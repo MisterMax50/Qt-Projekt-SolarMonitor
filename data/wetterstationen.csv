@@ -1,0 +1,26 @@
+station_id,name,ort,lat,lon,hoehe_m
+WS01,Wetterstation Friedrichshafen,Friedrichshafen,47.64658,9.47925,451
+WS02,Wetterstation Ravensburg,Ravensburg,47.7889,9.60345,592
+WS03,Wetterstation Konstanz,Konstanz,47.66232,9.17693,431
+WS04,Wetterstation Weingarten,Weingarten,47.80956,9.64821,644
+WS05,Wetterstation Lindau,Lindau,47.55102,9.68573,428
+WS06,Wetterstation Überlingen,Überlingen,47.76898,9.15191,459
+WS07,Wetterstation Wangen im Allgäu,Wangen im Allgäu,47.68869,9.8396,604
+WS08,Wetterstation Tettnang,Tettnang,47.67299,9.5825,494
+WS09,Wetterstation Markdorf,Markdorf,47.729,9.40029,504
+WS10,Wetterstation Bad Waldsee,Bad Waldsee,47.93029,9.75447,683
+WS11,Wetterstation Leutkirch,Leutkirch,47.82291,10.02285,691
+WS12,Wetterstation Meckenbeuren,Meckenbeuren,47.70025,9.56833,529
+WS13,Wetterstation Immenstaad,Immenstaad,47.66795,9.35689,438
+WS14,Wetterstation Langenargen,Langenargen,47.59557,9.53984,424
+WS15,Wetterstation Kressbronn,Kressbronn,47.59611,9.59637,431
+WS16,Wetterstation Salem,Salem,47.76513,9.295,492
+WS17,Wetterstation Isny,Isny,47.69202,10.04774,654
+WS18,Wetterstation Bad Wurzach,Bad Wurzach,9.90432,47.9067,699
+WS19,Wetterstation Pfullendorf,Pfullendorf,47.92476,9.24721,590
+WS20,Wetterstation Stockach,Stockach,47.84368,9.00128,467
+WS21,Wetterstation Oberteuringen,Oberteuringen,47.73164,9.46095,518
+WS22,Wetterstation Meersburg,Meersburg,47.6936,9.27074,412
+WS23,Wetterstation Baienfurt,Baienfurt,47.83602,9.65363,654
+WS24,Wetterstation Bermatingen,Bermatingen,47.72939,9.35189,496
+WS25,Wetterstation Eriskirch,Eriskirch,47.63091,9.5412,464

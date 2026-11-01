@@ -1,0 +1,1502 @@
+anlage_id,typ,ort,lat,lon,leistung_kwp,ausrichtung_grad,neigung_grad,wechselrichter_id,anzahl_wr,wetterstation_id,inbetriebnahme,verguetung_ct_kwh,status
+P00001,dach_privat,Kressbronn,47.62753,9.60438,15.19,273,39,W10,1,WS15,2025-07-04,7.86,in_betrieb
+P00002,balkon,Wangen im Allgäu,47.71389,9.7729,0.82,199,37,W02,1,WS07,2024-04-03,0.0,in_betrieb
+P00003,dach_privat,Ravensburg,47.81922,9.66268,8.28,198,38,W05,1,WS02,2025-12-09,7.86,in_betrieb
+P00004,balkon,Isny,47.7335,10.02222,0.9,185,63,W02,1,WS17,2025-10-28,0.0,in_betrieb
+P00005,dach_privat,Meersburg,47.7238,9.29305,18.65,101,29,W12,1,WS22,2025-09-12,7.86,in_betrieb
+P00006,dach_privat,Konstanz,47.64416,9.12101,5.18,199,29,W04,1,WS03,2023-04-07,8.2,in_betrieb
+P00007,balkon,Pfullendorf,47.91414,9.22181,0.8,176,86,W02,1,WS19,2024-05-14,0.0,in_betrieb
+P00008,dach_privat,Wangen im Allgäu,47.68285,9.89711,6.04,180,44,W04,1,WS07,2013-03-22,15.07,in_betrieb
+P00009,dach_privat,Immenstaad,47.68805,9.36166,10.43,209,36,W06,1,WS13,2023-04-05,8.2,in_betrieb
+P00010,balkon,Ravensburg,47.81615,9.60699,0.82,166,67,W02,1,WS02,2025-10-23,0.0,in_betrieb
+P00011,dach_gewerbe,Friedrichshafen,47.66847,9.50641,150.3,191,15,W16,3,WS01,2025-05-09,6.75,in_betrieb
+P00012,dach_privat,Konstanz,47.65964,9.17459,14.21,151,32,W11,1,WS03,2023-02-27,8.2,in_betrieb
+P00013,freiflaeche,Konstanz,47.66805,9.2131,3138.0,182,22,W22,12,WS03,2023-08-04,6.16,in_betrieb
+P00014,dach_gewerbe,Weingarten,47.82592,9.68074,48.6,137,11,W15,1,WS04,2025-10-31,6.52,in_betrieb
+P00015,dach_privat,Wangen im Allgäu,47.73241,9.86356,18.24,189,43,W12,1,WS07,2025-07-24,7.86,in_betrieb
+P00016,balkon,Weingarten,47.77422,9.66258,0.86,190,66,W02,1,WS04,2024-01-03,0.0,in_betrieb
+P00017,dach_privat,Meckenbeuren,47.69893,9.53856,10.44,173,44,W06,1,WS12,2010-03-14,39.14,in_betrieb
+P00018,balkon,Ravensburg,47.76062,9.59231,0.82,121,35,W01,1,WS02,2024-10-02,0.0,in_betrieb
+P00019,balkon,Wangen im Allgäu,47.65717,9.78047,0.6,154,66,W01,1,WS07,2023-06-17,0.0,in_betrieb
+P00020,dach_privat,Pfullendorf,47.9061,9.24388,20.06,148,39,W12,1,WS19,2023-05-16,8.2,in_betrieb
+P00021,balkon,Meckenbeuren,47.6592,9.61087,0.8,178,30,W01,1,WS12,2023-08-15,0.0,in_betrieb
+P00022,dach_privat,Bad Wurzach,47.88005,9.89274,6.89,283,27,W08,1,WS18,2020-06-17,9.17,in_betrieb
+P00023,balkon,Meersburg,47.68725,9.31368,0.8,168,88,W02,1,WS22,2024-12-25,0.0,in_betrieb
+P00024,balkon,Isny,47.72948,10.05186,0.8,190,37,W01,1,WS17,2025-11-15,0.0,in_betrieb
+P00025,freiflaeche,Ravensburg,47.86379,9.5618,1937.0,176,19,W22,7,WS02,2017-12-31,5.89,in_betrieb
+P00026,dach_privat,Meckenbeuren,47.75385,9.56251,22.72,98,40,W12,1,WS12,2008-09-07,46.75,in_betrieb
+P00027,dach_privat,Überlingen,47.75357,9.21679,12.66,78,44,W11,1,WS06,2021-09-18,8.16,in_betrieb
+P00028,dach_privat,Wangen im Allgäu,47.69152,9.76799,10.6,141,21,W05,1,WS07,2019-09-27,11.47,in_betrieb
+P00029,dach_privat,Leutkirch,47.79012,10.07913,11.55,178,37,W06,1,WS11,2010-12-03,39.14,in_betrieb
+P00030,dach_privat,Baienfurt,47.86723,9.70191,3.91,156,24,W03,1,WS23,2019-10-05,11.47,in_betrieb
+P00031,dach_privat,Überlingen,47.772,9.16894,21.7,198,28,W12,1,WS06,2017-03-29,12.3,in_betrieb
+P00032,balkon,Meckenbeuren,47.67634,9.60957,0.8,188,33,W01,1,WS12,2023-04-19,0.0,in_betrieb
+P00033,dach_gewerbe,Friedrichshafen,47.6781,9.50276,96.5,251,18,W17,1,WS01,2014-07-06,11.31,in_betrieb
+P00034,dach_privat,Ravensburg,47.77277,9.63285,6.95,185,29,W06,1,WS02,2013-09-27,15.07,in_betrieb
+P00035,dach_privat,Lindau,47.57589,9.6882,10.89,193,31,W06,1,WS05,2011-01-24,28.74,in_betrieb
+P00036,balkon,Meckenbeuren,47.6708,9.57645,0.82,215,33,W01,1,WS12,2024-09-07,0.0,in_betrieb
+P00037,dach_gewerbe,Überlingen,47.77549,9.14845,101.9,115,10,W17,1,WS06,2021-05-17,7.32,in_betrieb
+P00038,dach_privat,Tettnang,47.63147,9.54521,9.73,184,22,W06,1,WS08,2009-03-28,43.01,in_betrieb
+P00039,dach_gewerbe,Markdorf,47.7631,9.44537,96.6,249,24,W17,1,WS09,2020-09-20,8.1,in_betrieb
+P00040,dach_privat,Bad Waldsee,47.95882,9.75643,9.9,189,30,W05,1,WS10,2009-06-30,43.01,in_betrieb
+P00041,dach_privat,Lindau,47.5712,9.7414,6.51,285,18,W05,1,WS05,2013-03-08,15.07,in_betrieb
+P00042,balkon,Ravensburg,47.81064,9.66767,0.9,150,35,W02,1,WS02,2025-06-23,0.0,in_betrieb
+P00043,dach_privat,Friedrichshafen,47.69405,9.45307,10.69,176,25,W06,1,WS01,2023-08-23,8.2,in_betrieb
+P00044,dach_privat,Bad Waldsee,47.94297,9.77392,10.21,164,26,W06,1,WS10,2021-08-16,8.16,in_betrieb
+P00045,dach_privat,Konstanz,47.65576,9.10721,12.66,178,18,W06,1,WS03,2020-04-14,9.17,in_betrieb
+P00046,balkon,Bad Waldsee,47.94798,9.77403,0.86,170,33,W02,1,WS10,2025-06-27,0.0,in_betrieb
+P00047,dach_gewerbe,Ravensburg,47.76871,9.61747,146.4,179,6,W18,1,WS02,2016-01-19,11.08,in_betrieb
+P00048,dach_gewerbe,Wangen im Allgäu,47.73515,9.81544,49.9,192,15,W15,1,WS07,2024-06-28,7.19,in_betrieb
+P00049,dach_privat,Oberteuringen,47.70862,9.44083,5.84,281,29,W04,1,WS21,2024-08-10,8.03,in_betrieb
+P00050,dach_privat,Lindau,47.58268,9.71141,6.69,255,34,W05,1,WS05,2009-02-24,43.01,in_betrieb
+P00051,dach_privat,Friedrichshafen,47.6735,9.51578,18.46,271,28,W12,1,WS01,2026-04-24,7.78,gestoert
+P00052,dach_privat,Bad Waldsee,47.90404,9.74308,7.24,99,23,W05,1,WS10,2023-02-22,8.2,in_betrieb
+P00053,dach_privat,Markdorf,47.74814,9.36492,13.57,178,32,W11,1,WS09,2011-08-24,28.74,in_betrieb
+P00054,dach_gewerbe,Lindau,47.60001,9.67095,295.8,181,17,W14,8,WS05,2017-06-12,10.98,in_betrieb
+P00055,dach_privat,Weingarten,47.79727,9.66706,13.96,78,27,W10,1,WS04,2013-05-09,15.07,in_betrieb
+P00056,dach_gewerbe,Wangen im Allgäu,47.72625,9.85956,230.2,255,24,W15,4,WS07,2014-04-16,11.07,in_betrieb
+P00057,dach_gewerbe,Lindau,47.56398,9.71879,145.5,247,10,W14,4,WS05,2023-02-04,7.47,in_betrieb
+P00058,dach_privat,Lindau,47.57734,9.66837,8.05,74,19,W05,1,WS05,2022-10-02,6.93,in_betrieb
+P00059,balkon,Lindau,47.57122,9.70283,0.82,225,29,W01,1,WS05,2025-03-19,0.0,in_betrieb
+P00060,dach_privat,Überlingen,47.78833,9.16439,6.59,188,40,W08,1,WS06,2009-04-26,43.01,in_betrieb
+P00061,dach_privat,Leutkirch,47.79417,9.99644,8.75,184,34,W05,1,WS11,2012-09-30,19.5,in_betrieb
+P00062,dach_gewerbe,Friedrichshafen,47.64316,9.5233,59.5,185,7,W16,1,WS01,2016-05-12,11.29,in_betrieb
+P00063,dach_gewerbe,Salem,47.75185,9.36982,"58,4",182,25,W15,1,WS16,2012-11-16,17.63,in_betrieb
+P00064,dach_gewerbe,Ravensburg,47.77442,9.56041,116.8,179,12,W17,1,WS02,2018-10-05,11.15,in_betrieb
+P00065,dach_gewerbe,Bad Wurzach,47.86288,9.9334,155.0,173,23,W15,3,WS18,2024-03-03,6.8,in_betrieb
+P00066,balkon,Friedrichshafen,47.65699,9.47638,0.86,156,36,W02,1,WS01,2023-08-09,0.0,in_betrieb
+P00067,balkon,Bad Wurzach,47.90365,9.84161,0.9,207,83,W01,1,WS18,2025-06-19,0.0,in_betrieb
+P00068,dach_privat,Langenargen,47.62549,9.55439,8.58,182,34,W06,1,WS14,2012-08-25,19.5,in_betrieb
+P00069,dach_privat,Friedrichshafen,47.67937,9.52449,6.74,86,15,W08,1,WS01,2012-03-28,19.5,in_betrieb
+P00070,dach_gewerbe,Immenstaad,47.7006,9.40778,239.9,263,17,W14,6,WS13,2019-10-14,10.2,in_betrieb
+P00071,dach_privat,Konstanz,47.68172,9.18076,16.66,220,16,W10,1,WS03,2018-04-13,12.2,in_betrieb
+P00072,balkon,Pfullendorf,47.88181,9.2939,0.6,244,71,W01,1,WS19,2022-09-19,0.0,in_betrieb
+P00073,dach_privat,Friedrichshafen,47.65381,9.5102,8.58,170,42,W05,1,WS01,2009-03-12,43.01,in_betrieb
+P00074,balkon,Lindau,47.58494,9.68944,0.86,197,66,W01,1,WS05,2025-04-08,0.0,in_betrieb
+P00075,dach_privat,Lindau,47.57411,9.65126,4.58,171,35,W07,1,WS05,2018-06-24,12.2,in_betrieb
+P00076,dach_privat,Konstanz,47.6331,9.20262,12.23,143,19,W11,1,WS03,2010-12-17,39.14,in_betrieb
+P00077,freiflaeche,Weingarten,47.82151,9.60472,4042.0,181,28,W22,13,WS04,2024-11-09,6.41,in_betrieb
+P00078,dach_privat,Konstanz,47.6283,9.17004,16.84,260,15,W10,1,WS03,2010-03-03,39.14,in_betrieb
+P00079,dach_privat,Bad Wurzach,47.88463,9.94192,18.08,214,42,W12,1,WS18,2015-01-17,12.56,in_betrieb
+P00080,dach_privat,Ravensburg,47.74573,9.64919,8.69,270,33,W05,1,WS02,2013-05-14,15.07,in_betrieb
+P00081,dach_privat,Ravensburg,47.75495,9.66305,13.63,267,17,W10,1,WS02,2022-03-28,6.93,abgeschaltet
+P00082,dach_privat,Friedrichshafen,47.67708,9.49054,5.98,188,19,W04,1,WS01,2013-03-22,15.07,in_betrieb
+P00083,dach_privat,Ravensburg,47.80776,9.54488,6.17,189,40,W08,1,WS02,2014-03-09,13.15,in_betrieb
+P00084,balkon,Bad Wurzach,47.91931,9.96871,0.9,174,81,W02,1,WS18,2024-07-17,0.0,in_betrieb
+P00085,dach_privat,Konstanz,47.62841,9.11976,5.21,300,18,W04,1,WS03,2021-07-20,8.16,in_betrieb
+P00086,balkon,Friedrichshafen,47.62838,9.52317,0.82,164,88,W01,1,WS01,2024-09-04,0.0,in_betrieb
+P00087,dach_privat,Weingarten,47.82413,9.58988,5.65,200,40,W08,1,WS04,2015-12-14,12.56,in_betrieb
+P00088,dach_privat,Meckenbeuren,47.6603,9.56849,9.18,198,32,W05,1,WS12,2020-08-14,9.17,in_betrieb
+P00089,dach_privat,Friedrichshafen,47.67116,9.50146,13.06,195,41,W12,1,WS01,2008-02-14,46.75,in_betrieb
+P00090,dach_privat,Überlingen,47.77633,9.15683,23.44,274,23,W12,1,WS06,2025-07-17,7.86,in_betrieb
+P00091,dach_privat,Tettnang,47.68618,9.59523,6.73,86,41,W08,1,WS08,2009-10-30,43.01,abgeschaltet
+P00092,dach_privat,Lindau,47.59212,9.67693,6.9,263,18,W08,1,WS05,2022-12-10,6.93,in_betrieb
+P00093,dach_privat,Ravensburg,47.77439,9.64848,9.61,279,41,W06,1,WS02,2008-08-06,46.75,in_betrieb
+P00094,dach_privat,Meersburg,47.72195,9.27952,15.56,157,16,W10,1,WS22,2021-12-31,8.16,in_betrieb
+P00095,dach_privat,Konstanz,47.6286,9.22835,5.83,283,17,W04,1,WS03,2026-01-19,7.78,in_betrieb
+P00096,balkon,Oberteuringen,47.75923,9.47857,0.6,206,82,W02,1,WS21,2025-01-26,0.0,in_betrieb
+P00097,dach_gewerbe,Kressbronn,47.62461,9.60059,652.1,195,12,W15,12,WS15,2024-06-02,6.73,in_betrieb
+P00098,dach_privat,Konstanz,47.61548,9.21655,5.38,176,37,W05,1,WS03,2014-09-25,13.15,in_betrieb
+P00099,dach_privat,Konstanz,47.67341,9.18767,17.3,161,26,W10,1,WS03,2023-01-12,8.2,in_betrieb
+P00100,dach_privat,Friedrichshafen,47.6542,9.52225,3.86,90,29,W08,1,WS01,2017-04-10,12.3,in_betrieb
+P00101,dach_privat,Immenstaad,47.68466,9.37171,9.82,269,33,W05,1,WS13,2012-04-26,19.5,in_betrieb
+P00102,balkon,Meckenbeuren,47.74149,9.61948,0.6,206,33,W02,1,WS12,2023-12-20,0.0,in_betrieb
+P00103,freiflaeche,Pfullendorf,47.91561,9.24721,2293.0,175,21,W24,11,WS19,2019-01-12,6.44,in_betrieb
+P00104,dach_privat,Überlingen,47.73015,9.15422,5.75,86,24,W04,1,WS06,2013-08-08,15.07,in_betrieb
+P00105,balkon,Meckenbeuren,47.6811,9.50936,0.86,182,28,W02,1,WS99,2026-03-08,0.0,in_betrieb
+P00106,balkon,Lindau,47.56329,9.64758,0.8,184,65,W01,1,WS05,2023-06-17,0.0,in_betrieb
+P00107,dach_privat,Bermatingen,47.71272,9.28449,6.83,247,43,W08,1,WS24,2011-09-29,28.74,in_betrieb
+P00108,balkon,Bermatingen,47.7174,9.39007,0.6,185,32,W02,1,WS24,2024-12-22,0.0,in_betrieb
+P00109,dach_privat,Ravensburg,47.75666,9.65434,8.91,155,24,W05,1,WS02,2024-10-19,8.03,in_betrieb
+P00110,balkon,Salem,47.79049,9.22599,0.8,154,27,W02,1,WS16,2025-06-20,0.0,in_betrieb
+P00111,balkon,Oberteuringen,47.74787,9.50439,0.86,112,36,W01,1,WS21,2025-07-22,0.0,in_betrieb
+P00112,dach_gewerbe,Ravensburg,47.75234,9.54963,141.3,103,25,W20,2,WS02,2018-10-04,11.03,in_betrieb
+P00113,dach_privat,Salem,47.8018,9.31311,8.54,142,36,W05,1,WS16,2011-05-17,28.74,in_betrieb
+P00114,dach_privat,Weingarten,47.85096,9.66131,9.77,108,40,W06,1,WS04,2021-01-02,8.16,in_betrieb
+P00115,dach_privat,Bad Wurzach,47.92208,9.86562,12.35,105,42,W11,1,WS18,2023-07-04,8.2,in_betrieb
+P00116,balkon,Friedrichshafen,47.6648,9.50335,0.86,161,35,W02,1,WS01,2024-07-30,0.0,in_betrieb
+P00117,dach_gewerbe,Friedrichshafen,47.66724,9.51735,25.6,198,13,W13,1,WS01,2011-05-03,25.24,in_betrieb
+P00118,dach_privat,Meckenbeuren,47.73682,9.57749,8.09,183,30,W06,1,WS12,2026-04-18,7.78,in_betrieb
+P00119,dach_privat,Ravensburg,47.78256,9.58137,5.9,92,30,W05,1,WS02,2017-07-03,12.3,in_betrieb
+P00120,dach_privat,Stockach,47.79859,8.98426,9.68,269,29,W06,1,WS20,2021-04-25,8.16,in_betrieb
+P00121,dach_privat,Weingarten,47.7765,9.65351,3.52,267,30,W03,1,WS04,2022-03-02,6.93,in_betrieb
+P00122,balkon,Ravensburg,47.78062,9.56009,0.86,253,33,W02,1,WS02,2024-08-23,0.0,in_betrieb
+P00123,dach_privat,Ravensburg,47.77461,9.56629,5.47,226,19,W77,1,WS02,2019-05-01,11.47,in_betrieb
+P00124,dach_gewerbe,Pfullendorf,47.9477,9.27626,77.8,163,19,W18,1,WS19,2015-12-22,11.49,abgeschaltet
+P00125,dach_privat,Kressbronn,47.6444,9.57262,11.31,266,24,W11,1,WS15,2019-08-01,11.47,in_betrieb
+P00126,dach_privat,Oberteuringen,47.69668,9.47352,7.49,246,38,W09,1,WS21,2009-05-20,43.01,in_betrieb
+P00127,dach_gewerbe,Tettnang,47.71752,9.55338,105.4,184,14,W17,1,WS08,2022-03-24,5.78,in_betrieb
+P00128,balkon,Konstanz,47.70762,9.14634,0.6,183,34,W02,1,WS03,2026-03-19,0.0,in_betrieb
+P00129,balkon,Weingarten,47.79442,9.65992,0.86,165,69,W02,1,WS04,2024-01-25,0.0,in_betrieb
+P00130,dach_privat,Friedrichshafen,47.66165,9.50253,10.87,269,36,W06,1,WS01,2012-04-03,19.5,in_betrieb
+P00131,dach_gewerbe,Konstanz,47.62061,9.14635,339.5,191,10,W14,9,WS03,2017-03-10,10.29,in_betrieb
+P00132,dach_privat,Bad Wurzach,47.92082,9.85526,7.02,137,33,W06,1,WS18,2023-07-17,8.2,in_betrieb
+P00133,dach_privat,Überlingen,47.78001,9.14229,12.65,156,41,W11,1,WS06,2021-11-18,8.16,in_betrieb
+P00134,dach_privat,Wangen im Allgäu,47.69789,9.84643,9.03,185,28,W06,1,WS07,2023-09-13,8.2,in_betrieb
+P00135,dach_privat,Salem,47.72574,9.29905,15.28,154,27,W11,1,WS16,2020-02-18,9.17,in_betrieb
+P00136,dach_privat,Friedrichshafen,47.65545,9.50867,12.4,97,45,W11,1,WS01,2025-11-21,7.86,in_betrieb
+P00137,dach_privat,Bad Waldsee,47.97083,9.79261,7.93,100,32,W05,1,WS10,2011-11-30,28.74,in_betrieb
+P00138,balkon,Ravensburg,47.79496,9.56796,0.82,223,32,W01,1,WS02,2026-02-18,0.0,in_betrieb
+P00139,dach_privat,Konstanz,47.70452,9.17612,13.24,197,15,W12,1,WS03,2023-05-05,8.2,in_betrieb
+P00140,balkon,Weingarten,47.84032,9.58342,0.82,186,71,W02,1,WS04,2025-02-27,0.0,in_betrieb
+P00141,dach_privat,Leutkirch,47.77332,10.04129,5.31,185,42,W04,1,WS11,2024-10-08,8.03,in_betrieb
+P00142,dach_gewerbe,Markdorf,47.69156,9.39279,147.7,186,22,W18,1,WS09,2026-02-26,6.88,in_betrieb
+P00143,dach_privat,Friedrichshafen,47.67933,9.54092,3.61,103,37,W03,1,WS01,2021-09-26,8.16,in_betrieb
+P00144,dach_privat,Isny,47.67289,10.11293,5.72,102,16,W04,1,WS17,2018-05-27,12.2,in_betrieb
+P00145,dach_privat,Weingarten,47.84191,9.63689,11.15,187,16,W06,1,WS04,2025-12-20,7.86,in_betrieb
+P00146,dach_gewerbe,Eriskirch,47.64481,9.55547,45.6,186,11,W15,1,WS25,2022-10-22,5.88,in_betrieb
+P00147,dach_privat,Ravensburg,47.81238,9.59657,6.26,104,34,W08,1,WS02,2015-07-14,12.56,in_betrieb
+P00148,balkon,Weingarten,47.79885,9.60286,0.86,192,32,W01,1,WS04,2024-05-04,0.0,in_betrieb
+P00149,freiflaeche,Leutkirch,47.7773,10.02953,5327.0,184,28,W22,21,WS11,2011-11-03,5.01,in_betrieb
+P00150,dach_privat,Konstanz,47.70384,9.16354,8.73,169,30,W05,1,WS03,2013-07-26,15.07,in_betrieb
+P00151,dach_gewerbe,Überlingen,47.77881,9.17274,530.6,151,22,W17,4,WS06,2022-11-15,6.27,in_betrieb
+P00152,dach_privat,Ravensburg,47.82221,9.589,10.89,186,27,W05,1,WS02,2014-06-23,13.15,in_betrieb
+P00153,dach_privat,Konstanz,47.6239,9.14818,10.22,268,31,W05,1,WS03,2024-04-20,8.03,in_betrieb
+P00154,dach_privat,Leutkirch,47.82187,10.09359,5.46,290,41,W04,1,WS11,2009-02-22,43.01,in_betrieb
+P00155,dach_privat,Markdorf,47.72449,9.45934,9.31,218,38,W05,1,WS09,2013-04-07,15.07,in_betrieb
+P00156,dach_privat,Bad Wurzach,47.9161,9.96642,5.33,157,29,W07,1,WS18,2024-03-13,8.03,in_betrieb
+P00157,dach_privat,Ravensburg,47.79856,9.67536,16.89,259,25,W10,1,WS02,2011-11-25,28.74,in_betrieb
+P00158,dach_privat,Immenstaad,47.68736,9.36743,4.14,264,37,W04,1,WS13,2025-10-31,7.86,in_betrieb
+P00159,dach_privat,Eriskirch,47.63138,9.60136,13.23,147,17,W12,1,WS25,2012-08-25,19.5,in_betrieb
+P00160,balkon,Wangen im Allgäu,47.64646,9.81885,0.6,206,62,W02,1,WS07,2022-06-17,0.0,in_betrieb
+P00161,dach_privat,Meckenbeuren,47.70111,9.59996,10.4,270,38,W06,1,WS12,2012-12-08,19.5,in_betrieb
+P00162,dach_privat,Weingarten,47.76081,9.64382,5.78,85,25,W04,1,WS04,2025-03-20,7.86,in_betrieb
+P00163,dach_gewerbe,Konstanz,47.65974,9.17644,126.3,120,6,W18,1,WS03,2019-09-07,10.51,in_betrieb
+P00164,dach_privat,Baienfurt,47.79759,9.66707,12.5,276,29,W11,1,WS23,2020-08-01,9.17,in_betrieb
+P00165,balkon,Markdorf,47.7189,9.34073,0.8,107,78,W02,1,WS09,2022-07-02,0.0,in_betrieb
+P00166,dach_privat,Wangen im Allgäu,47.67099,9.76698,5.5,94,21,W08,1,WS07,2010-03-27,39.14,in_betrieb
+P00167,dach_privat,Friedrichshafen,47.66481,9.51272,8.35,267,23,W05,1,WS01,2024-12-28,8.03,in_betrieb
+P00168,dach_gewerbe,Ravensburg,47.75295,9.55518,149.7,179,18,W17,1,WS02,2025-11-11,7.1,in_betrieb
+P00169,dach_privat,Ravensburg,47.78454,9.67476,8.89,102,43,W05,1,WS02,2019-11-14,11.47,in_betrieb
+P00170,dach_privat,Friedrichshafen,47.6772,9.55583,15.41,175,32,W11,1,WS01,2022-10-09,6.93,in_betrieb
+P00171,balkon,Ravensburg,47.82092,9.5576,0.6,203,62,W02,1,WS02,2024-03-27,0.0,in_betrieb
+P00172,dach_privat,Bad Waldsee,47.94706,9.80458,4.89,66,18,W07,1,WS10,2022-11-09,6.93,in_betrieb
+P00173,balkon,Ravensburg,47.8093,9.55531,0.82,169,61,W01,1,WS02,2025-11-27,0.0,in_betrieb
+P00174,dach_privat,Friedrichshafen,47.66342,9.51485,7.21,104,34,W08,1,WS01,2010-10-27,39.14,in_betrieb
+P00175,dach_privat,Ravensburg,47.83123,9.58754,9.25,152,30,W05,1,WS02,2012-09-13,19.5,in_betrieb
+P00176,dach_privat,Tettnang,47.67646,9.56465,6.67,147,25,W08,1,WS08,2008-10-05,46.75,in_betrieb
+P00177,dach_privat,Konstanz,47.65919,9.17515,9.61,86,17,W05,1,WS03,2011-04-02,28.74,in_betrieb
+P00178,dach_privat,Wangen im Allgäu,47.72353,9.79691,3.73,280,26,W03,1,WS07,2010-09-14,39.14,abgeschaltet
+P00179,dach_privat,Lindau,47.57345,9.71686,7.07,95,37,W08,1,WS05,2023-12-12,8.2,in_betrieb
+P00180,dach_privat,Wangen im Allgäu,47.6878,9.90239,3.79,253,15,W03,1,WS07,2008-07-14,46.75,in_betrieb
+P00181,dach_privat,Salem,47.75318,9.32125,15.9,144,44,W10,1,WS16,2026-04-14,7.78,in_betrieb
+P00182,balkon,Isny,47.66208,10.08027,0.6,140,32,W02,1,WS17,2023-07-12,0.0,in_betrieb
+P00183,dach_privat,Leutkirch,47.78264,10.04716,11.99,206,32,W11,1,WS11,2011-12-10,28.74,in_betrieb
+P00184,balkon,Konstanz,47.67855,9.14437,0.8,160,82,W02,1,WS03,2022-10-28,0.0,in_betrieb
+P00185,freiflaeche,Weingarten,47.77597,9.58046,1671.0,183,27,W24,8,WS04,2012-01-15,5.02,in_betrieb
+P00186,dach_privat,Friedrichshafen,47.60881,9.53203,17.5,195,37,W10,1,WS01,2023-04-13,8.2,in_betrieb
+P00187,dach_privat,Isny,47.67487,10.10796,5.18,178,16,W05,1,WS17,2024-11-07,8.03,in_betrieb
+P00188,dach_privat,Wangen im Allgäu,47.68932,9.86907,12.99,159,24,W11,1,WS07,2022-03-17,6.93,in_betrieb
+P00189,dach_privat,Wangen im Allgäu,47.68922,9.76863,8.7,97,38,W05,1,WS07,2024-09-24,8.03,in_betrieb
+P00190,dach_gewerbe,Ravensburg,47.77054,9.55417,45.0,173,12,W14,1,WS02,2024-10-31,6.77,in_betrieb
+P00191,balkon,Oberteuringen,47.76143,9.39698,0.8,171,88,W02,1,WS21,2025-06-23,0.0,in_betrieb
+P00192,balkon,Bad Waldsee,47.92619,9.81188,0.86,206,39,W02,1,WS10,2024-05-06,0.0,in_betrieb
+P00193,dach_privat,Ravensburg,47.83047,9.59207,10.59,87,20,W06,1,WS02,2024-04-07,8.03,in_betrieb
+P00194,dach_privat,Bad Wurzach,47.92031,9.90743,12.93,256,31,W10,1,WS18,2011-07-02,28.74,in_betrieb
+P00195,dach_privat,Weingarten,47.78561,9.66833,9.36,209,32,W05,1,WS04,2008-10-21,46.75,in_betrieb
+P00196,dach_privat,Lindau,47.53794,9.75272,12.72,91,28,W06,1,WS05,2024-04-23,8.03,in_betrieb
+P00197,dach_privat,Friedrichshafen,47.66573,9.54304,3.17,106,44,W03,1,WS01,2021-09-24,8.16,in_betrieb
+P00198,dach_privat,Wangen im Allgäu,47.66549,9.83861,6.12,92,16,W04,1,WS07,2008-06-03,46.75,in_betrieb
+P00199,balkon,Leutkirch,47.81494,10.08599,0.6,179,37,W01,1,WS11,2026-02-01,0.0,in_betrieb
+P00200,freiflaeche,Bad Waldsee,48.00064,9.77912,1284.0,191,21,W24,5,WS10,2015-03-26,5.55,in_betrieb
+P00201,freiflaeche,Immenstaad,47.69012,9.37115,2151.0,181,21,W23,6,WS13,2021-10-06,6.66,in_betrieb
+P00202,freiflaeche,Markdorf,47.7809,9.35037,2443.0,164,27,W24,10,WS09,2018-12-14,5.01,in_betrieb
+P00203,dach_privat,Friedrichshafen,47.67744,9.46326,10.0,116,19,W06,1,WS01,2009-11-17,43.01,in_betrieb
+P00204,dach_privat,Kressbronn,47.63572,9.58212,5.29,91,29,W04,1,WS15,2024-04-22,8.03,in_betrieb
+P00205,dach_privat,Bad Wurzach,47.92811,9.9358,11.58,148,32,W11,1,WS18,2019-12-09,11.47,in_betrieb
+P00206,dach_gewerbe,Konstanz,47.66965,9.17842,236.6,105,14,W15,4,WS03,2022-09-13,6.28,in_betrieb
+P00207,balkon,Tettnang,47.66432,9.51164,0.82,179,35,W01,1,WS08,2024-11-21,0.0,in_betrieb
+P00208,dach_privat,Immenstaad,47.6912,9.35484,8.44,199,26,W05,1,WS13,2018-08-30,12.2,in_betrieb
+P00209,freiflaeche,Lindau,47.57544,9.79476,5567.0,179,20,W22,18,WS05,2018-03-22,4.99,in_betrieb
+P00210,dach_privat,Bermatingen,47.72142,9.40451,8.8,82,40,W05,1,WS24,2010-10-28,39.14,in_betrieb
+P00211,dach_privat,Konstanz,47.68982,9.16466,8.89,269,30,W05,1,WS03,2019-06-29,11.47,in_betrieb
+P00212,dach_privat,Tettnang,47.7088,9.553,11.28,209,29,W06,1,WS08,2012-12-31,19.5,in_betrieb
+P00213,dach_privat,Immenstaad,47.68872,9.34137,7.08,162,24,W08,1,WS13,2010-02-02,39.14,in_betrieb
+P00214,dach_gewerbe,Überlingen,47.79601,9.14762,271.5,182,15,W15,5,WS06,2023-06-10,6.9,in_betrieb
+P00215,freiflaeche,Ravensburg,47.78072,9.49561,1314.0,189,19,W24,6,WS02,2021-01-27,5.48,in_betrieb
+P00216,dach_privat,Friedrichshafen,47.6841,9.51027,9.96,89,19,W06,1,WS01,2015-05-02,12.56,in_betrieb
+P00217,dach_privat,Wangen im Allgäu,47.7197,9.81822,7.47,274,28,W05,1,WS07,2022-04-04,6.93,in_betrieb
+P00218,dach_privat,Meckenbeuren,47.69288,9.58943,8.87,106,35,W05,1,WS12,2010-07-13,39.14,in_betrieb
+P00219,dach_privat,Überlingen,47.72684,9.10317,7.84,259,42,W08,1,WS06,2020-05-11,9.17,in_betrieb
+P00220,dach_privat,Friedrichshafen,47.67088,9.49632,3.47,100,45,W03,1,WS01,2024-02-15,8.03,in_betrieb
+P00221,dach_privat,Ravensburg,47.79042,9.58346,4.95,87,16,W04,1,WS02,2022-05-27,6.93,in_betrieb
+P00222,freiflaeche,Markdorf,47.79493,9.36673,3245.0,180,22,W21,22,WS09,2015-01-31,5.72,in_betrieb
+P00223,balkon,Ravensburg,47.75191,9.5511,0.6,159,32,W02,1,WS02,2023-06-18,0.0,in_betrieb
+P00224,balkon,Ravensburg,47.78562,9.66799,0.9,202,62,W01,1,WS02,2023-11-09,0.0,in_betrieb
+P00225,freiflaeche,Weingarten,47.7467,9.67148,3217.0,184,21,W23,9,WS04,2011-07-14,4.93,in_betrieb
+P00226,freiflaeche,Ravensburg,47.71978,9.58862,3605.0,181,21,W22,12,WS02,2019-02-16,6.35,in_betrieb
+P00227,dach_privat,Weingarten,47.76769,9.66691,8.05,150,25,W05,1,WS04,2009-07-26,43.01,in_betrieb
+P00228,dach_gewerbe,Wangen im Allgäu,47.66724,9.90931,122.4,149,12,W17,1,WS07,2019-07-03,9.61,in_betrieb
+P00229,dach_privat,Lindau,47.5836,9.67518,12.58,93,15,W11,1,WS05,2013-10-30,15.07,in_betrieb
+P00230,dach_gewerbe,Baienfurt,47.81469,9.65121,58.8,175,12,W15,1,WS23,2022-11-18,5.85,in_betrieb
+P00231,dach_privat,Salem,47.71689,9.32533,6.29,257,33,W08,1,WS16,2012-10-11,19.5,in_betrieb
+P00232,dach_gewerbe,Ravensburg,47.76114,9.60845,46.5,155,21,W15,1,WS02,2011-12-14,25.44,in_betrieb
+P00233,balkon,Weingarten,47.81748,9.60531,0.86,209,35,W02,1,WS04,2025-09-02,0.0,in_betrieb
+P00234,dach_gewerbe,Konstanz,47.67998,9.14567,172.8,210,9,W14,4,WS03,2022-09-18,6.36,in_betrieb
+P00235,dach_privat,Bad Waldsee,47.92872,9.70208,4.28,141,39,W07,1,WS10,2023-10-26,8.2,in_betrieb
+P00236,dach_privat,Baienfurt,47.85765,9.61958,5.82,271,20,W05,1,WS23,2021-12-03,8.16,in_betrieb
+P00237,dach_gewerbe,Isny,47.67802,10.04815,158.1,195,19,W17,1,WS17,2016-07-08,10.57,in_betrieb
+P00238,balkon,Konstanz,47.61404,9.17287,0.9,172,71,W02,1,WS03,2024-09-12,0.0,in_betrieb
+P00239,dach_gewerbe,Meckenbeuren,47.66279,9.59365,39.7,164,14,W20,1,WS12,2018-08-04,10.79,in_betrieb
+P00240,dach_privat,Tettnang,47.67474,9.50372,6.45,183,18,W08,1,WS08,2025-08-04,7.86,in_betrieb
+P00241,dach_gewerbe,Weingarten,47.79095,9.63448,52.4,191,6,W15,1,WS04,2017-05-14,10.66,in_betrieb
+P00242,balkon,Leutkirch,47.84565,10.05365,0.6,169,68,W02,1,WS11,2025-03-08,0.0,in_betrieb
+P00243,dach_privat,Friedrichshafen,47.66378,9.51195,6.18,86,25,W08,1,WS01,2018-07-12,12.2,in_betrieb
+P00244,dach_gewerbe,Immenstaad,47.68418,9.36933,99.8,189,6,W18,1,WS13,2015-04-22,10.9,in_betrieb
+P00245,dach_privat,Überlingen,47.78111,9.22063,4.87,206,30,W04,1,WS06,2020-06-11,9.17,in_betrieb
+P00246,dach_privat,Isny,47.73466,10.04288,17.96,270,22,W10,1,WS17,2025-07-03,7.86,in_betrieb
+P00247,balkon,Friedrichshafen,47.68014,9.50742,0.82,235,35,W01,1,WS01,2024-11-13,0.0,in_betrieb
+P00248,balkon,Ravensburg,47.81454,9.59779,0.82,253,75,W01,1,WS02,2025-12-27,0.0,in_betrieb
+P00249,dach_privat,Weingarten,47.78852,9.71538,8.18,272,19,W05,1,WS04,2010-07-25,39.14,in_betrieb
+P00250,dach_gewerbe,Tettnang,47.65019,9.59757,75.1,124,12,W18,1,WS08,2022-03-05,5.86,in_betrieb
+P00251,dach_privat,Ravensburg,47.7816,9.57349,8.87,170,28,W05,1,WS02,2019-13-05,7.86,in_betrieb
+P00252,dach_privat,Wangen im Allgäu,47.67203,9.9046,12.03,91,20,W11,1,WS07,2022-07-16,6.93,in_betrieb
+P00253,balkon,Lindau,47.57493,9.68831,0.8,193,88,W01,1,WS05,2025-02-05,0.0,in_betrieb
+P00254,dach_privat,Wangen im Allgäu,47.69927,9.82735,10.94,160,24,W11,1,WS07,2023-04-06,8.2,in_betrieb
+P00255,balkon,Friedrichshafen,47.65817,9.50493,0.9,204,38,W02,1,WS01,2023-01-15,0.0,in_betrieb
+P00256,balkon,Lindau,47.57946,9.66518,0.8,114,27,W01,1,WS05,2024-07-31,0.0,in_betrieb
+P00257,balkon,Wangen im Allgäu,47.6817,9.91241,0.6,195,26,W01,1,WS07,2024-12-07,0.0,in_betrieb
+P00258,dach_privat,Ravensburg,47.81968,9.65759,6.26,165,16,W04,1,WS02,2024-08-17,8.03,in_betrieb
+P00259,dach_gewerbe,Ravensburg,47.83402,9.56367,114.3,113,7,W17,1,WS02,2009-06-27,36.17,in_betrieb
+P00260,dach_gewerbe,Ravensburg,47.77144,9.67583,113.4,238,23,W17,1,WS02,2024-04-20,7.14,in_betrieb
+P00261,balkon,Kressbronn,47.59737,9.65032,0.9,157,73,W01,1,WS15,2024-07-16,0.0,in_betrieb
+P00262,balkon,Friedrichshafen,47.65954,9.52334,0.82,162,40,W01,1,WS01,2025-07-01,0.0,in_betrieb
+P00263,dach_privat,Pfullendorf,47.89928,9.17649,7.28,177,42,W08,1,WS19,2011-03-23,28.74,in_betrieb
+P00264,balkon,Überlingen,47.81069,9.18857,0.8,232,81,W01,1,WS06,2024-05-08,0.0,in_betrieb
+P00265,dach_privat,Bad Waldsee,47.95369,9.76616,5.84,220,24,W04,1,WS10,2013-06-11,15.07,in_betrieb
+P00266,dach_privat,Lindau,47.60363,9.66812,14.95,162,37,W10,1,WS05,2024-05-19,8.03,in_betrieb
+P00267,balkon,Wangen im Allgäu,47.68911,9.88363,0.82,202,86,W01,1,WS07,2025-03-15,0.0,in_betrieb
+P00268,dach_privat,Pfullendorf,47.96098,9.25648,5.0,274,42,W04,1,WS19,2024-05-13,8.03,in_betrieb
+P00269,dach_privat,Kressbronn,47.611,9.534,8.77,259,24,W06,1,WS15,2025-08-08,7.86,in_betrieb
+P00270,dach_privat,Friedrichshafen,47.68088,9.49916,10.25,98,23,W06,1,WS01,2019-01-25,11.47,in_betrieb
+P00271,balkon,Bermatingen,47.70659,9.3785,0.8,218,65,W01,1,WS24,2024-12-15,0.0,in_betrieb
+P00272,balkon,Tettnang,47.64121,9.56236,0.8,194,64,W01,1,WS08,2023-08-16,0.0,in_betrieb
+P00273,balkon,Friedrichshafen,47.65041,9.50645,0.8,178,40,W01,1,WS01,2023-11-02,0.0,in_betrieb
+P00274,dach_privat,Wangen im Allgäu,47.68924,9.81478,11.06,191,38,W11,1,WS07,2024-05-17,8.03,in_betrieb
+P00275,dach_privat,Friedrichshafen,47.63667,9.53612,11.57,255,34,W06,1,WS01,2021-03-11,8.16,in_betrieb
+P00276,balkon,Isny,47.7111,9.9853,0.6,210,31,W01,1,WS17,2026-04-01,0.0,in_betrieb
+P00277,balkon,Wangen im Allgäu,47.66544,9.90191,0.8,135,66,W01,1,WS07,2025-01-15,0.0,in_betrieb
+P00278,dach_privat,Bad Wurzach,47.92315,9.88194,12.75,80,40,W06,1,WS18,2010-08-16,39.14,in_betrieb
+P00279,balkon,Immenstaad,47.67854,9.31027,0.8,181,85,W02,1,WS13,2023-01-01,0.0,in_betrieb
+P00280,balkon,Isny,47.706,10.09791,0.9,152,36,W02,1,WS17,2023-06-25,0.0,in_betrieb
+P00281,dach_privat,Ravensburg,47.80609,9.6572,14.17,268,45,W11,1,WS02,2026-02-02,7.78,in_betrieb
+P00282,dach_privat,Friedrichshafen,47.68208,9.54628,8.08,87,19,W05,1,WS01,2009-10-08,43.01,in_betrieb
+P00283,dach_gewerbe,Ravensburg,47.83155,9.5783,452.4,138,12,W18,4,WS02,2026-04-02,6.55,in_betrieb
+P00284,dach_privat,Leutkirch,47.78277,10.04985,5.31,102,35,W04,1,WS11,2016-04-21,12.31,in_betrieb
+P00285,dach_privat,Bad Waldsee,47.92708,9.70577,17.7,265,21,W10,1,WS10,2025-04-23,7.86,in_betrieb
+P00286,dach_gewerbe,Lindau,47.55978,9.65223,40.6,168,7,W14,1,WS05,2025-09-12,6.69,in_betrieb
+P00287,dach_privat,Bermatingen,47.75832,9.33257,13.04,159,41,W06,1,WS24,2024-02-09,8.03,in_betrieb
+P00288,dach_privat,Überlingen,47.73674,9.11521,3.95,264,18,W03,1,WS06,2022-09-15,6.93,in_betrieb
+P00289,dach_privat,Ravensburg,47.755,9.66267,8.72,175,17,W05,1,WS02,2023-04-26,8.2,in_betrieb
+P00290,dach_gewerbe,Kressbronn,47.62228,9.59274,182.1,174,18,W17,2,WS15,2012-08-06,16.45,in_betrieb
+P00291,dach_gewerbe,Ravensburg,47.80669,9.63082,81.6,110,17,W16,1,WS02,2020-03-30,8.39,in_betrieb
+P00292,dach_privat,Markdorf,47.70323,9.43475,4.8,103,44,W08,1,WS09,2010-10-09,39.14,in_betrieb
+P00293,dach_privat,Friedrichshafen,47.67775,9.49275,10.23,87,15,W06,1,WS01,2017-04-28,12.3,in_betrieb
+P00294,dach_gewerbe,Friedrichshafen,47.69616,9.48992,38.5,103,10,W14,1,WS01,2014-03-30,11.34,in_betrieb
+P00295,balkon,Konstanz,47.67493,9.15476,0.8,195,36,W02,1,WS03,2025-04-18,0.0,in_betrieb
+P00296,dach_privat,Leutkirch,47.77168,10.02271,9.79,280,19,W06,1,WS11,2024-12-30,8.03,in_betrieb
+P00297,dach_privat,Langenargen,47.622,9.55403,4.4,172,21,W07,1,WS14,2026-03-11,7.78,in_betrieb
+P00298,dach_privat,Lindau,47.58898,9.69253,6.97,96,22,W08,1,WS05,2010-07-30,39.14,in_betrieb
+P00299,dach_gewerbe,Ravensburg,47.80591,9.61484,193.7,226,5,W17,2,WS02,2022-02-17,6.09,in_betrieb
+P00300,dach_privat,Kressbronn,47.63251,9.60759,14.91,169,32,W10,1,WS15,2021-05-20,8.16,in_betrieb
+P00301,dach_privat,Ravensburg,47.79566,9.62956,10.9,98,21,W06,1,WS02,2015-08-18,12.56,in_betrieb
+P00302,dach_privat,Konstanz,47.6734,9.15821,12.6,191,18,W11,1,WS03,2016-09-28,12.31,in_betrieb
+P00303,dach_privat,Wangen im Allgäu,47.72309,9.86206,10.58,99,34,W06,1,WS07,2015-12-06,12.56,in_betrieb
+P00304,dach_privat,Markdorf,47.73121,9.36583,7.26,171,19,W05,1,WS09,2020-05-28,9.17,in_betrieb
+P00305,dach_gewerbe,Ravensburg,47.7666,9.53377,74.8,183,18,W16,1,WS02,2018-05-06,10.11,wartung
+P00306,dach_privat,Konstanz,47.66023,9.15355,7.2,267,33,W05,1,WS03,2024-07-23,8.03,in_betrieb
+P00307,dach_privat,Oberteuringen,47.7133,9.455,9.96,162,41,W09,1,WS21,2010-04-19,39.14,in_betrieb
+P00308,dach_privat,Konstanz,47.65328,9.12213,18.34,156,18,W12,1,WS03,2025-12-04,7.86,in_betrieb
+P00309,dach_privat,Markdorf,47.75321,9.44392,8.57,180,22,W05,1,WS09,2010-08-11,39.14,in_betrieb
+P00310,balkon,Bad Waldsee,47.95372,9.75464,0.82,134,76,W02,1,WS10,2022-04-11,0.0,in_betrieb
+P00311,dach_privat,Wangen im Allgäu,47.67988,9.83205,8.79,90,37,W05,1,WS07,2026-04-26,7.78,in_betrieb
+P00312,dach_privat,Ravensburg,47.74589,9.55483,4.99,83,20,W04,1,WS02,2009-06-02,43.01,in_betrieb
+P00313,balkon,Konstanz,47.6718,9.1467,0.6,173,33,W02,1,WS03,2025-06-12,0.0,in_betrieb
+P00314,dach_privat,Lindau,47.56728,9.66012,12.92,193,40,W11,1,WS05,2022-11-19,6.93,in_betrieb
+P00315,dach_privat,Lindau,47.59442,9.6675,11.26,189,40,W11,1,WS05,2023-12-24,8.2,in_betrieb
+P00316,dach_privat,Bad Wurzach,47.92387,9.84387,5.86,139,40,W04,1,WS18,2022-01-22,6.93,in_betrieb
+P00317,dach_privat,Bermatingen,47.73901,9.30884,7.74,160,17,W05,1,WS24,2011-05-12,28.74,in_betrieb
+P00318,dach_privat,Überlingen,47.77735,9.15749,17.9,212,18,W12,1,WS06,2015-03-22,12.56,in_betrieb
+P00319,balkon,Ravensburg,47.78895,9.6682,0.8,101,34,W01,1,WS02,2024-10-26,0.0,in_betrieb
+P00320,dach_privat,Friedrichshafen,47.67114,9.47614,7.93,179,26,W08,1,WS01,2010-01-01,39.14,in_betrieb
+P00321,balkon,Friedrichshafen,47.69652,9.49733,0.9,189,27,W01,1,WS01,2024-03-19,0.0,in_betrieb
+P00322,dach_privat,Wangen im Allgäu,47.66261,9.7874,3.26,190,44,W03,1,WS07,2024-05-31,8.03,in_betrieb
+P00323,balkon,Ravensburg,47.7573,9.59856,0.6,161,26,W02,1,WS02,2024-04-29,0.0,in_betrieb
+P00324,balkon,Konstanz,47.69963,9.12416,0.6,170,30,W02,1,WS03,2024-11-05,0.0,in_betrieb
+P00325,dach_privat,Bad Waldsee,47.89127,9.75482,11.16,272,19,W06,1,WS10,2017-12-21,12.3,in_betrieb
+P00326,dach_gewerbe,Wangen im Allgäu,47.70188,9.85458,114.7,179,19,W18,1,WS07,2013-03-10,12.93,in_betrieb
+P00327,dach_privat,Friedrichshafen,47.66062,9.47924,11.68,102,34,W06,1,WS01,2013-01-18,15.07,in_betrieb
+P00328,balkon,Weingarten,47.79922,9.60269,0.86,249,27,W02,1,WS04,2023-06-16,0.0,in_betrieb
+P00329,dach_privat,Friedrichshafen,47.63186,9.55182,11.69,155,22,W09,1,WS01,2014-03-16,13.15,in_betrieb
+P00330,dach_privat,Friedrichshafen,47.6814,9.53866,3.85,141,24,W07,1,WS01,2011-03-24,28.74,in_betrieb
+P00331,dach_privat,Konstanz,47.67911,9.20027,12.24,91,44,W11,1,WS03,2013-01-21,15.07,wartung
+P00332,dach_privat,Ravensburg,47.75486,9.58967,-15.0,256,32,W11,1,WS02,2008-05-06,46.75,in_betrieb
+P00333,dach_gewerbe,Konstanz,47.63049,9.13119,140.5,95,16,W18,1,WS03,2021-08-03,6.74,in_betrieb
+P00334,dach_privat,Friedrichshafen,47.63751,9.53923,7.64,176,18,W05,1,WS01,2010-04-20,39.14,in_betrieb
+P00335,dach_privat,Konstanz,47.68614,9.12195,8.61,265,34,W05,1,WS03,2023-06-03,8.2,in_betrieb
+P00336,balkon,Ravensburg,47.78556,9.6812,0.86,112,26,W01,1,WS02,2023-08-07,0.0,in_betrieb
+P00337,dach_privat,Konstanz,47.6588,9.17111,7.97,87,17,W05,1,WS03,2017-04-22,12.3,in_betrieb
+P00338,dach_gewerbe,Salem,47.75146,9.35367,68.4,185,6,W16,1,WS16,2023-11-03,7.18,in_betrieb
+P00339,dach_privat,Ravensburg,47.73913,9.61899,9.14,89,30,W05,1,WS02,2022-06-28,6.93,in_betrieb
+P00340,dach_gewerbe,Wangen im Allgäu,47.70765,9.91038,121.7,182,21,W18,1,WS07,2025-01-19,6.76,in_betrieb
+P00341,dach_privat,Friedrichshafen,47.68968,9.47518,6.83,277,35,W08,1,WS01,2023-03-28,8.2,in_betrieb
+P00342,dach_privat,Friedrichshafen,47.67243,9.43117,17.16,270,30,W12,1,WS01,2020-02-16,9.17,in_betrieb
+P00343,dach_privat,Konstanz,47.66056,9.16513,11.43,189,28,W06,1,WS03,2024-02-16,8.03,in_betrieb
+P00344,balkon,Pfullendorf,47.88017,9.22193,0.9,233,81,W02,1,WS19,2023-09-19,0.0,in_betrieb
+P00345,balkon,Baienfurt,47.87567,9.66978,0.82,212,74,W02,1,WS23,2026-04-21,0.0,in_betrieb
+P00346,dach_privat,Weingarten,47.80467,9.60499,15.55,128,29,W10,1,WS04,2008-07-12,46.75,in_betrieb
+P00347,dach_privat,Stockach,47.88687,8.97061,8.3,80,38,W05,1,WS20,2022-12-17,6.93,in_betrieb
+P00348,dach_privat,Konstanz,47.64389,9.12189,15.82,90,16,W10,1,WS03,2020-11-01,9.17,in_betrieb
+P00349,dach_privat,Langenargen,47.64318,9.57452,4.37,213,31,W07,1,WS14,2013-11-06,15.07,in_betrieb
+P00350,dach_privat,Wangen im Allgäu,47.68464,9.81786,20.45,109,30,W12,1,WS07,2021-05-04,8.16,in_betrieb
+P00351,balkon,Salem,47.76351,9.2844,0.82,165,39,W02,1,WS16,2025-01-25,0.0,in_betrieb
+P00352,dach_privat,Friedrichshafen,47.67137,9.42381,3.62,172,35,W03,1,WS01,2019-03-01,11.47,in_betrieb
+P00353,dach_privat,Friedrichshafen,47.68094,9.51001,15.83,91,25,W10,1,WS01,2009-02-09,43.01,in_betrieb
+P00354,dach_privat,Langenargen,47.61775,9.55489,5.94,187,31,W04,1,WS14,2023-06-01,8.2,in_betrieb
+P00355,dach_privat,Wangen im Allgäu,47.64973,9.89344,8.18,95,26,W05,1,WS07,2020-07-30,9.17,in_betrieb
+P00356,balkon,Ravensburg,47.78961,9.54849,0.9,225,31,W02,1,WS02,2025-12-12,0.0,in_betrieb
+P00357,dach_privat,Bad Waldsee,47.90932,9.69837,5.17,88,36,W07,1,WS10,2025-11-23,7.86,in_betrieb
+P00358,dach_privat,Friedrichshafen,47.62107,9.53613,6.04,89,16,W08,1,WS01,2009-11-10,43.01,in_betrieb
+P00359,balkon,Meersburg,47.72526,9.32145,0.8,183,30,W02,1,WS22,2026-03-01,0.0,in_betrieb
+P00360,dach_privat,Bad Wurzach,47.89601,9.89371,11.62,190,23,W06,1,WS18,2014-08-11,13.15,in_betrieb
+P00361,balkon,Kressbronn,47.64135,9.56349,0.6,190,62,W01,1,WS15,2024-07-24,0.0,in_betrieb
+P00362,balkon,Konstanz,47.65221,9.17161,0.82,199,29,W02,1,WS03,2023-12-24,0.0,in_betrieb
+P00363,dach_gewerbe,Friedrichshafen,47.66616,9.51153,401.5,157,15,W17,4,WS01,2022-09-09,6.35,in_betrieb
+P00364,balkon,Lindau,47.5779,9.68764,0.86,217,82,W01,1,WS05,2025-12-14,0.0,in_betrieb
+P00365,dach_privat,Ravensburg,47.81418,9.64235,16.34,228,35,W10,1,WS02,2012-04-15,19.5,in_betrieb
+P00366,dach_privat,Leutkirch,47.87365,10.00342,10.4,280,36,W11,1,WS11,2017-10-11,12.3,abgeschaltet
+P00367,balkon,Kressbronn,47.62415,9.61262,0.82,145,34,W01,1,WS15,2023-09-18,0.0,in_betrieb
+P00368,dach_privat,Langenargen,47.61756,9.53184,2.51,193,42,W03,1,WS14,2023-07-19,8.2,in_betrieb
+P00369,balkon,Friedrichshafen,47.68209,9.495,0.9,158,39,W02,1,WS01,2024-08-19,0.0,in_betrieb
+P00370,dach_gewerbe,Lindau,47.56571,9.68023,125.1,92,7,W18,1,WS05,2018-09-28,10.69,in_betrieb
+P00371,dach_gewerbe,Bad Wurzach,47.87666,9.93382,485.4,185,9,W14,11,WS18,2026-02-26,6.44,in_betrieb
+P00372,freiflaeche,Immenstaad,47.68761,9.36962,5424.0,191,19,W21,36,WS13,2012-04-30,6.23,in_betrieb
+P00373,dach_gewerbe,Baienfurt,47.85398,9.62697,98.5,151,8,W18,1,WS23,2020-05-19,7.56,in_betrieb
+P00374,dach_gewerbe,Weingarten,47.77009,9.69557,184.9,167,14,W15,3,WS04,2023-07-17,6.75,in_betrieb
+P00375,balkon,Isny,47.67337,9.98234,0.8,200,35,W02,1,WS17,2024-05-24,0.0,in_betrieb
+P00376,dach_gewerbe,Markdorf,47.71752,9.47587,142.5,114,11,W17,1,WS09,2022-04-05,6.3,in_betrieb
+P00377,dach_privat,Salem,47.73113,9.34445,9.11,100,31,W05,1,WS16,2015-05-05,12.56,in_betrieb
+P00378,balkon,Konstanz,47.6849,9.15367,0.9,200,62,W02,1,WS03,2024-09-03,0.0,in_betrieb
+P00379,dach_privat,Lindau,47.56071,9.6516,13.65,164,16,W10,1,WS05,2012-07-29,19.5,in_betrieb
+P00380,balkon,Wangen im Allgäu,47.69014,9.76864,0.8,190,40,W02,1,WS07,2025-12-18,0.0,in_betrieb
+P00381,dach_privat,Weingarten,47.79352,9.68494,9.9,119,28,W06,1,WS04,2010-03-14,39.14,in_betrieb
+P00382,dach_gewerbe,Markdorf,47.69935,9.44754,145.9,187,9,W20,3,WS09,2019-05-21,9.83,in_betrieb
+P00383,dach_privat,Salem,47.79465,9.34169,5.51,166,40,W04,1,WS16,2010-11-08,39.14,in_betrieb
+P00384,dach_privat,Konstanz,47.67174,9.14214,14.47,83,28,W11,1,WS03,2017-07-04,12.3,in_betrieb
+P00385,dach_gewerbe,Immenstaad,47.67817,9.37625,155.9,186,8,W17,1,WS13,2022-01-24,5.98,in_betrieb
+P00386,dach_privat,Markdorf,47.71479,9.3708,4.03,92,19,W03,1,WS09,2021-12-15,8.16,in_betrieb
+P00387,balkon,Tettnang,47.67872,9.59814,0.86,152,32,W02,1,WS08,2025-02-21,0.0,in_betrieb
+P00388,dach_privat,Meckenbeuren,47.70419,9.60253,5.73,105,44,W04,1,WS12,2025-07-19,7.86,in_betrieb
+P00389,dach_privat,Baienfurt,47.85187,9.70391,20.91,82,35,W12,1,WS23,2011-12-13,28.74,in_betrieb
+P00390,dach_privat,Friedrichshafen,47.68949,9.50362,9.57,247,40,W06,1,WS01,2019-12-18,11.47,in_betrieb
+P00391,dach_privat,Meckenbeuren,47.74337,9.56184,12.63,136,20,W12,1,WS12,2012-01-14,19.5,in_betrieb
+P00392,dach_gewerbe,Konstanz,47.6595,9.17459,164.3,237,24,W14,4,WS03,2026-05-19,6.58,in_betrieb
+P00393,dach_privat,Leutkirch,47.81125,10.08452,12.88,267,27,W12,1,WS11,2008-09-14,46.75,in_betrieb
+P00394,dach_privat,Konstanz,47.62202,9.20636,8.03,282,22,W08,1,WS03,2016-10-30,12.31,in_betrieb
+P00395,dach_gewerbe,Markdorf,47.70479,9.33465,274.2,177,17,W17,3,WS09,2012-05-04,17.53,in_betrieb
+P00396,dach_privat,Ravensburg,47.79375,9.54493,8.16,199,22,W06,1,WS02,2009-02-08,43.01,in_betrieb
+P00397,dach_privat,Ravensburg,47.75148,9.56971,4.79,189,36,W04,1,WS02,2014-02-04,13.15,in_betrieb
+P00398,dach_privat,Leutkirch,47.79037,10.08673,20.57,277,32,W12,1,WS11,2022-10-26,6.93,in_betrieb
+P00399,dach_privat,Lindau,47.59998,9.70938,8.83,167,27,W05,1,WS05,2026-03-03,7.78,in_betrieb
+P00400,balkon,Ravensburg,47.79935,9.59445,0.8,179,40,W02,1,WS02,2024-02-26,0.0,in_betrieb
+P00401,dach_privat,Konstanz,47.63964,9.13124,7.88,174,40,W06,1,WS03,2021-04-20,8.16,abgeschaltet
+P00402,dach_privat,Friedrichshafen,47.66381,9.52817,4.16,71,34,W07,1,WS01,2023-06-11,8.2,in_betrieb
+P00403,dach_gewerbe,Tettnang,47.67614,9.51554,125.1,270,11,W18,1,WS08,2024-06-15,6.71,in_betrieb
+P00404,balkon,Friedrichshafen,47.68168,9.54782,0.9,196,30,W01,1,WS01,2022-07-06,0.0,in_betrieb
+P00405,balkon,Isny,47.71335,9.97666,0.82,243,32,W02,1,WS17,2025-01-14,0.0,in_betrieb
+P00406,dach_privat,Friedrichshafen,47.66436,9.50781,7.07,268,32,W05,1,WS01,2011-01-18,28.74,in_betrieb
+P00407,dach_privat,Konstanz,47.63613,9.19647,8.9,144,42,W05,1,WS03,2009-08-10,43.01,abgeschaltet
+P00408,balkon,Ravensburg,47.83293,9.60517,0.86,140,33,W02,1,WS02,2022-12-04,0.0,in_betrieb
+P00409,dach_gewerbe,Lindau,47.56532,9.66923,92.3,192,9,W18,1,WS05,2024-01-26,7.22,in_betrieb
+P00410,dach_privat,Stockach,47.84795,8.96125,7.6,182,16,W06,1,WS20,2018-01-09,12.2,in_betrieb
+P00411,dach_privat,Ravensburg,47.81122,9.65142,8.13,183,35,W05,1,WS02,2020-01-15,9.17,in_betrieb
+P00412,balkon,Konstanz,47.67639,9.1804,0.9,192,87,W02,1,WS03,2024-09-10,0.0,in_betrieb
+P00413,dach_gewerbe,Leutkirch,47.8635,10.00697,380.8,160,7,W20,8,WS11,2022-06-05,6.33,in_betrieb
+P00414,dach_privat,Leutkirch,47.83781,10.06887,19.64,211,31,W12,1,WS11,2023-08-08,8.2,in_betrieb
+P00415,balkon,Wangen im Allgäu,47.64899,9.78597,0.6,190,75,W01,1,WS07,2026-02-12,0.0,in_betrieb
+P00416,dach_privat,Friedrichshafen,47.66724,9.5073,14.58,91,41,W10,1,WS01,2010-04-15,39.14,in_betrieb
+P00417,dach_privat,Lindau,47.57186,9.69144,16.6,152,16,W10,1,WS05,2022-11-21,6.93,in_betrieb
+P00418,dach_privat,Weingarten,47.80624,9.6325,4.54,171,20,W04,1,WS04,2024-03-11,8.03,in_betrieb
+P00419,dach_gewerbe,Meersburg,47.67891,9.34616,43.3,204,12,W16,1,WS22,2019-09-13,9.78,in_betrieb
+P00420,dach_privat,Friedrichshafen,47.65888,9.51834,12.0,300,43,W06,1,WS01,2019-04-12,11.47,in_betrieb
+P00421,dach_privat,Bad Wurzach,47.89618,9.83453,8.89,266,27,W05,1,WS18,2011-03-31,28.74,in_betrieb
+P00422,balkon,Ravensburg,47.80523,9.64007,0.86,177,66,W01,1,WS02,2024-06-29,0.0,in_betrieb
+P00423,dach_privat,Friedrichshafen,47.66171,9.51428,7.5,88,39,W06,1,WS01,2022-08-29,6.93,in_betrieb
+P00424,dach_privat,Wangen im Allgäu,47.68488,9.77166,7.82,274,38,W05,1,WS07,2009-09-21,43.01,in_betrieb
+P00425,dach_privat,Markdorf,47.75175,9.45964,6.29,269,17,W08,1,WS09,2011-07-09,28.74,in_betrieb
+P00426,dach_privat,Ravensburg,47.82102,9.66563,3.22,166,20,W03,1,WS02,2009-07-19,43.01,in_betrieb
+P00427,dach_privat,Ravensburg,47.78612,9.67541,4.9,92,18,W07,1,WS02,2013-07-10,15.07,in_betrieb
+P00428,freiflaeche,Bad Wurzach,47.94149,9.92042,4790.0,175,26,W21,29,WS18,2021-03-17,5.58,in_betrieb
+P00429,freiflaeche,Überlingen,47.77955,9.03463,4947.0,175,23,W22,20,WS06,2020-08-13,6.7,in_betrieb
+P00430,dach_privat,Immenstaad,47.69089,9.38164,2.5,97,26,W04,1,WS13,2009-07-05,43.01,in_betrieb
+P00431,dach_privat,Bad Wurzach,47.87616,9.93073,3.42,193,36,W03,1,WS18,2023-01-30,8.2,in_betrieb
+P00432,dach_gewerbe,Kressbronn,47.59857,9.57536,193.1,191,5,W17,2,WS15,2018-05-05,10.85,in_betrieb
+P00433,dach_gewerbe,Lindau,47.58247,9.66347,262.3,235,7,W16,4,WS05,2015-04-28,11.52,in_betrieb
+P00434,dach_privat,Immenstaad,47.6733,9.40312,5.47,187,23,W04,1,WS13,2016-01-05,12.31,in_betrieb
+P00435,dach_privat,Friedrichshafen,47.68465,9.5026,18.33,139,21,W12,1,WS01,2009-02-22,43.01,in_betrieb
+P00436,dach_privat,Kressbronn,47.64649,9.60336,18.42,179,23,W10,1,WS15,2026-02-11,7.78,in_betrieb
+P00437,dach_privat,Friedrichshafen,47.67085,9.42789,8.33,217,44,W09,1,WS01,2012-04-29,19.5,in_betrieb
+P00438,balkon,Stockach,47.8733,8.98924,0.86,199,27,W01,1,WS20,2024-10-04,0.0,in_betrieb
+P00439,dach_privat,Lindau,47.57825,9.70835,9.93,80,18,W05,1,WS05,2023-06-27,8.2,in_betrieb
+P00440,dach_gewerbe,Friedrichshafen,47.64992,9.53022,25,133,14,W13,1,WS01,2018-12-07,10.27,in_betrieb
+P00441,dach_privat,Überlingen,47.77214,9.14693,5.7,172,16,W04,1,WS06,2018-04-26,12.2,in_betrieb
+P00442,dach_privat,Friedrichshafen,47.66609,9.50189,12.36,154,28,W06,1,WS01,2019-09-25,11.47,in_betrieb
+P00443,balkon,Isny,47.7035,10.03763,0.82,203,83,W02,1,WS17,2022-06-05,0.0,in_betrieb
+P00444,balkon,Kressbronn,47.57883,9.63575,0.82,220,38,W02,1,WS15,2024-10-04,0.0,in_betrieb
+P00445,dach_gewerbe,Tettnang,47.7136,9.55291,202.9,105,9,W18,2,WS08,2022-09-23,6.01,in_betrieb
+P00446,dach_privat,Meckenbeuren,47.72608,9.63034,13.74,192,16,W06,1,WS12,2024-11-13,8.03,in_betrieb
+P00447,dach_gewerbe,Lindau,47.56764,9.68697,339.1,192,19,W18,3,WS05,2020-12-24,8.31,in_betrieb
+P00448,dach_privat,Konstanz,47.63718,9.14791,6.02,165,30,W05,1,WS03,2010-07-09,39.14,in_betrieb
+P00449,dach_gewerbe,Konstanz,47.65834,9.17558,89.1,181,21,W17,1,WS03,2024-07-05,7.01,in_betrieb
+P00450,dach_gewerbe,Wangen im Allgäu,47.68835,9.77262,114.6,178,9,W17,1,WS07,2025-06-21,6.61,in_betrieb
+P00451,dach_privat,Bermatingen,47.77552,9.37559,6.96,278,31,W05,1,WS24,2016-12-22,12.31,in_betrieb
+P00452,dach_privat,Weingarten,47.81687,9.59861,5.67,87,21,W04,1,WS04,2020-05-09,9.17,in_betrieb
+P00453,dach_privat,Pfullendorf,47.88186,9.21742,4.06,98,15,W07,1,WS19,2019-10-09,11.47,in_betrieb
+P00454,balkon,Friedrichshafen,47.63549,9.52665,0.6,184,60,W01,1,WS01,2023-10-23,0.0,in_betrieb
+P00455,balkon,Überlingen,47.7795,9.15584,0.82,161,34,W02,1,WS06,2023-05-30,0.0,in_betrieb
+P00456,dach_privat,Überlingen,47.73202,9.14952,6.03,235,28,W04,1,WS06,2016-08-15,12.31,in_betrieb
+P00457,dach_privat,Bermatingen,47.77078,9.40228,10.06,179,16,W06,1,WS24,2018-05-09,12.2,in_betrieb
+P00458,dach_privat,Friedrichshafen,47.66979,9.54691,4.16,199,28,W04,1,WS01,2024-10-18,8.03,in_betrieb
+P00459,dach_privat,Isny,47.68993,10.03185,30,170,36,W12,1,WS17,2008-03-19,46.75,in_betrieb
+P00460,dach_gewerbe,Friedrichshafen,47.69509,9.4615,75.6,114,22,W18,1,WS01,2024-04-25,6.98,in_betrieb
+P00461,balkon,Überlingen,47.78856,9.14599,0.82,160,90,W01,1,WS06,2025-06-22,0.0,in_betrieb
+P00462,dach_privat,Eriskirch,47.61386,9.57382,8.64,268,35,W05,1,WS25,2018-11-20,12.2,in_betrieb
+P00463,dach_privat,Tettnang,47.69487,9.60752,5.08,208,24,W04,1,WS08,2008-02-13,46.75,in_betrieb
+P00464,balkon,Friedrichshafen,47.66897,9.49164,0.86,100,84,W01,1,WS01,2025-09-07,0.0,in_betrieb
+P00465,dach_privat,Wangen im Allgäu,47.73688,9.84708,14.21,275,24,W10,1,WS07,2011-11-11,28.74,in_betrieb
+P00466,dach_privat,Langenargen,47.64955,9.541,12.4,94,28,W06,1,WS14,2018-04-28,12.2,in_betrieb
+P00467,freiflaeche,Leutkirch,47.76304,10.09842,1979.0,178,22,W23,5,WS11,2014-12-16,5.51,in_betrieb
+P00468,dach_gewerbe,Bad Wurzach,47.93018,9.91802,83.3,178,9,W17,1,WS18,2020-11-05,7.67,in_betrieb
+P00469,balkon,Weingarten,47.84506,9.63867,0.86,165,26,W01,1,WS04,2023-05-20,0.0,in_betrieb
+P00470,balkon,Lindau,47.56836,9.67759,0.8,182,36,W01,1,WS05,2025-01-09,0.0,in_betrieb
+P00471,dach_privat,Eriskirch,47.6437,9.56343,17.73,288,37,W12,1,WS25,2022-04-07,6.93,in_betrieb
+P00472,dach_gewerbe,Markdorf,47.68941,9.3825,37.1,245,15,W14,1,WS09,2010-06-21,35.52,in_betrieb
+P00473,dach_privat,Friedrichshafen,47.66814,9.50541,12.79,189,21,W06,1,WS01,2011-03-14,28.74,in_betrieb
+P00474,balkon,Friedrichshafen,47.66245,9.50549,0.9,208,40,W01,1,WS01,2026-02-14,0.0,in_betrieb
+P00475,dach_gewerbe,Friedrichshafen,47.67168,9.53253,110.4,93,6,W17,1,WS01,2023-06-26,6.82,in_betrieb
+P00476,dach_privat,Isny,47.67248,10.11458,8.71,218,28,W05,1,WS17,2010-07-15,39.14,in_betrieb
+P00477,balkon,Konstanz,47.65788,9.15355,0.86,116,71,W02,1,WS03,2023-06-28,0.0,in_betrieb
+P00478,balkon,Salem,47.76011,9.28453,0.9,140,29,W01,1,WS16,2025-01-29,0.0,in_betrieb
+P00479,dach_gewerbe,Meckenbeuren,47.722,9.61479,599.8,148,23,W20,12,WS12,2012-11-26,16.39,in_betrieb
+P00480,dach_privat,Überlingen,47.7846,9.16841,9.42,254,19,W06,1,WS06,2020-03-09,9.17,in_betrieb
+P00481,balkon,Tettnang,47.62899,9.60477,0.86,198,26,W01,1,WS08,2026-05-20,0.0,in_betrieb
+P00482,dach_privat,Meckenbeuren,47.71224,9.52658,3.79,195,41,W04,1,WS12,2012-10-04,19.5,in_betrieb
+P00483,dach_privat,Wangen im Allgäu,47.72615,9.79809,5.95,96,20,W08,1,WS07,2015-04-22,12.56,in_betrieb
+P00484,dach_privat,Ravensburg,47.80065,9.63149,9.17,63,37,W06,1,WS02,2020-05-05,9.17,in_betrieb
+P00485,balkon,Konstanz,47.65886,9.12502,0.82,208,73,W02,1,WS03,2023-06-06,0.0,in_betrieb
+P00486,balkon,Bermatingen,47.67961,9.35796,0.8,160,75,W01,1,WS24,2025-08-10,0.0,in_betrieb
+P00487,dach_privat,Friedrichshafen,47.66458,9.50713,12.86,180,34,W06,1,WS01,2008-12-19,46.75,in_betrieb
+P00488,dach_privat,Ravensburg,47.80317,9.5997,16.71,269,43,W10,1,WS02,2017-05-02,12.3,in_betrieb
+P00489,balkon,Langenargen,47.61815,9.54576,0.86,203,28,W01,1,WS14,2023-03-10,0.0,in_betrieb
+P00490,dach_gewerbe,Kressbronn,47.62668,9.62956,123.9,168,15,W18,1,WS15,2023-06-13,7.5,in_betrieb
+P00491,dach_privat,Friedrichshafen,47.695,9.50073,12.73,86,17,W06,1,WS01,2009-10-12,43.01,in_betrieb
+P00492,dach_gewerbe,Stockach,47.87857,8.98535,91.6,239,16,W18,1,WS20,2023-09-29,7.27,in_betrieb
+P00493,dach_gewerbe,Tettnang,47.70712,9.53464,336.0,123,12,W20,6,WS08,2018-06-11,10.89,in_betrieb
+P00494,balkon,Kressbronn,47.64049,9.5735,0.86,174,89,W02,1,WS15,2026-04-17,0.0,in_betrieb
+P00495,dach_gewerbe,Lindau,47.59542,9.70273,159.5,183,15,W16,3,WS05,2023-12-27,7.09,in_betrieb
+P00496,dach_privat,Wangen im Allgäu,47.72865,9.86103,5.08,158,28,W07,1,WS07,2011-07-15,28.74,in_betrieb
+P00497,dach_gewerbe,Ravensburg,47.76116,9.5425,693.5,187,17,W15,14,WS02,2018-08-21,11.0,in_betrieb
+P00498,dach_privat,Meersburg,47.7202,9.29413,16.39,96,41,W10,1,WS22,2011-05-06,28.74,in_betrieb
+P00499,balkon,Markdorf,47.75099,9.44306,0.6,176,86,W01,1,WS09,2024-10-27,0.0,in_betrieb
+P00500,dach_privat,Friedrichshafen,47.67448,9.51442,13.97,176,43,W11,1,WS01,2010-11-21,39.14,in_betrieb
+P00501,dach_privat,Konstanz,47.69164,9.11494,8.54,167,24,W05,1,WS03,2024-06-30,8.03,in_betrieb
+P00502,dach_gewerbe,Friedrichshafen,47.65725,9.53114,272.8,163,13,W17,2,WS01,2027-03-01,25.71,in_betrieb
+P00503,balkon,Salem,47.77507,9.26546,0.86,193,38,W01,1,WS16,2024-07-06,0.0,in_betrieb
+P00504,dach_privat,Salem,47.78729,9.22471,8.09,186,32,W05,1,WS16,2022-03-01,6.93,in_betrieb
+P00505,dach_gewerbe,Eriskirch,47.64511,9.58223,168.3,269,8,W20,3,WS25,2020-08-30,7.88,in_betrieb
+P00506,dach_privat,Lindau,47.54593,9.6839,11.45,286,35,W06,1,WS05,2009-12-08,43.01,in_betrieb
+P00507,dach_gewerbe,Konstanz,47.66949,9.18561,126.6,186,15,W18,1,WS03,2021-01-02,7.08,in_betrieb
+P00508,balkon,Überlingen,47.72796,9.10324,0.86,205,80,W02,1,WS06,2025-03-04,0.0,in_betrieb
+P00509,balkon,Pfullendorf,47.92192,9.29072,0.86,166,74,W02,1,WS19,2026-02-18,0.0,in_betrieb
+P00510,dach_privat,Lindau,47.56581,9.67351,6.74,222,26,W08,1,WS05,2021-04-12,8.16,in_betrieb
+P00511,balkon,Lindau,47.58003,9.69195,0.6,179,37,W01,1,WS05,2025-06-01,0.0,in_betrieb
+P00512,dach_privat,Friedrichshafen,47.66155,9.45548,13.72,211,28,W11,1,WS01,2008-03-09,46.75,in_betrieb
+P00513,dach_gewerbe,Friedrichshafen,47.6913,9.51179,25,257,11,W13,1,WS01,2017-04-17,10.27,in_betrieb
+P00514,dach_gewerbe,Isny,47.698,10.02531,154.7,103,12,W16,2,WS17,2011-01-15,24.36,in_betrieb
+P00515,balkon,Friedrichshafen,47.67534,9.49601,0.6,250,35,W01,1,WS01,2025-11-17,0.0,in_betrieb
+P00516,dach_privat,Ravensburg,47.82959,9.57449,10.08,259,18,W05,1,WS02,2010-11-27,39.14,in_betrieb
+P00517,dach_privat,Ravensburg,47.77252,9.61271,7.23,266,25,W08,1,WS02,2024-02-24,8.03,in_betrieb
+P00518,dach_privat,Ravensburg,47.77363,9.57207,5.39,191,19,W04,1,WS02,2020-08-30,9.17,in_betrieb
+P00519,dach_privat,Meckenbeuren,47.72625,9.61321,13.02,154,38,W11,1,WS12,2011-01-23,28.74,in_betrieb
+P00520,dach_gewerbe,Wangen im Allgäu,47.67754,9.89777,216.1,264,14,W20,3,WS07,2012-10-23,16.8,in_betrieb
+P00521,dach_gewerbe,Konstanz,47.61951,9.20559,155.6,152,10,W16,2,WS03,2014-10-27,11.49,in_betrieb
+P00522,dach_privat,Lindau,47.58308,9.68369,6.59,199,21,W08,1,WS05,2023-01-23,8.2,in_betrieb
+P00523,dach_privat,Bermatingen,47.70881,9.38753,12.22,96,36,W06,1,WS24,2017-11-07,12.3,in_betrieb
+P00524,dach_privat,Ravensburg,47.80968,9.65957,9.44,108,24,W06,1,WS02,2022-02-17,6.93,in_betrieb
+P00525,balkon,Ravensburg,47.8176,9.62994,0.8,124,29,W02,1,WS02,2022-06-16,0.0,in_betrieb
+P00526,dach_privat,Weingarten,47.79097,9.69811,24.48,270,38,W12,1,WS04,2023-04-25,8.2,in_betrieb
+P00527,dach_privat,Wangen im Allgäu,47.66132,9.79252,12.71,169,26,W11,1,WS07,2011-03-20,28.74,in_betrieb
+P00528,dach_privat,Konstanz,47.68938,9.14472,8.0,274,28,W05,1,WS03,2012-09-03,19.5,in_betrieb
+P00529,dach_gewerbe,Kressbronn,47.62284,9.58816,154.0,260,7,W15,3,WS15,2022-09-15,5.96,in_betrieb
+P00530,dach_privat,Kressbronn,47.6376,9.62106,10.15,91,24,W05,1,WS15,2013-09-13,15.07,in_betrieb
+P00531,dach_privat,Friedrichshafen,47.69471,9.48082,12.8,263,35,W12,1,WS01,2022-04-16,6.93,in_betrieb
+P00532,balkon,Friedrichshafen,47.64551,9.51105,0.8,144,65,W01,1,WS01,2024-02-22,0.0,in_betrieb
+P00533,dach_privat,Weingarten,47.79395,9.66713,12.3,266,38,W06,1,WS04,2019-10-10,11.47,in_betrieb
+P00534,dach_privat,Konstanz,47.63731,9.16666,8.63,199,26,W05,1,WS03,2020-10-24,9.17,in_betrieb
+P00535,freiflaeche,Bad Waldsee,47.95176,9.65191,4426.0,174,20,W22,16,WS10,2020-08-04,6.22,in_betrieb
+P00536,dach_gewerbe,Ravensburg,47.7978,9.58479,339.0,190,9,W16,5,WS02,2013-06-13,13.02,in_betrieb
+P00537,balkon,Friedrichshafen,47.66725,9.50956,0.9,215,31,W01,1,WS01,2025-09-30,0.0,in_betrieb
+P00538,dach_gewerbe,Bad Waldsee,47.9783,9.7905,70.2,100,15,W16,1,WS10,2022-02-03,5.69,in_betrieb
+P00539,balkon,Ravensburg,47.74633,9.56777,0.82,102,38,W02,1,WS02,2025-10-10,0.0,in_betrieb
+P00540,balkon,Meckenbeuren,47.66419,9.6016,0.82,184,80,W02,1,WS12,2024-07-23,0.0,in_betrieb
+P00541,dach_privat,Konstanz,47.68663,9.14165,5.01,153,23,W04,1,WS03,2009-06-12,43.01,in_betrieb
+P00542,dach_gewerbe,Eriskirch,47.60982,9.54455,311.5,195,12,W18,3,WS25,2015-12-01,10.56,in_betrieb
+P00543,dach_privat,Ravensburg,47.80489,9.62294,13.65,96,17,W10,1,WS02,2022-12-17,6.93,in_betrieb
+P00544,dach_privat,Stockach,47.80677,9.00278,16.21,280,26,W10,1,WS20,2010-11-15,39.14,in_betrieb
+P00545,dach_privat,Überlingen,47.80276,9.08997,9.35,227,15,W11,1,WS06,2023-11-29,8.2,in_betrieb
+P00546,dach_privat,Wangen im Allgäu,47.65122,9.81241,6.47,251,29,W06,1,WS07,2008-10-26,46.75,in_betrieb
+P00547,dach_privat,Ravensburg,47.78114,9.56686,8.9,167,40,W05,1,WS02,2012-07-03,19.5,in_betrieb
+P00548,balkon,Wangen im Allgäu,47.73224,9.86576,0.8,153,33,W01,1,WS07,2023-03-25,0.0,in_betrieb
+P00549,dach_privat,Leutkirch,47.79109,10.03707,10.06,267,16,W06,1,WS11,2013-11-17,15.07,in_betrieb
+P00550,dach_privat,Weingarten,47.81144,9.67822,11.0,65,41,W11,1,WS04,2022-03-07,6.93,in_betrieb
+P00551,dach_gewerbe,Leutkirch,47.8574,10.02805,301.8,161,6,W16,5,WS11,2022-12-04,5.71,in_betrieb
+P00552,dach_privat,Langenargen,47.60882,9.55462,10.35,269,25,W06,1,WS14,2015-12-24,12.56,in_betrieb
+P00553,dach_gewerbe,Ravensburg,47.81162,9.55323,48.6,165,17,W15,1,WS02,2012-01-24,16.62,in_betrieb
+P00554,dach_gewerbe,Stockach,47.84883,8.9235,139.9,131,8,W14,3,WS20,2014-03-13,11.52,in_betrieb
+P00555,dach_privat,Tettnang,47.69329,9.64001,8.38,260,36,W05,1,WS08,2017-05-29,12.3,in_betrieb
+P00556,dach_privat,Meckenbeuren,47.70113,9.53505,20.95,197,20,W12,1,WS12,2010-04-30,39.14,in_betrieb
+P00557,dach_gewerbe,Kressbronn,47.62871,9.60326,88.1,213,7,W17,1,WS15,2013-01-17,12.67,in_betrieb
+P00558,balkon,Oberteuringen,47.71196,9.49714,0.8,175,81,W02,1,WS21,2022-10-07,0.0,in_betrieb
+P00559,balkon,Wangen im Allgäu,47.71588,9.89909,0.8,174,34,W01,1,WS07,2025-01-04,0.0,in_betrieb
+P00560,dach_gewerbe,Ravensburg,47.80982,9.61203,45.9,174,13,W14,1,WS02,2022-02-17,5.9,in_betrieb
+P00561,dach_privat,Weingarten,47.81581,9.70995,8.9,177,25,W05,1,WS04,2011-05-05,28.74,in_betrieb
+P00562,dach_gewerbe,Weingarten,47.79601,9.68489,97.3,152,16,W18,1,WS04,2015-10-26,11.49,in_betrieb
+P00563,balkon,Ravensburg,47.8301,9.60867,0.9,234,62,W01,1,WS02,2024-05-11,0.0,in_betrieb
+P00564,dach_privat,Überlingen,47.7729,9.21135,8.53,118,45,W05,1,WS06,2011-04-27,28.74,in_betrieb
+P00565,dach_privat,Ravensburg,47.81982,9.61407,9.38,154,33,W09,1,WS02,2012-09-13,19.5,abgeschaltet
+P00566,dach_privat,Markdorf,47.74174,9.45881,11.02,177,25,W06,1,WS09,2022-06-29,6.93,in_betrieb
+P00567,dach_privat,Ravensburg,47.77003,9.58157,8.03,277,25,W05,1,WS02,2023-04-12,8.2,in_betrieb
+P00568,dach_privat,Meersburg,47.67578,9.32722,10.23,88,35,W05,1,WS22,2026-03-31,7.78,in_betrieb
+P00569,dach_gewerbe,Meckenbeuren,47.6812,9.49652,134.7,184,25,W18,1,WS12,2023-05-11,6.99,in_betrieb
+P00570,dach_gewerbe,Immenstaad,47.69482,9.40398,105.0,175,17,W17,1,WS13,2012-04-18,16.35,in_betrieb
+P00571,dach_privat,Lindau,47.58836,9.66927,6.7,186,27,W08,1,WS05,2023-11-25,8.2,in_betrieb
+P00572,balkon,Markdorf,47.68452,9.38945,0.86,150,64,W01,1,WS09,2024-07-06,0.0,in_betrieb
+P00573,dach_privat,Kressbronn,47.63226,9.63312,5.61,93,34,W04,1,WS15,2015-01-21,12.56,in_betrieb
+P00574,dach_privat,Ravensburg,47.83804,9.58089,10.02,179,27,W06,1,WS02,2020-01-27,9.17,in_betrieb
+P00575,dach_privat,Friedrichshafen,47.63361,9.52399,6.25,211,39,W08,1,WS01,2021-02-28,8.16,in_betrieb
+P00576,dach_privat,Markdorf,47.68221,9.38804,14.02,188,20,W10,1,WS09,2015-06-30,12.56,in_betrieb
+P00577,dach_privat,Bad Wurzach,47.90012,9.88989,16.24,193,30,W10,1,WS18,2017-12-04,12.3,in_betrieb
+P00578,dach_privat,Ravensburg,47.76061,9.55021,8.83,188,34,W05,1,WS02,2026-03-01,7.78,in_betrieb
+P00579,balkon,Stockach,47.83906,8.99,0.86,205,79,W02,1,WS20,2026-01-25,0.0,in_betrieb
+P00580,dach_gewerbe,Salem,47.72879,9.34709,149.2,191,8,W18,1,WS16,2023-07-03,7.07,gestoert
+P00581,dach_privat,Friedrichshafen,47.66534,9.51265,6.84,198,42,W08,1,WS01,2016-08-05,12.31,in_betrieb
+P00582,dach_gewerbe,Weingarten,47.78291,9.69772,98.9,163,7,W17,1,WS04,2024-01-05,7.33,in_betrieb
+P00583,dach_privat,Konstanz,47.64034,9.16107,8.51,212,25,W09,1,WS03,2008-07-09,46.75,in_betrieb
+P00584,dach_privat,Tettnang,47.64884,9.64499,10.0,283,22,W06,1,WS08,2015-11-11,12.56,in_betrieb
+P00585,dach_privat,Meckenbeuren,47.67225,9.57188,10.16,166,41,W05,1,WS12,2024-09-20,8.03,in_betrieb
+P00586,dach_privat,Kressbronn,47.59715,9.65625,16.95,85,29,W10,1,WS15,2011-04-06,28.74,in_betrieb
+P00587,balkon,Überlingen,47.78197,9.14441,0.82,165,26,W02,1,WS06,2022-05-16,0.0,in_betrieb
+P00588,dach_gewerbe,Salem,47.78102,9.25635,175.4,194,23,W17,2,WS16,2021-07-31,7.19,in_betrieb
+P00589,dach_gewerbe,Markdorf,47.70356,9.35862,291.1,124,8,W15,6,WS09,2010-02-19,35.09,in_betrieb
+P00590,balkon,Baienfurt,47.85927,9.70532,0.82,204,80,W02,1,WS23,2026-01-19,0.0,in_betrieb
+P00591,dach_privat,Salem,47.71692,9.27466,10.9,195,19,W06,1,WS16,2025-11-08,7.86,in_betrieb
+P00592,balkon,Konstanz,47.63477,9.19873,0.6,203,28,W01,1,WS03,2023-07-11,0.0,in_betrieb
+P00593,dach_gewerbe,Immenstaad,47.69925,9.3805,111.6,188,17,W17,1,WS13,2010-12-02,32.51,in_betrieb
+P00594,dach_gewerbe,Friedrichshafen,47.66401,9.49437,67.2,180,10,W16,1,WS01,2022-03-25,5.83,in_betrieb
+P00595,dach_gewerbe,Überlingen,47.7738,9.16,53.9,203,6,W15,1,WS06,2025-03-11,7.12,in_betrieb
+P00596,dach_privat,Friedrichshafen,47.68581,9.45424,14.3,178,32,W10,1,WS01,2021-02-17,8.16,in_betrieb
+P00597,dach_privat,Ravensburg,47.83103,9.59672,11.25,266,40,W10,1,WS02,2020-09-22,9.17,in_betrieb
+P00598,dach_gewerbe,Langenargen,47.63704,9.57856,206.5,154,10,W14,6,WS14,2015-04-08,10.39,in_betrieb
+P00599,dach_privat,Baienfurt,47.82344,9.72152,8.55,181,35,W05,1,WS23,2021-09-26,8.16,in_betrieb
+P00600,dach_privat,Leutkirch,47.80111,10.08308,15.41,154,27,W10,1,WS11,2023-11-09,8.2,in_betrieb
+P00601,freiflaeche,Ravensburg,47.78669,9.53841,5780.0,179,21,W21,36,WS02,2025-05-13,5.81,in_betrieb
+P00602,dach_privat,Ravensburg,47.77553,9.6806,13.73,182,29,W11,1,WS02,2024-12-30,8.03,in_betrieb
+P00603,dach_privat,Bad Waldsee,47.94544,9.77088,14.37,161,28,W10,1,WS10,2023-08-24,8.2,in_betrieb
+P00604,dach_privat,Ravensburg,47.74356,9.61815,6.39,251,35,W04,1,WS02,2022-06-04,6.93,in_betrieb
+P00605,dach_privat,Leutkirch,47.83883,10.05796,8.41,150,26,W05,1,WS11,2011-11-20,28.74,in_betrieb
+P00606,dach_privat,Bad Wurzach,47.87301,9.87874,7.95,278,42,W06,1,WS18,2021-03-22,8.16,in_betrieb
+P00607,dach_privat,Kressbronn,47.61586,9.59606,17.86,69,16,W12,1,WS15,2011-01-20,28.74,in_betrieb
+P00608,balkon,Leutkirch,47.82575,10.09043,0.6,155,87,W01,1,WS11,2023-04-18,0.0,in_betrieb
+P00609,balkon,Salem,47.7435,9.3327,0.8,162,90,W01,1,WS16,2025-04-07,0.0,in_betrieb
+P00610,dach_privat,Meckenbeuren,47.69195,9.63947,9.71,85,31,W11,1,WS12,2018-12-18,12.2,in_betrieb
+P00611,dach_privat,Konstanz,47.69111,9.17485,10.62,185,32,W06,1,WS03,2022-04-07,6.93,in_betrieb
+P00612,dach_privat,Weingarten,47.81943,9.5831,11.34,163,35,W06,1,WS04,2020-12-06,9.17,in_betrieb
+P00613,dach_privat,Stockach,47.83302,9.07011,14.18,266,37,W10,1,WS20,2022-03-08,6.93,in_betrieb
+P00614,dach_privat,Salem,47.79284,9.3501,5.67,149,32,W04,1,WS16,2024-02-13,8.03,abgeschaltet
+P00615,balkon,Tettnang,47.63424,9.58893,0.82,129,82,W02,1,WS08,2025-11-03,0.0,in_betrieb
+P00616,dach_gewerbe,Weingarten,47.83062,9.69377,190.9,192,15,W20,3,WS04,2024-09-19,6.86,in_betrieb
+P00617,dach_privat,Friedrichshafen,47.66672,9.50855,7.73,79,20,W05,1,WS01,2023-06-19,8.2,in_betrieb
+P00618,dach_privat,Leutkirch,47.83176,10.04326,10.46,96,27,W06,1,WS11,2012-08-09,19.5,in_betrieb
+P00619,dach_privat,Ravensburg,47.83633,9.56906,30,266,16,W10,2,WS02,2023-08-13,8.2,in_betrieb
+P00620,dach_privat,Salem,47.76248,9.27162,7.31,76,21,W06,1,WS16,2008-12-10,46.75,in_betrieb
+P00621,dach_privat,Friedrichshafen,47.6499,9.5069,3.66,253,26,W03,1,WS01,2013-12-06,15.07,in_betrieb
+P00622,dach_gewerbe,Überlingen,47.78384,9.14842,220.9,216,24,W14,6,WS06,2010-12-06,33.33,in_betrieb
+P00623,dach_gewerbe,Friedrichshafen,47.65823,9.5082,41.9,215,22,W15,1,WS01,2021-09-27,7.03,abgeschaltet
+P00624,dach_gewerbe,Baienfurt,47.84318,9.62554,125.6,186,5,W18,1,WS23,2024-11-30,6.77,in_betrieb
+P00625,dach_privat,Friedrichshafen,47.66735,9.51113,7.93,111,19,W05,1,WS01,2021-11-22,8.16,in_betrieb
+P00626,balkon,Wangen im Allgäu,47.66263,9.78605,0.8,250,25,W02,1,WS07,2026-05-16,0.0,in_betrieb
+P00627,dach_privat,Überlingen,47.78007,9.20451,3.31,160,42,W03,1,WS06,2011-05-07,28.74,in_betrieb
+P00628,dach_privat,Konstanz,47.68472,9.17051,14.65,264,18,W11,1,WS03,2019-07-08,11.47,in_betrieb
+P00629,dach_privat,Markdorf,47.74726,9.35017,4.82,96,32,W04,1,WS09,2022-09-11,6.93,in_betrieb
+P00630,dach_privat,Ravensburg,47.77233,9.53929,6.71,97,45,W05,1,WS02,2016-03-08,12.31,in_betrieb
+P00631,balkon,Friedrichshafen,47.68781,9.49561,0.82,190,73,W02,1,WS01,2025-01-16,0.0,in_betrieb
+P00632,dach_privat,Lindau,47.57313,9.62046,10.47,80,36,W05,1,WS05,2011-03-12,28.74,in_betrieb
+P00633,dach_privat,Konstanz,47.6663,9.16888,8.15,165,44,W08,1,WS03,2010-11-30,39.14,in_betrieb
+P00634,dach_privat,Lindau,47.56024,9.72945,7.49,181,40,W05,1,WS05,2019-06-04,11.47,in_betrieb
+P00635,dach_privat,Ravensburg,47.81224,9.59743,7.75,157,42,W09,1,WS02,2009-03-22,43.01,in_betrieb
+P00636,balkon,Ravensburg,47.75185,9.65573,0.9,202,81,W02,1,WS02,2024-01-14,0.0,in_betrieb
+P00637,dach_privat,Friedrichshafen,47.694,9.47914,20.86,179,30,W12,1,WS01,2024-09-27,8.03,in_betrieb
+P00638,dach_privat,Konstanz,47.67994,9.16279,8.52,267,16,W05,1,WS03,2008-01-03,46.75,in_betrieb
+P00639,balkon,Friedrichshafen,47.66326,9.45119,0.86,183,37,W01,1,WS01,2025-04-20,0.0,in_betrieb
+P00640,balkon,Langenargen,47.6238,9.57085,0.9,131,36,W01,1,WS14,2024-05-02,0.0,in_betrieb
+P00641,dach_privat,Friedrichshafen,47.67215,9.4916,6.42,85,18,W08,1,WS01,2020-11-30,9.17,in_betrieb
+P00642,dach_privat,Isny,47.70317,10.03539,9.48,198,16,W05,1,WS17,2011-04-16,28.74,in_betrieb
+P00643,freiflaeche,Weingarten,47.83744,9.58145,4612.0,177,25,W24,21,WS04,2016-12-22,5.29,in_betrieb
+P00644,dach_privat,Überlingen,47.72798,9.13561,10.91,177,43,W06,1,WS06,2014-07-16,13.15,in_betrieb
+P00645,dach_privat,Meersburg,47.69217,9.35497,13.06,207,21,W10,1,WS22,2013-08-20,15.07,in_betrieb
+P00646,dach_privat,Lindau,47.58257,9.6926,7.05,91,36,W05,1,WS05,2010-12-30,39.14,in_betrieb
+P00647,dach_privat,Wangen im Allgäu,47.65648,9.78922,7.02,148,21,W05,1,WS07,2025-08-21,7.86,in_betrieb
+P00648,balkon,Langenargen,47.62562,9.55802,0.6,136,80,W01,1,WS14,2025-09-15,0.0,in_betrieb
+P00649,freiflaeche,Friedrichshafen,47.63592,9.55511,5333.0,172,26,W21,32,WS01,2021-11-25,5.69,in_betrieb
+P00650,balkon,Konstanz,47.61198,9.16087,0.82,194,35,W02,1,WS03,2022-03-07,0.0,in_betrieb
+P00651,freiflaeche,Tettnang,47.73508,9.58011,3407.0,175,21,W21,20,WS08,2025-09-30,5.43,in_betrieb
+P00652,dach_gewerbe,Konstanz,47.69768,9.17046,304.1,128,24,W18,3,WS03,2012-04-22,16.07,in_betrieb
+P00653,dach_privat,Überlingen,47.79215,9.15715,5.05,287,39,W04,1,WS06,2011-03-03,28.74,in_betrieb
+P00654,dach_privat,Konstanz,47.69464,9.1687,13.21,212,43,W10,1,WS03,2022-04-03,6.93,in_betrieb
+P00655,dach_gewerbe,Leutkirch,47.79179,10.01667,49.9,138,18,W15,1,WS11,2024-09-01,7.0,in_betrieb
+P00656,dach_privat,Meersburg,47.72957,9.24136,6.16,89,32,W04,1,WS22,2017-03-14,12.3,in_betrieb
+P00657,dach_privat,Ravensburg,47.7848,9.62289,13.51,275,27,W11,1,WS02,2021-12-19,8.16,in_betrieb
+P00658,balkon,Leutkirch,47.83225,10.01502,0.9,260,83,W01,1,WS11,2025-12-10,0.0,in_betrieb
+P00659,dach_privat,Wangen im Allgäu,47.70413,9.83089,10.1,169,17,W06,1,WS07,2022-04-21,6.93,in_betrieb
+P00660,balkon,Isny,47.69853,10.07525,0.6,152,69,W02,1,WS17,2025-09-04,0.0,in_betrieb
+P00661,dach_privat,Wangen im Allgäu,47.67427,9.84693,4.73,189,18,W04,1,WS07,2009-05-27,43.01,in_betrieb
+P00662,dach_privat,Lindau,47.5882,9.65882,9.13,162,28,W09,1,WS05,2022-10-15,6.93,in_betrieb
+P00663,dach_gewerbe,Weingarten,47.76214,9.6836,228.9,231,13,W20,4,WS04,2023-03-25,6.72,in_betrieb
+P00664,dach_privat,Konstanz,47.63524,9.18436,6.21,85,39,W08,1,WS03,2013-01-07,15.07,in_betrieb
+P00665,dach_privat,Ravensburg,47.77135,9.57699,13.06,155,19,W11,1,WS02,2009-10-24,43.01,in_betrieb
+P00666,dach_privat,Wangen im Allgäu,47.69573,9.84339,7.64,161,42,W08,1,WS07,2014-05-16,13.15,in_betrieb
+P00667,dach_privat,Bad Waldsee,47.94397,9.69264,10.47,189,23,W06,1,WS10,2011-10-26,28.74,in_betrieb
+P00668,dach_privat,Konstanz,47.65778,9.17007,7.65,139,32,W08,1,WS03,2021-08-17,8.16,in_betrieb
+P00669,dach_gewerbe,Friedrichshafen,47.69362,9.48272,320.3,206,9,W18,3,WS01,2017-01-10,10.33,in_betrieb
+P00670,dach_privat,Immenstaad,47.68222,9.41228,20.6,103,43,W12,1,WS13,2012-11-20,19.5,in_betrieb
+P00671,dach_privat,Markdorf,47.72277,9.33891,7.77,182,19,W05,1,WS09,2021-10-25,8.16,in_betrieb
+P00672,dach_privat,Lindau,47.55367,9.73702,4.72,271,27,W08,1,WS05,2022-04-13,6.93,in_betrieb
+P00673,dach_privat,Tettnang,47.69962,9.54418,10.1,91,26,W05,1,WS08,2013-06-26,15.07,in_betrieb
+P00674,dach_gewerbe,Überlingen,47.73165,9.16154,56.5,206,22,W15,1,WS06,2012-07-06,16.63,in_betrieb
+P00675,dach_privat,Lindau,47.55963,9.75809,9.94,161,37,W06,1,WS05,2025-02-25,7.86,in_betrieb
+P00676,dach_privat,Wangen im Allgäu,47.70215,9.83388,9.0,208,25,W09,1,WS07,2010-12-22,39.14,in_betrieb
+P00677,dach_privat,Friedrichshafen,47.64999,9.5211,15.35,272,26,W11,1,WS01,2018-12-24,12.2,in_betrieb
+P00678,balkon,Stockach,47.84547,9.06545,0.8,193,32,W01,1,WS20,2025-05-27,0.0,in_betrieb
+P00679,dach_privat,Tettnang,47.63942,9.54577,6.15,163,32,W08,1,WS08,2013-10-08,15.07,in_betrieb
+P00680,dach_privat,Friedrichshafen,47.66702,9.50045,8.2,161,33,W05,1,WS01,2024-04-16,8.03,in_betrieb
+P00681,dach_privat,Friedrichshafen,47.66036,9.49379,16.07,204,19,W11,1,WS01,2022-04-17,6.93,in_betrieb
+P00682,dach_privat,Bad Waldsee,47.89866,9.80417,8.55,254,26,W09,1,WS10,2024-12-17,8.03,in_betrieb
+P00683,balkon,Überlingen,47.7908,9.21233,0.82,124,86,W02,1,WS06,2026-02-20,0.0,in_betrieb
+P00684,dach_privat,Überlingen,47.80762,9.15845,7.93,186,44,W05,1,WS06,2019-07-30,11.47,in_betrieb
+P00685,balkon,Kressbronn,47.6086,9.61535,0.9,175,27,W01,1,WS15,2023-02-13,0.0,in_betrieb
+P00686,balkon,Konstanz,47.6596,9.17288,0.82,109,27,W01,1,WS03,2025-11-14,0.0,in_betrieb
+P00687,balkon,Konstanz,47.68082,9.19692,0.82,163,84,W02,1,WS03,2025-08-25,0.0,in_betrieb
+P00688,dach_gewerbe,Konstanz,47.64363,9.15955,268.8,92,19,W17,2,WS03,2013-10-24,13.28,in_betrieb
+P00689,balkon,Isny,47.72773,10.00279,0.6,162,25,W02,1,WS17,2023-01-31,0.0,in_betrieb
+P00690,balkon,Stockach,47.83702,8.96255,0.6,132,88,W01,1,WS20,2024-10-10,0.0,in_betrieb
+P00691,dach_privat,Immenstaad,47.6925,9.35143,13.13,102,22,W11,1,WS13,2023-11-16,8.2,in_betrieb
+P00692,dach_privat,Isny,47.64811,10.03038,3.51,200,28,W03,1,WS17,2017-02-12,12.3,in_betrieb
+P00693,dach_gewerbe,Weingarten,47.81599,9.7179,139.2,99,24,W18,1,WS04,2019-05-05,9.42,in_betrieb
+P00694,dach_privat,Konstanz,47.62469,9.18122,8.33,64,26,W05,1,WS03,2025-01-15,7.86,in_betrieb
+P00695,dach_privat,Isny,47.72842,10.00306,8.72,82,26,W06,1,WS17,2020-09-08,9.17,in_betrieb
+P00696,balkon,Wangen im Allgäu,47.7173,9.783,0.86,225,28,W02,1,WS07,2025-09-15,0.0,in_betrieb
+P00697,dach_gewerbe,Lindau,47.57836,9.61891,179.5,179,6,W15,3,WS05,2016-04-27,10.52,in_betrieb
+P00698,balkon,Salem,47.76047,9.25312,0.8,152,69,W02,1,WS16,2025-03-07,0.0,in_betrieb
+P00699,dach_privat,Konstanz,47.62311,9.20538,10.66,172,21,W05,1,WS03,2014-04-03,13.15,in_betrieb
+P00700,dach_privat,Stockach,47.83899,9.03576,10.11,93,32,W05,1,WS20,2010-11-03,39.14,in_betrieb
+P00701,dach_privat,Lindau,47.57938,9.68737,9.49,209,44,W06,1,WS05,2023-01-30,8.2,in_betrieb
+P00702,dach_privat,Meckenbeuren,47.65744,9.52947,4.08,157,22,W03,1,WS12,2012-06-16,19.5,in_betrieb
+P00703,balkon,Stockach,47.87027,8.96234,0.86,101,87,W01,1,WS20,2022-10-07,0.0,in_betrieb
+P00704,dach_gewerbe,Bad Waldsee,47.97438,9.77359,116.9,261,14,W18,1,WS10,2024-11-07,6.96,in_betrieb
+P00705,dach_gewerbe,Bad Waldsee,47.96196,9.6961,152.1,192,16,W15,3,WS10,2021-09-17,7.11,in_betrieb
+P00706,dach_privat,Konstanz,47.64309,9.14494,17.04,87,37,W10,1,WS03,2025-07-20,7.86,in_betrieb
+P00707,balkon,Weingarten,47.8197,9.68558,0.82,241,67,W02,1,WS04,2024-12-06,0.0,in_betrieb
+P00708,dach_privat,Meckenbeuren,47.69094,9.59011,9.14,93,44,W05,1,WS12,2019-01-15,11.47,in_betrieb
+P00709,balkon,Friedrichshafen,47.66727,9.48436,0.9,102,68,W01,1,WS01,2026-04-13,0.0,in_betrieb
+P00710,dach_privat,Friedrichshafen,47.68667,9.49718,9.34,104,20,W06,1,WS01,2020-11-13,9.17,in_betrieb
+P00711,balkon,Friedrichshafen,47.67425,9.48752,0.8,207,31,W02,1,WS01,2024-12-12,0.0,in_betrieb
+P00712,dach_privat,Wangen im Allgäu,47.72469,9.82977,7.92,204,26,W08,1,WS07,2022-11-25,6.93,in_betrieb
+P00713,balkon,Ravensburg,47.7498,9.56646,0.8,123,28,W02,1,WS02,2025-05-31,0.0,in_betrieb
+P00714,dach_privat,Wangen im Allgäu,47.66653,9.81706,21.01,279,41,W12,1,WS07,2024-02-22,8.03,in_betrieb
+P00715,dach_privat,Pfullendorf,47.93259,9.26733,5.3,93,31,W04,1,WS19,2011-01-19,28.74,in_betrieb
+P00716,dach_privat,Bad Waldsee,47.8826,9.72198,9.71,210,40,W06,1,WS10,2009-01-10,43.01,gestoert
+P00717,dach_privat,Tettnang,47.67668,9.63335,12.26,205,32,W12,1,WS08,2014-05-27,13.15,in_betrieb
+P00718,dach_privat,Konstanz,47.67761,9.15353,11.15,93,23,W09,1,WS03,2024-04-09,8.03,in_betrieb
+P00719,dach_privat,Leutkirch,47.84033,10.05908,3.76,259,36,W03,1,WS11,2024-01-04,8.03,in_betrieb
+P00720,balkon,Salem,47.78788,9.22929,0.86,171,34,W02,1,WS16,2024-08-27,0.0,in_betrieb
+P00721,dach_privat,Pfullendorf,47.89423,9.20968,8.47,176,30,W05,1,WS19,2025-03-24,7.86,in_betrieb
+P00722,dach_privat,Weingarten,47.81699,9.6543,7.92,177,44,W05,1,WS04,2011-03-23,28.74,in_betrieb
+P00723,dach_gewerbe,Ravensburg,47.81961,9.61346,216.9,156,6,W16,3,WS02,2021-10-06,7.24,in_betrieb
+P00724,dach_gewerbe,Friedrichshafen,47.66346,9.51096,184.7,262,19,W20,3,WS01,2015-10-05,11.45,in_betrieb
+P00725,dach_privat,Ravensburg,47.82075,9.54535,6.45,273,27,W05,1,WS02,2014-05-31,13.15,in_betrieb
+P00726,freiflaeche,Ravensburg,47.83785,9.62648,3028.0,187,26,W22,10,WS02,2019-01-26,6.17,in_betrieb
+P00727,dach_privat,Stockach,47.84375,8.97747,13.77,73,41,W11,1,WS20,2022-12-26,6.93,in_betrieb
+P00728,dach_privat,Friedrichshafen,47.63004,9.52863,11.24,76,39,W06,1,WS01,2021-06-10,8.16,in_betrieb
+P00729,balkon,Bad Wurzach,47.93538,9.92555,0.82,187,25,W02,1,WS18,2025-02-01,0.0,in_betrieb
+P00730,freiflaeche,Ravensburg,47.77036,9.64685,5398.0,174,18,W22,21,WS02,2017-09-22,6.39,in_betrieb
+P00731,dach_privat,Ravensburg,47.80439,9.60486,11.31,174,30,W06,1,WS02,2025-02-12,7.86,in_betrieb
+P00732,dach_privat,Friedrichshafen,47.668,9.51247,10.52,199,19,W06,1,WS01,2021-10-05,8.16,in_betrieb
+P00733,freiflaeche,Wangen im Allgäu,47.74874,9.80821,5405.0,178,23,W24,23,WS07,2018-06-01,6.57,in_betrieb
+P00734,dach_privat,Wangen im Allgäu,47.72365,9.87873,18.41,154,18,W12,1,WS07,2019-06-12,11.47,in_betrieb
+P00735,dach_privat,Ravensburg,47.78288,9.67504,9.78,172,20,W11,1,WS02,2024-10-21,8.03,in_betrieb
+P00736,balkon,Konstanz,47.67476,9.1652,0.9,194,34,W01,1,WS03,2024-03-19,0.0,in_betrieb
+P00737,balkon,Friedrichshafen,47.67061,9.50142,0.86,202,67,W02,1,WS01,2024-03-23,0.0,in_betrieb
+P00738,dach_gewerbe,Langenargen,47.62124,9.59762,112.0,261,19,W17,1,WS14,2010-11-06,35.54,in_betrieb
+P00739,balkon,Tettnang,47.66722,9.61452,0.82,149,29,W01,1,WS08,2025-01-26,0.0,in_betrieb
+P00740,dach_privat,Wangen im Allgäu,47.65388,9.79855,23.63,98,42,W09,2,WS07,2011-03-03,28.74,in_betrieb
+P00741,balkon,Langenargen,47.64396,9.55479,0.82,185,81,W01,1,WS14,2024-06-01,0.0,in_betrieb
+P00742,dach_privat,Markdorf,47.70029,9.44264,8.0,194,19,W06,1,WS09,2022-07-20,6.93,in_betrieb
+P00743,dach_privat,Konstanz,47.66008,9.17328,7.89,93,31,W05,1,WS03,2011-08-27,28.74,in_betrieb
+P00744,dach_privat,Weingarten,47.7805,9.70303,6.15,178,26,W04,1,WS04,2014-08-09,13.15,in_betrieb
+P00745,dach_privat,Ravensburg,47.78169,9.68075,13.81,168,16,W10,1,WS02,2025-08-04,7.86,in_betrieb
+P00746,dach_privat,Ravensburg,47.78316,9.6538,10.11,167,18,W05,1,WS02,2023-01-02,8.2,in_betrieb
+P00747,dach_gewerbe,Immenstaad,47.69432,9.33177,33.3,163,25,W15,1,WS13,2010-02-23,34.19,in_betrieb
+P00748,freiflaeche,Bermatingen,47.6903,9.35964,6288.0,177,19,W24,28,WS24,2014-01-08,5.79,in_betrieb
+P00749,dach_privat,Bad Waldsee,47.91497,9.74909,4.78,183,39,W07,1,WS10,2025-05-20,7.86,in_betrieb
+P00750,dach_privat,Meersburg,47.69785,9.32717,12.7,268,17,W06,1,WS22,2009-12-11,43.01,in_betrieb
+P00751,balkon,Ravensburg,47.81911,9.58614,0.8,183,36,W02,1,WS02,2025-10-29,0.0,in_betrieb
+P00752,dach_privat,Konstanz,47.6401,9.17335,20.8,264,23,W12,1,WS03,2024-06-26,8.03,in_betrieb
+P00753,dach_privat,Stockach,47.87834,9.01217,13.2,263,16,W11,1,WS20,2023-07-31,8.2,in_betrieb
+P00754,balkon,Lindau,47.5607,9.68477,0.9,208,75,W02,1,WS05,2025-10-05,0.0,in_betrieb
+P00755,dach_gewerbe,Pfullendorf,47.87089,9.25059,393.7,179,11,W20,8,WS19,2012-09-24,16.29,in_betrieb
+P00756,balkon,Überlingen,47.81042,9.17322,0.82,155,85,W01,1,WS06,2026-04-04,0.0,in_betrieb
+P00757,balkon,Friedrichshafen,47.67506,9.50329,0,123,84,W02,1,WS01,2025-05-20,0.0,in_betrieb
+P00758,dach_privat,Lindau,47.56524,9.68374,9.32,263,29,W06,1,WS05,2017-12-29,12.3,in_betrieb
+P00759,dach_privat,Langenargen,47.625,9.57007,8.28,186,25,W05,1,WS14,2023-04-23,8.2,in_betrieb
+P00760,dach_privat,Ravensburg,47.79272,9.67264,9.2,284,27,W05,1,WS02,2024-09-30,8.03,in_betrieb
+P00761,dach_privat,Weingarten,47.80652,9.67246,8.94,239,31,W05,1,WS04,2020-09-03,9.17,in_betrieb
+P00762,dach_privat,Kressbronn,47.61719,9.61482,6.58,91,39,W08,1,WS15,2026-01-03,7.78,in_betrieb
+P00763,dach_privat,Weingarten,47.80317,9.64304,11.41,205,41,W06,1,WS04,2015-06-11,12.56,in_betrieb
+P00764,dach_privat,Weingarten,47.83235,9.68915,8.03,201,28,W05,1,WS04,2018-06-10,12.2,in_betrieb
+P00765,dach_privat,Kressbronn,47.62523,9.60417,15.51,175,15,W10,1,WS15,2021-10-20,8.16,in_betrieb
+P00766,freiflaeche,Überlingen,47.73571,9.08847,2606.0,174,21,W21,16,WS06,2025-10-10,5.78,in_betrieb
+P00767,dach_privat,Eriskirch,47.64546,9.56152,9.45,200,15,W05,1,WS25,2021-12-25,8.16,in_betrieb
+P00768,dach_privat,Bad Waldsee,47.93396,9.76429,6.31,283,35,W04,1,WS10,2011-10-07,28.74,in_betrieb
+P00769,dach_privat,Konstanz,47.6298,9.23018,4.61,148,17,W07,1,WS03,2026-03-19,7.78,in_betrieb
+P00770,dach_privat,Weingarten,47.84146,9.65583,8.44,268,38,W05,1,WS04,2022-09-20,6.93,in_betrieb
+P00771,balkon,Weingarten,47.82999,9.58904,0.86,122,60,W01,1,WS04,2025-09-16,0.0,in_betrieb
+P00772,dach_privat,Tettnang,47.70262,9.58299,9.7,84,17,W06,1,WS08,2013-09-25,15.07,in_betrieb
+P00773,balkon,Tettnang,47.68119,9.6134,0.86,208,27,W01,1,WS08,2026-01-17,0.0,in_betrieb
+P00774,dach_privat,Bad Waldsee,47.92262,9.71528,5.64,172,31,W05,1,WS10,2012-11-19,19.5,in_betrieb
+P00775,balkon,Friedrichshafen,47.66656,9.50764,0.9,246,30,W02,1,WS01,2022-12-19,0.0,in_betrieb
+P00776,balkon,Pfullendorf,47.9533,9.22976,0.9,178,30,W02,1,WS19,2025-05-14,0.0,in_betrieb
+P00777,dach_privat,Konstanz,47.68465,9.19571,4.06,267,24,W07,1,WS03,2025-07-20,7.86,in_betrieb
+P00778,dach_gewerbe,Salem,47.80098,9.24919,82.5,191,13,W20,1,WS16,2020-11-06,8.23,in_betrieb
+P00779,dach_privat,Meckenbeuren,47.68608,9.53003,12.98,284,26,W11,1,WS12,2009-01-02,43.01,in_betrieb
+P00780,dach_gewerbe,Eriskirch,47.66554,9.54645,121.3,192,20,W18,1,WS25,2025-05-14,6.84,in_betrieb
+P00781,dach_privat,Langenargen,47.62793,9.55421,7.3,196,26,W05,1,WS14,2012-11-24,19.5,in_betrieb
+P00782,dach_privat,Ravensburg,47.82635,9.63436,18.74,93,19,W12,1,WS02,2012-02-27,19.5,in_betrieb
+P00783,dach_privat,Kressbronn,47.60193,9.58081,19.5,149,29,W10,1,WS15,2015-09-04,12.56,in_betrieb
+P00784,dach_privat,Wangen im Allgäu,47.69331,9.91457,13.83,276,20,W10,1,WS07,2009-04-16,43.01,in_betrieb
+P00785,dach_privat,Überlingen,47.72454,9.14176,9.59,256,30,W05,1,WS06,2011-11-05,28.74,in_betrieb
+P00786,dach_privat,Bad Wurzach,47.88774,9.94125,10.95,159,35,W06,1,WS18,2009-07-10,43.01,in_betrieb
+P00787,dach_privat,Bad Wurzach,47.88117,9.90016,8.96,109,38,W06,1,WS18,2021-09-28,8.16,in_betrieb
+P00788,dach_privat,Ravensburg,47.75427,9.64708,6.36,165,16,W08,1,WS02,2017-04-14,12.3,in_betrieb
+P00789,balkon,Ravensburg,47.75251,9.62711,0.8,164,32,W02,1,WS02,2025-03-20,0.0,in_betrieb
+P00790,dach_gewerbe,Immenstaad,47.67249,9.32874,105.6,107,10,W17,1,WS13,2011-05-03,24.79,in_betrieb
+P00791,dach_privat,Lindau,47.59664,9.70411,5.8,294,39,W04,1,WS05,2025-01-14,7.86,in_betrieb
+P00792,dach_privat,Bad Wurzach,47.9532,9.92666,8.41,206,17,W05,1,WS18,2017-09-01,12.3,in_betrieb
+P00793,balkon,Friedrichshafen,47.63292,9.53786,0.6,104,38,W02,1,WS01,2024-04-20,0.0,in_betrieb
+P00794,balkon,Bermatingen,47.70043,9.34063,0.82,189,37,W01,1,WS24,2024-12-23,0.0,in_betrieb
+P00795,dach_privat,Lindau,47.57811,9.6881,11.8,223,32,W11,1,WS05,2012-12-18,19.5,in_betrieb
+P00796,dach_privat,Konstanz,47.62045,9.21185,10.04,92,34,W06,1,WS03,2017-01-09,12.3,in_betrieb
+P00797,balkon,Weingarten,47.853,9.69493,0.8,170,28,W01,1,WS04,2025-10-21,0.0,in_betrieb
+P00798,dach_privat,Bad Wurzach,47.86402,9.94902,10.17,174,28,W11,1,WS18,2021-04-02,8.16,in_betrieb
+P00799,balkon,Oberteuringen,47.70311,9.5149,0.6,114,72,W02,1,WS21,2025-11-30,0.0,in_betrieb
+P00800,dach_privat,Ravensburg,47.79628,9.62651,11.66,82,17,W06,1,WS02,2011-02-19,28.74,in_betrieb
+P00801,dach_privat,Konstanz,47.65763,9.17618,13.63,262,30,W11,1,WS03,2008-09-02,46.75,in_betrieb
+P00802,dach_gewerbe,Bad Waldsee,47.95195,9.7598,25,267,10,W13,1,WS10,2015-01-27,10.33,in_betrieb
+P00803,balkon,Wangen im Allgäu,47.68103,9.81348,0.8,193,83,W01,1,WS07,2025-11-16,0.0,in_betrieb
+P00804,balkon,Immenstaad,47.68935,9.37452,0.86,222,26,W02,1,WS13,2024-12-21,0.0,in_betrieb
+P00805,dach_privat,Ravensburg,47.83542,9.59149,13.88,212,43,W10,1,WS02,2009-01-18,43.01,in_betrieb
+P00806,dach_gewerbe,Friedrichshafen,47.63935,9.54476,51.8,161,18,W15,1,WS01,2012-04-10,17.55,in_betrieb
+P00807,dach_privat,Baienfurt,47.84782,9.67221,10.44,145,29,W06,1,WS23,2009-11-16,43.01,in_betrieb
+P00808,dach_privat,Pfullendorf,47.87177,9.2321,7.13,278,43,W05,1,WS19,2015-10-22,12.56,in_betrieb
+P00809,balkon,Friedrichshafen,47.66905,9.50786,0.9,188,83,W02,1,WS01,2025-03-16,0.0,in_betrieb
+P00810,dach_gewerbe,Weingarten,47.82918,9.70361,317.3,178,22,W17,3,WS04,2020-01-27,8.01,in_betrieb
+P00811,dach_gewerbe,Friedrichshafen,47.68118,9.4996,307.1,198,19,W18,2,WS01,2024-06-15,7.02,wartung
+P00812,freiflaeche,Ravensburg,47.71384,9.57275,5441.0,180,19,W22,22,WS02,2013-12-13,5.84,in_betrieb
+P00813,dach_privat,Oberteuringen,47.74872,9.40692,7.81,70,29,W05,1,WS21,2012-08-31,19.5,in_betrieb
+P00814,dach_privat,Isny,47.68339,10.03808,14.47,101,26,W12,1,WS17,2025-07-15,7.86,in_betrieb
+P00815,dach_gewerbe,Friedrichshafen,47.67226,9.49579,44.4,227,20,W15,1,WS01,2018-05-20,10.3,in_betrieb
+P00816,balkon,Pfullendorf,47.9431,9.21234,0.6,158,65,W02,1,WS19,2026-03-01,0.0,in_betrieb
+P00817,balkon,Ravensburg,47.80072,9.62852,0.9,139,74,W01,1,WS02,2025-07-15,0.0,in_betrieb
+P00818,dach_privat,Leutkirch,47.86117,10.01998,8.72,174,44,W05,1,WS11,2018-09-08,12.2,in_betrieb
+P00819,dach_privat,Bad Wurzach,47.94464,9.92984,12.63,183,41,W11,1,WS18,2018-11-14,12.2,in_betrieb
+P00820,balkon,Weingarten,47.78129,9.69444,0.6,185,35,W02,1,WS04,2025-08-11,0.0,in_betrieb
+P00821,balkon,Bad Waldsee,47.9121,9.7609,0.9,209,39,W01,1,WS10,2025-01-04,0.0,in_betrieb
+P00822,dach_privat,Markdorf,47.7193,9.42598,10.88,97,42,W06,1,WS09,2021-11-17,8.16,in_betrieb
+P00823,dach_privat,Ravensburg,47.74396,9.56102,15.27,281,43,W11,1,WS02,2021-08-02,8.16,in_betrieb
+P00824,balkon,Bad Wurzach,47.93162,9.84746,0.8,165,40,W01,1,WS18,2025-01-23,0.0,in_betrieb
+P00825,balkon,Wangen im Allgäu,47.70935,9.8599,0.82,162,30,W01,1,WS07,2024-02-25,0.0,in_betrieb
+P00826,dach_gewerbe,Wangen im Allgäu,47.69257,9.763,188.0,180,10,W17,2,WS07,2011-02-13,24.27,in_betrieb
+P00827,balkon,Salem,47.7535,9.2453,0.82,200,36,W02,1,WS16,2023-01-04,0.0,in_betrieb
+P00828,balkon,Weingarten,47.83591,9.6186,0.6,209,30,W01,1,WS04,2023-02-28,0.0,in_betrieb
+P00829,balkon,Stockach,47.79932,8.99799,0.82,134,34,W02,1,WS20,2023-03-14,0.0,in_betrieb
+P00830,dach_privat,Stockach,47.86499,9.02516,8.37,188,25,W05,1,WS20,2023-04-02,8.2,in_betrieb
+P00831,dach_gewerbe,Wangen im Allgäu,47.72579,9.88342,54.0,164,20,W15,1,WS07,2009-03-10,36.83,in_betrieb
+P00832,dach_gewerbe,Bad Waldsee,47.94054,9.78279,281.9,209,17,W16,4,WS31,2021-12-14,6.83,in_betrieb
+P00833,dach_privat,Wangen im Allgäu,47.63878,9.81453,10.56,247,20,W06,1,WS07,2010-08-03,39.14,in_betrieb
+P00834,dach_gewerbe,Konstanz,47.61242,9.17595,144.5,103,19,W20,2,WS03,2020-01-12,8.35,in_betrieb
+P00835,balkon,Isny,47.71792,10.06733,0.82,179,60,W02,1,WS17,2024-02-19,0.0,in_betrieb
+P00836,freiflaeche,Konstanz,47.62627,9.14848,3276.0,184,22,W22,12,WS03,2013-03-25,5.37,in_betrieb
+P00837,dach_privat,Kressbronn,47.59329,9.57624,5.02,108,31,W08,1,WS15,2026-01-21,7.78,in_betrieb
+P00838,dach_privat,Weingarten,47.78992,9.72153,7.13,260,25,W05,1,WS04,2010-01-10,39.14,in_betrieb
+P00839,dach_privat,Lindau,47.57607,9.68853,22.59,267,43,W12,1,WS05,2010-11-21,39.14,in_betrieb
+P00840,dach_privat,Überlingen,47.81152,9.15448,6.1,184,39,W08,1,WS06,2011-05-18,28.74,in_betrieb
+P00841,dach_privat,Konstanz,47.66421,9.1631,5.76,165,37,W08,1,WS03,2024-11-22,8.03,in_betrieb
+P00842,dach_privat,Friedrichshafen,47.6066,9.53077,12.06,84,22,W06,1,WS01,2010-11-22,39.14,in_betrieb
+P00843,balkon,Kressbronn,47.62674,9.6073,0.86,226,74,W02,1,WS15,2024-08-15,0.0,in_betrieb
+P00844,balkon,Konstanz,47.6637,9.17321,0.82,168,78,W01,1,WS03,2025-11-09,0.0,in_betrieb
+P00845,balkon,Konstanz,47.66071,9.16477,0.6,164,39,W02,1,WS03,2025-01-26,0.0,in_betrieb
+P00846,dach_privat,Meersburg,47.69464,9.28276,5.77,169,32,W08,1,WS22,2025-01-30,7.86,in_betrieb
+P00847,balkon,Ravensburg,47.81411,9.62047,0.9,171,27,W02,1,WS02,2025-01-22,0.0,in_betrieb
+P00848,dach_privat,Isny,47.73539,10.03926,8.45,203,15,W05,1,WS17,2009-06-22,43.01,in_betrieb
+P00849,freiflaeche,Überlingen,47.73314,9.12155,3940.0,176,19,W23,10,WS06,2014-09-28,5.9,in_betrieb
+P00850,balkon,Tettnang,47.66027,9.65139,0.6,102,86,W01,1,WS08,2024-02-29,0.0,in_betrieb
+P00851,dach_privat,Friedrichshafen,47.66339,9.5279,14.21,172,19,W10,1,WS01,2020-10-16,9.17,in_betrieb
+P00852,dach_privat,Friedrichshafen,47.67276,9.51114,9.77,289,33,W06,1,WS01,2022-10-20,6.93,in_betrieb
+P00853,balkon,Bad Waldsee,47.8969,9.77916,0.6,147,88,W02,1,WS10,2022-08-04,0.0,in_betrieb
+P00854,dach_privat,Konstanz,47.62921,9.15368,6.91,197,34,W08,1,WS03,2022-12-12,6.93,in_betrieb
+P00855,dach_privat,Lindau,47.56905,9.6809,7.06,282,31,W08,1,WS05,2025-04-23,7.86,in_betrieb
+P00856,dach_privat,Überlingen,47.79051,9.13174,11.3,257,39,W06,1,WS06,2011-10-05,28.74,in_betrieb
+P00857,dach_privat,Pfullendorf,47.92726,9.28466,10.27,160,40,W06,1,WS19,2025-07-23,7.86,in_betrieb
+P00858,dach_privat,Bad Wurzach,47.90224,9.84078,13.33,144,23,W11,1,WS18,2008-11-18,46.75,in_betrieb
+P00859,dach_privat,Friedrichshafen,47.66393,9.52031,7.08,205,31,W05,1,WS01,2020-06-15,9.17,in_betrieb
+P00860,dach_gewerbe,Wangen im Allgäu,47.67372,9.8407,314.8,207,10,W20,6,WS07,2022-06-17,5.69,in_betrieb
+P00861,dach_privat,Baienfurt,47.79061,9.61716,11.49,206,33,W11,1,WS23,2009-07-14,43.01,in_betrieb
+P00862,balkon,Tettnang,47.63458,9.57639,0.82,159,83,W01,1,WS08,2025-10-18,0.0,in_betrieb
+P00863,dach_gewerbe,Friedrichshafen,47.66364,9.53949,237.4,159,14,W15,4,WS01,2025-09-12,6.81,in_betrieb
+P00864,dach_privat,Friedrichshafen,47.66941,9.49175,4.88,161,41,W04,1,WS01,2020-12-10,9.17,in_betrieb
+P00865,dach_gewerbe,Immenstaad,47.70923,9.36644,508.3,183,13,W20,9,WS13,2022-04-05,5.86,in_betrieb
+P00866,dach_gewerbe,Tettnang,47.70411,9.64405,55.3,259,14,W15,1,WS08,2025-04-08,6.54,in_betrieb
+P00867,dach_privat,Ravensburg,47.7748,9.62677,18.0,90,35,W10,1,WS02,2008-06-15,46.75,in_betrieb
+P00868,dach_privat,Ravensburg,47.83755,9.5736,10.89,93,26,W06,1,WS02,2026-05-06,7.78,in_betrieb
+P00869,dach_gewerbe,Markdorf,47.75251,9.39637,373.9,225,9,W14,9,WS09,2010-06-27,33.72,in_betrieb
+P00870,dach_privat,Friedrichshafen,47.67932,9.53344,18.61,96,42,W12,1,WS01,2013-10-06,15.07,in_betrieb
+P00871,dach_privat,Pfullendorf,47.93665,9.29169,12.9,81,35,W06,1,WS19,2021-01-06,8.16,in_betrieb
+P00872,freiflaeche,Konstanz,47.63414,9.09559,4029.0,185,24,W23,10,WS03,2025-05-06,5.04,in_betrieb
+P00873,balkon,Weingarten,47.81187,9.66385,0.8,241,75,W01,1,WS04,2024-08-16,0.0,in_betrieb
+P00874,dach_gewerbe,Weingarten,47.82452,9.64414,98.4,182,12,W17,1,WS04,2023-11-11,6.84,in_betrieb
+P00875,dach_privat,Bad Wurzach,47.87363,9.90222,6.33,93,33,W04,1,WS18,2020-04-03,9.17,in_betrieb
+P00876,dach_privat,Immenstaad,47.68795,9.37438,17.22,275,34,W10,1,WS13,2019-01-07,11.47,in_betrieb
+P00877,dach_gewerbe,Kressbronn,47.63975,9.62529,532.4,175,8,W20,8,WS15,2025-12-25,6.9,in_betrieb
+P00878,dach_privat,Langenargen,47.59951,9.55701,6.59,136,44,W04,1,WS14,2023-10-28,8.2,in_betrieb
+P00879,freiflaeche,Friedrichshafen,47.628,9.455,793.0,179,25,W24,4,WS01,2016-03-03,6.25,in_betrieb
+P00880,balkon,Meckenbeuren,47.68436,9.59862,0.82,195,75,W02,1,WS12,2026-04-06,0.0,in_betrieb
+P00881,dach_privat,Friedrichshafen,47.6887,9.52501,15.27,225,37,W11,1,WS01,2025-12-09,7.86,in_betrieb
+P00882,balkon,Stockach,47.86375,8.96206,0.82,179,70,W01,1,WS20,2026-04-09,0.0,in_betrieb
+P00883,balkon,Kressbronn,47.61254,9.5432,0.86,192,27,W02,1,WS15,2025-07-13,0.0,in_betrieb
+P00884,dach_gewerbe,Ravensburg,47.8297,9.61094,451.7,262,25,W20,9,WS02,2023-07-16,7.16,in_betrieb
+P00885,dach_privat,Konstanz,47.65745,9.17424,6.41,158,41,W04,1,WS03,2022-09-07,6.93,in_betrieb
+P00886,dach_privat,Ravensburg,47.78259,9.58797,6.02,82,22,W08,1,WS02,2026-01-13,7.78,in_betrieb
+P00887,dach_privat,Isny,47.67856,10.09916,5.3,140,44,W07,1,WS17,2011-08-18,28.74,in_betrieb
+P00888,balkon,Weingarten,47.84715,9.65374,0.6,193,34,W01,1,WS04,2024-12-18,0.0,in_betrieb
+P00889,balkon,Langenargen,47.61827,9.54709,0.9,172,38,W02,1,WS14,2024-12-19,0.0,in_betrieb
+P00890,dach_privat,Überlingen,47.78451,9.15867,16.84,263,39,W10,1,WS06,2021-11-18,8.16,in_betrieb
+P00891,dach_privat,Friedrichshafen,47.65564,9.51129,6.5,234,40,W08,1,WS01,2009-02-06,43.01,in_betrieb
+P00892,dach_privat,Wangen im Allgäu,47.71052,9.84912,21.2,156,17,W12,1,WS07,2021-12-27,8.16,in_betrieb
+P00893,dach_privat,Leutkirch,47.85123,10.00077,8.1,268,37,W09,1,WS11,2023-06-21,8.2,in_betrieb
+P00894,dach_privat,Langenargen,47.62375,9.54332,7.13,81,17,W05,1,WS14,2013-06-30,15.07,in_betrieb
+P00895,dach_privat,Eriskirch,47.65066,9.60783,10.35,139,21,W06,1,WS25,2018-10-07,12.2,in_betrieb
+P00896,balkon,Ravensburg,47.75271,9.62623,0.6,168,31,W01,1,WS02,2024-03-06,0.0,in_betrieb
+P00897,dach_gewerbe,Bad Waldsee,47.93795,9.7789,305.4,168,19,W15,5,WS10,2025-12-14,6.76,in_betrieb
+P00898,dach_gewerbe,Konstanz,47.69685,9.13328,26.8,173,14,W19,1,WS03,2019-02-05,9.42,in_betrieb
+P00899,dach_gewerbe,Lindau,47.58909,9.72135,142.6,137,22,W18,1,WS05,2022-09-04,6.17,in_betrieb
+P00900,balkon,Friedrichshafen,47.66096,9.5138,0.9,165,25,W02,1,WS01,2025-01-20,0.0,in_betrieb
+P00901,dach_privat,Lindau,47.57285,9.67591,12.83,267,18,W09,1,WS05,2012-04-14,19.5,in_betrieb
+P00902,dach_privat,Konstanz,47.69109,9.14103,6.87,185,40,W05,1,WS03,2010-02-24,39.14,in_betrieb
+P00903,balkon,Friedrichshafen,47.65021,9.50853,0.8,182,36,W02,1,WS01,2026-01-12,0.0,in_betrieb
+P00904,balkon,Lindau,47.58482,9.71038,0.6,153,35,W02,1,WS05,2025-08-26,0.0,in_betrieb
+P00905,balkon,Stockach,47.79133,8.98891,0.82,209,63,W01,1,WS20,2023-12-10,0.0,in_betrieb
+P00906,dach_privat,Ravensburg,47.79873,9.53763,8.22,101,32,W05,1,WS02,2026-04-10,7.78,in_betrieb
+P00907,dach_privat,Langenargen,47.60348,9.56345,9.49,227,15,W06,1,WS14,2019-10-16,11.47,in_betrieb
+P00908,balkon,Langenargen,47.64329,9.5319,0.86,124,75,W02,1,WS14,2024-02-14,0.0,in_betrieb
+P00909,balkon,Konstanz,47.62409,9.12598,0.6,205,25,W02,1,WS03,2023-04-01,0.0,in_betrieb
+P00910,dach_gewerbe,Ravensburg,47.80187,9.66229,72.2,163,25,W20,1,WS02,2023-12-26,7.22,in_betrieb
+P00911,dach_privat,Ravensburg,47.75648,9.57562,6.97,179,41,W08,1,WS02,2019-05-21,11.47,in_betrieb
+P00912,dach_privat,Leutkirch,47.83094,10.00231,7.21,275,19,W05,1,WS11,2016-09-02,12.31,in_betrieb
+P00913,dach_privat,Leutkirch,47.77858,10.04063,11.98,170,20,W06,1,WS11,2022-07-31,6.93,in_betrieb
+P00914,dach_privat,Bad Wurzach,47.86787,9.92948,11.47,103,30,W11,1,WS18,2008-12-02,46.75,in_betrieb
+P00915,dach_privat,Konstanz,47.68109,9.15841,13.68,201,29,W11,1,WS03,2010-09-14,39.14,in_betrieb
+P00916,dach_privat,Bad Waldsee,47.91782,9.68118,3.79,81,18,W07,1,WS10,2021-02-09,8.16,in_betrieb
+P00917,balkon,Friedrichshafen,47.66263,9.47354,0.9,157,38,W02,1,WS01,2025-09-01,0.0,in_betrieb
+P00918,dach_privat,Bad Wurzach,47.93957,9.8844,6.96,83,34,W05,1,WS18,2022-02-02,6.93,in_betrieb
+P00919,dach_privat,Weingarten,47.82257,9.66526,10.1,96,16,W06,1,WS04,2011-02-28,28.74,in_betrieb
+P00920,balkon,Friedrichshafen,47.67029,9.52317,0.6,157,70,W02,1,WS01,2025-06-16,0.0,in_betrieb
+P00921,dach_privat,Wangen im Allgäu,47.70107,9.84263,7.82,271,27,W09,1,WS07,2024-10-30,8.03,in_betrieb
+P00922,dach_gewerbe,Kressbronn,47.6315,9.65682,91.3,255,10,W17,1,WS15,2022-02-08,6.34,in_betrieb
+P00923,freiflaeche,Lindau,47.59184,9.68134,6140.0,188,23,W21,38,WS05,2017-03-03,4.95,in_betrieb
+P00924,balkon,Weingarten,47.77899,9.63711,0.6,188,78,W02,1,WS04,2025-08-31,0.0,in_betrieb
+P00925,dach_privat,Isny,47.70827,10.10548,11.54,190,40,W11,1,WS17,2024-02-28,8.03,in_betrieb
+P00926,dach_gewerbe,Lindau,47.55582,9.70819,252.2,194,21,W18,2,WS05,2013-05-04,12.47,in_betrieb
+P00927,dach_gewerbe,Markdorf,47.76542,9.40582,160.0,245,6,W17,1,WS09,2011-11-14,24.06,in_betrieb
+P00928,dach_privat,Friedrichshafen,47.66906,9.5198,8.68,93,32,W05,1,WS01,2025-03-27,7.86,in_betrieb
+P00929,dach_privat,Bad Waldsee,47.91265,9.80295,5.71,264,16,W04,1,WS10,2020-12-23,9.17,in_betrieb
+P00930,dach_gewerbe,Überlingen,47.82202,9.16572,78.6,237,16,W17,1,WS06,2017-11-30,10.15,in_betrieb
+P00931,balkon,Überlingen,47.80205,9.20821,0.9,223,61,W01,1,WS06,2026-03-17,0.0,in_betrieb
+P00932,dach_privat,Friedrichshafen,47.66827,9.50515,8.87,179,28,W05,1,WS01,2014-01-12,13.15,in_betrieb
+P00933,dach_privat,Meersburg,47.68949,9.32521,10.27,226,42,W06,1,WS22,2022-03-23,6.93,in_betrieb
+P00934,balkon,Oberteuringen,47.76254,9.4706,0.9,225,76,W01,1,WS21,2024-05-19,0.0,in_betrieb
+P00935,dach_gewerbe,Konstanz,47.6573,9.17324,196.6,194,22,W15,4,WS03,2010-12-23,32.24,in_betrieb
+P00936,balkon,Überlingen,47.77795,9.15303,0.86,189,28,W02,1,WS06,2025-05-29,0.0,in_betrieb
+P00937,dach_privat,Konstanz,47.66315,9.11097,17.2,139,16,W10,1,WS03,2023-09-28,8.2,in_betrieb
+P00938,dach_privat,Tettnang,47.7187,9.61984,12.83,94,40,W11,1,WS08,2019-11-10,11.47,in_betrieb
+P00939,balkon,Ravensburg,47.78911,9.60151,0.86,196,25,W02,1,WS02,2025-04-15,0.0,in_betrieb
+P00940,dach_gewerbe,Bad Waldsee,47.93631,9.78436,53.9,187,18,W20,1,WS10,2021-02-10,6.86,in_betrieb
+P00941,freiflaeche,Pfullendorf,47.99225,9.30965,4392.0,193,20,W23,10,WS19,2022-05-26,6.47,in_betrieb
+P00942,dach_gewerbe,Weingarten,47.83163,9.63186,227.7,159,16,W15,4,WS04,2024-01-26,7.17,gestoert
+P00943,dach_gewerbe,Friedrichshafen,47.67004,9.51219,164.1,100,8,W18,1,WS01,2010-06-24,35.76,in_betrieb
+P00944,dach_privat,Konstanz,47.63423,9.15576,8.28,208,43,W08,1,WS03,2023-05-03,8.2,in_betrieb
+P00945,dach_privat,Friedrichshafen,47.68127,9.51248,8.88,146,34,W05,1,WS01,2017-04-20,12.3,in_betrieb
+P00946,dach_privat,Stockach,47.8178,8.95772,8.48,286,41,W09,1,WS20,2015-06-15,12.56,in_betrieb
+P00947,dach_gewerbe,Salem,47.78143,9.35071,109.6,249,11,W17,1,WS16,2010-12-03,32.17,in_betrieb
+P00948,dach_gewerbe,Leutkirch,47.84946,9.99429,294.5,123,9,W18,2,WS11,2016-12-10,10.51,in_betrieb
+P00949,dach_gewerbe,Weingarten,47.7898,9.65173,50.2,235,9,W15,1,WS04,2024-07-25,6.81,in_betrieb
+P00950,dach_privat,Konstanz,47.68739,9.15195,7.75,263,34,W06,1,WS03,2024-02-15,8.03,in_betrieb
+P00951,dach_privat,Friedrichshafen,47.6687,9.42002,8.28,280,21,W05,1,WS01,2012-12-18,19.5,in_betrieb
+P00952,balkon,Langenargen,47.59339,9.57695,0.6,230,87,W01,1,WS14,2026-05-17,0.0,in_betrieb
+P00953,dach_gewerbe,Ravensburg,47.82981,9.61884,31.1,194,11,W13,1,WS02,2025-04-08,6.91,in_betrieb
+P00954,balkon,Markdorf,47.75241,9.44299,0.9,255,29,W01,1,WS09,2026-05-02,0.0,in_betrieb
+P00955,balkon,Markdorf,47.77864,9.41047,0.6,153,27,W01,1,WS09,2024-09-23,0.0,in_betrieb
+P00956,dach_privat,Wangen im Allgäu,47.73194,9.88513,19.76,212,33,W12,1,WS07,2023-04-01,8.2,in_betrieb
+P00957,balkon,Friedrichshafen,47.64321,9.50889,0.86,206,72,W01,1,WS01,2026-01-16,0.0,in_betrieb
+P00958,dach_privat,Markdorf,47.74221,9.39539,5.9,267,31,W05,1,WS09,2019-08-09,11.47,in_betrieb
+P00959,dach_privat,Ravensburg,47.80401,9.66515,9.64,202,20,W05,1,WS02,2015-06-24,12.56,abgeschaltet
+P00960,dach_privat,Weingarten,47.85803,9.65421,8.94,85,26,W05,1,WS04,2012-08-03,19.5,in_betrieb
+P00961,dach_gewerbe,Tettnang,47.68753,9.54127,192.3,170,10,W18,1,WS08,2025-09-04,7.21,in_betrieb
+P00962,dach_privat,Friedrichshafen,47.67583,9.49434,14.59,188,35,W11,1,WS01,2023-06-13,8.2,in_betrieb
+P00963,dach_privat,Pfullendorf,47.94256,9.17709,5.13,174,31,W04,1,WS19,2012-05-02,19.5,in_betrieb
+P00964,dach_privat,Überlingen,47.7651,9.22742,3.95,227,20,W07,1,WS06,2014-12-26,13.15,in_betrieb
+P00965,dach_privat,Ravensburg,47.80162,9.6213,3.56,75,42,W04,1,WS02,2023-05-28,8.2,in_betrieb
+P00966,dach_privat,Konstanz,47.65827,9.17677,9.17,187,23,W05,1,WS03,2024-07-25,8.03,in_betrieb
+P00967,balkon,Konstanz,47.68568,9.11702,0.8,253,36,W01,1,WS03,2025-06-30,0.0,in_betrieb
+P00968,dach_privat,Weingarten,47.79975,9.65343,9.46,82,35,W06,1,WS04,2022-04-02,6.93,in_betrieb
+P00969,dach_privat,Lindau,47.58455,9.66921,24.93,171,26,W12,1,WS05,2025-04-06,7.86,in_betrieb
+P00970,dach_privat,Ravensburg,47.79106,9.63563,8.95,93,43,W05,1,WS02,2026-03-16,7.78,in_betrieb
+P00971,dach_gewerbe,Wangen im Allgäu,47.69352,9.82618,235.3,194,12,W16,4,WS07,2009-02-07,35.27,in_betrieb
+P00972,dach_privat,Pfullendorf,47.95969,9.24752,8.22,80,31,W05,1,WS19,2008-03-27,46.75,in_betrieb
+P00973,dach_privat,Wangen im Allgäu,47.66389,9.87504,14.6,164,23,W10,1,WS07,2008-07-14,46.75,in_betrieb
+P00974,dach_privat,Ravensburg,47.78444,9.56225,8.16,83,28,W08,1,WS02,2026-01-12,7.78,in_betrieb
+P00975,dach_privat,Immenstaad,47.68639,9.36951,12.53,93,23,W11,1,WS13,2008-03-24,46.75,in_betrieb
+P00976,balkon,Lindau,47.58675,9.70271,0.8,193,30,W02,1,WS05,2025-06-01,0.0,in_betrieb
+P00977,dach_privat,Lindau,47.57155,9.7012,8.27,182,30,W09,1,WS05,2009-10-07,43.01,in_betrieb
+P00978,dach_privat,Lindau,47.57528,9.68835,5.95,279,18,W08,1,WS05,2013-05-23,15.07,in_betrieb
+P00979,dach_gewerbe,Lindau,47.56531,9.69179,430.9,206,15,W15,7,WS05,2025-11-01,6.98,in_betrieb
+P00980,dach_privat,Weingarten,47.84879,9.66446,15.76,117,18,W11,1,WS04,2016-05-04,12.31,in_betrieb
+P00981,dach_privat,Pfullendorf,47.91917,9.18255,18.51,178,43,W12,1,WS19,2010-10-14,39.14,in_betrieb
+P00982,dach_privat,Friedrichshafen,47.66316,9.48426,6.22,135,40,W08,1,WS01,2016-01-11,12.31,in_betrieb
+P00983,balkon,Ravensburg,47.80245,9.55052,0.8,177,65,W02,1,WS02,2023-09-14,0.0,in_betrieb
+P00984,dach_gewerbe,Tettnang,47.69354,9.54592,76.3,154,5,W16,1,WS08,2012-10-02,17.19,in_betrieb
+P00985,dach_gewerbe,Leutkirch,47.86642,10.05287,430.4,251,15,W16,6,WS11,2020-09-05,8.22,in_betrieb
+P00986,dach_gewerbe,Isny,47.69378,10.04519,64.3,166,15,W15,1,WS17,2025-12-04,6.81,in_betrieb
+P00987,dach_privat,Leutkirch,47.80137,10.08401,10.14,108,19,W05,1,WS11,2016-04-27,12.31,in_betrieb
+P00988,dach_gewerbe,Konstanz,47.66238,9.16733,124.5,92,10,W14,3,WS03,2021-10-30,7.39,in_betrieb
+P00989,dach_gewerbe,Friedrichshafen,47.65199,9.46552,651.6,115,25,W14,14,WS01,2025-11-03,6.54,in_betrieb
+P00990,dach_gewerbe,Konstanz,47.62452,9.16932,38.2,214,11,W14,1,WS03,2022-06-30,5.98,in_betrieb
+P00991,balkon,Überlingen,47.77416,9.16805,0.86,101,75,W02,1,WS06,2026-02-21,0.0,in_betrieb
+P00992,dach_gewerbe,Oberteuringen,47.76169,9.43091,183.5,164,12,W16,3,WS21,2023-08-05,6.85,in_betrieb
+P00993,dach_privat,Lindau,47.55584,9.69289,5.24,267,32,W04,1,WS05,2011-10-01,28.74,in_betrieb
+P00994,balkon,Ravensburg,47.80143,9.6668,0.86,138,39,W02,1,WS02,2026-05-11,0.0,in_betrieb
+P00995,dach_privat,Immenstaad,47.68508,9.3755,3.64,95,45,W03,1,WS13,2012-10-03,19.5,in_betrieb
+P00996,dach_gewerbe,Markdorf,47.69565,9.45401,172.0,140,17,W20,3,WS09,2023-09-04,6.91,in_betrieb
+P00997,dach_privat,Ravensburg,47.74661,9.56947,15.58,88,42,W10,1,WS02,2022-12-19,6.93,in_betrieb
+P00998,dach_privat,Bad Waldsee,47.92955,9.79718,3.14,172,38,W03,1,WS10,2024-04-17,8.03,in_betrieb
+P00999,dach_privat,Bad Wurzach,47.88437,9.86483,7.1,174,38,W08,1,WS18,2026-03-28,7.78,in_betrieb
+P01000,balkon,Meckenbeuren,47.74996,9.56698,0.6,165,75,W01,1,WS12,2024-05-23,0.0,in_betrieb
+P01001,dach_privat,Weingarten,47.81949,9.67112,20.46,79,35,W12,1,WS04,2025-01-18,7.86,in_betrieb
+P01002,dach_privat,Ravensburg,47.83313,9.63221,9.89,171,37,W06,1,WS02,2019-06-07,11.47,in_betrieb
+P01003,dach_gewerbe,Meckenbeuren,47.6469,9.57333,72.1,180,22,W16,1,WS12,2026-04-27,6.47,in_betrieb
+P01004,dach_gewerbe,Markdorf,47.75207,9.36032,133.0,154,5,W17,1,WS09,2009-04-12,37.06,in_betrieb
+P01005,dach_privat,Konstanz,47.67644,9.1711,7.93,162,44,W06,1,WS03,2019-02-13,11.47,in_betrieb
+P01006,balkon,Markdorf,47.69057,9.43657,0.86,176,38,W01,1,WS09,2023-11-19,0.0,in_betrieb
+P01007,balkon,Isny,47.66086,10.07574,0.9,251,33,W02,1,WS17,2025-06-29,0.0,in_betrieb
+P01008,balkon,Ravensburg,47.80289,9.59042,0.8,160,60,W01,1,WS02,2025-06-10,0.0,in_betrieb
+P01009,dach_gewerbe,Konstanz,47.67481,9.19308,116.9,126,6,W18,1,WS03,2010-12-31,34.63,in_betrieb
+P01010,balkon,Friedrichshafen,47.66401,9.43246,0.6,128,30,W02,1,WS01,2025-11-16,0.0,in_betrieb
+P01011,dach_privat,Markdorf,47.70041,9.37888,17.48,242,27,W12,1,WS09,2018-09-23,12.2,in_betrieb
+P01012,dach_privat,Weingarten,47.85036,9.64674,4.25,165,45,W07,1,WS04,2023-05-09,8.2,in_betrieb
+P01013,balkon,Langenargen,47.63143,9.57206,0.86,234,37,W02,1,WS14,2022-08-13,0.0,in_betrieb
+P01014,dach_privat,Weingarten,47.7787,9.64011,4.7,241,23,W04,1,WS04,2021-03-20,8.16,in_betrieb
+P01015,dach_privat,Weingarten,47.81039,9.7144,11.9,95,15,W06,1,WS04,2013-12-28,15.07,in_betrieb
+P01016,dach_privat,Markdorf,47.73376,9.40376,12.45,178,28,W12,1,WS09,2010-01-18,39.14,in_betrieb
+P01017,dach_privat,Friedrichshafen,47.66779,9.53191,9.96,79,26,W05,1,WS01,2013-06-23,15.07,in_betrieb
+P01018,dach_privat,Wangen im Allgäu,47.71916,9.86541,7.24,266,28,W05,1,WS07,2008-11-17,46.75,in_betrieb
+P01019,dach_privat,Isny,47.65634,10.01993,12.7,266,34,W06,1,WS17,2011-04-20,28.74,in_betrieb
+P01020,dach_privat,Weingarten,47.82849,9.67627,6.07,86,25,W04,1,WS04,2023-03-21,8.2,in_betrieb
+P01021,dach_privat,Leutkirch,47.83014,10.01412,10.9,279,20,W06,1,WS11,2023-04-10,8.2,in_betrieb
+P01022,dach_gewerbe,Langenargen,47.62192,9.561,78.1,212,19,W17,1,WS14,2023-04-15,7.53,in_betrieb
+P01023,dach_privat,Friedrichshafen,47.67266,9.51066,11.9,275,28,W11,1,WS01,2022-06-03,6.93,in_betrieb
+P01024,freiflaeche,Baienfurt,47.87814,9.63844,3306.0,189,27,W23,8,WS23,2019-04-25,5.75,in_betrieb
+P01025,dach_privat,Lindau,47.56281,9.69587,5.72,100,33,W04,1,WS05,2012-01-22,19.5,in_betrieb
+P01026,dach_privat,Lindau,47.57719,9.68642,11.16,209,26,W06,1,WS05,2022-04-21,6.93,in_betrieb
+P01027,balkon,Friedrichshafen,47.61606,9.52966,0.8,135,63,W02,1,WS01,2025-05-25,0.0,in_betrieb
+P01028,dach_privat,Tettnang,47.68593,9.61525,4.53,258,27,W04,1,WS08,2023-02-22,8.2,in_betrieb
+P01029,dach_privat,Weingarten,47.83165,9.64212,4.29,174,36,W07,1,WS04,2009-12-26,43.01,in_betrieb
+P01030,dach_gewerbe,Kressbronn,47.60302,9.61887,69.2,105,9,W16,1,WS15,2019-12-05,10.14,in_betrieb
+P01031,dach_privat,Wangen im Allgäu,47.65133,9.88469,9.8,77,40,W09,1,WS07,2023-11-26,8.2,in_betrieb
+P01032,dach_privat,Markdorf,47.70838,9.35457,6.98,186,23,W05,1,WS09,2026-01-20,7.78,in_betrieb
+P01033,dach_privat,Friedrichshafen,47.68083,9.50655,12.06,168,28,W11,1,WS01,2014-12-13,13.15,in_betrieb
+P01034,balkon,Ravensburg,47.74835,9.61963,0.86,101,90,W02,1,WS02,2026-03-02,0.0,in_betrieb
+P01035,dach_privat,Meckenbeuren,47.70041,9.61127,9.49,143,17,W05,1,WS12,2023-01-03,8.2,in_betrieb
+P01036,dach_privat,Tettnang,47.70806,9.61986,5.61,95,41,W04,1,WS08,2011-08-24,28.74,in_betrieb
+P01037,dach_gewerbe,Lindau,47.56855,9.70389,136.8,117,6,W14,4,WS05,2009-05-04,37.97,in_betrieb
+P01038,dach_privat,Eriskirch,47.61431,9.60671,13.3,275,41,W12,1,WS25,2011-07-07,28.74,in_betrieb
+P01039,dach_privat,Lindau,47.57721,9.70783,7.15,83,40,W08,1,WS05,2025-07-31,7.86,in_betrieb
+P01040,balkon,Weingarten,47.82514,9.60924,0.86,240,35,W01,1,WS04,2023-12-03,0.0,in_betrieb
+P01041,balkon,Isny,47.68772,10.05783,0.8,163,80,W02,1,WS17,2022-04-24,0.0,in_betrieb
+P01042,freiflaeche,Konstanz,47.70962,9.12231,2522.0,179,25,W23,7,WS03,2021-09-24,6.01,wartung
+P01043,dach_privat,Ravensburg,47.8157,9.57779,8.71,225,29,W05,1,WS02,2019-11-02,11.47,in_betrieb
+P01044,dach_privat,Weingarten,47.79095,9.63328,9.46,269,36,W05,1,WS04,2021-07-13,8.16,in_betrieb
+P01045,dach_privat,Ravensburg,47.7559,9.56268,3.7,265,23,W07,1,WS02,2009-07-12,43.01,in_betrieb
+P01046,balkon,Überlingen,47.79061,9.18247,0.8,247,63,W01,1,WS06,2025-06-07,0.0,in_betrieb
+P01047,dach_privat,Baienfurt,47.86989,9.60875,10.88,228,26,W06,1,WS23,2020-12-17,9.17,in_betrieb
+P01048,balkon,Salem,47.71882,9.30506,0.86,232,35,W02,1,WS16,2026-02-02,0.0,in_betrieb
+P01049,dach_gewerbe,Leutkirch,47.83818,9.96943,208.1,139,20,W15,4,WS11,2023-06-28,7.1,in_betrieb
+P01050,dach_privat,Markdorf,47.74185,9.36561,6.18,173,41,W08,1,WS09,2018-03-01,12.2,in_betrieb
+P01051,dach_privat,Immenstaad,47.68759,9.3864,8.56,172,33,W05,1,WS13,2012-09-22,19.5,in_betrieb
+P01052,dach_privat,Markdorf,47.69197,9.41501,11.46,82,42,W06,1,WS09,2019-09-26,11.47,in_betrieb
+P01053,dach_privat,Friedrichshafen,47.67664,9.50625,16.57,82,31,W12,1,WS01,2024-06-17,8.03,in_betrieb
+P01054,dach_privat,Ravensburg,47.79406,9.56849,15.18,175,43,W10,1,WS02,2025-01-26,7.86,in_betrieb
+P01055,dach_privat,Eriskirch,47.65533,9.60094,6.0,142,18,W08,1,WS25,2026-05-19,7.78,in_betrieb
+P01056,balkon,Bad Waldsee,47.9585,9.80218,0.8,129,27,W01,1,WS10,2026-05-04,0.0,in_betrieb
+P01057,dach_privat,Lindau,47.56511,9.7062,2.5,160,28,W04,1,WS05,2010-04-24,39.14,in_betrieb
+P01058,dach_gewerbe,Markdorf,47.69421,9.45697,169.7,200,18,W15,3,WS09,2014-12-27,11.58,in_betrieb
+P01059,dach_privat,Wangen im Allgäu,47.6662,9.84786,9.67,281,38,W11,1,WS07,2011-01-28,28.74,in_betrieb
+P01060,dach_privat,Friedrichshafen,47.69129,9.50987,2.65,196,27,W04,1,WS01,2020-04-02,9.17,in_betrieb
+P01061,dach_privat,Konstanz,47.68804,9.1965,14.28,100,33,W11,1,WS03,2008-03-25,46.75,in_betrieb
+P01062,dach_privat,Kressbronn,47.63662,9.6015,14.27,95,39,W10,1,WS15,2017-11-25,12.3,in_betrieb
+P01063,balkon,Überlingen,47.81428,9.12894,0.6,178,25,W02,1,WS06,2026-03-28,0.0,in_betrieb
+P01064,dach_privat,Ravensburg,47.78962,9.52841,5.9,174,26,W04,1,WS02,2024-07-01,8.03,in_betrieb
+P01065,dach_privat,Bad Waldsee,47.92548,9.76462,14.37,257,24,W10,1,WS10,2021-05-02,8.16,in_betrieb
+P01066,dach_privat,Friedrichshafen,47.69086,9.49663,4.9,205,38,W04,1,WS01,2010-12-19,39.14,in_betrieb
+P01067,dach_privat,Friedrichshafen,47.67756,9.50638,7.14,103,30,W05,1,WS01,2025-10-07,7.86,in_betrieb
+P01068,dach_privat,Isny,47.6502,10.06661,15.14,215,22,W11,1,WS17,2020-03-16,9.17,in_betrieb
+P01069,dach_privat,Tettnang,47.63733,9.59381,9.13,263,23,W05,1,WS08,2015-06-25,12.56,in_betrieb
+P01070,balkon,Bad Wurzach,47.90688,9.92433,0.82,171,63,W02,1,WS18,2023-09-26,0.0,in_betrieb
+P01071,balkon,Konstanz,47.67982,9.1502,0.6,167,31,W01,1,WS03,2025-03-04,0.0,in_betrieb
+P01072,dach_privat,Weingarten,47.78588,9.60064,4.31,141,24,W07,1,WS04,2010-01-25,39.14,in_betrieb
+P01073,freiflaeche,Friedrichshafen,47.67316,9.49354,3259.0,175,22,W21,19,WS01,2011-09-25,6.47,in_betrieb
+P01074,dach_privat,Bad Waldsee,47.97102,9.76106,8.27,168,42,W05,1,WS10,2018-04-17,12.2,in_betrieb
+P01075,dach_privat,Leutkirch,47.86421,9.9789,13.39,189,31,W10,1,WS11,2022-04-26,6.93,in_betrieb
+P01076,dach_privat,Meckenbeuren,47.68533,9.53443,13.46,93,35,W06,1,WS12,2010-07-12,39.14,in_betrieb
+P01077,dach_privat,Konstanz,47.63464,9.21314,9.22,181,21,W05,1,WS03,2008-06-19,46.75,in_betrieb
+P01078,balkon,Langenargen,47.61947,9.54516,0.86,204,31,W02,1,WS14,2025-05-18,0.0,in_betrieb
+P01079,balkon,Friedrichshafen,47.69211,9.49037,0.82,167,61,W01,1,WS01,2026-04-02,0.0,in_betrieb
+P01080,balkon,Lindau,47.60285,9.69754,0.8,162,28,W02,1,WS05,2022-08-26,0.0,in_betrieb
+P01081,dach_gewerbe,Oberteuringen,47.71804,9.45217,171.0,168,23,W17,2,WS21,2021-04-03,6.72,in_betrieb
+P01082,balkon,Lindau,47.58714,9.67848,0.6,231,85,W01,1,WS05,2025-03-20,0.0,in_betrieb
+P01083,dach_gewerbe,Leutkirch,47.85358,9.98561,55.3,171,9,W20,1,WS11,2020-08-24,8.16,in_betrieb
+P01084,balkon,Konstanz,47.64386,9.13081,0.9,218,88,W01,1,WS03,2023-05-07,0.0,in_betrieb
+P01085,dach_privat,Weingarten,47.83747,9.66744,9.2,84,40,W05,1,WS04,2009-10-23,43.01,in_betrieb
+P01086,balkon,Bad Waldsee,47.93255,9.75768,0.86,207,26,W02,1,WS10,2024-10-30,0.0,in_betrieb
+P01087,dach_privat,Leutkirch,47.83365,10.06319,12.78,84,19,W06,1,WS11,2009-05-27,43.01,in_betrieb
+P01088,dach_privat,Ravensburg,47.77581,9.60273,4.58,266,31,W04,1,WS02,2023-10-28,8.2,in_betrieb
+P01089,dach_privat,Weingarten,47.79621,9.62249,5.96,200,36,W05,1,WS04,2021-07-23,8.16,in_betrieb
+P01090,dach_gewerbe,Langenargen,47.63346,9.54679,221.4,179,10,W16,4,WS14,2025-03-05,7.22,in_betrieb
+P01091,dach_privat,Friedrichshafen,47.61769,9.53599,6.02,185,26,W08,1,WS01,2025-12-04,7.86,in_betrieb
+P01092,dach_privat,Überlingen,47.7781,9.16371,8.89,178,19,W06,1,WS06,2011-01-25,28.74,in_betrieb
+P01093,dach_gewerbe,Tettnang,47.65984,9.63949,107.0,238,22,W17,1,WS08,2023-04-25,7.4,in_betrieb
+P01094,dach_privat,Konstanz,47.62609,9.18734,7.17,161,44,W08,1,WS03,2024-06-08,8.03,in_betrieb
+P01095,dach_privat,Leutkirch,47.81721,10.02944,11.75,179,33,W06,1,WS11,2014-04-26,13.15,in_betrieb
+P01096,balkon,Friedrichshafen,47.67023,9.49671,0.8,193,34,W01,1,WS01,2022-05-03,0.0,in_betrieb
+P01097,dach_privat,Meckenbeuren,47.71738,9.58599,3.82,278,42,W03,1,WS12,2008-04-10,46.75,in_betrieb
+P01098,balkon,Tettnang,47.6391,9.5275,0.9,158,39,W01,1,WS08,2024-07-18,0.0,in_betrieb
+P01099,dach_privat,Lindau,47.54895,9.73835,5.54,148,38,W04,1,WS05,2011-04-24,28.74,in_betrieb
+P01100,freiflaeche,Lindau,47.60332,9.67759,5351.0,192,26,W23,12,WS05,2024-01-23,6.22,in_betrieb
+P01101,balkon,Tettnang,47.67489,9.54716,0.9,208,74,W02,1,WS08,2026-01-31,0.0,in_betrieb
+P01102,dach_gewerbe,Friedrichshafen,47.68589,9.52086,164.2,257,12,W18,1,WS01,2023-08-09,7.05,in_betrieb
+P01103,dach_privat,Tettnang,47.64416,9.54347,6.08,205,22,W08,1,WS08,2014-06-02,13.15,in_betrieb
+P01104,dach_privat,Leutkirch,47.83117,9.94412,12.31,70,44,W11,1,WS11,2023-11-18,8.2,in_betrieb
+P01105,balkon,Leutkirch,47.79398,9.96586,0.86,187,30,W01,1,WS11,2026-03-09,0.0,in_betrieb
+P01106,dach_gewerbe,Leutkirch,47.80317,9.9948,25,178,15,W13,1,WS11,2024-10-18,7.12,in_betrieb
+P01107,dach_privat,Wangen im Allgäu,47.67139,9.82488,16.03,216,42,W10,1,WS07,2009-09-08,43.01,in_betrieb
+P01108,freiflaeche,Markdorf,47.66767,9.44875,4162.0,175,22,W21,27,WS09,2020-08-15,6.56,in_betrieb
+P01109,dach_privat,Lindau,47.57784,9.68671,7.07,165,17,W06,1,WS05,2017-08-29,12.3,in_betrieb
+P01110,dach_privat,Überlingen,47.75837,9.19934,10.11,83,40,W06,1,WS06,2024-08-02,8.03,in_betrieb
+P01111,dach_gewerbe,Friedrichshafen,47.67053,9.52865,208.7,119,16,W18,2,WS01,2024-05-17,7.09,in_betrieb
+P01112,balkon,Weingarten,47.78805,9.68439,0.9,112,37,W01,1,WS04,2023-10-29,0.0,in_betrieb
+P01113,balkon,Konstanz,47.70937,9.15889,0.6,236,30,W02,1,WS03,2024-09-05,0.0,in_betrieb
+P01114,dach_gewerbe,Ravensburg,47.78175,9.62943,66.7,186,18,W16,1,WS02,2022-11-02,5.77,in_betrieb
+P01115,dach_privat,Langenargen,47.62857,9.55925,16.31,160,27,W10,1,WS14,2013-07-24,15.07,in_betrieb
+P01116,dach_gewerbe,Immenstaad,47.71043,9.38815,127.8,190,18,W18,1,WS13,2010-07-13,33.4,abgeschaltet
+P01117,dach_privat,Konstanz,47.67189,9.13095,6.39,289,44,W08,1,WS03,2022-09-25,6.93,in_betrieb
+P01118,dach_privat,Friedrichshafen,47.66714,9.50891,4.2,156,39,W07,1,WS01,2015-08-13,12.56,in_betrieb
+P01119,balkon,Leutkirch,47.80369,10.09631,0.9,152,31,W02,1,WS11,2026-03-07,0.0,in_betrieb
+P01120,dach_privat,Baienfurt,47.84861,9.60748,21.35,85,35,W12,1,WS23,2012-05-29,19.5,in_betrieb
+P01121,dach_privat,Konstanz,47.63732,9.11548,4.99,267,27,W04,1,WS03,2011-10-27,28.74,in_betrieb
+P01122,dach_privat,Meersburg,47.71252,9.27313,9.99,96,20,W05,1,WS22,2024-07-24,8.03,in_betrieb
+P01123,dach_privat,Weingarten,47.82241,9.59961,6.27,205,42,W08,1,WS04,2010-06-19,39.14,in_betrieb
+P01124,dach_gewerbe,Friedrichshafen,47.6577,9.52365,145.0,169,12,W18,1,WS01,2013-11-19,13.14,in_betrieb
+P01125,dach_privat,Tettnang,47.66266,9.64697,18.83,279,34,W12,1,WS08,2009-01-10,43.01,in_betrieb
+P01126,balkon,Weingarten,47.75954,9.65575,0.9,185,77,W01,1,WS04,2024-12-27,0.0,in_betrieb
+P01127,balkon,Weingarten,47.77657,9.66738,0.6,150,86,W02,1,WS04,2026-01-06,0.0,in_betrieb
+P01128,dach_privat,Friedrichshafen,47.68843,9.50284,5.52,86,21,W04,1,WS01,2010-12-06,39.14,in_betrieb
+P01129,dach_privat,Friedrichshafen,47.65588,9.55112,10.11,132,41,W06,1,WS01,2012-08-21,19.5,in_betrieb
+P01130,dach_privat,Ravensburg,47.76662,9.63134,7.55,180,21,W05,1,WS02,2014-05-01,13.15,in_betrieb
+P01131,balkon,Ravensburg,47.80281,9.54339,0.9,181,87,W01,1,WS02,2026-01-22,0.0,in_betrieb
+P01132,dach_gewerbe,Isny,47.73372,10.01322,116.2,195,20,W17,1,WS17,2022-01-18,6.27,in_betrieb
+P01133,dach_privat,Baienfurt,47.79672,9.61343,21.96,198,23,W12,1,WS23,2008-06-01,46.75,in_betrieb
+P01134,dach_privat,Friedrichshafen,47.6701,9.51212,3.7,180,42,W03,1,WS01,2023-03-14,8.2,in_betrieb
+P01135,dach_privat,Friedrichshafen,47.67206,9.51487,24.28,156,40,W11,2,WS01,2025-09-08,7.86,in_betrieb
+P01136,dach_privat,Salem,47.75565,9.32014,15.64,266,20,W10,1,WS16,2012-06-08,19.5,in_betrieb
+P01137,dach_privat,Meckenbeuren,47.73236,9.52107,9.26,270,28,W05,1,WS12,2021-02-04,8.16,in_betrieb
+P01138,balkon,Ravensburg,47.78015,9.67289,0.6,242,74,W01,1,WS02,2026-02-21,0.0,in_betrieb
+P01139,dach_privat,Wangen im Allgäu,47.70189,9.88515,5.34,227,43,W08,1,WS07,2009-01-09,43.01,in_betrieb
+P01140,dach_privat,Stockach,47.86981,9.04226,6.44,201,23,W08,1,WS20,2025-07-24,7.86,in_betrieb
+P01141,balkon,Ravensburg,47.81596,9.6697,0.8,251,35,W02,1,WS02,2024-11-06,0.0,in_betrieb
+P01142,dach_privat,Konstanz,47.67799,9.14475,3.37,164,24,W03,1,WS03,2017-07-23,12.3,in_betrieb
+P01143,balkon,Tettnang,47.65845,9.6315,0.8,169,77,W02,1,WS08,2024-09-13,in_betrieb
+P01144,dach_gewerbe,Konstanz,47.61437,9.21396,210.0,200,9,W18,2,WS03,2024-01-20,6.64,in_betrieb
+P01145,dach_gewerbe,Markdorf,47.78083,9.41436,304.8,186,24,W20,6,WS09,2014-05-14,11.8,wartung
+P01146,dach_privat,Konstanz,47.66729,9.16418,5.74,100,24,W05,1,WS03,2021-05-03,8.16,in_betrieb
+P01147,dach_privat,Eriskirch,47.64617,9.57383,8.19,143,39,W06,1,WS25,2009-12-06,43.01,in_betrieb
+P01148,dach_privat,Ravensburg,47.7795,9.52936,12.84,250,25,W11,1,WS02,2020-07-07,9.17,in_betrieb
+P01149,dach_privat,Ravensburg,47.83141,9.63409,8.1,268,36,W05,1,WS02,2025-03-20,7.86,in_betrieb
+P01150,dach_privat,Langenargen,47.64777,9.53242,11.14,87,37,W06,1,WS14,2018-07-19,12.2,in_betrieb
+P01151,freiflaeche,Pfullendorf,47.86738,9.20963,4579.0,184,19,W22,15,WS19,2014-12-07,4.91,in_betrieb
+P01152,dach_privat,Weingarten,47.8453,9.63421,13.47,91,39,W10,1,WS04,2012-10-13,19.5,in_betrieb
+P01153,dach_privat,Immenstaad,47.69307,9.36799,7.17,82,44,W05,1,WS13,2022-09-13,6.93,in_betrieb
+P01154,dach_privat,Lindau,47.5726,9.69163,6.08,86,43,W08,1,WS05,2023-02-14,8.2,in_betrieb
+P01155,dach_privat,Ravensburg,47.78091,9.58353,10.17,188,31,W05,1,WS02,2014-01-17,13.15,in_betrieb
+P01156,dach_gewerbe,Konstanz,47.6117,9.19646,234.5,132,15,W17,2,WS03,2015-06-29,11.24,in_betrieb
+P01157,balkon,Überlingen,47.72951,9.1317,0.82,156,79,W02,1,WS06,2026-01-19,0.0,in_betrieb
+P01158,dach_privat,Friedrichshafen,47.65937,9.47953,7.37,153,17,W05,1,WS01,2024-10-23,8.03,in_betrieb
+P01159,balkon,Tettnang,47.64694,9.60069,0.9,182,28,W02,1,WS08,2026-04-11,0.0,in_betrieb
+P01160,dach_privat,Baienfurt,47.82947,9.64905,7.82,85,20,W08,1,WS23,2019-05-24,11.47,in_betrieb
+P01161,dach_gewerbe,Oberteuringen,47.70773,9.51417,53.1,167,6,W15,1,WS21,2023-07-18,7.26,in_betrieb
+P01162,dach_privat,Ravensburg,47.8039,9.54706,12.96,75,30,W10,1,WS02,2011-04-25,28.74,in_betrieb
+P01163,dach_privat,Wangen im Allgäu,47.64896,9.88438,4.84,108,32,W04,1,WS07,2010-09-06,39.14,in_betrieb
+P01164,dach_privat,Weingarten,47.77341,9.65391,4.51,275,18,W07,1,WS04,2010-12-03,39.14,in_betrieb
+P01165,balkon,Tettnang,47.6545,9.55863,0.6,206,39,W01,1,WS08,2024-01-02,0.0,in_betrieb
+P01166,balkon,Weingarten,47.78795,9.69728,0.82,131,31,W01,1,WS04,2026-05-15,0.0,in_betrieb
+P01167,dach_privat,Bad Wurzach,47.91903,9.96781,8.1,86,44,W09,1,WS18,2012-02-09,19.5,in_betrieb
+P01168,dach_privat,Weingarten,47.782,9.67254,18.31,178,25,W12,1,WS04,2026-02-25,7.78,in_betrieb
+P01169,freiflaeche,Leutkirch,47.76263,10.05072,2708.0,182,24,W21,16,WS11,2018-03-03,6.39,in_betrieb
+P01170,dach_privat,Lindau,47.56963,9.69246,11.1,266,18,W06,1,WS05,2023-09-02,8.2,in_betrieb
+P01171,balkon,Isny,47.72576,10.0228,0.82,195,74,W02,1,WS17,2025-11-07,0.0,in_betrieb
+P01172,dach_gewerbe,Ravensburg,47.7974,9.62182,80.2,224,17,W16,1,WS02,2021-03-01,7.03,in_betrieb
+P01173,dach_privat,Kressbronn,47.63202,9.58994,11.44,237,30,W09,1,WS15,2021-06-23,8.16,in_betrieb
+P01174,dach_privat,Markdorf,47.69422,9.33901,30,81,39,W08,5,WS09,2023-04-04,8.2,in_betrieb
+P01175,balkon,Leutkirch,47.82441,10.05375,0.82,181,66,W01,1,WS11,2024-01-05,0.0,in_betrieb
+P01176,dach_privat,Lindau,47.58128,9.64808,13.73,204,36,W10,1,WS05,2010-10-25,39.14,in_betrieb
+P01177,dach_gewerbe,Friedrichshafen,47.65377,9.50518,271.2,119,8,W18,2,WS01,2022-02-02,6.3,in_betrieb
+P01178,dach_privat,Friedrichshafen,47.67878,9.48954,8.23,195,23,W05,1,WS01,2020-02-10,9.17,in_betrieb
+P01179,balkon,Stockach,47.86016,9.02893,0.9,184,83,W02,1,WS20,2024-01-09,0.0,in_betrieb
+P01180,dach_privat,Ravensburg,47.81772,9.60854,6.07,275,22,W08,1,WS02,2022-10-30,6.93,in_betrieb
+P01181,balkon,Wangen im Allgäu,47.70476,9.77293,0.6,128,32,W01,1,WS07,2024-01-11,0.0,in_betrieb
+P01182,balkon,Überlingen,47.7798,9.15675,0.86,185,35,W02,1,WS06,2025-06-18,0.0,in_betrieb
+P01183,balkon,Oberteuringen,47.76559,9.48089,0.9,223,28,W01,1,WS21,2024-09-02,0.0,in_betrieb
+P01184,dach_privat,Lindau,47.58532,9.69921,5.28,91,29,W04,1,WS05,2011-06-09,28.74,in_betrieb
+P01185,dach_gewerbe,Konstanz,47.67397,9.18477,146.5,186,22,W16,2,WS03,2012-07-08,17.08,in_betrieb
+P01186,dach_privat,Konstanz,47.65894,9.16803,16.43,270,19,W10,1,WS03,2023-10-21,8.2,in_betrieb
+P01187,balkon,Konstanz,47.66164,9.1761,0.6,186,80,W01,1,WS03,2026-03-30,0.0,in_betrieb
+P01188,dach_privat,Lindau,47.57575,9.68282,19.76,153,17,W10,1,WS05,2026-03-17,7.78,in_betrieb
+P01189,dach_privat,Lindau,47.5773,9.72763,12.81,205,35,W11,1,WS05,2021-09-02,8.16,in_betrieb
+P01190,balkon,Tettnang,47.62573,9.56243,0.9,149,35,W02,1,WS08,2023-10-10,0.0,in_betrieb
+P01191,dach_privat,Weingarten,47.84551,9.68927,13.76,167,38,W11,1,WS04,2011-11-29,28.74,in_betrieb
+P01192,balkon,Weingarten,47.86222,9.6633,0.6,154,34,W02,1,WS04,2024-11-01,0.0,in_betrieb
+P01193,dach_privat,Friedrichshafen,47.66772,9.51049,10.79,271,30,W11,1,WS01,2025-10-08,7.86,in_betrieb
+P01194,dach_privat,Pfullendorf,47.93937,9.27835,8.89,263,26,W06,1,WS19,2016-12-24,12.31,in_betrieb
+P01195,dach_privat,Überlingen,47.77879,9.15453,26.7,266,18,W09,3,WS06,2011-03-31,28.74,in_betrieb
+P01196,freiflaeche,Ravensburg,47.76301,9.63299,1262.0,179,26,W21,8,WS02,2023-01-20,5.72,in_betrieb
+P01197,balkon,Meckenbeuren,47.66,9.59821,0.82,164,70,W02,1,WS12,2023-05-01,0.0,in_betrieb
+P01198,dach_privat,Überlingen,47.78397,9.22115,18.53,269,24,W10,1,WS06,2022-05-26,6.93,in_betrieb
+P01199,dach_privat,Oberteuringen,47.75278,9.48626,20.67,86,30,W12,1,WS21,2023-03-17,8.2,in_betrieb
+P01200,dach_privat,Konstanz,47.62396,9.14823,12.59,169,35,W11,1,WS03,2024-07-02,8.03,in_betrieb
+P01201,dach_privat,Friedrichshafen,47.65874,9.4879,8.15,101,33,W05,1,WS01,2012-06-25,19.5,in_betrieb
+P01202,dach_privat,Weingarten,47.83953,9.67487,9.99,258,40,W06,1,WS04,2025-08-15,7.86,in_betrieb
+P01203,dach_privat,Ravensburg,47.79793,9.63218,15.91,153,42,W10,1,WS02,2023-12-17,8.2,in_betrieb
+P01204,dach_privat,Stockach,47.84481,8.92618,5.02,80,24,W04,1,WS20,2011-11-19,28.74,gestoert
+P01205,balkon,Bad Wurzach,47.89335,9.96907,0.86,230,75,W02,1,WS18,2024-01-25,0.0,in_betrieb
+P01206,balkon,Weingarten,47.76607,9.65655,0.8,205,90,W02,1,WS04,2025-05-01,0.0,in_betrieb
+P01207,dach_gewerbe,Bad Wurzach,47.89122,9.82911,118.0,193,18,W14,3,WS18,2026-04-29,6.98,in_betrieb
+P01208,dach_privat,Leutkirch,47.77529,10.03119,7.27,268,42,W05,1,WS11,2018-01-10,12.2,in_betrieb
+P01209,balkon,Kressbronn,47.60407,9.64006,0.82,229,89,W01,1,WS15,2025-03-15,0.0,in_betrieb
+P01210,dach_privat,Bad Waldsee,47.92659,9.76062,6.21,182,44,W08,1,WS10,2020-03-25,9.17,in_betrieb
+P01211,dach_gewerbe,Konstanz,47.66598,9.1641,191.5,165,24,W15,3,WS03,2014-05-15,10.83,in_betrieb
+P01212,dach_privat,Markdorf,47.7378,9.32791,9.51,210,20,W06,1,WS09,2025-10-21,7.86,in_betrieb
+P01213,dach_privat,Tettnang,47.67401,9.64285,6.65,177,28,W08,1,WS08,2012-01-11,19.5,in_betrieb
+P01214,dach_privat,Friedrichshafen,47.63205,9.53322,12.01,253,16,W06,1,WS01,2023-04-16,8.2,in_betrieb
+P01215,dach_privat,Salem,47.7794,9.22392,13.38,86,41,W10,1,WS16,2025-07-18,7.86,in_betrieb
+P01216,dach_privat,Markdorf,47.74639,9.38536,5.83,272,45,W04,1,WS09,2023-04-29,8.2,in_betrieb
+P01217,balkon,Friedrichshafen,47.67373,9.51992,0.6,197,87,W01,1,WS01,2022-03-23,0.0,in_betrieb
+P01218,dach_privat,Wangen im Allgäu,47.67076,9.76631,5.72,103,39,W04,1,WS07,2010-03-07,39.14,in_betrieb
+P01219,freiflaeche,Ravensburg,47.77542,9.62217,5271.0,159,23,W22,20,WS02,2019-09-08,5.99,in_betrieb
+P01220,dach_privat,Ravensburg,47.80808,9.54245,10.84,95,27,W06,1,WS02,2021-11-23,8.16,in_betrieb
+P01221,dach_privat,Wangen im Allgäu,47.65481,9.8554,13.83,265,19,W10,1,WS07,2010-07-06,39.14,in_betrieb
+P01222,dach_privat,Leutkirch,47.77502,10.02719,13.3,91,22,W11,1,WS11,2008-05-08,46.75,in_betrieb
+P01223,balkon,Immenstaad,47.71169,9.36173,0.9,121,76,W01,1,WS13,2022-10-29,0.0,in_betrieb
+P01224,balkon,Konstanz,47.64378,9.16186,0.86,156,89,W01,1,WS03,2024-05-09,0.0,in_betrieb
+P01225,dach_privat,Weingarten,47.84294,9.60244,9.78,183,18,W06,1,WS04,2024-05-27,8.03,in_betrieb
+P01226,dach_gewerbe,Weingarten,47.84518,9.63241,162.5,184,10,W17,2,WS04,2014-04-24,11.75,in_betrieb
+P01227,dach_privat,Konstanz,47.64049,9.19522,7.94,92,43,W05,1,WS03,2012-12-06,19.5,in_betrieb
+P01228,freiflaeche,Weingarten,47.82496,9.5538,900.0,190,19,W22,3,WS04,2019-10-23,5.58,in_betrieb
+P01229,balkon,Isny,47.64699,10.01059,0.9,163,70,W01,1,WS17,2024-01-30,0.0,in_betrieb
+P01230,balkon,Überlingen,47.74122,9.11189,0.8,179,83,W01,1,WS06,2025-06-04,0.0,in_betrieb
+P01231,dach_privat,Friedrichshafen,47.66735,9.52175,7.14,179,20,W08,1,WS01,2012-07-18,19.5,in_betrieb
+P01232,dach_privat,Lindau,47.5731,9.70012,16.13,267,27,W11,1,WS05,2012-12-15,19.5,in_betrieb
+P01233,dach_gewerbe,Ravensburg,47.79547,9.54259,249.2,158,11,W14,7,WS02,2020-03-28,7.98,in_betrieb
+P01234,dach_gewerbe,Immenstaad,47.67989,9.34153,689.6,200,23,W18,5,WS13,2019-05-23,9.76,in_betrieb
+P01235,dach_privat,Leutkirch,47.77612,10.02911,11.82,106,42,W06,1,WS11,2022-11-01,6.93,in_betrieb
+P01236,dach_privat,Weingarten,47.78172,9.68174,5.51,76,42,W04,1,WS04,2008-09-02,46.75,in_betrieb
+P01237,dach_privat,Bermatingen,47.73371,9.37409,13.92,99,38,W11,1,WS24,2010-12-01,39.14,in_betrieb
+P01238,balkon,Bad Waldsee,47.91029,9.72981,0.9,178,35,W01,1,WS10,2022-12-23,0.0,in_betrieb
+P01239,dach_privat,Markdorf,47.72246,9.38982,4.04,282,24,W07,1,WS09,2023-01-27,8.2,in_betrieb
+P01240,dach_privat,Wangen im Allgäu,47.69245,9.79514,13.14,90,19,W11,1,WS07,2023-05-13,8.2,in_betrieb
+P01241,dach_privat,Lindau,47.57646,9.68467,4.92,202,42,W04,1,WS05,2021-09-10,8.16,in_betrieb
+P01242,balkon,Kressbronn,47.62849,9.62891,0.6,197,36,W01,1,WS15,2024-10-04,0.0,in_betrieb
+P01243,dach_privat,Konstanz,47.65834,9.14476,9.31,158,38,W05,1,WS03,2025-11-13,7.86,in_betrieb
+P01244,dach_privat,Stockach,47.79666,9.03476,8.7,88,19,W05,1,WS20,2024-11-05,8.03,in_betrieb
+P01245,balkon,Weingarten,47.83459,9.6713,0.9,251,78,W02,1,WS04,2023-08-05,0.0,in_betrieb
+P01246,balkon,Friedrichshafen,47.68976,9.52644,0.6,161,32,W02,1,WS01,2025-12-29,0.0,in_betrieb
+P01247,dach_gewerbe,Wangen im Allgäu,47.68791,9.85235,108.7,124,7,W17,1,WS07,2020-02-29,7.83,gestoert
+P01248,dach_privat,Lindau,47.57058,9.67309,10.43,180,38,W09,1,WS05,2024-04-15,8.03,in_betrieb
+P01249,dach_gewerbe,Markdorf,47.75191,9.35277,46.2,173,9,W15,1,WS09,2017-05-04,11.18,in_betrieb
+P01250,balkon,Weingarten,47.79588,9.678,0.82,192,39,W01,1,WS04,2022-01-23,0.0,in_betrieb
+P01251,dach_gewerbe,Lindau,47.5653,9.74786,164.8,136,16,W16,2,WS05,2018-05-27,10.82,in_betrieb
+P01252,balkon,Meckenbeuren,47.68488,9.63624,0.86,175,28,W01,1,WS12,2026-05-08,0.0,in_betrieb
+P01253,dach_privat,Friedrichshafen,47.6059,9.53129,4.7,195,22,W08,1,WS01,2024-12-01,8.03,in_betrieb
+P01254,balkon,Wangen im Allgäu,47.71203,9.77326,0.86,253,36,W02,1,WS07,2024-03-24,0.0,in_betrieb
+P01255,dach_privat,Konstanz,47.65852,9.16974,12.92,272,32,W11,1,WS03,2020-07-11,9.17,in_betrieb
+P01256,balkon,Überlingen,47.71617,9.14198,0.9,168,37,W02,1,WS06,2023-07-07,0.0,in_betrieb
+P01257,balkon,Immenstaad,47.68616,9.37268,0.8,260,29,W02,1,WS13,2025-04-12,0.0,in_betrieb
+P01258,balkon,Weingarten,47.7921,9.68315,0.86,131,66,W01,1,WS04,2024-11-03,0.0,in_betrieb
+P01259,balkon,Überlingen,47.79681,9.2109,0.86,181,61,W01,1,WS06,2025-08-26,0.0,in_betrieb
+P01260,dach_privat,Immenstaad,47.68709,9.42408,8.05,206,33,W05,1,WS13,2012-08-16,19.5,in_betrieb
+P01261,dach_privat,Ravensburg,47.77698,9.53186,5.75,87,29,W04,1,WS02,2024-03-18,8.03,in_betrieb
+P01262,dach_privat,Überlingen,47.78381,9.14296,6.93,184,21,W08,1,WS06,2023-11-22,8.2,in_betrieb
+P01263,dach_privat,Konstanz,47.63789,9.12383,9.07,181,34,W09,1,WS03,2026-01-01,7.78,in_betrieb
+P01264,dach_privat,Lindau,47.57634,9.69304,9.5,137,36,W05,1,WS05,2012-12-23,19.5,in_betrieb
+P01265,dach_gewerbe,Tettnang,47.67358,9.64503,353.6,138,23,W20,6,WS08,2026-01-08,6.76,in_betrieb
+P01266,dach_privat,Friedrichshafen,47.69158,9.46811,10.39,278,30,W06,1,WS01,2012-02-14,19.5,in_betrieb
+P01267,dach_gewerbe,Wangen im Allgäu,47.64229,9.82838,134.9,167,15,W18,1,WS07,2022-10-25,6.15,in_betrieb
+P01268,dach_privat,Bermatingen,47.74396,9.29472,11.02,82,27,W11,1,WS24,2012-12-07,19.5,in_betrieb
+P01269,balkon,Baienfurt,47.84674,9.63288,0.86,258,40,W01,1,WS23,2023-05-01,0.0,in_betrieb
+P01270,balkon,Überlingen,47.79536,9.12141,0.8,129,29,W02,1,WS06,2023-09-17,0.0,in_betrieb
+P01271,dach_gewerbe,Überlingen,47.78915,9.1218,28.4,243,8,W19,1,WS06,2017-09-26,10.86,in_betrieb
+P01272,freiflaeche,Pfullendorf,47.91418,9.14414,4616.0,181,25,W22,19,WS19,2015-06-25,5.47,in_betrieb
+P01273,dach_privat,Bad Wurzach,47.91599,9.91144,6.87,268,29,W08,1,WS18,2019-10-24,11.47,in_betrieb
+P01274,balkon,Langenargen,47.64588,9.56045,0.9,158,89,W01,1,WS14,2025-06-23,0.0,in_betrieb
+P01275,dach_privat,Kressbronn,47.61976,9.59381,7.1,180,37,W06,1,WS15,2023-09-29,8.2,in_betrieb
+P01276,freiflaeche,Salem,47.81611,9.23002,3422.0,169,23,W23,8,WS16,2024-04-30,6.66,in_betrieb
+P01277,dach_privat,Bad Wurzach,47.92815,9.84595,7.58,149,45,W08,1,WS18,2024-09-07,8.03,in_betrieb
+P01278,balkon,Weingarten,47.82302,9.7106,0.9,140,70,W01,1,WS04,2025-09-24,0.0,in_betrieb
+P01279,dach_privat,Konstanz,47.67112,9.18604,8.67,86,17,W05,1,WS03,2024-05-31,8.03,in_betrieb
+P01280,dach_privat,Konstanz,47.65076,9.10964,8.62,189,32,W05,1,WS03,2023-09-16,8.2,in_betrieb
+P01281,dach_privat,Markdorf,47.69821,9.43575,5.23,161,15,W04,1,WS09,2010-01-30,39.14,in_betrieb
+P01282,dach_privat,Konstanz,47.69549,9.14309,6.01,259,28,W08,1,WS03,2017-11-07,12.3,in_betrieb
+P01283,dach_privat,Langenargen,47.62917,9.56255,7.51,153,27,W05,1,WS14,2010-01-13,39.14,in_betrieb
+P01284,balkon,Bad Waldsee,47.96819,9.71494,0.6,217,72,W02,1,WS10,2023-08-25,0.0,in_betrieb
+P01285,balkon,Ravensburg,47.81087,9.55222,0.82,199,31,W01,1,WS02,2025-06-14,0.0,in_betrieb
+P01286,dach_privat,Bad Waldsee,47.94916,9.79319,9.17,152,27,W09,1,WS10,2023-06-02,8.2,in_betrieb
+P01287,dach_privat,Lindau,47.57729,9.68931,7.33,254,25,W08,1,WS05,2011-02-22,28.74,in_betrieb
+P01288,freiflaeche,Langenargen,47.62945,9.55769,4838.0,174,28,W21,30,WS14,2020-09-17,5.53,in_betrieb
+P01289,dach_privat,Lindau,47.50196,9.71127,11.41,190,45,W06,1,WS05,2023-10-21,8.2,in_betrieb
+P01290,dach_privat,Bad Waldsee,47.94709,9.79565,11.1,81,41,W11,1,WS10,2021-03-06,8.16,in_betrieb
+P01291,dach_gewerbe,Bad Wurzach,47.88746,9.84191,126.2,237,5,W18,1,WS18,2021-11-16,7.21,in_betrieb
+P01292,balkon,Salem,47.75091,9.25017,0.9,143,80,W01,1,WS16,2024-06-19,0.0,in_betrieb
+P01293,dach_privat,Lindau,47.5781,9.67666,9.2,211,38,W05,1,WS05,2010-02-01,39.14,in_betrieb
+P01294,dach_privat,Baienfurt,47.80533,9.69979,9.61,89,45,W05,1,WS23,2019-03-25,11.47,in_betrieb
+P01295,balkon,Weingarten,47.82504,9.69675,0.9,174,26,W02,1,WS04,2026-03-13,0.0,in_betrieb
+P01296,dach_privat,Eriskirch,47.64334,9.57076,2.83,100,18,W03,1,WS25,2013-09-05,15.07,wartung
+P01297,freiflaeche,Überlingen,47.75456,9.03873,5792.0,178,27,W23,17,WS06,2024-12-15,5.13,in_betrieb
+P01298,dach_privat,Salem,47.74833,9.3564,4.11,231,26,W03,1,WS16,2018-10-26,12.2,in_betrieb
+P01299,freiflaeche,Ravensburg,47.76499,9.59044,4811.0,178,19,W21,27,WS02,2016-07-08,6.57,in_betrieb
+P01300,dach_privat,Ravensburg,47.83148,9.59892,15.1,160,26,W10,1,WS02,2011-10-13,28.74,in_betrieb
+P01301,dach_privat,Friedrichshafen,47.66909,9.50477,6.91,160,38,W08,1,WS01,2024-01-24,8.03,in_betrieb
+P01302,dach_gewerbe,Oberteuringen,47.7429,9.45222,41.1,150,7,W14,1,WS21,2018-12-02,10.73,in_betrieb
+P01303,dach_gewerbe,Friedrichshafen,47.6671,9.50865,79.6,122,6,W17,1,WS01,2012-05-06,16.04,in_betrieb
+P01304,dach_privat,Weingarten,47.79014,9.71759,10.28,200,27,W06,1,WS04,2010-10-20,39.14,in_betrieb
+P01305,dach_privat,Immenstaad,47.70183,9.31682,9.16,185,23,W05,1,WS13,2017-05-08,12.3,in_betrieb
+P01306,balkon,Konstanz,47.66002,9.17083,0.6,169,89,W02,1,WS03,2022-01-27,0.0,in_betrieb
+P01307,balkon,Konstanz,47.66079,9.17167,0.82,247,88,W01,1,WS03,2026-04-17,0.0,in_betrieb
+P01308,dach_privat,Ravensburg,47.82155,9.5403,9.19,170,20,W06,1,WS02,2011-08-23,28.74,in_betrieb
+P01309,dach_privat,Friedrichshafen,47.66001,9.49419,9.4,271,33,W09,1,WS01,2017-02-07,12.3,in_betrieb
+P01310,dach_privat,Immenstaad,47.6842,9.36556,5.73,164,20,W04,1,WS13,2016-12-05,12.31,in_betrieb
+P01311,dach_privat,Ravensburg,47.74754,9.654,11.9,187,20,W06,1,WS02,2026-04-04,7.78,in_betrieb
+P01312,balkon,Ravensburg,47.74662,9.60718,0.6,130,39,W01,1,WS02,2026-02-10,0.0,in_betrieb
+P01313,dach_privat,Lindau,47.57258,9.67785,8.45,103,36,W05,1,WS05,2024-10-31,8.03,in_betrieb
+P01314,dach_privat,Überlingen,47.80023,9.20735,6.06,266,43,W08,1,WS06,2018-10-14,12.2,in_betrieb
+P01315,balkon,Friedrichshafen,47.6548,9.51901,0.9,104,26,W01,1,WS01,2025-02-18,0.0,in_betrieb
+P01316,dach_gewerbe,Konstanz,47.61849,9.17664,157.6,146,22,W20,3,WS03,2010-10-23,35.23,in_betrieb
+P01317,dach_gewerbe,Friedrichshafen,47.68015,9.52219,75.1,175,23,W15,1,WS01,2025-11-20,7.21,in_betrieb
+P01318,dach_gewerbe,Wangen im Allgäu,47.68654,9.8377,131.9,185,11,W17,1,WS07,2023-01-05,6.76,in_betrieb
+P01319,balkon,Wangen im Allgäu,47.69218,9.90192,0.6,109,27,W02,1,WS07,2024-08-20,0.0,in_betrieb
+P01320,dach_privat,Überlingen,47.78711,9.19523,5.49,147,16,W04,1,WS06,2019-12-21,11.47,in_betrieb
+P01321,dach_privat,Friedrichshafen,47.65881,9.50342,6.0,205,43,W05,1,WS01,2009-05-23,43.01,in_betrieb
+P01322,dach_gewerbe,Langenargen,47.62266,9.58018,140.4,172,17,W18,1,WS14,2024-01-15,6.84,in_betrieb
+P01323,freiflaeche,Ravensburg,47.73704,9.56991,4387.0,177,25,W23,11,WS02,2022-06-03,6.12,in_betrieb
+P01324,dach_gewerbe,Überlingen,47.7987,9.11136,58.5,171,13,W15,1,WS06,2021-10-05,7.04,in_betrieb
+P01325,dach_privat,Markdorf,47.72629,9.34728,12.39,268,38,W06,1,WS09,2026-01-06,7.78,in_betrieb
+P01326,balkon,Salem,47.7512,9.37085,0.9,164,37,W02,1,WS16,2023-12-26,0.0,in_betrieb
+P01327,balkon,Konstanz,47.69613,9.18229,0.8,168,60,W02,1,WS03,2026-05-02,0.0,in_betrieb
+P01328,balkon,Konstanz,47.64385,9.10508,0.9,202,84,W01,1,WS03,2025-04-22,0.0,in_betrieb
+P01329,balkon,Überlingen,47.81939,9.14767,0.9,158,28,W01,1,WS06,2022-03-31,0.0,in_betrieb
+P01330,dach_privat,Bad Waldsee,47.90489,9.70244,13.1,196,39,W06,1,WS10,2010-02-26,39.14,in_betrieb
+P01331,freiflaeche,Friedrichshafen,47.66596,9.50328,6176.0,186,26,W23,18,WS01,2016-09-29,5.91,in_betrieb
+P01332,dach_privat,Bad Waldsee,47.90722,9.73179,11.15,183,39,W06,1,WS10,2014-11-07,13.15,in_betrieb
+P01333,freiflaeche,Friedrichshafen,47.69219,9.57078,2772.0,176,23,W23,6,WS01,2023-10-17,6.44,in_betrieb
+P01334,dach_privat,Markdorf,47.71761,9.36361,11.47,93,41,W11,1,WS09,2008-09-30,46.75,in_betrieb
+P01335,balkon,Meersburg,47.68515,9.19738,0.82,230,61,W01,1,WS22,2024-01-17,0.0,in_betrieb
+P01336,dach_privat,Überlingen,47.80879,9.09843,11.28,279,25,W06,1,WS06,2021-05-01,8.16,in_betrieb
+P01337,dach_gewerbe,Ravensburg,47.82434,9.62164,163.4,202,23,W18,1,WS02,2021-02-21,7.0,in_betrieb
+P01338,dach_privat,Weingarten,47.79443,9.59579,13.84,102,22,W10,1,WS04,2011-10-02,28.74,in_betrieb
+P01339,balkon,Friedrichshafen,47.66161,9.52054,0.6,194,79,W02,1,WS01,2023-07-23,0.0,in_betrieb
+P01340,dach_privat,Bad Waldsee,47.96888,9.72673,6.94,177,32,W08,1,WS10,2012-04-03,19.5,in_betrieb
+P01341,dach_privat,Tettnang,47.65015,9.61333,10.51,79,33,W06,1,WS08,2019-02-13,11.47,in_betrieb
+P01342,balkon,Isny,47.7177,10.05481,0.6,180,81,W02,1,WS17,2025-05-23,0.0,in_betrieb
+P01343,dach_privat,Weingarten,47.78926,9.60704,8.78,111,38,W05,1,WS04,2020-11-21,9.17,in_betrieb
+P01344,dach_privat,Konstanz,47.65679,9.17453,9.72,271,38,W06,1,WS03,2008-09-09,46.75,in_betrieb
+P01345,dach_privat,Langenargen,47.62522,9.5488,11.06,160,29,W11,1,WS14,2025-11-05,7.86,in_betrieb
+P01346,dach_privat,Markdorf,47.70021,9.42286,7.63,177,40,W05,1,WS09,2008-07-08,46.75,in_betrieb
+P01347,balkon,Ravensburg,47.79064,9.61132,0.6,159,31,W02,1,WS02,2024-09-17,0.0,in_betrieb
+P01348,dach_gewerbe,Wangen im Allgäu,47.70548,9.7802,118.3,100,18,W17,1,WS07,2023-05-31,7.41,in_betrieb
+P01349,dach_privat,Konstanz,47.67164,9.1462,8.9,191,29,W05,1,WS03,2025-08-14,7.86,in_betrieb
+P01350,balkon,Wangen im Allgäu,47.65746,9.87119,0.86,188,30,W01,1,WS07,2023-03-12,0.0,in_betrieb
+P01351,dach_privat,Tettnang,47.65501,9.576,7.01,78,33,W05,1,WS08,2019-09-09,11.47,in_betrieb
+P01352,balkon,Weingarten,47.83808,9.63307,0.86,102,28,W02,1,WS04,2024-05-07,0.0,in_betrieb
+P01353,dach_privat,Tettnang,47.65732,9.58872,6.04,85,40,W08,1,WS08,2017-06-26,12.3,in_betrieb
+P01354,dach_gewerbe,Tettnang,47.67288,9.62916,505.6,162,24,W15,9,WS08,2025-07-24,6.56,in_betrieb
+P01355,balkon,Ravensburg,47.79566,9.67663,0.8,183,33,W01,1,WS02,2025-08-09,0.0,in_betrieb
+P01356,dach_privat,Stockach,47.83285,8.97866,7.43,197,28,W08,1,WS20,2022-02-25,6.93,in_betrieb
+P01357,dach_privat,Weingarten,47.76436,9.63651,11.91,157,34,W06,1,WS04,2012-05-31,19.5,in_betrieb
+P01358,balkon,Konstanz,47.62665,9.1391,0.6,234,77,W01,1,WS03,2024-06-13,0.0,in_betrieb
+P01359,dach_privat,Tettnang,47.66575,9.6184,6.52,139,25,W04,1,WS08,2024-04-04,8.03,in_betrieb
+P01360,dach_privat,Weingarten,47.83438,9.61665,5.55,286,24,W04,1,WS04,2011-07-05,28.74,in_betrieb
+P01361,dach_privat,Salem,47.75171,9.36874,22.17,171,16,W12,1,WS16,2021-12-26,8.16,in_betrieb
+P01362,dach_privat,Konstanz,47.69347,9.17423,14.99,161,37,W11,1,WS03,2010-11-21,39.14,in_betrieb
+P01363,dach_gewerbe,Stockach,47.87703,9.05405,109.8,268,13,W17,1,WS20,2017-12-22,11.02,in_betrieb
+P01364,dach_privat,Langenargen,47.6277,9.5579,11.07,200,28,W11,1,WS14,2011-07-10,28.74,in_betrieb
+P01365,dach_privat,Ravensburg,47.7666,9.55904,9.49,90,40,W05,1,WS02,2010-11-25,39.14,in_betrieb
+P01366,dach_privat,Friedrichshafen,47.66026,9.48213,13.6,165,27,W11,1,WS01,2011-02-14,28.74,abgeschaltet
+P01367,balkon,Weingarten,47.83231,9.57806,0.6,173,74,W01,1,WS04,2025-03-23,0.0,in_betrieb
+P01368,dach_privat,Markdorf,47.74054,9.45614,8.78,213,37,W05,1,WS09,2021-10-19,8.16,in_betrieb
+P01369,balkon,Meckenbeuren,47.68832,9.57232,0.6,131,25,W01,1,WS12,2024-06-16,0.0,in_betrieb
+P01370,dach_privat,Leutkirch,47.782,10.07431,4.38,60,26,W07,1,WS11,2017-03-15,12.3,in_betrieb
+P01371,balkon,Ravensburg,47.81674,9.59663,0.8,201,77,W01,1,WS02,2025-12-10,0.0,in_betrieb
+P01372,dach_privat,Bad Waldsee,47.89922,9.72197,9.79,282,39,W06,1,WS10,2025-10-24,7.86,in_betrieb
+P01373,balkon,Meckenbeuren,47.7089,9.62541,0.9,108,38,W02,1,WS12,2026-05-10,0.0,in_betrieb
+P01374,balkon,Tettnang,47.65458,9.51744,0.86,122,34,W02,1,WS08,2024-03-16,0.0,in_betrieb
+P01375,balkon,Ravensburg,47.80908,9.55966,0.9,148,66,W02,1,WS02,2025-10-12,0.0,in_betrieb
+P01376,dach_privat,Bad Wurzach,47.93254,9.92656,10.73,263,42,W06,1,WS18,2008-05-20,46.75,in_betrieb
+P01377,dach_privat,Ravensburg,47.81785,9.65348,7.74,248,34,W05,1,WS02,2011-09-18,28.74,in_betrieb
+P01378,balkon,Friedrichshafen,47.67883,9.53922,0.82,213,66,W01,1,WS01,2025-01-26,0.0,in_betrieb
+P01379,balkon,Tettnang,47.71395,9.55425,0.8,156,68,W02,1,WS08,2024-01-30,0.0,in_betrieb
+P01380,dach_privat,Stockach,47.84057,9.02284,6.17,211,18,W04,1,WS20,2023-12-09,8.2,in_betrieb
+P01381,balkon,Weingarten,47.81088,9.5987,0.9,168,74,W01,1,WS04,2023-01-29,0.0,in_betrieb
+P01382,dach_gewerbe,Tettnang,47.70435,9.55738,72.9,105,17,W16,1,WS08,2022-05-14,6.04,in_betrieb
+P01383,dach_privat,Ravensburg,47.75713,9.64435,7.02,99,28,W05,1,WS02,2018-12-05,12.2,in_betrieb
+P01384,dach_gewerbe,Bermatingen,47.7328,9.33725,138.7,242,12,W18,1,WS24,2020-10-27,7.88,in_betrieb
+P01385,dach_privat,Baienfurt,47.8292,9.71007,10.04,149,34,W06,1,WS23,2018-05-20,12.2,in_betrieb
+P01386,balkon,Konstanz,47.65856,9.17661,0.82,258,32,W02,1,WS03,2024-04-11,0.0,in_betrieb
+P01387,dach_gewerbe,Pfullendorf,47.9112,9.17979,35.9,196,15,W15,1,WS19,2015-02-12,11.2,in_betrieb
+P01388,dach_privat,Oberteuringen,47.73249,9.45715,3.8,84,43,W07,1,WS21,2025-07-12,7.86,in_betrieb
+P01389,dach_privat,Pfullendorf,47.96825,9.21355,4.75,219,25,W08,1,WS19,2010-12-03,39.14,in_betrieb
+P01390,dach_privat,Bad Waldsee,47.94474,9.80357,13.0,172,27,W12,1,WS10,2021-12-09,8.16,in_betrieb
+P01391,dach_privat,Ravensburg,47.81174,9.66508,15.23,91,31,W10,1,WS02,2011-01-13,28.74,in_betrieb
+P01392,freiflaeche,Ravensburg,47.75539,9.52171,3048.0,190,24,W23,8,WS02,2023-07-30,5.59,in_betrieb
+P01393,dach_privat,Ravensburg,47.81099,9.63563,11.72,169,21,W11,1,WS02,2024-06-17,8.03,in_betrieb
+P01394,dach_privat,Leutkirch,47.78396,9.97387,13.39,187,17,W11,1,WS11,2014-12-24,13.15,in_betrieb
+P01395,dach_gewerbe,Ravensburg,47.77703,9.60043,315.2,137,11,W20,5,WS02,2016-11-02,10.42,in_betrieb
+P01396,dach_privat,Tettnang,47.71761,9.54768,8.83,262,41,W06,1,WS08,2020-04-04,9.17,in_betrieb
+P01397,balkon,Stockach,47.84417,8.99888,0.82,198,72,W01,1,WS20,2026-02-17,0.0,in_betrieb
+P01398,dach_privat,Weingarten,47.83578,9.68209,10.17,153,18,W06,1,WS04,2011-04-07,28.74,in_betrieb
+P01399,dach_gewerbe,Überlingen,47.77695,9.17416,50.1,210,18,W15,1,WS06,2025-04-09,7.13,in_betrieb
+P01400,dach_privat,Bad Wurzach,47.93851,9.89036,23.82,178,26,W12,1,WS18,2009-09-16,43.01,in_betrieb
+P01401,dach_privat,Langenargen,47.62542,9.55291,5.76,89,37,W04,1,WS14,2021-02-19,8.16,in_betrieb
+P01402,dach_privat,Überlingen,47.75695,9.19142,5.47,275,43,W08,1,WS06,2024-07-10,8.03,in_betrieb
+P01403,dach_privat,Weingarten,47.84378,9.66149,7.5,271,36,W08,1,WS04,2025-12-17,7.86,in_betrieb
+P01404,dach_privat,Bad Waldsee,47.97292,9.76102,7.07,95,24,W08,1,WS10,2024-04-05,8.03,in_betrieb
+P01405,dach_privat,Konstanz,47.644,9.11487,17.0,170,29,W10,1,WS03,2026-04-10,7.78,in_betrieb
+P01406,balkon,Überlingen,47.72787,9.16996,0.82,169,74,W02,1,WS06,2026-01-10,0.0,in_betrieb
+P01407,dach_privat,Wangen im Allgäu,47.73939,9.81354,7.96,94,26,W05,1,WS07,2011-08-20,28.74,in_betrieb
+P01408,dach_gewerbe,Weingarten,47.85161,9.64394,50.5,189,24,W15,1,WS04,2025-11-16,6.53,in_betrieb
+P01409,dach_privat,Markdorf,47.75508,9.3354,6.43,271,36,W08,1,WS09,2022-01-11,6.93,in_betrieb
+P01410,freiflaeche,Salem,47.71837,9.23742,2030.0,184,27,W22,7,WS16,2021-05-11,5.32,in_betrieb
+P01411,dach_privat,Weingarten,47.84817,9.59753,12.34,156,40,W11,1,WS04,2026-01-06,7.78,in_betrieb
+P01412,balkon,Baienfurt,47.82856,9.62974,0.86,175,36,W02,1,WS23,2024-08-19,0.0,in_betrieb
+P01413,dach_gewerbe,Konstanz,47.68288,9.1652,136.9,172,12,W15,3,WS03,2017-12-29,10.22,in_betrieb
+P01414,dach_privat,Eriskirch,47.64704,9.55081,8.19,270,37,W05,1,WS25,2024-12-10,8.03,in_betrieb
+P01415,dach_privat,Friedrichshafen,47.69011,9.5211,13.65,196,19,W12,1,WS01,2008-04-25,46.75,in_betrieb
+P01416,dach_privat,Friedrichshafen,47.66906,9.50666,8.74,90,34,W06,1,WS01,2009-12-30,43.01,in_betrieb
+P01417,dach_privat,Lindau,47.57075,9.66773,11.9,96,26,W11,1,WS05,2011-08-08,28.74,in_betrieb
+P01418,dach_privat,Konstanz,47.65913,9.1723,7.69,88,16,W09,1,WS03,2022-08-06,6.93,in_betrieb
+P01419,dach_privat,Überlingen,47.77375,9.17721,11.11,271,27,W06,1,WS06,2023-08-04,8.2,in_betrieb
+P01420,balkon,Ravensburg,47.82647,9.64805,0.86,151,31,W01,1,WS02,2022-07-07,0.0,in_betrieb
+P01421,dach_privat,Wangen im Allgäu,47.64686,9.80947,6.35,200,41,W08,1,WS07,2011-10-19,28.74,in_betrieb
+P01422,dach_privat,Lindau,47.57461,9.69054,2.91,86,28,W03,1,WS05,2025-03-21,7.86,in_betrieb
+P01423,dach_privat,Markdorf,47.77535,9.41495,10.56,180,36,W11,1,WS09,2023-04-16,8.2,in_betrieb
+P01424,dach_privat,Friedrichshafen,47.6779,9.50859,6.95,75,31,W05,1,WS01,2018-08-01,12.2,in_betrieb
+P01425,balkon,Isny,47.70535,10.0504,0.6,234,34,W02,1,WS17,2026-04-20,0.0,in_betrieb
+P01426,dach_privat,Überlingen,47.80919,9.16714,5.85,153,34,W08,1,WS06,2017-11-02,12.3,in_betrieb
+P01427,dach_privat,Baienfurt,47.8515,9.59358,21.02,272,38,W12,1,WS23,2025-08-26,7.86,in_betrieb
+P01428,dach_privat,Bad Waldsee,47.93554,9.7759,5.67,238,31,W04,1,WS10,2011-05-30,28.74,in_betrieb
+P01429,balkon,Langenargen,47.59831,9.54198,0.6,450,31,W01,1,WS14,2025-05-30,0.0,in_betrieb
+P01430,balkon,Ravensburg,47.80133,9.59489,0.86,167,27,W01,1,WS02,2023-03-09,0.0,in_betrieb
+P01431,dach_privat,Überlingen,47.77688,9.1498,17.9,76,16,W12,1,WS06,2009-03-15,43.01,in_betrieb
+P01432,dach_privat,Salem,47.75643,9.33337,8.13,72,44,W05,1,WS16,2019-06-23,11.47,abgeschaltet
+P01433,balkon,Baienfurt,47.83561,9.73079,0.86,146,39,W02,1,WS23,2023-03-27,0.0,in_betrieb
+P01434,dach_privat,Konstanz,47.6118,9.15354,7.64,95,23,W05,1,WS03,2024-12-31,8.03,in_betrieb
+P01435,dach_privat,Isny,47.73919,10.04327,7.65,266,31,W05,1,WS17,2013-10-05,15.07,in_betrieb
+P01436,balkon,Isny,47.70091,10.08768,0.8,164,65,W01,1,WS17,2025-05-30,0.0,in_betrieb
+P01437,dach_privat,Friedrichshafen,47.67911,9.45192,6.72,101,21,W08,1,WS01,2016-01-24,12.31,in_betrieb
+P01438,dach_gewerbe,Weingarten,47.77909,9.5884,162.5,195,15,W18,1,WS04,2021-11-10,7.49,in_betrieb
+P01439,dach_privat,Konstanz,47.6733,9.173,17.66,249,32,W12,1,WS03,2021-06-22,8.16,in_betrieb
+P01440,dach_privat,Salem,47.76602,9.25994,11.39,96,27,W06,1,WS16,2024-04-16,8.03,in_betrieb
+P01441,dach_gewerbe,Leutkirch,47.87149,9.99866,109.2,105,7,W18,1,WS11,2025-09-21,6.72,in_betrieb
+P01442,dach_privat,Friedrichshafen,47.65885,9.50222,8.33,171,27,W05,1,WS01,2010-07-14,39.14,in_betrieb
+P01443,balkon,Wangen im Allgäu,47.68012,9.87075,0.82,117,68,W01,1,WS07,2025-03-14,0.0,in_betrieb
+P01444,balkon,Markdorf,47.69737,9.35862,0.6,171,65,W02,1,WS09,2025-11-03,0.0,in_betrieb
+P01445,dach_privat,Leutkirch,47.80586,9.98538,9.5,158,40,W05,1,WS11,2010-09-25,39.14,abgeschaltet
+P01446,dach_privat,Markdorf,47.72416,9.45667,9.04,212,27,W05,1,WS09,2023-11-05,8.2,gestoert
+P01447,balkon,Ravensburg,47.82304,9.57291,0.86,179,35,W02,1,WS02,2025-09-23,0.0,in_betrieb
+P01448,dach_gewerbe,Weingarten,47.81468,9.65996,52.5,201,10,W16,1,WS04,2013-03-08,13.01,in_betrieb
+P01449,dach_privat,Konstanz,47.65628,9.17845,6.05,172,21,W08,1,WS03,2010-04-25,39.14,in_betrieb
+P01450,dach_privat,Konstanz,47.63718,9.11582,11.0,174,25,W11,1,WS03,2022-08-29,6.93,in_betrieb
+P01451,dach_privat,Bad Waldsee,47.89812,9.73601,16.34,149,25,W12,1,WS10,2021-07-09,8.16,in_betrieb
+P01452,dach_privat,Weingarten,47.83384,9.68331,16.08,100,31,W10,1,WS04,2023-05-14,8.2,in_betrieb
+P01453,dach_privat,Friedrichshafen,47.65872,9.4734,14.08,75,40,W10,1,WS01,2012-04-30,19.5,in_betrieb
+P01454,dach_privat,Konstanz,47.653,9.13148,16.24,81,21,W11,1,WS03,2013-05-27,15.07,in_betrieb
+P01455,freiflaeche,Friedrichshafen,47.68976,9.395,3594.0,173,23,W23,9,WS01,2023-04-14,5.46,in_betrieb
+P01456,dach_gewerbe,Lindau,47.59394,9.6786,195.9,187,21,W14,4,WS05,2015-07-27,10.58,in_betrieb
+P01457,dach_gewerbe,Bermatingen,47.68993,9.32049,32.8,160,9,W19,1,WS24,2023-07-03,7.05,in_betrieb
+P01458,dach_privat,Meersburg,47.72517,9.28498,7.67,84,44,W05,1,WS22,2013-06-26,15.07,in_betrieb
+P01459,dach_privat,Pfullendorf,47.8962,9.25146,9.64,90,16,W05,1,WS19,2019-02-26,11.47,in_betrieb
+P01460,dach_privat,Kressbronn,47.59871,9.59742,17.45,138,40,W12,1,WS15,2018-08-07,12.2,in_betrieb
+P01461,balkon,Weingarten,47.76297,9.63835,0.6,197,79,W02,1,WS04,2025-08-10,0.0,in_betrieb
+P01462,dach_gewerbe,Langenargen,47.58586,9.61158,112.1,236,23,W17,1,WS14,2021-06-26,7.18,in_betrieb
+P01463,dach_privat,Pfullendorf,47.90325,9.23929,6.17,202,21,W04,1,WS19,2023-08-08,8.2,in_betrieb
+P01464,dach_privat,Überlingen,47.77968,9.14794,6.55,270,19,W04,1,WS06,2008-09-07,46.75,in_betrieb
+P01465,dach_privat,Konstanz,47.65604,9.17365,2.5,162,41,W03,1,WS03,2010-03-08,39.14,in_betrieb
+P01466,balkon,Eriskirch,47.66276,9.5718,0.9,209,32,W01,1,WS25,2026-05-07,0.0,in_betrieb
+P01467,freiflaeche,Ravensburg,47.76385,9.57048,6226.0,159,26,W24,27,WS02,2013-09-10,5.81,in_betrieb
+P01468,balkon,Weingarten,47.81818,9.59001,0.9,179,77,W02,1,WS04,2024-03-17,0.0,in_betrieb
+P01469,dach_gewerbe,Ravensburg,47.76117,9.66319,55.4,205,12,W17,1,WS02,2019-08-22,10.32,in_betrieb
+P01470,dach_privat,Lindau,47.5764,9.66615,6.47,267,30,W08,1,WS05,2025-07-12,7.86,in_betrieb
+P01471,balkon,Oberteuringen,47.75569,9.47473,0.82,200,26,W01,1,WS21,2025-01-10,0.0,in_betrieb
+P01472,balkon,Überlingen,47.74658,9.22397,0.8,195,38,W02,1,WS06,2024-05-19,0.0,in_betrieb
+P01473,dach_privat,Langenargen,47.62162,9.55198,10.1,252,22,W06,1,WS14,2025-02-06,7.86,in_betrieb
+P01474,dach_privat,Lindau,47.57955,9.70855,17.27,276,44,W10,1,WS05,2022-06-01,6.93,in_betrieb
+P01475,dach_privat,Tettnang,47.6628,9.51035,6.71,280,27,W08,1,WS08,2024-04-14,8.03,in_betrieb
+P01476,dach_gewerbe,Kressbronn,47.63252,9.55813,114.8,215,12,W17,1,WS15,2024-07-24,6.67,in_betrieb
+P01477,dach_privat,Ravensburg,47.75446,9.58568,11.22,186,23,W06,1,WS02,2015-08-28,12.56,in_betrieb
+P01478,dach_privat,Wangen im Allgäu,47.66228,9.77276,17.12,185,22,W10,1,WS07,2023-07-10,8.2,in_betrieb
+P01479,balkon,Friedrichshafen,47.66071,9.51027,0.86,126,38,W01,1,WS01,2022-04-01,0.0,in_betrieb
+P01480,dach_privat,Konstanz,47.68808,9.14517,5.67,87,41,W08,1,WS03,2012-07-12,19.5,in_betrieb
+P01481,dach_privat,Isny,47.71317,9.99781,9.58,184,30,W06,1,WS17,2022-01-13,6.93,in_betrieb
+P01482,dach_privat,Tettnang,47.69575,9.59742,9.16,166,23,W05,1,WS08,2022-12-19,6.93,in_betrieb
+P01483,dach_privat,Bad Wurzach,47.92068,9.9664,6.61,97,36,W04,1,WS18,2021-04-22,8.16,in_betrieb
+P01484,dach_privat,Friedrichshafen,47.67231,9.52506,7.61,274,35,W05,1,WS01,2018-05-08,12.2,in_betrieb
+P01485,dach_gewerbe,Tettnang,47.71023,9.55543,148.0,255,23,W20,3,WS08,2015-04-26,11.51,in_betrieb
+P01486,dach_privat,Oberteuringen,47.70844,9.47382,6.4,185,32,W04,1,WS21,2019-03-06,11.47,in_betrieb
+P01487,balkon,Friedrichshafen,47.65815,9.47726,0.86,106,74,W01,1,WS01,2025-02-17,0.0,in_betrieb
+P01488,dach_privat,Konstanz,47.65834,9.11311,18.75,100,35,W12,1,WS03,2022-08-15,6.93,in_betrieb
+P01489,dach_privat,Salem,47.74843,9.37132,16.29,176,20,W10,1,WS16,2023-04-05,8.2,in_betrieb
+P01490,dach_privat,Friedrichshafen,47.66977,9.51326,12.95,85,41,W11,1,WS01,2011-11-21,28.74,in_betrieb
+P01491,balkon,Bad Wurzach,47.92211,9.85064,0.86,195,80,W01,1,WS18,2026-02-01,0.0,in_betrieb
+P01492,dach_privat,Ravensburg,47.81034,9.56107,9.81,271,28,W06,1,WS02,2012-09-17,19.5,in_betrieb
+P01493,balkon,Bad Waldsee,47.94022,9.68868,0.9,207,85,W01,1,WS10,2024-03-17,0.0,in_betrieb
+P01494,dach_privat,Ravensburg,47.80867,9.56043,7.77,161,30,W05,1,WS02,2011-02-01,28.74,in_betrieb
+P01495,dach_privat,Salem,47.79127,9.35868,11.89,192,32,W11,1,WS16,2022-07-14,6.93,in_betrieb
+P01496,dach_privat,Stockach,47.82019,9.00493,17.31,81,16,W12,1,WS20,2024-01-06,8.03,in_betrieb
+P01497,dach_privat,Friedrichshafen,47.66537,9.52341,7.46,182,16,W06,1,WS01,2011-07-16,28.74,in_betrieb
+P01498,dach_gewerbe,Friedrichshafen,47.66841,9.53866,84.5,182,13,W17,1,WS01,2024-09-03,7.2,in_betrieb
+P01499,dach_privat,Wangen im Allgäu,47.69884,9.76464,6.92,189,21,W08,1,WS07,2019-08-09,11.47,in_betrieb
+P01500,dach_gewerbe,Ravensburg,47.80389,9.58896,293.8,105,7,W18,2,WS02,2024-06-28,7.32,in_betrieb
+P00045,dach_gewerbe,Konstanz,47.65576,9.10721,48.6,178,18,W06,1,WS03,2020-04-14,9.17,in_betrieb
