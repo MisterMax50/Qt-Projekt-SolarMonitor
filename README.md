@@ -22,7 +22,7 @@ cmake --build build
 
 Hinweis Windows/MinGW: Dateipfade dürfen höchstens 260 Zeichen lang sein. Das
 CMake-Ziel heißt deshalb intern kurz `SolarMonitor` (die Exe trotzdem
-`SolarMonitor_Gruppe_XY.exe`). Liegt das Projekt sehr tief im Dateisystem und
+`SolarMonitor_Gruppe_03.exe`). Liegt das Projekt sehr tief im Dateisystem und
 erscheint beim Bauen „opening dependency file … No such file or directory“,
 das Projekt in einen kürzeren Pfad verschieben (z. B. `C:\Projekte\`).
 
@@ -227,4 +227,4 @@ i18n/                 SolarMonitor_en.ts (vollständig), SolarMonitor_de.ts (Plu
 - [ ] Gewünschte Touren vorher einmal online planen und `data/routen_cache`
       mit abgeben (Autorouten offline verfügbar)
 - [ ] Dokumentation als PDF (Times New Roman 11 pt, 2.800–3.000 Wörter, nur Fließtext)
-- [ ] Gruppennummer in Projekt- und Ordnernamen eintragen (`SolarMonitor_Gruppe_XY`)
+- [ ] Gruppennummer in Projekt- und Ordnernamen eintragen (`SolarMonitor_Gruppe_03`)
