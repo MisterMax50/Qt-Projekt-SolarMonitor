@@ -484,14 +484,14 @@
 <context>
     <name>DashboardWidget</name>
     <message>
-        <location filename="../src/ui/dashboard_widget.cpp" line="+103"/>
+        <location filename="../src/ui/dashboard_widget.cpp" line="+115"/>
         <source>Rot: kritische Störung, gestört oder Fehlerbild · Orange: offene Störung oder Wartung · Grün: in Ordnung
 Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</source>
         <translation>Red: critical fault, faulty or fault pattern · orange: open fault or maintenance · green: OK
 Click a dot to open the plant, use the mouse wheel to zoom.</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+26"/>
         <source>Anlagenkarte – Handlungsbedarf</source>
         <translation>Plant map – action required</translation>
     </message>
@@ -501,7 +501,7 @@ Click a dot to open the plant, use the mouse wheel to zoom.</translation>
         <translation>Open map</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+3"/>
         <source>Aktive Alarme (kritisch)</source>
         <translation>Active alarms (critical)</translation>
     </message>
@@ -511,7 +511,7 @@ Click a dot to open the plant, use the mouse wheel to zoom.</translation>
         <translation>All faults</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+3"/>
         <source>Größte Ertragsverluste</source>
         <translation>Largest yield losses</translation>
     </message>
@@ -521,7 +521,7 @@ Click a dot to open the plant, use the mouse wheel to zoom.</translation>
         <translation>Go to service planning</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+4"/>
         <source>Erkannte Fehlerbilder</source>
         <translation>Detected fault patterns</translation>
     </message>
@@ -531,7 +531,7 @@ Click a dot to open the plant, use the mouse wheel to zoom.</translation>
         <translation>Go to plant list</translation>
     </message>
     <message>
-        <location line="+86"/>
+        <location line="+95"/>
         <source>%1 gestört · %2 in Wartung</source>
         <translation>%1 faulty · %2 in maintenance</translation>
     </message>
@@ -571,7 +571,7 @@ Click a dot to open the plant, use the mouse wheel to zoom.</translation>
         <translation>%1 in 14 days</translation>
     </message>
     <message>
-        <location line="-195"/>
+        <location line="-225"/>
         <source>Anlagen in Betrieb</source>
         <translation>Plants in operation</translation>
     </message>
@@ -596,7 +596,12 @@ Click a dot to open the plant, use the mouse wheel to zoom.</translation>
         <translation>Data quality</translation>
     </message>
     <message>
-        <location line="+14"/>
+        <location line="+12"/>
+        <source>Klick öffnet die Seite · Ziehen verschiebt die Kachel</source>
+        <translation>Click opens the page · drag to move the tile</translation>
+    </message>
+    <message>
+        <location line="+12"/>
         <location line="+1"/>
         <source>Anlage</source>
         <translation>Plant</translation>
@@ -643,7 +648,12 @@ Click a dot to open the plant, use the mouse wheel to zoom.</translation>
         <translation>Plants</translation>
     </message>
     <message>
-        <location line="+68"/>
+        <location line="+62"/>
+        <source>An der Überschrift ziehen, um die Karte auf einen anderen Platz zu verschieben</source>
+        <translation>Drag the title to move the card to another position</translation>
+    </message>
+    <message>
+        <location line="+26"/>
         <source>Doppelklick öffnet die Anlage</source>
         <translation>Double-click opens the plant</translation>
     </message>
@@ -1848,12 +1858,7 @@ Administrator: additionally edit and export master data</translation>
         <translation>SolarMonitor – PV fleet monitoring</translation>
     </message>
     <message>
-        <location line="+136"/>
-        <source>Zustand der Flotte auf einen Blick</source>
-        <translation>Fleet status at a glance</translation>
-    </message>
-    <message>
-        <location line="+9"/>
+        <location line="+148"/>
         <location line="+188"/>
         <source>Anlagen</source>
         <translation>Plants</translation>
@@ -1964,7 +1969,7 @@ Administrator: additionally edit and export master data</translation>
         <translation>No critical faults open</translation>
     </message>
     <message>
-        <location line="+53"/>
+        <location line="+54"/>
         <source>Alle Status</source>
         <translation>All statuses</translation>
     </message>
@@ -2010,7 +2015,7 @@ Administrator: additionally edit and export master data</translation>
         <translation>Reset filters</translation>
     </message>
     <message>
-        <location line="-486"/>
+        <location line="-487"/>
         <location line="+196"/>
         <source>Übersicht</source>
         <translation>Overview</translation>
@@ -2021,7 +2026,7 @@ Administrator: additionally edit and export master data</translation>
         <translation>%1 plants with a detected fault pattern</translation>
     </message>
     <message>
-        <location line="+44"/>
+        <location line="+45"/>
         <source>Filter zurücksetzen (%1)</source>
         <translation>Reset filters (%1)</translation>
     </message>
@@ -2148,7 +2153,7 @@ Administrator: additionally edit and export master data</translation>
         <translation>Redo: %1 (Ctrl+Y)</translation>
     </message>
     <message>
-        <location line="-529"/>
+        <location line="-530"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation>S&amp;witch user …</translation>
     </message>
@@ -2173,7 +2178,7 @@ Administrator: additionally edit and export master data</translation>
         <translation>%1 errors on import</translation>
     </message>
     <message>
-        <location line="+52"/>
+        <location line="+53"/>
         <source>Anlagen durchsuchen (Strg+F)</source>
         <translation>Search plants (Ctrl+F)</translation>
     </message>
@@ -2219,12 +2224,12 @@ Administrator: additionally edit and export master data</translation>
         <translation>Plant:</translation>
     </message>
     <message>
-        <location line="-555"/>
+        <location line="-556"/>
         <source>Exportieren</source>
         <translation>Export</translation>
     </message>
     <message>
-        <location line="+716"/>
+        <location line="+717"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>Administrator role only.</translation>
     </message>
@@ -2299,7 +2304,7 @@ Administrator: additionally edit and export master data</translation>
         <translation>Change history …</translation>
     </message>
     <message>
-        <location line="-1003"/>
+        <location line="-1007"/>
         <source>Daten werden geladen …</source>
         <translation>Loading data …</translation>
     </message>
@@ -2319,7 +2324,22 @@ Administrator: additionally edit and export master data</translation>
         <translation>Data folder – SolarMonitor</translation>
     </message>
     <message>
-        <location line="+309"/>
+        <location line="+109"/>
+        <source>Anordnung zurücksetzen</source>
+        <translation>Reset layout</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Kacheln und Karten wieder auf ihre ursprünglichen Plätze setzen</source>
+        <translation>Put tiles and cards back in their original positions</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Zustand der Flotte auf einen Blick · Kacheln und Karten lassen sich per Ziehen verschieben</source>
+        <translation>Fleet status at a glance · tiles and cards can be moved by dragging</translation>
+    </message>
+    <message>
+        <location line="+200"/>
         <source>Auswertung</source>
         <translation>Analysis</translation>
     </message>
@@ -2344,7 +2364,7 @@ Administrator: additionally edit and export master data</translation>
         <translation>Quit SolarMonitor (Ctrl+Q)</translation>
     </message>
     <message>
-        <location line="+547"/>
+        <location line="+548"/>
         <source>Bitte zuerst eine Anlage in der Liste auswählen.</source>
         <translation>Please select a plant in the list first.</translation>
     </message>
@@ -2524,12 +2544,12 @@ Open it now?</translation>
         <translation>&lt;Initial state after loading&gt;</translation>
     </message>
     <message>
-        <location line="-1304"/>
+        <location line="-1308"/>
         <source>Angemeldet als %1.</source>
         <translation>Signed in as %1.</translation>
     </message>
     <message>
-        <location line="+1323"/>
+        <location line="+1327"/>
         <source>Über SolarMonitor</source>
         <translation>About SolarMonitor</translation>
     </message>

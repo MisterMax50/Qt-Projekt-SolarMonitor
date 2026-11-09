@@ -141,6 +141,12 @@ für Solarparks):
 - **Inhalte als Karten**: weiße Flächen mit runden Ecken auf hellgrauem
   Grund; Filter in einer eigenen Karte über der Tabelle; Detailkarte rechts
   neben der Anlagentabelle (`src/ui/anlage_info.*`).
+- **Übersicht frei anordnen** (`src/ui/anordnungs_raster.*`): Kennzahlenkacheln
+  und Karten lassen sich mit der Maus ziehen (Karten an der Überschrift) und
+  rasten auf festen Plätzen ein – fünf Plätze für die Kacheln, vier für die
+  Karten (oben breit/schmal, unten breit/schmal). Die Karte tauscht dabei
+  den Platz mit der Karte, die dort lag. Die Anordnung wird gespeichert;
+  *Anordnung zurücksetzen* stellt die Vorgabe wieder her.
 - **Kennzahlenkacheln** (`src/ui/kennzahl_kachel.*`) auf Übersicht,
   Statistik und im Detaildialog: farbiger Symbolkreis, großer Wert, Notiz.
   Auf der Übersicht führt ein Klick zur passenden Seite.

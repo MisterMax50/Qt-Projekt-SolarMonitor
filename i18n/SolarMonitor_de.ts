@@ -484,14 +484,14 @@
 <context>
     <name>DashboardWidget</name>
     <message>
-        <location filename="../src/ui/dashboard_widget.cpp" line="+103"/>
+        <location filename="../src/ui/dashboard_widget.cpp" line="+115"/>
         <source>Rot: kritische Störung, gestört oder Fehlerbild · Orange: offene Störung oder Wartung · Grün: in Ordnung
 Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</source>
         <translation>Rot: kritische Störung, gestört oder Fehlerbild · Orange: offene Störung oder Wartung · Grün: in Ordnung
 Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+26"/>
         <source>Anlagenkarte – Handlungsbedarf</source>
         <translation>Anlagenkarte – Handlungsbedarf</translation>
     </message>
@@ -501,7 +501,7 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</translation>
         <translation>Karte öffnen</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+3"/>
         <source>Aktive Alarme (kritisch)</source>
         <translation>Aktive Alarme (kritisch)</translation>
     </message>
@@ -511,7 +511,7 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</translation>
         <translation>Alle Störungen</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+3"/>
         <source>Größte Ertragsverluste</source>
         <translation>Größte Ertragsverluste</translation>
     </message>
@@ -521,7 +521,7 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</translation>
         <translation>Zur Serviceplanung</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+4"/>
         <source>Erkannte Fehlerbilder</source>
         <translation>Erkannte Fehlerbilder</translation>
     </message>
@@ -531,7 +531,7 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</translation>
         <translation>Zur Anlagenliste</translation>
     </message>
     <message>
-        <location line="+86"/>
+        <location line="+95"/>
         <source>%1 gestört · %2 in Wartung</source>
         <translation>%1 gestört · %2 in Wartung</translation>
     </message>
@@ -571,7 +571,7 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</translation>
         <translation>%1 in 14 Tagen</translation>
     </message>
     <message>
-        <location line="-195"/>
+        <location line="-225"/>
         <source>Anlagen in Betrieb</source>
         <translation>Anlagen in Betrieb</translation>
     </message>
@@ -596,7 +596,12 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</translation>
         <translation>Datenqualität</translation>
     </message>
     <message>
-        <location line="+14"/>
+        <location line="+12"/>
+        <source>Klick öffnet die Seite · Ziehen verschiebt die Kachel</source>
+        <translation>Klick öffnet die Seite · Ziehen verschiebt die Kachel</translation>
+    </message>
+    <message>
+        <location line="+12"/>
         <location line="+1"/>
         <source>Anlage</source>
         <translation>Anlage</translation>
@@ -643,7 +648,12 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</translation>
         <translation>Anlagen</translation>
     </message>
     <message>
-        <location line="+68"/>
+        <location line="+62"/>
+        <source>An der Überschrift ziehen, um die Karte auf einen anderen Platz zu verschieben</source>
+        <translation>An der Überschrift ziehen, um die Karte auf einen anderen Platz zu verschieben</translation>
+    </message>
+    <message>
+        <location line="+26"/>
         <source>Doppelklick öffnet die Anlage</source>
         <translation>Doppelklick öffnet die Anlage</translation>
     </message>
@@ -1848,12 +1858,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>SolarMonitor – Monitoring der PV-Flotte</translation>
     </message>
     <message>
-        <location line="+136"/>
-        <source>Zustand der Flotte auf einen Blick</source>
-        <translation>Zustand der Flotte auf einen Blick</translation>
-    </message>
-    <message>
-        <location line="+9"/>
+        <location line="+148"/>
         <location line="+188"/>
         <source>Anlagen</source>
         <translation>Anlagen</translation>
@@ -1964,7 +1969,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Keine kritischen Störungen offen</translation>
     </message>
     <message>
-        <location line="+53"/>
+        <location line="+54"/>
         <source>Alle Status</source>
         <translation>Alle Status</translation>
     </message>
@@ -2010,7 +2015,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Filter zurücksetzen</translation>
     </message>
     <message>
-        <location line="-486"/>
+        <location line="-487"/>
         <location line="+196"/>
         <source>Übersicht</source>
         <translation>Übersicht</translation>
@@ -2021,7 +2026,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>%1 Anlagen mit erkanntem Fehlerbild</translation>
     </message>
     <message>
-        <location line="+44"/>
+        <location line="+45"/>
         <source>Filter zurücksetzen (%1)</source>
         <translation>Filter zurücksetzen (%1)</translation>
     </message>
@@ -2148,7 +2153,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Wiederholen: %1 (Strg+Y)</translation>
     </message>
     <message>
-        <location line="-529"/>
+        <location line="-530"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation>Benutzer &amp;wechseln …</translation>
     </message>
@@ -2173,7 +2178,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>%1 Fehler beim Einlesen</translation>
     </message>
     <message>
-        <location line="+52"/>
+        <location line="+53"/>
         <source>Anlagen durchsuchen (Strg+F)</source>
         <translation>Anlagen durchsuchen (Strg+F)</translation>
     </message>
@@ -2219,12 +2224,12 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Anlage:</translation>
     </message>
     <message>
-        <location line="-555"/>
+        <location line="-556"/>
         <source>Exportieren</source>
         <translation>Exportieren</translation>
     </message>
     <message>
-        <location line="+716"/>
+        <location line="+717"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>Nur für die Rolle Administrator.</translation>
     </message>
@@ -2299,7 +2304,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Änderungsverlauf …</translation>
     </message>
     <message>
-        <location line="-1003"/>
+        <location line="-1007"/>
         <source>Daten werden geladen …</source>
         <translation>Daten werden geladen …</translation>
     </message>
@@ -2319,7 +2324,22 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Datenordner – SolarMonitor</translation>
     </message>
     <message>
-        <location line="+309"/>
+        <location line="+109"/>
+        <source>Anordnung zurücksetzen</source>
+        <translation>Anordnung zurücksetzen</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Kacheln und Karten wieder auf ihre ursprünglichen Plätze setzen</source>
+        <translation>Kacheln und Karten wieder auf ihre ursprünglichen Plätze setzen</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Zustand der Flotte auf einen Blick · Kacheln und Karten lassen sich per Ziehen verschieben</source>
+        <translation>Zustand der Flotte auf einen Blick · Kacheln und Karten lassen sich per Ziehen verschieben</translation>
+    </message>
+    <message>
+        <location line="+200"/>
         <source>Auswertung</source>
         <translation>Auswertung</translation>
     </message>
@@ -2344,7 +2364,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>SolarMonitor beenden (Strg+Q)</translation>
     </message>
     <message>
-        <location line="+547"/>
+        <location line="+548"/>
         <source>Bitte zuerst eine Anlage in der Liste auswählen.</source>
         <translation>Bitte zuerst eine Anlage in der Liste auswählen.</translation>
     </message>
@@ -2524,12 +2544,12 @@ Jetzt öffnen?</translation>
         <translation>&lt;Ausgangszustand nach dem Laden&gt;</translation>
     </message>
     <message>
-        <location line="-1304"/>
+        <location line="-1308"/>
         <source>Angemeldet als %1.</source>
         <translation>Angemeldet als %1.</translation>
     </message>
     <message>
-        <location line="+1323"/>
+        <location line="+1327"/>
         <source>Über SolarMonitor</source>
         <translation>Über SolarMonitor</translation>
     </message>

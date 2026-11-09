@@ -550,8 +550,11 @@ void MainWindow::baueUi()
         case DashboardWidget::Ziel::Datenpruefung: m_tabs->setCurrentIndex(ReiterPruefung); break;
         }
     });
-    m_tabs->addWidget(seite(tr("Übersicht"), tr("Zustand der Flotte auf einen Blick"), uebersicht,
-                            {m_aktAnalyse}, {m_aktPdfFlotte, m_aktExportBericht}));
+    auto* anordnung = new QAction(Stil::icon(Stil::Symbol::Uebersicht, Stil::text()), tr("Anordnung zurücksetzen"), uebersicht);
+    anordnung->setToolTip(tr("Kacheln und Karten wieder auf ihre ursprünglichen Plätze setzen"));
+    connect(anordnung, &QAction::triggered, uebersicht, &DashboardWidget::anordnungZuruecksetzen);
+    m_tabs->addWidget(seite(tr("Übersicht"), tr("Zustand der Flotte auf einen Blick · Kacheln und Karten lassen sich per Ziehen verschieben"),
+                            uebersicht, {anordnung, m_aktAnalyse}, {m_aktPdfFlotte, m_aktExportBericht}));
 
     // Zähler links in der Aktionszeile der Listen
     m_anlagenZaehler = new QLabel;

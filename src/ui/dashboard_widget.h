@@ -10,6 +10,7 @@ class QGroupBox;
 class QLabel;
 class QTreeWidget;
 class KennzahlKachel;
+class AnordnungsRaster;
 
 /**
  * @brief Startseite "Übersicht": der Zustand der Flotte auf einen Blick.
@@ -21,6 +22,9 @@ class KennzahlKachel;
  *   Modus Kompakt), daneben die aktiven kritischen Alarme
  * - unten: größte Ertragsverluste und erkannte Fehlerbilder.
  *   Doppelklick öffnet die Anlage.
+ *
+ * Kacheln und Karten lassen sich per Ziehen auf feste Plätze verschieben
+ * (AnordnungsRaster); die Anordnung wird gespeichert.
  *
  * Es wird nichts neu berechnet: Die Seite fasst Ergebnisse der
  * Flottenanalyse und der Datenbasis zusammen und aktualisiert sich bei
@@ -35,6 +39,9 @@ public:
     /// Seiten, zu denen die Übersicht springen kann.
     enum class Ziel { Anlagen, Stoerungen, Karte, Statistik, Serviceplanung, Datenpruefung };
 
+    /// Kacheln und Karten wieder auf ihre vorgegebenen Plätze setzen.
+    void anordnungZuruecksetzen();
+
 signals:
     void anlageOeffnen(const QString& anlageId);
     void seiteOeffnen(DashboardWidget::Ziel ziel);
@@ -48,6 +55,8 @@ private:
     AppKontext m_kontext;
     bool       m_geplant = false;
 
+    AnordnungsRaster* m_kachelRaster = nullptr;
+    AnordnungsRaster* m_kartenRaster = nullptr;
     KennzahlKachel* m_betrieb = nullptr;
     KennzahlKachel* m_stoerungen = nullptr;
     KennzahlKachel* m_pr = nullptr;

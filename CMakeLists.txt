@@ -57,6 +57,7 @@ set(PROJEKT_HEADER
     src/ui/kennzahl_kachel.h
     src/ui/intro_animation.h
     src/ui/datenordner_seite.h
+    src/ui/anordnungs_raster.h
     src/ui/pdf_bericht.h
     src/ui/pruefprotokoll_widget.h
     src/ui/serviceplanung.h
@@ -97,6 +98,7 @@ set(PROJEKT_QUELLEN
     src/ui/kennzahl_kachel.cpp
     src/ui/intro_animation.cpp
     src/ui/datenordner_seite.cpp
+    src/ui/anordnungs_raster.cpp
     src/ui/pdf_bericht.cpp
     src/ui/pruefprotokoll_widget.cpp
     src/ui/serviceplanung.cpp

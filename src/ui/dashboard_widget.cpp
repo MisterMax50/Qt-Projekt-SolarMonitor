@@ -18,6 +18,7 @@
 #include "eval/flotten_analyse.h"
 #include "model/datenbasis.h"
 #include "ui/karte_view.h"
+#include "ui/anordnungs_raster.h"
 #include "ui/kennzahl_kachel.h"
 #include "util/anzeige.h"
 #include "util/stil.h"
@@ -26,6 +27,7 @@ namespace {
 
 constexpr int kMaxZeilen = 8;
 constexpr int kZeilenhoehe = 26;
+constexpr int kGriffHoehe = 36; ///< Überschrift der Karten, an der gezogen wird
 const QColor kGruen(22, 163, 74);
 const QColor kRot(220, 38, 38);
 const QColor kOrange(217, 119, 6);
@@ -91,11 +93,21 @@ DashboardWidget::DashboardWidget(const AppKontext& kontext, const QList<QAction*
     m_pr = kachel(Stil::Symbol::Statistik, kBlau, tr("Performance Ratio (Median)"), Ziel::Statistik);
     m_verlust = kachel(Stil::Symbol::Euro, kOrange, tr("Geschätzter Ertragsverlust"), Ziel::Serviceplanung);
     m_daten = kachel(Stil::Symbol::Pruefung, kViolett, tr("Datenqualität"), Ziel::Datenpruefung);
-    auto* kacheln = new QHBoxLayout;
-    kacheln->setSpacing(16);
-    for (KennzahlKachel* k : {m_betrieb, m_stoerungen, m_pr, m_verlust, m_daten})
-        kacheln->addWidget(k, 1);
-    v->addLayout(kacheln);
+    // Kacheln und Karten lassen sich per Ziehen auf feste Plätze verschieben
+    m_kachelRaster = new AnordnungsRaster(QStringLiteral("uebersicht/kacheln"));
+    const QList<QPair<QString, KennzahlKachel*>> kachelListe{{QStringLiteral("betrieb"), m_betrieb},
+                                                             {QStringLiteral("stoerungen"), m_stoerungen},
+                                                             {QStringLiteral("pr"), m_pr},
+                                                             {QStringLiteral("verlust"), m_verlust},
+                                                             {QStringLiteral("daten"), m_daten}};
+    for (int i = 0; i < kachelListe.size(); ++i) {
+        m_kachelRaster->neuerPlatz(0, i);
+        m_kachelRaster->raster()->setColumnStretch(i, 1);
+        m_kachelRaster->fuegeHinzu(kachelListe.at(i).first, kachelListe.at(i).second);
+        kachelListe.at(i).second->setToolTip(tr("Klick öffnet die Seite · Ziehen verschiebt die Kachel"));
+    }
+    m_kachelRaster->ladeAnordnung();
+    v->addWidget(m_kachelRaster);
 
     // ---------- Karte und Alarmliste nebeneinander ----------
     auto* karte = new KarteView(m_kontext, nullptr, KarteView::Modus::Kompakt);
@@ -116,17 +128,30 @@ DashboardWidget::DashboardWidget(const AppKontext& kontext, const QList<QAction*
                 emit anlageOeffnen(id);
         });
 
-    auto* mitte = new QHBoxLayout;
-    mitte->setSpacing(16);
-    mitte->addWidget(neueGruppe(tr("Anlagenkarte – Handlungsbedarf"), karte, tr("Karte öffnen"), Ziel::Karte), 3);
-    mitte->addWidget(neueGruppe(tr("Aktive Alarme (kritisch)"), m_dringend, tr("Alle Störungen"), Ziel::Stoerungen), 2);
-    v->addLayout(mitte, 1);
-
-    auto* unten = new QHBoxLayout;
-    unten->setSpacing(16);
-    unten->addWidget(neueGruppe(tr("Größte Ertragsverluste"), m_verluste, tr("Zur Serviceplanung"), Ziel::Serviceplanung), 3);
-    unten->addWidget(neueGruppe(tr("Erkannte Fehlerbilder"), m_fehlerbilder, tr("Zur Anlagenliste"), Ziel::Anlagen), 2);
-    v->addLayout(unten);
+    // Vier Plätze: oben breit/schmal, unten breit/schmal
+    m_kartenRaster = new AnordnungsRaster(QStringLiteral("uebersicht/karten"));
+    m_kartenRaster->neuerPlatz(0, 0);
+    m_kartenRaster->neuerPlatz(0, 1);
+    m_kartenRaster->neuerPlatz(1, 0);
+    m_kartenRaster->neuerPlatz(1, 1);
+    m_kartenRaster->raster()->setColumnStretch(0, 3);
+    m_kartenRaster->raster()->setColumnStretch(1, 2);
+    m_kartenRaster->raster()->setRowStretch(0, 1);
+    m_kartenRaster->fuegeHinzu(QStringLiteral("karte"),
+                               neueGruppe(tr("Anlagenkarte – Handlungsbedarf"), karte, tr("Karte öffnen"), Ziel::Karte),
+                               kGriffHoehe);
+    m_kartenRaster->fuegeHinzu(QStringLiteral("alarme"),
+                               neueGruppe(tr("Aktive Alarme (kritisch)"), m_dringend, tr("Alle Störungen"), Ziel::Stoerungen),
+                               kGriffHoehe);
+    m_kartenRaster->fuegeHinzu(QStringLiteral("verluste"),
+                               neueGruppe(tr("Größte Ertragsverluste"), m_verluste, tr("Zur Serviceplanung"),
+                                          Ziel::Serviceplanung),
+                               kGriffHoehe);
+    m_kartenRaster->fuegeHinzu(QStringLiteral("fehlerbilder"),
+                               neueGruppe(tr("Erkannte Fehlerbilder"), m_fehlerbilder, tr("Zur Anlagenliste"), Ziel::Anlagen),
+                               kGriffHoehe);
+    m_kartenRaster->ladeAnordnung();
+    v->addWidget(m_kartenRaster, 1);
 
     // Bei kleinen Fenstern scrollen statt quetschen
     auto* scroll = new QScrollArea(this);
@@ -146,9 +171,16 @@ DashboardWidget::DashboardWidget(const AppKontext& kontext, const QList<QAction*
     aktualisiere();
 }
 
+void DashboardWidget::anordnungZuruecksetzen()
+{
+    m_kachelRaster->zuruecksetzen();
+    m_kartenRaster->zuruecksetzen();
+}
+
 QGroupBox* DashboardWidget::neueGruppe(const QString& titel, QWidget* inhalt, const QString& linkText, Ziel sprung)
 {
     auto* g = new QGroupBox(titel);
+    g->setToolTip(tr("An der Überschrift ziehen, um die Karte auf einen anderen Platz zu verschieben"));
     auto* v = new QVBoxLayout(g);
     v->setContentsMargins(0, 0, 0, 0);
     v->setSpacing(0);

@@ -142,6 +142,8 @@ QLabel#Gedimmt, QLabel#KpiTitel, QLabel#KpiNotiz { color: %GED%; }
 QLabel#KpiWert { font-size: 13pt; font-weight: 600; }
 QLabel#Leerzustand { color: %GED%; padding: 24px; background: %FLAECHE%; border: 1px solid %LINIE%; border-radius: 8px; }
 QSplitter::handle { background: transparent; }
+QFrame#Platzhalter { background: transparent; border: 2px dashed %LINIESTARK%; border-radius: 8px; }
+QFrame#Ablageziel { background: rgba(245, 158, 11, 0.10); border: 2px solid %AKZ%; border-radius: 8px; }
 QScrollArea { background: transparent; border: none; }
 QScrollArea > QWidget > QWidget { background: transparent; }
 
