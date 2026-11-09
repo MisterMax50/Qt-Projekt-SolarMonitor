@@ -484,7 +484,7 @@
 <context>
     <name>DashboardWidget</name>
     <message>
-        <location filename="../src/ui/dashboard_widget.cpp" line="+74"/>
+        <location filename="../src/ui/dashboard_widget.cpp" line="+95"/>
         <source>Rot: kritische Störung, gestört oder Fehlerbild · Orange: offene Störung oder Wartung · Grün: in Ordnung
 Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</source>
         <translation type="unfinished"></translation>
@@ -500,12 +500,12 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+122"/>
+        <location line="+123"/>
         <source>Keine offenen kritischen Störungen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+21"/>
+        <location line="+20"/>
         <source>Flottenanalyse läuft …</source>
         <translation type="unfinished"></translation>
     </message>
@@ -622,7 +622,7 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+66"/>
+        <location line="+67"/>
         <source>Doppelklick öffnet die Anlage</source>
         <translation type="unfinished"></translation>
     </message>
@@ -637,12 +637,12 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+19"/>
+        <location line="+18"/>
         <source>%1 Fehler, %2 Warnungen beim Einlesen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+37"/>
+        <location line="+38"/>
         <source>%1 (%2)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -662,7 +662,7 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+9"/>
         <source>Keine Fehlerbilder erkannt.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1674,12 +1674,12 @@ PR %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+8"/>
         <source>Melden Sie sich mit Ihrer Rolle und PIN an.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Demo-Zugänge: betrieb / 0000, service / 5678, admin / 1234</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1711,7 +1711,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+55"/>
+        <location line="+65"/>
         <source>PIN falsch (Versuch %1 von %2).</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1724,48 +1724,54 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="+171"/>
+        <location filename="../src/ui/mainwindow.cpp" line="+172"/>
         <source>SolarMonitor – Monitoring der PV-Flotte</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+19"/>
         <location line="+88"/>
+        <location line="+534"/>
         <source>Anlagen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-85"/>
+        <location line="-619"/>
         <location line="+85"/>
+        <location line="+535"/>
         <source>Störungen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-79"/>
+        <location line="-614"/>
         <location line="+80"/>
+        <location line="+535"/>
         <source>Karte</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-77"/>
+        <location line="-612"/>
         <location line="+77"/>
+        <location line="+521"/>
         <source>Statistik</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-66"/>
+        <location line="-587"/>
         <location line="+67"/>
+        <location line="+522"/>
         <source>Serviceplanung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-61"/>
+        <location line="-583"/>
         <location line="+61"/>
+        <location line="+523"/>
         <source>Datenprüfung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+69"/>
+        <location line="-451"/>
         <source>Alle Status</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1811,13 +1817,14 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-196"/>
+        <location line="-199"/>
         <location line="+89"/>
+        <location line="+534"/>
         <source>Übersicht</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-89"/>
+        <location line="-623"/>
         <source>Der Zustand der Flotte auf einen Blick – was ist zu tun?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1852,7 +1859,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+101"/>
+        <location line="+104"/>
         <source>%1 Anlagen mit erkanntem Fehlerbild</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1974,82 +1981,27 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+19"/>
-        <source>&amp;Datei</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
+        <location line="+43"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+11"/>
         <source>&amp;Beenden</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+4"/>
-        <source>&amp;Bearbeiten</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Änderungs&amp;verlauf …</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>A&amp;nlage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>A&amp;nalyse</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Flottenanalyse &amp;neu starten</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>&amp;Ansicht</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>&amp;Dunkles Design</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>&amp;Vollbild</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>&amp;Sprache / Language</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
+        <location line="+110"/>
         <source>Die Übersetzung konnte nicht geladen werden.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+5"/>
-        <source>&amp;Hilfe</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="-112"/>
         <source>&amp;Über SolarMonitor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+78"/>
+        <location line="+148"/>
         <source>Zur Datenprüfung</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2059,7 +2011,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-534"/>
+        <location line="-572"/>
         <source>%1 offene Störungen</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2120,22 +2072,17 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+218"/>
-        <source>Befehle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+34"/>
+        <location line="+215"/>
         <source>Exportieren</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+12"/>
         <source>Bericht</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+44"/>
+        <location line="+108"/>
         <source>Analyse %p %</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2190,7 +2137,8 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="-237"/>
+        <location line="+242"/>
         <source>Auf der Karte zeigen</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2215,12 +2163,190 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="-242"/>
+        <location line="+11"/>
+        <location line="+244"/>
         <source>Anlage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="-738"/>
+        <source>Ansichten</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+454"/>
+        <source>Änderungsverlauf …</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Störungen der Anlage anzeigen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Flottenanalyse neu starten</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Rückgängig</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+12"/>
+        <source>Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-11"/>
+        <location line="+12"/>
+        <source>Stammdaten
+bearbeiten</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-11"/>
+        <location line="+12"/>
+        <source>Störung
+erfassen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-11"/>
+        <location line="+26"/>
+        <source>Berichte</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-25"/>
+        <location line="+15"/>
+        <source>Anlagen-
+bericht</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-14"/>
+        <location line="+25"/>
+        <source>Flotten-
+bericht</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-19"/>
+        <source>Bearbeiten</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Anzeigen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Auf Karte
+zeigen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Störungen
+anzeigen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Auswertung</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Flotte</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Analyse neu
+starten</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Service-
+planung</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Daten-
+prüfung</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Ansicht</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Seiten</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Bereiche</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Navigationsbereich</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Detailbereich</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Vollbild</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Design</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Dunkles Design</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Dunkles
+Design</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Sprache</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+187"/>
         <source>Die Anlage %1 ist nicht vorhanden.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2413,6 +2539,19 @@ Jetzt öffnen?</source>
     <message>
         <location line="+24"/>
         <source>Flottenanalyse abgeschlossen: %1 Anlagen ausgewertet, %2 mit Fehlerbild, %3 Verlaufsdateien defekt.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Menueband</name>
+    <message>
+        <location filename="../src/ui/menueband.cpp" line="+27"/>
+        <source>Datei</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Doppelklick blendet das Menüband ein oder aus</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

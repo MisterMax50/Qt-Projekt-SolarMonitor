@@ -63,7 +63,7 @@ SHA-256-Hash im Code hinterlegt. *Datei → Benutzer wechseln* meldet neu an.
 | Seite (Navigation links) | Inhalt |
 |---|---|
 | Übersicht (Startseite) | Gruppenfeld „Flottenstatus“ mit Kennzahlen als Links zur passenden Seite (Anlagen in Betrieb, offene/kritische Störungen, Median-PR, Ertragsverlust, Datenprüfung), Karte der Flotte gefärbt nach Handlungsbedarf (rot: kritische Störung, gestört oder Fehlerbild; orange: offene Störung oder Wartung), Listen mit offenen kritischen Störungen, größten Ertragsverlusten und Fehlerbildern (Doppelklick öffnet die Anlage). Aktualisiert sich bei jeder Änderung (`src/ui/dashboard_widget.*`) |
-| Anlagen | Tabelle (QAbstractTableModel + QSortFilterProxyModel) mit Detailbereich rechts, Suche nach ID/Ort/Wetterstation (Suchfeld in der Befehlsleiste), kombinierbare Filter (Status, Typ, Ort, Leistungsbereich, nur mit Fehlerbild, nur mit offenen Störungen), Sortierung u. a. nach Leistung, Inbetriebnahme und PR, Kontextmenü |
+| Anlagen | Tabelle (QAbstractTableModel + QSortFilterProxyModel) mit Detailbereich rechts, Suche nach ID/Ort/Wetterstation (Suchfeld im Menüband), kombinierbare Filter (Status, Typ, Ort, Leistungsbereich, nur mit Fehlerbild, nur mit offenen Störungen), Sortierung u. a. nach Leistung, Inbetriebnahme und PR, Kontextmenü |
 | Störungen | Störungsliste mit Filtern, Kontextmenü (Status ändern, Anlage öffnen) |
 | Karte | OpenStreetMap-Hintergrund, Anlagen und Wetterstationen, Färbung nach Status/PR/Auffälligkeit/Handlungsbedarf, Zoom/Pan, Klick öffnet die Anlage, geplante Tour |
 | Statistik | Leistung je Typ und Ort, Altersverteilung, Störungen je Fehlercode und Schwere, PR je Wetterstation |
@@ -77,19 +77,19 @@ Diagramm und Tabelle, erkannte Fehlerbilder) und Störungen.
 
 **Rückgängig/Wiederholen:** Alle Datenänderungen (Stammdaten bearbeiten,
 Störung erfassen, Störung bearbeiten, Status per Kontextmenü) laufen als
-Befehle über einen `QUndoStack` (`src/ui/aenderungen.*`). *Bearbeiten →
+Befehle über einen `QUndoStack` (`src/ui/aenderungen.*`). *Start →
 Rückgängig* (Strg+Z) bzw. *Wiederholen* (Strg+Y) nennt die betroffene
-Änderung; *Bearbeiten → Änderungsverlauf* zeigt alle Änderungen der Sitzung
+Änderung; *Start → Änderungsverlauf* zeigt alle Änderungen der Sitzung
 (`QUndoView`) und springt per Klick zu jedem Stand. Nach jedem Schritt werden
 die `*_out.csv` neu geschrieben und die Kennzahlen der Anlage neu berechnet.
 Beim Benutzerwechsel wird der Verlauf geleert, damit eine Rolle nicht die
 Änderungen einer anderen zurücknimmt.
 
 **PDF-Berichte** (`src/ui/pdf_bericht.*`, alle Rollen):
-- *Anlagenbericht* (Detaildialog, Kontextmenü oder *Anlage → Anlagenbericht
-  als PDF*): Stammdaten, Kennzahlen, Tageserträge und Leistungsverlauf als
+- *Anlagenbericht* (Detaildialog, Kontextmenü oder Menüband *Start/Anlage →
+  Anlagenbericht*): Stammdaten, Kennzahlen, Tageserträge und Leistungsverlauf als
   Diagramm, erkannte Fehlerbilder, Störungen, Hinweise der Datenprüfung.
-- *Flottenbericht* (*Datei* oder Seite *Statistik*): Übersicht, Status,
+- *Flottenbericht* (Menüband *Start* oder *Auswertung → Flottenbericht*): Übersicht, Status,
   Vergleich der Wetterstationen, 15 größte Ertragsverluste, Häufigkeit der
   Fehlerbilder, offene kritische Störungen, Datenqualität.
 
@@ -100,29 +100,34 @@ selbst auf A4-Seiten um, Tabellenköpfe werden auf Folgeseiten wiederholt,
 gezeichnet. Die Diagramme sind dieselben Widgets wie in der Oberfläche, in
 ein Bild gerendert, immer hell (auch im dunklen Design).
 
-Das Programm startet im **Vollbild**; *Ansicht → Vollbild* bzw. F11 schaltet
+Das Programm startet im **Vollbild**; *Ansicht → Bereiche → Vollbild* bzw. F11 schaltet
 auf ein maximiertes Fenster um. Die Wahl wird gespeichert.
 
-Sprache: *Ansicht → Sprache / Language* (Deutsch/Englisch, zur Laufzeit).
-Design: hell oder dunkel (*Ansicht → Dunkles Design*).
+Sprache: *Ansicht → Sprache* im Menüband (Deutsch/Englisch, zur Laufzeit).
+Design: hell oder dunkel (*Ansicht → Dunkles Design* im Menüband).
 Sprache, Design, Vollbild und Fenstergröße werden gespeichert (QSettings).
 
-**Gestaltung:** Die Oberfläche orientiert sich an üblichen Windows-
-Desktopprogrammen wie Explorer und Outlook statt an Web-Dashboards:
-Menüleiste und Befehlsleiste oben (häufige Befehle mit Symbol und Text,
-Exporte und Berichte als Klappmenüs, Suchfeld rechts), Navigationsbereich
-links (Zähler in Klammern, z. B. „Störungen (47)“), Inhalt rechts, neben
-der Anlagentabelle ein verstellbarer Detailbereich wie der Lesebereich in Outlook
-(`src/ui/anlage_info.*`), Statusleiste mit Anzahl der Einträge, Datenordner
-und angemeldeter Rolle. Kennzahlen stehen als Beschriftung/Wert-Paare in
-Gruppenfeldern, Status in Tabellen als farbiger Punkt vor dem Text.
-
-Unter Windows 11 nutzt das Programm den nativen Qt-Stil „windows11“
-(gleiche Steuerelemente und Systemschrift wie andere Programme), sonst
-„Fusion“ mit einer an Windows angelehnten Palette (ein Akzent, Windows-Blau).
-Das Stylesheet in `src/util/stil.cpp` enthält nur wenige gezielte Regeln
-(Navigationsbereich, Befehlsleiste); alles andere zeichnet der Plattformstil.
-Die Linien-Icons werden im Code gezeichnet, ohne zusätzliche Bilddateien.
+**Gestaltung nach dem Vorbild von Microsoft Office:**
+- **Menüband** (`src/ui/menueband.*`) statt Menü- und Symbolleiste: farbiger
+  Knopf „Datei“ mit Menü (Benutzer wechseln, Exporte, Info, Beenden), Reiter
+  *Start*, *Anlage*, *Auswertung* und *Ansicht* mit Gruppen aus großen
+  Knöpfen (Symbol über Text) und Stapeln kleiner Knöpfe; Suchfeld rechts.
+  Doppelklick auf einen Reiter klappt das Band ein.
+- **Navigationsbereich** links wie in Outlook (Zähler in Klammern, z. B.
+  „Störungen (47)“), **Detailbereich** rechts neben der Anlagentabelle wie
+  der Lesebereich (`src/ui/anlage_info.*`). Beide lassen sich unter
+  *Ansicht → Bereiche* ausblenden.
+- **Statusleiste in der Programmfarbe** wie bei Word oder Excel, mit Anzahl
+  der Einträge, Meldungen der Datenprüfung und angemeldeter Rolle.
+- **Steuerelemente**: flache Knöpfe mit dünnem Rahmen, Standardknopf in der
+  Programmfarbe; Eingabefelder mit Akzentlinie bei Fokus; Reiter mit
+  Unterstrich; Gruppen als Abschnitte (Überschrift mit Linie) statt Rahmen;
+  Tabellen mit schlichten Spaltenköpfen und getönter Auswahl; Anmeldefenster
+  mit Kopfband in der Programmfarbe.
+- Programmfarbe ist Grün (Energie) – so wie jedes Office-Programm seine
+  eigene Farbe hat. Alles steht in einem Stylesheet in `src/util/stil.cpp`
+  (hell und dunkel), Grundlage ist der Qt-Stil „Fusion“. Die Linien-Icons
+  werden im Code gezeichnet, ohne zusätzliche Bilddateien.
 
 ## Datenbasis und Indexdateien
 

@@ -55,8 +55,10 @@ public:
 void passeSpaltenAn(QTreeWidget* t)
 {
     for (int c = 0; c < t->columnCount(); ++c)
-        if (t->header()->sectionResizeMode(c) != QHeaderView::Stretch)
+        if (t->header()->sectionResizeMode(c) != QHeaderView::Stretch) {
             t->resizeColumnToContents(c);
+            t->setColumnWidth(c, qMax(t->columnWidth(c), t->header()->sectionSizeHint(c)) + 8);
+        }
 }
 
 } // namespace

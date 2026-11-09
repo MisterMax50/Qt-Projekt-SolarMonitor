@@ -55,6 +55,7 @@
 #include "ui/edit_dialog.h"
 #include "ui/karte_view.h"
 #include "ui/login_dialog.h"
+#include "ui/menueband.h"
 #include "ui/pdf_bericht.h"
 #include "ui/pruefprotokoll_widget.h"
 #include "ui/serviceplanung.h"
@@ -269,7 +270,7 @@ QWidget* MainWindow::baueNavigation()
 
     m_navigation = new QListWidget(bereich);
     m_navigation->setObjectName(QStringLiteral("Navigation"));
-    m_navigation->setIconSize(QSize(16, 16));
+    m_navigation->setIconSize(QSize(18, 18));
     m_navigation->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_navigation->setFrameShape(QFrame::NoFrame);
     const QColor iconFarbe = Stil::text();
@@ -288,9 +289,12 @@ QWidget* MainWindow::baueNavigation()
             m_tabs->setCurrentIndex(zeile);
     });
 
+    auto* titel = new QLabel(tr("Ansichten"), bereich);
+    titel->setObjectName(QStringLiteral("Bereichstitel"));
     auto* v = new QVBoxLayout(bereich);
-    v->setContentsMargins(0, 6, 0, 6);
+    v->setContentsMargins(0, 0, 0, 6);
     v->setSpacing(0);
+    v->addWidget(titel);
     v->addWidget(m_navigation, 1);
     return bereich;
 }
@@ -689,82 +693,19 @@ void MainWindow::erzeugeAktionen()
 
 void MainWindow::baueMenues()
 {
-    setMenuBar(new QMenuBar(this)); // ersetzt (und löscht) die alte Menüleiste
+    // Menüband wie in Office statt Menü- und Symbolleiste
+    if (QWidget* alt = menuWidget())
+        alt->deleteLater();
     for (QToolBar* tb : findChildren<QToolBar*>()) {
         removeToolBar(tb);
         tb->deleteLater();
     }
     m_anlagenTabelle->addAction(m_aktDetails);
-    const QColor f = Stil::text();
     baueBefehlsleiste();
 
-    // Datei
-    QMenu* datei = menuBar()->addMenu(tr("&Datei"));
-    datei->addAction(m_aktExportAnlagen);
-    datei->addAction(m_aktExportStoerungen);
-    datei->addAction(m_aktExportBericht);
-    datei->addSeparator();
-    datei->addAction(m_aktPdfAnlage);
-    datei->addAction(m_aktPdfFlotte);
-    datei->addSeparator();
-    datei->addAction(Stil::icon(Stil::Symbol::Benutzer, f), tr("Benutzer &wechseln …"), this,
-                     &MainWindow::benutzerWechseln);
-    datei->addSeparator();
-    QAction* beenden = datei->addAction(tr("&Beenden"), this, &QWidget::close);
-    beenden->setShortcut(QKeySequence::Quit);
-
-    // Bearbeiten
-    QMenu* bearbeiten = menuBar()->addMenu(tr("&Bearbeiten"));
-    bearbeiten->addAction(m_aktRueckgaengig);
-    bearbeiten->addAction(m_aktWiederholen);
-    bearbeiten->addSeparator();
-    bearbeiten->addAction(tr("Änderungs&verlauf …"), this, &MainWindow::zeigeAenderungsverlauf);
-
-    // Anlage
-    QMenu* anlage = menuBar()->addMenu(tr("A&nlage"));
-    anlage->addAction(m_aktDetails);
-    anlage->addAction(m_aktBearbeiten);
-    anlage->addAction(m_aktStoerung);
-    anlage->addSeparator();
-    anlage->addAction(m_aktPdfAnlage);
-
-    // Analyse
-    QMenu* analyse = menuBar()->addMenu(tr("A&nalyse"));
-    analyse->addAction(Stil::icon(Stil::Symbol::Neuladen, f), tr("Flottenanalyse &neu starten"), this,
-                       [this] { m_kontext.analyse->starte(); });
-
-    // Ansicht / Sprache
-    QMenu* ansicht = menuBar()->addMenu(tr("&Ansicht"));
-    QAction* dunkel = ansicht->addAction(Stil::icon(Stil::Symbol::Mond, f), tr("&Dunkles Design"));
-    dunkel->setCheckable(true);
-    dunkel->setChecked(Stil::istDunkel());
-    connect(dunkel, &QAction::toggled, this, &MainWindow::setzeDesign);
-    QAction* vollbild = ansicht->addAction(Stil::icon(Stil::Symbol::Vollbild, f), tr("&Vollbild"));
-    vollbild->setCheckable(true);
-    vollbild->setChecked(isFullScreen() || QSettings().value(QStringLiteral("vollbild"), true).toBool());
-    vollbild->setShortcut(QKeySequence::FullScreen);
-    if (vollbild->shortcut().isEmpty())
-        vollbild->setShortcut(Qt::Key_F11);
-    connect(vollbild, &QAction::toggled, this, &MainWindow::setzeVollbild);
-    QMenu* sprache = ansicht->addMenu(tr("&Sprache / Language"));
-    auto* gruppe = new QActionGroup(sprache);
-    for (const auto& [kuerzel, name] : {std::pair{QStringLiteral("de"), QStringLiteral("Deutsch")},
-                                        std::pair{QStringLiteral("en"), QStringLiteral("English")}}) {
-        QAction* a = sprache->addAction(name);
-        a->setCheckable(true);
-        a->setChecked(Sprache::aktuell() == kuerzel);
-        gruppe->addAction(a);
-        connect(a, &QAction::triggered, this, [this, k = kuerzel] {
-            QSettings().setValue(QStringLiteral("sprache"), k);
-            if (k != Sprache::aktuell() && !Sprache::setze(k))
-                QMessageBox::warning(this, QStringLiteral("SolarMonitor"),
-                                     tr("Die Übersetzung konnte nicht geladen werden."));
-        });
-    }
-
-    // Hilfe
-    QMenu* hilfe = menuBar()->addMenu(tr("&Hilfe"));
-    hilfe->addAction(Stil::icon(Stil::Symbol::Info, f), tr("&Über SolarMonitor"), this, &MainWindow::zeigeUeber);
+    // Tastenkürzel gelten im ganzen Fenster, auch wenn der Knopf gerade
+    // auf einem anderen Reiter des Bands liegt
+    addActions({m_aktRueckgaengig, m_aktWiederholen, m_aktBearbeiten});
 
     auto* sucheKurz = new QShortcut(QKeySequence::Find, m_tabs);
     connect(sucheKurz, &QShortcut::activated, this, [this] {
@@ -776,52 +717,153 @@ void MainWindow::baueMenues()
 
 void MainWindow::baueBefehlsleiste()
 {
-    // Befehlsleiste unter dem Menü, wie in Explorer/Outlook: häufige Befehle
-    // mit Symbol und Text, seltene in Klappmenüs, Suche rechts.
-    auto* leiste = new QToolBar(tr("Befehle"), this);
-    leiste->setObjectName(QStringLiteral("Befehlsleiste"));
-    leiste->setMovable(false);
-    leiste->setFloatable(false);
-    leiste->setIconSize(QSize(16, 16));
-    leiste->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-    leiste->toggleViewAction()->setEnabled(false);
-    addToolBar(Qt::TopToolBarArea, leiste);
-
-    auto nurSymbol = [leiste](QAction* a) {
-        leiste->addAction(a);
-        if (auto* k = qobject_cast<QToolButton*>(leiste->widgetForAction(a)))
-            k->setToolButtonStyle(Qt::ToolButtonIconOnly);
-    };
-    nurSymbol(m_aktRueckgaengig);
-    nurSymbol(m_aktWiederholen);
-    leiste->addSeparator();
-    leiste->addAction(m_aktDetails);
-    leiste->addAction(m_aktBearbeiten);
-    leiste->addAction(m_aktStoerung);
-    leiste->addSeparator();
-
+    auto* band = new Menueband;
     const QColor f = Stil::text();
-    auto klappKnopf = [&](Stil::Symbol symbol, const QString& text, const QList<QAction*>& aktionen) {
-        auto* menue = new QMenu(leiste);
-        menue->addActions(aktionen);
-        auto* knopf = new QToolButton(leiste);
-        knopf->setIcon(Stil::icon(symbol, f));
-        knopf->setText(text);
-        knopf->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-        knopf->setPopupMode(QToolButton::InstantPopup);
-        knopf->setMenu(menue);
-        leiste->addWidget(knopf);
+    auto aktion = [band](const QIcon& icon, const QString& text, auto&& slot) {
+        auto* a = new QAction(icon, text, band);
+        QObject::connect(a, &QAction::triggered, band, slot);
+        return a;
     };
-    klappKnopf(Stil::Symbol::Export, tr("Exportieren"), {m_aktExportAnlagen, m_aktExportStoerungen, m_aktExportBericht});
-    klappKnopf(Stil::Symbol::Pdf, tr("Bericht"), {m_aktPdfAnlage, m_aktPdfFlotte});
 
-    auto* platz = new QWidget(leiste);
-    platz->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-    leiste->addWidget(platz);
+    // ---------- Datei (Menü hinter dem farbigen Knopf) ----------
+    QMenu* datei = band->dateiMenue();
+    datei->addAction(Stil::icon(Stil::Symbol::Benutzer, f), tr("Benutzer &wechseln …"), this, &MainWindow::benutzerWechseln);
+    datei->addSeparator();
+    datei->addAction(m_aktExportAnlagen);
+    datei->addAction(m_aktExportStoerungen);
+    datei->addAction(m_aktExportBericht);
+    datei->addSeparator();
+    datei->addAction(m_aktPdfAnlage);
+    datei->addAction(m_aktPdfFlotte);
+    datei->addSeparator();
+    datei->addAction(Stil::icon(Stil::Symbol::Info, f), tr("&Über SolarMonitor"), this, &MainWindow::zeigeUeber);
+    datei->addSeparator();
+    QAction* beenden = datei->addAction(tr("&Beenden"), this, &QWidget::close);
+    beenden->setShortcut(QKeySequence::Quit);
+    addAction(beenden);
+
+    // Zusätzliche Befehle für das Band
+    QAction* verlauf = aktion(Stil::icon(Stil::Symbol::Liste, f), tr("Änderungsverlauf …"),
+                              [this] { zeigeAenderungsverlauf(); });
+    QAction* aufKarte = aktion(Stil::icon(Stil::Symbol::Karte, f), tr("Auf der Karte zeigen"), [this] {
+        if (markierteAnlage().isEmpty())
+            return;
+        m_karte->markiere(markierteAnlage());
+        m_tabs->setCurrentIndex(ReiterKarte);
+    });
+    QAction* stoerungenDerAnlage = aktion(Stil::icon(Stil::Symbol::Warnung, f), tr("Störungen der Anlage anzeigen"), [this] {
+        if (markierteAnlage().isEmpty())
+            return;
+        m_stoerAnlage->setText(markierteAnlage());
+        m_stoerStatus->setCurrentIndex(0);
+        m_tabs->setCurrentIndex(ReiterStoerungen);
+    });
+    QAction* analyse = aktion(Stil::icon(Stil::Symbol::Neuladen, f), tr("Flottenanalyse neu starten"),
+                              [this] { m_kontext.analyse->starte(); });
+    auto seitenAktion = [&](Stil::Symbol symbol, const QString& text, int seite) {
+        QAction* a = aktion(Stil::icon(symbol, f), text, [this, seite] { m_tabs->setCurrentIndex(seite); });
+        a->setCheckable(true);
+        a->setChecked(m_tabs->currentIndex() == seite);
+        connect(m_tabs, &QStackedWidget::currentChanged, a, [a, seite](int i) { a->setChecked(i == seite); });
+        return a;
+    };
+
+    // ---------- Start ----------
+    band->neuerReiter(tr("Start"));
+    band->neueGruppe(tr("Rückgängig"));
+    band->klein({m_aktRueckgaengig, m_aktWiederholen, verlauf});
+    band->neueGruppe(tr("Anlage"));
+    band->gross(m_aktDetails, tr("Details"));
+    band->gross(m_aktBearbeiten, tr("Stammdaten\nbearbeiten"));
+    band->gross(m_aktStoerung, tr("Störung\nerfassen"));
+    band->neueGruppe(tr("Berichte"));
+    band->gross(m_aktPdfAnlage, tr("Anlagen-\nbericht"));
+    band->gross(m_aktPdfFlotte, tr("Flotten-\nbericht"));
+    band->neueGruppe(tr("Exportieren"));
+    band->klein({m_aktExportAnlagen, m_aktExportStoerungen, m_aktExportBericht});
+
+    // ---------- Anlage ----------
+    band->neuerReiter(tr("Anlage"));
+    band->neueGruppe(tr("Bearbeiten"));
+    band->gross(m_aktDetails, tr("Details"));
+    band->gross(m_aktBearbeiten, tr("Stammdaten\nbearbeiten"));
+    band->gross(m_aktStoerung, tr("Störung\nerfassen"));
+    band->neueGruppe(tr("Anzeigen"));
+    band->gross(aufKarte, tr("Auf Karte\nzeigen"));
+    band->gross(stoerungenDerAnlage, tr("Störungen\nanzeigen"));
+    band->neueGruppe(tr("Bericht"));
+    band->gross(m_aktPdfAnlage, tr("Anlagen-\nbericht"));
+
+    // ---------- Auswertung ----------
+    band->neuerReiter(tr("Auswertung"));
+    band->neueGruppe(tr("Flotte"));
+    band->gross(analyse, tr("Analyse neu\nstarten"));
+    band->gross(seitenAktion(Stil::Symbol::Statistik, tr("Statistik"), ReiterStatistik), tr("Statistik"));
+    band->neueGruppe(tr("Service"));
+    band->gross(seitenAktion(Stil::Symbol::Werkzeug, tr("Serviceplanung"), ReiterService), tr("Service-\nplanung"));
+    band->gross(seitenAktion(Stil::Symbol::Pruefung, tr("Datenprüfung"), ReiterPruefung), tr("Daten-\nprüfung"));
+    band->neueGruppe(tr("Berichte"));
+    band->gross(m_aktPdfFlotte, tr("Flotten-\nbericht"));
+    band->klein({m_aktExportAnlagen, m_aktExportStoerungen, m_aktExportBericht});
+
+    // ---------- Ansicht ----------
+    band->neuerReiter(tr("Ansicht"));
+    band->neueGruppe(tr("Seiten"));
+    band->gross(seitenAktion(Stil::Symbol::Uebersicht, tr("Übersicht"), ReiterUebersicht), tr("Übersicht"));
+    band->gross(seitenAktion(Stil::Symbol::Liste, tr("Anlagen"), ReiterAnlagen), tr("Anlagen"));
+    band->gross(seitenAktion(Stil::Symbol::Warnung, tr("Störungen"), ReiterStoerungen), tr("Störungen"));
+    band->gross(seitenAktion(Stil::Symbol::Karte, tr("Karte"), ReiterKarte), tr("Karte"));
+
+    band->neueGruppe(tr("Bereiche"));
+    QAction* navi = aktion(Stil::icon(Stil::Symbol::Liste, f), tr("Navigationsbereich"), [this](bool an) {
+        if (m_navigation)
+            m_navigation->parentWidget()->setVisible(an);
+    });
+    navi->setCheckable(true);
+    navi->setChecked(true);
+    QAction* detail = aktion(Stil::icon(Stil::Symbol::Details, f), tr("Detailbereich"), [this](bool an) {
+        if (m_anlageInfo)
+            m_anlageInfo->setVisible(an);
+    });
+    detail->setCheckable(true);
+    detail->setChecked(true);
+    QAction* vollbild = aktion(Stil::icon(Stil::Symbol::Vollbild, f), tr("Vollbild"), [this](bool an) { setzeVollbild(an); });
+    vollbild->setCheckable(true);
+    vollbild->setChecked(isFullScreen() || QSettings().value(QStringLiteral("vollbild"), true).toBool());
+    vollbild->setShortcut(Qt::Key_F11);
+    addAction(vollbild);
+    band->klein({navi, detail, vollbild});
+
+    band->neueGruppe(tr("Design"));
+    QAction* dunkel = aktion(Stil::icon(Stil::Symbol::Mond, f), tr("Dunkles Design"), [this](bool an) { setzeDesign(an); });
+    dunkel->setCheckable(true);
+    dunkel->setChecked(Stil::istDunkel());
+    band->gross(dunkel, tr("Dunkles\nDesign"));
+
+    band->neueGruppe(tr("Sprache"));
+    auto* sprachen = new QActionGroup(band);
+    QList<QAction*> sprachAktionen;
+    for (const auto& [kuerzel, name] : {std::pair{QStringLiteral("de"), QStringLiteral("Deutsch")},
+                                        std::pair{QStringLiteral("en"), QStringLiteral("English")}}) {
+        QAction* a = aktion(QIcon(), name, [this, k = kuerzel] {
+            QSettings().setValue(QStringLiteral("sprache"), k);
+            if (k != Sprache::aktuell() && !Sprache::setze(k))
+                QMessageBox::warning(this, QStringLiteral("SolarMonitor"), tr("Die Übersetzung konnte nicht geladen werden."));
+        });
+        a->setCheckable(true);
+        a->setChecked(Sprache::aktuell() == kuerzel);
+        sprachen->addAction(a);
+        sprachAktionen.append(a);
+    }
+    band->klein(sprachAktionen);
+
+    // Suchfeld rechts neben den Reitern (wie "Suchen" in Office)
     if (m_suche) {
-        leiste->addWidget(m_suche);
+        m_suche->setObjectName(QStringLiteral("Suchfeld"));
+        band->setzeRechts(m_suche);
         connect(m_suche, &QLineEdit::textEdited, this, [this] { m_tabs->setCurrentIndex(ReiterAnlagen); });
     }
+    setMenuWidget(band);
 }
 
 void MainWindow::baueStatusleiste()
@@ -846,7 +888,7 @@ void MainWindow::baueStatusleiste()
     connect(m_meldungenKnopf, &QPushButton::clicked, this, [this] { m_tabs->setCurrentIndex(ReiterPruefung); });
     auto meldungenText = [this] {
         const int fehler = m_kontext.daten->anzahlMeldungen(Pruefmeldung::Stufe::Fehler);
-        m_meldungenKnopf->setIcon(fehler > 0 ? Stil::icon(Stil::Symbol::Warnung, QColor(196, 43, 28)) : QIcon());
+        m_meldungenKnopf->setIcon(fehler > 0 ? Stil::icon(Stil::Symbol::Warnung, Qt::white) : QIcon());
         m_meldungenKnopf->setText(tr("%1 Fehler, %2 Warnungen beim Einlesen")
                                       .arg(fehler)
                                       .arg(m_kontext.daten->anzahlMeldungen(Pruefmeldung::Stufe::Warnung)));

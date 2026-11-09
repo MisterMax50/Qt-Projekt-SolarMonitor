@@ -10,8 +10,10 @@ class QPainter;
 /**
  * @brief Einheitliches Erscheinungsbild der Anwendung.
  *
- * - Qt-Stil "Fusion" (sieht auf allen Systemen gleich aus) mit eigener
- *   Farbpalette und Stylesheet für ein helles und ein dunkles Design.
+ * - Gestaltung nach dem Vorbild von Microsoft Office (Menüband, flache
+ *   Knöpfe, Felder mit Akzentlinie bei Fokus, Abschnitte statt Rahmen,
+ *   Statusleiste in der Programmfarbe). Grundlage ist der Qt-Stil "Fusion",
+ *   das Stylesheet legt das Aussehen fest – hell und dunkel.
  *   Selbst gezeichnete Widgets (Diagramme) lesen ihre Farben aus der
  *   Palette und passen sich dadurch automatisch an.
  * - Eigene, im Code gezeichnete Linien-Icons (keine Bilddateien, keine
@@ -28,7 +30,7 @@ public:
     static void anwenden(bool dunkel);
     static bool istDunkel();
 
-    static QColor akzent();       ///< Akzentfarbe (Windows-Blau), z. B. für Links
+    static QColor akzent();       ///< Programmfarbe (Grün, wie bei Office jedes Programm seine Farbe hat)
     static QColor text();
     static QColor textGedimmt();
     static QColor flaeche();      ///< Karten-/Tabellenhintergrund
