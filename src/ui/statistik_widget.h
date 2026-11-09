@@ -7,6 +7,7 @@
 class BalkenDiagramm;
 class QGridLayout;
 class QLabel;
+class KennzahlKachel;
 class QTableWidget;
 
 /**
@@ -27,7 +28,6 @@ public slots:
     void aktualisiere();
 
 private:
-    QLabel* kpiKachel(const QString& titel, QWidget* parent, QGridLayout* raster);
     void fuelleTypen();
     void fuelleOrte();
     void fuelleStoerungen();
@@ -35,12 +35,12 @@ private:
     void fuelleStationen();
 
     AppKontext m_kontext;
-    QLabel* m_kpiAnlagen = nullptr;
-    QLabel* m_kpiLeistung = nullptr;
-    QLabel* m_kpiStoerungen = nullptr;
-    QLabel* m_kpiPr = nullptr;
-    QLabel* m_kpiErtrag = nullptr;
-    QLabel* m_kpiAuffaellig = nullptr;
+    KennzahlKachel* m_kpiAnlagen = nullptr;
+    KennzahlKachel* m_kpiLeistung = nullptr;
+    KennzahlKachel* m_kpiStoerungen = nullptr;
+    KennzahlKachel* m_kpiPr = nullptr;
+    KennzahlKachel* m_kpiErtrag = nullptr;
+    KennzahlKachel* m_kpiAuffaellig = nullptr;
     QTableWidget*   m_typen = nullptr;
     QTableWidget*   m_orte = nullptr;
     QTableWidget*   m_stoerungen = nullptr;

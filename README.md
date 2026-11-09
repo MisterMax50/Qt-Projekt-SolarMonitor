@@ -63,7 +63,7 @@ SHA-256-Hash im Code hinterlegt. *Datei → Benutzer wechseln* meldet neu an.
 | Seite (Navigation links) | Inhalt |
 |---|---|
 | Übersicht (Startseite) | Gruppenfeld „Flottenstatus“ mit Kennzahlen als Links zur passenden Seite (Anlagen in Betrieb, offene/kritische Störungen, Median-PR, Ertragsverlust, Datenprüfung), Karte der Flotte gefärbt nach Handlungsbedarf (rot: kritische Störung, gestört oder Fehlerbild; orange: offene Störung oder Wartung), Listen mit offenen kritischen Störungen, größten Ertragsverlusten und Fehlerbildern (Doppelklick öffnet die Anlage). Aktualisiert sich bei jeder Änderung (`src/ui/dashboard_widget.*`) |
-| Anlagen | Tabelle (QAbstractTableModel + QSortFilterProxyModel) mit Detailbereich rechts, Suche nach ID/Ort/Wetterstation (Suchfeld im Menüband), kombinierbare Filter (Status, Typ, Ort, Leistungsbereich, nur mit Fehlerbild, nur mit offenen Störungen), Sortierung u. a. nach Leistung, Inbetriebnahme und PR, Kontextmenü |
+| Anlagen | Tabelle (QAbstractTableModel + QSortFilterProxyModel) mit Detailbereich rechts, Suche nach ID/Ort/Wetterstation (Suchfeld in der Kopfzeile), kombinierbare Filter (Status, Typ, Ort, Leistungsbereich, nur mit Fehlerbild, nur mit offenen Störungen), Sortierung u. a. nach Leistung, Inbetriebnahme und PR, Kontextmenü |
 | Störungen | Störungsliste mit Filtern, Kontextmenü (Status ändern, Anlage öffnen) |
 | Karte | OpenStreetMap-Hintergrund, Anlagen und Wetterstationen, Färbung nach Status/PR/Auffälligkeit/Handlungsbedarf, Zoom/Pan, Klick öffnet die Anlage, geplante Tour |
 | Statistik | Leistung je Typ und Ort, Altersverteilung, Störungen je Fehlercode und Schwere, PR je Wetterstation |
@@ -86,10 +86,10 @@ Beim Benutzerwechsel wird der Verlauf geleert, damit eine Rolle nicht die
 Änderungen einer anderen zurücknimmt.
 
 **PDF-Berichte** (`src/ui/pdf_bericht.*`, alle Rollen):
-- *Anlagenbericht* (Detaildialog, Kontextmenü oder Menüband *Start/Anlage →
-  Anlagenbericht*): Stammdaten, Kennzahlen, Tageserträge und Leistungsverlauf als
+- *Anlagenbericht* (Detaildialog, Kontextmenü oder *Exportieren* auf der
+  Seite *Anlagen*): Stammdaten, Kennzahlen, Tageserträge und Leistungsverlauf als
   Diagramm, erkannte Fehlerbilder, Störungen, Hinweise der Datenprüfung.
-- *Flottenbericht* (Menüband *Start* oder *Auswertung → Flottenbericht*): Übersicht, Status,
+- *Flottenbericht* (*Exportieren* auf den Seiten *Übersicht* und *Statistik*): Übersicht, Status,
   Vergleich der Wetterstationen, 15 größte Ertragsverluste, Häufigkeit der
   Fehlerbilder, offene kritische Störungen, Datenqualität.
 
@@ -100,34 +100,40 @@ selbst auf A4-Seiten um, Tabellenköpfe werden auf Folgeseiten wiederholt,
 gezeichnet. Die Diagramme sind dieselben Widgets wie in der Oberfläche, in
 ein Bild gerendert, immer hell (auch im dunklen Design).
 
-Das Programm startet im **Vollbild**; *Ansicht → Bereiche → Vollbild* bzw. F11 schaltet
-auf ein maximiertes Fenster um. Die Wahl wird gespeichert.
+Das Programm startet im **Vollbild**; im Benutzermenü oben rechts bzw. mit F11
+wird auf ein maximiertes Fenster umgeschaltet. Die Wahl wird gespeichert.
 
-Sprache: *Ansicht → Sprache* im Menüband (Deutsch/Englisch, zur Laufzeit).
-Design: hell oder dunkel (*Ansicht → Dunkles Design* im Menüband).
-Sprache, Design, Vollbild und Fenstergröße werden gespeichert (QSettings).
+Sprache (Deutsch/Englisch, zur Laufzeit) und Design (hell/dunkel) stehen
+ebenfalls im Benutzermenü. Sprache, Design, Vollbild und Fenstergröße werden
+gespeichert (QSettings).
 
-**Gestaltung nach dem Vorbild von Microsoft Office:**
-- **Menüband** (`src/ui/menueband.*`) statt Menü- und Symbolleiste: farbiger
-  Knopf „Datei“ mit Menü (Benutzer wechseln, Exporte, Info, Beenden), Reiter
-  *Start*, *Anlage*, *Auswertung* und *Ansicht* mit Gruppen aus großen
-  Knöpfen (Symbol über Text) und Stapeln kleiner Knöpfe; Suchfeld rechts.
-  Doppelklick auf einen Reiter klappt das Band ein.
-- **Navigationsbereich** links wie in Outlook (Zähler in Klammern, z. B.
-  „Störungen (47)“), **Detailbereich** rechts neben der Anlagentabelle wie
-  der Lesebereich (`src/ui/anlage_info.*`). Beide lassen sich unter
-  *Ansicht → Bereiche* ausblenden.
-- **Statusleiste in der Programmfarbe** wie bei Word oder Excel, mit Anzahl
-  der Einträge, Meldungen der Datenprüfung und angemeldeter Rolle.
-- **Steuerelemente**: flache Knöpfe mit dünnem Rahmen, Standardknopf in der
-  Programmfarbe; Eingabefelder mit Akzentlinie bei Fokus; Reiter mit
-  Unterstrich; Gruppen als Abschnitte (Überschrift mit Linie) statt Rahmen;
-  Tabellen mit schlichten Spaltenköpfen und getönter Auswahl; Anmeldefenster
-  mit Kopfband in der Programmfarbe.
-- Programmfarbe ist Grün (Energie) – so wie jedes Office-Programm seine
-  eigene Farbe hat. Alles steht in einem Stylesheet in `src/util/stil.cpp`
-  (hell und dunkel), Grundlage ist der Qt-Stil „Fusion“. Die Linien-Icons
-  werden im Code gezeichnet, ohne zusätzliche Bilddateien.
+**Gestaltung nach dem Vorbild von Monitoring-Portalen für Solaranlagen**
+(z. B. Hersteller-Portale für Wechselrichter oder Betriebsführungs-Software
+für Solarparks):
+- **Seitenleiste** links in Dunkelblau mit Logo, Abschnitten *Überwachung*
+  und *Auswertung* und farbigen Abzeichen (offene Störungen, Anlagen mit
+  Fehlerbild, Fehler beim Einlesen). Unten der Zustand der Flottenanalyse.
+- **Kopfzeile** mit Seitentitel und Erklärung, Anlagensuche (Strg+F),
+  **Alarmglocke** mit der Zahl offener kritischer Störungen und
+  **Benutzermenü** (Benutzer wechseln, Änderungsverlauf, Dunkles Design,
+  Vollbild, Sprache, Über, Beenden).
+- **Aktionszeile** je Seite: links der Zähler („1499 von 1499 Anlagen“),
+  rechts Rückgängig/Wiederholen, die Befehle der Seite (Hauptbefehl
+  „Störung erfassen“ in Orange) und ein Menüknopf *Exportieren*.
+- **Inhalte als Karten**: weiße Flächen mit runden Ecken auf hellgrauem
+  Grund; Filter in einer eigenen Karte über der Tabelle; Detailkarte rechts
+  neben der Anlagentabelle (`src/ui/anlage_info.*`).
+- **Kennzahlenkacheln** (`src/ui/kennzahl_kachel.*`) auf Übersicht,
+  Statistik und im Detaildialog: farbiger Symbolkreis, großer Wert, Notiz.
+  Auf der Übersicht führt ein Klick zur passenden Seite.
+- Rückmeldungen (gespeichert, exportiert, Analyse fertig) erscheinen als
+  kurze **Einblendung** unten rechts statt in einer Statusleiste.
+- Anmeldefenster mit dunkelblauer Markenfläche links und Formular rechts.
+- Farben: Dunkelblau (Seitenleiste) und Sonnen-Orange (Akzent, Hauptknöpfe);
+  Grün/Orange/Rot nur für den Zustand der Anlagen. Alles steht in einem
+  Stylesheet in `src/util/stil.cpp` (hell und dunkel), Grundlage ist der
+  Qt-Stil „Fusion“. Die Linien-Icons werden im Code gezeichnet, ohne
+  zusätzliche Bilddateien.
 
 ## Datenbasis und Indexdateien
 

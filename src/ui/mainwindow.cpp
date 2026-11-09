@@ -27,6 +27,7 @@
 #include <QPushButton>
 #include <QSaveFile>
 #include <QShortcut>
+#include <QSignalBlocker>
 #include <QSplitter>
 #include <QStatusBar>
 #include <QStyle>
@@ -55,7 +56,6 @@
 #include "ui/edit_dialog.h"
 #include "ui/karte_view.h"
 #include "ui/login_dialog.h"
-#include "ui/menueband.h"
 #include "ui/pdf_bericht.h"
 #include "ui/pruefprotokoll_widget.h"
 #include "ui/serviceplanung.h"
@@ -74,11 +74,161 @@ const QString kQuelleJson = QStringLiteral("Verlauf (JSON)");
 QIcon farbIcon(const QColor& farbe)
 {
     QPixmap pm(12, 12);
-    pm.fill(farbe);
+    pm.fill(Qt::transparent);
+    QPainter p(&pm);
+    p.setRenderHint(QPainter::Antialiasing, true);
+    p.setPen(Qt::NoPen);
+    p.setBrush(farbe);
+    p.drawEllipse(QRectF(1, 1, 10, 10));
+    p.end();
     return QIcon(pm);
 }
-/// Rolle für den Grundnamen eines Navigationseintrags (ohne Zähler)
-constexpr int kNameRolle = Qt::UserRole + 1;
+
+// Rollen der Navigationseinträge
+constexpr int kSeiteRolle = Qt::UserRole + 1;   ///< Seitennummer, -1 = Abschnittsüberschrift
+constexpr int kSymbolRolle = Qt::UserRole + 2;  ///< Stil::Symbol
+constexpr int kZahlRolle = Qt::UserRole + 3;    ///< Zahl im Abzeichen (0 = keins)
+constexpr int kZahlFarbeRolle = Qt::UserRole + 4;
+
+// Farben der Seitenleiste (in hellem und dunklem Design gleich)
+const QColor kNavText(199, 209, 222);
+const QColor kNavGedimmt(125, 141, 163);
+const QColor kNavHover(255, 255, 255, 14);
+const QColor kNavAuswahl(255, 255, 255, 26);
+const QColor kSonne(245, 158, 11);
+const QColor kRot(220, 38, 38);
+
+/**
+ * Zeichnet die Einträge der Seitenleiste: Symbol, Name, rechts ein farbiges
+ * Abzeichen mit der Anzahl (z. B. offene Störungen) und für die gewählte
+ * Seite eine hellere Fläche mit orangem Balken links.
+ */
+class NavDelegate : public QStyledItemDelegate {
+public:
+    using QStyledItemDelegate::QStyledItemDelegate;
+
+    QSize sizeHint(const QStyleOptionViewItem& o, const QModelIndex& i) const override
+    {
+        const bool abschnitt = i.data(kSeiteRolle).toInt() < 0;
+        return {o.rect.width(), abschnitt ? 34 : 40};
+    }
+
+    void paint(QPainter* p, const QStyleOptionViewItem& o, const QModelIndex& i) const override
+    {
+        p->save();
+        p->setRenderHint(QPainter::Antialiasing, true);
+        const QRect r = o.rect;
+        if (i.data(kSeiteRolle).toInt() < 0) {
+            // Abschnittsüberschrift in Kapitälchen-Optik
+            QFont f = o.font;
+            f.setPointSizeF(f.pointSizeF() * 0.8);
+            f.setBold(true);
+            f.setLetterSpacing(QFont::AbsoluteSpacing, 1.0);
+            p->setFont(f);
+            p->setPen(kNavGedimmt);
+            p->drawText(r.adjusted(22, 0, -10, -4), Qt::AlignLeft | Qt::AlignBottom, i.data().toString().toUpper());
+            p->restore();
+            return;
+        }
+
+        const bool gewaehlt = o.state & QStyle::State_Selected;
+        const bool hover = o.state & QStyle::State_MouseOver;
+        const QRectF flaeche = QRectF(r).adjusted(10, 2, -10, -2);
+        if (gewaehlt || hover) {
+            p->setPen(Qt::NoPen);
+            p->setBrush(gewaehlt ? kNavAuswahl : kNavHover);
+            p->drawRoundedRect(flaeche, 6, 6);
+        }
+        if (gewaehlt) {
+            p->setBrush(kSonne);
+            p->drawRoundedRect(QRectF(flaeche.left(), flaeche.top() + 8, 3, flaeche.height() - 16), 1.5, 1.5);
+        }
+
+        const QColor farbe = gewaehlt ? QColor(Qt::white) : kNavText;
+        const auto symbol = static_cast<Stil::Symbol>(i.data(kSymbolRolle).toInt());
+        const int g = 18;
+        const QRect symRect(int(flaeche.left()) + 14, r.center().y() - g / 2 + 1, g, g);
+        Stil::icon(symbol, gewaehlt ? kSonne : kNavText).paint(p, symRect);
+
+        QFont f = o.font;
+        f.setBold(gewaehlt);
+        p->setFont(f);
+        p->setPen(farbe);
+
+        int rechts = int(flaeche.right()) - 10;
+        const int zahl = i.data(kZahlRolle).toInt();
+        if (zahl > 0) {
+            QFont fz = o.font;
+            fz.setPointSizeF(fz.pointSizeF() * 0.8);
+            fz.setBold(true);
+            const QString t = zahl > 999 ? QStringLiteral("999+") : QString::number(zahl);
+            const int b = qMax(20, QFontMetrics(fz).horizontalAdvance(t) + 12);
+            const QRectF abz(rechts - b, r.center().y() - 9, b, 18);
+            p->setPen(Qt::NoPen);
+            p->setBrush(i.data(kZahlFarbeRolle).value<QColor>());
+            p->drawRoundedRect(abz, 9, 9);
+            p->setFont(fz);
+            p->setPen(Qt::white);
+            p->drawText(abz, Qt::AlignCenter, t);
+            rechts = int(abz.left()) - 6;
+            p->setFont(f);
+            p->setPen(farbe);
+        }
+        const QRect textRect(symRect.right() + 12, r.top(), rechts - symRect.right() - 12, r.height());
+        p->drawText(textRect, Qt::AlignLeft | Qt::AlignVCenter,
+                    QFontMetrics(f).elidedText(i.data().toString(), Qt::ElideRight, textRect.width()));
+        p->restore();
+    }
+};
+
+/// Glocken-Symbol mit rotem Zähler oben rechts (Anzahl kritischer Alarme).
+QIcon glocke(int anzahl)
+{
+    QIcon icon;
+    for (int g : {24, 48}) {
+        QPixmap pm(g, g);
+        pm.fill(Qt::transparent);
+        QPainter p(&pm);
+        p.setRenderHint(QPainter::Antialiasing, true);
+        Stil::icon(Stil::Symbol::Glocke, Stil::text()).paint(&p, QRect(0, 0, g, g));
+        if (anzahl > 0) {
+            const double s = g / 24.0;
+            const QRectF kreis(10 * s, 0, 14 * s, 14 * s);
+            p.setPen(QPen(Stil::flaeche(), 1.5 * s));
+            p.setBrush(kRot);
+            p.drawEllipse(kreis);
+            QFont f;
+            f.setPixelSize(int(9 * s));
+            f.setBold(true);
+            p.setFont(f);
+            p.setPen(Qt::white);
+            p.drawText(kreis, Qt::AlignCenter, anzahl > 9 ? QStringLiteral("9+") : QString::number(anzahl));
+        }
+        p.end();
+        icon.addPixmap(pm);
+    }
+    return icon;
+}
+
+/// Runder Avatar mit den Anfangsbuchstaben der Rolle.
+QIcon avatar(const QString& name)
+{
+    QPixmap pm(64, 64);
+    pm.fill(Qt::transparent);
+    QPainter p(&pm);
+    p.setRenderHint(QPainter::Antialiasing, true);
+    p.setPen(Qt::NoPen);
+    p.setBrush(Stil::seitenleiste());
+    p.drawEllipse(QRectF(0, 0, 64, 64));
+    QFont f;
+    f.setPixelSize(26);
+    f.setBold(true);
+    p.setFont(f);
+    p.setPen(kSonne);
+    p.drawText(QRectF(0, 0, 64, 64), Qt::AlignCenter, name.left(1).toUpper());
+    p.end();
+    return QIcon(pm);
+}
 } // namespace
 
 MainWindow::MainWindow(const AppKontext& kontext, QWidget* parent)
@@ -174,7 +324,7 @@ void MainWindow::baueUi()
 
     m_tabs = new QStackedWidget;
 
-    auto* uebersicht = new DashboardWidget(m_kontext, {m_aktPdfFlotte, m_aktExportBericht});
+    auto* uebersicht = new DashboardWidget(m_kontext);
     connect(uebersicht, &DashboardWidget::anlageOeffnen, this, [this](const QString& id) { oeffneAnlage(id); });
     connect(uebersicht, &DashboardWidget::seiteOeffnen, this, [this](DashboardWidget::Ziel ziel) {
         switch (ziel) {
@@ -186,22 +336,30 @@ void MainWindow::baueUi()
         case DashboardWidget::Ziel::Datenpruefung: m_tabs->setCurrentIndex(ReiterPruefung); break;
         }
     });
-    m_tabs->addWidget(seite(tr("Übersicht"), tr("Der Zustand der Flotte auf einen Blick – was ist zu tun?"), uebersicht));
+    m_tabs->addWidget(seite(tr("Übersicht"), tr("Zustand der Flotte auf einen Blick"), uebersicht,
+                            {m_aktAnalyse}, {m_aktPdfFlotte, m_aktExportBericht}));
 
-    m_tabs->addWidget(seite(tr("Anlagen"),
-                            tr("Alle PV-Anlagen der Flotte. Doppelklick öffnet die Details, Rechtsklick zeigt weitere Aktionen."),
-                            baueAnlagenSeite(), {m_aktRueckgaengig, m_aktWiederholen, m_aktDetails, m_aktBearbeiten, m_aktStoerung, m_aktExportAnlagen}));
-    m_tabs->addWidget(seite(tr("Störungen"),
-                            tr("Störungsmeldungen seit 2024. Doppelklick öffnet eine Meldung, Rechtsklick ändert den Status."),
-                            baueStoerungsSeite(), {m_aktRueckgaengig, m_aktWiederholen, m_aktExportStoerungen}));
+    // Zähler links in der Aktionszeile der Listen
+    m_anlagenZaehler = new QLabel;
+    m_anlagenZaehler->setObjectName(QStringLiteral("Zaehler"));
+    m_stoerungsZaehler = new QLabel;
+    m_stoerungsZaehler->setObjectName(QStringLiteral("Zaehler"));
+
+    m_tabs->addWidget(seite(tr("Anlagen"), tr("Alle PV-Anlagen der Flotte · Doppelklick öffnet die Details"),
+                            baueAnlagenSeite(),
+                            {m_aktRueckgaengig, m_aktWiederholen, nullptr, m_aktDetails, m_aktBearbeiten, m_aktStoerung},
+                            {m_aktExportAnlagen, m_aktPdfAnlage, nullptr, m_aktVerlauf}, m_anlagenZaehler));
+    m_tabs->addWidget(seite(tr("Störungen"), tr("Störungsmeldungen seit 2024 · Rechtsklick ändert den Status"),
+                            baueStoerungsSeite(), {m_aktRueckgaengig, m_aktWiederholen}, {m_aktExportStoerungen},
+                            m_stoerungsZaehler));
 
     m_karte = new KarteView(m_kontext);
     connect(m_karte, &KarteView::anlageGewaehlt, this, [this](const QString& id) { oeffneAnlage(id); });
-    m_tabs->addWidget(seite(tr("Karte"), tr("Lage der Anlagen und Wetterstationen. Mausrad zoomt, Ziehen verschiebt, Klick öffnet eine Anlage."),
+    m_tabs->addWidget(seite(tr("Karte"), tr("Lage der Anlagen und Wetterstationen · Mausrad zoomt, Klick öffnet eine Anlage"),
                             m_karte));
 
-    m_tabs->addWidget(seite(tr("Statistik"), tr("Kennzahlen und Auswertungen über die gesamte Flotte."),
-                            new StatistikWidget(m_kontext), {m_aktPdfFlotte, m_aktExportBericht}));
+    m_tabs->addWidget(seite(tr("Statistik"), tr("Kennzahlen und Auswertungen über die gesamte Flotte"),
+                            new StatistikWidget(m_kontext), {m_aktAnalyse}, {m_aktPdfFlotte, m_aktExportBericht}));
 
     auto* service = new Serviceplanung(m_kontext);
     connect(service, &Serviceplanung::anlageOeffnen, this, [this](const QString& id) { oeffneAnlage(id); });
@@ -212,50 +370,107 @@ void MainWindow::baueUi()
         m_tabs->setCurrentIndex(ReiterKarte);
     });
     m_tabs->addWidget(seite(tr("Serviceplanung"),
-                            tr("Welche Anlagen sollten zuerst angefahren werden? Sortiert nach Priorität und geschätztem Ertragsverlust."),
+                            tr("Welche Anlagen zuerst? Sortiert nach Priorität und geschätztem Ertragsverlust"),
                             service));
 
     auto* pruefung = new PruefprotokollWidget(m_kontext);
     connect(pruefung, &PruefprotokollWidget::anlageOeffnen, this, [this](const QString& id) { oeffneAnlage(id); });
     m_tabs->addWidget(seite(tr("Datenprüfung"),
-                            tr("Alle Auffälligkeiten, die beim Einlesen der Dateien gefunden und teilweise automatisch korrigiert wurden."),
-                            pruefung));
+                            tr("Auffälligkeiten beim Einlesen der Dateien und automatische Korrekturen"), pruefung));
 
-    // Navigationsbereich links, Inhalt rechts, Breite per Trennlinie verstellbar
-    auto* zentrum = new QSplitter(Qt::Horizontal);
-    zentrum->setChildrenCollapsible(false);
-    zentrum->setHandleWidth(1);
-    zentrum->addWidget(baueNavigation());
-    zentrum->addWidget(m_tabs);
-    zentrum->setStretchFactor(1, 1);
-    zentrum->setSizes({190, 1200});
+    // Seitenleiste links, rechts Kopfzeile und Inhalt
+    auto* rechts = new QWidget;
+    auto* rv = new QVBoxLayout(rechts);
+    rv->setContentsMargins(0, 0, 0, 0);
+    rv->setSpacing(0);
+    rv->addWidget(baueKopfzeile());
+    rv->addWidget(m_tabs, 1);
+
+    auto* zentrum = new QWidget;
+    auto* h = new QHBoxLayout(zentrum);
+    h->setContentsMargins(0, 0, 0, 0);
+    h->setSpacing(0);
+    h->addWidget(baueNavigation());
+    h->addWidget(rechts, 1);
     setCentralWidget(zentrum); // löscht die alte Oberfläche
 
-    connect(m_tabs, &QStackedWidget::currentChanged, m_navigation, [this](int i) { m_navigation->setCurrentRow(i); });
+    connect(m_tabs, &QStackedWidget::currentChanged, this, &MainWindow::seiteGewechselt);
     m_tabs->setCurrentIndex(aktuelleSeite);
-    m_navigation->setCurrentRow(aktuelleSeite);
+    seiteGewechselt(aktuelleSeite);
 
     baueMenues();
-    baueStatusleiste();
     aktualisiereRechte();
     aktualisiereZaehler();
     aktualisiereNavigation();
     aktualisiereFilterKnopf();
+    analyseFortschritt(m_fortschrittWert, m_fortschrittMax);
 }
 
 QWidget* MainWindow::seite(const QString& titel, const QString& hinweis, QWidget* inhalt,
-                           const QList<QAction*>& aktionen)
+                           const QList<QAction*>& aktionen, const QList<QAction*>& exportieren, QWidget* links)
 {
-    // Kein Seitenkopf: Wo man ist, zeigt die Navigation; Befehle stehen in
-    // der Befehlsleiste und im Menü, wie in Explorer oder Outlook.
-    Q_UNUSED(aktionen)
-    Q_UNUSED(hinweis)
+    // Titel und Hinweis stehen in der Kopfzeile; auf der Seite selbst eine
+    // Aktionszeile (links Zähler, rechts Befehle) und darunter der Inhalt.
     auto* w = new QWidget;
     w->setObjectName(QStringLiteral("Inhalt"));
+    w->setAttribute(Qt::WA_StyledBackground, true);
     w->setWindowTitle(titel);
+    w->setProperty("hinweis", hinweis);
     auto* v = new QVBoxLayout(w);
-    v->setContentsMargins(8, 8, 8, 8);
-    v->setSpacing(6);
+    v->setContentsMargins(24, 18, 24, 20);
+    v->setSpacing(14);
+
+    if (!aktionen.isEmpty() || !exportieren.isEmpty() || links) {
+        auto* zeile = new QHBoxLayout;
+        zeile->setSpacing(8);
+        if (links)
+            zeile->addWidget(links);
+        zeile->addStretch(1);
+        for (QAction* a : aktionen) {
+            if (!a) {
+                zeile->addSpacing(8);
+                continue;
+            }
+            auto* k = new QToolButton(w);
+            k->setDefaultAction(a);
+            const bool primaer = a == m_aktStoerung;
+            const bool nurSymbol = a == m_aktRueckgaengig || a == m_aktWiederholen;
+            k->setObjectName(primaer ? QStringLiteral("SeitenAktionPrimaer") : QStringLiteral("SeitenAktion"));
+            k->setProperty("nurSymbol", nurSymbol);
+            k->setToolButtonStyle(nurSymbol ? Qt::ToolButtonIconOnly : Qt::ToolButtonTextBesideIcon);
+            k->setIconSize(QSize(16, 16));
+            if (primaer)
+                k->setIcon(Stil::icon(Stil::Symbol::Plus, Qt::white));
+            connect(a, &QAction::changed, k, [k, a, primaer] {
+                // Text ohne "&" und "…" wirkt auf Schaltflächen ruhiger
+                k->setText(QString(a->text()).remove(QLatin1Char('&')).remove(QStringLiteral(" …")));
+                if (primaer)
+                    k->setIcon(Stil::icon(Stil::Symbol::Plus, a->isEnabled() ? QColor(Qt::white) : Stil::textGedimmt()));
+            });
+            emit a->changed();
+            zeile->addWidget(k);
+        }
+        if (!exportieren.isEmpty()) {
+            auto* k = new QToolButton(w);
+            k->setObjectName(QStringLiteral("SeitenAktion"));
+            k->setProperty("menue", true);
+            k->setText(tr("Exportieren"));
+            k->setIcon(Stil::icon(Stil::Symbol::Export, Stil::text()));
+            k->setIconSize(QSize(16, 16));
+            k->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+            k->setPopupMode(QToolButton::InstantPopup);
+            auto* menue = new QMenu(k);
+            for (QAction* a : exportieren) {
+                if (a)
+                    menue->addAction(a);
+                else
+                    menue->addSeparator();
+            }
+            k->setMenu(menue);
+            zeile->addWidget(k);
+        }
+        v->addLayout(zeile);
+    }
     if (QLayout* l = inhalt->layout())
         l->setContentsMargins(0, 0, 0, 0);
     v->addWidget(inhalt, 1);
@@ -264,67 +479,253 @@ QWidget* MainWindow::seite(const QString& titel, const QString& hinweis, QWidget
 
 QWidget* MainWindow::baueNavigation()
 {
-    auto* bereich = new QWidget;
-    bereich->setObjectName(QStringLiteral("Navigationsbereich"));
-    bereich->setAttribute(Qt::WA_StyledBackground, true);
+    auto* leiste = new QWidget;
+    leiste->setObjectName(QStringLiteral("Seitenleiste"));
+    leiste->setAttribute(Qt::WA_StyledBackground, true);
+    leiste->setFixedWidth(236);
 
-    m_navigation = new QListWidget(bereich);
+    // Marke oben: Logo, Name und Flotte
+    auto* logo = new QLabel(leiste);
+    logo->setPixmap(Stil::appIcon().pixmap(34, 34));
+    auto* name = new QLabel(Stil::wortmarke(), leiste);
+    name->setObjectName(QStringLiteral("Marke"));
+    auto* flotte = new QLabel(tr("PV-Flotte Bodensee"), leiste);
+    flotte->setObjectName(QStringLiteral("MarkeText"));
+    auto* namen = new QVBoxLayout;
+    namen->setSpacing(0);
+    namen->addWidget(name);
+    namen->addWidget(flotte);
+    auto* kopf = new QHBoxLayout;
+    kopf->setContentsMargins(20, 18, 16, 14);
+    kopf->setSpacing(10);
+    kopf->addWidget(logo);
+    kopf->addLayout(namen, 1);
+
+    m_navigation = new QListWidget(leiste);
     m_navigation->setObjectName(QStringLiteral("Navigation"));
-    m_navigation->setIconSize(QSize(18, 18));
+    m_navigation->setItemDelegate(new NavDelegate(m_navigation));
     m_navigation->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_navigation->setFrameShape(QFrame::NoFrame);
-    const QColor iconFarbe = Stil::text();
-    const QList<QPair<Stil::Symbol, QString>> eintraege{
-        {Stil::Symbol::Uebersicht, tr("Übersicht")},
-        {Stil::Symbol::Liste, tr("Anlagen")},       {Stil::Symbol::Warnung, tr("Störungen")},
-        {Stil::Symbol::Karte, tr("Karte")},         {Stil::Symbol::Statistik, tr("Statistik")},
-        {Stil::Symbol::Werkzeug, tr("Serviceplanung")}, {Stil::Symbol::Pruefung, tr("Datenprüfung")}};
-    for (const auto& e : eintraege) {
-        auto* it = new QListWidgetItem(Stil::icon(e.first, iconFarbe), e.second);
-        it->setData(kNameRolle, e.second);
+    m_navigation->setMouseTracking(true);
+    m_navigation->viewport()->setAttribute(Qt::WA_Hover, true);
+    m_navigation->setCursor(Qt::PointingHandCursor);
+
+    auto abschnitt = [this](const QString& text) {
+        auto* it = new QListWidgetItem(text);
+        it->setData(kSeiteRolle, -1);
+        it->setFlags(Qt::NoItemFlags);
         m_navigation->addItem(it);
-    }
-    connect(m_navigation, &QListWidget::currentRowChanged, this, [this](int zeile) {
-        if (zeile >= 0)
-            m_tabs->setCurrentIndex(zeile);
+    };
+    auto eintrag = [this](Stil::Symbol symbol, const QString& text, int seite) {
+        auto* it = new QListWidgetItem(text);
+        it->setData(kSeiteRolle, seite);
+        it->setData(kSymbolRolle, int(symbol));
+        m_navigation->addItem(it);
+    };
+    abschnitt(tr("Überwachung"));
+    eintrag(Stil::Symbol::Uebersicht, tr("Übersicht"), ReiterUebersicht);
+    eintrag(Stil::Symbol::Liste, tr("Anlagen"), ReiterAnlagen);
+    eintrag(Stil::Symbol::Warnung, tr("Störungen"), ReiterStoerungen);
+    eintrag(Stil::Symbol::Karte, tr("Karte"), ReiterKarte);
+    abschnitt(tr("Auswertung"));
+    eintrag(Stil::Symbol::Statistik, tr("Statistik"), ReiterStatistik);
+    eintrag(Stil::Symbol::Werkzeug, tr("Serviceplanung"), ReiterService);
+    eintrag(Stil::Symbol::Pruefung, tr("Datenprüfung"), ReiterPruefung);
+    connect(m_navigation, &QListWidget::currentItemChanged, this, [this](QListWidgetItem* it) {
+        if (it && it->data(kSeiteRolle).toInt() >= 0)
+            m_tabs->setCurrentIndex(it->data(kSeiteRolle).toInt());
     });
 
-    auto* titel = new QLabel(tr("Ansichten"), bereich);
-    titel->setObjectName(QStringLiteral("Bereichstitel"));
-    auto* v = new QVBoxLayout(bereich);
-    v->setContentsMargins(0, 0, 0, 6);
+    // Unten: Zustand der Flottenanalyse
+    m_analyseText = new QLabel(leiste);
+    m_analyseText->setObjectName(QStringLiteral("AnalyseText"));
+    m_analyseText->setWordWrap(true);
+    m_fortschritt = new QProgressBar(leiste);
+    m_fortschritt->setTextVisible(false);
+    auto* unten = new QVBoxLayout;
+    unten->setContentsMargins(22, 10, 22, 18);
+    unten->setSpacing(6);
+    unten->addWidget(m_fortschritt);
+    unten->addWidget(m_analyseText);
+
+    auto* v = new QVBoxLayout(leiste);
+    v->setContentsMargins(0, 0, 0, 0);
     v->setSpacing(0);
-    v->addWidget(titel);
+    v->addLayout(kopf);
     v->addWidget(m_navigation, 1);
-    return bereich;
+    v->addLayout(unten);
+    return leiste;
+}
+
+QWidget* MainWindow::baueKopfzeile()
+{
+    auto* kopf = new QWidget;
+    kopf->setObjectName(QStringLiteral("Kopfzeile"));
+    kopf->setAttribute(Qt::WA_StyledBackground, true);
+    kopf->setFixedHeight(68);
+
+    m_seitenTitel = new QLabel(kopf);
+    m_seitenTitel->setObjectName(QStringLiteral("SeitenTitel"));
+    m_seitenHinweis = new QLabel(kopf);
+    m_seitenHinweis->setObjectName(QStringLiteral("SeitenHinweis"));
+    auto* titel = new QVBoxLayout;
+    titel->setSpacing(0);
+    titel->addStretch(1);
+    titel->addWidget(m_seitenTitel);
+    titel->addWidget(m_seitenHinweis);
+    titel->addStretch(1);
+
+    // Suche nach Anlagen, wie das Suchfeld oben in Monitoring-Portalen
+    m_suche->setObjectName(QStringLiteral("Suchfeld"));
+    m_suche->addAction(Stil::icon(Stil::Symbol::Suche, Stil::textGedimmt()), QLineEdit::LeadingPosition);
+    connect(m_suche, &QLineEdit::textEdited, this, [this] { m_tabs->setCurrentIndex(ReiterAnlagen); });
+
+    // Glocke: kritische offene Störungen
+    m_glocke = new QToolButton(kopf);
+    m_glocke->setObjectName(QStringLiteral("Glocke"));
+    m_glocke->setIconSize(QSize(22, 22));
+    m_glocke->setCursor(Qt::PointingHandCursor);
+    connect(m_glocke, &QToolButton::clicked, this, [this] {
+        m_stoerStatus->setCurrentIndex(1); // offen + in Bearbeitung
+        m_stoerAnlage->clear();
+        m_tabs->setCurrentIndex(ReiterStoerungen);
+    });
+
+    auto* trenner = new QFrame(kopf);
+    trenner->setObjectName(QStringLiteral("KopfTrenner"));
+    trenner->setFixedWidth(1);
+
+    // Benutzer mit Menü (Konto, Darstellung, Sprache, Programm)
+    const QString rolle = Rollen::anzeigename(m_kontext.rolle);
+    auto* benutzer = new QToolButton(kopf);
+    benutzer->setObjectName(QStringLiteral("BenutzerKnopf"));
+    benutzer->setIcon(avatar(rolle));
+    benutzer->setIconSize(QSize(32, 32));
+    benutzer->setText(QStringLiteral("%1   ").arg(rolle));
+    benutzer->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    benutzer->setPopupMode(QToolButton::InstantPopup);
+    benutzer->setCursor(Qt::PointingHandCursor);
+    benutzer->setToolTip(tr("Angemeldet als %1").arg(rolle));
+    auto* menue = new QMenu(benutzer);
+    menue->addAction(Stil::icon(Stil::Symbol::Benutzer, Stil::text()), tr("Benutzer &wechseln …"), this,
+                     &MainWindow::benutzerWechseln);
+    menue->addAction(m_aktVerlauf);
+    menue->addSeparator();
+    QAction* dunkel = menue->addAction(Stil::icon(Stil::Symbol::Mond, Stil::text()), tr("&Dunkles Design"));
+    dunkel->setCheckable(true);
+    dunkel->setChecked(Stil::istDunkel());
+    connect(dunkel, &QAction::toggled, this, &MainWindow::setzeDesign);
+    QAction* vollbild = menue->addAction(Stil::icon(Stil::Symbol::Vollbild, Stil::text()), tr("&Vollbild"));
+    vollbild->setCheckable(true);
+    vollbild->setChecked(isFullScreen() || QSettings().value(QStringLiteral("vollbild"), true).toBool());
+    vollbild->setShortcut(Qt::Key_F11);
+    connect(vollbild, &QAction::toggled, this, &MainWindow::setzeVollbild);
+    addAction(vollbild);
+    QMenu* sprache = menue->addMenu(tr("&Sprache"));
+    auto* sprachen = new QActionGroup(sprache);
+    for (const auto& [kuerzel, name] : {std::pair{QStringLiteral("de"), QStringLiteral("Deutsch")},
+                                        std::pair{QStringLiteral("en"), QStringLiteral("English")}}) {
+        QAction* a = sprache->addAction(name);
+        a->setCheckable(true);
+        a->setChecked(Sprache::aktuell() == kuerzel);
+        sprachen->addAction(a);
+        connect(a, &QAction::triggered, this, [this, k = kuerzel] {
+            QSettings().setValue(QStringLiteral("sprache"), k);
+            if (k != Sprache::aktuell() && !Sprache::setze(k))
+                QMessageBox::warning(this, QStringLiteral("SolarMonitor"), tr("Die Übersetzung konnte nicht geladen werden."));
+        });
+    }
+    menue->addSeparator();
+    menue->addAction(Stil::icon(Stil::Symbol::Info, Stil::text()), tr("&Über SolarMonitor"), this, &MainWindow::zeigeUeber);
+    QAction* beenden = menue->addAction(Stil::icon(Stil::Symbol::Abmelden, Stil::text()), tr("&Beenden"), this, &QWidget::close);
+    beenden->setShortcut(QKeySequence::Quit);
+    addAction(beenden);
+    benutzer->setMenu(menue);
+
+    auto* h = new QHBoxLayout(kopf);
+    h->setContentsMargins(24, 0, 18, 0);
+    h->setSpacing(10);
+    h->addLayout(titel, 1);
+    h->addWidget(m_suche);
+    h->addWidget(m_glocke);
+    h->addWidget(trenner);
+    h->addWidget(benutzer);
+    return kopf;
+}
+
+void MainWindow::seiteGewechselt(int index)
+{
+    QWidget* w = m_tabs->widget(index);
+    if (!w)
+        return;
+    m_seitenTitel->setText(w->windowTitle());
+    m_seitenHinweis->setText(w->property("hinweis").toString());
+    for (int i = 0; i < m_navigation->count(); ++i)
+        if (m_navigation->item(i)->data(kSeiteRolle).toInt() == index) {
+            QSignalBlocker sperre(m_navigation);
+            m_navigation->setCurrentRow(i);
+            m_navigation->viewport()->update();
+            break;
+        }
 }
 
 void MainWindow::aktualisiereNavigation()
 {
-    if (!m_navigation || m_navigation->count() <= ReiterPruefung)
+    if (!m_navigation)
         return;
-    // Anzahl in Klammern hinter dem Namen, wie "Posteingang (3)" in Outlook
-    auto setze = [this](int zeile, int anzahl, const QString& tipp) {
-        QListWidgetItem* it = m_navigation->item(zeile);
-        const QString name = it->data(kNameRolle).toString();
-        it->setText(anzahl > 0 ? QStringLiteral("%1 (%2)").arg(name).arg(anzahl) : name);
-        QFont f = m_navigation->font();
-        f.setBold(anzahl > 0);
-        it->setFont(f);
-        it->setToolTip(tipp);
+    // Abzeichen mit der Anzahl, wie ungelesene Meldungen in einem Portal
+    auto setze = [this](int seite, int anzahl, const QColor& farbe, const QString& tipp) {
+        for (int i = 0; i < m_navigation->count(); ++i) {
+            QListWidgetItem* it = m_navigation->item(i);
+            if (it->data(kSeiteRolle).toInt() != seite)
+                continue;
+            it->setData(kZahlRolle, anzahl);
+            it->setData(kZahlFarbeRolle, farbe);
+            it->setToolTip(tipp);
+        }
     };
-    int offen = 0;
+    int offen = 0, kritisch = 0;
     for (const Stoerung& st : m_kontext.daten->stoerungen())
-        if (st.istOffen())
+        if (st.istOffen()) {
             ++offen;
-    setze(ReiterStoerungen, offen, tr("%1 offene Störungen").arg(offen));
+            if (st.istKritisch())
+                ++kritisch;
+        }
+    setze(ReiterStoerungen, offen, kritisch > 0 ? kRot : kSonne,
+          tr("%1 offene Störungen, davon %2 kritisch").arg(offen).arg(kritisch));
     int auffaellig = 0;
     for (const Kennzahl& k : m_kontext.analyse->kennzahlen())
         if (k.ok && k.auswertung.istAuffaellig())
             ++auffaellig;
-    setze(ReiterAnlagen, auffaellig, tr("%1 Anlagen mit erkanntem Fehlerbild").arg(auffaellig));
+    setze(ReiterAnlagen, auffaellig, kSonne, tr("%1 Anlagen mit erkanntem Fehlerbild").arg(auffaellig));
     const int fehler = m_kontext.daten->anzahlMeldungen(Pruefmeldung::Stufe::Fehler);
-    setze(ReiterPruefung, fehler, tr("%1 Fehler beim Einlesen").arg(fehler));
+    setze(ReiterPruefung, fehler, kRot, tr("%1 Fehler beim Einlesen").arg(fehler));
+
+    if (m_glocke) {
+        m_glocke->setIcon(glocke(kritisch));
+        m_glocke->setToolTip(kritisch > 0 ? tr("%1 kritische Störungen offen – anzeigen").arg(kritisch)
+                                          : tr("Keine kritischen Störungen offen"));
+    }
+}
+
+void MainWindow::meldung(const QString& text, int dauerMs)
+{
+    // Kurze Einblendung unten rechts statt einer Statuszeile
+    if (!m_toast) {
+        m_toast = new QLabel(this);
+        m_toast->setObjectName(QStringLiteral("Toast"));
+        m_toast->setWordWrap(true);
+        m_toastTimer = new QTimer(this);
+        m_toastTimer->setSingleShot(true);
+        connect(m_toastTimer, &QTimer::timeout, m_toast, &QWidget::hide);
+    }
+    m_toast->setText(text);
+    m_toast->setMaximumWidth(460);
+    m_toast->adjustSize();
+    m_toast->move(width() - m_toast->width() - 28, height() - m_toast->height() - 24);
+    m_toast->raise();
+    m_toast->show();
+    m_toastTimer->start(dauerMs);
 }
 
 void MainWindow::aktualisiereFilterKnopf()
@@ -342,12 +743,12 @@ QWidget* MainWindow::baueAnlagenSeite()
 {
     auto* seite = new QWidget;
 
-    // Suchfeld sitzt rechts in der Befehlsleiste (wie im Explorer)
+    // Suchfeld sitzt rechts in der Kopfzeile (siehe baueKopfzeile)
     m_suche = new QLineEdit(m_filter.suche);
     m_suche->setPlaceholderText(tr("Anlagen durchsuchen (Strg+F)"));
     m_suche->setToolTip(tr("Sucht in Anlagen-ID, Ort und Wetterstation"));
     m_suche->setClearButtonEnabled(true);
-    m_suche->setFixedWidth(260);
+    m_suche->setFixedWidth(300);
 
     auto* status = new QComboBox(seite);
     status->addItem(tr("Alle Status"), QString());
@@ -388,27 +789,40 @@ QWidget* MainWindow::baueAnlagenSeite()
     auto* zuruecksetzen = new QPushButton(tr("Filter zurücksetzen"), seite);
     m_filterReset = zuruecksetzen;
 
-    // Eine Filterzeile mit beschrifteten Feldern
+    // Filter in einer Karte über der Tabelle (zwei Zeilen, damit das
+    // Fenster auch auf Laptop-Bildschirmen Platz hat)
+    auto* filterKarte = new QFrame(seite);
+    filterKarte->setObjectName(QStringLiteral("Filterleiste"));
     auto* zeile1 = new QHBoxLayout;
     zeile1->setSpacing(6);
     zeile1->addWidget(new QLabel(tr("Status:"), seite));
-    zeile1->addWidget(status);
-    zeile1->addSpacing(8);
+    zeile1->addWidget(status, 1);
+    zeile1->addSpacing(10);
     zeile1->addWidget(new QLabel(tr("Typ:"), seite));
-    zeile1->addWidget(typ);
-    zeile1->addSpacing(8);
+    zeile1->addWidget(typ, 1);
+    zeile1->addSpacing(10);
     zeile1->addWidget(new QLabel(tr("Ort:"), seite));
-    zeile1->addWidget(ort);
-    zeile1->addSpacing(8);
+    zeile1->addWidget(ort, 1);
+    zeile1->addSpacing(10);
     zeile1->addWidget(new QLabel(tr("Leistung:"), seite));
     zeile1->addWidget(minKwp);
     zeile1->addWidget(new QLabel(QStringLiteral("–"), seite));
     zeile1->addWidget(maxKwp);
-    zeile1->addSpacing(8);
-    zeile1->addWidget(nurAuffaellig);
-    zeile1->addWidget(nurOffen);
-    zeile1->addStretch();
-    zeile1->addWidget(zuruecksetzen);
+    auto* zeile2 = new QHBoxLayout;
+    zeile2->setSpacing(16);
+    zeile2->addWidget(nurAuffaellig);
+    zeile2->addWidget(nurOffen);
+    zeile2->addStretch();
+    zeile2->addWidget(zuruecksetzen);
+    for (QComboBox* c : {status, typ, ort}) {
+        c->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLengthWithIcon);
+        c->setMinimumContentsLength(9);
+    }
+    auto* filterV = new QVBoxLayout(filterKarte);
+    filterV->setContentsMargins(14, 10, 14, 10);
+    filterV->setSpacing(8);
+    filterV->addLayout(zeile1);
+    filterV->addLayout(zeile2);
 
     // Sortierung merken: setSortingEnabled() sortiert sofort nach der
     // Standardspalte absteigend, danach wird der gewünschte Zustand gesetzt.
@@ -424,7 +838,7 @@ QWidget* MainWindow::baueAnlagenSeite()
     m_anlagenTabelle->setSelectionMode(QAbstractItemView::SingleSelection);
     m_anlagenTabelle->setAlternatingRowColors(false);
     m_anlagenTabelle->verticalHeader()->setVisible(false);
-    m_anlagenTabelle->verticalHeader()->setDefaultSectionSize(24);
+    m_anlagenTabelle->verticalHeader()->setDefaultSectionSize(32);
     m_anlagenTabelle->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     m_anlagenTabelle->setShowGrid(false);
     m_anlagenTabelle->setItemDelegateForColumn(AnlageModel::SpStatus, new BadgeDelegate(m_anlagenTabelle));
@@ -503,7 +917,7 @@ QWidget* MainWindow::baueAnlagenSeite()
     m_anlagenLeer->setAlignment(Qt::AlignCenter);
     m_anlagenLeer->hide();
 
-    // Tabelle links, Detailbereich rechts (verstellbar, wie der Lesebereich in Outlook)
+    // Tabelle links, Detailkarte rechts (Breite verstellbar)
     auto* links = new QWidget(seite);
     auto* lv = new QVBoxLayout(links);
     lv->setContentsMargins(0, 0, 0, 0);
@@ -512,14 +926,15 @@ QWidget* MainWindow::baueAnlagenSeite()
     lv->addWidget(m_anlagenLeer, 1);
     auto* teiler = new QSplitter(Qt::Horizontal, seite);
     teiler->setChildrenCollapsible(false);
+    teiler->setHandleWidth(16);
     teiler->addWidget(links);
     teiler->addWidget(m_anlageInfo);
     teiler->setStretchFactor(0, 1);
     teiler->setSizes({1000, 330});
 
     auto* v = new QVBoxLayout(seite);
-    v->setSpacing(6);
-    v->addLayout(zeile1);
+    v->setSpacing(14);
+    v->addWidget(filterKarte);
     v->addWidget(teiler, 1);
     m_anlageInfo->zeige(markierteAnlage());
     return seite;
@@ -553,9 +968,12 @@ QWidget* MainWindow::baueStoerungsSeite()
     m_stoerAnlage->setMaximumWidth(180);
 
 
-    auto* leiste = new QHBoxLayout;
+    auto* filterKarte = new QFrame(seite);
+    filterKarte->setObjectName(QStringLiteral("Filterleiste"));
+    auto* leiste = new QHBoxLayout(filterKarte);
+    leiste->setContentsMargins(14, 10, 14, 10);
     leiste->setSpacing(6);
-    leiste->addWidget(new QLabel(tr("Suchen:"), seite));
+    suche->addAction(Stil::icon(Stil::Symbol::Suche, Stil::textGedimmt()), QLineEdit::LeadingPosition);
     leiste->addWidget(suche, 2);
     leiste->addSpacing(8);
     leiste->addWidget(new QLabel(tr("Status:"), seite));
@@ -580,7 +998,7 @@ QWidget* MainWindow::baueStoerungsSeite()
     m_stoerungsTabelle->setSelectionMode(QAbstractItemView::SingleSelection);
     m_stoerungsTabelle->setAlternatingRowColors(false);
     m_stoerungsTabelle->verticalHeader()->setVisible(false);
-    m_stoerungsTabelle->verticalHeader()->setDefaultSectionSize(24);
+    m_stoerungsTabelle->verticalHeader()->setDefaultSectionSize(32);
     m_stoerungsTabelle->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     m_stoerungsTabelle->setShowGrid(false);
     m_stoerungsTabelle->setItemDelegateForColumn(StoerungModel::SpSchwere, new BadgeDelegate(m_stoerungsTabelle));
@@ -618,8 +1036,8 @@ QWidget* MainWindow::baueStoerungsSeite()
     m_stoerungenLeer->hide();
 
     auto* v = new QVBoxLayout(seite);
-    v->setSpacing(6);
-    v->addLayout(leiste);
+    v->setSpacing(14);
+    v->addWidget(filterKarte);
     v->addWidget(m_stoerungsTabelle, 1);
     v->addWidget(m_stoerungenLeer, 1);
     m_stoerungsTabelle->resizeColumnsToContents();
@@ -630,7 +1048,8 @@ void MainWindow::erzeugeAktionen()
 {
     // Aktionen werden bei jedem Neuaufbau neu erzeugt (Texte in aktueller Sprache)
     for (QAction* alt : {m_aktDetails, m_aktBearbeiten, m_aktStoerung, m_aktExportAnlagen, m_aktExportStoerungen,
-                         m_aktExportBericht, m_aktPdfAnlage, m_aktPdfFlotte, m_aktRueckgaengig, m_aktWiederholen})
+                         m_aktExportBericht, m_aktPdfAnlage, m_aktPdfFlotte, m_aktRueckgaengig, m_aktWiederholen,
+                         m_aktAnalyse, m_aktVerlauf})
         if (alt)
             alt->deleteLater();
 
@@ -670,6 +1089,12 @@ void MainWindow::erzeugeAktionen()
     m_aktPdfFlotte = new QAction(Stil::icon(Stil::Symbol::Pdf, f), tr("&Flottenbericht als PDF …"), this);
     connect(m_aktPdfFlotte, &QAction::triggered, this, &MainWindow::exportiereFlottenPdf);
 
+    m_aktAnalyse = new QAction(Stil::icon(Stil::Symbol::Neuladen, f), tr("Analyse neu starten"), this);
+    m_aktAnalyse->setToolTip(tr("Verläufe aller Anlagen erneut auswerten"));
+    connect(m_aktAnalyse, &QAction::triggered, this, [this] { m_kontext.analyse->starte(); });
+    m_aktVerlauf = new QAction(Stil::icon(Stil::Symbol::Liste, f), tr("Änderungsverlauf …"), this);
+    connect(m_aktVerlauf, &QAction::triggered, this, &MainWindow::zeigeAenderungsverlauf);
+
     // Rückgängig/Wiederholen: Text zeigt, welche Änderung betroffen ist
     m_aktRueckgaengig = new QAction(Stil::icon(Stil::Symbol::Rueckgaengig, f), tr("&Rückgängig"), this);
     m_aktRueckgaengig->setShortcut(QKeySequence::Undo);
@@ -693,18 +1118,11 @@ void MainWindow::erzeugeAktionen()
 
 void MainWindow::baueMenues()
 {
-    // Menüband wie in Office statt Menü- und Symbolleiste
-    if (QWidget* alt = menuWidget())
-        alt->deleteLater();
-    for (QToolBar* tb : findChildren<QToolBar*>()) {
-        removeToolBar(tb);
-        tb->deleteLater();
-    }
+    // Keine Menü- oder Symbolleiste: Befehle stehen in der Aktionszeile der
+    // Seiten, im Benutzermenü und in den Kontextmenüs.
     m_anlagenTabelle->addAction(m_aktDetails);
-    baueBefehlsleiste();
-
-    // Tastenkürzel gelten im ganzen Fenster, auch wenn der Knopf gerade
-    // auf einem anderen Reiter des Bands liegt
+    // Tastenkürzel gelten im ganzen Fenster, auch wenn die Seite mit dem
+    // passenden Knopf gerade nicht sichtbar ist
     addActions({m_aktRueckgaengig, m_aktWiederholen, m_aktBearbeiten});
 
     auto* sucheKurz = new QShortcut(QKeySequence::Find, m_tabs);
@@ -713,205 +1131,6 @@ void MainWindow::baueMenues()
         m_suche->setFocus();
         m_suche->selectAll();
     });
-}
-
-void MainWindow::baueBefehlsleiste()
-{
-    auto* band = new Menueband;
-    const QColor f = Stil::text();
-    auto aktion = [band](const QIcon& icon, const QString& text, auto&& slot) {
-        auto* a = new QAction(icon, text, band);
-        QObject::connect(a, &QAction::triggered, band, slot);
-        return a;
-    };
-
-    // ---------- Datei (Menü hinter dem farbigen Knopf) ----------
-    QMenu* datei = band->dateiMenue();
-    datei->addAction(Stil::icon(Stil::Symbol::Benutzer, f), tr("Benutzer &wechseln …"), this, &MainWindow::benutzerWechseln);
-    datei->addSeparator();
-    datei->addAction(m_aktExportAnlagen);
-    datei->addAction(m_aktExportStoerungen);
-    datei->addAction(m_aktExportBericht);
-    datei->addSeparator();
-    datei->addAction(m_aktPdfAnlage);
-    datei->addAction(m_aktPdfFlotte);
-    datei->addSeparator();
-    datei->addAction(Stil::icon(Stil::Symbol::Info, f), tr("&Über SolarMonitor"), this, &MainWindow::zeigeUeber);
-    datei->addSeparator();
-    QAction* beenden = datei->addAction(tr("&Beenden"), this, &QWidget::close);
-    beenden->setShortcut(QKeySequence::Quit);
-    addAction(beenden);
-
-    // Zusätzliche Befehle für das Band
-    QAction* verlauf = aktion(Stil::icon(Stil::Symbol::Liste, f), tr("Änderungsverlauf …"),
-                              [this] { zeigeAenderungsverlauf(); });
-    QAction* aufKarte = aktion(Stil::icon(Stil::Symbol::Karte, f), tr("Auf der Karte zeigen"), [this] {
-        if (markierteAnlage().isEmpty())
-            return;
-        m_karte->markiere(markierteAnlage());
-        m_tabs->setCurrentIndex(ReiterKarte);
-    });
-    QAction* stoerungenDerAnlage = aktion(Stil::icon(Stil::Symbol::Warnung, f), tr("Störungen der Anlage anzeigen"), [this] {
-        if (markierteAnlage().isEmpty())
-            return;
-        m_stoerAnlage->setText(markierteAnlage());
-        m_stoerStatus->setCurrentIndex(0);
-        m_tabs->setCurrentIndex(ReiterStoerungen);
-    });
-    QAction* analyse = aktion(Stil::icon(Stil::Symbol::Neuladen, f), tr("Flottenanalyse neu starten"),
-                              [this] { m_kontext.analyse->starte(); });
-    auto seitenAktion = [&](Stil::Symbol symbol, const QString& text, int seite) {
-        QAction* a = aktion(Stil::icon(symbol, f), text, [this, seite] { m_tabs->setCurrentIndex(seite); });
-        a->setCheckable(true);
-        a->setChecked(m_tabs->currentIndex() == seite);
-        connect(m_tabs, &QStackedWidget::currentChanged, a, [a, seite](int i) { a->setChecked(i == seite); });
-        return a;
-    };
-
-    // ---------- Start ----------
-    band->neuerReiter(tr("Start"));
-    band->neueGruppe(tr("Rückgängig"));
-    band->klein({m_aktRueckgaengig, m_aktWiederholen, verlauf});
-    band->neueGruppe(tr("Anlage"));
-    band->gross(m_aktDetails, tr("Details"));
-    band->gross(m_aktBearbeiten, tr("Stammdaten\nbearbeiten"));
-    band->gross(m_aktStoerung, tr("Störung\nerfassen"));
-    band->neueGruppe(tr("Berichte"));
-    band->gross(m_aktPdfAnlage, tr("Anlagen-\nbericht"));
-    band->gross(m_aktPdfFlotte, tr("Flotten-\nbericht"));
-    band->neueGruppe(tr("Exportieren"));
-    band->klein({m_aktExportAnlagen, m_aktExportStoerungen, m_aktExportBericht});
-
-    // ---------- Anlage ----------
-    band->neuerReiter(tr("Anlage"));
-    band->neueGruppe(tr("Bearbeiten"));
-    band->gross(m_aktDetails, tr("Details"));
-    band->gross(m_aktBearbeiten, tr("Stammdaten\nbearbeiten"));
-    band->gross(m_aktStoerung, tr("Störung\nerfassen"));
-    band->neueGruppe(tr("Anzeigen"));
-    band->gross(aufKarte, tr("Auf Karte\nzeigen"));
-    band->gross(stoerungenDerAnlage, tr("Störungen\nanzeigen"));
-    band->neueGruppe(tr("Bericht"));
-    band->gross(m_aktPdfAnlage, tr("Anlagen-\nbericht"));
-
-    // ---------- Auswertung ----------
-    band->neuerReiter(tr("Auswertung"));
-    band->neueGruppe(tr("Flotte"));
-    band->gross(analyse, tr("Analyse neu\nstarten"));
-    band->gross(seitenAktion(Stil::Symbol::Statistik, tr("Statistik"), ReiterStatistik), tr("Statistik"));
-    band->neueGruppe(tr("Service"));
-    band->gross(seitenAktion(Stil::Symbol::Werkzeug, tr("Serviceplanung"), ReiterService), tr("Service-\nplanung"));
-    band->gross(seitenAktion(Stil::Symbol::Pruefung, tr("Datenprüfung"), ReiterPruefung), tr("Daten-\nprüfung"));
-    band->neueGruppe(tr("Berichte"));
-    band->gross(m_aktPdfFlotte, tr("Flotten-\nbericht"));
-    band->klein({m_aktExportAnlagen, m_aktExportStoerungen, m_aktExportBericht});
-
-    // ---------- Ansicht ----------
-    band->neuerReiter(tr("Ansicht"));
-    band->neueGruppe(tr("Seiten"));
-    band->gross(seitenAktion(Stil::Symbol::Uebersicht, tr("Übersicht"), ReiterUebersicht), tr("Übersicht"));
-    band->gross(seitenAktion(Stil::Symbol::Liste, tr("Anlagen"), ReiterAnlagen), tr("Anlagen"));
-    band->gross(seitenAktion(Stil::Symbol::Warnung, tr("Störungen"), ReiterStoerungen), tr("Störungen"));
-    band->gross(seitenAktion(Stil::Symbol::Karte, tr("Karte"), ReiterKarte), tr("Karte"));
-
-    band->neueGruppe(tr("Bereiche"));
-    QAction* navi = aktion(Stil::icon(Stil::Symbol::Liste, f), tr("Navigationsbereich"), [this](bool an) {
-        if (m_navigation)
-            m_navigation->parentWidget()->setVisible(an);
-    });
-    navi->setCheckable(true);
-    navi->setChecked(true);
-    QAction* detail = aktion(Stil::icon(Stil::Symbol::Details, f), tr("Detailbereich"), [this](bool an) {
-        if (m_anlageInfo)
-            m_anlageInfo->setVisible(an);
-    });
-    detail->setCheckable(true);
-    detail->setChecked(true);
-    QAction* vollbild = aktion(Stil::icon(Stil::Symbol::Vollbild, f), tr("Vollbild"), [this](bool an) { setzeVollbild(an); });
-    vollbild->setCheckable(true);
-    vollbild->setChecked(isFullScreen() || QSettings().value(QStringLiteral("vollbild"), true).toBool());
-    vollbild->setShortcut(Qt::Key_F11);
-    addAction(vollbild);
-    band->klein({navi, detail, vollbild});
-
-    band->neueGruppe(tr("Design"));
-    QAction* dunkel = aktion(Stil::icon(Stil::Symbol::Mond, f), tr("Dunkles Design"), [this](bool an) { setzeDesign(an); });
-    dunkel->setCheckable(true);
-    dunkel->setChecked(Stil::istDunkel());
-    band->gross(dunkel, tr("Dunkles\nDesign"));
-
-    band->neueGruppe(tr("Sprache"));
-    auto* sprachen = new QActionGroup(band);
-    QList<QAction*> sprachAktionen;
-    for (const auto& [kuerzel, name] : {std::pair{QStringLiteral("de"), QStringLiteral("Deutsch")},
-                                        std::pair{QStringLiteral("en"), QStringLiteral("English")}}) {
-        QAction* a = aktion(QIcon(), name, [this, k = kuerzel] {
-            QSettings().setValue(QStringLiteral("sprache"), k);
-            if (k != Sprache::aktuell() && !Sprache::setze(k))
-                QMessageBox::warning(this, QStringLiteral("SolarMonitor"), tr("Die Übersetzung konnte nicht geladen werden."));
-        });
-        a->setCheckable(true);
-        a->setChecked(Sprache::aktuell() == kuerzel);
-        sprachen->addAction(a);
-        sprachAktionen.append(a);
-    }
-    band->klein(sprachAktionen);
-
-    // Suchfeld rechts neben den Reitern (wie "Suchen" in Office)
-    if (m_suche) {
-        m_suche->setObjectName(QStringLiteral("Suchfeld"));
-        band->setzeRechts(m_suche);
-        connect(m_suche, &QLineEdit::textEdited, this, [this] { m_tabs->setCurrentIndex(ReiterAnlagen); });
-    }
-    setMenuWidget(band);
-}
-
-void MainWindow::baueStatusleiste()
-{
-    auto* sb = new QStatusBar(this);
-    setStatusBar(sb);
-
-    // Anzahl der Einträge der aktuellen Liste, wie "1.499 Elemente" im Explorer
-    m_anlagenZaehler = new QLabel(sb);
-    m_stoerungsZaehler = new QLabel(sb);
-    auto zaehlerZeigen = [this] {
-        m_anlagenZaehler->setVisible(m_tabs->currentIndex() == ReiterAnlagen);
-        m_stoerungsZaehler->setVisible(m_tabs->currentIndex() == ReiterStoerungen);
-    };
-    connect(m_tabs, &QStackedWidget::currentChanged, sb, zaehlerZeigen);
-    zaehlerZeigen();
-
-    m_meldungenKnopf = new QPushButton(sb);
-    m_meldungenKnopf->setFlat(true);
-    m_meldungenKnopf->setCursor(Qt::PointingHandCursor);
-    m_meldungenKnopf->setToolTip(tr("Zur Datenprüfung"));
-    connect(m_meldungenKnopf, &QPushButton::clicked, this, [this] { m_tabs->setCurrentIndex(ReiterPruefung); });
-    auto meldungenText = [this] {
-        const int fehler = m_kontext.daten->anzahlMeldungen(Pruefmeldung::Stufe::Fehler);
-        m_meldungenKnopf->setIcon(fehler > 0 ? Stil::icon(Stil::Symbol::Warnung, Qt::white) : QIcon());
-        m_meldungenKnopf->setText(tr("%1 Fehler, %2 Warnungen beim Einlesen")
-                                      .arg(fehler)
-                                      .arg(m_kontext.daten->anzahlMeldungen(Pruefmeldung::Stufe::Warnung)));
-    };
-    meldungenText();
-    connect(m_kontext.daten, &Datenbasis::meldungenGeaendert, m_meldungenKnopf, meldungenText);
-
-    m_fortschritt = new QProgressBar(sb);
-    m_fortschritt->setMaximumWidth(180);
-    m_fortschritt->setMaximumHeight(16);
-    m_fortschritt->setFormat(tr("Analyse %p %"));
-    analyseFortschritt(m_fortschrittWert, m_fortschrittMax);
-
-    auto* benutzer = new QLabel(tr("Angemeldet: %1").arg(Rollen::anzeigename(m_kontext.rolle)), sb);
-    auto* ordner = new QLabel(QDir::toNativeSeparators(m_kontext.daten->datenOrdner()), sb);
-    ordner->setToolTip(tr("Datenordner"));
-
-    sb->addWidget(ordner, 1);
-    sb->addPermanentWidget(m_anlagenZaehler);
-    sb->addPermanentWidget(m_stoerungsZaehler);
-    sb->addPermanentWidget(m_meldungenKnopf);
-    sb->addPermanentWidget(m_fortschritt);
-    sb->addPermanentWidget(benutzer);
 }
 
 void MainWindow::aktualisiereRechte()
@@ -1090,7 +1309,7 @@ void MainWindow::erfasseStoerung(const QString& anlageId, QWidget* parent)
     auto* befehl = new StoerungErfassen(m_kontext.daten, dlg.stoerung(),
                                         [this](const QString& id) { nachStoerungsAenderung(id); });
     m_undo->push(befehl);
-    statusBar()->showMessage(tr("Störung %1 für Anlage %2 erfasst (Strg+Z macht es rückgängig).")
+    meldung(tr("Störung %1 für Anlage %2 erfasst (Strg+Z macht es rückgängig).")
                                  .arg(befehl->stoerungId(), anlageId),
                              6000);
 }
@@ -1130,7 +1349,7 @@ void MainWindow::speichereAnlagen()
     const QString pfad = m_kontext.daten->ausgabePfad(QStringLiteral("anlagen_out.csv"));
     QString fehler;
     if (m_kontext.daten->exportiereAnlagen(pfad, &fehler))
-        statusBar()->showMessage(tr("Änderung gespeichert: %1").arg(QDir::toNativeSeparators(pfad)), 6000);
+        meldung(tr("Änderung gespeichert: %1").arg(QDir::toNativeSeparators(pfad)), 6000);
     else
         QMessageBox::warning(this, tr("Automatisches Speichern fehlgeschlagen"),
                              tr("Die Änderung ist im Speicher, wurde aber nicht gesichert:\n%1").arg(fehler));
@@ -1141,7 +1360,7 @@ void MainWindow::speichereStoerungen()
     const QString pfad = m_kontext.daten->ausgabePfad(QStringLiteral("stoerungen_out.csv"));
     QString fehler;
     if (m_kontext.daten->exportiereStoerungen(pfad, &fehler))
-        statusBar()->showMessage(tr("Änderung gespeichert: %1").arg(QDir::toNativeSeparators(pfad)), 6000);
+        meldung(tr("Änderung gespeichert: %1").arg(QDir::toNativeSeparators(pfad)), 6000);
     else
         QMessageBox::warning(this, tr("Automatisches Speichern fehlgeschlagen"),
                              tr("Die Änderung ist im Speicher, wurde aber nicht gesichert:\n%1").arg(fehler));
@@ -1156,7 +1375,7 @@ void MainWindow::exportiereAnlagen()
         return;
     QString fehler;
     if (m_kontext.daten->exportiereAnlagen(pfad, &fehler))
-        statusBar()->showMessage(tr("%1 Anlagen exportiert nach %2").arg(m_kontext.daten->anlagen().size())
+        meldung(tr("%1 Anlagen exportiert nach %2").arg(m_kontext.daten->anlagen().size())
                                      .arg(QDir::toNativeSeparators(pfad)), 6000);
     else
         QMessageBox::critical(this, tr("Export fehlgeschlagen"), fehler);
@@ -1171,7 +1390,7 @@ void MainWindow::exportiereStoerungen()
         return;
     QString fehler;
     if (m_kontext.daten->exportiereStoerungen(pfad, &fehler))
-        statusBar()->showMessage(tr("Störungen exportiert nach %1").arg(QDir::toNativeSeparators(pfad)), 6000);
+        meldung(tr("Störungen exportiert nach %1").arg(QDir::toNativeSeparators(pfad)), 6000);
     else
         QMessageBox::critical(this, tr("Export fehlgeschlagen"), fehler);
 }
@@ -1221,7 +1440,7 @@ void MainWindow::exportiereBericht()
     }
     out.flush();
     if (datei.commit())
-        statusBar()->showMessage(tr("Ertragsbericht gespeichert: %1").arg(QDir::toNativeSeparators(pfad)), 6000);
+        meldung(tr("Ertragsbericht gespeichert: %1").arg(QDir::toNativeSeparators(pfad)), 6000);
     else
         QMessageBox::critical(this, tr("Export fehlgeschlagen"), datei.errorString());
 }
@@ -1248,7 +1467,7 @@ void MainWindow::pdfFertig(bool ok, const QString& pfad, const QString& fehler)
         QMessageBox::critical(this, tr("PDF-Bericht"), fehler);
         return;
     }
-    statusBar()->showMessage(tr("Bericht gespeichert: %1").arg(QDir::toNativeSeparators(pfad)), 8000);
+    meldung(tr("Bericht gespeichert: %1").arg(QDir::toNativeSeparators(pfad)), 8000);
     if (QMessageBox::question(this, tr("PDF-Bericht"),
                               tr("Der Bericht wurde gespeichert:\n%1\n\nJetzt öffnen?").arg(QDir::toNativeSeparators(pfad)))
         == QMessageBox::Yes)
@@ -1314,7 +1533,7 @@ void MainWindow::benutzerWechseln()
     // Die neue Rolle darf die Änderungen der vorherigen nicht rückgängig machen
     m_undo->clear();
     baueUi();
-    statusBar()->showMessage(tr("Angemeldet als %1.").arg(Rollen::anzeigename(m_kontext.rolle)), 5000);
+    meldung(tr("Angemeldet als %1.").arg(Rollen::anzeigename(m_kontext.rolle)), 5000);
 }
 
 void MainWindow::zeigeUeber()
@@ -1340,10 +1559,18 @@ void MainWindow::analyseFortschritt(int erledigt, int gesamt)
     m_fortschrittMax = gesamt;
     if (!m_fortschritt)
         return;
+    const bool laeuft = gesamt > 0 && erledigt < gesamt;
     m_fortschritt->setRange(0, qMax(1, gesamt));
     m_fortschritt->setValue(erledigt);
-    m_fortschritt->setVisible(gesamt > 0 && erledigt < gesamt);
-    m_fortschritt->setToolTip(tr("Verläufe aller Anlagen werden im Hintergrund ausgewertet (%1 von %2).")
+    m_fortschritt->setVisible(laeuft);
+    if (laeuft)
+        m_analyseText->setText(tr("Flottenanalyse läuft: %1 von %2 Anlagen").arg(erledigt).arg(gesamt));
+    else if (m_kontext.analyse->istFertig())
+        m_analyseText->setText(QStringLiteral("<span style='color:#22c55e'>●</span> ")
+                               + tr("Analyse aktuell · %1 Anlagen").arg(m_kontext.analyse->kennzahlen().size()));
+    else
+        m_analyseText->setText(tr("Flottenanalyse wird vorbereitet …"));
+    m_analyseText->setToolTip(tr("Verläufe aller Anlagen werden im Hintergrund ausgewertet (%1 von %2).")
                                   .arg(erledigt)
                                   .arg(gesamt));
 }
@@ -1367,7 +1594,7 @@ void MainWindow::analyseFertig()
     m_kontext.daten->entferneMeldungen(kQuelleJson);
     m_kontext.daten->ergaenzeMeldungen(meldungen);
 
-    statusBar()->showMessage(tr("Flottenanalyse abgeschlossen: %1 Anlagen ausgewertet, %2 mit Fehlerbild, "
+    meldung(tr("Flottenanalyse abgeschlossen: %1 Anlagen ausgewertet, %2 mit Fehlerbild, "
                                 "%3 Verlaufsdateien defekt.")
                                  .arg(m_kontext.analyse->kennzahlen().size())
                                  .arg(auffaellig)

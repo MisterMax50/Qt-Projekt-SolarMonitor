@@ -15,18 +15,20 @@
 
 namespace {
 
-/// Farben nach dem Vorbild von Microsoft Office (Fluent): neutrale Grautöne,
-/// weiße Arbeitsfläche und eine Programmfarbe. Grün steht für Energie –
-/// so wie jedes Office-Programm seine eigene Farbe hat (Word blau, Excel grün).
+/// Farben nach dem Vorbild von Monitoring-Portalen für PV-Anlagen:
+/// dunkelblaue Seitenleiste, helle Arbeitsfläche mit weißen Karten und
+/// Sonnen-Orange als Akzent. Statusfarben (grün/orange/rot) bleiben
+/// für den Zustand der Anlagen reserviert.
 struct Farben {
-    QColor fenster;      ///< Hintergrund außerhalb der Arbeitsfläche
-    QColor band;         ///< Menüband
-    QColor flaeche;      ///< Arbeitsfläche, Listen, Eingaben
+    QColor fenster;      ///< Hintergrund der Arbeitsfläche (zwischen den Karten)
+    QColor seite;        ///< Seitenleiste
+    QColor flaeche;      ///< Karten, Listen, Eingaben
     QColor text, gedimmt;
     QColor linie, linieStark, feldRand;
     QColor hover, gedrueckt;
     QColor auswahl;      ///< markierte Zeile (Akzent-Tönung)
-    QColor akzent, akzentHover, akzentText, akzentFlaeche; ///< Akzent als Fläche (Statusleiste, Datei)
+    QColor akzent, akzentHover, link, akzentFlaeche; ///< Akzent, Verweise, Hauptknopf
+    QColor kopf;         ///< Spaltenköpfe
 };
 
 bool g_dunkel = false;
@@ -35,12 +37,14 @@ constexpr double kPiStil = 3.14159265358979323846;
 Farben farben()
 {
     if (g_dunkel)
-        return {QColor("#1b1a19"), QColor("#292827"), QColor("#252423"), QColor("#f3f2f1"), QColor("#b3b0ad"),
-                QColor("#3b3a39"), QColor("#605e5c"), QColor("#8a8886"), QColor("#3b3a39"), QColor("#484644"),
-                QColor("#1e4d32"), QColor("#4bbf7f"), QColor("#1f7a49"), QColor("#ffffff"), QColor("#185c37")};
-    return {QColor("#f3f2f1"), QColor("#faf9f8"), QColor("#ffffff"), QColor("#201f1e"), QColor("#605e5c"),
-            QColor("#e1dfdd"), QColor("#c8c6c4"), QColor("#8a8886"), QColor("#edebe9"), QColor("#e1dfdd"),
-            QColor("#d9eedf"), QColor("#107c41"), QColor("#0c6634"), QColor("#ffffff"), QColor("#107c41")};
+        return {QColor("#0e1622"), QColor("#09111b"), QColor("#16212f"), QColor("#e5ebf3"), QColor("#8d9bb0"),
+                QColor("#243245"), QColor("#31435b"), QColor("#3a4d66"), QColor("#1d2a3b"), QColor("#253549"),
+                QColor("#3b2c12"), QColor("#fbbf24"), QColor("#b45309"), QColor("#7cb3ff"), QColor("#d97706"),
+                QColor("#1a2636")};
+    return {QColor("#f2f4f7"), QColor("#0f1e33"), QColor("#ffffff"), QColor("#1d2939"), QColor("#667085"),
+            QColor("#e4e7ec"), QColor("#d0d5dd"), QColor("#c4cad4"), QColor("#f5f7fa"), QColor("#e9edf2"),
+            QColor("#fff2dc"), QColor("#f59e0b"), QColor("#b45309"), QColor("#1d5fd1"), QColor("#d97706"),
+            QColor("#f8f9fb")};
 }
 
 /// Kleine Grafik für Pfeile/Häkchen erzeugen und als Datei für das Stylesheet ablegen.
@@ -72,67 +76,101 @@ QString stylesheet(const Farben& f)
 QMainWindow, QDialog { background: %FENSTER%; }
 QWidget#Inhalt { background: %FENSTER%; }
 
-/* ---------- Menüband ---------- */
-QWidget#Menueband { background: %BAND%; border-bottom: 1px solid %LINIE%; }
-QToolButton#DateiKnopf { background: %AKZFL%; color: #ffffff; border: none; padding: 7px 18px; margin: 0; }
-QToolButton#DateiKnopf:hover { background: %AKZH%; }
-QToolButton#DateiKnopf::menu-indicator { image: none; width: 0; }
-QTabBar#BandReiter { background: transparent; }
-QTabBar#BandReiter::tab { background: transparent; color: %TEXT%; border: none; padding: 7px 12px 6px 12px; margin: 0 1px;
-    border-bottom: 3px solid transparent; }
-QTabBar#BandReiter::tab:hover { background: %HOVER%; }
-QTabBar#BandReiter::tab:selected { color: %AKZ%; border-bottom: 3px solid %AKZ%; }
-QStackedWidget#BandFlaeche, QWidget#BandSeite { background: %FLAECHE%; }
-QStackedWidget#BandFlaeche { border-top: 1px solid %LINIE%; min-height: 96px; max-height: 96px; }
-QLabel#BandGruppenTitel { color: %GED%; font-size: 8pt; padding: 1px 0 3px 0; }
-QFrame#BandTrenner { color: %LINIE%; background: %LINIE%; margin: 6px 3px; }
-QToolButton#BandGross { border: 1px solid transparent; border-radius: 3px; padding: 3px 6px; color: %TEXT%; min-width: 46px; }
-QToolButton#BandKlein { border: 1px solid transparent; border-radius: 3px; padding: 2px 6px; color: %TEXT%; text-align: left; }
-QToolButton#BandGross:hover, QToolButton#BandKlein:hover { background: %HOVER%; border-color: %LINIE%; }
-QToolButton#BandGross:pressed, QToolButton#BandKlein:pressed { background: %GEDR%; }
-QToolButton#BandGross:checked, QToolButton#BandKlein:checked { background: %AUSW%; border-color: %AKZ%; }
-QToolButton#BandGross:disabled, QToolButton#BandKlein:disabled { color: %GED%; }
-QToolButton#BandGross::menu-indicator { subcontrol-position: bottom center; subcontrol-origin: padding; bottom: -2px;
-    image: url(%PFEILUNTEN%); width: 9px; height: 9px; }
-
-/* ---------- Navigationsbereich (wie in Outlook) ---------- */
-QWidget#Navigationsbereich { background: %FENSTER%; border-right: 1px solid %LINIE%; }
-QLabel#Bereichstitel { color: %GED%; font-size: 8pt; font-weight: 600; padding: 10px 14px 4px 14px; }
+/* ---------- Seitenleiste (immer dunkel, wie in Monitoring-Portalen) ---------- */
+QWidget#Seitenleiste { background: %SEITE%; }
+QLabel#Marke { color: #ffffff; font-size: 13pt; }
+QLabel#MarkeText { color: #8293ab; font-size: 8pt; }
 QListWidget#Navigation { background: transparent; border: none; }
-QListWidget#Navigation::item { color: %TEXT%; padding: 7px 10px; border-left: 3px solid transparent; }
-QListWidget#Navigation::item:hover { background: %HOVER%; }
-QListWidget#Navigation::item:selected { background: %AUSW%; color: %TEXT%; border-left: 3px solid %AKZ%; font-weight: 600; }
+QLabel#AnalyseText { color: #8293ab; font-size: 8pt; }
+QWidget#Seitenleiste QProgressBar { background: #1f3350; border: none; border-radius: 2px; max-height: 4px;
+    color: transparent; }
+QWidget#Seitenleiste QProgressBar::chunk { background: %AKZ%; border-radius: 2px; }
+
+/* ---------- Kopfzeile ---------- */
+QWidget#Kopfzeile { background: %FLAECHE%; border-bottom: 1px solid %LINIE%; }
+QLabel#SeitenTitel { font-size: 15pt; font-weight: 600; color: %TEXT%; }
+QLabel#SeitenHinweis { color: %GED%; }
+QLineEdit#Suchfeld { background: %FENSTER%; border: 1px solid %FENSTER%; border-radius: 17px; padding: 6px 12px;
+    min-width: 260px; }
+QLineEdit#Suchfeld:hover { border-color: %LINIESTARK%; }
+QLineEdit#Suchfeld:focus { background: %FLAECHE%; border: 1px solid %AKZ%; }
+QToolButton#Glocke { border: none; border-radius: 18px; padding: 6px; }
+QToolButton#Glocke:hover, QToolButton#BenutzerKnopf:hover { background: %HOVER%; }
+QToolButton#BenutzerKnopf { border: none; border-radius: 6px; padding: 4px 8px; color: %TEXT%; }
+QToolButton#BenutzerKnopf::menu-indicator { image: url(%PFEILUNTEN%); width: 10px; height: 10px;
+    subcontrol-position: right center; right: 4px; }
+QFrame#KopfTrenner { background: %LINIE%; max-width: 1px; margin: 10px 4px; }
+
+/* ---------- Seitenaktionen ---------- */
+QToolButton#SeitenAktion, QToolButton#SeitenAktionPrimaer { background: %FLAECHE%; color: %TEXT%;
+    border: 1px solid %LINIESTARK%; border-radius: 6px; padding: 5px 12px; }
+QToolButton#SeitenAktion:hover { background: %HOVER%; }
+QToolButton#SeitenAktion:pressed { background: %GEDR%; }
+QToolButton#SeitenAktion:disabled { color: %GED%; background: %FENSTER%; border-color: %LINIE%; }
+QToolButton#SeitenAktion[nurSymbol="true"] { padding: 5px 7px; }
+QToolButton#SeitenAktion::menu-indicator { image: url(%PFEILUNTEN%); width: 10px; height: 10px;
+    subcontrol-position: right center; right: 6px; }
+QToolButton#SeitenAktion[menue="true"] { padding-right: 24px; }
+QToolButton#SeitenAktionPrimaer { background: %AKZFL%; border-color: %AKZFL%; color: #ffffff; font-weight: 600; }
+QToolButton#SeitenAktionPrimaer:hover { background: %AKZH%; border-color: %AKZH%; }
+QToolButton#SeitenAktionPrimaer:disabled { background: %LINIE%; border-color: %LINIE%; color: %GED%; }
+QLabel#Zaehler { color: %GED%; }
+
+/* ---------- Karten ---------- */
+QGroupBox { background: %FLAECHE%; border: 1px solid %LINIE%; border-radius: 8px; margin-top: 0;
+    padding: 34px 6px 6px 6px; font-weight: 600; color: %TEXT%; }
+QGroupBox::title { subcontrol-origin: padding; subcontrol-position: top left; left: 14px; top: 11px;
+    color: %TEXT%; font-size: 10pt; }
+QGroupBox QTreeView, QGroupBox QTreeWidget, QGroupBox QTableView, QGroupBox QTableWidget, QGroupBox QListWidget {
+    border: none; border-top: 1px solid %LINIE%; }
+QFrame#Kachel, QFrame#Filterleiste { background: %FLAECHE%; border: 1px solid %LINIE%; border-radius: 8px; }
+QFrame#Kachel[klickbar="true"]:hover { border-color: %AKZ%; }
+QLabel#KachelTitel { color: %GED%; }
+QLabel#KachelWert { font-size: 19pt; font-weight: 600; color: %TEXT%; }
+QLabel#KachelNotiz { color: %GED%; font-size: 8.5pt; }
+
+/* Detailbereich: eine Karte, darin Abschnitte statt weiterer Karten */
+QWidget#Detailbereich { background: %FLAECHE%; border: 1px solid %LINIE%; border-radius: 8px; }
+QWidget#Detailbereich QGroupBox { border: none; border-top: 1px solid %LINIE%; border-radius: 0; margin-top: 18px;
+    padding: 10px 0 0 0; background: transparent; }
+QWidget#Detailbereich QGroupBox::title { subcontrol-origin: margin; left: 0; top: 0; color: %GED%; font-size: 8.5pt; }
+QLabel#DetailTitel { font-size: 14pt; font-weight: 600; }
+QLabel#Gedimmt, QLabel#KpiTitel, QLabel#KpiNotiz { color: %GED%; }
+QLabel#KpiWert { font-size: 13pt; font-weight: 600; }
+QLabel#Leerzustand { color: %GED%; padding: 24px; background: %FLAECHE%; border: 1px solid %LINIE%; border-radius: 8px; }
+QSplitter::handle { background: transparent; }
+QScrollArea { background: transparent; border: none; }
+QScrollArea > QWidget > QWidget { background: transparent; }
 
 /* ---------- Knöpfe ---------- */
-QPushButton { background: %FLAECHE%; color: %TEXT%; border: 1px solid %FELD%; border-radius: 2px; padding: 4px 16px;
+QPushButton { background: %FLAECHE%; color: %TEXT%; border: 1px solid %LINIESTARK%; border-radius: 6px; padding: 5px 16px;
     min-height: 18px; }
 QPushButton:hover { background: %HOVER%; }
 QPushButton:pressed { background: %GEDR%; }
-QPushButton:default, QPushButton#Primaer { background: %AKZFL%; color: #ffffff; border-color: %AKZFL%; }
+QPushButton:default, QPushButton#Primaer { background: %AKZFL%; color: #ffffff; border-color: %AKZFL%; font-weight: 600; }
 QPushButton:default:hover, QPushButton#Primaer:hover { background: %AKZH%; border-color: %AKZH%; }
 QPushButton:disabled { color: %GED%; background: %FENSTER%; border-color: %LINIE%; }
 QPushButton:flat { border: none; background: transparent; }
-QToolButton { color: %TEXT%; border: 1px solid transparent; border-radius: 2px; padding: 2px 4px; }
-QToolButton:hover { background: %HOVER%; border-color: %LINIE%; }
+QToolButton { color: %TEXT%; border: 1px solid transparent; border-radius: 6px; padding: 3px 5px; }
+QToolButton:hover { background: %HOVER%; }
 
 /* ---------- Eingaben ---------- */
 QLineEdit, QComboBox, QSpinBox, QDoubleSpinBox, QDateEdit, QDateTimeEdit, QPlainTextEdit, QTextEdit {
-    background: %FLAECHE%; color: %TEXT%; border: 1px solid %FELD%; border-radius: 2px; padding: 3px 6px;
-    selection-background-color: %AKZ%; selection-color: #ffffff; }
+    background: %FLAECHE%; color: %TEXT%; border: 1px solid %LINIESTARK%; border-radius: 6px; padding: 4px 8px;
+    selection-background-color: %AKZFL%; selection-color: #ffffff; }
 QLineEdit, QComboBox, QSpinBox, QDoubleSpinBox, QDateEdit, QDateTimeEdit { min-height: 18px; }
 QLineEdit:hover, QComboBox:hover, QSpinBox:hover, QDoubleSpinBox:hover, QDateEdit:hover, QDateTimeEdit:hover {
-    border-color: %TEXT%; }
+    border-color: %FELD%; }
 QLineEdit:focus, QComboBox:focus, QSpinBox:focus, QDoubleSpinBox:focus, QDateEdit:focus, QDateTimeEdit:focus,
-QPlainTextEdit:focus, QTextEdit:focus { border: 1px solid %AKZ%; border-bottom: 2px solid %AKZ%; }
+QPlainTextEdit:focus, QTextEdit:focus { border: 1px solid %AKZ%; }
 QLineEdit:disabled, QComboBox:disabled, QSpinBox:disabled, QDoubleSpinBox:disabled { color: %GED%; background: %FENSTER%;
     border-color: %LINIE%; }
-QLineEdit#Suchfeld { border-radius: 2px; padding: 4px 8px; min-width: 240px; }
-QComboBox::drop-down, QDateEdit::drop-down, QDateTimeEdit::drop-down { border: none; width: 22px; }
+QComboBox::drop-down, QDateEdit::drop-down, QDateTimeEdit::drop-down { border: none; width: 24px; }
 QComboBox::down-arrow, QDateEdit::down-arrow, QDateTimeEdit::down-arrow { image: url(%PFEILUNTEN%); width: 11px; height: 11px; }
-QComboBox QAbstractItemView { background: %FLAECHE%; border: 1px solid %FELDLINIE%; selection-background-color: %AUSW%;
+QComboBox QAbstractItemView { background: %FLAECHE%; border: 1px solid %LINIESTARK%; selection-background-color: %AUSW%;
     selection-color: %TEXT%; outline: 0; }
-QAbstractSpinBox { padding-right: 18px; }
-QAbstractSpinBox::up-button, QAbstractSpinBox::down-button { subcontrol-origin: border; width: 18px; border: none;
+QAbstractSpinBox { padding-right: 20px; }
+QAbstractSpinBox::up-button, QAbstractSpinBox::down-button { subcontrol-origin: border; width: 20px; border: none;
     background: transparent; }
 QAbstractSpinBox::up-button { subcontrol-position: top right; }
 QAbstractSpinBox::down-button { subcontrol-position: bottom right; }
@@ -141,93 +179,71 @@ QAbstractSpinBox::up-arrow { image: url(%PFEILOBEN%); width: 9px; height: 9px; }
 QAbstractSpinBox::down-arrow { image: url(%PFEILUNTEN%); width: 9px; height: 9px; }
 QAbstractSpinBox::up-arrow:disabled, QAbstractSpinBox::up-arrow:off,
 QAbstractSpinBox::down-arrow:disabled, QAbstractSpinBox::down-arrow:off { image: none; }
-QCheckBox { spacing: 6px; color: %TEXT%; }
-QCheckBox::indicator { width: 14px; height: 14px; border: 1px solid %TEXT%; border-radius: 2px; background: %FLAECHE%; }
+QCheckBox { spacing: 7px; color: %TEXT%; }
+QCheckBox::indicator { width: 15px; height: 15px; border: 1px solid %FELD%; border-radius: 4px; background: %FLAECHE%; }
 QCheckBox::indicator:hover { border-color: %AKZ%; }
 QCheckBox::indicator:checked { background: %AKZFL%; border-color: %AKZFL%; image: url(%HAKEN%); }
-QCheckBox::indicator:disabled { border-color: %LINIESTARK%; background: %FENSTER%; }
+QCheckBox::indicator:disabled { border-color: %LINIE%; background: %FENSTER%; }
 
 /* ---------- Tabellen und Listen ---------- */
 QTableView, QTableWidget, QTreeView, QTreeWidget, QListWidget {
     background: %FLAECHE%; alternate-background-color: %FLAECHE%; color: %TEXT%; border: 1px solid %LINIE%;
-    gridline-color: %LINIE%; selection-background-color: %AUSW%; selection-color: %TEXT%; }
-QTableView::item, QTreeView::item { padding: 0 6px; border: none; }
+    border-radius: 8px; gridline-color: %LINIE%; selection-background-color: %AUSW%; selection-color: %TEXT%; }
+QTableView::item, QTreeView::item { padding: 0 8px; border: none; border-bottom: 1px solid %LINIE%; }
 QTableView::item:hover, QTreeView::item:hover { background: %HOVER%; }
 QTableView::item:selected, QTreeView::item:selected, QListWidget::item:selected { background: %AUSW%; color: %TEXT%; }
-QHeaderView { background: %FLAECHE%; }
-QHeaderView::section { background: %FLAECHE%; color: %GED%; border: none; border-right: 1px solid %LINIE%;
-    border-bottom: 1px solid %LINIESTARK%; padding: 4px 8px; font-weight: 600; }
-QHeaderView::section:hover { background: %HOVER%; color: %TEXT%; }
+QHeaderView { background: transparent; }
+QHeaderView::section { background: %KOPF%; color: %GED%; border: none; border-bottom: 1px solid %LINIE%;
+    padding: 7px 8px; font-weight: 600; font-size: 8.5pt; }
+QHeaderView::section:first { border-top-left-radius: 8px; }
+QHeaderView::section:last { border-top-right-radius: 8px; }
+QHeaderView::section:hover { color: %TEXT%; }
 QHeaderView::down-arrow { image: url(%PFEILUNTEN%); width: 9px; height: 9px; }
 QHeaderView::up-arrow { image: url(%PFEILOBEN%); width: 9px; height: 9px; }
-QTableCornerButton::section { background: %FLAECHE%; border: none; }
+QTableCornerButton::section { background: %KOPF%; border: none; }
 
 /* ---------- Reiter (Dialoge) ---------- */
 QTabWidget::pane { border: none; border-top: 1px solid %LINIE%; background: %FENSTER%; top: -1px; }
-QTabBar::tab { background: transparent; color: %TEXT%; padding: 6px 14px; border: none; border-bottom: 3px solid transparent; }
-QTabBar::tab:hover { background: %HOVER%; }
-QTabBar::tab:selected { color: %AKZ%; border-bottom: 3px solid %AKZ%; font-weight: 600; }
-QTabBar::tab:disabled { color: %GED%; }
+QTabBar::tab { background: transparent; color: %GED%; padding: 8px 16px; border: none; border-bottom: 2px solid transparent;
+    font-weight: 600; }
+QTabBar::tab:hover { color: %TEXT%; }
+QTabBar::tab:selected { color: %TEXT%; border-bottom: 2px solid %AKZ%; }
+QTabBar::tab:disabled { color: %LINIESTARK%; }
 
-/* ---------- Gruppen als Abschnitte (Überschrift mit Linie) ---------- */
-QGroupBox { background: transparent; border: none; border-top: 1px solid %LINIE%; margin-top: 22px; padding-top: 8px;
-    font-weight: 600; color: %TEXT%; }
-QGroupBox::title { subcontrol-origin: margin; subcontrol-position: top left; left: 0; top: 2px; padding: 0 6px 0 0;
-    color: %AKZ%; }
+/* ---------- Kopf in Dialogen ---------- */
+QWidget#DialogKopf { background: %SEITE%; }
+QLabel#DialogKopfTitel { color: #ffffff; font-size: 16pt; font-weight: 600; }
+QLabel#DialogKopfText { color: #9fb0c6; }
+QLabel#AnmeldenTitel { font-size: 15pt; font-weight: 600; }
 
-/* ---------- Kopfband in Dialogen ---------- */
-QWidget#DialogKopf { background: %AKZFL%; }
-QLabel#DialogKopfTitel { color: #ffffff; font-size: 14pt; font-weight: 600; }
-QLabel#DialogKopfText { color: #ffffff; }
-
-/* ---------- Detailbereich, Karten ---------- */
-QWidget#Detailbereich { background: %FLAECHE%; border-left: 1px solid %LINIE%; }
-QLabel#DetailTitel { font-size: 13pt; font-weight: 600; }
-QLabel#Gedimmt, QLabel#KpiTitel, QLabel#KpiNotiz { color: %GED%; }
-QLabel#KpiWert { font-weight: 600; }
-QLabel#Leerzustand { color: %GED%; padding: 24px; }
-QFrame#Karte, QFrame#KarteKlick { background: %FLAECHE%; border: 1px solid %LINIE%; }
-QSplitter::handle { background: %LINIE%; }
-QSplitter::handle:horizontal { width: 1px; }
-QSplitter::handle:vertical { height: 1px; }
-QScrollArea { background: transparent; border: none; }
-QScrollArea > QWidget > QWidget { background: transparent; }
-
-/* ---------- Menüs ---------- */
-QMenu { background: %FLAECHE%; color: %TEXT%; border: 1px solid %LINIESTARK%; padding: 4px 0; }
-QMenu::item { padding: 6px 28px 6px 12px; }
+/* ---------- Menüs, Hinweise ---------- */
+QMenu { background: %FLAECHE%; color: %TEXT%; border: 1px solid %LINIE%; border-radius: 8px; padding: 6px; }
+QMenu::item { padding: 7px 28px 7px 10px; border-radius: 4px; }
 QMenu::item:selected { background: %HOVER%; }
 QMenu::item:disabled { color: %GED%; }
-QMenu::separator { height: 1px; background: %LINIE%; margin: 4px 0; }
+QMenu::separator { height: 1px; background: %LINIE%; margin: 5px 4px; }
 QMenu::icon { padding-left: 8px; }
-QToolTip { background: %FLAECHE%; color: %TEXT%; border: 1px solid %LINIESTARK%; padding: 4px 6px; }
-
-/* ---------- Statusleiste in der Programmfarbe (wie Word/Excel) ---------- */
-QStatusBar { background: %AKZFL%; color: #ffffff; min-height: 24px; }
-QStatusBar::item { border: none; }
-QStatusBar QLabel { color: #ffffff; padding: 0 6px; }
-QStatusBar QPushButton { color: #ffffff; background: transparent; border: none; padding: 1px 8px; min-height: 0; }
-QStatusBar QPushButton:hover { background: rgba(255,255,255,0.18); }
-QProgressBar { background: rgba(255,255,255,0.25); border: none; max-height: 6px; color: transparent; }
-QProgressBar::chunk { background: #ffffff; }
+QToolTip { background: %SEITE%; color: #ffffff; border: none; padding: 5px 8px; }
+QLabel#Toast { background: %SEITE%; color: #ffffff; border-radius: 8px; padding: 10px 16px; }
+QProgressBar { background: %LINIE%; border: none; border-radius: 3px; max-height: 6px; color: transparent; }
+QProgressBar::chunk { background: %AKZ%; border-radius: 3px; }
 
 /* ---------- Bildlaufleisten ---------- */
 QScrollBar:vertical { background: transparent; width: 12px; margin: 0; }
 QScrollBar:horizontal { background: transparent; height: 12px; margin: 0; }
-QScrollBar::handle { background: %LINIESTARK%; border: 3px solid transparent; background-clip: padding; min-height: 30px;
-    min-width: 30px; }
+QScrollBar::handle { background: %LINIESTARK%; border: 3px solid transparent; border-radius: 6px; background-clip: padding;
+    min-height: 30px; min-width: 30px; }
 QScrollBar::handle:hover { background: %FELD%; }
 QScrollBar::add-line, QScrollBar::sub-line { width: 0; height: 0; }
 QScrollBar::add-page, QScrollBar::sub-page { background: transparent; }
 )");
     s.replace(QStringLiteral("%FENSTER%"), f.fenster.name());
-    s.replace(QStringLiteral("%BAND%"), f.band.name());
+    s.replace(QStringLiteral("%SEITE%"), f.seite.name());
     s.replace(QStringLiteral("%FLAECHE%"), f.flaeche.name());
     s.replace(QStringLiteral("%TEXT%"), f.text.name());
     s.replace(QStringLiteral("%GED%"), f.gedimmt.name());
     s.replace(QStringLiteral("%LINIESTARK%"), f.linieStark.name());
     s.replace(QStringLiteral("%LINIE%"), f.linie.name());
-    s.replace(QStringLiteral("%FELDLINIE%"), f.linieStark.name());
     s.replace(QStringLiteral("%FELD%"), f.feldRand.name());
     s.replace(QStringLiteral("%HOVER%"), f.hover.name());
     s.replace(QStringLiteral("%GEDR%"), f.gedrueckt.name());
@@ -235,6 +251,7 @@ QScrollBar::add-page, QScrollBar::sub-page { background: transparent; }
     s.replace(QStringLiteral("%AKZFL%"), f.akzentFlaeche.name());
     s.replace(QStringLiteral("%AKZH%"), f.akzentHover.name());
     s.replace(QStringLiteral("%AKZ%"), f.akzent.name());
+    s.replace(QStringLiteral("%KOPF%"), f.kopf.name());
     s.replace(QStringLiteral("%PFEILUNTEN%"), grafik(QStringLiteral("unten"), f.gedimmt, 0));
     s.replace(QStringLiteral("%PFEILOBEN%"), grafik(QStringLiteral("oben"), f.gedimmt, 1));
     s.replace(QStringLiteral("%HAKEN%"), grafik(QStringLiteral("haken"), QColor("#ffffff"), 2));
@@ -270,8 +287,8 @@ void Stil::anwenden(bool dunkel)
     p.setColor(QPalette::Mid, f.linieStark);
     p.setColor(QPalette::Dark, f.feldRand);
     p.setColor(QPalette::Shadow, QColor(0, 0, 0, dunkel ? 160 : 60));
-    p.setColor(QPalette::Link, f.akzent);
-    p.setColor(QPalette::LinkVisited, f.akzent);
+    p.setColor(QPalette::Link, f.link);
+    p.setColor(QPalette::LinkVisited, f.link);
     p.setColor(QPalette::Disabled, QPalette::Text, f.gedimmt);
     p.setColor(QPalette::Disabled, QPalette::ButtonText, f.gedimmt);
     p.setColor(QPalette::Disabled, QPalette::WindowText, f.gedimmt);
@@ -286,6 +303,8 @@ QColor Stil::text() { return farben().text; }
 QColor Stil::textGedimmt() { return farben().gedimmt; }
 QColor Stil::flaeche() { return farben().flaeche; }
 QColor Stil::rahmen() { return farben().linie; }
+QColor Stil::hintergrund() { return farben().fenster; }
+QColor Stil::seitenleiste() { return farben().seite; }
 
 // -------------------------------------------------------------------
 //  Icons: 24er-Raster, Linienstärke 2, abgerundete Enden
@@ -460,6 +479,38 @@ QIcon Stil::icon(Symbol symbol, const QColor& farbeWunsch)
         case Symbol::Haken:
             p.drawEllipse(QPointF(12, 12), 9, 9);
             p.drawPolyline(QPolygonF({QPointF(8, 12.5), QPointF(11, 15.5), QPointF(16.5, 9)}));
+            break;
+        case Symbol::Glocke: {
+            QPainterPath g;
+            g.moveTo(5, 17);
+            g.lineTo(6.5, 15);
+            g.lineTo(6.5, 10.5);
+            g.cubicTo(6.5, 7, 9, 4.5, 12, 4.5);
+            g.cubicTo(15, 4.5, 17.5, 7, 17.5, 10.5);
+            g.lineTo(17.5, 15);
+            g.lineTo(19, 17);
+            g.closeSubpath();
+            p.drawPath(g);
+            p.drawArc(QRectF(9.5, 17.5, 5, 4), 180 * 16, 180 * 16);
+            break;
+        }
+        case Symbol::Suche:
+            p.drawEllipse(QPointF(10.5, 10.5), 6, 6);
+            p.drawLine(QPointF(15, 15), QPointF(20, 20));
+            break;
+        case Symbol::Blitz:
+            p.drawPolygon(QPolygonF({QPointF(13.5, 2.5), QPointF(5, 13.5), QPointF(11.5, 13.5), QPointF(10.5, 21.5),
+                                     QPointF(19, 10.5), QPointF(12.5, 10.5)}));
+            break;
+        case Symbol::Euro:
+            p.drawArc(QRectF(6, 4, 15, 16), 50 * 16, 260 * 16);
+            p.drawLine(QPointF(4, 10.5), QPointF(13, 10.5));
+            p.drawLine(QPointF(4, 14), QPointF(12, 14));
+            break;
+        case Symbol::Abmelden:
+            p.drawPolyline(QPolygonF({QPointF(10, 4), QPointF(5, 4), QPointF(5, 20), QPointF(10, 20)}));
+            p.drawLine(QPointF(10, 12), QPointF(20, 12));
+            p.drawPolyline(QPolygonF({QPointF(16, 8), QPointF(20, 12), QPointF(16, 16)}));
             break;
         case Symbol::Fehler:
             p.drawEllipse(QPointF(12, 12), 9, 9);

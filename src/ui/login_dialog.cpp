@@ -22,16 +22,22 @@ LoginDialog::LoginDialog(QWidget* parent)
 {
     setWindowTitle(tr("Anmeldung – SolarMonitor"));
 
-    // Aufbau wie ein üblicher Anmeldedialog: Symbol und Titel links oben,
-    // darunter das Formular, Schaltflächen unten rechts
+    // Aufbau wie die Anmeldeseite eines Monitoring-Portals: links eine
+    // dunkelblaue Markenfläche, rechts das Formular
     auto* logo = new QLabel(this);
-    logo->setPixmap(Stil::appIcon().pixmap(40, 40));
+    logo->setPixmap(Stil::appIcon().pixmap(56, 56));
     auto* titel = new QLabel(QStringLiteral("SolarMonitor"), this);
     titel->setObjectName(QStringLiteral("DialogKopfTitel"));
-    auto* untertitel = new QLabel(tr("Melden Sie sich mit Ihrer Rolle und PIN an."), this);
+    auto* untertitel = new QLabel(tr("Überwachung und Service für die PV-Flotte rund um den Bodensee"), this);
     untertitel->setObjectName(QStringLiteral("DialogKopfText"));
+    untertitel->setWordWrap(true);
+    auto* anmeldenTitel = new QLabel(tr("Anmelden"), this);
+    anmeldenTitel->setObjectName(QStringLiteral("AnmeldenTitel"));
+    auto* anmeldenText = new QLabel(tr("Melden Sie sich mit Ihrer Rolle und PIN an."), this);
+    anmeldenText->setObjectName(QStringLiteral("Gedimmt"));
     auto* hinweis = new QLabel(tr("Demo-Zugänge: betrieb / 0000, service / 5678, admin / 1234"), this);
     hinweis->setObjectName(QStringLiteral("Gedimmt"));
+    hinweis->setWordWrap(true);
 
     m_rollen = new QComboBox(this);
     for (Rolle r : {Rolle::Betrieb, Rolle::Service, Rolle::Admin})
@@ -50,6 +56,8 @@ LoginDialog::LoginDialog(QWidget* parent)
     m_meldung->setWordWrap(true);
 
     auto* form = new QFormLayout;
+    form->setVerticalSpacing(10);
+    form->setLabelAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     form->addRow(tr("Rolle:"), m_rollen);
     form->addRow(tr("PIN:"), m_pin);
 
@@ -59,35 +67,38 @@ LoginDialog::LoginDialog(QWidget* parent)
     connect(m_anmelden, &QPushButton::clicked, this, &LoginDialog::anmelden);
     connect(knoepfe, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
-    auto* texte = new QVBoxLayout;
-    texte->setSpacing(2);
-    texte->addWidget(titel);
-    texte->addWidget(untertitel);
-    // Kopfband in der Programmfarbe, wie die Anmeldefenster von Office
-    auto* kopfBand = new QWidget(this);
-    kopfBand->setObjectName(QStringLiteral("DialogKopf"));
-    kopfBand->setAttribute(Qt::WA_StyledBackground, true);
-    auto* kopf = new QHBoxLayout(kopfBand);
-    kopf->setContentsMargins(20, 16, 20, 16);
-    kopf->setSpacing(12);
-    kopf->addWidget(logo, 0, Qt::AlignVCenter);
-    kopf->addLayout(texte, 1);
+    auto* marke = new QWidget(this);
+    marke->setObjectName(QStringLiteral("DialogKopf"));
+    marke->setAttribute(Qt::WA_StyledBackground, true);
+    marke->setFixedWidth(250);
+    auto* mv = new QVBoxLayout(marke);
+    mv->setContentsMargins(28, 32, 28, 28);
+    mv->setSpacing(10);
+    mv->addWidget(logo);
+    mv->addSpacing(6);
+    mv->addWidget(titel);
+    mv->addWidget(untertitel);
+    mv->addStretch(1);
 
-    auto* inhalt = new QVBoxLayout;
-    inhalt->setContentsMargins(20, 16, 20, 16);
-    inhalt->setSpacing(10);
-    inhalt->addLayout(form);
-    inhalt->addWidget(m_meldung);
-    inhalt->addWidget(hinweis);
-    inhalt->addSpacing(4);
-    inhalt->addWidget(knoepfe);
+    auto* rechts = new QVBoxLayout;
+    rechts->setContentsMargins(32, 32, 32, 24);
+    rechts->setSpacing(10);
+    rechts->addWidget(anmeldenTitel);
+    rechts->addWidget(anmeldenText);
+    rechts->addSpacing(8);
+    rechts->addLayout(form);
+    rechts->addWidget(m_meldung);
+    rechts->addStretch(1);
+    rechts->addWidget(hinweis);
+    rechts->addSpacing(6);
+    rechts->addWidget(knoepfe);
 
-    auto* v = new QVBoxLayout(this);
-    v->setContentsMargins(0, 0, 0, 0);
-    v->setSpacing(0);
-    v->addWidget(kopfBand);
-    v->addLayout(inhalt);
-    setMinimumWidth(380);
+    auto* h = new QHBoxLayout(this);
+    h->setContentsMargins(0, 0, 0, 0);
+    h->setSpacing(0);
+    h->addWidget(marke);
+    h->addLayout(rechts, 1);
+    setMinimumSize(700, 340);
 
     m_sperrTimer = new QTimer(this);
     m_sperrTimer->setInterval(1000);

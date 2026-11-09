@@ -13,6 +13,7 @@
 #include "eval/flotten_analyse.h"
 #include "model/datenbasis.h"
 #include "ui/balken_diagramm.h"
+#include "ui/kennzahl_kachel.h"
 #include "ui/tabellen_hilfe.h"
 #include "util/anzeige.h"
 
@@ -23,23 +24,26 @@ StatistikWidget::StatistikWidget(const AppKontext& kontext, QWidget* parent)
     auto* inhalt = new QWidget;
     auto* v = new QVBoxLayout(inhalt);
 
-    // Zusammenfassung als Beschriftung/Wert-Paare in drei Spalten
-    auto* zusammen = new QGroupBox(tr("Zusammenfassung"), inhalt);
-    auto* kpis = new QGridLayout(zusammen);
-    kpis->setHorizontalSpacing(12);
-    m_kpiAnlagen    = kpiKachel(tr("Anlagen:"), zusammen, kpis);
-    m_kpiLeistung   = kpiKachel(tr("Installierte Leistung:"), zusammen, kpis);
-    m_kpiStoerungen = kpiKachel(tr("Offene Störungen (kritisch):"), zusammen, kpis);
-    m_kpiPr         = kpiKachel(tr("Median-PR der Flotte:"), zusammen, kpis);
-    m_kpiErtrag     = kpiKachel(tr("Ertrag 01.–14.06.:"), zusammen, kpis);
-    m_kpiAuffaellig = kpiKachel(tr("Anlagen mit Fehlerbild:"), zusammen, kpis);
-    for (int s : {1, 3, 5})
-        kpis->setColumnStretch(s, 1);
-    v->addWidget(zusammen);
+    v->setContentsMargins(0, 0, 0, 0);
+    v->setSpacing(16);
+    // Kennzahlenkacheln in einer Reihe
+    m_kpiAnlagen    = new KennzahlKachel(Stil::Symbol::Liste, QColor(37, 99, 235), tr("Anlagen"), inhalt);
+    m_kpiLeistung   = new KennzahlKachel(Stil::Symbol::Blitz, QColor(217, 119, 6), tr("Installierte Leistung"), inhalt);
+    m_kpiStoerungen = new KennzahlKachel(Stil::Symbol::Warnung, QColor(220, 38, 38), tr("Offene Störungen"), inhalt);
+    m_kpiPr         = new KennzahlKachel(Stil::Symbol::Statistik, QColor(13, 148, 136), tr("Median-PR der Flotte"), inhalt);
+    m_kpiErtrag     = new KennzahlKachel(Stil::Symbol::Sonne, QColor(22, 163, 74), tr("Ertrag 01.–14.06."), inhalt);
+    m_kpiAuffaellig = new KennzahlKachel(Stil::Symbol::Pruefung, QColor(124, 58, 237), tr("Anlagen mit Fehlerbild"), inhalt);
+    auto* kpis = new QHBoxLayout;
+    kpis->setSpacing(16);
+    for (KennzahlKachel* k : {m_kpiAnlagen, m_kpiLeistung, m_kpiStoerungen, m_kpiPr, m_kpiErtrag, m_kpiAuffaellig})
+        kpis->addWidget(k, 1);
+    v->addLayout(kpis);
 
     auto gruppe = [&](const QString& titel, QWidget* w) {
         auto* g = new QGroupBox(titel, inhalt);
-        (new QVBoxLayout(g))->addWidget(w);
+        auto* l = new QVBoxLayout(g);
+        l->setContentsMargins(0, 0, 0, 0);
+        l->addWidget(w);
         return g;
     };
 
@@ -62,6 +66,7 @@ StatistikWidget::StatistikWidget(const AppKontext& kontext, QWidget* parent)
     }
 
     auto* grid = new QGridLayout;
+    grid->setSpacing(16);
     grid->addWidget(gruppe(tr("Installierte Leistung je Typ"), m_typen), 0, 0);
     grid->addWidget(gruppe(tr("Altersverteilung (Jahr der Inbetriebnahme)"), m_alter), 0, 1);
     grid->addWidget(gruppe(tr("Installierte Leistung je Ort"), m_orte), 1, 0);
@@ -81,19 +86,6 @@ StatistikWidget::StatistikWidget(const AppKontext& kontext, QWidget* parent)
     aktualisiere();
 }
 
-QLabel* StatistikWidget::kpiKachel(const QString& titel, QWidget* parent, QGridLayout* raster)
-{
-    // nächste freie Stelle: zwei Zeilen, je Spalte Beschriftung + Wert
-    const int nr = raster->count() / 2;
-    const int zeile = nr % 2, spalte = nr / 2;
-    auto* t = new QLabel(titel, parent);
-    t->setObjectName(QStringLiteral("Gedimmt"));
-    auto* w = new QLabel(QStringLiteral("–"), parent);
-    raster->addWidget(t, zeile, spalte * 2);
-    raster->addWidget(w, zeile, spalte * 2 + 1);
-    return w;
-}
-
 void StatistikWidget::aktualisiere()
 {
     const auto& anlagen = m_kontext.daten->anlagen();
@@ -108,9 +100,9 @@ void StatistikWidget::aktualisiere()
                 ++kritisch;
         }
     }
-    m_kpiAnlagen->setText(QString::number(anlagen.size()));
-    m_kpiLeistung->setText(Anzeige::zahl(kwp / 1000.0, 2) + QStringLiteral(" MWp"));
-    m_kpiStoerungen->setText(QStringLiteral("%1 (%2)").arg(offen).arg(kritisch));
+    m_kpiAnlagen->setzeWert(QString::number(anlagen.size()));
+    m_kpiLeistung->setzeWert(Anzeige::zahl(kwp / 1000.0, 2) + QStringLiteral(" MWp"));
+    m_kpiStoerungen->setzeWert(QString::number(offen), tr("davon %1 kritisch").arg(kritisch));
 
     if (m_kontext.analyse->istFertig()) {
         double ertrag = 0.0;
@@ -121,12 +113,12 @@ void StatistikWidget::aktualisiere()
             if (k.ok && k.auswertung.istAuffaellig())
                 ++auffaellig;
         }
-        m_kpiPr->setText(Anzeige::pr(m_kontext.analyse->medianPrFlotte()));
-        m_kpiErtrag->setText(Anzeige::zahl(ertrag / 1000.0, 1) + QStringLiteral(" MWh"));
-        m_kpiAuffaellig->setText(QString::number(auffaellig));
+        m_kpiPr->setzeWert(Anzeige::pr(m_kontext.analyse->medianPrFlotte()));
+        m_kpiErtrag->setzeWert(Anzeige::zahl(ertrag / 1000.0, 1) + QStringLiteral(" MWh"));
+        m_kpiAuffaellig->setzeWert(QString::number(auffaellig));
     } else {
-        for (QLabel* l : {m_kpiPr, m_kpiErtrag, m_kpiAuffaellig})
-            l->setText(tr("läuft …"));
+        for (KennzahlKachel* k : {m_kpiPr, m_kpiErtrag, m_kpiAuffaellig})
+            k->setzeWert(QStringLiteral("…"), tr("läuft …"));
     }
 
     fuelleTypen();

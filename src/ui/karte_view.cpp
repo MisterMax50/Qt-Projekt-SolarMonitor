@@ -629,6 +629,7 @@ KarteView::KarteView(const AppKontext& kontext, QWidget* parent, Modus modus)
     online->setToolTip(tr("Aus: nur bereits gespeicherte Kacheln verwenden (vollständig offline)."));
     auto* zuruecksetzen = new QPushButton(tr("Ansicht zurücksetzen"), this);
     m_info = new QLabel(tr("Mausrad: Zoom · Ziehen: verschieben · Klick: Anlage öffnen"), this);
+    m_info->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Preferred); // bei schmalen Fenstern abschneiden
     m_info->setObjectName(QStringLiteral("Gedimmt"));
 
     auto* leistenWidget = new QWidget(this);

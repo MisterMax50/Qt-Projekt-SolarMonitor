@@ -10,10 +10,11 @@ class QPainter;
 /**
  * @brief Einheitliches Erscheinungsbild der Anwendung.
  *
- * - Gestaltung nach dem Vorbild von Microsoft Office (Menüband, flache
- *   Knöpfe, Felder mit Akzentlinie bei Fokus, Abschnitte statt Rahmen,
- *   Statusleiste in der Programmfarbe). Grundlage ist der Qt-Stil "Fusion",
- *   das Stylesheet legt das Aussehen fest – hell und dunkel.
+ * - Gestaltung nach dem Vorbild von Monitoring-Portalen für Solaranlagen:
+ *   dunkelblaue Seitenleiste, Kopfzeile mit Suche, Alarmen und Benutzer,
+ *   Inhalte als weiße Karten mit Kennzahlenkacheln, Sonnen-Orange als
+ *   Akzent. Grundlage ist der Qt-Stil "Fusion", das Stylesheet legt das
+ *   Aussehen fest – hell und dunkel.
  *   Selbst gezeichnete Widgets (Diagramme) lesen ihre Farben aus der
  *   Palette und passen sich dadurch automatisch an.
  * - Eigene, im Code gezeichnete Linien-Icons (keine Bilddateien, keine
@@ -24,17 +25,19 @@ public:
     enum class Symbol {
         Liste, Warnung, Karte, Statistik, Werkzeug, Pruefung, Details, Bearbeiten,
         Plus, Export, Bericht, Neuladen, Sonne, Mond, Benutzer, Info, Haken, Fehler,
-        Rueckgaengig, Wiederholen, Pdf, Uebersicht, Vollbild
+        Rueckgaengig, Wiederholen, Pdf, Uebersicht, Vollbild, Glocke, Suche, Blitz, Euro, Abmelden
     };
 
     static void anwenden(bool dunkel);
     static bool istDunkel();
 
-    static QColor akzent();       ///< Programmfarbe (Grün, wie bei Office jedes Programm seine Farbe hat)
+    static QColor akzent();       ///< Akzentfarbe (Sonnen-Orange)
     static QColor text();
     static QColor textGedimmt();
     static QColor flaeche();      ///< Karten-/Tabellenhintergrund
     static QColor rahmen();
+    static QColor hintergrund();  ///< Arbeitsfläche zwischen den Karten
+    static QColor seitenleiste(); ///< dunkelblaue Navigationsleiste
 
     static QIcon icon(Symbol symbol, const QColor& farbe = QColor());
     /**

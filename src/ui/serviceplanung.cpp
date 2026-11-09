@@ -76,6 +76,7 @@ Serviceplanung::Serviceplanung(const AppKontext& kontext, QWidget* parent)
                              "Bereits berechnete Touren werden gespeichert und sind offline verfügbar."));
     m_umkreisInfo = new QLabel(this);
     m_umkreisInfo->setObjectName(QStringLiteral("Gedimmt"));
+    m_umkreisInfo->setWordWrap(true);
     m_routen = new RoutenDienst(QDir(m_kontext.daten->datenOrdner()).filePath(QStringLiteral("routen_cache")), this);
     connect(m_routen, &RoutenDienst::routeBerechnet, this, &Serviceplanung::strassenRouteDa);
     auto* btnPlanen = new QPushButton(tr("Tour planen"), this);
@@ -90,6 +91,7 @@ Serviceplanung::Serviceplanung(const AppKontext& kontext, QWidget* parent)
                                        tr("Fahrzeit (min)"), tr("Kumuliert (km)")});
     m_tour->setItemDelegateForColumn(3, new BadgeDelegate(m_tour));
     m_tourSumme = new QLabel(this);
+    m_tourSumme->setWordWrap(true);
 
     connect(btnPlanen, &QPushButton::clicked, this, &Serviceplanung::planeTour);
     connect(m_btnKarte, &QPushButton::clicked, this, [this] {
@@ -110,14 +112,16 @@ Serviceplanung::Serviceplanung(const AppKontext& kontext, QWidget* parent)
     leiste->addWidget(btnPlanen);
     leiste->addWidget(m_btnKarte);
     leiste->addStretch();
-    leiste->addWidget(m_btnExport);
 
     auto* gTour = new QGroupBox(tr("Tourenplanung"), this);
     auto* vTour = new QVBoxLayout(gTour);
     vTour->addLayout(leiste);
     vTour->addWidget(m_umkreisInfo);
     vTour->addWidget(m_tour, 1);
-    vTour->addWidget(m_tourSumme);
+    auto* fuss = new QHBoxLayout;
+    fuss->addWidget(m_tourSumme, 1);
+    fuss->addWidget(m_btnExport);
+    vTour->addLayout(fuss);
 
     auto* gListe = new QGroupBox(tr("Priorisierte Einsatzliste"), this);
     auto* vListe = new QVBoxLayout(gListe);

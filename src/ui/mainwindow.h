@@ -26,8 +26,10 @@ class StoerungModel;
 /**
  * @brief Hauptfenster von SolarMonitor.
  *
- * Seiten (Navigation links): Anlagen · Störungen · Karte · Statistik ·
- * Serviceplanung · Datenprüfung. Fenstergröße, Sprache und Design werden
+ * Aufbau wie ein Monitoring-Portal für Solarparks: dunkle Seitenleiste
+ * mit den Seiten (Übersicht · Anlagen · Störungen · Karte · Statistik ·
+ * Serviceplanung · Datenprüfung), Kopfzeile mit Seitentitel, Anlagensuche,
+ * Alarmglocke und Benutzermenü, darunter der Inhalt als Karten. Fenstergröße, Sprache und Design werden
  * in QSettings gespeichert.
  *
  * Das Fenster koordiniert alle Aktionen, die Daten ändern (Bearbeiten,
@@ -71,6 +73,7 @@ private slots:
     void aktualisiereNavigation();
     void setzeDesign(bool dunkel);
     void setzeVollbild(bool an);
+    void seiteGewechselt(int index);
 
 private:
     /// Merkt sich die Filtereinstellungen über einen Neuaufbau der Oberfläche hinweg.
@@ -84,16 +87,24 @@ private:
 
     void baueUi();
     void erzeugeAktionen();
+    /// Dunkle Seitenleiste mit Marke, Navigation und Analysezustand.
     QWidget* baueNavigation();
-    void baueBefehlsleiste();
-    /// Seite mit Titel, Erklärung und Aktionsknöpfen im Kopf.
+    /// Kopfzeile mit Seitentitel, Suche, Alarmglocke und Benutzermenü.
+    QWidget* baueKopfzeile();
+    /**
+     * Seite mit Aktionszeile über dem Inhalt: links optional ein Widget
+     * (z. B. Zähler), rechts Knöpfe für @p aktionen (nullptr = Abstand) und
+     * ein Menüknopf "Exportieren" für @p exportieren.
+     */
     QWidget* seite(const QString& titel, const QString& hinweis, QWidget* inhalt,
-                   const QList<QAction*>& aktionen = {});
+                   const QList<QAction*>& aktionen = {}, const QList<QAction*>& exportieren = {},
+                   QWidget* links = nullptr);
+    /// Kurze Einblendung unten rechts (ersetzt die Statusleiste).
+    void meldung(const QString& text, int dauerMs = 5000);
     void aktualisiereFilterKnopf();
     QWidget* baueAnlagenSeite();
     QWidget* baueStoerungsSeite();
     void baueMenues();
-    void baueStatusleiste();
     void aktualisiereRechte();
     QString markierteAnlage() const;
     QString markierteStoerung() const;
@@ -119,7 +130,13 @@ private:
     bool m_neuaufbauGeplant = false;
 
     // werden bei baueUi() neu erzeugt
-    QStackedWidget* m_tabs = nullptr;     ///< Seiten, gesteuert über die Navigation
+    QStackedWidget* m_tabs = nullptr;     ///< Seiten, gesteuert über die Seitenleiste
+    QLabel*       m_seitenTitel = nullptr;
+    QLabel*       m_seitenHinweis = nullptr;
+    QLabel*       m_analyseText = nullptr;
+    class QToolButton* m_glocke = nullptr;
+    QLabel*       m_toast = nullptr;
+    class QTimer* m_toastTimer = nullptr;
     QListWidget*  m_navigation = nullptr;
     AnlageInfo*   m_anlageInfo = nullptr;
     QPushButton*  m_filterReset = nullptr;
@@ -134,7 +151,6 @@ private:
     QLabel*       m_anlagenZaehler = nullptr;
     QLabel*       m_stoerungsZaehler = nullptr;
     QProgressBar* m_fortschritt = nullptr;
-    QPushButton*  m_meldungenKnopf = nullptr;
 
     QAction* m_aktDetails = nullptr;
     QAction* m_aktBearbeiten = nullptr;
@@ -146,4 +162,6 @@ private:
     QAction* m_aktPdfFlotte = nullptr;
     QAction* m_aktRueckgaengig = nullptr;
     QAction* m_aktWiederholen = nullptr;
+    QAction* m_aktAnalyse = nullptr;
+    QAction* m_aktVerlauf = nullptr;
 };

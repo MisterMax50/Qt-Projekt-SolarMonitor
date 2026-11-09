@@ -129,7 +129,7 @@ DetailDialog::DetailDialog(const QString& anlageId, const AppKontext& kontext, Q
 void DetailDialog::setzeBanner(const QString& text, bool fehler)
 {
     m_banner->setText(text);
-    // Infoleiste wie in Office/Windows: blasser Hintergrund, dünner Rahmen
+    // Infoleiste: blasser Hintergrund, dünner Rahmen
     m_banner->setStyleSheet(fehler ? QStringLiteral("background:#fde7e9; color:#1b1b1b; padding:8px 10px; border:1px solid #f1bbbc;")
                                    : QStringLiteral("background:#fff4ce; color:#1b1b1b; padding:8px 10px; border:1px solid #f0d78c;"));
     m_banner->setVisible(!text.isEmpty());
@@ -273,31 +273,33 @@ QWidget* DetailDialog::baueAuswertungSeite()
     auto* seite = new QWidget;
     m_auswertungHinweis = new QLabel(tr("Wird berechnet, sobald der Verlauf geladen ist …"), seite);
     m_auswertungHinweis->setObjectName(QStringLiteral("Gedimmt"));
-    // Kennzahlen als Beschriftung/Wert-Paare in einem Gruppenfeld (2 Zeilen × 3 Spalten)
-    auto* kennzahlen = new QGroupBox(tr("Kennzahlen"), seite);
+    // Kennzahlen als kleine Kacheln (2 Zeilen × 3 Spalten)
+    auto* kennzahlen = new QWidget(seite);
     auto* kacheln = new QGridLayout(kennzahlen);
-    kacheln->setHorizontalSpacing(10);
+    kacheln->setContentsMargins(0, 0, 0, 0);
+    kacheln->setSpacing(10);
     const QStringList titel{tr("Energieertrag (14 Tage):"), tr("Spezifischer Ertrag:"), tr("Performance Ratio:"),
                             tr("Datenabdeckung:"), tr("Erlös:"), tr("Geschätzter Verlust:")};
     for (int i = 0; i < titel.size(); ++i) {
-        auto* t = new QLabel(titel.at(i), kennzahlen);
-        t->setObjectName(QStringLiteral("Gedimmt"));
-        auto* w = new QLabel(QStringLiteral("–"), kennzahlen);
+        auto* kachel = new QFrame(kennzahlen);
+        kachel->setObjectName(QStringLiteral("Kachel"));
+        auto* t = new QLabel(QString(titel.at(i)).remove(QLatin1Char(':')), kachel);
+        t->setObjectName(QStringLiteral("KachelTitel"));
+        auto* w = new QLabel(QStringLiteral("–"), kachel);
         w->setObjectName(QStringLiteral("KpiWert"));
         w->setTextInteractionFlags(Qt::TextSelectableByMouse);
-        auto* n = new QLabel(kennzahlen);
+        auto* n = new QLabel(kachel);
         n->setObjectName(QStringLiteral("KpiNotiz"));
-        auto* wert = new QHBoxLayout;
-        wert->setSpacing(6);
-        wert->addWidget(w);
-        wert->addWidget(n, 1);
-        kacheln->addWidget(t, i % 2, (i / 2) * 2);
-        kacheln->addLayout(wert, i % 2, (i / 2) * 2 + 1);
+        auto* kv = new QVBoxLayout(kachel);
+        kv->setContentsMargins(14, 10, 14, 10);
+        kv->setSpacing(2);
+        kv->addWidget(t);
+        kv->addWidget(w);
+        kv->addWidget(n);
+        kacheln->addWidget(kachel, i / 3, i % 3);
         m_kpiWerte.append(w);
         m_kpiNotizen.append(n);
     }
-    for (int s : {1, 3, 5})
-        kacheln->setColumnStretch(s, 1);
     m_tagesDiagramm = new BalkenDiagramm(seite);
     m_tagesDiagramm->setToolTip(tr("Balkenfarbe = Tages-PR (rot niedrig, grün hoch)"));
 

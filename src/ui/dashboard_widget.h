@@ -9,17 +9,17 @@ class QAction;
 class QGroupBox;
 class QLabel;
 class QTreeWidget;
+class KennzahlKachel;
 
 /**
  * @brief Startseite "Übersicht": der Zustand der Flotte auf einen Blick.
  *
- * Aufgebaut wie die Übersichtsseiten klassischer Verwaltungsprogramme
- * (Gruppenfelder mit Beschriftung, Listen mit Spaltenköpfen, Verweise als
- * Links):
- * - "Flottenstatus": wichtigste Kennzahlen als Beschriftung/Wert-Paare,
- *   jeder Wert ist ein Link zur passenden Seite
- * - Karte der Flotte, gefärbt nach Handlungsbedarf (KarteView, Modus Kompakt)
- * - Listen: offene kritische Störungen, größte Ertragsverluste, Fehlerbilder.
+ * Aufgebaut wie die Startseite eines Monitoring-Portals für Solarparks:
+ * - oben fünf Kennzahlenkacheln (Betrieb, Störungen, PR, Verlust,
+ *   Datenqualität); ein Klick öffnet die passende Seite
+ * - Mitte: Karte der Flotte, gefärbt nach Handlungsbedarf (KarteView,
+ *   Modus Kompakt), daneben die aktiven kritischen Alarme
+ * - unten: größte Ertragsverluste und erkannte Fehlerbilder.
  *   Doppelklick öffnet die Anlage.
  *
  * Es wird nichts neu berechnet: Die Seite fasst Ergebnisse der
@@ -29,7 +29,7 @@ class QTreeWidget;
 class DashboardWidget : public QWidget {
     Q_OBJECT
 public:
-    /// @param schnellzugriff wird nicht mehr angezeigt (Befehle stehen in der Befehlsleiste)
+    /// @param schnellzugriff wird nicht angezeigt (Befehle stehen in der Kopfzeile der Seite)
     DashboardWidget(const AppKontext& kontext, const QList<QAction*>& schnellzugriff = {}, QWidget* parent = nullptr);
 
     /// Seiten, zu denen die Übersicht springen kann.
@@ -40,22 +40,19 @@ signals:
     void seiteOeffnen(DashboardWidget::Ziel ziel);
 
 private:
-    QLabel* neuerWert(class QGridLayout* raster, int zeile, int spalte, const QString& titel);
     QGroupBox* neueGruppe(const QString& titel, QWidget* inhalt, const QString& linkText, Ziel sprung);
     QTreeWidget* neueListe(const QStringList& spalten);
-    void verlinke(QLabel* label, const QString& text, Ziel ziel);
     void spaeterAktualisieren();
     void aktualisiere();
 
     AppKontext m_kontext;
     bool       m_geplant = false;
 
-    QLabel* m_betrieb = nullptr;
-    QLabel* m_stoerungen = nullptr;
-    QLabel* m_pr = nullptr;
-    QLabel* m_verlust = nullptr;
-    QLabel* m_daten = nullptr;
-    QLabel* m_ausgewertet = nullptr;
+    KennzahlKachel* m_betrieb = nullptr;
+    KennzahlKachel* m_stoerungen = nullptr;
+    KennzahlKachel* m_pr = nullptr;
+    KennzahlKachel* m_verlust = nullptr;
+    KennzahlKachel* m_daten = nullptr;
     QTreeWidget* m_dringend = nullptr;
     QTreeWidget* m_verluste = nullptr;
     QTreeWidget* m_fehlerbilder = nullptr;
