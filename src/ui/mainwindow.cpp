@@ -632,6 +632,11 @@ QWidget* MainWindow::baueKopfzeile()
     vollbild->setShortcut(Qt::Key_F11);
     connect(vollbild, &QAction::toggled, this, &MainWindow::setzeVollbild);
     addAction(vollbild);
+    QAction* intro = menue->addAction(tr("&Intro beim Start"));
+    intro->setCheckable(true);
+    intro->setChecked(QSettings().value(QStringLiteral("intro"), true).toBool());
+    intro->setToolTip(tr("Logo-Animation beim Programmstart zeigen"));
+    connect(intro, &QAction::toggled, this, [](bool an) { QSettings().setValue(QStringLiteral("intro"), an); });
     QMenu* sprache = menue->addMenu(tr("&Sprache"));
     auto* sprachen = new QActionGroup(sprache);
     for (const auto& [kuerzel, name] : {std::pair{QStringLiteral("de"), QStringLiteral("Deutsch")},

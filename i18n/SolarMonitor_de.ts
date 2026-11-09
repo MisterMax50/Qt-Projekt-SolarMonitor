@@ -1489,6 +1489,19 @@ Grund: %1</translation>
     </message>
 </context>
 <context>
+    <name>IntroAnimation</name>
+    <message>
+        <location filename="../src/ui/intro_animation.cpp" line="+160"/>
+        <source>PV-FLOTTE BODENSEE · MONITORING &amp; SERVICE</source>
+        <translation>PV-FLOTTE BODENSEE · MONITORING &amp; SERVICE</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Klicken oder beliebige Taste zum Überspringen</source>
+        <translation>Klicken oder beliebige Taste zum Überspringen</translation>
+    </message>
+</context>
+<context>
     <name>KachelLader</name>
     <message>
         <location filename="../src/ui/kachel_lader.cpp" line="+145"/>
@@ -1830,7 +1843,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>&amp;Vollbild</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+11"/>
         <source>&amp;Sprache</source>
         <translation>&amp;Sprache</translation>
     </message>
@@ -1896,13 +1909,13 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Filter zurücksetzen</translation>
     </message>
     <message>
-        <location line="-465"/>
+        <location line="-470"/>
         <location line="+187"/>
         <source>Übersicht</source>
         <translation>Übersicht</translation>
     </message>
     <message>
-        <location line="+189"/>
+        <location line="+194"/>
         <source>%1 Anlagen mit erkanntem Fehlerbild</source>
         <translation>%1 Anlagen mit erkanntem Fehlerbild</translation>
     </message>
@@ -2034,12 +2047,12 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Wiederholen: %1 (Strg+Y)</translation>
     </message>
     <message>
-        <location line="-517"/>
+        <location line="-522"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation>Benutzer &amp;wechseln …</translation>
     </message>
     <message>
-        <location line="+30"/>
+        <location line="+35"/>
         <source>&amp;Beenden</source>
         <translation>&amp;Beenden</translation>
     </message>
@@ -2105,12 +2118,12 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Anlage:</translation>
     </message>
     <message>
-        <location line="-543"/>
+        <location line="-548"/>
         <source>Exportieren</source>
         <translation>Exportieren</translation>
     </message>
     <message>
-        <location line="+704"/>
+        <location line="+709"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>Nur für die Rolle Administrator.</translation>
     </message>
@@ -2185,12 +2198,22 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Änderungsverlauf …</translation>
     </message>
     <message>
-        <location line="-580"/>
+        <location line="-585"/>
         <source>Auswertung</source>
         <translation>Auswertung</translation>
     </message>
     <message>
-        <location line="+129"/>
+        <location line="+94"/>
+        <source>&amp;Intro beim Start</source>
+        <translation>&amp;Intro beim Start</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Logo-Animation beim Programmstart zeigen</source>
+        <translation>Logo-Animation beim Programmstart zeigen</translation>
+    </message>
+    <message>
+        <location line="+37"/>
         <source>SolarMonitor beenden (Strg+Q)</source>
         <translation>SolarMonitor beenden (Strg+Q)</translation>
     </message>
@@ -3797,7 +3820,7 @@ Gemessen wird auf dem Landweg um den Bodensee herum, nicht quer über das Wasser
 <context>
     <name>main</name>
     <message>
-        <location filename="../src/main.cpp" line="+103"/>
+        <location filename="../src/main.cpp" line="+110"/>
         <source>Der Datenordner (mit anlagen.csv) wurde nicht gefunden. Bitte im nächsten Schritt auswählen.</source>
         <translation>Der Datenordner (mit anlagen.csv) wurde nicht gefunden. Bitte im nächsten Schritt auswählen.</translation>
     </message>

@@ -12,6 +12,7 @@
 #include "eval/flotten_analyse.h"
 #include "model/datenbasis.h"
 #include "repo/verlauf_repository.h"
+#include "ui/intro_animation.h"
 #include "ui/login_dialog.h"
 #include "ui/mainwindow.h"
 #include "util/sprache.h"
@@ -86,8 +87,10 @@ int main(int argc, char* argv[])
                                       QStringLiteral("ordner"));
     const QCommandLineOption spracheOpt(QStringLiteral("lang"), QStringLiteral("Sprache: de oder en"),
                                         QStringLiteral("sprache"));
+    const QCommandLineOption ohneIntroOpt(QStringLiteral("kein-intro"), QStringLiteral("Startanimation überspringen"));
     parser.addOption(datenOpt);
     parser.addOption(spracheOpt);
+    parser.addOption(ohneIntroOpt);
     parser.process(app);
 
     // Gespeicherte Einstellungen (Sprache, Design); --lang hat Vorrang
@@ -95,6 +98,10 @@ int main(int argc, char* argv[])
     Stil::anwenden(einstellungen.value(QStringLiteral("dunkel"), false).toBool());
     Sprache::setze(parser.isSet(spracheOpt) ? parser.value(spracheOpt).toLower()
                                             : einstellungen.value(QStringLiteral("sprache"), QStringLiteral("de")).toString());
+
+    // ---------- Intro (Logo-Animation, abschaltbar im Benutzermenü) ----------
+    if (!parser.isSet(ohneIntroOpt) && einstellungen.value(QStringLiteral("intro"), true).toBool())
+        IntroAnimation::abspielen();
 
     // ---------- Datenordner ----------
     QString ordner = findeDatenordner(parser.value(datenOpt));

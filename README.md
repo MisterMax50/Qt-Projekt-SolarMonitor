@@ -100,6 +100,12 @@ selbst auf A4-Seiten um, Tabellenköpfe werden auf Folgeseiten wiederholt,
 gezeichnet. Die Diagramme sind dieselben Widgets wie in der Oberfläche, in
 ein Bild gerendert, immer hell (auch im dunklen Design).
 
+Beim Start läuft ein kurzes **Logo-Intro** (`src/ui/intro_animation.*`, ca. 3 s):
+Die Kachel springt auf, die Sonne geht auf, Strahlen und Messkurve
+zeichnen sich, dann blendet der Schriftzug ein. Klick oder Taste
+überspringt es; abschalten im Benutzermenü (*Intro beim Start*) oder mit
+`--kein-intro`. Gezeichnet mit QPainter, ohne Bild- oder Videodateien.
+
 Das Programm startet im **Vollbild**; im Benutzermenü oben rechts bzw. mit F11
 wird auf ein maximiertes Fenster umgeschaltet. Die Wahl wird gespeichert.
 

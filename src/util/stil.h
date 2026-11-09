@@ -49,6 +49,13 @@ public:
      * Programmdatei (resources/SolarMonitor.ico).
      */
     static void zeichneLogo(QPainter& p, const QRectF& ziel);
+    /**
+     * @brief Logo teilweise gezeichnet, für die Startanimation.
+     * @param sonne    0 = Sonne unter dem Horizont, 1 = aufgegangen
+     * @param strahlen 0 = keine Strahlen, 1 = alle Strahlen in voller Länge
+     * @param kurve    Anteil der gezeichneten Messkurve (0 … 1)
+     */
+    static void zeichneLogo(QPainter& p, const QRectF& ziel, double sonne, double strahlen, double kurve);
     static QPixmap logo(int groesse);
     /// Schriftzug "SolarMonitor" (Rich Text): "Solar" fett, "Monitor" normal.
     static QString wortmarke();

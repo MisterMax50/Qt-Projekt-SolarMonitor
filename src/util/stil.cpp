@@ -535,6 +535,11 @@ QIcon Stil::icon(Symbol symbol, const QColor& farbeWunsch)
 
 void Stil::zeichneLogo(QPainter& p, const QRectF& ziel)
 {
+    zeichneLogo(p, ziel, 1.0, 1.0, 1.0);
+}
+
+void Stil::zeichneLogo(QPainter& p, const QRectF& ziel, double sonne, double strahlen, double kurve)
+{
     // Entwurf auf einem 64er-Raster; Kacheln bis 20 px bekommen eine
     // vereinfachte Variante (weniger Strahlen, gerader Horizont), damit das
     // Symbol auch in der Titelleiste noch klar erkennbar ist.
@@ -562,17 +567,27 @@ void Stil::zeichneLogo(QPainter& p, const QRectF& ziel)
     const QColor weiss(Qt::white);
     const QPointF m(32, klein ? 37 : 35);
     const double r = klein ? 11.0 : 10.0;
-    QPainterPath sonne;
-    sonne.moveTo(m.x() - r, m.y());
-    sonne.arcTo(QRectF(m.x() - r, m.y() - r, 2 * r, 2 * r), 180, -180);
-    sonne.closeSubpath();
-    p.fillPath(sonne, weiss);
+    // Sonne geht auf: nach unten verschoben und am Horizont abgeschnitten
+    const double absenkung = (1.0 - std::clamp(sonne, 0.0, 1.0)) * (r + 2.0);
+    QPainterPath halbkreis;
+    halbkreis.moveTo(m.x() - r, m.y() + absenkung);
+    halbkreis.arcTo(QRectF(m.x() - r, m.y() - r + absenkung, 2 * r, 2 * r), 180, -180);
+    halbkreis.closeSubpath();
+    p.save();
+    p.setClipRect(QRectF(0, 0, 64, m.y()), Qt::IntersectClip);
+    p.fillPath(halbkreis, weiss);
+    p.restore();
 
     p.setPen(QPen(weiss, klein ? 4.5 : 3.2, Qt::SolidLine, Qt::RoundCap));
-    const int strahlen = klein ? 3 : 5;
-    for (int i = 0; i < strahlen; ++i) {
+    const int anzahlStrahlen = klein ? 3 : 5;
+    for (int i = 0; i < anzahlStrahlen; ++i) {
+        // Strahlen erscheinen nacheinander und wachsen nach außen
+        const double anteil = std::clamp(strahlen * anzahlStrahlen - i, 0.0, 1.0);
+        if (anteil <= 0.0)
+            continue;
         const double winkel = (klein ? 45.0 + i * 45.0 : 15.0 + i * 37.5) * kPiStil / 180.0;
-        const double r1 = r + (klein ? 5.0 : 4.5), r2 = r + (klein ? 10.0 : 9.5);
+        const double r1 = r + (klein ? 5.0 : 4.5);
+        const double r2 = r1 + ((klein ? 10.0 : 9.5) - (klein ? 5.0 : 4.5)) * anteil;
         p.drawLine(QPointF(m.x() + r1 * std::cos(winkel), m.y() - r1 * std::sin(winkel)),
                    QPointF(m.x() + r2 * std::cos(winkel), m.y() - r2 * std::sin(winkel)));
     }
@@ -580,11 +595,28 @@ void Stil::zeichneLogo(QPainter& p, const QRectF& ziel)
     // Horizont als Messkurve: steht für die Überwachung (Monitoring)
     p.setPen(QPen(weiss, klein ? 4.5 : 3.4, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     if (klein) {
-        p.drawLine(QPointF(10, 44), QPointF(54, 44));
+        p.drawLine(QPointF(10, 44), QPointF(10 + 44 * std::clamp(kurve, 0.0, 1.0), 44));
     } else {
-        const QPolygonF kurve({QPointF(11, 42), QPointF(24.5, 42), QPointF(28.5, 37.5), QPointF(34, 50),
-                               QPointF(38.5, 42), QPointF(53, 42)});
-        p.drawPolyline(kurve);
+        const QPolygonF punkte({QPointF(11, 42), QPointF(24.5, 42), QPointF(28.5, 37.5), QPointF(34, 50),
+                                QPointF(38.5, 42), QPointF(53, 42)});
+        // nur den gewünschten Anteil der Kurve zeichnen (von links nach rechts)
+        double gesamt = 0.0;
+        for (int i = 1; i < punkte.size(); ++i)
+            gesamt += QLineF(punkte[i - 1], punkte[i]).length();
+        double rest = std::clamp(kurve, 0.0, 1.0) * gesamt;
+        QPolygonF teil{punkte.first()};
+        for (int i = 1; i < punkte.size() && rest > 0.0; ++i) {
+            const QLineF strecke(punkte[i - 1], punkte[i]);
+            if (strecke.length() <= rest) {
+                teil.append(punkte[i]);
+                rest -= strecke.length();
+            } else {
+                teil.append(strecke.pointAt(rest / strecke.length()));
+                rest = 0.0;
+            }
+        }
+        if (teil.size() > 1)
+            p.drawPolyline(teil);
     }
     p.restore();
 }
