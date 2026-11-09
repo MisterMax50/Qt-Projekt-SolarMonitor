@@ -911,6 +911,76 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</translation>
     </message>
 </context>
 <context>
+    <name>DatenordnerSeite</name>
+    <message>
+        <location filename="../src/ui/datenordner_seite.cpp" line="+34"/>
+        <location line="+83"/>
+        <source>Datenordner festlegen</source>
+        <translation>Datenordner festlegen</translation>
+    </message>
+    <message>
+        <location line="-81"/>
+        <source>Wählen Sie den Ordner mit den Daten der PV-Flotte. Er muss mindestens die Datei &lt;b&gt;anlagen.csv&lt;/b&gt; enthalten; wetterstationen.csv, wechselrichter.csv, stoerungen.csv und die Verlaufsordner werden mitgeladen, wenn vorhanden.</source>
+        <translation>Wählen Sie den Ordner mit den Daten der PV-Flotte. Er muss mindestens die Datei &lt;b&gt;anlagen.csv&lt;/b&gt; enthalten; wetterstationen.csv, wechselrichter.csv, stoerungen.csv und die Verlaufsordner werden mitgeladen, wenn vorhanden.</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Pfad zum Datenordner</source>
+        <translation>Pfad zum Datenordner</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Durchsuchen …</source>
+        <translation>Durchsuchen …</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Die Wahl wird gespeichert und beim nächsten Start wieder verwendet.</source>
+        <translation>Die Wahl wird gespeichert und beim nächsten Start wieder verwendet.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Übernehmen</source>
+        <translation>Übernehmen</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location line="+52"/>
+        <source>Beenden</source>
+        <translation>Beenden</translation>
+    </message>
+    <message>
+        <location line="-3"/>
+        <source>Datenordner ändern</source>
+        <translation>Datenordner ändern</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Zurück</source>
+        <translation>Zurück</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Datenordner wählen</source>
+        <translation>Datenordner wählen</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Der Ordner existiert nicht.</source>
+        <translation>Der Ordner existiert nicht.</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>%1 Verlaufsordner</source>
+        <translation>%1 Verlaufsordner</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Ohne anlagen.csv kann der Ordner nicht verwendet werden.</source>
+        <translation>Ohne anlagen.csv kann der Ordner nicht verwendet werden.</translation>
+    </message>
+</context>
+<context>
     <name>DetailDialog</name>
     <message>
         <location filename="../src/ui/detail_dialog.cpp" line="+45"/>
@@ -1748,12 +1818,12 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="+322"/>
+        <location filename="../src/ui/mainwindow.cpp" line="+329"/>
         <source>SolarMonitor – Monitoring der PV-Flotte</source>
         <translation>SolarMonitor – Monitoring der PV-Flotte</translation>
     </message>
     <message>
-        <location line="+99"/>
+        <location line="+144"/>
         <source>Zustand der Flotte auf einen Blick</source>
         <translation>Zustand der Flotte auf einen Blick</translation>
     </message>
@@ -1839,7 +1909,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Angemeldet als %1</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+8"/>
         <source>&amp;Dunkles Design</source>
         <translation>&amp;Dunkles Design</translation>
     </message>
@@ -1915,13 +1985,13 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Filter zurücksetzen</translation>
     </message>
     <message>
-        <location line="-478"/>
+        <location line="-480"/>
         <location line="+196"/>
         <source>Übersicht</source>
         <translation>Übersicht</translation>
     </message>
     <message>
-        <location line="+193"/>
+        <location line="+195"/>
         <source>%1 Anlagen mit erkanntem Fehlerbild</source>
         <translation>%1 Anlagen mit erkanntem Fehlerbild</translation>
     </message>
@@ -2053,12 +2123,12 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Wiederholen: %1 (Strg+Y)</translation>
     </message>
     <message>
-        <location line="-521"/>
+        <location line="-523"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation>Benutzer &amp;wechseln …</translation>
     </message>
     <message>
-        <location line="+34"/>
+        <location line="+36"/>
         <source>&amp;Beenden</source>
         <translation>&amp;Beenden</translation>
     </message>
@@ -2124,12 +2194,12 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Anlage:</translation>
     </message>
     <message>
-        <location line="-547"/>
+        <location line="-549"/>
         <source>Exportieren</source>
         <translation>Exportieren</translation>
     </message>
     <message>
-        <location line="+708"/>
+        <location line="+710"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>Nur für die Rolle Administrator.</translation>
     </message>
@@ -2204,17 +2274,27 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Änderungsverlauf …</translation>
     </message>
     <message>
-        <location line="-893"/>
+        <location line="-940"/>
         <source>Anmeldung – SolarMonitor</source>
         <translation>Anmeldung – SolarMonitor</translation>
     </message>
     <message>
-        <location line="+309"/>
+        <location line="+44"/>
+        <source>Datenordner – SolarMonitor</source>
+        <translation>Datenordner – SolarMonitor</translation>
+    </message>
+    <message>
+        <location line="+310"/>
         <source>Auswertung</source>
         <translation>Auswertung</translation>
     </message>
     <message>
-        <location line="+94"/>
+        <location line="+83"/>
+        <source>Daten&amp;ordner ändern …</source>
+        <translation>Daten&amp;ordner ändern …</translation>
+    </message>
+    <message>
+        <location line="+13"/>
         <source>&amp;Intro beim Start</source>
         <translation>&amp;Intro beim Start</translation>
     </message>
@@ -2404,12 +2484,12 @@ Jetzt öffnen?</translation>
         <translation>&lt;Ausgangszustand nach dem Laden&gt;</translation>
     </message>
     <message>
-        <location line="-1288"/>
+        <location line="-1290"/>
         <source>Angemeldet als %1.</source>
         <translation>Angemeldet als %1.</translation>
     </message>
     <message>
-        <location line="+1307"/>
+        <location line="+1309"/>
         <source>Über SolarMonitor</source>
         <translation>Über SolarMonitor</translation>
     </message>
@@ -3831,31 +3911,19 @@ Gemessen wird auf dem Landweg um den Bodensee herum, nicht quer über das Wasser
 <context>
     <name>main</name>
     <message>
-        <location filename="../src/main.cpp" line="+104"/>
-        <source>Der Datenordner (mit anlagen.csv) wurde nicht gefunden. Bitte im nächsten Schritt auswählen.</source>
-        <translation>Der Datenordner (mit anlagen.csv) wurde nicht gefunden. Bitte im nächsten Schritt auswählen.</translation>
+        <location filename="../src/main.cpp" line="+114"/>
+        <source>Es wurde kein Datenordner mit anlagen.csv gefunden.</source>
+        <translation>Es wurde kein Datenordner mit anlagen.csv gefunden.</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location line="+16"/>
-        <source>Datenordner wählen</source>
-        <translation>Datenordner wählen</translation>
-    </message>
-    <message>
-        <location line="-6"/>
         <source>In %1 konnten keine Anlagen geladen werden:
-
-%2
-
-Einen anderen Datenordner wählen?</source>
+%2</source>
         <translation>In %1 konnten keine Anlagen geladen werden:
-
-%2
-
-Einen anderen Datenordner wählen?</translation>
+%2</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+11"/>
         <source>Kein Verlauf im Index – nur Stammdaten verfügbar.</source>
         <translation>Kein Verlauf im Index – nur Stammdaten verfügbar.</translation>
     </message>

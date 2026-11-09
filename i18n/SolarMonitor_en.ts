@@ -911,6 +911,76 @@ Click a dot to open the plant, use the mouse wheel to zoom.</translation>
     </message>
 </context>
 <context>
+    <name>DatenordnerSeite</name>
+    <message>
+        <location filename="../src/ui/datenordner_seite.cpp" line="+34"/>
+        <location line="+83"/>
+        <source>Datenordner festlegen</source>
+        <translation>Set data folder</translation>
+    </message>
+    <message>
+        <location line="-81"/>
+        <source>Wählen Sie den Ordner mit den Daten der PV-Flotte. Er muss mindestens die Datei &lt;b&gt;anlagen.csv&lt;/b&gt; enthalten; wetterstationen.csv, wechselrichter.csv, stoerungen.csv und die Verlaufsordner werden mitgeladen, wenn vorhanden.</source>
+        <translation>Select the folder containing the PV fleet data. It must contain at least the file &lt;b&gt;anlagen.csv&lt;/b&gt;; wetterstationen.csv, wechselrichter.csv, stoerungen.csv and the trend folders are loaded as well if present.</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Pfad zum Datenordner</source>
+        <translation>Path to the data folder</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Durchsuchen …</source>
+        <translation>Browse …</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Die Wahl wird gespeichert und beim nächsten Start wieder verwendet.</source>
+        <translation>The choice is saved and used again at the next start.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Übernehmen</source>
+        <translation>Apply</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location line="+52"/>
+        <source>Beenden</source>
+        <translation>Quit</translation>
+    </message>
+    <message>
+        <location line="-3"/>
+        <source>Datenordner ändern</source>
+        <translation>Change data folder</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Zurück</source>
+        <translation>Back</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Datenordner wählen</source>
+        <translation>Select data folder</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Der Ordner existiert nicht.</source>
+        <translation>The folder does not exist.</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>%1 Verlaufsordner</source>
+        <translation>%1 trend folders</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Ohne anlagen.csv kann der Ordner nicht verwendet werden.</source>
+        <translation>The folder cannot be used without anlagen.csv.</translation>
+    </message>
+</context>
+<context>
     <name>DetailDialog</name>
     <message>
         <location filename="../src/ui/detail_dialog.cpp" line="+45"/>
@@ -1748,12 +1818,12 @@ Administrator: additionally edit and export master data</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="+322"/>
+        <location filename="../src/ui/mainwindow.cpp" line="+329"/>
         <source>SolarMonitor – Monitoring der PV-Flotte</source>
         <translation>SolarMonitor – PV fleet monitoring</translation>
     </message>
     <message>
-        <location line="+99"/>
+        <location line="+144"/>
         <source>Zustand der Flotte auf einen Blick</source>
         <translation>Fleet status at a glance</translation>
     </message>
@@ -1839,7 +1909,7 @@ Administrator: additionally edit and export master data</translation>
         <translation>Signed in as %1</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+8"/>
         <source>&amp;Dunkles Design</source>
         <translation>&amp;Dark theme</translation>
     </message>
@@ -1915,13 +1985,13 @@ Administrator: additionally edit and export master data</translation>
         <translation>Reset filters</translation>
     </message>
     <message>
-        <location line="-478"/>
+        <location line="-480"/>
         <location line="+196"/>
         <source>Übersicht</source>
         <translation>Overview</translation>
     </message>
     <message>
-        <location line="+193"/>
+        <location line="+195"/>
         <source>%1 Anlagen mit erkanntem Fehlerbild</source>
         <translation>%1 plants with a detected fault pattern</translation>
     </message>
@@ -2053,12 +2123,12 @@ Administrator: additionally edit and export master data</translation>
         <translation>Redo: %1 (Ctrl+Y)</translation>
     </message>
     <message>
-        <location line="-521"/>
+        <location line="-523"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation>S&amp;witch user …</translation>
     </message>
     <message>
-        <location line="+34"/>
+        <location line="+36"/>
         <source>&amp;Beenden</source>
         <translation>&amp;Quit</translation>
     </message>
@@ -2124,12 +2194,12 @@ Administrator: additionally edit and export master data</translation>
         <translation>Plant:</translation>
     </message>
     <message>
-        <location line="-547"/>
+        <location line="-549"/>
         <source>Exportieren</source>
         <translation>Export</translation>
     </message>
     <message>
-        <location line="+708"/>
+        <location line="+710"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>Administrator role only.</translation>
     </message>
@@ -2204,17 +2274,27 @@ Administrator: additionally edit and export master data</translation>
         <translation>Change history …</translation>
     </message>
     <message>
-        <location line="-893"/>
+        <location line="-940"/>
         <source>Anmeldung – SolarMonitor</source>
         <translation>Sign in – SolarMonitor</translation>
     </message>
     <message>
-        <location line="+309"/>
+        <location line="+44"/>
+        <source>Datenordner – SolarMonitor</source>
+        <translation>Data folder – SolarMonitor</translation>
+    </message>
+    <message>
+        <location line="+310"/>
         <source>Auswertung</source>
         <translation>Analysis</translation>
     </message>
     <message>
-        <location line="+94"/>
+        <location line="+83"/>
+        <source>Daten&amp;ordner ändern …</source>
+        <translation>Change data &amp;folder …</translation>
+    </message>
+    <message>
+        <location line="+13"/>
         <source>&amp;Intro beim Start</source>
         <translation>&amp;Intro at startup</translation>
     </message>
@@ -2404,12 +2484,12 @@ Open it now?</translation>
         <translation>&lt;Initial state after loading&gt;</translation>
     </message>
     <message>
-        <location line="-1288"/>
+        <location line="-1290"/>
         <source>Angemeldet als %1.</source>
         <translation>Signed in as %1.</translation>
     </message>
     <message>
-        <location line="+1307"/>
+        <location line="+1309"/>
         <source>Über SolarMonitor</source>
         <translation>About SolarMonitor</translation>
     </message>
@@ -3831,31 +3911,19 @@ Measured over land around Lake Constance, not straight across the water.</transl
 <context>
     <name>main</name>
     <message>
-        <location filename="../src/main.cpp" line="+104"/>
-        <source>Der Datenordner (mit anlagen.csv) wurde nicht gefunden. Bitte im nächsten Schritt auswählen.</source>
-        <translation>The data folder (containing anlagen.csv) was not found. Please select it in the next step.</translation>
+        <location filename="../src/main.cpp" line="+114"/>
+        <source>Es wurde kein Datenordner mit anlagen.csv gefunden.</source>
+        <translation>No data folder containing anlagen.csv was found.</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location line="+16"/>
-        <source>Datenordner wählen</source>
-        <translation>Select data folder</translation>
-    </message>
-    <message>
-        <location line="-6"/>
         <source>In %1 konnten keine Anlagen geladen werden:
-
-%2
-
-Einen anderen Datenordner wählen?</source>
+%2</source>
         <translation>No plants could be loaded from %1:
-
-%2
-
-Select a different data folder?</translation>
+%2</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+11"/>
         <source>Kein Verlauf im Index – nur Stammdaten verfügbar.</source>
         <translation>No trend data in the index – only master data available.</translation>
     </message>

@@ -43,9 +43,19 @@ trägt CMake beim Bauen ein (`SOLARMONITOR_PROJEKTORDNER`). Auch
 Kartenkacheln und gespeicherte Routen landen dort. Findet das Programm den
 Ordner nicht (z. B. weil das Projekt nach dem Bauen verschoben wurde), sucht
 es neben der Exe, bis zu vier Ordnerebenen darüber und im
-Arbeitsverzeichnis; danach fragt es nach dem Ordner.
+Arbeitsverzeichnis.
 
-Kommandozeile: `--daten <ordner>` (Datenordner), `--lang de|en` (Startsprache).
+**Datenordner ändern:** Im Benutzermenü unter *Datenordner ändern …* lässt
+sich jederzeit ein anderer Ordner wählen (Pfad eintippen oder
+*Durchsuchen …*). Die Seite prüft sofort, ob `anlagen.csv` und die übrigen
+Dateien vorhanden sind. Nach *Übernehmen* werden Daten, Auswertung und
+Oberfläche neu aufgebaut, die Anmeldung bleibt bestehen; die Wahl wird
+gespeichert (QSettings) und hat beim nächsten Start Vorrang vor der Suche.
+Werden beim Start keine Daten gefunden, erscheint dieselbe Seite direkt nach
+der Anmeldung (`src/ui/datenordner_seite.*`).
+
+Kommandozeile: `--daten <ordner>` (Datenordner), `--lang de|en|fr|zh`
+(Startsprache), `--kein-intro`.
 
 ## Anmeldung (Rollen)
 
@@ -232,7 +242,7 @@ Nutzung gedacht).
 
 ```
 src/
-├── main.cpp          Start: Datenordner, Laden, Login, Hauptfenster
+├── main.cpp          Start: Datenordner suchen, Laden, Hauptfenster (neu bei Ordnerwechsel)
 ├── model/            Datenklassen, Datenbasis (CSV laden/prüfen/exportieren), Rollen
 ├── repo/             CSV-Leser, Verlaufsindex + JSON-Parser + LRU-Cache
 ├── eval/             Ertragsauswertung, Flottenanalyse, Tourenplanung, Schwellwerte

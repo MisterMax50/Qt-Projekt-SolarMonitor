@@ -57,6 +57,7 @@
 #include "ui/karte_view.h"
 #include "ui/intro_animation.h"
 #include "ui/login_seite.h"
+#include "ui/datenordner_seite.h"
 #include "ui/pdf_bericht.h"
 #include "ui/pruefprotokoll_widget.h"
 #include "ui/serviceplanung.h"
@@ -232,9 +233,12 @@ QIcon avatar(const QString& name)
 }
 } // namespace
 
-MainWindow::MainWindow(const AppKontext& kontext, QWidget* parent)
+MainWindow::MainWindow(const AppKontext& kontext, const QString& datenFehler, const QString& datenOrdner,
+                       QWidget* parent)
     : QMainWindow(parent)
     , m_kontext(kontext)
+    , m_datenFehler(datenFehler)
+    , m_datenOrdner(datenOrdner)
 {
     m_anlageModel = new AnlageModel(m_kontext, this);
     m_anlageFilter = new AnlageFilterModel(this);
@@ -293,13 +297,16 @@ void MainWindow::neueLoginSeite()
     });
 }
 
-void MainWindow::starte(bool mitIntro)
+void MainWindow::starte(bool mitIntro, std::optional<Rolle> rolle)
 {
     if (QSettings().value(QStringLiteral("vollbild"), true).toBool())
         showFullScreen();
     else
         showMaximized();
-    if (mitIntro) {
+    if (rolle) {
+        // Neu geladen nach Wechsel des Datenordners: angemeldet bleiben
+        angemeldet(*rolle);
+    } else if (mitIntro) {
         m_ebenen->setCurrentWidget(m_intro);
         m_intro->starte();
     } else {
@@ -323,8 +330,53 @@ void MainWindow::zeigeProgramm()
     m_ebenen->setCurrentWidget(m_programm);
 }
 
+std::optional<Rolle> MainWindow::angemeldeteRolle() const
+{
+    return m_angemeldet ? std::optional<Rolle>(m_kontext.rolle) : std::nullopt;
+}
+
+void MainWindow::zeigeDatenordner(const QString& fehler, bool zurueckMoeglich)
+{
+    // Seite jedes Mal neu erzeugen, damit sie der aktuellen Sprache folgt
+    if (m_ordnerSeite) {
+        m_ebenen->removeWidget(m_ordnerSeite);
+        m_ordnerSeite->deleteLater();
+    }
+    m_ordnerSeite = new DatenordnerSeite;
+    m_ebenen->addWidget(m_ordnerSeite);
+    connect(m_ordnerSeite, &DatenordnerSeite::abgebrochen, this, [this] {
+        if (m_programm)
+            zeigeProgramm();
+        else
+            close();
+    });
+    connect(m_ordnerSeite, &DatenordnerSeite::ordnerGewaehlt, this, [this](const QString& ordner) {
+        QSettings().setValue(QStringLiteral("datenordner"), ordner);
+        if (m_programm && QDir(ordner) == QDir(m_datenOrdner)) {
+            zeigeProgramm(); // unverändert
+            return;
+        }
+        // Daten, Auswertung und Fenster neu aufbauen (siehe main.cpp)
+        QSettings().setValue(QStringLiteral("fenster"), saveGeometry());
+        qApp->exit(kNeuLaden);
+    });
+    setWindowTitle(tr("Datenordner – SolarMonitor"));
+    if (m_toast)
+        m_toast->hide();
+    m_ordnerSeite->vorbereiten(m_datenOrdner, fehler, zurueckMoeglich);
+    m_ebenen->setCurrentWidget(m_ordnerSeite);
+    m_ordnerSeite->vorbereiten(m_datenOrdner, fehler, zurueckMoeglich);
+}
+
 void MainWindow::angemeldet(Rolle rolle)
 {
+    m_angemeldet = true;
+    if (!m_datenFehler.isEmpty()) {
+        // Keine Daten: erst den Datenordner festlegen lassen
+        m_kontext.rolle = rolle;
+        zeigeDatenordner(m_datenFehler, false);
+        return;
+    }
     const bool wechsel = m_programm != nullptr;
     // Die neue Rolle darf die Änderungen der vorherigen nicht rückgängig machen
     if (wechsel && rolle != m_kontext.rolle)
@@ -701,6 +753,8 @@ QWidget* MainWindow::baueKopfzeile()
     menue->addAction(Stil::icon(Stil::Symbol::Benutzer, Stil::text()), tr("Benutzer &wechseln …"), this,
                      &MainWindow::benutzerWechseln);
     menue->addAction(m_aktVerlauf);
+    menue->addAction(Stil::icon(Stil::Symbol::Liste, Stil::text()), tr("Daten&ordner ändern …"), this,
+                     [this] { zeigeDatenordner(QString(), true); });
     menue->addSeparator();
     QAction* dunkel = menue->addAction(Stil::icon(Stil::Symbol::Mond, Stil::text()), tr("&Dunkles Design"));
     dunkel->setCheckable(true);

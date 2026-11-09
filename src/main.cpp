@@ -1,13 +1,11 @@
 #include <memory>
+#include <optional>
 
 #include <QApplication>
 #include <QCommandLineParser>
 #include <QDir>
-#include <QFileDialog>
 #include <QFileInfo>
-#include <QMessageBox>
 #include <QSettings>
-#include <QTimer>
 
 #include "eval/flotten_analyse.h"
 #include "model/datenbasis.h"
@@ -26,10 +24,11 @@ bool istDatenordner(const QString& ordner)
 /**
  * Sucht den Datenordner in dieser Reihenfolge:
  *  1. Ordner aus --daten
- *  2. data/ im Projektordner (Ordner mit CMakeLists.txt). Der Pfad
+ *  2. der zuletzt in der App gewählte Ordner (QSettings "datenordner")
+ *  3. data/ im Projektordner (Ordner mit CMakeLists.txt). Der Pfad
  *     wird beim Bauen als SOLARMONITOR_PROJEKTORDNER eingetragen; die CSV-
  *     Dateien müssen daher nicht in den Build-Ordner kopiert werden.
- *  3. Relativ zur Exe: daneben und bis zu vier Ebenen darüber, danach im
+ *  4. Relativ zur Exe: daneben und bis zu vier Ebenen darüber, danach im
  *     Arbeitsverzeichnis (falls das Projekt verschoben oder die Exe
  *     weitergegeben wurde).
  */
@@ -37,6 +36,9 @@ QString findeDatenordner(const QString& vorgabe)
 {
     if (istDatenordner(vorgabe))
         return QDir(vorgabe).absolutePath();
+    const QString gespeichert = QSettings().value(QStringLiteral("datenordner")).toString();
+    if (istDatenordner(gespeichert))
+        return QDir(gespeichert).absolutePath();
 
 #ifdef SOLARMONITOR_PROJEKTORDNER
     const QString projektDaten =
@@ -97,57 +99,54 @@ int main(int argc, char* argv[])
     Sprache::setze(parser.isSet(spracheOpt) ? parser.value(spracheOpt).toLower()
                                             : einstellungen.value(QStringLiteral("sprache"), QStringLiteral("de")).toString());
 
-    // ---------- Datenordner ----------
-    QString ordner = findeDatenordner(parser.value(datenOpt));
-    if (ordner.isEmpty()) {
-        QMessageBox::information(nullptr, QStringLiteral("SolarMonitor"),
-                                 QCoreApplication::translate("main", "Der Datenordner (mit anlagen.csv) wurde nicht "
-                                                                     "gefunden. Bitte im nächsten Schritt auswählen."));
-        ordner = QFileDialog::getExistingDirectory(nullptr, QCoreApplication::translate("main", "Datenordner wählen"));
+    // Wird in der App ein anderer Datenordner gewählt, endet die
+    // Ereignisschleife mit MainWindow::kNeuLaden: Daten, Auswertung und
+    // Fenster werden dann neu aufgebaut, die Anmeldung bleibt bestehen.
+    bool ersterDurchlauf = true;
+    std::optional<Rolle> rolle;
+    int ergebnis = 0;
+    do {
+        // ---------- Datenordner und Stammdaten ----------
+        const QString ordner = findeDatenordner(ersterDurchlauf ? parser.value(datenOpt) : QString());
+        auto daten = std::make_unique<Datenbasis>();
+        QString datenFehler;
         if (ordner.isEmpty())
-            return 1;
-    }
+            datenFehler = QCoreApplication::translate("main", "Es wurde kein Datenordner mit anlagen.csv gefunden.");
+        else if (!daten->lade(ordner))
+            datenFehler = QCoreApplication::translate("main", "In %1 konnten keine Anlagen geladen werden:\n%2")
+                              .arg(QDir::toNativeSeparators(ordner), fehlerText(*daten));
 
-    // ---------- Stammdaten ----------
-    auto daten = std::make_unique<Datenbasis>();
-    while (!daten->lade(ordner)) {
-        const auto antwort = QMessageBox::critical(
-            nullptr, QStringLiteral("SolarMonitor"),
-            QCoreApplication::translate("main", "In %1 konnten keine Anlagen geladen werden:\n\n%2\n\n"
-                                                "Einen anderen Datenordner wählen?")
-                .arg(QDir::toNativeSeparators(ordner), fehlerText(*daten)),
-            QMessageBox::Yes | QMessageBox::Cancel);
-        if (antwort != QMessageBox::Yes)
-            return 1;
-        ordner = QFileDialog::getExistingDirectory(nullptr, QCoreApplication::translate("main", "Datenordner wählen"), ordner);
-        if (ordner.isEmpty())
-            return 1;
-    }
+        // ---------- Verlaufsindex (die JSON-Dateien selbst werden erst bei Bedarf geladen) ----------
+        auto verlaeufe = std::make_unique<VerlaufRepository>();
+        if (datenFehler.isEmpty()) {
+            verlaeufe->ladeIndex(daten->datenOrdner());
+            QVector<Pruefmeldung> meldungen = verlaeufe->indexMeldungen();
+            for (const Anlage& a : daten->anlagen())
+                if (!verlaeufe->istEingetragen(a.anlageId))
+                    meldungen.append({Pruefmeldung::Stufe::Info, QStringLiteral("master_verlauf_index.csv"), 0, a.anlageId,
+                                      QCoreApplication::translate("main", "Kein Verlauf im Index – nur Stammdaten verfügbar.")});
+            for (const QString& id : verlaeufe->anlagenMitVerlauf())
+                if (!daten->anlage(id))
+                    meldungen.append({Pruefmeldung::Stufe::Info, QStringLiteral("master_verlauf_index.csv"), 0, id,
+                                      QCoreApplication::translate("main", "Verlauf vorhanden, aber keine Stammdaten in anlagen.csv.")});
+            daten->ergaenzeMeldungen(meldungen);
+        }
 
-    // ---------- Verlaufsindex (die JSON-Dateien selbst werden erst bei Bedarf geladen) ----------
-    auto verlaeufe = std::make_unique<VerlaufRepository>();
-    verlaeufe->ladeIndex(daten->datenOrdner());
-    QVector<Pruefmeldung> meldungen = verlaeufe->indexMeldungen();
-    for (const Anlage& a : daten->anlagen())
-        if (!verlaeufe->istEingetragen(a.anlageId))
-            meldungen.append({Pruefmeldung::Stufe::Info, QStringLiteral("master_verlauf_index.csv"), 0, a.anlageId,
-                              QCoreApplication::translate("main", "Kein Verlauf im Index – nur Stammdaten verfügbar.")});
-    for (const QString& id : verlaeufe->anlagenMitVerlauf())
-        if (!daten->anlage(id))
-            meldungen.append({Pruefmeldung::Stufe::Info, QStringLiteral("master_verlauf_index.csv"), 0, id,
-                              QCoreApplication::translate("main", "Verlauf vorhanden, aber keine Stammdaten in anlagen.csv.")});
-    daten->ergaenzeMeldungen(meldungen);
+        // ---------- Hauptfenster: Intro → Anmeldung → (Datenordner) → Programm ----------
+        auto analyse = std::make_unique<FlottenAnalyse>(daten.get(), verlaeufe.get());
+        AppKontext kontext;
+        kontext.daten = daten.get();
+        kontext.verlaeufe = verlaeufe.get();
+        kontext.analyse = analyse.get();
 
-    // ---------- Hauptfenster: Intro → Anmeldung → Programm in einem Fenster ----------
-    auto analyse = std::make_unique<FlottenAnalyse>(daten.get(), verlaeufe.get());
-    AppKontext kontext;
-    kontext.daten = daten.get();
-    kontext.verlaeufe = verlaeufe.get();
-    kontext.analyse = analyse.get();
-
-    MainWindow fenster(kontext);
-    // Intro abschaltbar im Benutzermenü oder mit --kein-intro
-    fenster.starte(!parser.isSet(ohneIntroOpt) && einstellungen.value(QStringLiteral("intro"), true).toBool());
-
-    return app.exec();
+        MainWindow fenster(kontext, datenFehler, ordner);
+        // Intro nur beim ersten Start; abschaltbar im Benutzermenü oder mit --kein-intro
+        fenster.starte(ersterDurchlauf && !parser.isSet(ohneIntroOpt)
+                           && einstellungen.value(QStringLiteral("intro"), true).toBool(),
+                       rolle);
+        ergebnis = app.exec();
+        rolle = fenster.angemeldeteRolle();
+        ersterDurchlauf = false;
+    } while (ergebnis == MainWindow::kNeuLaden);
+    return ergebnis;
 }

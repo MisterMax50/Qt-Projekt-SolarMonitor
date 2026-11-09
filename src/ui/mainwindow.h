@@ -1,5 +1,7 @@
 #pragma once
 
+#include <optional>
+
 #include <QMainWindow>
 
 #include "ui/app_kontext.h"
@@ -27,7 +29,8 @@ class StoerungModel;
  * @brief Hauptfenster von SolarMonitor.
  *
  * Alles läuft in diesem einen Fenster: zuerst das Logo-Intro, dann die
- * Anmeldung, danach das Programm (QStackedWidget mit drei Ebenen).
+ * Anmeldung, falls keine Daten gefunden wurden die Seite zum Festlegen des
+ * Datenordners, danach das Programm (QStackedWidget mit Ebenen).
  *
  * Aufbau wie ein Monitoring-Portal für Solarparks: dunkle Seitenleiste
  * mit den Seiten (Übersicht · Anlagen · Störungen · Karte · Statistik ·
@@ -43,13 +46,24 @@ class StoerungModel;
 class MainWindow : public QMainWindow {
     Q_OBJECT
 public:
-    explicit MainWindow(const AppKontext& kontext, QWidget* parent = nullptr);
+    /// Rückgabewert der Ereignisschleife: Datenordner gewechselt, alles neu laden.
+    static constexpr int kNeuLaden = 1000;
+
+    /**
+     * @param datenFehler leer = Daten geladen; sonst der Grund, warum nicht –
+     *        dann folgt nach der Anmeldung die Seite "Datenordner festlegen".
+     * @param datenOrdner aktueller (bzw. zuletzt versuchter) Datenordner
+     */
+    MainWindow(const AppKontext& kontext, const QString& datenFehler = QString(),
+               const QString& datenOrdner = QString(), QWidget* parent = nullptr);
 
     /**
      * @brief Fenster anzeigen (Vollbild oder maximiert, je nach letzter Wahl)
      *        und mit dem Intro bzw. direkt mit der Anmeldung beginnen.
      */
-    void starte(bool mitIntro);
+    void starte(bool mitIntro, std::optional<Rolle> rolle = std::nullopt);
+    /// Angemeldete Rolle, falls bereits angemeldet (bleibt beim Neuladen erhalten).
+    std::optional<Rolle> angemeldeteRolle() const;
 
 protected:
     void changeEvent(QEvent* event) override;
@@ -97,6 +111,7 @@ private:
     void neueLoginSeite();
     void zeigeAnmeldung(bool wechsel);
     void zeigeProgramm();
+    void zeigeDatenordner(const QString& fehler, bool zurueckMoeglich);
     void erzeugeAktionen();
     /// Dunkle Seitenleiste mit Marke, Navigation und Analysezustand.
     QWidget* baueNavigation();
@@ -145,6 +160,10 @@ private:
     class IntroAnimation* m_intro = nullptr;
     class LoginSeite*  m_login = nullptr;
     QWidget*           m_programm = nullptr; ///< Oberfläche nach der Anmeldung (wird neu aufgebaut)
+    class DatenordnerSeite* m_ordnerSeite = nullptr;
+    QString            m_datenFehler;
+    QString            m_datenOrdner;
+    bool               m_angemeldet = false;
 
     // werden bei baueUi() neu erzeugt
     QStackedWidget* m_tabs = nullptr;     ///< Seiten, gesteuert über die Seitenleiste

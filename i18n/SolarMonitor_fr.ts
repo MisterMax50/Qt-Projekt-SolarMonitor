@@ -911,6 +911,76 @@ Cliquez sur un point pour ouvrir l&apos;installation, molette pour zoomer.</tran
     </message>
 </context>
 <context>
+    <name>DatenordnerSeite</name>
+    <message>
+        <location filename="../src/ui/datenordner_seite.cpp" line="34"/>
+        <location filename="../src/ui/datenordner_seite.cpp" line="117"/>
+        <source>Datenordner festlegen</source>
+        <translation>Définir le dossier de données</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/datenordner_seite.cpp" line="36"/>
+        <source>Wählen Sie den Ordner mit den Daten der PV-Flotte. Er muss mindestens die Datei &lt;b&gt;anlagen.csv&lt;/b&gt; enthalten; wetterstationen.csv, wechselrichter.csv, stoerungen.csv und die Verlaufsordner werden mitgeladen, wenn vorhanden.</source>
+        <translation>Choisissez le dossier contenant les données du parc PV. Il doit contenir au moins le fichier &lt;b&gt;anlagen.csv&lt;/b&gt; ; wetterstationen.csv, wechselrichter.csv, stoerungen.csv et les dossiers de courbes sont également chargés s&apos;ils existent.</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/datenordner_seite.cpp" line="51"/>
+        <source>Pfad zum Datenordner</source>
+        <translation>Chemin du dossier de données</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/datenordner_seite.cpp" line="53"/>
+        <source>Durchsuchen …</source>
+        <translation>Parcourir …</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/datenordner_seite.cpp" line="63"/>
+        <source>Die Wahl wird gespeichert und beim nächsten Start wieder verwendet.</source>
+        <translation>Le choix est enregistré et réutilisé au prochain démarrage.</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/datenordner_seite.cpp" line="66"/>
+        <source>Übernehmen</source>
+        <translation>Appliquer</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/datenordner_seite.cpp" line="68"/>
+        <location filename="../src/ui/datenordner_seite.cpp" line="120"/>
+        <source>Beenden</source>
+        <translation>Quitter</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/datenordner_seite.cpp" line="117"/>
+        <source>Datenordner ändern</source>
+        <translation>Changer de dossier de données</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/datenordner_seite.cpp" line="120"/>
+        <source>Zurück</source>
+        <translation>Retour</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/datenordner_seite.cpp" line="129"/>
+        <source>Datenordner wählen</source>
+        <translation>Choisir le dossier de données</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/datenordner_seite.cpp" line="145"/>
+        <source>Der Ordner existiert nicht.</source>
+        <translation>Le dossier n&apos;existe pas.</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/datenordner_seite.cpp" line="158"/>
+        <source>%1 Verlaufsordner</source>
+        <translation>%1 dossiers de courbes</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/datenordner_seite.cpp" line="161"/>
+        <source>Ohne anlagen.csv kann der Ordner nicht verwendet werden.</source>
+        <translation>Sans anlagen.csv, le dossier ne peut pas être utilisé.</translation>
+    </message>
+</context>
+<context>
     <name>DetailDialog</name>
     <message>
         <location filename="../src/ui/detail_dialog.cpp" line="45"/>
@@ -1748,627 +1818,637 @@ Administrateur : en plus, modifier et exporter les données de base</translation
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="312"/>
+        <location filename="../src/ui/mainwindow.cpp" line="319"/>
         <source>Anmeldung – SolarMonitor</source>
         <translation>Connexion – SolarMonitor</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="322"/>
+        <location filename="../src/ui/mainwindow.cpp" line="329"/>
         <source>SolarMonitor – Monitoring der PV-Flotte</source>
         <translation>SolarMonitor – Surveillance du parc PV</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="338"/>
+        <location filename="../src/ui/mainwindow.cpp" line="363"/>
+        <source>Datenordner – SolarMonitor</source>
+        <translation>Dossier de données – SolarMonitor</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/mainwindow.cpp" line="390"/>
         <source>Angemeldet als %1.</source>
         <translation>Connecté en tant que %1.</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="421"/>
-        <location filename="../src/ui/mainwindow.cpp" line="617"/>
+        <location filename="../src/ui/mainwindow.cpp" line="473"/>
+        <location filename="../src/ui/mainwindow.cpp" line="669"/>
         <source>Übersicht</source>
         <translation>Vue d&apos;ensemble</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="421"/>
+        <location filename="../src/ui/mainwindow.cpp" line="473"/>
         <source>Zustand der Flotte auf einen Blick</source>
         <translation>État du parc en un coup d&apos;œil</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="430"/>
-        <location filename="../src/ui/mainwindow.cpp" line="618"/>
+        <location filename="../src/ui/mainwindow.cpp" line="482"/>
+        <location filename="../src/ui/mainwindow.cpp" line="670"/>
         <source>Anlagen</source>
         <translation>Installations</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="430"/>
+        <location filename="../src/ui/mainwindow.cpp" line="482"/>
         <source>Alle PV-Anlagen der Flotte · Doppelklick öffnet die Details</source>
         <translation>Toutes les installations PV du parc · double-clic pour les détails</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="434"/>
-        <location filename="../src/ui/mainwindow.cpp" line="619"/>
+        <location filename="../src/ui/mainwindow.cpp" line="486"/>
+        <location filename="../src/ui/mainwindow.cpp" line="671"/>
         <source>Störungen</source>
         <translation>Pannes</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="434"/>
+        <location filename="../src/ui/mainwindow.cpp" line="486"/>
         <source>Störungsmeldungen seit 2024 · Rechtsklick ändert den Status</source>
         <translation>Signalements de pannes depuis 2024 · clic droit pour changer le statut</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="440"/>
-        <location filename="../src/ui/mainwindow.cpp" line="620"/>
+        <location filename="../src/ui/mainwindow.cpp" line="492"/>
+        <location filename="../src/ui/mainwindow.cpp" line="672"/>
         <source>Karte</source>
         <translation>Carte</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="440"/>
+        <location filename="../src/ui/mainwindow.cpp" line="492"/>
         <source>Lage der Anlagen und Wetterstationen · Mausrad zoomt, Klick öffnet eine Anlage</source>
         <translation>Emplacement des installations et stations météo · molette pour zoomer, clic pour ouvrir</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="443"/>
-        <location filename="../src/ui/mainwindow.cpp" line="622"/>
+        <location filename="../src/ui/mainwindow.cpp" line="495"/>
+        <location filename="../src/ui/mainwindow.cpp" line="674"/>
         <source>Statistik</source>
         <translation>Statistiques</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="443"/>
+        <location filename="../src/ui/mainwindow.cpp" line="495"/>
         <source>Kennzahlen und Auswertungen über die gesamte Flotte</source>
         <translation>Indicateurs et analyses sur l&apos;ensemble du parc</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="454"/>
-        <location filename="../src/ui/mainwindow.cpp" line="623"/>
+        <location filename="../src/ui/mainwindow.cpp" line="506"/>
+        <location filename="../src/ui/mainwindow.cpp" line="675"/>
         <source>Serviceplanung</source>
         <translation>Planification</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="455"/>
+        <location filename="../src/ui/mainwindow.cpp" line="507"/>
         <source>Welche Anlagen zuerst? Sortiert nach Priorität und geschätztem Ertragsverlust</source>
         <translation>Quelles installations d&apos;abord ? Triées par priorité et perte de production estimée</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="460"/>
-        <location filename="../src/ui/mainwindow.cpp" line="624"/>
+        <location filename="../src/ui/mainwindow.cpp" line="512"/>
+        <location filename="../src/ui/mainwindow.cpp" line="676"/>
         <source>Datenprüfung</source>
         <translation>Contrôle des données</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="461"/>
+        <location filename="../src/ui/mainwindow.cpp" line="513"/>
         <source>Auffälligkeiten beim Einlesen der Dateien und automatische Korrekturen</source>
         <translation>Anomalies détectées au chargement des fichiers et corrections automatiques</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="548"/>
+        <location filename="../src/ui/mainwindow.cpp" line="600"/>
         <source>Exportieren</source>
         <translation>Exporter</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="583"/>
+        <location filename="../src/ui/mainwindow.cpp" line="635"/>
         <source>PV-Flotte Bodensee</source>
         <translation>Parc PV Lac de Constance</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="616"/>
+        <location filename="../src/ui/mainwindow.cpp" line="668"/>
         <source>Überwachung</source>
         <translation>Surveillance</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="621"/>
+        <location filename="../src/ui/mainwindow.cpp" line="673"/>
         <source>Auswertung</source>
         <translation>Analyse</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="699"/>
+        <location filename="../src/ui/mainwindow.cpp" line="751"/>
         <source>Angemeldet als %1</source>
         <translation>Connecté en tant que %1</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="701"/>
+        <location filename="../src/ui/mainwindow.cpp" line="753"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation>&amp;Changer d&apos;utilisateur …</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="705"/>
+        <location filename="../src/ui/mainwindow.cpp" line="756"/>
+        <source>Daten&amp;ordner ändern …</source>
+        <translation>Changer le &amp;dossier de données …</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/mainwindow.cpp" line="759"/>
         <source>&amp;Dunkles Design</source>
         <translation>&amp;Thème sombre</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="709"/>
+        <location filename="../src/ui/mainwindow.cpp" line="763"/>
         <source>&amp;Vollbild</source>
         <translation>&amp;Plein écran</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="715"/>
+        <location filename="../src/ui/mainwindow.cpp" line="769"/>
         <source>&amp;Intro beim Start</source>
         <translation>&amp;Intro au démarrage</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="718"/>
+        <location filename="../src/ui/mainwindow.cpp" line="772"/>
         <source>Logo-Animation beim Programmstart zeigen</source>
         <translation>Afficher l&apos;animation du logo au démarrage du programme</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="720"/>
+        <location filename="../src/ui/mainwindow.cpp" line="774"/>
         <source>&amp;Sprache</source>
         <translation>&amp;Langue</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="730"/>
+        <location filename="../src/ui/mainwindow.cpp" line="784"/>
         <source>Die Übersetzung konnte nicht geladen werden.</source>
         <translation>La traduction n&apos;a pas pu être chargée.</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="734"/>
+        <location filename="../src/ui/mainwindow.cpp" line="788"/>
         <source>&amp;Über SolarMonitor</source>
         <translation>À &amp;propos de SolarMonitor</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="735"/>
+        <location filename="../src/ui/mainwindow.cpp" line="789"/>
         <source>&amp;Beenden</source>
         <translation>&amp;Quitter</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="754"/>
+        <location filename="../src/ui/mainwindow.cpp" line="808"/>
         <source>SolarMonitor beenden (Strg+Q)</source>
         <translation>Quitter SolarMonitor (Ctrl+Q)</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="805"/>
+        <location filename="../src/ui/mainwindow.cpp" line="859"/>
         <source>%1 offene Störungen, davon %2 kritisch</source>
         <translation>%1 pannes ouvertes, dont %2 critiques</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="810"/>
+        <location filename="../src/ui/mainwindow.cpp" line="864"/>
         <source>%1 Anlagen mit erkanntem Fehlerbild</source>
         <translation>%1 installations avec défaut détecté</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="812"/>
+        <location filename="../src/ui/mainwindow.cpp" line="866"/>
         <source>%1 Fehler beim Einlesen</source>
         <translation>%1 erreurs au chargement</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="816"/>
+        <location filename="../src/ui/mainwindow.cpp" line="870"/>
         <source>%1 kritische Störungen offen – anzeigen</source>
         <translation>%1 pannes critiques ouvertes – afficher</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="817"/>
+        <location filename="../src/ui/mainwindow.cpp" line="871"/>
         <source>Keine kritischen Störungen offen</source>
         <translation>Aucune panne critique ouverte</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="848"/>
+        <location filename="../src/ui/mainwindow.cpp" line="902"/>
         <source>Filter zurücksetzen (%1)</source>
         <translation>Réinitialiser les filtres (%1)</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="848"/>
-        <location filename="../src/ui/mainwindow.cpp" line="899"/>
+        <location filename="../src/ui/mainwindow.cpp" line="902"/>
+        <location filename="../src/ui/mainwindow.cpp" line="953"/>
         <source>Filter zurücksetzen</source>
         <translation>Réinitialiser les filtres</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="858"/>
+        <location filename="../src/ui/mainwindow.cpp" line="912"/>
         <source>Anlagen durchsuchen (Strg+F)</source>
         <translation>Rechercher des installations (Ctrl+F)</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="859"/>
+        <location filename="../src/ui/mainwindow.cpp" line="913"/>
         <source>Sucht in Anlagen-ID, Ort und Wetterstation</source>
         <translation>Recherche dans l&apos;ID, le lieu et la station météo</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="864"/>
+        <location filename="../src/ui/mainwindow.cpp" line="918"/>
         <source>Alle Status</source>
         <translation>Tous les statuts</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="870"/>
+        <location filename="../src/ui/mainwindow.cpp" line="924"/>
         <source>Alle Typen</source>
         <translation>Tous les types</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="876"/>
+        <location filename="../src/ui/mainwindow.cpp" line="930"/>
         <source>Alle Orte</source>
         <translation>Tous les lieux</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="887"/>
+        <location filename="../src/ui/mainwindow.cpp" line="941"/>
         <source>beliebig</source>
         <translation>indifférent</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="888"/>
+        <location filename="../src/ui/mainwindow.cpp" line="942"/>
         <source>0 = keine Grenze</source>
         <translation>0 = aucune limite</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="893"/>
+        <location filename="../src/ui/mainwindow.cpp" line="947"/>
         <source>nur mit Fehlerbild</source>
         <translation>uniquement avec défaut détecté</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="895"/>
+        <location filename="../src/ui/mainwindow.cpp" line="949"/>
         <source>Anlagen, bei denen die Flottenanalyse ein Fehlerbild erkannt hat</source>
         <translation>Installations pour lesquelles l&apos;analyse du parc a détecté un défaut</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="896"/>
+        <location filename="../src/ui/mainwindow.cpp" line="950"/>
         <source>nur mit offenen Störungen</source>
         <translation>uniquement avec pannes ouvertes</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="908"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1089"/>
+        <location filename="../src/ui/mainwindow.cpp" line="962"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1143"/>
         <source>Status:</source>
         <translation>Statut :</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="911"/>
+        <location filename="../src/ui/mainwindow.cpp" line="965"/>
         <source>Typ:</source>
         <translation>Type :</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="914"/>
+        <location filename="../src/ui/mainwindow.cpp" line="968"/>
         <source>Ort:</source>
         <translation>Lieu :</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="917"/>
+        <location filename="../src/ui/mainwindow.cpp" line="971"/>
         <source>Leistung:</source>
         <translation>Puissance :</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1025"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1079"/>
         <source>Keine Anlage entspricht den gewählten Filtern.</source>
         <translation>Aucune installation ne correspond aux filtres choisis.</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1058"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1112"/>
         <source>Suche nach Störung, Anlage, Code oder Beschreibung</source>
         <translation>Rechercher par panne, installation, code ou description</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1062"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1116"/>
         <source>Alle</source>
         <translation>Toutes</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1063"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1117"/>
         <source>Offen + in Bearbeitung</source>
         <translation>Ouvertes + en cours</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1070"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1124"/>
         <source>Alle Schweregrade</source>
         <translation>Toutes les gravités</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1076"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1130"/>
         <source>Anlage, z. B. P00051</source>
         <translation>Installation, p. ex. P00051</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1092"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1146"/>
         <source>Schwere:</source>
         <translation>Gravité :</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1095"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1149"/>
         <source>Anlage:</source>
         <translation>Installation :</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1143"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1197"/>
         <source>Keine Störung entspricht den gewählten Filtern.</source>
         <translation>Aucune panne ne correspond aux filtres choisis.</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1167"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1221"/>
         <source>&amp;Details …</source>
         <translation>&amp;Détails …</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1175"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1229"/>
         <source>Stammdaten &amp;bearbeiten …</source>
         <translation>&amp;Modifier les données de base …</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1181"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1235"/>
         <source>Störung &amp;erfassen …</source>
         <translation>&amp;Saisir une panne …</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1187"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1241"/>
         <source>&amp;Anlagen exportieren …</source>
         <translation>Exporter les &amp;installations …</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1189"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1243"/>
         <source>&amp;Störungen exportieren …</source>
         <translation>Exporter les &amp;pannes …</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1191"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1245"/>
         <source>&amp;Ertragsbericht exportieren …</source>
         <translation>Exporter le rapport de &amp;production …</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1194"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1248"/>
         <source>Anlagenbericht als &amp;PDF …</source>
         <translation>Rapport d&apos;installation en &amp;PDF …</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1199"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1253"/>
         <source>&amp;Flottenbericht als PDF …</source>
         <translation>Rapport du &amp;parc en PDF …</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1202"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1256"/>
         <source>Analyse neu starten</source>
         <translation>Relancer l&apos;analyse</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1203"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1257"/>
         <source>Verläufe aller Anlagen erneut auswerten</source>
         <translation>Réanalyser les courbes de toutes les installations</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1205"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1259"/>
         <source>Änderungsverlauf …</source>
         <translation>Historique des modifications …</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1209"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1218"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1263"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1272"/>
         <source>&amp;Rückgängig</source>
         <translation>&amp;Annuler</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1211"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1221"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1265"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1275"/>
         <source>&amp;Wiederholen</source>
         <translation>&amp;Rétablir</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1218"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1272"/>
         <source>&amp;Rückgängig: %1</source>
         <translation>&amp;Annuler : %1</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1219"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1273"/>
         <source>Nichts rückgängig zu machen</source>
         <translation>Rien à annuler</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1219"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1273"/>
         <source>Rückgängig: %1 (Strg+Z)</source>
         <translation>Annuler : %1 (Ctrl+Z)</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1221"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1275"/>
         <source>&amp;Wiederholen: %1</source>
         <translation>&amp;Rétablir : %1</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1222"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1276"/>
         <source>Nichts zu wiederholen</source>
         <translation>Rien à rétablir</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1222"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1276"/>
         <source>Wiederholen: %1 (Strg+Y)</source>
         <translation>Rétablir : %1 (Ctrl+Y)</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1256"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1310"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>Réservé au rôle Administrateur.</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1257"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1311"/>
         <source>Nur für die Rollen Service und Administrator.</source>
         <translation>Réservé aux rôles Service et Administrateur.</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1258"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1312"/>
         <source>Stammdaten der markierten Anlage bearbeiten (F2)</source>
         <translation>Modifier les données de base de l&apos;installation sélectionnée (F2)</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1259"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1313"/>
         <source>Neue Störung für die markierte Anlage erfassen</source>
         <translation>Saisir une nouvelle panne pour l&apos;installation sélectionnée</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1260"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1314"/>
         <source>Anlagen als CSV speichern (anlagen_out.csv)</source>
         <translation>Enregistrer les installations en CSV (anlagen_out.csv)</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1266"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1320"/>
         <source>%1 von %2 Anlagen</source>
         <translation>%1 installations sur %2</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1270"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1324"/>
         <source>%1 von %2 Störungen</source>
         <translation>%1 pannes sur %2</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1314"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1368"/>
         <source>Störungen dieser Anlage anzeigen</source>
         <translation>Afficher les pannes de cette installation</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1319"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1373"/>
         <source>Auf der Karte zeigen</source>
         <translation>Afficher sur la carte</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1338"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1392"/>
         <source>Öffnen …</source>
         <translation>Ouvrir …</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1339"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1393"/>
         <source>Status: in Bearbeitung</source>
         <translation>Statut : en cours</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1342"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1396"/>
         <source>Status: behoben</source>
         <translation>Statut : résolue</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1346"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1400"/>
         <source>Anlage %1 öffnen</source>
         <translation>Ouvrir l&apos;installation %1</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1359"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1413"/>
         <source>Anlage</source>
         <translation>Installation</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1359"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1413"/>
         <source>Die Anlage %1 ist nicht vorhanden.</source>
         <translation>L&apos;installation %1 n&apos;existe pas.</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1376"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1412"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1430"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1466"/>
         <source>Keine Berechtigung</source>
         <translation>Non autorisé</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1377"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1431"/>
         <source>Stammdaten dürfen nur von der Rolle Administrator bearbeitet werden.</source>
         <translation>Les données de base ne peuvent être modifiées que par le rôle Administrateur.</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1390"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1438"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1444"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1492"/>
         <source>Speichern fehlgeschlagen</source>
         <translation>Échec de l&apos;enregistrement</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1390"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1444"/>
         <source>Anlage %1 ist unbekannt.</source>
         <translation>L&apos;installation %1 est inconnue.</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1413"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1467"/>
         <source>Störungen dürfen nur von den Rollen Service und Administrator erfasst werden.</source>
         <translation>Les pannes ne peuvent être saisies que par les rôles Service et Administrateur.</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1422"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1476"/>
         <source>Störung %1 für Anlage %2 erfasst (Strg+Z macht es rückgängig).</source>
         <translation>Panne %1 saisie pour l&apos;installation %2 (Ctrl+Z pour annuler).</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1438"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1492"/>
         <source>Störung %1 ist unbekannt.</source>
         <translation>La panne %1 est inconnue.</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1462"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1473"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1516"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1527"/>
         <source>Änderung gespeichert: %1</source>
         <translation>Modification enregistrée : %1</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1464"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1475"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1518"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1529"/>
         <source>Automatisches Speichern fehlgeschlagen</source>
         <translation>Échec de l&apos;enregistrement automatique</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1465"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1476"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1519"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1530"/>
         <source>Die Änderung ist im Speicher, wurde aber nicht gesichert:
 %1</source>
         <translation>La modification est en mémoire mais n&apos;a pas été enregistrée :
 %1</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1481"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1535"/>
         <source>Anlagen exportieren</source>
         <translation>Exporter les installations</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1483"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1498"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1517"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1537"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1552"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1571"/>
         <source>CSV-Dateien (*.csv)</source>
         <translation>Fichiers CSV (*.csv)</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1488"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1542"/>
         <source>%1 Anlagen exportiert nach %2</source>
         <translation>%1 installations exportées vers %2</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1491"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1505"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1523"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1555"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1545"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1559"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1577"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1609"/>
         <source>Export fehlgeschlagen</source>
         <translation>Échec de l&apos;export</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1496"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1550"/>
         <source>Störungen exportieren</source>
         <translation>Exporter les pannes</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1503"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1557"/>
         <source>Störungen exportiert nach %1</source>
         <translation>Pannes exportées vers %1</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1511"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1565"/>
         <source>Ertragsbericht</source>
         <translation>Rapport de production</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1512"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1605"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1566"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1659"/>
         <source>Die Flottenanalyse ist noch nicht abgeschlossen. Bitte kurz warten.</source>
         <translation>L&apos;analyse du parc n&apos;est pas encore terminée. Veuillez patienter un instant.</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1515"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1569"/>
         <source>Ertragsbericht exportieren</source>
         <translation>Exporter le rapport de production</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1553"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1607"/>
         <source>Ertragsbericht gespeichert: %1</source>
         <translation>Rapport de production enregistré : %1</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1565"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1619"/>
         <source>PDF-Dateien (*.pdf)</source>
         <translation>Fichiers PDF (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1577"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1581"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1631"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1635"/>
         <source>PDF-Bericht</source>
         <translation>Rapport PDF</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1580"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1634"/>
         <source>Bericht gespeichert: %1</source>
         <translation>Rapport enregistré : %1</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1582"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1636"/>
         <source>Der Bericht wurde gespeichert:
 %1
 
@@ -2379,67 +2459,67 @@ Jetzt öffnen?</source>
 L&apos;ouvrir maintenant ?</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1592"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1646"/>
         <source>Anlagenbericht speichern</source>
         <translation>Enregistrer le rapport d&apos;installation</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1604"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1658"/>
         <source>Flottenbericht</source>
         <translation>Rapport du parc</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1609"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1663"/>
         <source>Flottenbericht speichern</source>
         <translation>Enregistrer le rapport du parc</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1620"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1674"/>
         <source>Änderungsverlauf</source>
         <translation>Historique des modifications</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1621"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1675"/>
         <source>Alle Änderungen dieser Sitzung. Ein Klick auf einen Eintrag setzt die Daten auf genau diesen Stand zurück (oder wieder vor).</source>
         <translation>Toutes les modifications de cette session. Un clic sur une entrée ramène les données exactement à cet état (en arrière ou en avant).</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1626"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1680"/>
         <source>&lt;Ausgangszustand nach dem Laden&gt;</source>
         <translation>&lt;État initial après le chargement&gt;</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1645"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1699"/>
         <source>Über SolarMonitor</source>
         <translation>À propos de SolarMonitor</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1646"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1700"/>
         <source>&lt;h3&gt;SolarMonitor&lt;/h3&gt;&lt;p&gt;Offline-Monitoring einer PV-Flotte: Stammdaten, Störungen, Verläufe, Ertrag und Performance Ratio, Fehlererkennung, Serviceplanung und Karte.&lt;/p&gt;&lt;p&gt;C++17 · Qt %1 · Diagramme und Karte mit QPainter&lt;/p&gt;&lt;p&gt;Datenordner:&lt;br&gt;%2&lt;/p&gt;</source>
         <translation>&lt;h3&gt;SolarMonitor&lt;/h3&gt;&lt;p&gt;Surveillance hors ligne d&apos;un parc PV : données de base, pannes, courbes, production et Performance Ratio, détection des défauts, planification de maintenance et carte.&lt;/p&gt;&lt;p&gt;C++17 · Qt %1 · graphiques et carte dessinés avec QPainter&lt;/p&gt;&lt;p&gt;Dossier de données :&lt;br&gt;%2&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1671"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1725"/>
         <source>Flottenanalyse läuft: %1 von %2 Anlagen</source>
         <translation>Analyse du parc en cours : %1 installations sur %2</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1674"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1728"/>
         <source>Analyse aktuell · %1 Anlagen</source>
         <translation>Analyse à jour · %1 installations</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1676"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1730"/>
         <source>Flottenanalyse wird vorbereitet …</source>
         <translation>Préparation de l&apos;analyse du parc …</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1677"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1731"/>
         <source>Verläufe aller Anlagen werden im Hintergrund ausgewertet (%1 von %2).</source>
         <translation>Les courbes de toutes les installations sont analysées en arrière-plan (%1 sur %2).</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1701"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1755"/>
         <source>Flottenanalyse abgeschlossen: %1 Anlagen ausgewertet, %2 mit Fehlerbild, %3 Verlaufsdateien defekt.</source>
         <translation>Analyse du parc terminée : %1 installations analysées, %2 avec défaut, %3 fichiers de courbe défectueux.</translation>
     </message>
@@ -3831,36 +3911,24 @@ Les tournées déjà calculées sont enregistrées et disponibles hors ligne.</t
 <context>
     <name>main</name>
     <message>
-        <location filename="../src/main.cpp" line="104"/>
-        <source>Der Datenordner (mit anlagen.csv) wurde nicht gefunden. Bitte im nächsten Schritt auswählen.</source>
-        <translation>Le dossier de données (contenant anlagen.csv) est introuvable. Veuillez le sélectionner à l&apos;étape suivante.</translation>
-    </message>
-    <message>
-        <location filename="../src/main.cpp" line="106"/>
-        <location filename="../src/main.cpp" line="122"/>
-        <source>Datenordner wählen</source>
-        <translation>Choisir le dossier de données</translation>
+        <location filename="../src/main.cpp" line="114"/>
+        <source>Es wurde kein Datenordner mit anlagen.csv gefunden.</source>
+        <translation>Aucun dossier de données contenant anlagen.csv n’a été trouvé.</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="116"/>
         <source>In %1 konnten keine Anlagen geladen werden:
-
-%2
-
-Einen anderen Datenordner wählen?</source>
-        <translation>Aucune installation n&apos;a pu être chargée depuis %1 :
-
-%2
-
-Choisir un autre dossier de données ?</translation>
+%2</source>
+        <translation>Aucune installation n’a pu être chargée depuis %1 :
+%2</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="134"/>
+        <location filename="../src/main.cpp" line="127"/>
         <source>Kein Verlauf im Index – nur Stammdaten verfügbar.</source>
         <translation>Aucune courbe dans l&apos;index – seules les données de base sont disponibles.</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="138"/>
+        <location filename="../src/main.cpp" line="131"/>
         <source>Verlauf vorhanden, aber keine Stammdaten in anlagen.csv.</source>
         <translation>Courbe présente mais aucune donnée de base dans anlagen.csv.</translation>
     </message>
