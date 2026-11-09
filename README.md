@@ -238,7 +238,7 @@ src/
 ├── eval/             Ertragsauswertung, Flottenanalyse, Tourenplanung, Schwellwerte
 ├── util/             Anzeige-Formatierung, Zeitstempel, Geo, Gewässer (Bodensee), Sprachumschaltung
 └── ui/               Hauptfenster, Modelle, Dialoge, Diagramme, Karte, Statistik, Service
-i18n/                 SolarMonitor_en.ts (vollständig), SolarMonitor_de.ts (Pluralformen)
+i18n/                 SolarMonitor_en/_fr/_zh.ts (vollständig), SolarMonitor_de.ts (Pluralformen)
 ```
 
 ## Bekannte Einschränkungen
