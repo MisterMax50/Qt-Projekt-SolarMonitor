@@ -665,7 +665,7 @@ QWidget* MainWindow::baueKopfzeile()
     // Programm schließen (wichtig im Vollbild, wo die Titelleiste fehlt)
     auto* schliessen = new QToolButton(kopf);
     schliessen->setObjectName(QStringLiteral("Schliessen"));
-    schliessen->setIconSize(QSize(18, 18));
+    schliessen->setIconSize(QSize(20, 20));
     schliessen->setCursor(Qt::PointingHandCursor);
     schliessen->setToolTip(tr("SolarMonitor beenden (Strg+Q)"));
     const QIcon normal = Stil::icon(Stil::Symbol::Schliessen, Stil::textGedimmt());

@@ -94,12 +94,12 @@ QLineEdit#Suchfeld { background: %FENSTER%; border: 1px solid %FENSTER%; border-
     min-width: 260px; }
 QLineEdit#Suchfeld:hover { border-color: %LINIESTARK%; }
 QLineEdit#Suchfeld:focus { background: %FLAECHE%; border: 1px solid %AKZ%; }
-QToolButton#Glocke { border: none; border-radius: 18px; padding: 6px; }
+QToolButton#Glocke { border: none; border-radius: 8px; padding: 6px; }
 QToolButton#Glocke:hover, QToolButton#BenutzerKnopf:hover { background: %HOVER%; }
 QToolButton#BenutzerKnopf { border: none; border-radius: 6px; padding: 4px 8px; color: %TEXT%; }
 QToolButton#BenutzerKnopf::menu-indicator { image: url(%PFEILUNTEN%); width: 10px; height: 10px;
     subcontrol-position: right center; right: 4px; }
-QToolButton#Schliessen { border: none; border-radius: 18px; padding: 7px; }
+QToolButton#Schliessen { border: none; border-radius: 8px; padding: 7px; }
 QToolButton#Schliessen:hover { background: #dc2626; }
 QToolButton#Schliessen:pressed { background: #b91c1c; }
 QFrame#KopfTrenner { background: %LINIE%; max-width: 1px; margin: 10px 4px; }
@@ -516,8 +516,10 @@ QIcon Stil::icon(Symbol symbol, const QColor& farbeWunsch)
             p.drawPolyline(QPolygonF({QPointF(16, 8), QPointF(20, 12), QPointF(16, 16)}));
             break;
         case Symbol::Schliessen:
-            p.drawLine(QPointF(6, 6), QPointF(18, 18));
-            p.drawLine(QPointF(18, 6), QPointF(6, 18));
+            // Tür: Türblatt mit Klinke, darunter der Boden
+            p.drawPolyline(QPolygonF({QPointF(6.5, 20.5), QPointF(6.5, 4.5), QPointF(17.5, 4.5), QPointF(17.5, 20.5)}));
+            p.drawLine(QPointF(3.5, 20.5), QPointF(20.5, 20.5));
+            p.drawLine(QPointF(13.5, 12.5), QPointF(14.5, 12.5));
             break;
         case Symbol::Fehler:
             p.drawEllipse(QPointF(12, 12), 9, 9);
