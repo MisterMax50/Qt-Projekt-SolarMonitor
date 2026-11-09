@@ -1964,7 +1964,7 @@ Administrator: additionally edit and export master data</translation>
         <translation>No critical faults open</translation>
     </message>
     <message>
-        <location line="+47"/>
+        <location line="+53"/>
         <source>Alle Status</source>
         <translation>All statuses</translation>
     </message>
@@ -2010,7 +2010,7 @@ Administrator: additionally edit and export master data</translation>
         <translation>Reset filters</translation>
     </message>
     <message>
-        <location line="-480"/>
+        <location line="-486"/>
         <location line="+196"/>
         <source>Übersicht</source>
         <translation>Overview</translation>
@@ -2021,7 +2021,7 @@ Administrator: additionally edit and export master data</translation>
         <translation>%1 plants with a detected fault pattern</translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="+44"/>
         <source>Filter zurücksetzen (%1)</source>
         <translation>Reset filters (%1)</translation>
     </message>
@@ -2148,7 +2148,7 @@ Administrator: additionally edit and export master data</translation>
         <translation>Redo: %1 (Ctrl+Y)</translation>
     </message>
     <message>
-        <location line="-523"/>
+        <location line="-529"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation>S&amp;witch user …</translation>
     </message>
@@ -2173,7 +2173,7 @@ Administrator: additionally edit and export master data</translation>
         <translation>%1 errors on import</translation>
     </message>
     <message>
-        <location line="+46"/>
+        <location line="+52"/>
         <source>Anlagen durchsuchen (Strg+F)</source>
         <translation>Search plants (Ctrl+F)</translation>
     </message>
@@ -2219,12 +2219,12 @@ Administrator: additionally edit and export master data</translation>
         <translation>Plant:</translation>
     </message>
     <message>
-        <location line="-549"/>
+        <location line="-555"/>
         <source>Exportieren</source>
         <translation>Export</translation>
     </message>
     <message>
-        <location line="+710"/>
+        <location line="+716"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>Administrator role only.</translation>
     </message>
@@ -2259,7 +2259,7 @@ Administrator: additionally edit and export master data</translation>
         <translation>%1 of %2 faults</translation>
     </message>
     <message>
-        <location line="+44"/>
+        <location line="+52"/>
         <source>Störungen dieser Anlage anzeigen</source>
         <translation>Show faults of this plant</translation>
     </message>
@@ -2294,12 +2294,12 @@ Administrator: additionally edit and export master data</translation>
         <translation>Plant</translation>
     </message>
     <message>
-        <location line="-154"/>
+        <location line="-162"/>
         <source>Änderungsverlauf …</source>
         <translation>Change history …</translation>
     </message>
     <message>
-        <location line="-997"/>
+        <location line="-1003"/>
         <source>Daten werden geladen …</source>
         <translation>Loading data …</translation>
     </message>
@@ -2344,7 +2344,12 @@ Administrator: additionally edit and export master data</translation>
         <translation>Quit SolarMonitor (Ctrl+Q)</translation>
     </message>
     <message>
-        <location line="+605"/>
+        <location line="+547"/>
+        <source>Bitte zuerst eine Anlage in der Liste auswählen.</source>
+        <translation>Please select a plant in the list first.</translation>
+    </message>
+    <message>
+        <location line="+72"/>
         <source>Die Anlage %1 ist nicht vorhanden.</source>
         <translation>Plant %1 does not exist.</translation>
     </message>
@@ -2519,12 +2524,12 @@ Open it now?</translation>
         <translation>&lt;Initial state after loading&gt;</translation>
     </message>
     <message>
-        <location line="-1290"/>
+        <location line="-1304"/>
         <source>Angemeldet als %1.</source>
         <translation>Signed in as %1.</translation>
     </message>
     <message>
-        <location line="+1309"/>
+        <location line="+1323"/>
         <source>Über SolarMonitor</source>
         <translation>About SolarMonitor</translation>
     </message>

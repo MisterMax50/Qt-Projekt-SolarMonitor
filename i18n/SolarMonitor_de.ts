@@ -1964,7 +1964,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Keine kritischen Störungen offen</translation>
     </message>
     <message>
-        <location line="+47"/>
+        <location line="+53"/>
         <source>Alle Status</source>
         <translation>Alle Status</translation>
     </message>
@@ -2010,7 +2010,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Filter zurücksetzen</translation>
     </message>
     <message>
-        <location line="-480"/>
+        <location line="-486"/>
         <location line="+196"/>
         <source>Übersicht</source>
         <translation>Übersicht</translation>
@@ -2021,7 +2021,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>%1 Anlagen mit erkanntem Fehlerbild</translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="+44"/>
         <source>Filter zurücksetzen (%1)</source>
         <translation>Filter zurücksetzen (%1)</translation>
     </message>
@@ -2148,7 +2148,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Wiederholen: %1 (Strg+Y)</translation>
     </message>
     <message>
-        <location line="-523"/>
+        <location line="-529"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation>Benutzer &amp;wechseln …</translation>
     </message>
@@ -2173,7 +2173,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>%1 Fehler beim Einlesen</translation>
     </message>
     <message>
-        <location line="+46"/>
+        <location line="+52"/>
         <source>Anlagen durchsuchen (Strg+F)</source>
         <translation>Anlagen durchsuchen (Strg+F)</translation>
     </message>
@@ -2219,12 +2219,12 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Anlage:</translation>
     </message>
     <message>
-        <location line="-549"/>
+        <location line="-555"/>
         <source>Exportieren</source>
         <translation>Exportieren</translation>
     </message>
     <message>
-        <location line="+710"/>
+        <location line="+716"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>Nur für die Rolle Administrator.</translation>
     </message>
@@ -2259,7 +2259,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>%1 von %2 Störungen</translation>
     </message>
     <message>
-        <location line="+44"/>
+        <location line="+52"/>
         <source>Störungen dieser Anlage anzeigen</source>
         <translation>Störungen dieser Anlage anzeigen</translation>
     </message>
@@ -2294,12 +2294,12 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Anlage</translation>
     </message>
     <message>
-        <location line="-154"/>
+        <location line="-162"/>
         <source>Änderungsverlauf …</source>
         <translation>Änderungsverlauf …</translation>
     </message>
     <message>
-        <location line="-997"/>
+        <location line="-1003"/>
         <source>Daten werden geladen …</source>
         <translation>Daten werden geladen …</translation>
     </message>
@@ -2344,7 +2344,12 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>SolarMonitor beenden (Strg+Q)</translation>
     </message>
     <message>
-        <location line="+605"/>
+        <location line="+547"/>
+        <source>Bitte zuerst eine Anlage in der Liste auswählen.</source>
+        <translation>Bitte zuerst eine Anlage in der Liste auswählen.</translation>
+    </message>
+    <message>
+        <location line="+72"/>
         <source>Die Anlage %1 ist nicht vorhanden.</source>
         <translation>Die Anlage %1 ist nicht vorhanden.</translation>
     </message>
@@ -2519,12 +2524,12 @@ Jetzt öffnen?</translation>
         <translation>&lt;Ausgangszustand nach dem Laden&gt;</translation>
     </message>
     <message>
-        <location line="-1290"/>
+        <location line="-1304"/>
         <source>Angemeldet als %1.</source>
         <translation>Angemeldet als %1.</translation>
     </message>
     <message>
-        <location line="+1309"/>
+        <location line="+1323"/>
         <source>Über SolarMonitor</source>
         <translation>Über SolarMonitor</translation>
     </message>

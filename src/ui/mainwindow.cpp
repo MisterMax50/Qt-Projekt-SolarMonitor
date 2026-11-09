@@ -952,7 +952,7 @@ void MainWindow::aktualisiereNavigation()
     }
 }
 
-void MainWindow::meldung(const QString& text, int dauerMs)
+void MainWindow::meldung(const QString& text, int dauerMs, bool hinweis)
 {
     // Kurze Einblendung unten rechts statt einer Statuszeile
     if (!m_toast) {
@@ -964,7 +964,14 @@ void MainWindow::meldung(const QString& text, int dauerMs)
         connect(m_toastTimer, &QTimer::timeout, m_toast, &QWidget::hide);
     }
     m_toast->setText(text);
-    m_toast->setMaximumWidth(460);
+    // Hinweise (z. B. "erst Anlage auswählen") mit orangem Balken links
+    if (m_toast->property("hinweis").toBool() != hinweis) {
+        m_toast->setProperty("hinweis", hinweis);
+        m_toast->style()->unpolish(m_toast);
+        m_toast->style()->polish(m_toast);
+    }
+    // kurze Texte in einer Zeile, lange umbrechen
+    m_toast->setFixedWidth(qMin(460, m_toast->fontMetrics().horizontalAdvance(text) + 48));
     m_toast->adjustSize();
     m_toast->move(width() - m_toast->width() - 28, height() - m_toast->height() - 24);
     m_toast->raise();
@@ -1302,20 +1309,20 @@ void MainWindow::erzeugeAktionen()
     m_aktDetails->setShortcut(Qt::Key_Return);
     m_aktDetails->setShortcutContext(Qt::WidgetWithChildrenShortcut);
     connect(m_aktDetails, &QAction::triggered, this, [this] {
-        if (!markierteAnlage().isEmpty())
-            oeffneAnlage(markierteAnlage());
+        if (const QString id = markierteAnlageOderHinweis(); !id.isEmpty())
+            oeffneAnlage(id);
     });
 
     m_aktBearbeiten = new QAction(Stil::icon(Stil::Symbol::Bearbeiten, f), tr("Stammdaten &bearbeiten …"), this);
     m_aktBearbeiten->setShortcut(Qt::Key_F2);
     connect(m_aktBearbeiten, &QAction::triggered, this, [this] {
-        if (!markierteAnlage().isEmpty())
-            bearbeiteAnlage(markierteAnlage());
+        if (const QString id = markierteAnlageOderHinweis(); !id.isEmpty())
+            bearbeiteAnlage(id);
     });
     m_aktStoerung = new QAction(Stil::icon(Stil::Symbol::Plus, f), tr("Störung &erfassen …"), this);
     connect(m_aktStoerung, &QAction::triggered, this, [this] {
-        if (!markierteAnlage().isEmpty())
-            erfasseStoerung(markierteAnlage());
+        if (const QString id = markierteAnlageOderHinweis(); !id.isEmpty())
+            erfasseStoerung(id);
     });
 
     m_aktExportAnlagen = new QAction(Stil::icon(Stil::Symbol::Export, f), tr("&Anlagen exportieren …"), this);
@@ -1327,8 +1334,8 @@ void MainWindow::erzeugeAktionen()
 
     m_aktPdfAnlage = new QAction(Stil::icon(Stil::Symbol::Pdf, f), tr("Anlagenbericht als &PDF …"), this);
     connect(m_aktPdfAnlage, &QAction::triggered, this, [this] {
-        if (!markierteAnlage().isEmpty())
-            exportiereAnlagenPdf(markierteAnlage());
+        if (const QString id = markierteAnlageOderHinweis(); !id.isEmpty())
+            exportiereAnlagenPdf(id);
     });
     m_aktPdfFlotte = new QAction(Stil::icon(Stil::Symbol::Pdf, f), tr("&Flottenbericht als PDF …"), this);
     connect(m_aktPdfFlotte, &QAction::triggered, this, &MainWindow::exportiereFlottenPdf);
@@ -1420,6 +1427,14 @@ QString MainWindow::markierteAnlage() const
 {
     const QModelIndex idx = m_anlagenTabelle ? m_anlagenTabelle->currentIndex() : QModelIndex();
     return idx.isValid() ? idx.data(AnlageModel::IdRolle).toString() : QString();
+}
+
+QString MainWindow::markierteAnlageOderHinweis()
+{
+    const QString id = markierteAnlage();
+    if (id.isEmpty())
+        meldung(tr("Bitte zuerst eine Anlage in der Liste auswählen."), 3500, true);
+    return id;
 }
 
 QString MainWindow::markierteStoerung() const

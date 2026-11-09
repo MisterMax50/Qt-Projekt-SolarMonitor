@@ -233,6 +233,7 @@ QMenu::separator { height: 1px; background: %LINIE%; margin: 5px 4px; }
 QMenu::icon { padding-left: 8px; }
 QToolTip { background: %SEITE%; color: #ffffff; border: none; padding: 5px 8px; }
 QLabel#Toast { background: %SEITE%; color: #ffffff; border-radius: 8px; padding: 10px 16px; }
+QLabel#Toast[hinweis="true"] { border-left: 4px solid %AKZ%; padding-left: 14px; }
 QProgressBar { background: %LINIE%; border: none; border-radius: 3px; max-height: 6px; color: transparent; }
 QProgressBar::chunk { background: %AKZ%; border-radius: 3px; }
 

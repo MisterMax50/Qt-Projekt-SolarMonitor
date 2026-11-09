@@ -128,7 +128,9 @@ private:
                    const QList<QAction*>& aktionen = {}, const QList<QAction*>& exportieren = {},
                    QWidget* links = nullptr);
     /// Kurze Einblendung unten rechts (ersetzt die Statusleiste).
-    void meldung(const QString& text, int dauerMs = 5000);
+    void meldung(const QString& text, int dauerMs = 5000, bool hinweis = false);
+    /// Markierte Anlage; ist keine markiert, erscheint ein kurzer Hinweis.
+    QString markierteAnlageOderHinweis();
     void aktualisiereFilterKnopf();
     QWidget* baueAnlagenSeite();
     QWidget* baueStoerungsSeite();
