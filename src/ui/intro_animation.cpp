@@ -3,12 +3,9 @@
 #include <algorithm>
 #include <cmath>
 
-#include <QEventLoop>
-#include <QGuiApplication>
 #include <QKeyEvent>
 #include <QPainter>
 #include <QRadialGradient>
-#include <QScreen>
 #include <QTimer>
 
 #include "util/stil.h"
@@ -38,10 +35,9 @@ double easeOutBack(double x)
 IntroAnimation::IntroAnimation(QWidget* parent)
     : QWidget(parent)
 {
-    setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     setAttribute(Qt::WA_OpaquePaintEvent, true);
+    setFocusPolicy(Qt::StrongFocus);
     setCursor(Qt::BlankCursor);
-    setWindowTitle(QStringLiteral("SolarMonitor"));
 
     m_takt = new QTimer(this);
     m_takt->setInterval(16); // ~60 Bilder pro Sekunde
@@ -53,19 +49,13 @@ IntroAnimation::IntroAnimation(QWidget* parent)
     });
 }
 
-void IntroAnimation::abspielen()
+void IntroAnimation::starte()
 {
-    IntroAnimation intro;
-    if (QScreen* bildschirm = QGuiApplication::primaryScreen())
-        intro.setGeometry(bildschirm->geometry());
-    QEventLoop schleife;
-    connect(&intro, &IntroAnimation::fertig, &schleife, &QEventLoop::quit);
-    intro.showFullScreen();
-    intro.activateWindow();
-    intro.setFocus();
-    intro.m_uhr.start();
-    intro.m_takt->start();
-    schleife.exec();
+    m_beendet = false;
+    m_zeit = 0.0;
+    setFocus();
+    m_uhr.start();
+    m_takt->start();
 }
 
 void IntroAnimation::setzeZeit(double sekunden)
@@ -80,7 +70,6 @@ void IntroAnimation::beenden()
         return;
     m_beendet = true;
     m_takt->stop();
-    hide();
     emit fertig();
 }
 

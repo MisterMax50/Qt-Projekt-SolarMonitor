@@ -1491,7 +1491,7 @@ Reason: %1</translation>
 <context>
     <name>IntroAnimation</name>
     <message>
-        <location filename="../src/ui/intro_animation.cpp" line="+160"/>
+        <location filename="../src/ui/intro_animation.cpp" line="+149"/>
         <source>PV-FLOTTE BODENSEE · MONITORING &amp; SERVICE</source>
         <translation>PV FLEET LAKE CONSTANCE · MONITORING &amp; SERVICE</translation>
     </message>
@@ -1677,19 +1677,20 @@ PR %1</translation>
     </message>
 </context>
 <context>
-    <name>LoginDialog</name>
+    <name>LoginSeite</name>
     <message>
-        <location filename="../src/ui/login_dialog.cpp" line="+23"/>
-        <source>Anmeldung – SolarMonitor</source>
-        <translation>Sign in – SolarMonitor</translation>
-    </message>
-    <message>
-        <location line="+8"/>
+        <location filename="../src/ui/login_seite.cpp" line="+34"/>
         <source>Überwachung und Service für die PV-Flotte rund um den Bodensee</source>
         <translation>Monitoring and service for the PV fleet around Lake Constance</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+3"/>
+        <location line="+30"/>
+        <source>Anmelden</source>
+        <translation>Sign in</translation>
+    </message>
+    <message>
+        <location line="-28"/>
         <source>Melden Sie sich mit Ihrer Rolle und PIN an.</source>
         <translation>Sign in with your role and PIN.</translation>
     </message>
@@ -1723,13 +1724,18 @@ Administrator: additionally edit and export master data</translation>
         <translation>PIN:</translation>
     </message>
     <message>
-        <location line="-28"/>
-        <location line="+31"/>
-        <source>Anmelden</source>
-        <translation>Sign in</translation>
+        <location line="+4"/>
+        <location line="+63"/>
+        <source>Beenden</source>
+        <translation>Quit</translation>
     </message>
     <message>
-        <location line="+68"/>
+        <location line="+0"/>
+        <source>Zurück</source>
+        <translation>Back</translation>
+    </message>
+    <message>
+        <location line="+31"/>
         <source>PIN falsch (Versuch %1 von %2).</source>
         <translation>Wrong PIN (attempt %1 of %2).</translation>
     </message>
@@ -1742,83 +1748,83 @@ Administrator: additionally edit and export master data</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="+333"/>
+        <location filename="../src/ui/mainwindow.cpp" line="+320"/>
         <source>SolarMonitor – Monitoring der PV-Flotte</source>
         <translation>SolarMonitor – PV fleet monitoring</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+99"/>
         <source>Zustand der Flotte auf einen Blick</source>
         <translation>Fleet status at a glance</translation>
     </message>
     <message>
         <location line="+9"/>
-        <location line="+179"/>
+        <location line="+188"/>
         <source>Anlagen</source>
         <translation>Plants</translation>
     </message>
     <message>
-        <location line="-179"/>
+        <location line="-188"/>
         <source>Alle PV-Anlagen der Flotte · Doppelklick öffnet die Details</source>
         <translation>All PV plants of the fleet · double-click opens the details</translation>
     </message>
     <message>
         <location line="+4"/>
-        <location line="+176"/>
+        <location line="+185"/>
         <source>Störungen</source>
         <translation>Faults</translation>
     </message>
     <message>
-        <location line="-176"/>
+        <location line="-185"/>
         <source>Störungsmeldungen seit 2024 · Rechtsklick ändert den Status</source>
         <translation>Fault reports since 2024 · right-click changes the status</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location line="+171"/>
+        <location line="+180"/>
         <source>Karte</source>
         <translation>Map</translation>
     </message>
     <message>
-        <location line="-171"/>
+        <location line="-180"/>
         <source>Lage der Anlagen und Wetterstationen · Mausrad zoomt, Klick öffnet eine Anlage</source>
         <translation>Location of plants and weather stations · mouse wheel zooms, click opens a plant</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location line="+170"/>
+        <location line="+179"/>
         <source>Statistik</source>
         <translation>Statistics</translation>
     </message>
     <message>
-        <location line="-170"/>
+        <location line="-179"/>
         <source>Kennzahlen und Auswertungen über die gesamte Flotte</source>
         <translation>Key figures and evaluations for the entire fleet</translation>
     </message>
     <message>
         <location line="+11"/>
-        <location line="+160"/>
+        <location line="+169"/>
         <source>Serviceplanung</source>
         <translation>Service planning</translation>
     </message>
     <message>
-        <location line="-159"/>
+        <location line="-168"/>
         <source>Welche Anlagen zuerst? Sortiert nach Priorität und geschätztem Ertragsverlust</source>
         <translation>Which plants first? Sorted by priority and estimated yield loss</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location line="+155"/>
+        <location line="+164"/>
         <source>Datenprüfung</source>
         <translation>Data validation</translation>
     </message>
     <message>
-        <location line="-154"/>
+        <location line="-163"/>
         <source>Auffälligkeiten beim Einlesen der Dateien und automatische Korrekturen</source>
         <translation>Issues found while loading the files and automatic corrections</translation>
     </message>
     <message>
-        <location line="+113"/>
+        <location line="+122"/>
         <source>PV-Flotte Bodensee</source>
         <translation>PV fleet Lake Constance</translation>
     </message>
@@ -1909,8 +1915,8 @@ Administrator: additionally edit and export master data</translation>
         <translation>Reset filters</translation>
     </message>
     <message>
-        <location line="-470"/>
-        <location line="+187"/>
+        <location line="-479"/>
+        <location line="+196"/>
         <source>Übersicht</source>
         <translation>Overview</translation>
     </message>
@@ -2198,7 +2204,12 @@ Administrator: additionally edit and export master data</translation>
         <translation>Change history …</translation>
     </message>
     <message>
-        <location line="-585"/>
+        <location line="-892"/>
+        <source>Anmeldung – SolarMonitor</source>
+        <translation>Sign in – SolarMonitor</translation>
+    </message>
+    <message>
+        <location line="+307"/>
         <source>Auswertung</source>
         <translation>Analysis</translation>
     </message>
@@ -2393,12 +2404,12 @@ Open it now?</translation>
         <translation>&lt;Initial state after loading&gt;</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="-1289"/>
         <source>Angemeldet als %1.</source>
         <translation>Signed in as %1.</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+1308"/>
         <source>Über SolarMonitor</source>
         <translation>About SolarMonitor</translation>
     </message>
@@ -3820,7 +3831,7 @@ Measured over land around Lake Constance, not straight across the water.</transl
 <context>
     <name>main</name>
     <message>
-        <location filename="../src/main.cpp" line="+110"/>
+        <location filename="../src/main.cpp" line="+104"/>
         <source>Der Datenordner (mit anlagen.csv) wurde nicht gefunden. Bitte im nächsten Schritt auswählen.</source>
         <translation>The data folder (containing anlagen.csv) was not found. Please select it in the next step.</translation>
     </message>

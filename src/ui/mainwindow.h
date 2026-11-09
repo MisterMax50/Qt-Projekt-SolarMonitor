@@ -26,6 +26,9 @@ class StoerungModel;
 /**
  * @brief Hauptfenster von SolarMonitor.
  *
+ * Alles läuft in diesem einen Fenster: zuerst das Logo-Intro, dann die
+ * Anmeldung, danach das Programm (QStackedWidget mit drei Ebenen).
+ *
  * Aufbau wie ein Monitoring-Portal für Solarparks: dunkle Seitenleiste
  * mit den Seiten (Übersicht · Anlagen · Störungen · Karte · Statistik ·
  * Serviceplanung · Datenprüfung), Kopfzeile mit Seitentitel, Anlagensuche,
@@ -42,8 +45,11 @@ class MainWindow : public QMainWindow {
 public:
     explicit MainWindow(const AppKontext& kontext, QWidget* parent = nullptr);
 
-    /// Fenster anzeigen: im Vollbild (Standard) oder maximiert, je nach letzter Wahl.
-    void zeigeBeimStart();
+    /**
+     * @brief Fenster anzeigen (Vollbild oder maximiert, je nach letzter Wahl)
+     *        und mit dem Intro bzw. direkt mit der Anmeldung beginnen.
+     */
+    void starte(bool mitIntro);
 
 protected:
     void changeEvent(QEvent* event) override;
@@ -75,6 +81,7 @@ private slots:
     void setzeDesign(bool dunkel);
     void setzeVollbild(bool an);
     void seiteGewechselt(int index);
+    void angemeldet(Rolle rolle);
 
 private:
     /// Merkt sich die Filtereinstellungen über einen Neuaufbau der Oberfläche hinweg.
@@ -87,6 +94,9 @@ private:
     };
 
     void baueUi();
+    void neueLoginSeite();
+    void zeigeAnmeldung(bool wechsel);
+    void zeigeProgramm();
     void erzeugeAktionen();
     /// Dunkle Seitenleiste mit Marke, Navigation und Analysezustand.
     QWidget* baueNavigation();
@@ -129,6 +139,12 @@ private:
     int  m_fortschrittWert = 0;
     int  m_fortschrittMax = 0;
     bool m_neuaufbauGeplant = false;
+
+    // Ebenen des Fensters: Intro → Anmeldung → Programm
+    QStackedWidget*    m_ebenen = nullptr;
+    class IntroAnimation* m_intro = nullptr;
+    class LoginSeite*  m_login = nullptr;
+    QWidget*           m_programm = nullptr; ///< Oberfläche nach der Anmeldung (wird neu aufgebaut)
 
     // werden bei baueUi() neu erzeugt
     QStackedWidget* m_tabs = nullptr;     ///< Seiten, gesteuert über die Seitenleiste

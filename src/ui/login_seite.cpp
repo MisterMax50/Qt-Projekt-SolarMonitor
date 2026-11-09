@@ -1,7 +1,9 @@
-#include "login_dialog.h"
+#include "login_seite.h"
 
 #include <QComboBox>
-#include <QDialogButtonBox>
+#include <QFrame>
+#include <QGraphicsDropShadowEffect>
+#include <QPainter>
 #include <QFormLayout>
 #include <QHBoxLayout>
 #include <QLabel>
@@ -17,10 +19,11 @@ constexpr int kMaxVersuche = 3;
 constexpr int kSperreSekunden = 30;
 } // namespace
 
-LoginDialog::LoginDialog(QWidget* parent)
-    : QDialog(parent)
+LoginSeite::LoginSeite(QWidget* parent)
+    : QWidget(parent)
 {
-    setWindowTitle(tr("Anmeldung – SolarMonitor"));
+    setObjectName(QStringLiteral("Anmeldeseite"));
+    setAttribute(Qt::WA_StyledBackground, true);
 
     // Aufbau wie die Anmeldeseite eines Monitoring-Portals: links eine
     // dunkelblaue Markenfläche, rechts das Formular
@@ -61,18 +64,33 @@ LoginDialog::LoginDialog(QWidget* parent)
     form->addRow(tr("Rolle:"), m_rollen);
     form->addRow(tr("PIN:"), m_pin);
 
-    auto* knoepfe = new QDialogButtonBox(QDialogButtonBox::Cancel, this);
-    m_anmelden = knoepfe->addButton(tr("Anmelden"), QDialogButtonBox::AcceptRole);
-    m_anmelden->setDefault(true);
-    connect(m_anmelden, &QPushButton::clicked, this, &LoginDialog::anmelden);
-    connect(knoepfe, &QDialogButtonBox::rejected, this, &QDialog::reject);
+    m_anmelden = new QPushButton(tr("Anmelden"), this);
+    m_anmelden->setObjectName(QStringLiteral("Primaer"));
+    m_abbrechen = new QPushButton(tr("Beenden"), this);
+    connect(m_anmelden, &QPushButton::clicked, this, &LoginSeite::anmelden);
+    connect(m_pin, &QLineEdit::returnPressed, this, &LoginSeite::anmelden);
+    connect(m_abbrechen, &QPushButton::clicked, this, &LoginSeite::abgebrochen);
+    auto* knoepfe = new QHBoxLayout;
+    knoepfe->addStretch(1);
+    knoepfe->addWidget(m_abbrechen);
+    knoepfe->addWidget(m_anmelden);
 
-    auto* marke = new QWidget(this);
+    // Karte in der Mitte: links Markenfläche, rechts das Formular
+    auto* karte = new QFrame(this);
+    karte->setObjectName(QStringLiteral("Anmeldekarte"));
+    karte->setFixedSize(760, 370);
+    auto* schatten = new QGraphicsDropShadowEffect(karte);
+    schatten->setBlurRadius(60);
+    schatten->setOffset(0, 12);
+    schatten->setColor(QColor(0, 0, 0, 140));
+    karte->setGraphicsEffect(schatten);
+
+    auto* marke = new QWidget(karte);
     marke->setObjectName(QStringLiteral("DialogKopf"));
     marke->setAttribute(Qt::WA_StyledBackground, true);
-    marke->setFixedWidth(250);
+    marke->setFixedWidth(280);
     auto* mv = new QVBoxLayout(marke);
-    mv->setContentsMargins(28, 32, 28, 28);
+    mv->setContentsMargins(32, 36, 32, 32);
     mv->setSpacing(10);
     mv->addWidget(logo);
     mv->addSpacing(6);
@@ -81,41 +99,53 @@ LoginDialog::LoginDialog(QWidget* parent)
     mv->addStretch(1);
 
     auto* rechts = new QVBoxLayout;
-    rechts->setContentsMargins(32, 32, 32, 24);
+    rechts->setContentsMargins(36, 36, 36, 28);
     rechts->setSpacing(10);
     rechts->addWidget(anmeldenTitel);
     rechts->addWidget(anmeldenText);
-    rechts->addSpacing(8);
+    rechts->addSpacing(10);
     rechts->addLayout(form);
     rechts->addWidget(m_meldung);
     rechts->addStretch(1);
     rechts->addWidget(hinweis);
     rechts->addSpacing(6);
-    rechts->addWidget(knoepfe);
+    rechts->addLayout(knoepfe);
 
-    auto* h = new QHBoxLayout(this);
+    auto* h = new QHBoxLayout(karte);
     h->setContentsMargins(0, 0, 0, 0);
     h->setSpacing(0);
     h->addWidget(marke);
     h->addLayout(rechts, 1);
-    setMinimumSize(700, 340);
+
+    auto* raster = new QVBoxLayout(this);
+    raster->addStretch(1);
+    raster->addWidget(karte, 0, Qt::AlignHCenter);
+    raster->addStretch(1);
 
     m_sperrTimer = new QTimer(this);
     m_sperrTimer->setInterval(1000);
-    connect(m_sperrTimer, &QTimer::timeout, this, &LoginDialog::sperreTick);
+    connect(m_sperrTimer, &QTimer::timeout, this, &LoginSeite::sperreTick);
+}
 
+void LoginSeite::vorbereiten(bool zurueckMoeglich)
+{
+    m_abbrechen->setText(zurueckMoeglich ? tr("Zurück") : tr("Beenden"));
+    m_pin->clear();
+    if (m_restSekunden <= 0)
+        m_meldung->clear();
     m_pin->setFocus();
 }
 
-void LoginDialog::anmelden()
+void LoginSeite::anmelden()
 {
     if (m_restSekunden > 0)
         return;
 
     const auto rolle = static_cast<Rolle>(m_rollen->currentData().toInt());
     if (Rollen::pinKorrekt(rolle, m_pin->text())) {
-        m_rolle = rolle;
-        accept();
+        m_fehlversuche = 0;
+        m_pin->clear();
+        emit angemeldet(rolle);
         return;
     }
 
@@ -134,7 +164,7 @@ void LoginDialog::anmelden()
     }
 }
 
-void LoginDialog::sperreTick()
+void LoginSeite::sperreTick()
 {
     if (m_restSekunden <= 0) {
         m_sperrTimer->stop();

@@ -100,7 +100,7 @@ selbst auf A4-Seiten um, Tabellenköpfe werden auf Folgeseiten wiederholt,
 gezeichnet. Die Diagramme sind dieselben Widgets wie in der Oberfläche, in
 ein Bild gerendert, immer hell (auch im dunklen Design).
 
-Beim Start läuft ein kurzes **Logo-Intro** (`src/ui/intro_animation.*`, ca. 3 s):
+Beim Start läuft im Programmfenster ein kurzes **Logo-Intro** (`src/ui/intro_animation.*`, ca. 3 s):
 Die Kachel springt auf, die Sonne geht auf, Strahlen und Messkurve
 zeichnen sich, dann blendet der Schriftzug ein. Klick oder Taste
 überspringt es; abschalten im Benutzermenü (*Intro beim Start*) oder mit
@@ -134,7 +134,11 @@ für Solarparks):
   Auf der Übersicht führt ein Klick zur passenden Seite.
 - Rückmeldungen (gespeichert, exportiert, Analyse fertig) erscheinen als
   kurze **Einblendung** unten rechts statt in einer Statusleiste.
-- Anmeldefenster mit dunkelblauer Markenfläche links und Formular rechts.
+- **Ein einziges Fenster**: Intro, Anmeldung und Programm laufen im selben
+  Fenster (QStackedWidget im Hauptfenster). Die Anmeldung
+  (`src/ui/login_seite.*`) ist eine Karte auf dunkelblauem Grund mit
+  Markenfläche links und Formular rechts; *Benutzer wechseln* zeigt sie
+  ebenfalls im Fenster, mit „Zurück“ geht es ohne Wechsel weiter.
 - Farben: Dunkelblau (Seitenleiste) und Sonnen-Orange (Akzent, Hauptknöpfe);
   Grün/Orange/Rot nur für den Zustand der Anlagen. Alles steht in einem
   Stylesheet in `src/util/stil.cpp` (hell und dunkel), Grundlage ist der

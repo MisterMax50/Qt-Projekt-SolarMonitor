@@ -218,6 +218,11 @@ QWidget#DialogKopf { background: %SEITE%; }
 QLabel#DialogKopfTitel { color: #ffffff; font-size: 16pt; font-weight: 600; }
 QLabel#DialogKopfText { color: #9fb0c6; }
 QLabel#AnmeldenTitel { font-size: 15pt; font-weight: 600; }
+QWidget#Anmeldeseite { background: qradialgradient(cx:0.5, cy:0.45, radius:0.8, fx:0.5, fy:0.45,
+    stop:0 #16294a, stop:1 #08111f); }
+QFrame#Anmeldekarte { background: %FLAECHE%; border: none; border-radius: 12px; }
+QFrame#Anmeldekarte QWidget#DialogKopf { border-top-left-radius: 12px; border-bottom-left-radius: 12px;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #1e3a64, stop:1 #13253f); }
 
 /* ---------- Menüs, Hinweise ---------- */
 QMenu { background: %FLAECHE%; color: %TEXT%; border: 1px solid %LINIE%; border-radius: 8px; padding: 6px; }

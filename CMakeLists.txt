@@ -51,7 +51,7 @@ set(PROJEKT_HEADER
     src/ui/filter_proxy.h
     src/ui/kachel_lader.h
     src/ui/karte_view.h
-    src/ui/login_dialog.h
+    src/ui/login_seite.h
     src/ui/mainwindow.h
     src/ui/kennzahl_kachel.h
     src/ui/intro_animation.h
@@ -89,7 +89,7 @@ set(PROJEKT_QUELLEN
     src/ui/edit_dialog.cpp
     src/ui/kachel_lader.cpp
     src/ui/karte_view.cpp
-    src/ui/login_dialog.cpp
+    src/ui/login_seite.cpp
     src/ui/mainwindow.cpp
     src/ui/kennzahl_kachel.cpp
     src/ui/intro_animation.cpp

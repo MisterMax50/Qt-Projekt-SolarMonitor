@@ -12,8 +12,6 @@
 #include "eval/flotten_analyse.h"
 #include "model/datenbasis.h"
 #include "repo/verlauf_repository.h"
-#include "ui/intro_animation.h"
-#include "ui/login_dialog.h"
 #include "ui/mainwindow.h"
 #include "util/sprache.h"
 #include "util/stil.h"
@@ -99,10 +97,6 @@ int main(int argc, char* argv[])
     Sprache::setze(parser.isSet(spracheOpt) ? parser.value(spracheOpt).toLower()
                                             : einstellungen.value(QStringLiteral("sprache"), QStringLiteral("de")).toString());
 
-    // ---------- Intro (Logo-Animation, abschaltbar im Benutzermenü) ----------
-    if (!parser.isSet(ohneIntroOpt) && einstellungen.value(QStringLiteral("intro"), true).toBool())
-        IntroAnimation::abspielen();
-
     // ---------- Datenordner ----------
     QString ordner = findeDatenordner(parser.value(datenOpt));
     if (ordner.isEmpty()) {
@@ -144,22 +138,16 @@ int main(int argc, char* argv[])
                               QCoreApplication::translate("main", "Verlauf vorhanden, aber keine Stammdaten in anlagen.csv.")});
     daten->ergaenzeMeldungen(meldungen);
 
-    // ---------- Anmeldung ----------
-    LoginDialog login;
-    if (login.exec() != QDialog::Accepted)
-        return 0;
-
-    // ---------- Hauptfenster ----------
+    // ---------- Hauptfenster: Intro → Anmeldung → Programm in einem Fenster ----------
     auto analyse = std::make_unique<FlottenAnalyse>(daten.get(), verlaeufe.get());
     AppKontext kontext;
     kontext.daten = daten.get();
     kontext.verlaeufe = verlaeufe.get();
     kontext.analyse = analyse.get();
-    kontext.rolle = login.rolle();
 
     MainWindow fenster(kontext);
-    fenster.zeigeBeimStart(); // Vollbild (F11 schaltet um)
-    QTimer::singleShot(0, analyse.get(), &FlottenAnalyse::starte); // Auswertung im Hintergrund
+    // Intro abschaltbar im Benutzermenü oder mit --kein-intro
+    fenster.starte(!parser.isSet(ohneIntroOpt) && einstellungen.value(QStringLiteral("intro"), true).toBool());
 
     return app.exec();
 }

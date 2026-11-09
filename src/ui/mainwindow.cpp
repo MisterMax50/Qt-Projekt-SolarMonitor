@@ -55,7 +55,8 @@
 #include "ui/detail_dialog.h"
 #include "ui/edit_dialog.h"
 #include "ui/karte_view.h"
-#include "ui/login_dialog.h"
+#include "ui/intro_animation.h"
+#include "ui/login_seite.h"
 #include "ui/pdf_bericht.h"
 #include "ui/pruefprotokoll_widget.h"
 #include "ui/serviceplanung.h"
@@ -261,15 +262,80 @@ MainWindow::MainWindow(const AppKontext& kontext, QWidget* parent)
 
     resize(1440, 900);
     restoreGeometry(QSettings().value(QStringLiteral("fenster")).toByteArray());
-    baueUi();
+    setWindowTitle(QStringLiteral("SolarMonitor"));
+
+    // Ein einziges Fenster mit drei Ebenen: Intro → Anmeldung → Programm
+    m_ebenen = new QStackedWidget(this);
+    m_intro = new IntroAnimation(m_ebenen);
+    connect(m_intro, &IntroAnimation::fertig, this, [this] { zeigeAnmeldung(false); });
+    m_ebenen->addWidget(m_intro);
+    neueLoginSeite();
+    setCentralWidget(m_ebenen);
 }
 
-void MainWindow::zeigeBeimStart()
+void MainWindow::neueLoginSeite()
+{
+    // Neu erzeugen statt umzuschalten, damit die Texte der aktuellen Sprache folgen
+    int stelle = 1;
+    if (m_login) {
+        stelle = m_ebenen->indexOf(m_login);
+        m_ebenen->removeWidget(m_login);
+        m_login->deleteLater();
+    }
+    m_login = new LoginSeite;
+    m_ebenen->insertWidget(stelle, m_login);
+    connect(m_login, &LoginSeite::angemeldet, this, &MainWindow::angemeldet);
+    connect(m_login, &LoginSeite::abgebrochen, this, [this] {
+        if (m_programm)
+            zeigeProgramm(); // Benutzerwechsel abgebrochen: zurück zum Programm
+        else
+            close();
+    });
+}
+
+void MainWindow::starte(bool mitIntro)
 {
     if (QSettings().value(QStringLiteral("vollbild"), true).toBool())
         showFullScreen();
     else
         showMaximized();
+    if (mitIntro) {
+        m_ebenen->setCurrentWidget(m_intro);
+        m_intro->starte();
+    } else {
+        zeigeAnmeldung(false);
+    }
+}
+
+void MainWindow::zeigeAnmeldung(bool wechsel)
+{
+    setWindowTitle(tr("Anmeldung – SolarMonitor"));
+    if (m_toast)
+        m_toast->hide();
+    m_login->vorbereiten(wechsel);
+    m_ebenen->setCurrentWidget(m_login);
+    m_login->vorbereiten(wechsel); // Fokus erst, wenn die Seite sichtbar ist
+}
+
+void MainWindow::zeigeProgramm()
+{
+    setWindowTitle(tr("SolarMonitor – Monitoring der PV-Flotte"));
+    m_ebenen->setCurrentWidget(m_programm);
+}
+
+void MainWindow::angemeldet(Rolle rolle)
+{
+    const bool wechsel = m_programm != nullptr;
+    // Die neue Rolle darf die Änderungen der vorherigen nicht rückgängig machen
+    if (wechsel && rolle != m_kontext.rolle)
+        m_undo->clear();
+    m_kontext.rolle = rolle;
+    baueUi();
+    zeigeProgramm();
+    if (!wechsel)
+        QTimer::singleShot(0, m_kontext.analyse, &FlottenAnalyse::starte); // Auswertung im Hintergrund
+    else
+        meldung(tr("Angemeldet als %1.").arg(Rollen::anzeigename(m_kontext.rolle)), 5000);
 }
 
 void MainWindow::setzeVollbild(bool an)
@@ -293,7 +359,8 @@ void MainWindow::setzeDesign(bool dunkel)
     // verzögert, weil der auslösende Knopf beim Neuaufbau gelöscht wird
     QTimer::singleShot(0, this, [this, dunkel] {
         Stil::anwenden(dunkel);
-        baueUi();
+        if (m_programm)
+            baueUi();
     });
 }
 
@@ -313,11 +380,16 @@ void MainWindow::changeEvent(QEvent* event)
     // Beim Sprachwechsel kommen mehrere LanguageChange-Ereignisse
     // (Translator entfernt/installiert); die Oberfläche wird nur einmal
     // danach neu aufgebaut.
-    if (event->type() == QEvent::LanguageChange && m_tabs && !m_neuaufbauGeplant) {
+    if (event->type() == QEvent::LanguageChange && m_ebenen && !m_neuaufbauGeplant) {
         m_neuaufbauGeplant = true;
         QTimer::singleShot(0, this, [this] {
             m_neuaufbauGeplant = false;
-            baueUi();
+            const bool loginSichtbar = m_ebenen->currentWidget() == m_login;
+            neueLoginSeite();
+            if (m_programm)
+                baueUi();
+            if (loginSichtbar)
+                zeigeAnmeldung(m_programm != nullptr);
         });
     }
     QMainWindow::changeEvent(event);
@@ -330,7 +402,6 @@ void MainWindow::changeEvent(QEvent* event)
 void MainWindow::baueUi()
 {
     const int aktuelleSeite = m_tabs ? m_tabs->currentIndex() : 0;
-    setWindowTitle(tr("SolarMonitor – Monitoring der PV-Flotte"));
     erzeugeAktionen();
 
     m_tabs = new QStackedWidget;
@@ -403,7 +474,16 @@ void MainWindow::baueUi()
     h->setSpacing(0);
     h->addWidget(baueNavigation());
     h->addWidget(rechts, 1);
-    setCentralWidget(zentrum); // löscht die alte Oberfläche
+    // alte Oberfläche ersetzen (Ebene "Programm" im Fenster)
+    const bool warSichtbar = m_programm && m_ebenen->currentWidget() == m_programm;
+    if (m_programm) {
+        m_ebenen->removeWidget(m_programm);
+        m_programm->deleteLater();
+    }
+    m_programm = zentrum;
+    m_ebenen->addWidget(m_programm);
+    if (warSichtbar)
+        m_ebenen->setCurrentWidget(m_programm);
 
     connect(m_tabs, &QStackedWidget::currentChanged, this, &MainWindow::seiteGewechselt);
     m_tabs->setCurrentIndex(aktuelleSeite);
@@ -1557,14 +1637,8 @@ void MainWindow::zeigeAenderungsverlauf()
 
 void MainWindow::benutzerWechseln()
 {
-    LoginDialog dlg(this);
-    if (dlg.exec() != QDialog::Accepted)
-        return;
-    m_kontext.rolle = dlg.rolle();
-    // Die neue Rolle darf die Änderungen der vorherigen nicht rückgängig machen
-    m_undo->clear();
-    baueUi();
-    meldung(tr("Angemeldet als %1.").arg(Rollen::anzeigename(m_kontext.rolle)), 5000);
+    // Anmeldung im selben Fenster; "Zurück" führt ohne Wechsel zum Programm
+    zeigeAnmeldung(true);
 }
 
 void MainWindow::zeigeUeber()

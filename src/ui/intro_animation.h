@@ -8,7 +8,8 @@ class QTimer;
 /**
  * @brief Startanimation des Logos, wie das Intro beim Start eines Spiels.
  *
- * Ablauf (etwa 3,4 Sekunden) auf dunkelblauem Vollbild:
+ * Läuft als erste Seite im Hauptfenster (kein eigenes Fenster).
+ * Ablauf (etwa 3,4 Sekunden) auf dunkelblauem Grund:
  *  1. Die Logokachel springt mit leichtem Überschwingen auf, dahinter
  *     leuchtet ein warmer Schein.
  *  2. Die Sonne geht hinter dem Horizont auf, danach wachsen die Strahlen
@@ -26,8 +27,8 @@ class IntroAnimation : public QWidget {
 public:
     explicit IntroAnimation(QWidget* parent = nullptr);
 
-    /// Zeigt das Intro im Vollbild und kehrt zurück, wenn es fertig oder übersprungen ist.
-    static void abspielen();
+    /// Startet das Intro von vorn; am Ende (oder beim Überspringen) kommt fertig().
+    void starte();
 
     /// Bild zum Zeitpunkt @p sekunden zeichnen (auch für Tests/Screenshots).
     void setzeZeit(double sekunden);
