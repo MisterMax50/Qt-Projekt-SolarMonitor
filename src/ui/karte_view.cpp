@@ -17,6 +17,7 @@
 #include <QWheelEvent>
 
 #include <QDir>
+#include <QHash>
 #include <QFileInfo>
 #include <QStandardPaths>
 
@@ -333,34 +334,75 @@ private:
     QPointF m_pan;
     QPointF m_druckPos, m_letztePos;
     bool    m_zieht = false;
+    /// Kacheln, die bereits auf die exakte Zielgröße in Gerätepixeln
+    /// herunterskaliert wurden (Schlüssel: Bild + Größe)
+    QHash<QString, QPixmap> m_scharf;
+    QPixmap scharf(const QPixmap& quelle, const QRectF& ausschnitt, const QSize& ziel, qreal dpr);
 };
+
+QPixmap KartenFlaeche::scharf(const QPixmap& quelle, const QRectF& ausschnitt, const QSize& ziel, qreal dpr)
+{
+    // Hochwertig verkleinern (statt beim Zeichnen nur bilinear zu
+    // interpolieren) und das Ergebnis merken: beim Verschieben der Karte
+    // bleiben die Größen gleich, es wird also nicht neu gerechnet.
+    const QString schluessel = QStringLiteral("%1|%2,%3,%4|%5x%6")
+                                   .arg(quelle.cacheKey())
+                                   .arg(ausschnitt.x()).arg(ausschnitt.y()).arg(ausschnitt.width())
+                                   .arg(ziel.width()).arg(ziel.height());
+    auto it = m_scharf.constFind(schluessel);
+    if (it != m_scharf.constEnd())
+        return it.value();
+    if (m_scharf.size() > 300)
+        m_scharf.clear(); // nach vielen Zoomstufen Speicher freigeben
+    QPixmap teil = ausschnitt == QRectF(quelle.rect()) ? quelle : quelle.copy(ausschnitt.toRect());
+    QPixmap pm = teil.scaled(ziel, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    pm.setDevicePixelRatio(dpr);
+    m_scharf.insert(schluessel, pm);
+    return pm;
+}
 
 void KartenFlaeche::zeichneKacheln(QPainter& p)
 {
-    // Kachel-Zoomstufe passend zum Maßstab: eine Kachel ist 256 px breit,
-    // die Welt hat auf Stufe z also 256 · 2^z Pixel.
-    const int z = qBound(1, int(std::lround(std::log2(skala() / 256.0))), 18);
+    // Kachel-Zoomstufe passend zum Maßstab in Gerätepixeln (Windows-
+    // Skalierung 125 %/150 % berücksichtigt): eine Kachel ist 256 px breit,
+    // die Welt hat auf Stufe z also 256 · 2^z Pixel. Es wird aufgerundet,
+    // damit Kacheln höchstens minimal vergrößert, sonst verkleinert werden –
+    // Vergrößern macht die Karte unscharf, Verkleinern nicht.
+    const qreal dpr = devicePixelRatioF();
+    const int z = qBound(1, int(std::ceil(std::log2(skala() * dpr / 256.0) - 0.1)), 19);
     const int n = 1 << z;
-    const double kachelPx = skala() / n;
 
     const QPointF w0 = bildZuWelt(QPointF(0, 0));
     const QPointF w1 = bildZuWelt(QPointF(width(), height()));
     const int x0 = qMax(0, int(std::floor(w0.x() * n))), x1 = qMin(n - 1, int(std::floor(w1.x() * n)));
     const int y0 = qMax(0, int(std::floor(w0.y() * n))), y1 = qMin(n - 1, int(std::floor(w1.y() * n)));
 
+    // Kachelränder auf ganze Gerätepixel legen: Kacheln stoßen lückenlos
+    // aneinander und werden ohne weiteres Umrechnen 1:1 gezeichnet.
+    auto geraet = [&](double wx, double wy) {
+        const QPointF b = weltZuBild(QPointF(wx, wy));
+        return QPoint(int(std::lround(b.x() * dpr)), int(std::lround(b.y() * dpr)));
+    };
+
     m_lader->neueAnforderungsrunde();
     p.save();
-    p.setRenderHint(QPainter::SmoothPixmapTransform, true);
-    p.setOpacity(0.75); // etwas aufgehellt, damit die Anlagenpunkte gut lesbar bleiben
+    p.setOpacity(0.8); // etwas aufgehellt, damit die Anlagenpunkte gut lesbar bleiben
     for (int ty = y0; ty <= y1; ++ty) {
         for (int tx = x0; tx <= x1; ++tx) {
-            const QRectF ziel(weltZuBild(QPointF(double(tx) / n, double(ty) / n)), QSizeF(kachelPx, kachelPx));
+            const QPoint a = geraet(double(tx) / n, double(ty) / n);
+            const QPoint e = geraet(double(tx + 1) / n, double(ty + 1) / n);
+            const QSize groesse(e.x() - a.x(), e.y() - a.y());
+            if (groesse.width() <= 0 || groesse.height() <= 0)
+                continue;
+            const QPointF ziel(a.x() / dpr, a.y() / dpr);
+
             const QPixmap pm = m_lader->kachel(z, tx, ty);
             if (!pm.isNull()) {
-                p.drawPixmap(ziel.adjusted(0, 0, 0.5, 0.5), pm, QRectF(pm.rect()));
+                p.drawPixmap(ziel, scharf(pm, QRectF(pm.rect()), groesse, dpr));
                 continue;
             }
-            // Ersatz: vergrößerter Ausschnitt einer gröberen, bereits gespeicherten Kachel
+            // Ersatz, bis die Kachel geladen ist: vergrößerter Ausschnitt
+            // einer gröberen, bereits gespeicherten Kachel
             for (int d = 1; d <= 4 && z - d >= 0; ++d) {
                 const QPixmap grob = m_lader->kachelOhneDownload(z - d, tx >> d, ty >> d);
                 if (grob.isNull())
@@ -368,7 +410,7 @@ void KartenFlaeche::zeichneKacheln(QPainter& p)
                 const int teile = 1 << d;
                 const double gr = 256.0 / teile;
                 const QRectF quelle((tx % teile) * gr, (ty % teile) * gr, gr, gr);
-                p.drawPixmap(ziel.adjusted(0, 0, 0.5, 0.5), grob, quelle);
+                p.drawPixmap(ziel, scharf(grob, quelle, groesse, dpr));
                 break;
             }
         }
