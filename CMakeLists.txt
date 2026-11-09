@@ -19,6 +19,7 @@ qt_standard_project_setup()
 set(PROJEKT_HEADER
     src/model/anlage.h
     src/model/datenbasis.h
+    src/model/datensatz.h
     src/model/pruefmeldung.h
     src/model/rolle.h
     src/model/stoerung.h
@@ -69,6 +70,7 @@ set(PROJEKT_HEADER
 set(PROJEKT_QUELLEN
     src/main.cpp
     src/model/datenbasis.cpp
+    src/model/datensatz.cpp
     src/model/rolle.cpp
     src/repo/csv_parser.cpp
     src/repo/routen_dienst.cpp

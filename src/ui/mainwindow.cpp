@@ -46,6 +46,7 @@
 
 #include "eval/flotten_analyse.h"
 #include "model/datenbasis.h"
+#include "model/datensatz.h"
 #include "repo/csv_parser.h"
 #include "ui/aenderungen.h"
 #include "ui/anlage_info.h"
@@ -233,21 +234,56 @@ QIcon avatar(const QString& name)
 }
 } // namespace
 
-MainWindow::MainWindow(const AppKontext& kontext, const QString& datenFehler, const QString& datenOrdner,
-                       QWidget* parent)
+MainWindow::MainWindow(std::unique_ptr<Datensatz> datensatz, QWidget* parent)
     : QMainWindow(parent)
-    , m_kontext(kontext)
-    , m_datenFehler(datenFehler)
-    , m_datenOrdner(datenOrdner)
 {
+    m_undo = new QUndoStack(this);
+    m_undo->setUndoLimit(100);
+    uebernimmDaten(std::move(datensatz));
+
+    resize(1440, 900);
+    restoreGeometry(QSettings().value(QStringLiteral("fenster")).toByteArray());
+    setWindowTitle(QStringLiteral("SolarMonitor"));
+
+    // Ein einziges Fenster mit drei Ebenen: Intro → Anmeldung → Programm
+    m_ebenen = new QStackedWidget(this);
+    m_intro = new IntroAnimation(m_ebenen);
+    connect(m_intro, &IntroAnimation::fertig, this, [this] { zeigeAnmeldung(false); });
+    m_ebenen->addWidget(m_intro);
+    neueLoginSeite();
+    setCentralWidget(m_ebenen);
+}
+
+MainWindow::~MainWindow()
+{
+    // Erst die Oberfläche und die Modelle, dann die Daten, auf die sie zeigen
+    m_undo->clear();
+    delete m_ebenen; // enthält auch die Programmoberfläche
+    m_ebenen = nullptr;
+    m_programm = nullptr;
+    m_intro = nullptr;
+    m_login = nullptr;
+    m_ordnerSeite = nullptr;
+    trenneDaten();
+}
+
+void MainWindow::uebernimmDaten(std::unique_ptr<Datensatz> datensatz)
+{
+    m_datensatz = std::move(datensatz); // ein alter Datensatz wird hier freigegeben
+    m_kontext.daten = m_datensatz->daten();
+    m_kontext.verlaeufe = m_datensatz->verlaeufe();
+    m_kontext.analyse = m_datensatz->analyse();
+    m_datenFehler = m_datensatz->fehler();
+    m_datenOrdner = m_datensatz->ordner();
+    m_fortschrittWert = m_fortschrittMax = 0;
+    m_filter = FilterZustand{};
+
     m_anlageModel = new AnlageModel(m_kontext, this);
     m_anlageFilter = new AnlageFilterModel(this);
     m_anlageFilter->setSourceModel(m_anlageModel);
     m_stoerungModel = new StoerungModel(m_kontext, this);
     m_stoerungFilter = new StoerungFilterModel(this);
     m_stoerungFilter->setSourceModel(m_stoerungModel);
-    m_undo = new QUndoStack(this);
-    m_undo->setUndoLimit(100);
 
     connect(m_anlageFilter, &QAbstractItemModel::rowsInserted, this, &MainWindow::aktualisiereZaehler);
     connect(m_anlageFilter, &QAbstractItemModel::rowsRemoved, this, &MainWindow::aktualisiereZaehler);
@@ -263,18 +299,73 @@ MainWindow::MainWindow(const AppKontext& kontext, const QString& datenFehler, co
     connect(m_kontext.daten, &Datenbasis::stoerungenGeaendert, this, &MainWindow::aktualisiereNavigation);
     connect(m_kontext.daten, &Datenbasis::meldungenGeaendert, this, &MainWindow::aktualisiereNavigation);
     connect(m_kontext.analyse, &FlottenAnalyse::fertig, this, &MainWindow::aktualisiereNavigation);
+}
 
-    resize(1440, 900);
-    restoreGeometry(QSettings().value(QStringLiteral("fenster")).toByteArray());
-    setWindowTitle(QStringLiteral("SolarMonitor"));
+void MainWindow::trenneDaten()
+{
+    // Programmoberfläche und Modelle entfernen, solange die alten Daten noch leben
+    if (m_programm) {
+        if (m_ebenen)
+            m_ebenen->removeWidget(m_programm);
+        delete m_programm;
+    }
+    m_programm = nullptr;
+    m_tabs = nullptr;
+    m_seitenTitel = m_seitenHinweis = m_analyseText = nullptr;
+    m_anlagenLeer = m_stoerungenLeer = m_anlagenZaehler = m_stoerungsZaehler = nullptr;
+    m_glocke = nullptr;
+    m_navigation = nullptr;
+    m_anlageInfo = nullptr;
+    m_filterReset = nullptr;
+    m_anlagenTabelle = m_stoerungsTabelle = nullptr;
+    m_karte = nullptr;
+    m_suche = m_stoerAnlage = nullptr;
+    m_stoerStatus = nullptr;
+    m_fortschritt = nullptr;
+    delete m_anlageFilter;
+    delete m_anlageModel;
+    delete m_stoerungFilter;
+    delete m_stoerungModel;
+    m_anlageFilter = nullptr;
+    m_anlageModel = nullptr;
+    m_stoerungFilter = nullptr;
+    m_stoerungModel = nullptr;
+}
 
-    // Ein einziges Fenster mit drei Ebenen: Intro → Anmeldung → Programm
-    m_ebenen = new QStackedWidget(this);
-    m_intro = new IntroAnimation(m_ebenen);
-    connect(m_intro, &IntroAnimation::fertig, this, [this] { zeigeAnmeldung(false); });
-    m_ebenen->addWidget(m_intro);
-    neueLoginSeite();
-    setCentralWidget(m_ebenen);
+void MainWindow::wechsleDaten(const QString& ordner)
+{
+    // Neue Daten laden, während das Fenster offen bleibt; erst bei Erfolg
+    // wird der alte Datensatz ersetzt.
+    if (m_ordnerSeite)
+        m_ordnerSeite->setEnabled(false);
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    meldung(tr("Daten werden geladen …"), 60000);
+    QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+    auto neu = Datensatz::lade(ordner);
+    QApplication::restoreOverrideCursor();
+    if (m_ordnerSeite)
+        m_ordnerSeite->setEnabled(true);
+    if (m_toast)
+        m_toast->hide();
+
+    if (!neu->ok()) {
+        // Ordner bleibt angezeigt, mit dem Grund
+        m_ordnerSeite->vorbereiten(ordner, neu->fehler(), m_programm != nullptr);
+        return;
+    }
+    QSettings().setValue(QStringLiteral("datenordner"), neu->ordner());
+
+    // Änderungen der alten Daten lassen sich nicht mehr zurücknehmen
+    m_undo->clear();
+    trenneDaten();
+    uebernimmDaten(std::move(neu));
+    baueUi();
+    zeigeProgramm();
+    QTimer::singleShot(0, m_kontext.analyse, &FlottenAnalyse::starte); // Auswertung im Hintergrund
+    meldung(tr("Datenordner geladen: %1 Anlagen aus %2")
+                .arg(m_kontext.daten->anlagen().size())
+                .arg(QDir::toNativeSeparators(m_datenOrdner)),
+            6000);
 }
 
 void MainWindow::neueLoginSeite()
@@ -297,16 +388,13 @@ void MainWindow::neueLoginSeite()
     });
 }
 
-void MainWindow::starte(bool mitIntro, std::optional<Rolle> rolle)
+void MainWindow::starte(bool mitIntro)
 {
     if (QSettings().value(QStringLiteral("vollbild"), true).toBool())
         showFullScreen();
     else
         showMaximized();
-    if (rolle) {
-        // Neu geladen nach Wechsel des Datenordners: angemeldet bleiben
-        angemeldet(*rolle);
-    } else if (mitIntro) {
+    if (mitIntro) {
         m_ebenen->setCurrentWidget(m_intro);
         m_intro->starte();
     } else {
@@ -330,11 +418,6 @@ void MainWindow::zeigeProgramm()
     m_ebenen->setCurrentWidget(m_programm);
 }
 
-std::optional<Rolle> MainWindow::angemeldeteRolle() const
-{
-    return m_angemeldet ? std::optional<Rolle>(m_kontext.rolle) : std::nullopt;
-}
-
 void MainWindow::zeigeDatenordner(const QString& fehler, bool zurueckMoeglich)
 {
     // Seite jedes Mal neu erzeugen, damit sie der aktuellen Sprache folgt
@@ -351,14 +434,12 @@ void MainWindow::zeigeDatenordner(const QString& fehler, bool zurueckMoeglich)
             close();
     });
     connect(m_ordnerSeite, &DatenordnerSeite::ordnerGewaehlt, this, [this](const QString& ordner) {
-        QSettings().setValue(QStringLiteral("datenordner"), ordner);
         if (m_programm && QDir(ordner) == QDir(m_datenOrdner)) {
+            QSettings().setValue(QStringLiteral("datenordner"), ordner);
             zeigeProgramm(); // unverändert
             return;
         }
-        // Daten, Auswertung und Fenster neu aufbauen (siehe main.cpp)
-        QSettings().setValue(QStringLiteral("fenster"), saveGeometry());
-        qApp->exit(kNeuLaden);
+        wechsleDaten(ordner);
     });
     setWindowTitle(tr("Datenordner – SolarMonitor"));
     if (m_toast)
@@ -370,7 +451,6 @@ void MainWindow::zeigeDatenordner(const QString& fehler, bool zurueckMoeglich)
 
 void MainWindow::angemeldet(Rolle rolle)
 {
-    m_angemeldet = true;
     if (!m_datenFehler.isEmpty()) {
         // Keine Daten: erst den Datenordner festlegen lassen
         m_kontext.rolle = rolle;

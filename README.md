@@ -48,8 +48,10 @@ Arbeitsverzeichnis.
 **Datenordner ändern:** Im Benutzermenü unter *Datenordner ändern …* lässt
 sich jederzeit ein anderer Ordner wählen (Pfad eintippen oder
 *Durchsuchen …*). Die Seite prüft sofort, ob `anlagen.csv` und die übrigen
-Dateien vorhanden sind. Nach *Übernehmen* werden Daten, Auswertung und
-Oberfläche neu aufgebaut, die Anmeldung bleibt bestehen; die Wahl wird
+Dateien vorhanden sind. Nach *Übernehmen* lädt das Programm den neuen
+Ordner (`src/model/datensatz.*`) im laufenden Fenster und tauscht erst bei
+Erfolg Daten, Auswertung und Oberfläche aus – das Fenster bleibt offen, die
+Anmeldung bleibt bestehen; die Wahl wird
 gespeichert (QSettings) und hat beim nächsten Start Vorrang vor der Suche.
 Werden beim Start keine Daten gefunden, erscheint dieselbe Seite direkt nach
 der Anmeldung (`src/ui/datenordner_seite.*`).
@@ -242,7 +244,7 @@ Nutzung gedacht).
 
 ```
 src/
-├── main.cpp          Start: Datenordner suchen, Laden, Hauptfenster (neu bei Ordnerwechsel)
+├── main.cpp          Start: Datenordner suchen, Laden, Hauptfenster
 ├── model/            Datenklassen, Datenbasis (CSV laden/prüfen/exportieren), Rollen
 ├── repo/             CSV-Leser, Verlaufsindex + JSON-Parser + LRU-Cache
 ├── eval/             Ertragsauswertung, Flottenanalyse, Tourenplanung, Schwellwerte

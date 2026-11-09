@@ -9,7 +9,7 @@ class FlottenAnalyse;
 /**
  * @brief Bündelt die Dienste, die fast jede Ansicht braucht.
  *
- * Die Objekte gehören main() (std::unique_ptr); die Oberfläche hält nur
+ * Die Objekte gehören dem Datensatz des Hauptfensters; die Oberfläche hält nur
  * nicht besitzende Zeiger. So bleiben Konstruktoren schlank und die
  * Rechteprüfung ist überall gleich.
  */

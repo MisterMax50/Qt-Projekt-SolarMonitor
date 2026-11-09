@@ -981,6 +981,31 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</source>
     </message>
 </context>
 <context>
+    <name>Datensatz</name>
+    <message>
+        <location filename="../src/model/datensatz.cpp" line="26"/>
+        <source>Es wurde kein Datenordner mit anlagen.csv gefunden.</source>
+        <translation>未找到包含 anlagen.csv 的数据文件夹。</translation>
+    </message>
+    <message>
+        <location filename="../src/model/datensatz.cpp" line="32"/>
+        <source>In %1 konnten keine Anlagen geladen werden:
+%2</source>
+        <translation>无法从 %1 加载电站：
+%2</translation>
+    </message>
+    <message>
+        <location filename="../src/model/datensatz.cpp" line="41"/>
+        <source>Kein Verlauf im Index – nur Stammdaten verfügbar.</source>
+        <translation>索引中无曲线数据——仅有基础数据。</translation>
+    </message>
+    <message>
+        <location filename="../src/model/datensatz.cpp" line="45"/>
+        <source>Verlauf vorhanden, aber keine Stammdaten in anlagen.csv.</source>
+        <translation>有曲线数据，但 anlagen.csv 中没有基础数据。</translation>
+    </message>
+</context>
+<context>
     <name>DetailDialog</name>
     <message>
         <location filename="../src/ui/detail_dialog.cpp" line="45"/>
@@ -1818,637 +1843,647 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="319"/>
+        <location filename="../src/ui/mainwindow.cpp" line="342"/>
+        <source>Daten werden geladen …</source>
+        <translation>正在加载数据 …</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/mainwindow.cpp" line="365"/>
+        <source>Datenordner geladen: %1 Anlagen aus %2</source>
+        <translation>数据文件夹已加载：从 %2 读取 %1 个电站</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/mainwindow.cpp" line="407"/>
         <source>Anmeldung – SolarMonitor</source>
         <translation>登录 – SolarMonitor</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="329"/>
+        <location filename="../src/ui/mainwindow.cpp" line="417"/>
         <source>SolarMonitor – Monitoring der PV-Flotte</source>
         <translation>SolarMonitor – 光伏电站群监控</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="363"/>
+        <location filename="../src/ui/mainwindow.cpp" line="444"/>
         <source>Datenordner – SolarMonitor</source>
         <translation>数据文件夹 – SolarMonitor</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="390"/>
+        <location filename="../src/ui/mainwindow.cpp" line="470"/>
         <source>Angemeldet als %1.</source>
         <translation>已登录为 %1。</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="473"/>
-        <location filename="../src/ui/mainwindow.cpp" line="669"/>
+        <location filename="../src/ui/mainwindow.cpp" line="553"/>
+        <location filename="../src/ui/mainwindow.cpp" line="749"/>
         <source>Übersicht</source>
         <translation>概览</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="473"/>
+        <location filename="../src/ui/mainwindow.cpp" line="553"/>
         <source>Zustand der Flotte auf einen Blick</source>
         <translation>电站群状态一览</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="482"/>
-        <location filename="../src/ui/mainwindow.cpp" line="670"/>
+        <location filename="../src/ui/mainwindow.cpp" line="562"/>
+        <location filename="../src/ui/mainwindow.cpp" line="750"/>
         <source>Anlagen</source>
         <translation>电站</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="482"/>
+        <location filename="../src/ui/mainwindow.cpp" line="562"/>
         <source>Alle PV-Anlagen der Flotte · Doppelklick öffnet die Details</source>
         <translation>电站群中的全部光伏电站 · 双击查看详情</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="486"/>
-        <location filename="../src/ui/mainwindow.cpp" line="671"/>
+        <location filename="../src/ui/mainwindow.cpp" line="566"/>
+        <location filename="../src/ui/mainwindow.cpp" line="751"/>
         <source>Störungen</source>
         <translation>故障</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="486"/>
+        <location filename="../src/ui/mainwindow.cpp" line="566"/>
         <source>Störungsmeldungen seit 2024 · Rechtsklick ändert den Status</source>
         <translation>2024 年以来的故障报告 · 右键修改状态</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="492"/>
-        <location filename="../src/ui/mainwindow.cpp" line="672"/>
+        <location filename="../src/ui/mainwindow.cpp" line="572"/>
+        <location filename="../src/ui/mainwindow.cpp" line="752"/>
         <source>Karte</source>
         <translation>地图</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="492"/>
+        <location filename="../src/ui/mainwindow.cpp" line="572"/>
         <source>Lage der Anlagen und Wetterstationen · Mausrad zoomt, Klick öffnet eine Anlage</source>
         <translation>电站和气象站位置 · 滚轮缩放，单击打开电站</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="495"/>
-        <location filename="../src/ui/mainwindow.cpp" line="674"/>
+        <location filename="../src/ui/mainwindow.cpp" line="575"/>
+        <location filename="../src/ui/mainwindow.cpp" line="754"/>
         <source>Statistik</source>
         <translation>统计</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="495"/>
+        <location filename="../src/ui/mainwindow.cpp" line="575"/>
         <source>Kennzahlen und Auswertungen über die gesamte Flotte</source>
         <translation>全电站群的指标与分析</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="506"/>
-        <location filename="../src/ui/mainwindow.cpp" line="675"/>
+        <location filename="../src/ui/mainwindow.cpp" line="586"/>
+        <location filename="../src/ui/mainwindow.cpp" line="755"/>
         <source>Serviceplanung</source>
         <translation>运维规划</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="507"/>
+        <location filename="../src/ui/mainwindow.cpp" line="587"/>
         <source>Welche Anlagen zuerst? Sortiert nach Priorität und geschätztem Ertragsverlust</source>
         <translation>先处理哪些电站？按优先级和预计发电损失排序</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="512"/>
-        <location filename="../src/ui/mainwindow.cpp" line="676"/>
+        <location filename="../src/ui/mainwindow.cpp" line="592"/>
+        <location filename="../src/ui/mainwindow.cpp" line="756"/>
         <source>Datenprüfung</source>
         <translation>数据校验</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="513"/>
+        <location filename="../src/ui/mainwindow.cpp" line="593"/>
         <source>Auffälligkeiten beim Einlesen der Dateien und automatische Korrekturen</source>
         <translation>读取文件时发现的问题及自动修正</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="600"/>
+        <location filename="../src/ui/mainwindow.cpp" line="680"/>
         <source>Exportieren</source>
         <translation>导出</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="635"/>
+        <location filename="../src/ui/mainwindow.cpp" line="715"/>
         <source>PV-Flotte Bodensee</source>
         <translation>博登湖光伏电站群</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="668"/>
+        <location filename="../src/ui/mainwindow.cpp" line="748"/>
         <source>Überwachung</source>
         <translation>监控</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="673"/>
+        <location filename="../src/ui/mainwindow.cpp" line="753"/>
         <source>Auswertung</source>
         <translation>分析</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="751"/>
+        <location filename="../src/ui/mainwindow.cpp" line="831"/>
         <source>Angemeldet als %1</source>
         <translation>当前登录：%1</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="753"/>
+        <location filename="../src/ui/mainwindow.cpp" line="833"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation>切换用户(&amp;W) …</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="756"/>
+        <location filename="../src/ui/mainwindow.cpp" line="836"/>
         <source>Daten&amp;ordner ändern …</source>
         <translation>更改数据文件夹(&amp;O) …</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="759"/>
+        <location filename="../src/ui/mainwindow.cpp" line="839"/>
         <source>&amp;Dunkles Design</source>
         <translation>深色主题(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="763"/>
+        <location filename="../src/ui/mainwindow.cpp" line="843"/>
         <source>&amp;Vollbild</source>
         <translation>全屏(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="769"/>
+        <location filename="../src/ui/mainwindow.cpp" line="849"/>
         <source>&amp;Intro beim Start</source>
         <translation>启动动画(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="772"/>
+        <location filename="../src/ui/mainwindow.cpp" line="852"/>
         <source>Logo-Animation beim Programmstart zeigen</source>
         <translation>程序启动时显示徽标动画</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="774"/>
+        <location filename="../src/ui/mainwindow.cpp" line="854"/>
         <source>&amp;Sprache</source>
         <translation>语言(&amp;L)</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="784"/>
+        <location filename="../src/ui/mainwindow.cpp" line="864"/>
         <source>Die Übersetzung konnte nicht geladen werden.</source>
         <translation>无法加载翻译。</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="788"/>
+        <location filename="../src/ui/mainwindow.cpp" line="868"/>
         <source>&amp;Über SolarMonitor</source>
         <translation>关于 SolarMonitor(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="789"/>
+        <location filename="../src/ui/mainwindow.cpp" line="869"/>
         <source>&amp;Beenden</source>
         <translation>退出(&amp;Q)</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="808"/>
+        <location filename="../src/ui/mainwindow.cpp" line="888"/>
         <source>SolarMonitor beenden (Strg+Q)</source>
         <translation>退出 SolarMonitor（Ctrl+Q）</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="859"/>
+        <location filename="../src/ui/mainwindow.cpp" line="939"/>
         <source>%1 offene Störungen, davon %2 kritisch</source>
         <translation>%1 个未处理故障，其中 %2 个严重</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="864"/>
+        <location filename="../src/ui/mainwindow.cpp" line="944"/>
         <source>%1 Anlagen mit erkanntem Fehlerbild</source>
         <translation>%1 个电站存在故障模式</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="866"/>
+        <location filename="../src/ui/mainwindow.cpp" line="946"/>
         <source>%1 Fehler beim Einlesen</source>
         <translation>读取时 %1 个错误</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="870"/>
+        <location filename="../src/ui/mainwindow.cpp" line="950"/>
         <source>%1 kritische Störungen offen – anzeigen</source>
         <translation>%1 个严重故障未处理——查看</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="871"/>
+        <location filename="../src/ui/mainwindow.cpp" line="951"/>
         <source>Keine kritischen Störungen offen</source>
         <translation>没有未处理的严重故障</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="902"/>
+        <location filename="../src/ui/mainwindow.cpp" line="982"/>
         <source>Filter zurücksetzen (%1)</source>
         <translation>重置筛选（%1）</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="902"/>
-        <location filename="../src/ui/mainwindow.cpp" line="953"/>
+        <location filename="../src/ui/mainwindow.cpp" line="982"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1033"/>
         <source>Filter zurücksetzen</source>
         <translation>重置筛选</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="912"/>
+        <location filename="../src/ui/mainwindow.cpp" line="992"/>
         <source>Anlagen durchsuchen (Strg+F)</source>
         <translation>搜索电站（Ctrl+F）</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="913"/>
+        <location filename="../src/ui/mainwindow.cpp" line="993"/>
         <source>Sucht in Anlagen-ID, Ort und Wetterstation</source>
         <translation>在电站编号、地点和气象站中搜索</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="918"/>
+        <location filename="../src/ui/mainwindow.cpp" line="998"/>
         <source>Alle Status</source>
         <translation>全部状态</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="924"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1004"/>
         <source>Alle Typen</source>
         <translation>全部类型</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="930"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1010"/>
         <source>Alle Orte</source>
         <translation>全部地点</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="941"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1021"/>
         <source>beliebig</source>
         <translation>不限</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="942"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1022"/>
         <source>0 = keine Grenze</source>
         <translation>0 = 不限</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="947"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1027"/>
         <source>nur mit Fehlerbild</source>
         <translation>仅含故障模式</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="949"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1029"/>
         <source>Anlagen, bei denen die Flottenanalyse ein Fehlerbild erkannt hat</source>
         <translation>电站群分析中识别出故障模式的电站</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="950"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1030"/>
         <source>nur mit offenen Störungen</source>
         <translation>仅含未处理故障</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="962"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1143"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1042"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1223"/>
         <source>Status:</source>
         <translation>状态：</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="965"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1045"/>
         <source>Typ:</source>
         <translation>类型：</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="968"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1048"/>
         <source>Ort:</source>
         <translation>地点：</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="971"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1051"/>
         <source>Leistung:</source>
         <translation>功率：</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1079"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1159"/>
         <source>Keine Anlage entspricht den gewählten Filtern.</source>
         <translation>没有符合所选筛选条件的电站。</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1112"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1192"/>
         <source>Suche nach Störung, Anlage, Code oder Beschreibung</source>
         <translation>按故障、电站、代码或描述搜索</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1116"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1196"/>
         <source>Alle</source>
         <translation>全部</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1117"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1197"/>
         <source>Offen + in Bearbeitung</source>
         <translation>未处理 + 处理中</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1124"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1204"/>
         <source>Alle Schweregrade</source>
         <translation>全部严重程度</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1130"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1210"/>
         <source>Anlage, z. B. P00051</source>
         <translation>电站，例如 P00051</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1146"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1226"/>
         <source>Schwere:</source>
         <translation>严重程度：</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1149"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1229"/>
         <source>Anlage:</source>
         <translation>电站：</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1197"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1277"/>
         <source>Keine Störung entspricht den gewählten Filtern.</source>
         <translation>没有符合所选筛选条件的故障。</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1221"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1301"/>
         <source>&amp;Details …</source>
         <translation>详情(&amp;D) …</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1229"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1309"/>
         <source>Stammdaten &amp;bearbeiten …</source>
         <translation>编辑基础数据(&amp;E) …</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1235"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1315"/>
         <source>Störung &amp;erfassen …</source>
         <translation>登记故障(&amp;R) …</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1241"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1321"/>
         <source>&amp;Anlagen exportieren …</source>
         <translation>导出电站(&amp;P) …</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1243"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1323"/>
         <source>&amp;Störungen exportieren …</source>
         <translation>导出故障(&amp;F) …</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1245"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1325"/>
         <source>&amp;Ertragsbericht exportieren …</source>
         <translation>导出发电报告(&amp;Y) …</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1248"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1328"/>
         <source>Anlagenbericht als &amp;PDF …</source>
         <translation>电站报告 PDF(&amp;P) …</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1253"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1333"/>
         <source>&amp;Flottenbericht als PDF …</source>
         <translation>电站群报告 PDF(&amp;F) …</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1256"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1336"/>
         <source>Analyse neu starten</source>
         <translation>重新分析</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1257"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1337"/>
         <source>Verläufe aller Anlagen erneut auswerten</source>
         <translation>重新分析所有电站的曲线</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1259"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1339"/>
         <source>Änderungsverlauf …</source>
         <translation>修改历史 …</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1263"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1272"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1343"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1352"/>
         <source>&amp;Rückgängig</source>
         <translation>撤销(&amp;U)</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1265"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1275"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1345"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1355"/>
         <source>&amp;Wiederholen</source>
         <translation>重做(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1272"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1352"/>
         <source>&amp;Rückgängig: %1</source>
         <translation>撤销(&amp;U)：%1</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1273"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1353"/>
         <source>Nichts rückgängig zu machen</source>
         <translation>没有可撤销的操作</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1273"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1353"/>
         <source>Rückgängig: %1 (Strg+Z)</source>
         <translation>撤销：%1（Ctrl+Z）</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1275"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1355"/>
         <source>&amp;Wiederholen: %1</source>
         <translation>重做(&amp;R)：%1</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1276"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1356"/>
         <source>Nichts zu wiederholen</source>
         <translation>没有可重做的操作</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1276"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1356"/>
         <source>Wiederholen: %1 (Strg+Y)</source>
         <translation>重做：%1（Ctrl+Y）</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1310"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1390"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>仅限管理员角色。</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1311"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1391"/>
         <source>Nur für die Rollen Service und Administrator.</source>
         <translation>仅限运维和管理员角色。</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1312"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1392"/>
         <source>Stammdaten der markierten Anlage bearbeiten (F2)</source>
         <translation>编辑所选电站的基础数据（F2）</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1313"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1393"/>
         <source>Neue Störung für die markierte Anlage erfassen</source>
         <translation>为所选电站登记新故障</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1314"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1394"/>
         <source>Anlagen als CSV speichern (anlagen_out.csv)</source>
         <translation>将电站保存为 CSV（anlagen_out.csv）</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1320"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1400"/>
         <source>%1 von %2 Anlagen</source>
         <translation>%1 / %2 个电站</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1324"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1404"/>
         <source>%1 von %2 Störungen</source>
         <translation>%1 / %2 个故障</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1368"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1448"/>
         <source>Störungen dieser Anlage anzeigen</source>
         <translation>显示该电站的故障</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1373"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1453"/>
         <source>Auf der Karte zeigen</source>
         <translation>在地图上显示</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1392"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1472"/>
         <source>Öffnen …</source>
         <translation>打开 …</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1393"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1473"/>
         <source>Status: in Bearbeitung</source>
         <translation>状态：处理中</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1396"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1476"/>
         <source>Status: behoben</source>
         <translation>状态：已解决</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1400"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1480"/>
         <source>Anlage %1 öffnen</source>
         <translation>打开电站 %1</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1413"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1493"/>
         <source>Anlage</source>
         <translation>电站</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1413"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1493"/>
         <source>Die Anlage %1 ist nicht vorhanden.</source>
         <translation>电站 %1 不存在。</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1430"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1466"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1510"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1546"/>
         <source>Keine Berechtigung</source>
         <translation>无权限</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1431"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1511"/>
         <source>Stammdaten dürfen nur von der Rolle Administrator bearbeitet werden.</source>
         <translation>只有管理员角色可以编辑基础数据。</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1444"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1492"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1524"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1572"/>
         <source>Speichern fehlgeschlagen</source>
         <translation>保存失败</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1444"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1524"/>
         <source>Anlage %1 ist unbekannt.</source>
         <translation>电站 %1 未知。</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1467"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1547"/>
         <source>Störungen dürfen nur von den Rollen Service und Administrator erfasst werden.</source>
         <translation>只有运维和管理员角色可以登记故障。</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1476"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1556"/>
         <source>Störung %1 für Anlage %2 erfasst (Strg+Z macht es rückgängig).</source>
         <translation>已为电站 %2 登记故障 %1（Ctrl+Z 可撤销）。</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1492"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1572"/>
         <source>Störung %1 ist unbekannt.</source>
         <translation>故障 %1 未知。</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1516"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1527"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1596"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1607"/>
         <source>Änderung gespeichert: %1</source>
         <translation>修改已保存：%1</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1518"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1529"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1598"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1609"/>
         <source>Automatisches Speichern fehlgeschlagen</source>
         <translation>自动保存失败</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1519"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1530"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1599"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1610"/>
         <source>Die Änderung ist im Speicher, wurde aber nicht gesichert:
 %1</source>
         <translation>修改已在内存中，但尚未保存：
 %1</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1535"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1615"/>
         <source>Anlagen exportieren</source>
         <translation>导出电站</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1537"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1552"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1571"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1617"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1632"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1651"/>
         <source>CSV-Dateien (*.csv)</source>
         <translation>CSV 文件 (*.csv)</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1542"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1622"/>
         <source>%1 Anlagen exportiert nach %2</source>
         <translation>已导出 %1 个电站到 %2</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1545"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1559"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1577"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1609"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1625"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1639"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1657"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1689"/>
         <source>Export fehlgeschlagen</source>
         <translation>导出失败</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1550"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1630"/>
         <source>Störungen exportieren</source>
         <translation>导出故障</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1557"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1637"/>
         <source>Störungen exportiert nach %1</source>
         <translation>故障已导出到 %1</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1565"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1645"/>
         <source>Ertragsbericht</source>
         <translation>发电报告</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1566"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1659"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1646"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1739"/>
         <source>Die Flottenanalyse ist noch nicht abgeschlossen. Bitte kurz warten.</source>
         <translation>电站群分析尚未完成，请稍候。</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1569"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1649"/>
         <source>Ertragsbericht exportieren</source>
         <translation>导出发电报告</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1607"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1687"/>
         <source>Ertragsbericht gespeichert: %1</source>
         <translation>发电报告已保存：%1</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1619"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1699"/>
         <source>PDF-Dateien (*.pdf)</source>
         <translation>PDF 文件 (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1631"/>
-        <location filename="../src/ui/mainwindow.cpp" line="1635"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1711"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1715"/>
         <source>PDF-Bericht</source>
         <translation>PDF 报告</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1634"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1714"/>
         <source>Bericht gespeichert: %1</source>
         <translation>报告已保存：%1</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1636"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1716"/>
         <source>Der Bericht wurde gespeichert:
 %1
 
@@ -2459,67 +2494,67 @@ Jetzt öffnen?</source>
 现在打开吗？</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1646"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1726"/>
         <source>Anlagenbericht speichern</source>
         <translation>保存电站报告</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1658"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1738"/>
         <source>Flottenbericht</source>
         <translation>电站群报告</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1663"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1743"/>
         <source>Flottenbericht speichern</source>
         <translation>保存电站群报告</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1674"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1754"/>
         <source>Änderungsverlauf</source>
         <translation>修改历史</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1675"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1755"/>
         <source>Alle Änderungen dieser Sitzung. Ein Klick auf einen Eintrag setzt die Daten auf genau diesen Stand zurück (oder wieder vor).</source>
         <translation>本次会话中的全部修改。单击某一条目可将数据恢复（或前进）到该状态。</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1680"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1760"/>
         <source>&lt;Ausgangszustand nach dem Laden&gt;</source>
         <translation>&lt;加载后的初始状态&gt;</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1699"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1779"/>
         <source>Über SolarMonitor</source>
         <translation>关于 SolarMonitor</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1700"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1780"/>
         <source>&lt;h3&gt;SolarMonitor&lt;/h3&gt;&lt;p&gt;Offline-Monitoring einer PV-Flotte: Stammdaten, Störungen, Verläufe, Ertrag und Performance Ratio, Fehlererkennung, Serviceplanung und Karte.&lt;/p&gt;&lt;p&gt;C++17 · Qt %1 · Diagramme und Karte mit QPainter&lt;/p&gt;&lt;p&gt;Datenordner:&lt;br&gt;%2&lt;/p&gt;</source>
         <translation>&lt;h3&gt;SolarMonitor&lt;/h3&gt;&lt;p&gt;光伏电站群离线监控：基础数据、故障、曲线、发电量与性能比、故障识别、运维规划和地图。&lt;/p&gt;&lt;p&gt;C++17 · Qt %1 · 图表与地图使用 QPainter 绘制&lt;/p&gt;&lt;p&gt;数据文件夹：&lt;br&gt;%2&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1725"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1805"/>
         <source>Flottenanalyse läuft: %1 von %2 Anlagen</source>
         <translation>正在分析电站群：%1 / %2 个电站</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1728"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1808"/>
         <source>Analyse aktuell · %1 Anlagen</source>
         <translation>分析已更新 · %1 个电站</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1730"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1810"/>
         <source>Flottenanalyse wird vorbereitet …</source>
         <translation>正在准备电站群分析 …</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1731"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1811"/>
         <source>Verläufe aller Anlagen werden im Hintergrund ausgewertet (%1 von %2).</source>
         <translation>正在后台分析所有电站的曲线（%1 / %2）。</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="1755"/>
+        <location filename="../src/ui/mainwindow.cpp" line="1835"/>
         <source>Flottenanalyse abgeschlossen: %1 Anlagen ausgewertet, %2 mit Fehlerbild, %3 Verlaufsdateien defekt.</source>
         <translation>电站群分析完成：已分析 %1 个电站，%2 个存在故障模式，%3 个曲线文件损坏。</translation>
     </message>
@@ -3905,31 +3940,6 @@ Bereits berechnete Touren werden gespeichert und sind offline verfügbar.</sourc
         <location filename="../src/repo/verlauf_repository.cpp" line="391"/>
         <source>Zeitstempel sind nicht aufsteigend sortiert.</source>
         <translation>时间戳未按升序排列。</translation>
-    </message>
-</context>
-<context>
-    <name>main</name>
-    <message>
-        <location filename="../src/main.cpp" line="114"/>
-        <source>Es wurde kein Datenordner mit anlagen.csv gefunden.</source>
-        <translation>未找到包含 anlagen.csv 的数据文件夹。</translation>
-    </message>
-    <message>
-        <location filename="../src/main.cpp" line="116"/>
-        <source>In %1 konnten keine Anlagen geladen werden:
-%2</source>
-        <translation>无法从 %1 加载电站：
-%2</translation>
-    </message>
-    <message>
-        <location filename="../src/main.cpp" line="127"/>
-        <source>Kein Verlauf im Index – nur Stammdaten verfügbar.</source>
-        <translation>索引中无曲线数据——仅有基础数据。</translation>
-    </message>
-    <message>
-        <location filename="../src/main.cpp" line="131"/>
-        <source>Verlauf vorhanden, aber keine Stammdaten in anlagen.csv.</source>
-        <translation>有曲线数据，但 anlagen.csv 中没有基础数据。</translation>
     </message>
 </context>
 </TS>

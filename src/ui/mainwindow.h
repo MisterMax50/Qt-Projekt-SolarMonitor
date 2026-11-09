@@ -1,12 +1,13 @@
 #pragma once
 
-#include <optional>
+#include <memory>
 
 #include <QMainWindow>
 
 #include "ui/app_kontext.h"
 
 class AnlageFilterModel;
+class Datensatz;
 class AnlageModel;
 class KarteView;
 class QAction;
@@ -46,24 +47,19 @@ class StoerungModel;
 class MainWindow : public QMainWindow {
     Q_OBJECT
 public:
-    /// Rückgabewert der Ereignisschleife: Datenordner gewechselt, alles neu laden.
-    static constexpr int kNeuLaden = 1000;
-
     /**
-     * @param datenFehler leer = Daten geladen; sonst der Grund, warum nicht –
-     *        dann folgt nach der Anmeldung die Seite "Datenordner festlegen".
-     * @param datenOrdner aktueller (bzw. zuletzt versuchter) Datenordner
+     * @param datensatz geladene Daten. Konnten sie nicht geladen werden
+     *        (datensatz->ok() == false), folgt nach der Anmeldung die Seite
+     *        "Datenordner festlegen".
      */
-    MainWindow(const AppKontext& kontext, const QString& datenFehler = QString(),
-               const QString& datenOrdner = QString(), QWidget* parent = nullptr);
+    explicit MainWindow(std::unique_ptr<Datensatz> datensatz, QWidget* parent = nullptr);
+    ~MainWindow() override;
 
     /**
      * @brief Fenster anzeigen (Vollbild oder maximiert, je nach letzter Wahl)
      *        und mit dem Intro bzw. direkt mit der Anmeldung beginnen.
      */
-    void starte(bool mitIntro, std::optional<Rolle> rolle = std::nullopt);
-    /// Angemeldete Rolle, falls bereits angemeldet (bleibt beim Neuladen erhalten).
-    std::optional<Rolle> angemeldeteRolle() const;
+    void starte(bool mitIntro);
 
 protected:
     void changeEvent(QEvent* event) override;
@@ -112,6 +108,12 @@ private:
     void zeigeAnmeldung(bool wechsel);
     void zeigeProgramm();
     void zeigeDatenordner(const QString& fehler, bool zurueckMoeglich);
+    /// Daten und Modelle an das Fenster binden (beim Start und nach einem Ordnerwechsel).
+    void uebernimmDaten(std::unique_ptr<Datensatz> datensatz);
+    /// Programmoberfläche und Modelle entfernen, bevor die Daten ersetzt werden.
+    void trenneDaten();
+    /// Anderen Datenordner laden, ohne das Fenster zu schließen.
+    void wechsleDaten(const QString& ordner);
     void erzeugeAktionen();
     /// Dunkle Seitenleiste mit Marke, Navigation und Analysezustand.
     QWidget* baueNavigation();
@@ -142,6 +144,7 @@ private:
     bool pdfZiel(const QString& titel, const QString& vorschlag, QString* pfad);
     void pdfFertig(bool ok, const QString& pfad, const QString& fehler);
 
+    std::unique_ptr<Datensatz> m_datensatz; ///< Daten des aktuellen Ordners (gehören dem Fenster)
     AppKontext m_kontext;
     FilterZustand m_filter;
 
@@ -163,7 +166,6 @@ private:
     class DatenordnerSeite* m_ordnerSeite = nullptr;
     QString            m_datenFehler;
     QString            m_datenOrdner;
-    bool               m_angemeldet = false;
 
     // werden bei baueUi() neu erzeugt
     QStackedWidget* m_tabs = nullptr;     ///< Seiten, gesteuert über die Seitenleiste

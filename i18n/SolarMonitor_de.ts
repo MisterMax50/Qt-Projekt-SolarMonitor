@@ -981,6 +981,31 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</translation>
     </message>
 </context>
 <context>
+    <name>Datensatz</name>
+    <message>
+        <location filename="../src/model/datensatz.cpp" line="+26"/>
+        <source>Es wurde kein Datenordner mit anlagen.csv gefunden.</source>
+        <translation>Es wurde kein Datenordner mit anlagen.csv gefunden.</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>In %1 konnten keine Anlagen geladen werden:
+%2</source>
+        <translation>In %1 konnten keine Anlagen geladen werden:
+%2</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Kein Verlauf im Index – nur Stammdaten verfügbar.</source>
+        <translation>Kein Verlauf im Index – nur Stammdaten verfügbar.</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Verlauf vorhanden, aber keine Stammdaten in anlagen.csv.</source>
+        <translation>Verlauf vorhanden, aber keine Stammdaten in anlagen.csv.</translation>
+    </message>
+</context>
+<context>
     <name>DetailDialog</name>
     <message>
         <location filename="../src/ui/detail_dialog.cpp" line="+45"/>
@@ -1818,12 +1843,12 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="+329"/>
+        <location filename="../src/ui/mainwindow.cpp" line="+417"/>
         <source>SolarMonitor – Monitoring der PV-Flotte</source>
         <translation>SolarMonitor – Monitoring der PV-Flotte</translation>
     </message>
     <message>
-        <location line="+144"/>
+        <location line="+136"/>
         <source>Zustand der Flotte auf einen Blick</source>
         <translation>Zustand der Flotte auf einen Blick</translation>
     </message>
@@ -2274,17 +2299,27 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Änderungsverlauf …</translation>
     </message>
     <message>
-        <location line="-940"/>
+        <location line="-997"/>
+        <source>Daten werden geladen …</source>
+        <translation>Daten werden geladen …</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Datenordner geladen: %1 Anlagen aus %2</source>
+        <translation>Datenordner geladen: %1 Anlagen aus %2</translation>
+    </message>
+    <message>
+        <location line="+42"/>
         <source>Anmeldung – SolarMonitor</source>
         <translation>Anmeldung – SolarMonitor</translation>
     </message>
     <message>
-        <location line="+44"/>
+        <location line="+37"/>
         <source>Datenordner – SolarMonitor</source>
         <translation>Datenordner – SolarMonitor</translation>
     </message>
     <message>
-        <location line="+310"/>
+        <location line="+309"/>
         <source>Auswertung</source>
         <translation>Auswertung</translation>
     </message>
@@ -3906,31 +3941,6 @@ Gemessen wird auf dem Landweg um den Bodensee herum, nicht quer über das Wasser
         <location line="+3"/>
         <source>Zeitstempel sind nicht aufsteigend sortiert.</source>
         <translation>Zeitstempel sind nicht aufsteigend sortiert.</translation>
-    </message>
-</context>
-<context>
-    <name>main</name>
-    <message>
-        <location filename="../src/main.cpp" line="+114"/>
-        <source>Es wurde kein Datenordner mit anlagen.csv gefunden.</source>
-        <translation>Es wurde kein Datenordner mit anlagen.csv gefunden.</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>In %1 konnten keine Anlagen geladen werden:
-%2</source>
-        <translation>In %1 konnten keine Anlagen geladen werden:
-%2</translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>Kein Verlauf im Index – nur Stammdaten verfügbar.</source>
-        <translation>Kein Verlauf im Index – nur Stammdaten verfügbar.</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Verlauf vorhanden, aber keine Stammdaten in anlagen.csv.</source>
-        <translation>Verlauf vorhanden, aber keine Stammdaten in anlagen.csv.</translation>
     </message>
 </context>
 </TS>

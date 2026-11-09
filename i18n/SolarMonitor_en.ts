@@ -981,6 +981,31 @@ Click a dot to open the plant, use the mouse wheel to zoom.</translation>
     </message>
 </context>
 <context>
+    <name>Datensatz</name>
+    <message>
+        <location filename="../src/model/datensatz.cpp" line="+26"/>
+        <source>Es wurde kein Datenordner mit anlagen.csv gefunden.</source>
+        <translation>No data folder containing anlagen.csv was found.</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>In %1 konnten keine Anlagen geladen werden:
+%2</source>
+        <translation>No plants could be loaded from %1:
+%2</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Kein Verlauf im Index – nur Stammdaten verfügbar.</source>
+        <translation>No trend data in the index – only master data available.</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Verlauf vorhanden, aber keine Stammdaten in anlagen.csv.</source>
+        <translation>Trend data present but no master data in anlagen.csv.</translation>
+    </message>
+</context>
+<context>
     <name>DetailDialog</name>
     <message>
         <location filename="../src/ui/detail_dialog.cpp" line="+45"/>
@@ -1818,12 +1843,12 @@ Administrator: additionally edit and export master data</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="+329"/>
+        <location filename="../src/ui/mainwindow.cpp" line="+417"/>
         <source>SolarMonitor – Monitoring der PV-Flotte</source>
         <translation>SolarMonitor – PV fleet monitoring</translation>
     </message>
     <message>
-        <location line="+144"/>
+        <location line="+136"/>
         <source>Zustand der Flotte auf einen Blick</source>
         <translation>Fleet status at a glance</translation>
     </message>
@@ -2274,17 +2299,27 @@ Administrator: additionally edit and export master data</translation>
         <translation>Change history …</translation>
     </message>
     <message>
-        <location line="-940"/>
+        <location line="-997"/>
+        <source>Daten werden geladen …</source>
+        <translation>Loading data …</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Datenordner geladen: %1 Anlagen aus %2</source>
+        <translation>Data folder loaded: %1 plants from %2</translation>
+    </message>
+    <message>
+        <location line="+42"/>
         <source>Anmeldung – SolarMonitor</source>
         <translation>Sign in – SolarMonitor</translation>
     </message>
     <message>
-        <location line="+44"/>
+        <location line="+37"/>
         <source>Datenordner – SolarMonitor</source>
         <translation>Data folder – SolarMonitor</translation>
     </message>
     <message>
-        <location line="+310"/>
+        <location line="+309"/>
         <source>Auswertung</source>
         <translation>Analysis</translation>
     </message>
@@ -3906,31 +3941,6 @@ Measured over land around Lake Constance, not straight across the water.</transl
         <location line="+3"/>
         <source>Zeitstempel sind nicht aufsteigend sortiert.</source>
         <translation>Timestamps are not sorted in ascending order.</translation>
-    </message>
-</context>
-<context>
-    <name>main</name>
-    <message>
-        <location filename="../src/main.cpp" line="+114"/>
-        <source>Es wurde kein Datenordner mit anlagen.csv gefunden.</source>
-        <translation>No data folder containing anlagen.csv was found.</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>In %1 konnten keine Anlagen geladen werden:
-%2</source>
-        <translation>No plants could be loaded from %1:
-%2</translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>Kein Verlauf im Index – nur Stammdaten verfügbar.</source>
-        <translation>No trend data in the index – only master data available.</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Verlauf vorhanden, aber keine Stammdaten in anlagen.csv.</source>
-        <translation>Trend data present but no master data in anlagen.csv.</translation>
     </message>
 </context>
 </TS>
