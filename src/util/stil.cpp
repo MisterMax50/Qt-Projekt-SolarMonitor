@@ -99,6 +99,9 @@ QToolButton#Glocke:hover, QToolButton#BenutzerKnopf:hover { background: %HOVER%;
 QToolButton#BenutzerKnopf { border: none; border-radius: 6px; padding: 4px 8px; color: %TEXT%; }
 QToolButton#BenutzerKnopf::menu-indicator { image: url(%PFEILUNTEN%); width: 10px; height: 10px;
     subcontrol-position: right center; right: 4px; }
+QToolButton#Schliessen { border: none; border-radius: 18px; padding: 7px; }
+QToolButton#Schliessen:hover { background: #dc2626; }
+QToolButton#Schliessen:pressed { background: #b91c1c; }
 QFrame#KopfTrenner { background: %LINIE%; max-width: 1px; margin: 10px 4px; }
 
 /* ---------- Seitenaktionen ---------- */
@@ -511,6 +514,10 @@ QIcon Stil::icon(Symbol symbol, const QColor& farbeWunsch)
             p.drawPolyline(QPolygonF({QPointF(10, 4), QPointF(5, 4), QPointF(5, 20), QPointF(10, 20)}));
             p.drawLine(QPointF(10, 12), QPointF(20, 12));
             p.drawPolyline(QPolygonF({QPointF(16, 8), QPointF(20, 12), QPointF(16, 16)}));
+            break;
+        case Symbol::Schliessen:
+            p.drawLine(QPointF(6, 6), QPointF(18, 18));
+            p.drawLine(QPointF(18, 6), QPointF(6, 18));
             break;
         case Symbol::Fehler:
             p.drawEllipse(QPointF(12, 12), 9, 9);

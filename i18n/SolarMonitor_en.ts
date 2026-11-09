@@ -1583,7 +1583,7 @@ afterwards the map also works offline.</translation>
         <translation>Mouse wheel: zoom · Drag: pan · Click: open plant</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Färbung:</source>
         <translation>Colouring:</translation>
     </message>
@@ -1729,7 +1729,7 @@ Administrator: additionally edit and export master data</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="+322"/>
+        <location filename="../src/ui/mainwindow.cpp" line="+333"/>
         <source>SolarMonitor – Monitoring der PV-Flotte</source>
         <translation>SolarMonitor – PV fleet monitoring</translation>
     </message>
@@ -1835,7 +1835,7 @@ Administrator: additionally edit and export master data</translation>
         <translation>&amp;Language</translation>
     </message>
     <message>
-        <location line="+71"/>
+        <location line="+86"/>
         <source>%1 offene Störungen, davon %2 kritisch</source>
         <translation>%1 open faults, %2 of them critical</translation>
     </message>
@@ -1896,13 +1896,13 @@ Administrator: additionally edit and export master data</translation>
         <translation>Reset filters</translation>
     </message>
     <message>
-        <location line="-450"/>
+        <location line="-465"/>
         <location line="+187"/>
         <source>Übersicht</source>
         <translation>Overview</translation>
     </message>
     <message>
-        <location line="+174"/>
+        <location line="+189"/>
         <source>%1 Anlagen mit erkanntem Fehlerbild</source>
         <translation>%1 plants with a detected fault pattern</translation>
     </message>
@@ -1912,7 +1912,7 @@ Administrator: additionally edit and export master data</translation>
         <translation>Reset filters (%1)</translation>
     </message>
     <message>
-        <location line="+200"/>
+        <location line="+210"/>
         <source>Suche nach Störung, Anlage, Code oder Beschreibung</source>
         <translation>Search by fault, plant, code or description</translation>
     </message>
@@ -2034,7 +2034,7 @@ Administrator: additionally edit and export master data</translation>
         <translation>Redo: %1 (Ctrl+Y)</translation>
     </message>
     <message>
-        <location line="-492"/>
+        <location line="-517"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation>S&amp;witch user …</translation>
     </message>
@@ -2054,7 +2054,7 @@ Administrator: additionally edit and export master data</translation>
         <translation>&amp;About SolarMonitor</translation>
     </message>
     <message>
-        <location line="+63"/>
+        <location line="+78"/>
         <source>%1 Fehler beim Einlesen</source>
         <translation>%1 errors on import</translation>
     </message>
@@ -2070,12 +2070,12 @@ Administrator: additionally edit and export master data</translation>
     </message>
     <message>
         <location line="+49"/>
-        <location line="+171"/>
+        <location line="+181"/>
         <source>Status:</source>
         <translation>Status:</translation>
     </message>
     <message>
-        <location line="-168"/>
+        <location line="-178"/>
         <source>Typ:</source>
         <translation>Type:</translation>
     </message>
@@ -2090,7 +2090,7 @@ Administrator: additionally edit and export master data</translation>
         <translation>Capacity:</translation>
     </message>
     <message>
-        <location line="+98"/>
+        <location line="+108"/>
         <source>Keine Anlage entspricht den gewählten Filtern.</source>
         <translation>No plant matches the selected filters.</translation>
     </message>
@@ -2105,12 +2105,12 @@ Administrator: additionally edit and export master data</translation>
         <translation>Plant:</translation>
     </message>
     <message>
-        <location line="-518"/>
+        <location line="-543"/>
         <source>Exportieren</source>
         <translation>Export</translation>
     </message>
     <message>
-        <location line="+679"/>
+        <location line="+704"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>Administrator role only.</translation>
     </message>
@@ -2185,12 +2185,17 @@ Administrator: additionally edit and export master data</translation>
         <translation>Change history …</translation>
     </message>
     <message>
-        <location line="-555"/>
+        <location line="-580"/>
         <source>Auswertung</source>
         <translation>Analysis</translation>
     </message>
     <message>
-        <location line="+709"/>
+        <location line="+129"/>
+        <source>SolarMonitor beenden (Strg+Q)</source>
+        <translation>Quit SolarMonitor (Ctrl+Q)</translation>
+    </message>
+    <message>
+        <location line="+605"/>
         <source>Die Anlage %1 ist nicht vorhanden.</source>
         <translation>Plant %1 does not exist.</translation>
     </message>
@@ -3071,24 +3076,24 @@ Open it now?</translation>
     <name>Serviceplanung</name>
     <message>
         <location filename="../src/ui/serviceplanung.cpp" line="+44"/>
-        <location line="+45"/>
+        <location line="+46"/>
         <source>Prio</source>
         <translation>Prio</translation>
     </message>
     <message>
-        <location line="-45"/>
-        <location line="+45"/>
+        <location line="-46"/>
+        <location line="+46"/>
         <source>Anlage</source>
         <translation>Plant</translation>
     </message>
     <message>
-        <location line="-45"/>
-        <location line="+45"/>
+        <location line="-46"/>
+        <location line="+46"/>
         <source>Ort</source>
         <translation>Location</translation>
     </message>
     <message>
-        <location line="-45"/>
+        <location line="-46"/>
         <source>Typ</source>
         <translation>Type</translation>
     </message>
@@ -3150,7 +3155,7 @@ Bereits berechnete Touren werden gespeichert und sind offline verfügbar.</sourc
 Routes already calculated are stored and available offline.</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Tour planen</source>
         <translation>Plan route</translation>
     </message>
@@ -3185,7 +3190,7 @@ Routes already calculated are stored and available offline.</translation>
         <translation>Driving time (min)</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+14"/>
         <source>Start:</source>
         <translation>Start:</translation>
     </message>
@@ -3200,12 +3205,12 @@ Routes already calculated are stored and available offline.</translation>
         <translation>max.</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+7"/>
         <source>Tourenplanung</source>
         <translation>Route planning</translation>
     </message>
     <message>
-        <location line="+144"/>
+        <location line="+147"/>
         <source>%1 Einsätze ohne Umkreisbegrenzung (davon %2 mit Priorität A).</source>
         <translation>%1 jobs without radius limit (%2 of them priority A).</translation>
     </message>
@@ -3241,14 +3246,14 @@ Routes already calculated are stored and available offline.</translation>
         <translation>Prioritised job list</translation>
     </message>
     <message>
-        <location line="-51"/>
+        <location line="-55"/>
         <source>Nur Einsätze in diesem Umkreis um den Startpunkt einplanen (0 = unbegrenzt).
 Gemessen wird auf dem Landweg um den Bodensee herum, nicht quer über das Wasser.</source>
         <translation>Only schedule jobs within this radius around the starting point (0 = unlimited).
 Measured over land around Lake Constance, not straight across the water.</translation>
     </message>
     <message numerus="yes">
-        <location line="+85"/>
+        <location line="+89"/>
         <source>%n offene Störung(en)</source>
         <translation>
             <numerusform>%n open fault</numerusform>

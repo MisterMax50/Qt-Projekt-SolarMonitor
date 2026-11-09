@@ -297,6 +297,17 @@ void MainWindow::setzeDesign(bool dunkel)
     });
 }
 
+bool MainWindow::eventFilter(QObject* obj, QEvent* event)
+{
+    // Schließen-Knopf: Symbol beim Überfahren weiß auf rotem Grund
+    if (obj->objectName() == QLatin1String("Schliessen")
+        && (event->type() == QEvent::Enter || event->type() == QEvent::Leave)) {
+        if (auto* k = qobject_cast<QToolButton*>(obj))
+            k->setIcon(k->property(event->type() == QEvent::Enter ? "iconHover" : "iconNormal").value<QIcon>());
+    }
+    return QMainWindow::eventFilter(obj, event);
+}
+
 void MainWindow::changeEvent(QEvent* event)
 {
     // Beim Sprachwechsel kommen mehrere LanguageChange-Ereignisse
@@ -650,6 +661,21 @@ QWidget* MainWindow::baueKopfzeile()
     h->addWidget(m_glocke);
     h->addWidget(trenner);
     h->addWidget(benutzer);
+
+    // Programm schließen (wichtig im Vollbild, wo die Titelleiste fehlt)
+    auto* schliessen = new QToolButton(kopf);
+    schliessen->setObjectName(QStringLiteral("Schliessen"));
+    schliessen->setIconSize(QSize(18, 18));
+    schliessen->setCursor(Qt::PointingHandCursor);
+    schliessen->setToolTip(tr("SolarMonitor beenden (Strg+Q)"));
+    const QIcon normal = Stil::icon(Stil::Symbol::Schliessen, Stil::textGedimmt());
+    const QIcon weiss = Stil::icon(Stil::Symbol::Schliessen, Qt::white);
+    schliessen->setIcon(normal);
+    schliessen->installEventFilter(this);
+    schliessen->setProperty("iconNormal", normal);
+    schliessen->setProperty("iconHover", weiss);
+    connect(schliessen, &QToolButton::clicked, this, &QWidget::close);
+    h->addWidget(schliessen);
     return kopf;
 }
 

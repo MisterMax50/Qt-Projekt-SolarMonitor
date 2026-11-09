@@ -1583,7 +1583,7 @@ gespeichert; danach funktioniert die Karte auch offline.</translation>
         <translation>Mausrad: Zoom · Ziehen: verschieben · Klick: Anlage öffnen</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Färbung:</source>
         <translation>Färbung:</translation>
     </message>
@@ -1729,7 +1729,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="+322"/>
+        <location filename="../src/ui/mainwindow.cpp" line="+333"/>
         <source>SolarMonitor – Monitoring der PV-Flotte</source>
         <translation>SolarMonitor – Monitoring der PV-Flotte</translation>
     </message>
@@ -1835,7 +1835,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>&amp;Sprache</translation>
     </message>
     <message>
-        <location line="+71"/>
+        <location line="+86"/>
         <source>%1 offene Störungen, davon %2 kritisch</source>
         <translation>%1 offene Störungen, davon %2 kritisch</translation>
     </message>
@@ -1896,13 +1896,13 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Filter zurücksetzen</translation>
     </message>
     <message>
-        <location line="-450"/>
+        <location line="-465"/>
         <location line="+187"/>
         <source>Übersicht</source>
         <translation>Übersicht</translation>
     </message>
     <message>
-        <location line="+174"/>
+        <location line="+189"/>
         <source>%1 Anlagen mit erkanntem Fehlerbild</source>
         <translation>%1 Anlagen mit erkanntem Fehlerbild</translation>
     </message>
@@ -1912,7 +1912,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Filter zurücksetzen (%1)</translation>
     </message>
     <message>
-        <location line="+200"/>
+        <location line="+210"/>
         <source>Suche nach Störung, Anlage, Code oder Beschreibung</source>
         <translation>Suche nach Störung, Anlage, Code oder Beschreibung</translation>
     </message>
@@ -2034,7 +2034,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Wiederholen: %1 (Strg+Y)</translation>
     </message>
     <message>
-        <location line="-492"/>
+        <location line="-517"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation>Benutzer &amp;wechseln …</translation>
     </message>
@@ -2054,7 +2054,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>&amp;Über SolarMonitor</translation>
     </message>
     <message>
-        <location line="+63"/>
+        <location line="+78"/>
         <source>%1 Fehler beim Einlesen</source>
         <translation>%1 Fehler beim Einlesen</translation>
     </message>
@@ -2070,12 +2070,12 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
     </message>
     <message>
         <location line="+49"/>
-        <location line="+171"/>
+        <location line="+181"/>
         <source>Status:</source>
         <translation>Status:</translation>
     </message>
     <message>
-        <location line="-168"/>
+        <location line="-178"/>
         <source>Typ:</source>
         <translation>Typ:</translation>
     </message>
@@ -2090,7 +2090,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Leistung:</translation>
     </message>
     <message>
-        <location line="+98"/>
+        <location line="+108"/>
         <source>Keine Anlage entspricht den gewählten Filtern.</source>
         <translation>Keine Anlage entspricht den gewählten Filtern.</translation>
     </message>
@@ -2105,12 +2105,12 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Anlage:</translation>
     </message>
     <message>
-        <location line="-518"/>
+        <location line="-543"/>
         <source>Exportieren</source>
         <translation>Exportieren</translation>
     </message>
     <message>
-        <location line="+679"/>
+        <location line="+704"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>Nur für die Rolle Administrator.</translation>
     </message>
@@ -2185,12 +2185,17 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Änderungsverlauf …</translation>
     </message>
     <message>
-        <location line="-555"/>
+        <location line="-580"/>
         <source>Auswertung</source>
         <translation>Auswertung</translation>
     </message>
     <message>
-        <location line="+709"/>
+        <location line="+129"/>
+        <source>SolarMonitor beenden (Strg+Q)</source>
+        <translation>SolarMonitor beenden (Strg+Q)</translation>
+    </message>
+    <message>
+        <location line="+605"/>
         <source>Die Anlage %1 ist nicht vorhanden.</source>
         <translation>Die Anlage %1 ist nicht vorhanden.</translation>
     </message>
@@ -3071,24 +3076,24 @@ Jetzt öffnen?</translation>
     <name>Serviceplanung</name>
     <message>
         <location filename="../src/ui/serviceplanung.cpp" line="+44"/>
-        <location line="+45"/>
+        <location line="+46"/>
         <source>Prio</source>
         <translation>Prio</translation>
     </message>
     <message>
-        <location line="-45"/>
-        <location line="+45"/>
+        <location line="-46"/>
+        <location line="+46"/>
         <source>Anlage</source>
         <translation>Anlage</translation>
     </message>
     <message>
-        <location line="-45"/>
-        <location line="+45"/>
+        <location line="-46"/>
+        <location line="+46"/>
         <source>Ort</source>
         <translation>Ort</translation>
     </message>
     <message>
-        <location line="-45"/>
+        <location line="-46"/>
         <source>Typ</source>
         <translation>Typ</translation>
     </message>
@@ -3150,7 +3155,7 @@ Bereits berechnete Touren werden gespeichert und sind offline verfügbar.</sourc
 Bereits berechnete Touren werden gespeichert und sind offline verfügbar.</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Tour planen</source>
         <translation>Tour planen</translation>
     </message>
@@ -3185,7 +3190,7 @@ Bereits berechnete Touren werden gespeichert und sind offline verfügbar.</trans
         <translation>Fahrzeit (min)</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+14"/>
         <source>Start:</source>
         <translation>Start:</translation>
     </message>
@@ -3200,12 +3205,12 @@ Bereits berechnete Touren werden gespeichert und sind offline verfügbar.</trans
         <translation>max.</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+7"/>
         <source>Tourenplanung</source>
         <translation>Tourenplanung</translation>
     </message>
     <message>
-        <location line="+144"/>
+        <location line="+147"/>
         <source>%1 Einsätze ohne Umkreisbegrenzung (davon %2 mit Priorität A).</source>
         <translation>%1 Einsätze ohne Umkreisbegrenzung (davon %2 mit Priorität A).</translation>
     </message>
@@ -3241,14 +3246,14 @@ Bereits berechnete Touren werden gespeichert und sind offline verfügbar.</trans
         <translation>Priorisierte Einsatzliste</translation>
     </message>
     <message>
-        <location line="-51"/>
+        <location line="-55"/>
         <source>Nur Einsätze in diesem Umkreis um den Startpunkt einplanen (0 = unbegrenzt).
 Gemessen wird auf dem Landweg um den Bodensee herum, nicht quer über das Wasser.</source>
         <translation>Nur Einsätze in diesem Umkreis um den Startpunkt einplanen (0 = unbegrenzt).
 Gemessen wird auf dem Landweg um den Bodensee herum, nicht quer über das Wasser.</translation>
     </message>
     <message numerus="yes">
-        <location line="+85"/>
+        <location line="+89"/>
         <source>%n offene Störung(en)</source>
         <translation>
             <numerusform>%n offene Störung</numerusform>
