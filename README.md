@@ -62,8 +62,8 @@ SHA-256-Hash im Code hinterlegt. *Datei → Benutzer wechseln* meldet neu an.
 
 | Seite (Navigation links) | Inhalt |
 |---|---|
-| Übersicht (Startseite) | Kennzahl-Kacheln (Anlagen in Betrieb, Median-PR, offene/kritische Störungen, Ertragsverlust, Datenqualität), Karte der Flotte gefärbt nach Handlungsbedarf (rot: kritische Störung, gestört oder Fehlerbild; orange: offene Störung oder Wartung), „Jetzt kümmern“ (neueste offene kritische Störungen), größte Ertragsverluste, Häufigkeit der Fehlerbilder, Schnellzugriff. Kacheln und Zeilen sind anklickbar und führen zur passenden Seite bzw. Anlage; die Seite aktualisiert sich bei jeder Änderung (`src/ui/dashboard_widget.*`) |
-| Anlagen | Tabelle (QAbstractTableModel + QSortFilterProxyModel), Suche nach ID/Ort/Wetterstation, kombinierbare Filter (Status, Typ, Ort, Leistungsbereich, nur mit Fehlerbild, nur mit offenen Störungen), Sortierung u. a. nach Leistung, Inbetriebnahme und PR, Kontextmenü |
+| Übersicht (Startseite) | Gruppenfeld „Flottenstatus“ mit Kennzahlen als Links zur passenden Seite (Anlagen in Betrieb, offene/kritische Störungen, Median-PR, Ertragsverlust, Datenprüfung), Karte der Flotte gefärbt nach Handlungsbedarf (rot: kritische Störung, gestört oder Fehlerbild; orange: offene Störung oder Wartung), Listen mit offenen kritischen Störungen, größten Ertragsverlusten und Fehlerbildern (Doppelklick öffnet die Anlage). Aktualisiert sich bei jeder Änderung (`src/ui/dashboard_widget.*`) |
+| Anlagen | Tabelle (QAbstractTableModel + QSortFilterProxyModel) mit Detailbereich rechts, Suche nach ID/Ort/Wetterstation (Suchfeld in der Befehlsleiste), kombinierbare Filter (Status, Typ, Ort, Leistungsbereich, nur mit Fehlerbild, nur mit offenen Störungen), Sortierung u. a. nach Leistung, Inbetriebnahme und PR, Kontextmenü |
 | Störungen | Störungsliste mit Filtern, Kontextmenü (Status ändern, Anlage öffnen) |
 | Karte | OpenStreetMap-Hintergrund, Anlagen und Wetterstationen, Färbung nach Status/PR/Auffälligkeit/Handlungsbedarf, Zoom/Pan, Klick öffnet die Anlage, geplante Tour |
 | Statistik | Leistung je Typ und Ort, Altersverteilung, Störungen je Fehlercode und Schwere, PR je Wetterstation |
@@ -104,12 +104,25 @@ Das Programm startet im **Vollbild**; *Ansicht → Vollbild* bzw. F11 schaltet
 auf ein maximiertes Fenster um. Die Wahl wird gespeichert.
 
 Sprache: *Ansicht → Sprache / Language* (Deutsch/Englisch, zur Laufzeit).
-Design: hell oder dunkel (Knopf unten in der Seitenleiste oder *Ansicht → Dunkles Design*).
+Design: hell oder dunkel (*Ansicht → Dunkles Design*).
 Sprache, Design, Vollbild und Fenstergröße werden gespeichert (QSettings).
 
-Die Oberfläche nutzt den Qt-Stil „Fusion“ mit eigenem Stylesheet
-(`src/util/stil.cpp`) und selbst gezeichneten Linien-Icons, damit sie auf
-allen Systemen gleich aussieht – ohne zusätzliche Bild- oder Schriftdateien.
+**Gestaltung:** Die Oberfläche orientiert sich an üblichen Windows-
+Desktopprogrammen wie Explorer und Outlook statt an Web-Dashboards:
+Menüleiste und Befehlsleiste oben (häufige Befehle mit Symbol und Text,
+Exporte und Berichte als Klappmenüs, Suchfeld rechts), Navigationsbereich
+links (Zähler in Klammern, z. B. „Störungen (47)“), Inhalt rechts, neben
+der Anlagentabelle ein verstellbarer Detailbereich wie der Lesebereich in Outlook
+(`src/ui/anlage_info.*`), Statusleiste mit Anzahl der Einträge, Datenordner
+und angemeldeter Rolle. Kennzahlen stehen als Beschriftung/Wert-Paare in
+Gruppenfeldern, Status in Tabellen als farbiger Punkt vor dem Text.
+
+Unter Windows 11 nutzt das Programm den nativen Qt-Stil „windows11“
+(gleiche Steuerelemente und Systemschrift wie andere Programme), sonst
+„Fusion“ mit einer an Windows angelehnten Palette (ein Akzent, Windows-Blau).
+Das Stylesheet in `src/util/stil.cpp` enthält nur wenige gezielte Regeln
+(Navigationsbereich, Befehlsleiste); alles andere zeichnet der Plattformstil.
+Die Linien-Icons werden im Code gezeichnet, ohne zusätzliche Bilddateien.
 
 ## Datenbasis und Indexdateien
 

@@ -4,6 +4,9 @@
 #include <cmath>
 
 #include <QApplication>
+#include <QGuiApplication>
+#include <QStyle>
+#include <QStyleHints>
 #include <QPainter>
 #include <QLinearGradient>
 #include <QPainterPath>
@@ -15,197 +18,51 @@
 
 namespace {
 
+/// Farben im Stil üblicher Windows-Desktopprogramme (Explorer, Outlook):
+/// neutrale Grautöne, weiße Listen, ein einziger Akzent (Windows-Blau).
 struct Farben {
-    QColor hintergrund, flaeche, rahmen, text, gedimmt, alternativ, eingabe, hover, auswahl, seite, seiteText,
-        seiteGedimmt, scroll;
+    QColor fenster, liste, text, gedimmt, linie, schalter, hover, navAuswahl, akzent, akzentText;
 };
 
 bool g_dunkel = false;
-
-const QColor kAkzent(245, 158, 11); // Amber, "Sonne"
 constexpr double kPiStil = 3.14159265358979323846;
 
 Farben farben()
 {
     if (g_dunkel)
-        return {QColor("#0f172a"), QColor("#1e293b"), QColor("#334155"), QColor("#e2e8f0"), QColor("#94a3b8"),
-                QColor("#223047"), QColor("#0f172a"), QColor("#2b3a52"), QColor(245, 158, 11, 70), QColor("#020617"),
-                QColor("#cbd5e1"), QColor("#64748b"), QColor("#475569")};
-    return {QColor("#f1f5f9"), QColor("#ffffff"), QColor("#e2e8f0"), QColor("#0f172a"), QColor("#64748b"),
-            QColor("#f8fafc"), QColor("#ffffff"), QColor("#e2e8f0"), QColor("#fef3c7"), QColor("#0f172a"),
-            QColor("#cbd5e1"), QColor("#64748b"), QColor("#cbd5e1")};
+        return {QColor("#202020"), QColor("#2b2b2b"), QColor("#f0f0f0"), QColor("#a8a8a8"), QColor("#3f3f3f"),
+                QColor("#2d2d2d"), QColor("#353535"), QColor("#3a3a3a"), QColor("#4cc2ff"), QColor("#000000")};
+    return {QColor("#f3f3f3"), QColor("#ffffff"), QColor("#1b1b1b"), QColor("#5f5f5f"), QColor("#d6d6d6"),
+            QColor("#fdfdfd"), QColor("#e8e8e8"), QColor("#dcdcdc"), QColor("#005fb8"), QColor("#ffffff")};
 }
 
-QString rgba(const QColor& c)
-{
-    return QStringLiteral("rgba(%1,%2,%3,%4)").arg(c.red()).arg(c.green()).arg(c.blue()).arg(c.alpha());
-}
-
-/// Kleine Grafik für Pfeile/Häkchen erzeugen und als Datei für das Stylesheet ablegen.
-QString grafik(const QString& name, const QColor& farbe, int art)
-{
-    const QString ordner = QStandardPaths::writableLocation(QStandardPaths::TempLocation) + QStringLiteral("/solarmonitor_stil");
-    QDir().mkpath(ordner);
-    const QString pfad = QStringLiteral("%1/%2_%3.png").arg(ordner, name, farbe.name().mid(1));
-    QPixmap pm(24, 24);
-    pm.fill(Qt::transparent);
-    QPainter p(&pm);
-    p.setRenderHint(QPainter::Antialiasing, true);
-    p.setPen(QPen(farbe, 2.6, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    if (art == 0) // Pfeil nach unten
-        p.drawPolyline(QPolygonF({QPointF(6, 9), QPointF(12, 15), QPointF(18, 9)}));
-    else if (art == 1) // Pfeil nach oben
-        p.drawPolyline(QPolygonF({QPointF(6, 15), QPointF(12, 9), QPointF(18, 15)}));
-    else // Häkchen
-        p.drawPolyline(QPolygonF({QPointF(5.5, 12.5), QPointF(10, 17), QPointF(18.5, 7.5)}));
-    p.end();
-    pm.save(pfad, "PNG");
-    return pfad;
-}
-
+/// Nur wenige, gezielte Regeln. Alles andere zeichnet der Plattform-Stil
+/// (unter Windows 11 "windows11", sonst "Fusion"), damit Knöpfe, Eingaben,
+/// Tabellen und Menüs aussehen wie in anderen Programmen auch.
 QString stylesheet(const Farben& f)
 {
     QString s = QStringLiteral(R"(
-* { outline: 0; }
-QMainWindow, QDialog { background: %HG%; }
-QWidget#Inhalt { background: %HG%; }
-
-/* ---------- Seitenleiste ---------- */
-QWidget#Seitenleiste { background: %SEITE%; }
-QLabel#AppTitel { color: #ffffff; font-size: 14pt; font-weight: 600; }
-QLabel#AppUntertitel, QLabel#SeitenleisteInfo { color: %SEITEGED%; }
-QListWidget#Navigation { background: transparent; border: none; color: %SEITETEXT%; font-size: 10.5pt; }
-QListWidget#Navigation::item { padding: 9px 10px; margin: 2px 10px; border-radius: 8px; }
-QListWidget#Navigation::item:hover { background: rgba(255,255,255,0.07); }
-QListWidget#Navigation::item:selected { background: rgba(245,158,11,0.18); color: #fbbf24; }
-QPushButton#SeitenleisteKnopf { background: transparent; color: %SEITETEXT%; border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 8px; padding: 6px 10px; text-align: left; }
-QPushButton#SeitenleisteKnopf:hover { background: rgba(255,255,255,0.07); }
-
-/* ---------- Seitenkopf ---------- */
-QLabel#Seitentitel { font-size: 16pt; font-weight: 600; color: %TEXT%; }
-QLabel#Seitenhinweis { color: %GED%; }
-
-/* ---------- Karten / Kennzahlen ---------- */
-QFrame#Karte { background: %FL%; border: 1px solid %RAHMEN%; border-radius: 10px; }
-QLabel#KpiTitel { color: %GED%; font-size: 9pt; }
-QLabel#KpiWert { color: %TEXT%; font-size: 17pt; font-weight: 600; }
-QLabel#KpiNotiz { color: %GED%; font-size: 8.5pt; }
-QLabel#Gedimmt { color: %GED%; }
-QLabel#Leerzustand { color: %GED%; font-size: 11pt; padding: 30px; }
-QFrame#KarteKlick { background: %FL%; border: 1px solid %RAHMEN%; border-radius: 10px; }
-QFrame#KarteKlick:hover { border-color: #f59e0b; }
-QLabel#KartenTitel { color: %TEXT%; font-size: 11pt; font-weight: 600; }
-QPushButton#Link { border: none; background: transparent; color: #d97706; padding: 2px 4px; font-weight: 600; }
-QPushButton#Link:hover { color: #b45309; text-decoration: underline; }
-QToolButton#Schnell { border: 1px solid %RAHMEN%; border-radius: 8px; padding: 6px 12px; text-align: left; }
-QToolButton#Schnell:hover { border-color: #f59e0b; background: %HOVER%; }
-
-/* ---------- Eingaben ---------- */
-QLineEdit, QComboBox, QSpinBox, QDoubleSpinBox, QDateEdit, QDateTimeEdit {
-    background: %EIN%; color: %TEXT%; border: 1px solid %RAHMEN%; border-radius: 7px; padding: 5px 8px; min-height: 20px; }
-QLineEdit:focus, QComboBox:focus, QSpinBox:focus, QDoubleSpinBox:focus, QDateEdit:focus, QDateTimeEdit:focus {
-    border: 1px solid #f59e0b; }
-QComboBox::drop-down { border: none; width: 24px; }
-QComboBox::down-arrow { image: url(%PFEILUNTEN%); width: 12px; height: 12px; }
-QDateEdit::drop-down, QDateTimeEdit::drop-down { border: none; width: 24px; }
-QDateEdit::down-arrow, QDateTimeEdit::down-arrow { image: url(%PFEILUNTEN%); width: 12px; height: 12px; }
-QAbstractSpinBox { padding-right: 20px; }
-QAbstractSpinBox::up-button, QAbstractSpinBox::down-button { subcontrol-origin: border; width: 20px; border: none;
-    background: transparent; }
-QAbstractSpinBox::up-button { subcontrol-position: top right; }
-QAbstractSpinBox::down-button { subcontrol-position: bottom right; }
-QAbstractSpinBox::up-arrow { image: url(%PFEILOBEN%); width: 10px; height: 10px; }
-QAbstractSpinBox::down-arrow { image: url(%PFEILUNTEN%); width: 10px; height: 10px; }
-QAbstractSpinBox::up-arrow:disabled, QAbstractSpinBox::up-arrow:off { image: none; }
-QAbstractSpinBox::down-arrow:disabled, QAbstractSpinBox::down-arrow:off { image: none; }
-QCheckBox::indicator { width: 16px; height: 16px; border: 1px solid %GED%; border-radius: 4px; background: %EIN%; }
-QCheckBox::indicator:hover { border-color: #f59e0b; }
-QCheckBox::indicator:checked { background: #f59e0b; border-color: #f59e0b; image: url(%HAKEN%); }
-QCheckBox::indicator:disabled { background: %HG%; border-color: %RAHMEN%; }
-QComboBox QAbstractItemView { background: %FL%; border: 1px solid %RAHMEN%; selection-background-color: %AUSW%;
-    selection-color: %TEXT%; padding: 4px; }
-
-/* ---------- Knöpfe ---------- */
-QPushButton { background: %FL%; color: %TEXT%; border: 1px solid %RAHMEN%; border-radius: 7px; padding: 6px 14px; }
-QPushButton:hover { border-color: #f59e0b; }
-QPushButton:pressed { background: %HOVER%; }
-QPushButton:default, QPushButton#Primaer { background: #f59e0b; border-color: #f59e0b; color: #1f2937; font-weight: 600; }
-QPushButton:default:hover, QPushButton#Primaer:hover { background: #fbbf24; }
-QPushButton:disabled { color: %GED%; background: %HG%; border-color: %RAHMEN%; }
-QToolButton { border: none; border-radius: 7px; padding: 6px 10px; color: %TEXT%; }
-QToolButton:hover { background: %HOVER%; }
-QToolButton:disabled { color: %GED%; }
-QCheckBox { spacing: 6px; color: %TEXT%; }
-
-/* ---------- Tabellen und Listen ---------- */
-QTableView, QTableWidget, QListWidget, QTreeView {
-    background: %FL%; alternate-background-color: %ALT%; color: %TEXT%; border: 1px solid %RAHMEN%;
-    border-radius: 10px; gridline-color: transparent; selection-background-color: %AUSW%; selection-color: %TEXT%; }
-QTableView::item, QTableWidget::item { padding: 0 6px; border: none; }
-QTableWidget#Kompakt { border: none; border-radius: 0; background: transparent; }
-QTableWidget#Kompakt::item { border-bottom: 1px solid %RAHMEN%; }
-QTableWidget#Kompakt::item:hover { background: %HOVER%; }
-QListWidget::item { padding: 5px; }
-QHeaderView { background: transparent; }
-QHeaderView::section { background: %FL%; color: %GED%; border: none; border-bottom: 1px solid %RAHMEN%;
-    padding: 7px 8px; font-weight: 600; }
-QHeaderView::section:hover { color: %TEXT%; }
-QTableCornerButton::section { background: %FL%; border: none; }
-
-/* ---------- Reiter, Gruppen ---------- */
-QTabWidget::pane { border: 1px solid %RAHMEN%; border-radius: 10px; background: %FL%; top: -1px; }
-QTabBar::tab { background: transparent; color: %GED%; padding: 8px 16px; border: none; border-bottom: 2px solid transparent; }
-QTabBar::tab:selected { color: %TEXT%; border-bottom: 2px solid #f59e0b; font-weight: 600; }
-QTabBar::tab:hover { color: %TEXT%; }
-QTabBar::tab:disabled { color: %RAHMEN%; }
-QGroupBox { background: %FL%; border: 1px solid %RAHMEN%; border-radius: 10px; margin-top: 26px; padding: 10px 8px 8px 8px;
-    font-weight: 600; color: %TEXT%; }
-QGroupBox::title { subcontrol-origin: margin; subcontrol-position: top left; left: 2px; top: 4px; padding: 0; }
-QSplitter::handle { background: transparent; }
-
-/* ---------- Menüs, Leisten ---------- */
-QMenuBar { background: %HG%; color: %TEXT%; padding: 2px 6px; }
-QMenuBar::item { padding: 5px 10px; border-radius: 6px; background: transparent; }
-QMenuBar::item:selected { background: %HOVER%; }
-QMenu { background: %FL%; color: %TEXT%; border: 1px solid %RAHMEN%; border-radius: 8px; padding: 5px; }
-QMenu::item { padding: 6px 26px 6px 12px; border-radius: 5px; }
-QMenu::item:selected { background: %AUSW%; }
-QMenu::item:disabled { color: %GED%; }
-QMenu::separator { height: 1px; background: %RAHMEN%; margin: 4px 8px; }
-QToolBar { background: %HG%; border: none; padding: 6px 12px; spacing: 4px; }
-QToolBar::separator { width: 1px; background: %RAHMEN%; margin: 4px 6px; }
-QStatusBar { background: %FL%; border-top: 1px solid %RAHMEN%; color: %GED%; }
-QStatusBar QLabel { color: %GED%; }
-QProgressBar { background: %RAHMEN%; border: none; border-radius: 4px; max-height: 8px; color: transparent; }
-QProgressBar::chunk { background: #f59e0b; border-radius: 4px; }
-QToolTip { background: %FL%; color: %TEXT%; border: 1px solid %RAHMEN%; padding: 5px; border-radius: 6px; }
-
-/* ---------- Bildlaufleisten ---------- */
-QScrollBar:vertical { background: transparent; width: 11px; margin: 2px; }
-QScrollBar:horizontal { background: transparent; height: 11px; margin: 2px; }
-QScrollBar::handle { background: %SCROLL%; border-radius: 4px; min-height: 30px; min-width: 30px; }
-QScrollBar::handle:hover { background: %GED%; }
-QScrollBar::add-line, QScrollBar::sub-line { width: 0; height: 0; }
-QScrollBar::add-page, QScrollBar::sub-page { background: transparent; }
-QScrollArea { background: transparent; border: none; }
+QWidget#Navigationsbereich { background: %FENSTER%; border-right: 1px solid %LINIE%; }
+QListWidget#Navigation { background: transparent; border: none; outline: 0; }
+QListWidget#Navigation::item { color: %TEXT%; padding: 5px 6px; margin: 1px 4px; border-radius: 4px; }
+QListWidget#Navigation::item:hover { background: %HOVER%; }
+QListWidget#Navigation::item:selected { background: %NAVAUSW%; color: %TEXT%; }
+QLabel#Bereichstitel { color: %GED%; padding: 8px 10px 2px 10px; }
+QToolBar#Befehlsleiste { background: %FENSTER%; border: none; border-bottom: 1px solid %LINIE%; padding: 2px 4px; spacing: 2px; }
+QLabel#Gedimmt, QLabel#KpiTitel, QLabel#KpiNotiz { color: %GED%; }
+QLabel#KpiWert { font-weight: 600; }
+QLabel#Leerzustand { color: %GED%; padding: 24px; }
+QFrame#Karte, QFrame#KarteKlick { background: %LISTE%; border: 1px solid %LINIE%; border-radius: 3px; }
+QWidget#Detailbereich { background: %LISTE%; border-left: 1px solid %LINIE%; }
+QLabel#DetailTitel { font-size: 11pt; font-weight: 600; }
 )");
-    s.replace(QStringLiteral("%HG%"), f.hintergrund.name());
-    s.replace(QStringLiteral("%FL%"), f.flaeche.name());
-    s.replace(QStringLiteral("%RAHMEN%"), f.rahmen.name());
+    s.replace(QStringLiteral("%FENSTER%"), f.fenster.name());
+    s.replace(QStringLiteral("%LISTE%"), f.liste.name());
     s.replace(QStringLiteral("%TEXT%"), f.text.name());
     s.replace(QStringLiteral("%GED%"), f.gedimmt.name());
-    s.replace(QStringLiteral("%ALT%"), f.alternativ.name());
-    s.replace(QStringLiteral("%EIN%"), f.eingabe.name());
+    s.replace(QStringLiteral("%LINIE%"), f.linie.name());
     s.replace(QStringLiteral("%HOVER%"), f.hover.name());
-    s.replace(QStringLiteral("%AUSW%"), rgba(f.auswahl));
-    s.replace(QStringLiteral("%SEITE%"), f.seite.name());
-    s.replace(QStringLiteral("%SEITETEXT%"), f.seiteText.name());
-    s.replace(QStringLiteral("%SEITEGED%"), f.seiteGedimmt.name());
-    s.replace(QStringLiteral("%SCROLL%"), f.scroll.name());
-    s.replace(QStringLiteral("%PFEILUNTEN%"), grafik(QStringLiteral("unten"), f.gedimmt, 0));
-    s.replace(QStringLiteral("%PFEILOBEN%"), grafik(QStringLiteral("oben"), f.gedimmt, 1));
-    s.replace(QStringLiteral("%HAKEN%"), grafik(QStringLiteral("haken"), QColor("#1f2937"), 2));
+    s.replace(QStringLiteral("%NAVAUSW%"), f.navAuswahl.name());
     return s;
 }
 
@@ -215,40 +72,57 @@ void Stil::anwenden(bool dunkel)
 {
     g_dunkel = dunkel;
     const Farben f = farben();
-    QApplication::setStyle(QStyleFactory::create(QStringLiteral("Fusion")));
 
-    QPalette p;
-    p.setColor(QPalette::Window, f.hintergrund);
-    p.setColor(QPalette::WindowText, f.text);
-    p.setColor(QPalette::Base, f.flaeche);
-    p.setColor(QPalette::AlternateBase, f.alternativ);
-    p.setColor(QPalette::Text, f.text);
-    p.setColor(QPalette::Button, f.flaeche);
-    p.setColor(QPalette::ButtonText, f.text);
-    p.setColor(QPalette::ToolTipBase, f.flaeche);
-    p.setColor(QPalette::ToolTipText, f.text);
-    p.setColor(QPalette::Highlight, kAkzent);
-    p.setColor(QPalette::HighlightedText, QColor("#1f2937"));
-    p.setColor(QPalette::PlaceholderText, f.gedimmt);
-    p.setColor(QPalette::Mid, f.rahmen.darker(dunkel ? 70 : 115));
-    p.setColor(QPalette::Light, f.flaeche);
-    p.setColor(QPalette::Dark, f.rahmen);
-    p.setColor(QPalette::Link, kAkzent.darker(120));
-    p.setColor(QPalette::Disabled, QPalette::Text, f.gedimmt);
-    p.setColor(QPalette::Disabled, QPalette::ButtonText, f.gedimmt);
-    p.setColor(QPalette::Disabled, QPalette::WindowText, f.gedimmt);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 8, 0)
+    // Native Stile (z. B. windows11) richten sich nach dem Farbschema
+    QGuiApplication::styleHints()->setColorScheme(dunkel ? Qt::ColorScheme::Dark : Qt::ColorScheme::Light);
+#endif
+    // Windows 11: nativer Stil (abgerundete Fluent-Steuerelemente, Systemschrift).
+    // Überall sonst "Fusion" mit einer an Windows angelehnten Palette.
+    QStyle* stil = nullptr;
+    if (QStyleFactory::keys().contains(QStringLiteral("windows11"), Qt::CaseInsensitive))
+        stil = QStyleFactory::create(QStringLiteral("windows11"));
+    const bool nativ = stil != nullptr;
+    if (!stil)
+        stil = QStyleFactory::create(QStringLiteral("Fusion"));
+    QApplication::setStyle(stil);
+
+    QPalette p = nativ ? stil->standardPalette() : QPalette();
+    if (!nativ) {
+        p.setColor(QPalette::Window, f.fenster);
+        p.setColor(QPalette::WindowText, f.text);
+        p.setColor(QPalette::Base, f.liste);
+        p.setColor(QPalette::AlternateBase, f.liste.darker(dunkel ? 90 : 102));
+        p.setColor(QPalette::Text, f.text);
+        p.setColor(QPalette::Button, f.schalter);
+        p.setColor(QPalette::ButtonText, f.text);
+        p.setColor(QPalette::ToolTipBase, f.liste);
+        p.setColor(QPalette::ToolTipText, f.text);
+        p.setColor(QPalette::Highlight, dunkel ? QColor("#0078d4") : f.akzent);
+        p.setColor(QPalette::HighlightedText, QColor("#ffffff"));
+        p.setColor(QPalette::PlaceholderText, f.gedimmt);
+        p.setColor(QPalette::Light, dunkel ? QColor("#3a3a3a") : QColor("#ffffff"));
+        p.setColor(QPalette::Midlight, dunkel ? QColor("#333333") : QColor("#ececec"));
+        p.setColor(QPalette::Mid, dunkel ? QColor("#4a4a4a") : QColor("#c8c8c8"));
+        p.setColor(QPalette::Dark, dunkel ? QColor("#151515") : QColor("#a0a0a0"));
+        p.setColor(QPalette::Shadow, QColor(0, 0, 0, dunkel ? 160 : 60));
+        p.setColor(QPalette::Link, f.akzent);
+        p.setColor(QPalette::LinkVisited, f.akzent);
+        p.setColor(QPalette::Disabled, QPalette::Text, f.gedimmt);
+        p.setColor(QPalette::Disabled, QPalette::ButtonText, f.gedimmt);
+        p.setColor(QPalette::Disabled, QPalette::WindowText, f.gedimmt);
+    }
     QApplication::setPalette(p);
-
     qApp->setStyleSheet(stylesheet(f));
     QApplication::setWindowIcon(appIcon());
 }
 
 bool Stil::istDunkel() { return g_dunkel; }
-QColor Stil::akzent() { return kAkzent; }
+QColor Stil::akzent() { return farben().akzent; }
 QColor Stil::text() { return farben().text; }
 QColor Stil::textGedimmt() { return farben().gedimmt; }
-QColor Stil::flaeche() { return farben().flaeche; }
-QColor Stil::rahmen() { return farben().rahmen; }
+QColor Stil::flaeche() { return farben().liste; }
+QColor Stil::rahmen() { return farben().linie; }
 
 // -------------------------------------------------------------------
 //  Icons: 24er-Raster, Linienstärke 2, abgerundete Enden

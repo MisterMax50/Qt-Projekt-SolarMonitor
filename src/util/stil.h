@@ -28,7 +28,7 @@ public:
     static void anwenden(bool dunkel);
     static bool istDunkel();
 
-    static QColor akzent();       ///< Hauptfarbe (Sonnengelb)
+    static QColor akzent();       ///< Akzentfarbe (Windows-Blau), z. B. für Links
     static QColor text();
     static QColor textGedimmt();
     static QColor flaeche();      ///< Karten-/Tabellenhintergrund

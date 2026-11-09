@@ -3,7 +3,6 @@
 #include <QApplication>
 #include <QPainter>
 
-#include "util/stil.h"
 
 void BadgeDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
@@ -24,31 +23,29 @@ void BadgeDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
     QStyle* st = w ? w->style() : QApplication::style();
     st->drawControl(QStyle::CE_ItemViewItem, &opt, painter, w);
 
+    // Statuspunkt + normaler Text, wie Statusspalten in Explorer/Outlook
     const QColor farbe = farbWert.value<QColor>();
-    const QFontMetrics fm(option.font);
-    const int breite = fm.horizontalAdvance(text) + 22;
-    const int hoehe = qMin(option.rect.height() - 6, fm.height() + 6);
     const Qt::Alignment ausr = Qt::Alignment(index.data(Qt::TextAlignmentRole).toInt());
+    const QFontMetrics fm(option.font);
+    const int breite = fm.horizontalAdvance(text) + 14;
     const int x = (ausr & Qt::AlignRight) ? option.rect.right() - breite - 6 : option.rect.left() + 6;
-    const QRectF pille(x, option.rect.center().y() - hoehe / 2.0 + 0.5, breite, hoehe);
+    const QPointF punkt(x + 4, option.rect.center().y() + 0.5);
 
     painter->save();
     painter->setRenderHint(QPainter::Antialiasing, true);
-    QColor hinten = farbe;
-    hinten.setAlpha(Stil::istDunkel() ? 70 : 38);
     painter->setPen(Qt::NoPen);
-    painter->setBrush(hinten);
-    painter->drawRoundedRect(pille, hoehe / 2.0, hoehe / 2.0);
     painter->setBrush(farbe);
-    painter->drawEllipse(QPointF(pille.left() + 9, pille.center().y()), 3, 3);
-    painter->setPen(Stil::istDunkel() ? farbe.lighter(150) : farbe.darker(140));
-    painter->drawText(pille.adjusted(16, 0, -4, 0), Qt::AlignVCenter | Qt::AlignLeft, text);
+    painter->drawEllipse(punkt, 3.5, 3.5);
+    const bool ausgewaehlt = option.state & QStyle::State_Selected;
+    painter->setPen(option.palette.color(ausgewaehlt ? QPalette::HighlightedText : QPalette::Text));
+    painter->drawText(QRectF(x + 14, option.rect.top(), breite, option.rect.height()),
+                      Qt::AlignVCenter | Qt::AlignLeft, text);
     painter->restore();
 }
 
 QSize BadgeDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
     QSize s = QStyledItemDelegate::sizeHint(option, index);
-    s.setWidth(QFontMetrics(option.font).horizontalAdvance(index.data(Qt::DisplayRole).toString()) + 36);
+    s.setWidth(QFontMetrics(option.font).horizontalAdvance(index.data(Qt::DisplayRole).toString()) + 28);
     return s;
 }

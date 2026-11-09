@@ -40,6 +40,7 @@ set(PROJEKT_HEADER
     src/util/stil.h
     src/util/zeit.h
     src/ui/aenderungen.h
+    src/ui/anlage_info.h
     src/ui/anlage_model.h
     src/ui/app_kontext.h
     src/ui/badge_delegate.h
@@ -77,6 +78,7 @@ set(PROJEKT_QUELLEN
     src/util/sprache.cpp
     src/util/stil.cpp
     src/ui/aenderungen.cpp
+    src/ui/anlage_info.cpp
     src/ui/anlage_model.cpp
     src/ui/badge_delegate.cpp
     src/ui/balken_diagramm.cpp

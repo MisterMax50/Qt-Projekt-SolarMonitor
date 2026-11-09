@@ -5,6 +5,7 @@
 #include "ui/app_kontext.h"
 
 class BalkenDiagramm;
+class QGridLayout;
 class QLabel;
 class QTableWidget;
 
@@ -26,7 +27,7 @@ public slots:
     void aktualisiere();
 
 private:
-    QLabel* kpiKachel(const QString& titel, QWidget* parent, QLayout* layout);
+    QLabel* kpiKachel(const QString& titel, QWidget* parent, QGridLayout* raster);
     void fuelleTypen();
     void fuelleOrte();
     void fuelleStoerungen();

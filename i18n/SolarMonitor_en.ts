@@ -10,6 +10,145 @@
     </message>
 </context>
 <context>
+    <name>AnlageInfo</name>
+    <message>
+        <location filename="../src/ui/anlage_info.cpp" line="+37"/>
+        <source>Wählen Sie eine Anlage aus, um hier ihre Angaben zu sehen.</source>
+        <translation>Select a plant to see its details here.</translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>Stammdaten</source>
+        <translation>Master data</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Status:</source>
+        <translation>Status:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Typ:</source>
+        <translation>Type:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Leistung:</source>
+        <translation>Capacity:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Ausrichtung/Neigung:</source>
+        <translation>Azimuth/tilt:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Wechselrichter:</source>
+        <translation>Inverter:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Wetterstation:</source>
+        <translation>Weather station:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Inbetriebnahme:</source>
+        <translation>Commissioning:</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Auswertung</source>
+        <translation>Analysis</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Energieertrag:</source>
+        <translation>Energy yield:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Spez. Ertrag:</source>
+        <translation>Specific yield:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Performance Ratio:</source>
+        <translation>Performance ratio:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Ertragsverlust:</source>
+        <translation>Yield loss:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Fehlerbilder:</source>
+        <translation>Fault patterns:</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Störungen</source>
+        <translation>Faults</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Offen:</source>
+        <translation>Open:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Letzte Meldung:</source>
+        <translation>Latest report:</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Details …</source>
+        <translation>Details …</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Bearbeiten …</source>
+        <translation>Edit …</translation>
+    </message>
+    <message>
+        <location line="+66"/>
+        <source>Anlage %1</source>
+        <translation>Plant %1</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Auswertung läuft …</source>
+        <translation>Analysis running …</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>keine Verlaufsdaten</source>
+        <translation>no trend data</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source> (Station: %1)</source>
+        <translation> (station: %1)</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>keiner</source>
+        <translation>none</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+6"/>
+        <source>keine</source>
+        <translation>none</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>%1, davon %2 kritisch</source>
+        <translation>%1, %2 of them critical</translation>
+    </message>
+</context>
+<context>
     <name>AnlageModel</name>
     <message>
         <location filename="../src/ui/anlage_model.cpp" line="+81"/>
@@ -32,7 +171,7 @@
         <translation>%1 × %2 (%3 kW)</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+20"/>
         <source>Performance Ratio PR = E / (H · Ppeak) im Zeitraum 01.–14.06.2026</source>
         <translation>Performance ratio PR = E / (H · Ppeak) for the period 1–14 June 2026</translation>
     </message>
@@ -345,149 +484,173 @@
 <context>
     <name>DashboardWidget</name>
     <message>
-        <location filename="../src/ui/dashboard_widget.cpp" line="+54"/>
-        <source>Klick öffnet die Anlage %1</source>
-        <translation>Click to open plant %1</translation>
-    </message>
-    <message>
-        <location line="+33"/>
-        <source>Anlagen in Betrieb</source>
-        <translation>Plants in operation</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Median-PR der Flotte</source>
-        <translation>Fleet median PR</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Offene Störungen</source>
-        <translation>Open faults</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Geschätzter Ertragsverlust</source>
-        <translation>Estimated yield loss</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Datenqualität</source>
-        <translation>Data quality</translation>
-    </message>
-    <message>
-        <location line="+6"/>
+        <location filename="../src/ui/dashboard_widget.cpp" line="+74"/>
         <source>Rot: kritische Störung, gestört oder Fehlerbild · Orange: offene Störung oder Wartung · Grün: in Ordnung
 Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</source>
         <translation>Red: critical fault, faulty or fault pattern · orange: open fault or maintenance · green: OK
 Click a dot to open the plant, use the mouse wheel to zoom.</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>Karte – wo besteht Handlungsbedarf?</source>
-        <translation>Map – where is action needed?</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Große Karte öffnen →</source>
-        <translation>Open full map →</translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Jetzt kümmern – offene kritische Störungen</source>
-        <translation>Needs attention – open critical faults</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Alle Störungen →</source>
-        <translation>All faults →</translation>
-    </message>
-    <message>
-        <location line="+2"/>
+        <location line="+22"/>
         <source>Größte Ertragsverluste</source>
         <translation>Largest yield losses</translation>
     </message>
     <message>
-        <location line="+0"/>
-        <source>Zur Serviceplanung →</source>
-        <translation>To service planning →</translation>
-    </message>
-    <message>
-        <location line="+3"/>
+        <location line="+2"/>
         <source>Erkannte Fehlerbilder</source>
         <translation>Detected fault patterns</translation>
     </message>
     <message>
-        <location line="+0"/>
-        <source>Zur Anlagenliste →</source>
-        <translation>To plant list →</translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Servicetour planen</source>
-        <translation>Plan service tour</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Datenprüfung ansehen</source>
-        <translation>View data validation</translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Schnellzugriff</source>
-        <translation>Quick access</translation>
-    </message>
-    <message>
-        <location line="+121"/>
-        <source>%1 gestört · %2 in Wartung</source>
-        <translation>%1 faulty · %2 in maintenance</translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>davon %1 kritisch</source>
-        <translation>%1 of them critical</translation>
-    </message>
-    <message>
-        <location line="+7"/>
+        <location line="+122"/>
         <source>Keine offenen kritischen Störungen.</source>
         <translation>No open critical faults.</translation>
     </message>
     <message>
-        <location line="+18"/>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message numerus="yes">
-        <location line="+0"/>
-        <source>%n Fehler</source>
-        <translation>
-            <numerusform>%n error</numerusform>
-            <numerusform>%n errors</numerusform>
-        </translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>%1 Warnungen beim Einlesen</source>
-        <translation>%1 warnings on import</translation>
-    </message>
-    <message>
-        <location line="+8"/>
+        <location line="+21"/>
         <source>Flottenanalyse läuft …</source>
         <translation>Fleet analysis running …</translation>
     </message>
     <message>
-        <location line="+8"/>
-        <source>Angemeldet als %1 · Messwerte werden ausgewertet …</source>
-        <translation>Signed in as %1 · analysing measurements …</translation>
+        <location line="-180"/>
+        <source>Anlagen:</source>
+        <translation>Plants:</translation>
     </message>
     <message>
-        <location line="+27"/>
-        <source>%1 Anlagen ausgewertet</source>
-        <translation>%1 plants analysed</translation>
+        <location line="+1"/>
+        <source>Offene Störungen:</source>
+        <translation>Open faults:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Median-PR der Flotte:</source>
+        <translation>Fleet median PR:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Geschätzter Ertragsverlust:</source>
+        <translation>Estimated yield loss:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Datenprüfung:</source>
+        <translation>Data validation:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Ausgewertet:</source>
+        <translation>Analysed:</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>%1 entgangener Ertrag</source>
-        <translation>%1 of lost yield</translation>
+        <source>Flottenstatus</source>
+        <translation>Fleet status</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Karte – Handlungsbedarf</source>
+        <translation>Map – action needed</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Kartenansicht öffnen</source>
+        <translation>Open map view</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Anlage</source>
+        <translation>Plant</translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <location line="+1"/>
+        <source>Ort</source>
+        <translation>Location</translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Meldung</source>
+        <translation>Message</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Seit</source>
+        <translation>Since</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Ursache</source>
+        <translation>Cause</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Verlust</source>
+        <translation>Loss</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Fehlerbild</source>
+        <translation>Fault pattern</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Art</source>
+        <translation>Kind</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Anlagen</source>
+        <translation>Plants</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Offene kritische Störungen</source>
+        <translation>Open critical faults</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Alle Störungen anzeigen</source>
+        <translation>Show all faults</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Serviceplanung öffnen</source>
+        <translation>Open service planning</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Anlagenliste öffnen</source>
+        <translation>Open plant list</translation>
+    </message>
+    <message>
+        <location line="+66"/>
+        <source>Doppelklick öffnet die Anlage</source>
+        <translation>Double-click opens the plant</translation>
+    </message>
+    <message>
+        <location line="+36"/>
+        <source>%1 von %2 in Betrieb (%3 gestört, %4 in Wartung)</source>
+        <translation>%1 of %2 in operation (%3 faulty, %4 in maintenance)</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>%1, davon %2 kritisch</source>
+        <translation>%1, %2 of them critical</translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>%1 Fehler, %2 Warnungen beim Einlesen</source>
+        <translation>%1 errors, %2 warnings while loading</translation>
+    </message>
+    <message>
+        <location line="+37"/>
+        <source>%1 (%2)</source>
+        <translation>%1 (%2)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>%1 von %2 Anlagen mit Messwerten</source>
+        <translation>%1 of %2 plants with measurements</translation>
     </message>
     <message>
         <location line="+5"/>
@@ -495,37 +658,24 @@ Click a dot to open the plant, use the mouse wheel to zoom.</translation>
         <translation>No significant losses.</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+10"/>
         <source>Minderertrag</source>
         <translation>Underperformance</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+10"/>
         <source>Keine Fehlerbilder erkannt.</source>
         <translation>No fault patterns detected.</translation>
     </message>
     <message>
-        <location line="+10"/>
-        <source>Hinweis – kein Serviceeinsatz nötig</source>
-        <translation>Note – no service visit needed</translation>
+        <location line="+5"/>
+        <source>Hinweis</source>
+        <translation>Note</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Befund – sollte geprüft werden</source>
-        <translation>Finding – should be checked</translation>
-    </message>
-    <message numerus="yes">
-        <location line="+2"/>
-        <source>%n Anlage(n)</source>
-        <translation>
-            <numerusform>%n plant</numerusform>
-            <numerusform>%n plants</numerusform>
-        </translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Angemeldet als %1 · %2 Anlagen, davon %3 mit Messwerten ausgewertet · Ein Klick auf eine Kachel oder Zeile führt zu den Details.</source>
-        <translation>Signed in as %1 · %2 plants, %3 of them analysed from measurements · Click a tile or row for details.</translation>
+        <location line="+0"/>
+        <source>Befund</source>
+        <translation>Finding</translation>
     </message>
 </context>
 <context>
@@ -769,17 +919,18 @@ Click a dot to open the plant, use the mouse wheel to zoom.</translation>
     <name>DetailDialog</name>
     <message>
         <location filename="../src/ui/detail_dialog.cpp" line="+45"/>
+        <location line="+107"/>
         <source>Anlage %1</source>
         <translation>Plant %1</translation>
     </message>
     <message>
-        <location line="+12"/>
-        <location line="+182"/>
+        <location line="-95"/>
+        <location line="+181"/>
         <source>Stammdaten</source>
         <translation>Master data</translation>
     </message>
     <message>
-        <location line="-181"/>
+        <location line="-180"/>
         <source>Verlauf</source>
         <translation>Trend</translation>
     </message>
@@ -829,12 +980,17 @@ Click a dot to open the plant, use the mouse wheel to zoom.</translation>
         <translation>No trend data available – only the master data is shown. %1</translation>
     </message>
     <message>
-        <location line="+25"/>
+        <location line="+26"/>
         <source>&lt;h2&gt;%1&lt;/h2&gt;Anlage nicht gefunden.</source>
         <translation>&lt;h2&gt;%1&lt;/h2&gt;Plant not found.</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+3"/>
+        <source>Anlage %1 – %2</source>
+        <translation>Plant %1 – %2</translation>
+    </message>
+    <message>
+        <location line="+13"/>
         <source>Anlage</source>
         <translation>Plant</translation>
     </message>
@@ -1000,37 +1156,42 @@ Click a dot to open the plant, use the mouse wheel to zoom.</translation>
         <translation>Calculated as soon as the trend data has been loaded …</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <source>Energieertrag (14 Tage)</source>
-        <translation>Energy yield (14 days)</translation>
+        <location line="+3"/>
+        <source>Kennzahlen</source>
+        <translation>Key figures</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Energieertrag (14 Tage):</source>
+        <translation>Energy yield (14 days):</translation>
     </message>
     <message>
         <location line="+0"/>
-        <source>Spezifischer Ertrag</source>
-        <translation>Specific yield</translation>
+        <source>Spezifischer Ertrag:</source>
+        <translation>Specific yield:</translation>
     </message>
     <message>
         <location line="+0"/>
-        <source>Performance Ratio</source>
-        <translation>Performance ratio</translation>
+        <source>Performance Ratio:</source>
+        <translation>Performance ratio:</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Datenabdeckung</source>
-        <translation>Data coverage</translation>
+        <source>Datenabdeckung:</source>
+        <translation>Data coverage:</translation>
     </message>
     <message>
         <location line="+0"/>
-        <source>Erlös</source>
-        <translation>Revenue</translation>
+        <source>Erlös:</source>
+        <translation>Revenue:</translation>
     </message>
     <message>
         <location line="+0"/>
-        <source>Geschätzter Verlust</source>
-        <translation>Estimated loss</translation>
+        <source>Geschätzter Verlust:</source>
+        <translation>Estimated loss:</translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+21"/>
         <source>Balkenfarbe = Tages-PR (rot niedrig, grün hoch)</source>
         <translation>Bar colour = daily PR (red low, green high)</translation>
     </message>
@@ -1515,22 +1676,22 @@ PR %1</translation>
 <context>
     <name>LoginDialog</name>
     <message>
-        <location filename="../src/ui/login_dialog.cpp" line="+22"/>
+        <location filename="../src/ui/login_dialog.cpp" line="+23"/>
         <source>Anmeldung – SolarMonitor</source>
         <translation>Sign in – SolarMonitor</translation>
     </message>
     <message>
-        <location line="+8"/>
-        <source>Monitoring der PV-Flotte – bitte anmelden</source>
-        <translation>PV fleet monitoring – please sign in</translation>
+        <location line="+7"/>
+        <source>Melden Sie sich mit Ihrer Rolle und PIN an.</source>
+        <translation>Sign in with your role and PIN.</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+1"/>
         <source>Demo-Zugänge: betrieb / 0000, service / 5678, admin / 1234</source>
         <translation>Demo accounts: betrieb / 0000, service / 5678, admin / 1234</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+6"/>
         <source>Betrieb: lesen und auswerten
 Service: zusätzlich Störungen erfassen und bearbeiten
 Administrator: zusätzlich Stammdaten bearbeiten und exportieren</source>
@@ -1559,7 +1720,7 @@ Administrator: additionally edit and export master data</translation>
         <translation>Sign in</translation>
     </message>
     <message>
-        <location line="+49"/>
+        <location line="+55"/>
         <source>PIN falsch (Versuch %1 von %2).</source>
         <translation>Wrong PIN (attempt %1 of %2).</translation>
     </message>
@@ -1572,53 +1733,48 @@ Administrator: additionally edit and export master data</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="+201"/>
+        <location filename="../src/ui/mainwindow.cpp" line="+171"/>
         <source>SolarMonitor – Monitoring der PV-Flotte</source>
         <translation>SolarMonitor – PV fleet monitoring</translation>
     </message>
     <message>
         <location line="+19"/>
-        <location line="+121"/>
+        <location line="+88"/>
         <source>Anlagen</source>
         <translation>Plants</translation>
     </message>
     <message>
-        <location line="-118"/>
-        <location line="+118"/>
+        <location line="-85"/>
+        <location line="+85"/>
         <source>Störungen</source>
         <translation>Faults</translation>
     </message>
     <message>
-        <location line="-112"/>
-        <location line="+113"/>
+        <location line="-79"/>
+        <location line="+80"/>
         <source>Karte</source>
         <translation>Map</translation>
     </message>
     <message>
-        <location line="-110"/>
-        <location line="+110"/>
+        <location line="-77"/>
+        <location line="+77"/>
         <source>Statistik</source>
         <translation>Statistics</translation>
     </message>
     <message>
-        <location line="-99"/>
-        <location line="+100"/>
+        <location line="-66"/>
+        <location line="+67"/>
         <source>Serviceplanung</source>
         <translation>Service planning</translation>
     </message>
     <message>
-        <location line="-94"/>
-        <location line="+94"/>
+        <location line="-61"/>
+        <location line="+61"/>
         <source>Datenprüfung</source>
         <translation>Data validation</translation>
     </message>
     <message>
-        <location line="+79"/>
-        <source>Suche nach Anlagen-ID, Ort oder Wetterstation (Strg+F)</source>
-        <translation>Search by plant ID, location or weather station (Ctrl+F)</translation>
-    </message>
-    <message>
-        <location line="+5"/>
+        <location line="+69"/>
         <source>Alle Status</source>
         <translation>All statuses</translation>
     </message>
@@ -1658,19 +1814,19 @@ Administrator: additionally edit and export master data</translation>
         <translation>with open faults only</translation>
     </message>
     <message>
-        <location line="-46"/>
-        <location line="+50"/>
+        <location line="-48"/>
+        <location line="+51"/>
         <source>Filter zurücksetzen</source>
         <translation>Reset filters</translation>
     </message>
     <message>
-        <location line="-245"/>
-        <location line="+122"/>
+        <location line="-196"/>
+        <location line="+89"/>
         <source>Übersicht</source>
         <translation>Overview</translation>
     </message>
     <message>
-        <location line="-122"/>
+        <location line="-89"/>
         <source>Der Zustand der Flotte auf einen Blick – was ist zu tun?</source>
         <translation>The state of the fleet at a glance – what needs doing?</translation>
     </message>
@@ -1705,32 +1861,7 @@ Administrator: additionally edit and export master data</translation>
         <translation>All issues found while loading the files, some of them corrected automatically.</translation>
     </message>
     <message>
-        <location line="+71"/>
-        <source>PV-Flotte Bodensee</source>
-        <translation>PV fleet Lake Constance</translation>
-    </message>
-    <message>
-        <location line="+30"/>
-        <source>Angemeldet als&lt;br&gt;&lt;span style=&apos;color:#ffffff; font-weight:600&apos;&gt;%1&lt;/span&gt;</source>
-        <translation>Signed in as&lt;br&gt;&lt;span style=&apos;color:#ffffff; font-weight:600&apos;&gt;%1&lt;/span&gt;</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Helles Design</source>
-        <translation>Light theme</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Dunkles Design</source>
-        <translation>Dark theme</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Benutzer wechseln …</source>
-        <translation>Switch user …</translation>
-    </message>
-    <message>
-        <location line="+39"/>
+        <location line="+101"/>
         <source>%1 Anlagen mit erkanntem Fehlerbild</source>
         <translation>%1 plants with a detected fault pattern</translation>
     </message>
@@ -1740,29 +1871,7 @@ Administrator: additionally edit and export master data</translation>
         <translation>Reset filters (%1)</translation>
     </message>
     <message>
-        <location line="+61"/>
-        <source>Leistung von</source>
-        <translation>Capacity from</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>bis</source>
-        <translation>to</translation>
-    </message>
-    <message>
-        <location line="+28"/>
-        <source>Doppelklick: Details · Rechtsklick: weitere Aktionen</source>
-        <translation>Double-click: details · Right-click: more actions</translation>
-    </message>
-    <message>
-        <location line="+71"/>
-        <source>Keine Anlage entspricht den gewählten Filtern.
-Filter anpassen oder mit „Filter zurücksetzen“ alle Anlagen anzeigen.</source>
-        <translation>No plant matches the selected filters.
-Adjust the filters or use “Reset filters” to show all plants.</translation>
-    </message>
-    <message>
-        <location line="+19"/>
+        <location line="+196"/>
         <source>Suche nach Störung, Anlage, Code oder Beschreibung</source>
         <translation>Search by fault, plant, code or description</translation>
     </message>
@@ -1787,7 +1896,7 @@ Adjust the filters or use “Reset filters” to show all plants.</translation>
         <translation>Plant, e.g. P00051</translation>
     </message>
     <message>
-        <location line="+62"/>
+        <location line="+64"/>
         <source>Keine Störung entspricht den gewählten Filtern.</source>
         <translation>No fault matches the selected filters.</translation>
     </message>
@@ -1874,7 +1983,7 @@ Adjust the filters or use “Reset filters” to show all plants.</translation>
         <translation>Redo: %1 (Ctrl+Y)</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+19"/>
         <source>&amp;Datei</source>
         <translation>&amp;File</translation>
     </message>
@@ -1949,27 +2058,108 @@ Adjust the filters or use “Reset filters” to show all plants.</translation>
         <translation>&amp;About SolarMonitor</translation>
     </message>
     <message>
-        <location line="+15"/>
-        <source>Daten: %1</source>
-        <translation>Data: %1</translation>
-    </message>
-    <message>
-        <location line="+7"/>
+        <location line="+78"/>
         <source>Zur Datenprüfung</source>
         <translation>Go to data validation</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+5"/>
         <source>%1 Fehler, %2 Warnungen beim Einlesen</source>
         <translation>%1 errors, %2 warnings while loading</translation>
     </message>
     <message>
-        <location line="+9"/>
-        <source>Flottenanalyse %p %</source>
-        <translation>Fleet analysis %p %</translation>
+        <location line="-534"/>
+        <source>%1 offene Störungen</source>
+        <translation>%1 open faults</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+7"/>
+        <source>%1 Fehler beim Einlesen</source>
+        <translation>%1 errors on import</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Anlagen durchsuchen (Strg+F)</source>
+        <translation>Search plants (Ctrl+F)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Sucht in Anlagen-ID, Ort und Wetterstation</source>
+        <translation>Searches plant ID, location and weather station</translation>
+    </message>
+    <message>
+        <location line="+46"/>
+        <location line="+167"/>
+        <source>Status:</source>
+        <translation>Status:</translation>
+    </message>
+    <message>
+        <location line="-164"/>
+        <source>Typ:</source>
+        <translation>Type:</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Ort:</source>
+        <translation>Location:</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Leistung:</source>
+        <translation>Capacity:</translation>
+    </message>
+    <message>
+        <location line="+98"/>
+        <source>Keine Anlage entspricht den gewählten Filtern.</source>
+        <translation>No plant matches the selected filters.</translation>
+    </message>
+    <message>
+        <location line="+57"/>
+        <source>Suchen:</source>
+        <translation>Search:</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Schwere:</source>
+        <translation>Severity:</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Anlage:</source>
+        <translation>Plant:</translation>
+    </message>
+    <message>
+        <location line="+218"/>
+        <source>Befehle</source>
+        <translation>Commands</translation>
+    </message>
+    <message>
+        <location line="+34"/>
+        <source>Exportieren</source>
+        <translation>Export</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Bericht</source>
+        <translation>Report</translation>
+    </message>
+    <message>
+        <location line="+44"/>
+        <source>Analyse %p %</source>
+        <translation>Analysis %p %</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Angemeldet: %1</source>
+        <translation>Signed in: %1</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Datenordner</source>
+        <translation>Data folder</translation>
+    </message>
+    <message>
+        <location line="+20"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>Administrator role only.</translation>
     </message>
@@ -3144,38 +3334,47 @@ Measured over land around Lake Constance, not straight across the water.</transl
 <context>
     <name>StatistikWidget</name>
     <message>
-        <location filename="../src/ui/statistik_widget.cpp" line="+27"/>
-        <location line="+22"/>
+        <location filename="../src/ui/statistik_widget.cpp" line="+54"/>
         <source>Anlagen</source>
         <translation>Plants</translation>
     </message>
     <message>
-        <location line="-21"/>
-        <source>Installierte Leistung</source>
-        <translation>Installed capacity</translation>
+        <location line="-27"/>
+        <source>Zusammenfassung</source>
+        <translation>Summary</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Anlagen:</source>
+        <translation>Plants:</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Offene Störungen (kritisch)</source>
-        <translation>Open faults (critical)</translation>
+        <source>Installierte Leistung:</source>
+        <translation>Installed capacity:</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Median-PR der Flotte</source>
-        <translation>Fleet median PR</translation>
+        <source>Offene Störungen (kritisch):</source>
+        <translation>Open faults (critical):</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Ertrag 01.–14.06.</source>
-        <translation>Yield 1–14 June</translation>
+        <source>Median-PR der Flotte:</source>
+        <translation>Fleet median PR:</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Anlagen mit Fehlerbild</source>
-        <translation>Plants with fault pattern</translation>
+        <source>Ertrag 01.–14.06.:</source>
+        <translation>Yield 01–14 Jun:</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+1"/>
+        <source>Anlagen mit Fehlerbild:</source>
+        <translation>Plants with fault pattern:</translation>
+    </message>
+    <message>
+        <location line="+12"/>
         <source>Typ</source>
         <translation>Type</translation>
     </message>
@@ -3297,7 +3496,7 @@ Measured over land around Lake Constance, not straight across the water.</transl
         <translation>Faults by error code and severity (since 2024)</translation>
     </message>
     <message>
-        <location line="+63"/>
+        <location line="+60"/>
         <source>läuft …</source>
         <translation>running …</translation>
     </message>

@@ -31,9 +31,9 @@ inline void einrichten(QTableWidget* t, const QStringList& kopf)
     t->setHorizontalHeaderLabels(kopf);
     t->setEditTriggers(QAbstractItemView::NoEditTriggers);
     t->setSelectionBehavior(QAbstractItemView::SelectRows);
-    t->setAlternatingRowColors(true);
+    t->setAlternatingRowColors(false);
     t->verticalHeader()->setVisible(false);
-    t->verticalHeader()->setDefaultSectionSize(28);
+    t->verticalHeader()->setDefaultSectionSize(24);
     t->horizontalHeader()->setStretchLastSection(true);
     t->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     t->setShowGrid(false);

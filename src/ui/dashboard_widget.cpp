@@ -1,22 +1,18 @@
 #include "dashboard_widget.h"
 
 #include <algorithm>
-#include <functional>
 #include <map>
 
-#include <QAction>
-#include <QFrame>
 #include <QGridLayout>
+#include <QGroupBox>
 #include <QHBoxLayout>
 #include <QHeaderView>
 #include <QLabel>
-#include <QMouseEvent>
-#include <QPushButton>
 #include <QScrollArea>
 #include <QSet>
-#include <QTableWidget>
+#include <QStyledItemDelegate>
 #include <QTimer>
-#include <QToolButton>
+#include <QTreeWidget>
 #include <QVBoxLayout>
 
 #include "eval/flotten_analyse.h"
@@ -27,42 +23,40 @@
 
 namespace {
 
-constexpr int kZeilenhoehe = 30;
-constexpr int kMaxZeilen = 5;
+constexpr int kMaxZeilen = 8;
+constexpr int kZeilenhoehe = 20;
 constexpr int kIdRolle = Qt::UserRole + 10;
 
-/// Karte, die auf Klick reagiert (ganze Fläche ist die Schaltfläche).
-class KlickRahmen : public QFrame {
-public:
-    using QFrame::QFrame;
-    std::function<void()> beiKlick;
+QString zielName(DashboardWidget::Ziel z)
+{
+    return QString::number(int(z));
+}
 
-protected:
-    void mouseReleaseEvent(QMouseEvent* e) override
+/// Einen Hinweistext als einzige, nicht anklickbare Zeile zeigen.
+void leer(QTreeWidget* t, const QString& text)
+{
+    auto* it = new QTreeWidgetItem(t, {text});
+    it->setForeground(0, Stil::textGedimmt());
+    it->setFlags(Qt::ItemIsEnabled);
+    it->setFirstColumnSpanned(true);
+}
+
+/// Einheitliche Zeilenhöhe, auch für Zeilen ohne Symbol.
+class ZeilenDelegate : public QStyledItemDelegate {
+public:
+    using QStyledItemDelegate::QStyledItemDelegate;
+    QSize sizeHint(const QStyleOptionViewItem& o, const QModelIndex& i) const override
     {
-        if (e->button() == Qt::LeftButton && rect().contains(e->position().toPoint()) && beiKlick)
-            beiKlick();
-        QFrame::mouseReleaseEvent(e);
+        return QStyledItemDelegate::sizeHint(o, i).expandedTo(QSize(0, kZeilenhoehe));
     }
 };
 
-QTableWidgetItem* zelle(const QString& text, const QString& anlageId = {})
+/// Spaltenbreiten nach dem Füllen an den Inhalt anpassen (außer der gestreckten Spalte).
+void passeSpaltenAn(QTreeWidget* t)
 {
-    auto* item = new QTableWidgetItem(text);
-    item->setData(kIdRolle, anlageId);
-    if (!anlageId.isEmpty())
-        item->setToolTip(DashboardWidget::tr("Klick öffnet die Anlage %1").arg(anlageId));
-    return item;
-}
-
-void leer(QTableWidget* t, const QString& text)
-{
-    t->setRowCount(1);
-    auto* item = new QTableWidgetItem(text);
-    item->setForeground(Stil::textGedimmt());
-    item->setFlags(Qt::ItemIsEnabled);
-    t->setItem(0, 0, item);
-    t->setSpan(0, 0, 1, t->columnCount());
+    for (int c = 0; c < t->columnCount(); ++c)
+        if (t->header()->sectionResizeMode(c) != QHeaderView::Stretch)
+            t->resizeColumnToContents(c);
 }
 
 } // namespace
@@ -71,25 +65,27 @@ DashboardWidget::DashboardWidget(const AppKontext& kontext, const QList<QAction*
     : QWidget(parent)
     , m_kontext(kontext)
 {
+    Q_UNUSED(schnellzugriff)
     auto* inhalt = new QWidget;
-    inhalt->setObjectName(QStringLiteral("Inhalt"));
     auto* v = new QVBoxLayout(inhalt);
     v->setContentsMargins(0, 0, 0, 0);
-    v->setSpacing(14);
+    v->setSpacing(8);
 
-    m_stand = new QLabel(inhalt);
-    m_stand->setObjectName(QStringLiteral("Gedimmt"));
-    v->addWidget(m_stand);
-
-    // ---------- Kennzahl-Kacheln ----------
-    auto* kacheln = new QHBoxLayout;
-    kacheln->setSpacing(12);
-    m_betrieb = neueKachel(inhalt, kacheln, tr("Anlagen in Betrieb"), Ziel::Anlagen);
-    m_pr = neueKachel(inhalt, kacheln, tr("Median-PR der Flotte"), Ziel::Statistik);
-    m_stoerungen = neueKachel(inhalt, kacheln, tr("Offene Störungen"), Ziel::Stoerungen);
-    m_verlust = neueKachel(inhalt, kacheln, tr("Geschätzter Ertragsverlust"), Ziel::Serviceplanung);
-    m_daten = neueKachel(inhalt, kacheln, tr("Datenqualität"), Ziel::Datenpruefung);
-    v->addLayout(kacheln);
+    // ---------- Flottenstatus: Beschriftung/Wert-Paare ----------
+    auto* status = new QWidget;
+    auto* raster = new QGridLayout(status);
+    raster->setContentsMargins(4, 2, 4, 2);
+    raster->setHorizontalSpacing(12);
+    raster->setVerticalSpacing(6);
+    m_betrieb = neuerWert(raster, 0, 0, tr("Anlagen:"));
+    m_stoerungen = neuerWert(raster, 1, 0, tr("Offene Störungen:"));
+    m_pr = neuerWert(raster, 0, 1, tr("Median-PR der Flotte:"));
+    m_verlust = neuerWert(raster, 1, 1, tr("Geschätzter Ertragsverlust:"));
+    m_daten = neuerWert(raster, 0, 2, tr("Datenprüfung:"));
+    m_ausgewertet = neuerWert(raster, 1, 2, tr("Ausgewertet:"));
+    for (int s : {1, 3, 5})
+        raster->setColumnStretch(s, 1);
+    v->addWidget(neueGruppe(tr("Flottenstatus"), status, {}, Ziel::Anlagen));
 
     // ---------- Karte ----------
     auto* karte = new KarteView(m_kontext, nullptr, KarteView::Modus::Kompakt);
@@ -97,54 +93,29 @@ DashboardWidget::DashboardWidget(const AppKontext& kontext, const QList<QAction*
     karte->setToolTip(tr("Rot: kritische Störung, gestört oder Fehlerbild · Orange: offene Störung oder Wartung · Grün: in Ordnung\n"
                          "Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt."));
     connect(karte, &KarteView::anlageGewaehlt, this, &DashboardWidget::anlageOeffnen);
-    v->addWidget(neueKarte(tr("Karte – wo besteht Handlungsbedarf?"), karte, tr("Große Karte öffnen →"), Ziel::Karte), 1);
+    v->addWidget(neueGruppe(tr("Karte – Handlungsbedarf"), karte, tr("Kartenansicht öffnen"), Ziel::Karte), 1);
 
     // ---------- Listen ----------
-    m_dringend = neueListe(3);
-    m_verluste = neueListe(3);
-    m_fehlerbilder = neueListe(2);
-    for (QTableWidget* t : {m_dringend, m_verluste})
-        connect(t, &QTableWidget::cellClicked, this, [this, t](int zeile, int spalte) {
-            if (QTableWidgetItem* it = t->item(zeile, spalte); it && !it->data(kIdRolle).toString().isEmpty())
-                emit anlageOeffnen(it->data(kIdRolle).toString());
+    m_dringend = neueListe({tr("Anlage"), tr("Ort"), tr("Meldung"), tr("Seit")});
+    m_verluste = neueListe({tr("Anlage"), tr("Ort"), tr("Ursache"), tr("Verlust")});
+    m_fehlerbilder = neueListe({tr("Fehlerbild"), tr("Art"), tr("Anlagen")});
+    m_verluste->headerItem()->setTextAlignment(3, Qt::AlignRight | Qt::AlignVCenter);
+    m_fehlerbilder->headerItem()->setTextAlignment(2, Qt::AlignRight | Qt::AlignVCenter);
+    for (QTreeWidget* t : {m_dringend, m_verluste})
+        connect(t, &QTreeWidget::itemActivated, this, [this](QTreeWidgetItem* it) {
+            const QString id = it ? it->data(0, kIdRolle).toString() : QString();
+            if (!id.isEmpty())
+                emit anlageOeffnen(id);
         });
 
-    auto* raster = new QGridLayout;
-    raster->setSpacing(12);
-    raster->addWidget(neueKarte(tr("Jetzt kümmern – offene kritische Störungen"), m_dringend,
-                                tr("Alle Störungen →"), Ziel::Stoerungen),
-                      0, 0);
-    raster->addWidget(neueKarte(tr("Größte Ertragsverluste"), m_verluste, tr("Zur Serviceplanung →"),
-                                Ziel::Serviceplanung),
-                      0, 1);
-    raster->addWidget(neueKarte(tr("Erkannte Fehlerbilder"), m_fehlerbilder, tr("Zur Anlagenliste →"), Ziel::Anlagen),
-                      1, 0);
-
-    // Schnellzugriff
-    auto* schnell = new QWidget;
-    auto* sv = new QVBoxLayout(schnell);
-    sv->setContentsMargins(0, 0, 0, 0);
-    sv->setSpacing(6);
-    auto* tour = new QAction(Stil::icon(Stil::Symbol::Werkzeug, Stil::text()), tr("Servicetour planen"), this);
-    connect(tour, &QAction::triggered, this, [this] { emit seiteOeffnen(Ziel::Serviceplanung); });
-    auto* pruefung = new QAction(Stil::icon(Stil::Symbol::Pruefung, Stil::text()), tr("Datenprüfung ansehen"), this);
-    connect(pruefung, &QAction::triggered, this, [this] { emit seiteOeffnen(Ziel::Datenpruefung); });
-    QList<QAction*> knoepfe = schnellzugriff;
-    knoepfe << tour << pruefung;
-    for (QAction* a : std::as_const(knoepfe)) {
-        auto* knopf = new QToolButton(schnell);
-        knopf->setObjectName(QStringLiteral("Schnell"));
-        knopf->setDefaultAction(a);
-        knopf->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-        knopf->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-        knopf->setCursor(Qt::PointingHandCursor);
-        sv->addWidget(knopf);
-    }
-    sv->addStretch();
-    raster->addWidget(neueKarte(tr("Schnellzugriff"), schnell, {}, Ziel::Anlagen), 1, 1);
-    raster->setColumnStretch(0, 1);
-    raster->setColumnStretch(1, 1);
-    v->addLayout(raster);
+    auto* listen = new QHBoxLayout;
+    listen->setSpacing(8);
+    listen->addWidget(neueGruppe(tr("Offene kritische Störungen"), m_dringend, tr("Alle Störungen anzeigen"),
+                                 Ziel::Stoerungen), 3);
+    listen->addWidget(neueGruppe(tr("Größte Ertragsverluste"), m_verluste, tr("Serviceplanung öffnen"),
+                                 Ziel::Serviceplanung), 3);
+    listen->addWidget(neueGruppe(tr("Erkannte Fehlerbilder"), m_fehlerbilder, tr("Anlagenliste öffnen"), Ziel::Anlagen), 2);
+    v->addLayout(listen);
 
     // Bei kleinen Fenstern scrollen statt quetschen
     auto* scroll = new QScrollArea(this);
@@ -164,72 +135,58 @@ DashboardWidget::DashboardWidget(const AppKontext& kontext, const QList<QAction*
     aktualisiere();
 }
 
-DashboardWidget::Kachel DashboardWidget::neueKachel(QWidget* eltern, QLayout* ziel, const QString& titel, Ziel sprung)
+QLabel* DashboardWidget::neuerWert(QGridLayout* raster, int zeile, int spalte, const QString& titel)
 {
-    auto* rahmen = new KlickRahmen(eltern);
-    rahmen->setObjectName(QStringLiteral("KarteKlick"));
-    rahmen->setCursor(Qt::PointingHandCursor);
-    rahmen->beiKlick = [this, sprung] { emit seiteOeffnen(sprung); };
-    auto* v = new QVBoxLayout(rahmen);
-    v->setContentsMargins(16, 12, 16, 12);
-    v->setSpacing(2);
-    auto* t = new QLabel(titel, rahmen);
-    t->setObjectName(QStringLiteral("KpiTitel"));
-    Kachel k;
-    k.wert = new QLabel(QStringLiteral("–"), rahmen);
-    k.wert->setObjectName(QStringLiteral("KpiWert"));
-    k.notiz = new QLabel(rahmen);
-    k.notiz->setObjectName(QStringLiteral("KpiNotiz"));
-    v->addWidget(t);
-    v->addWidget(k.wert);
-    v->addWidget(k.notiz);
-    ziel->addWidget(rahmen);
-    return k;
+    auto* t = new QLabel(titel);
+    t->setObjectName(QStringLiteral("Gedimmt"));
+    auto* w = new QLabel(QStringLiteral("–"));
+    w->setTextFormat(Qt::RichText);
+    connect(w, &QLabel::linkActivated, this, [this](const QString& ziel) {
+        emit seiteOeffnen(static_cast<Ziel>(ziel.toInt()));
+    });
+    raster->addWidget(t, zeile, spalte * 2);
+    raster->addWidget(w, zeile, spalte * 2 + 1);
+    return w;
 }
 
-QWidget* DashboardWidget::neueKarte(const QString& titel, QWidget* inhalt, const QString& linkText, Ziel sprung)
+void DashboardWidget::verlinke(QLabel* label, const QString& text, Ziel ziel)
 {
-    auto* karte = new QFrame;
-    karte->setObjectName(QStringLiteral("Karte"));
-    auto* v = new QVBoxLayout(karte);
-    v->setContentsMargins(16, 12, 16, 12);
-    v->setSpacing(8);
-    auto* kopf = new QHBoxLayout;
-    auto* t = new QLabel(titel, karte);
-    t->setObjectName(QStringLiteral("KartenTitel"));
-    kopf->addWidget(t, 1);
+    label->setText(QStringLiteral("<a href=\"%1\">%2</a>").arg(zielName(ziel), text.toHtmlEscaped()));
+}
+
+QGroupBox* DashboardWidget::neueGruppe(const QString& titel, QWidget* inhalt, const QString& linkText, Ziel sprung)
+{
+    auto* g = new QGroupBox(titel);
+    auto* v = new QVBoxLayout(g);
+    v->setContentsMargins(8, 8, 8, 8);
+    v->setSpacing(4);
+    v->addWidget(inhalt, 1);
     if (!linkText.isEmpty()) {
-        auto* link = new QPushButton(linkText, karte);
-        link->setObjectName(QStringLiteral("Link"));
-        link->setFlat(true);
-        link->setCursor(Qt::PointingHandCursor);
-        connect(link, &QPushButton::clicked, this, [this, sprung] { emit seiteOeffnen(sprung); });
-        kopf->addWidget(link);
+        auto* link = new QLabel(QStringLiteral("<a href=\"%1\">%2</a>").arg(zielName(sprung), linkText.toHtmlEscaped()), g);
+        link->setAlignment(Qt::AlignRight);
+        connect(link, &QLabel::linkActivated, this, [this, sprung] { emit seiteOeffnen(sprung); });
+        v->addWidget(link);
     }
-    v->addLayout(kopf);
-    v->addWidget(inhalt);
-    return karte;
+    return g;
 }
 
-QTableWidget* DashboardWidget::neueListe(int spalten)
+QTreeWidget* DashboardWidget::neueListe(const QStringList& spalten)
 {
-    auto* t = new QTableWidget(0, spalten);
-    t->setObjectName(QStringLiteral("Kompakt"));
+    auto* t = new QTreeWidget;
+    t->setColumnCount(int(spalten.size()));
+    t->setHeaderLabels(spalten);
+    t->setRootIsDecorated(false);
+    t->setItemDelegate(new ZeilenDelegate(t));
+    t->setUniformRowHeights(true);
+    t->setAllColumnsShowFocus(true);
+    t->setSelectionMode(QAbstractItemView::SingleSelection);
     t->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    t->setSelectionMode(QAbstractItemView::NoSelection);
-    t->setFocusPolicy(Qt::NoFocus);
-    t->setShowGrid(false);
-    t->setFrameShape(QFrame::NoFrame);
-    t->horizontalHeader()->hide();
-    t->verticalHeader()->hide();
-    t->verticalHeader()->setDefaultSectionSize(kZeilenhoehe);
-    t->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    t->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    t->setMouseTracking(true);
-    t->setCursor(Qt::PointingHandCursor);
-    t->setFixedHeight(kZeilenhoehe * kMaxZeilen + 2);
-    t->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
-    t->horizontalHeader()->setSectionResizeMode(spalten > 2 ? 1 : 0, QHeaderView::Stretch);
+    t->setToolTip(tr("Doppelklick öffnet die Anlage"));
+    t->header()->setStretchLastSection(false);
+    t->header()->setSectionResizeMode(QHeaderView::Interactive);
+    t->header()->setSectionResizeMode(spalten.size() > 3 ? 2 : 0, QHeaderView::Stretch);
+    // Platz für kMaxZeilen Zeilen, damit die Listen nicht scrollen
+    t->setFixedHeight(t->header()->sizeHint().height() + kZeilenhoehe * kMaxZeilen + 2 * t->frameWidth() + 4);
     return t;
 }
 
@@ -249,7 +206,6 @@ void DashboardWidget::aktualisiere()
 {
     const Datenbasis& d = *m_kontext.daten;
     const FlottenAnalyse& fa = *m_kontext.analyse;
-    const bool fertig = fa.istFertig();
 
     // ---------- Anlagen ----------
     int inBetrieb = 0, gestoert = 0, wartung = 0;
@@ -261,8 +217,9 @@ void DashboardWidget::aktualisiere()
         else if (a.status == QLatin1String("wartung"))
             ++wartung;
     }
-    m_betrieb.wert->setText(QStringLiteral("%1 / %2").arg(inBetrieb).arg(d.anlagen().size()));
-    m_betrieb.notiz->setText(tr("%1 gestört · %2 in Wartung").arg(gestoert).arg(wartung));
+    verlinke(m_betrieb, tr("%1 von %2 in Betrieb (%3 gestört, %4 in Wartung)")
+                            .arg(inBetrieb).arg(d.anlagen().size()).arg(gestoert).arg(wartung),
+             Ziel::Anlagen);
 
     // ---------- Störungen ----------
     int offen = 0;
@@ -274,52 +231,38 @@ void DashboardWidget::aktualisiere()
         if (s.istKritisch())
             kritisch.append(s);
     }
-    m_stoerungen.wert->setText(QString::number(offen));
-    m_stoerungen.wert->setStyleSheet(kritisch.isEmpty() ? QString() : QStringLiteral("color: #dc2626;"));
-    m_stoerungen.notiz->setText(tr("davon %1 kritisch").arg(kritisch.size()));
+    verlinke(m_stoerungen, tr("%1, davon %2 kritisch").arg(offen).arg(kritisch.size()), Ziel::Stoerungen);
 
     std::sort(kritisch.begin(), kritisch.end(),
               [](const Stoerung& x, const Stoerung& y) { return x.zeitpunkt > y.zeitpunkt; });
-    m_dringend->clearSpans();
-    m_dringend->setRowCount(0);
-    if (kritisch.isEmpty()) {
+    m_dringend->clear();
+    if (kritisch.isEmpty())
         leer(m_dringend, tr("Keine offenen kritischen Störungen."));
-    } else {
-        for (int i = 0; i < qMin<qsizetype>(kMaxZeilen, kritisch.size()); ++i) {
-            const Stoerung& s = kritisch.at(i);
-            const Anlage* a = d.anlage(s.anlageId);
-            m_dringend->insertRow(i);
-            auto* anlage = zelle(QStringLiteral("%1 %2").arg(s.anlageId, a ? a->ort : QString()), s.anlageId);
-            anlage->setIcon(Stil::icon(Stil::Symbol::Warnung, QColor(220, 38, 38)));
-            m_dringend->setItem(i, 0, anlage);
-            m_dringend->setItem(i, 1, zelle(s.beschreibung, s.anlageId));
-            auto* zeit = zelle(Anzeige::zeitpunkt(s.zeitpunkt), s.anlageId);
-            zeit->setForeground(Stil::textGedimmt());
-            m_dringend->setItem(i, 2, zeit);
-        }
+    for (int i = 0; i < qMin<qsizetype>(kMaxZeilen, kritisch.size()); ++i) {
+        const Stoerung& s = kritisch.at(i);
+        const Anlage* a = d.anlage(s.anlageId);
+        auto* it = new QTreeWidgetItem(m_dringend, {s.anlageId, a ? a->ort : QString(), s.beschreibung,
+                                                    Anzeige::zeitpunkt(s.zeitpunkt)});
+        it->setIcon(0, Stil::icon(Stil::Symbol::Warnung, QColor(196, 43, 28)));
+        it->setData(0, kIdRolle, s.anlageId);
     }
 
     // ---------- Datenqualität ----------
     const int fehler = d.anzahlMeldungen(Pruefmeldung::Stufe::Fehler);
-    m_daten.wert->setText(fehler == 0 ? tr("OK") : tr("%n Fehler", nullptr, fehler));
-    m_daten.wert->setStyleSheet(fehler > 0 ? QStringLiteral("color: #dc2626;") : QStringLiteral("color: #16a34a;"));
-    m_daten.notiz->setText(tr("%1 Warnungen beim Einlesen").arg(d.anzahlMeldungen(Pruefmeldung::Stufe::Warnung)));
+    verlinke(m_daten, tr("%1 Fehler, %2 Warnungen beim Einlesen")
+                          .arg(fehler).arg(d.anzahlMeldungen(Pruefmeldung::Stufe::Warnung)),
+             Ziel::Datenpruefung);
 
     // ---------- Auswertung (erst nach der Flottenanalyse) ----------
-    m_verluste->clearSpans();
-    m_verluste->setRowCount(0);
-    m_fehlerbilder->clearSpans();
-    m_fehlerbilder->setRowCount(0);
-    if (!fertig) {
+    m_verluste->clear();
+    m_fehlerbilder->clear();
+    if (!fa.istFertig()) {
         const QString laeuft = tr("Flottenanalyse läuft …");
-        for (Kachel* k : {&m_pr, &m_verlust}) {
-            k->wert->setText(QStringLiteral("…"));
-            k->wert->setStyleSheet(QString());
-            k->notiz->setText(laeuft);
-        }
+        for (QLabel* l : {m_pr, m_verlust, m_ausgewertet})
+            l->setText(laeuft);
         leer(m_verluste, laeuft);
         leer(m_fehlerbilder, laeuft);
-        m_stand->setText(tr("Angemeldet als %1 · Messwerte werden ausgewertet …").arg(Rollen::anzeigename(m_kontext.rolle)));
+        passeSpaltenAn(m_dringend);
         return;
     }
 
@@ -343,63 +286,44 @@ void DashboardWidget::aktualisiere()
             }
     }
 
-    const double median = fa.medianPrFlotte();
-    m_pr.wert->setText(Anzeige::pr(median));
-    m_pr.wert->setStyleSheet(QStringLiteral("color: %1;").arg(Anzeige::prFarbe(median).darker(Stil::istDunkel() ? 90 : 125).name()));
-    m_pr.notiz->setText(tr("%1 Anlagen ausgewertet").arg(ausgewertet));
-    m_verlust.wert->setText(Anzeige::euro(verlustEuro));
-    m_verlust.wert->setStyleSheet(verlustEuro > 0.0 ? QStringLiteral("color: #d97706;") : QString());
-    m_verlust.notiz->setText(tr("%1 entgangener Ertrag").arg(Anzeige::kwh(verlustKwh)));
+    verlinke(m_pr, Anzeige::pr(fa.medianPrFlotte()), Ziel::Statistik);
+    verlinke(m_verlust, tr("%1 (%2)").arg(Anzeige::euro(verlustEuro), Anzeige::kwh(verlustKwh)), Ziel::Serviceplanung);
+    m_ausgewertet->setText(tr("%1 von %2 Anlagen mit Messwerten").arg(ausgewertet).arg(d.anlagen().size()));
 
     std::sort(verluste.begin(), verluste.end(),
               [](const Kennzahl* x, const Kennzahl* y) { return x->verlustEuro > y->verlustEuro; });
-    if (verluste.isEmpty()) {
+    if (verluste.isEmpty())
         leer(m_verluste, tr("Keine nennenswerten Verluste."));
-    } else {
-        for (int i = 0; i < qMin<qsizetype>(kMaxZeilen, verluste.size()); ++i) {
-            const Kennzahl* k = verluste.at(i);
-            const Anlage* a = d.anlage(k->anlageId);
-            QStringList namen;
-            for (const Anomalie& an : k->auswertung.anomalien)
-                if (!an.istHinweis())
-                    namen.append(Anomalie::typName(an.typ));
-            namen.removeDuplicates();
-            m_verluste->insertRow(i);
-            m_verluste->setItem(i, 0, zelle(QStringLiteral("%1 %2").arg(k->anlageId, a ? a->ort : QString()), k->anlageId));
-            auto* grund = zelle(namen.isEmpty() ? tr("Minderertrag") : namen.join(QStringLiteral(", ")), k->anlageId);
-            grund->setForeground(Stil::textGedimmt());
-            m_verluste->setItem(i, 1, grund);
-            auto* euro = zelle(Anzeige::euro(k->verlustEuro), k->anlageId);
-            euro->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
-            m_verluste->setItem(i, 2, euro);
-        }
+    for (int i = 0; i < qMin<qsizetype>(kMaxZeilen, verluste.size()); ++i) {
+        const Kennzahl* k = verluste.at(i);
+        const Anlage* a = d.anlage(k->anlageId);
+        QStringList namen;
+        for (const Anomalie& an : k->auswertung.anomalien)
+            if (!an.istHinweis())
+                namen.append(Anomalie::typName(an.typ));
+        namen.removeDuplicates();
+        auto* it = new QTreeWidgetItem(m_verluste, {k->anlageId, a ? a->ort : QString(),
+                                                    namen.isEmpty() ? tr("Minderertrag") : namen.join(QStringLiteral(", ")),
+                                                    Anzeige::euro(k->verlustEuro)});
+        it->setTextAlignment(3, Qt::AlignRight | Qt::AlignVCenter);
+        it->setData(0, kIdRolle, k->anlageId);
     }
 
     QVector<std::pair<Anomalie::Typ, int>> liste(bilder.begin(), bilder.end());
     std::sort(liste.begin(), liste.end(), [](const auto& x, const auto& y) { return x.second > y.second; });
-    if (liste.isEmpty()) {
+    if (liste.isEmpty())
         leer(m_fehlerbilder, tr("Keine Fehlerbilder erkannt."));
-    } else {
-        m_fehlerbilder->setCursor(Qt::ArrowCursor);
-        for (int i = 0; i < qMin<qsizetype>(kMaxZeilen, liste.size()); ++i) {
-            Anomalie muster;
-            muster.typ = liste.at(i).first;
-            m_fehlerbilder->insertRow(i);
-            auto* name = zelle(Anomalie::typName(muster.typ));
-            name->setIcon(muster.istHinweis() ? Stil::icon(Stil::Symbol::Info, QColor(37, 99, 235))
-                                              : Stil::icon(Stil::Symbol::Warnung, QColor(217, 119, 6)));
-            name->setToolTip(muster.istHinweis() ? tr("Hinweis – kein Serviceeinsatz nötig")
-                                                 : tr("Befund – sollte geprüft werden"));
-            m_fehlerbilder->setItem(i, 0, name);
-            auto* anzahl = zelle(tr("%n Anlage(n)", nullptr, liste.at(i).second));
-            anzahl->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
-            m_fehlerbilder->setItem(i, 1, anzahl);
-        }
+    for (const auto& [typ, anzahl] : liste) {
+        Anomalie muster;
+        muster.typ = typ;
+        auto* it = new QTreeWidgetItem(m_fehlerbilder, {Anomalie::typName(typ),
+                                                        muster.istHinweis() ? tr("Hinweis") : tr("Befund"),
+                                                        QString::number(anzahl)});
+        it->setIcon(0, muster.istHinweis() ? Stil::icon(Stil::Symbol::Info, QColor(0, 95, 184))
+                                           : Stil::icon(Stil::Symbol::Warnung, QColor(202, 120, 0)));
+        it->setTextAlignment(2, Qt::AlignRight | Qt::AlignVCenter);
     }
 
-    m_stand->setText(tr("Angemeldet als %1 · %2 Anlagen, davon %3 mit Messwerten ausgewertet · "
-                        "Ein Klick auf eine Kachel oder Zeile führt zu den Details.")
-                         .arg(Rollen::anzeigename(m_kontext.rolle))
-                         .arg(d.anlagen().size())
-                         .arg(ausgewertet));
+    for (QTreeWidget* t : {m_dringend, m_verluste, m_fehlerbilder})
+        passeSpaltenAn(t);
 }

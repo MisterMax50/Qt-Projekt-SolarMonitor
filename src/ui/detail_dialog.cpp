@@ -129,8 +129,9 @@ DetailDialog::DetailDialog(const QString& anlageId, const AppKontext& kontext, Q
 void DetailDialog::setzeBanner(const QString& text, bool fehler)
 {
     m_banner->setText(text);
-    m_banner->setStyleSheet(fehler ? QStringLiteral("background:#fee2e2; color:#991b1b; padding:10px 12px; border-radius:8px; border:1px solid #fecaca;")
-                                   : QStringLiteral("background:#fef3c7; color:#92400e; padding:10px 12px; border-radius:8px; border:1px solid #fde68a;"));
+    // Infoleiste wie in Office/Windows: blasser Hintergrund, dünner Rahmen
+    m_banner->setStyleSheet(fehler ? QStringLiteral("background:#fde7e9; color:#1b1b1b; padding:8px 10px; border:1px solid #f1bbbc;")
+                                   : QStringLiteral("background:#fff4ce; color:#1b1b1b; padding:8px 10px; border:1px solid #f0d78c;"));
     m_banner->setVisible(!text.isEmpty());
 }
 
@@ -145,16 +146,14 @@ void DetailDialog::zeigeStammdaten()
         m_kopf->setText(tr("<h2>%1</h2>Anlage nicht gefunden.").arg(m_anlageId));
         return;
     }
-    m_kopf->setText(QStringLiteral("<span style='font-size:18pt; font-weight:600'>%1</span><br>"
-                                   "<span style='color:%5'>%2 · %3 · %4 kWp</span>")
-                        .arg(a->anlageId, Anzeige::typName(a->typ), a->ort, Anzeige::zahl(a->leistungKwp, 2),
-                             Stil::textGedimmt().name()));
-    const QColor sf = Anzeige::statusFarbe(a->status);
-    m_statusChip->setText(QStringLiteral("● ") + Anzeige::statusName(a->status));
-    m_statusChip->setStyleSheet(QStringLiteral("background: rgba(%1,%2,%3,40); color: %4; border-radius: 11px; "
-                                               "padding: 4px 12px; font-weight: 600;")
-                                    .arg(sf.red()).arg(sf.green()).arg(sf.blue())
-                                    .arg((Stil::istDunkel() ? sf.lighter(140) : sf.darker(130)).name()));
+    setWindowTitle(tr("Anlage %1 – %2").arg(a->anlageId, a->ort));
+    m_kopf->setText(QStringLiteral("<span style='font-size:12pt; font-weight:600'>%1</span><br>"
+                                   "<span style='color:%5'>%2, %3, %4 kWp</span>")
+                        .arg(tr("Anlage %1").arg(a->anlageId), Anzeige::typName(a->typ), a->ort,
+                             Anzeige::zahl(a->leistungKwp, 2), Stil::textGedimmt().name()));
+    // Status schlicht als farbiger Punkt mit Text (wie in den Tabellen)
+    m_statusChip->setText(QStringLiteral("<span style='color:%1'>&#9679;</span>&nbsp;%2")
+                              .arg(Anzeige::statusFarbe(a->status).name(), Anzeige::statusName(a->status)));
 
     auto* seite = new QWidget;
     auto* grid = new QGridLayout(seite);
@@ -274,30 +273,31 @@ QWidget* DetailDialog::baueAuswertungSeite()
     auto* seite = new QWidget;
     m_auswertungHinweis = new QLabel(tr("Wird berechnet, sobald der Verlauf geladen ist …"), seite);
     m_auswertungHinweis->setObjectName(QStringLiteral("Gedimmt"));
-    auto* kacheln = new QGridLayout;
-    kacheln->setSpacing(10);
-    const QStringList titel{tr("Energieertrag (14 Tage)"), tr("Spezifischer Ertrag"), tr("Performance Ratio"),
-                            tr("Datenabdeckung"), tr("Erlös"), tr("Geschätzter Verlust")};
+    // Kennzahlen als Beschriftung/Wert-Paare in einem Gruppenfeld (2 Zeilen × 3 Spalten)
+    auto* kennzahlen = new QGroupBox(tr("Kennzahlen"), seite);
+    auto* kacheln = new QGridLayout(kennzahlen);
+    kacheln->setHorizontalSpacing(10);
+    const QStringList titel{tr("Energieertrag (14 Tage):"), tr("Spezifischer Ertrag:"), tr("Performance Ratio:"),
+                            tr("Datenabdeckung:"), tr("Erlös:"), tr("Geschätzter Verlust:")};
     for (int i = 0; i < titel.size(); ++i) {
-        auto* karte = new QFrame(seite);
-        karte->setObjectName(QStringLiteral("Karte"));
-        auto* kv = new QVBoxLayout(karte);
-        kv->setContentsMargins(14, 10, 14, 10);
-        kv->setSpacing(2);
-        auto* t = new QLabel(titel.at(i), karte);
-        t->setObjectName(QStringLiteral("KpiTitel"));
-        auto* w = new QLabel(QStringLiteral("–"), karte);
+        auto* t = new QLabel(titel.at(i), kennzahlen);
+        t->setObjectName(QStringLiteral("Gedimmt"));
+        auto* w = new QLabel(QStringLiteral("–"), kennzahlen);
         w->setObjectName(QStringLiteral("KpiWert"));
         w->setTextInteractionFlags(Qt::TextSelectableByMouse);
-        auto* n = new QLabel(karte);
+        auto* n = new QLabel(kennzahlen);
         n->setObjectName(QStringLiteral("KpiNotiz"));
-        kv->addWidget(t);
-        kv->addWidget(w);
-        kv->addWidget(n);
+        auto* wert = new QHBoxLayout;
+        wert->setSpacing(6);
+        wert->addWidget(w);
+        wert->addWidget(n, 1);
+        kacheln->addWidget(t, i % 2, (i / 2) * 2);
+        kacheln->addLayout(wert, i % 2, (i / 2) * 2 + 1);
         m_kpiWerte.append(w);
         m_kpiNotizen.append(n);
-        kacheln->addWidget(karte, 0, i);
     }
+    for (int s : {1, 3, 5})
+        kacheln->setColumnStretch(s, 1);
     m_tagesDiagramm = new BalkenDiagramm(seite);
     m_tagesDiagramm->setToolTip(tr("Balkenfarbe = Tages-PR (rot niedrig, grün hoch)"));
 
@@ -325,7 +325,7 @@ QWidget* DetailDialog::baueAuswertungSeite()
 
     auto* v = new QVBoxLayout(seite);
     v->addWidget(m_auswertungHinweis);
-    v->addLayout(kacheln);
+    v->addWidget(kennzahlen);
     v->addWidget(split, 1);
     return seite;
 }
@@ -395,7 +395,7 @@ void DetailDialog::zeigeAuswertung(const Verlauf& verlauf, const QStringList& da
     m_kpiWerte[1]->setText(Anzeige::zahl(aus.spezErtragKwhKwp, 1) + QStringLiteral(" kWh/kWp"));
     m_kpiNotizen[1]->setText(tr("Ertrag je installiertem kWp"));
     m_kpiWerte[2]->setText(Anzeige::pr(aus.pr));
-    m_kpiWerte[2]->setStyleSheet(QStringLiteral("color: %1;").arg(Anzeige::prFarbe(aus.pr).darker(Stil::istDunkel() ? 90 : 120).name()));
+
     m_kpiNotizen[2]->setText(median > 0.0 ? tr("Median der Station: %1").arg(Anzeige::pr(median))
                                           : tr("kein Stationsvergleich"));
     m_kpiWerte[3]->setText(Anzeige::prozent(aus.abdeckung, 1));

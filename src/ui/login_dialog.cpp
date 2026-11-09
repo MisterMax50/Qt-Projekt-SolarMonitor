@@ -3,6 +3,7 @@
 #include <QComboBox>
 #include <QDialogButtonBox>
 #include <QFormLayout>
+#include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
@@ -21,18 +22,14 @@ LoginDialog::LoginDialog(QWidget* parent)
 {
     setWindowTitle(tr("Anmeldung – SolarMonitor"));
 
+    // Aufbau wie ein üblicher Anmeldedialog: Symbol und Titel links oben,
+    // darunter das Formular, Schaltflächen unten rechts
     auto* logo = new QLabel(this);
-    logo->setPixmap(Stil::appIcon().pixmap(72, 72));
-    logo->setAlignment(Qt::AlignCenter);
-    auto* titel = new QLabel(Stil::wortmarke(), this);
-    titel->setObjectName(QStringLiteral("Seitentitel"));
-    titel->setAlignment(Qt::AlignCenter);
-    auto* untertitel = new QLabel(tr("Monitoring der PV-Flotte – bitte anmelden"), this);
-    untertitel->setObjectName(QStringLiteral("Gedimmt"));
-    untertitel->setAlignment(Qt::AlignCenter);
+    logo->setPixmap(Stil::appIcon().pixmap(40, 40));
+    auto* titel = new QLabel(QStringLiteral("<b>SolarMonitor</b>"), this);
+    auto* untertitel = new QLabel(tr("Melden Sie sich mit Ihrer Rolle und PIN an."), this);
     auto* hinweis = new QLabel(tr("Demo-Zugänge: betrieb / 0000, service / 5678, admin / 1234"), this);
-    hinweis->setObjectName(QStringLiteral("KpiNotiz"));
-    hinweis->setAlignment(Qt::AlignCenter);
+    hinweis->setObjectName(QStringLiteral("Gedimmt"));
 
     m_rollen = new QComboBox(this);
     for (Rolle r : {Rolle::Betrieb, Rolle::Service, Rolle::Admin})
@@ -60,19 +57,25 @@ LoginDialog::LoginDialog(QWidget* parent)
     connect(m_anmelden, &QPushButton::clicked, this, &LoginDialog::anmelden);
     connect(knoepfe, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
+    auto* texte = new QVBoxLayout;
+    texte->setSpacing(2);
+    texte->addWidget(titel);
+    texte->addWidget(untertitel);
+    auto* kopf = new QHBoxLayout;
+    kopf->setSpacing(12);
+    kopf->addWidget(logo, 0, Qt::AlignTop);
+    kopf->addLayout(texte, 1);
+
     auto* v = new QVBoxLayout(this);
-    v->setContentsMargins(32, 24, 32, 20);
     v->setSpacing(10);
-    v->addWidget(logo);
-    v->addWidget(titel);
-    v->addWidget(untertitel);
-    v->addSpacing(8);
+    v->addLayout(kopf);
+    v->addSpacing(4);
     v->addLayout(form);
     v->addWidget(m_meldung);
-    v->addWidget(knoepfe);
-    v->addSpacing(6);
     v->addWidget(hinweis);
-    setMinimumWidth(400);
+    v->addSpacing(4);
+    v->addWidget(knoepfe);
+    setMinimumWidth(380);
 
     m_sperrTimer = new QTimer(this);
     m_sperrTimer->setInterval(1000);

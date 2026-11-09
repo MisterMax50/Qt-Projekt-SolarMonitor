@@ -23,14 +23,19 @@ StatistikWidget::StatistikWidget(const AppKontext& kontext, QWidget* parent)
     auto* inhalt = new QWidget;
     auto* v = new QVBoxLayout(inhalt);
 
-    auto* kpis = new QHBoxLayout;
-    m_kpiAnlagen    = kpiKachel(tr("Anlagen"), inhalt, kpis);
-    m_kpiLeistung   = kpiKachel(tr("Installierte Leistung"), inhalt, kpis);
-    m_kpiStoerungen = kpiKachel(tr("Offene Störungen (kritisch)"), inhalt, kpis);
-    m_kpiPr         = kpiKachel(tr("Median-PR der Flotte"), inhalt, kpis);
-    m_kpiErtrag     = kpiKachel(tr("Ertrag 01.–14.06."), inhalt, kpis);
-    m_kpiAuffaellig = kpiKachel(tr("Anlagen mit Fehlerbild"), inhalt, kpis);
-    v->addLayout(kpis);
+    // Zusammenfassung als Beschriftung/Wert-Paare in drei Spalten
+    auto* zusammen = new QGroupBox(tr("Zusammenfassung"), inhalt);
+    auto* kpis = new QGridLayout(zusammen);
+    kpis->setHorizontalSpacing(12);
+    m_kpiAnlagen    = kpiKachel(tr("Anlagen:"), zusammen, kpis);
+    m_kpiLeistung   = kpiKachel(tr("Installierte Leistung:"), zusammen, kpis);
+    m_kpiStoerungen = kpiKachel(tr("Offene Störungen (kritisch):"), zusammen, kpis);
+    m_kpiPr         = kpiKachel(tr("Median-PR der Flotte:"), zusammen, kpis);
+    m_kpiErtrag     = kpiKachel(tr("Ertrag 01.–14.06.:"), zusammen, kpis);
+    m_kpiAuffaellig = kpiKachel(tr("Anlagen mit Fehlerbild:"), zusammen, kpis);
+    for (int s : {1, 3, 5})
+        kpis->setColumnStretch(s, 1);
+    v->addWidget(zusammen);
 
     auto gruppe = [&](const QString& titel, QWidget* w) {
         auto* g = new QGroupBox(titel, inhalt);
@@ -76,19 +81,16 @@ StatistikWidget::StatistikWidget(const AppKontext& kontext, QWidget* parent)
     aktualisiere();
 }
 
-QLabel* StatistikWidget::kpiKachel(const QString& titel, QWidget* parent, QLayout* layout)
+QLabel* StatistikWidget::kpiKachel(const QString& titel, QWidget* parent, QGridLayout* raster)
 {
-    auto* rahmen = new QFrame(parent);
-    rahmen->setObjectName(QStringLiteral("Karte"));
-    auto* v = new QVBoxLayout(rahmen);
-    v->setContentsMargins(16, 12, 16, 12);
-    auto* t = new QLabel(titel, rahmen);
-    t->setObjectName(QStringLiteral("KpiTitel"));
-    auto* w = new QLabel(QStringLiteral("–"), rahmen);
-    w->setObjectName(QStringLiteral("KpiWert"));
-    v->addWidget(t);
-    v->addWidget(w);
-    layout->addWidget(rahmen);
+    // nächste freie Stelle: zwei Zeilen, je Spalte Beschriftung + Wert
+    const int nr = raster->count() / 2;
+    const int zeile = nr % 2, spalte = nr / 2;
+    auto* t = new QLabel(titel, parent);
+    t->setObjectName(QStringLiteral("Gedimmt"));
+    auto* w = new QLabel(QStringLiteral("–"), parent);
+    raster->addWidget(t, zeile, spalte * 2);
+    raster->addWidget(w, zeile, spalte * 2 + 1);
     return w;
 }
 

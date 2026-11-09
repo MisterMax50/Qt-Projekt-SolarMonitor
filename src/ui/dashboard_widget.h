@@ -6,20 +6,21 @@
 #include "ui/app_kontext.h"
 
 class QAction;
+class QGroupBox;
 class QLabel;
-class QTableWidget;
-class QVBoxLayout;
+class QTreeWidget;
 
 /**
  * @brief Startseite "Übersicht": der Zustand der Flotte auf einen Blick.
  *
- * - Kennzahl-Kacheln (Anlagen in Betrieb, Median-PR, offene Störungen,
- *   Ertragsverlust, Datenqualität). Ein Klick springt zur passenden Seite.
- * - Karte der Flotte, gefärbt nach Handlungsbedarf (KarteView im Modus Kompakt)
- * - "Jetzt kümmern": neueste offene kritische Störungen
- * - "Größte Verluste": Anlagen mit dem höchsten geschätzten Verlust in €
- * - "Erkannte Fehlerbilder": wie viele Anlagen je Fehlerbild betroffen sind
- * - Schnellzugriff auf häufige Aktionen (z. B. Flottenbericht als PDF)
+ * Aufgebaut wie die Übersichtsseiten klassischer Verwaltungsprogramme
+ * (Gruppenfelder mit Beschriftung, Listen mit Spaltenköpfen, Verweise als
+ * Links):
+ * - "Flottenstatus": wichtigste Kennzahlen als Beschriftung/Wert-Paare,
+ *   jeder Wert ist ein Link zur passenden Seite
+ * - Karte der Flotte, gefärbt nach Handlungsbedarf (KarteView, Modus Kompakt)
+ * - Listen: offene kritische Störungen, größte Ertragsverluste, Fehlerbilder.
+ *   Doppelklick öffnet die Anlage.
  *
  * Es wird nichts neu berechnet: Die Seite fasst Ergebnisse der
  * Flottenanalyse und der Datenbasis zusammen und aktualisiert sich bei
@@ -28,10 +29,10 @@ class QVBoxLayout;
 class DashboardWidget : public QWidget {
     Q_OBJECT
 public:
-    /// @param schnellzugriff Aktionen, die als Knöpfe angeboten werden
-    DashboardWidget(const AppKontext& kontext, const QList<QAction*>& schnellzugriff, QWidget* parent = nullptr);
+    /// @param schnellzugriff wird nicht mehr angezeigt (Befehle stehen in der Befehlsleiste)
+    DashboardWidget(const AppKontext& kontext, const QList<QAction*>& schnellzugriff = {}, QWidget* parent = nullptr);
 
-    /// Seiten, zu denen die Übersicht springen kann (Reihenfolge wie in der Navigation).
+    /// Seiten, zu denen die Übersicht springen kann.
     enum class Ziel { Anlagen, Stoerungen, Karte, Statistik, Serviceplanung, Datenpruefung };
 
 signals:
@@ -39,23 +40,23 @@ signals:
     void seiteOeffnen(DashboardWidget::Ziel ziel);
 
 private:
-    struct Kachel {
-        QLabel* wert = nullptr;
-        QLabel* notiz = nullptr;
-    };
-
-    Kachel neueKachel(QWidget* eltern, QLayout* ziel, const QString& titel, Ziel sprung);
-    QWidget* neueKarte(const QString& titel, QWidget* inhalt, const QString& linkText, Ziel sprung);
-    QTableWidget* neueListe(int spalten);
+    QLabel* neuerWert(class QGridLayout* raster, int zeile, int spalte, const QString& titel);
+    QGroupBox* neueGruppe(const QString& titel, QWidget* inhalt, const QString& linkText, Ziel sprung);
+    QTreeWidget* neueListe(const QStringList& spalten);
+    void verlinke(QLabel* label, const QString& text, Ziel ziel);
     void spaeterAktualisieren();
     void aktualisiere();
 
     AppKontext m_kontext;
     bool       m_geplant = false;
 
-    QLabel* m_stand = nullptr;
-    Kachel  m_betrieb, m_pr, m_stoerungen, m_verlust, m_daten;
-    QTableWidget* m_dringend = nullptr;
-    QTableWidget* m_verluste = nullptr;
-    QTableWidget* m_fehlerbilder = nullptr;
+    QLabel* m_betrieb = nullptr;
+    QLabel* m_stoerungen = nullptr;
+    QLabel* m_pr = nullptr;
+    QLabel* m_verlust = nullptr;
+    QLabel* m_daten = nullptr;
+    QLabel* m_ausgewertet = nullptr;
+    QTreeWidget* m_dringend = nullptr;
+    QTreeWidget* m_verluste = nullptr;
+    QTreeWidget* m_fehlerbilder = nullptr;
 };

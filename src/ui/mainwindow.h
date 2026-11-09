@@ -14,6 +14,7 @@ class QDoubleSpinBox;
 class QLabel;
 class QLineEdit;
 class QListWidget;
+class AnlageInfo;
 class QStackedWidget;
 class QProgressBar;
 class QPushButton;
@@ -83,7 +84,8 @@ private:
 
     void baueUi();
     void erzeugeAktionen();
-    QWidget* baueSeitenleiste();
+    QWidget* baueNavigation();
+    void baueBefehlsleiste();
     /// Seite mit Titel, Erklärung und Aktionsknöpfen im Kopf.
     QWidget* seite(const QString& titel, const QString& hinweis, QWidget* inhalt,
                    const QList<QAction*>& aktionen = {});
@@ -119,6 +121,7 @@ private:
     // werden bei baueUi() neu erzeugt
     QStackedWidget* m_tabs = nullptr;     ///< Seiten, gesteuert über die Navigation
     QListWidget*  m_navigation = nullptr;
+    AnlageInfo*   m_anlageInfo = nullptr;
     QPushButton*  m_filterReset = nullptr;
     QLabel*       m_anlagenLeer = nullptr;
     QLabel*       m_stoerungenLeer = nullptr;

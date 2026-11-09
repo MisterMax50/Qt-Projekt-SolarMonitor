@@ -159,6 +159,9 @@ QVariant AnlageModel::headerData(int spalte, Qt::Orientation o, int rolle) const
 {
     if (o != Qt::Horizontal)
         return {};
+    if (rolle == Qt::TextAlignmentRole) // Zahlenspalten: Kopf rechtsbündig wie die Werte
+        return int((spalte == SpLeistung || spalte == SpOffeneStoerungen || spalte == SpPr || spalte == SpSpezErtrag
+                        ? Qt::AlignRight : Qt::AlignLeft) | Qt::AlignVCenter);
     if (rolle == Qt::ToolTipRole) {
         switch (spalte) {
         case SpPr:         return tr("Performance Ratio PR = E / (H · Ppeak) im Zeitraum 01.–14.06.2026");

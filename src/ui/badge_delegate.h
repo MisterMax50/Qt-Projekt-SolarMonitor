@@ -3,7 +3,7 @@
 #include <QStyledItemDelegate>
 
 /**
- * @brief Zeichnet eine Tabellenzelle als farbiges Abzeichen ("Badge").
+ * @brief Zeichnet eine Tabellenzelle mit farbigem Statuspunkt vor dem Text.
  *
  * Die Farbe kommt aus Qt::DecorationRole (QColor) des Modells, der Text
  * aus Qt::DisplayRole. So bleibt die Farbzuordnung im Modell und die
