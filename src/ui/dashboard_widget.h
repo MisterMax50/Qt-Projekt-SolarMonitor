@@ -41,6 +41,8 @@ public:
 
     /// Kacheln und Karten wieder auf ihre vorgegebenen Plätze setzen.
     void anordnungZuruecksetzen();
+    /// Aktion mit Menü der vordefinierten Anordnungen (für die Aktionszeile der Seite).
+    QAction* anordnungsAktion();
 
 signals:
     void anlageOeffnen(const QString& anlageId);

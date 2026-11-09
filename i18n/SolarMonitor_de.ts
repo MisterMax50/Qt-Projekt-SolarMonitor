@@ -484,14 +484,14 @@
 <context>
     <name>DashboardWidget</name>
     <message>
-        <location filename="../src/ui/dashboard_widget.cpp" line="+115"/>
+        <location filename="../src/ui/dashboard_widget.cpp" line="+135"/>
         <source>Rot: kritische Störung, gestört oder Fehlerbild · Orange: offene Störung oder Wartung · Grün: in Ordnung
 Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</source>
         <translation>Rot: kritische Störung, gestört oder Fehlerbild · Orange: offene Störung oder Wartung · Grün: in Ordnung
 Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="+34"/>
         <source>Anlagenkarte – Handlungsbedarf</source>
         <translation>Anlagenkarte – Handlungsbedarf</translation>
     </message>
@@ -531,7 +531,7 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</translation>
         <translation>Zur Anlagenliste</translation>
     </message>
     <message>
-        <location line="+95"/>
+        <location line="+131"/>
         <source>%1 gestört · %2 in Wartung</source>
         <translation>%1 gestört · %2 in Wartung</translation>
     </message>
@@ -571,7 +571,7 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</translation>
         <translation>%1 in 14 Tagen</translation>
     </message>
     <message>
-        <location line="-225"/>
+        <location line="-269"/>
         <source>Anlagen in Betrieb</source>
         <translation>Anlagen in Betrieb</translation>
     </message>
@@ -648,7 +648,52 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</translation>
         <translation>Anlagen</translation>
     </message>
     <message>
-        <location line="+62"/>
+        <location line="+15"/>
+        <source>Standard</source>
+        <translation>Standard</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Karte groß</source>
+        <translation>Karte groß</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Karte oben, Listen darunter</source>
+        <translation>Karte oben, Listen darunter</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Listen oben, Karte darunter</source>
+        <translation>Listen oben, Karte darunter</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Vier gleich große Felder</source>
+        <translation>Vier gleich große Felder</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Alarme zuerst</source>
+        <translation>Alarme zuerst</translation>
+    </message>
+    <message>
+        <location line="+46"/>
+        <source>Anordnung</source>
+        <translation>Anordnung</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Vordefinierte Anordnung der Karten wählen</source>
+        <translation>Vordefinierte Anordnung der Karten wählen</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Anordnung zurücksetzen</source>
+        <translation type="unfinished">Anordnung zurücksetzen</translation>
+    </message>
+    <message>
+        <location line="+23"/>
         <source>An der Überschrift ziehen, um die Karte auf einen anderen Platz zu verschieben</source>
         <translation>An der Überschrift ziehen, um die Karte auf einen anderen Platz zu verschieben</translation>
     </message>
@@ -1858,73 +1903,73 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>SolarMonitor – Monitoring der PV-Flotte</translation>
     </message>
     <message>
-        <location line="+148"/>
-        <location line="+188"/>
+        <location line="+146"/>
+        <location line="+193"/>
         <source>Anlagen</source>
         <translation>Anlagen</translation>
     </message>
     <message>
-        <location line="-188"/>
+        <location line="-193"/>
         <source>Alle PV-Anlagen der Flotte · Doppelklick öffnet die Details</source>
         <translation>Alle PV-Anlagen der Flotte · Doppelklick öffnet die Details</translation>
     </message>
     <message>
         <location line="+4"/>
-        <location line="+185"/>
+        <location line="+190"/>
         <source>Störungen</source>
         <translation>Störungen</translation>
     </message>
     <message>
-        <location line="-185"/>
+        <location line="-190"/>
         <source>Störungsmeldungen seit 2024 · Rechtsklick ändert den Status</source>
         <translation>Störungsmeldungen seit 2024 · Rechtsklick ändert den Status</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location line="+180"/>
+        <location line="+185"/>
         <source>Karte</source>
         <translation>Karte</translation>
     </message>
     <message>
-        <location line="-180"/>
+        <location line="-185"/>
         <source>Lage der Anlagen und Wetterstationen · Mausrad zoomt, Klick öffnet eine Anlage</source>
         <translation>Lage der Anlagen und Wetterstationen · Mausrad zoomt, Klick öffnet eine Anlage</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location line="+179"/>
+        <location line="+184"/>
         <source>Statistik</source>
         <translation>Statistik</translation>
     </message>
     <message>
-        <location line="-179"/>
+        <location line="-184"/>
         <source>Kennzahlen und Auswertungen über die gesamte Flotte</source>
         <translation>Kennzahlen und Auswertungen über die gesamte Flotte</translation>
     </message>
     <message>
         <location line="+11"/>
-        <location line="+169"/>
+        <location line="+174"/>
         <source>Serviceplanung</source>
         <translation>Serviceplanung</translation>
     </message>
     <message>
-        <location line="-168"/>
+        <location line="-173"/>
         <source>Welche Anlagen zuerst? Sortiert nach Priorität und geschätztem Ertragsverlust</source>
         <translation>Welche Anlagen zuerst? Sortiert nach Priorität und geschätztem Ertragsverlust</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location line="+164"/>
+        <location line="+169"/>
         <source>Datenprüfung</source>
         <translation>Datenprüfung</translation>
     </message>
     <message>
-        <location line="-163"/>
+        <location line="-168"/>
         <source>Auffälligkeiten beim Einlesen der Dateien und automatische Korrekturen</source>
         <translation>Auffälligkeiten beim Einlesen der Dateien und automatische Korrekturen</translation>
     </message>
     <message>
-        <location line="+122"/>
+        <location line="+127"/>
         <source>PV-Flotte Bodensee</source>
         <translation>PV-Flotte Bodensee</translation>
     </message>
@@ -2015,8 +2060,8 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Filter zurücksetzen</translation>
     </message>
     <message>
-        <location line="-487"/>
-        <location line="+196"/>
+        <location line="-492"/>
+        <location line="+201"/>
         <source>Übersicht</source>
         <translation>Übersicht</translation>
     </message>
@@ -2304,7 +2349,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Änderungsverlauf …</translation>
     </message>
     <message>
-        <location line="-1007"/>
+        <location line="-1010"/>
         <source>Daten werden geladen …</source>
         <translation>Daten werden geladen …</translation>
     </message>
@@ -2324,22 +2369,12 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Datenordner – SolarMonitor</translation>
     </message>
     <message>
-        <location line="+109"/>
-        <source>Anordnung zurücksetzen</source>
-        <translation>Anordnung zurücksetzen</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Kacheln und Karten wieder auf ihre ursprünglichen Plätze setzen</source>
-        <translation>Kacheln und Karten wieder auf ihre ursprünglichen Plätze setzen</translation>
-    </message>
-    <message>
-        <location line="+2"/>
+        <location line="+110"/>
         <source>Zustand der Flotte auf einen Blick · Kacheln und Karten lassen sich per Ziehen verschieben</source>
         <translation>Zustand der Flotte auf einen Blick · Kacheln und Karten lassen sich per Ziehen verschieben</translation>
     </message>
     <message>
-        <location line="+200"/>
+        <location line="+205"/>
         <source>Auswertung</source>
         <translation>Auswertung</translation>
     </message>
@@ -2544,12 +2579,12 @@ Jetzt öffnen?</translation>
         <translation>&lt;Ausgangszustand nach dem Laden&gt;</translation>
     </message>
     <message>
-        <location line="-1308"/>
+        <location line="-1311"/>
         <source>Angemeldet als %1.</source>
         <translation>Angemeldet als %1.</translation>
     </message>
     <message>
-        <location line="+1327"/>
+        <location line="+1330"/>
         <source>Über SolarMonitor</source>
         <translation>Über SolarMonitor</translation>
     </message>

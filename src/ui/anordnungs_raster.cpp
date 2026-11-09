@@ -4,6 +4,7 @@
 #include <QFrame>
 #include <QGridLayout>
 #include <QMouseEvent>
+#include <QPainter>
 #include <QSettings>
 
 AnordnungsRaster::AnordnungsRaster(const QString& schluessel, QWidget* parent)
@@ -30,6 +31,84 @@ void AnordnungsRaster::neuerPlatz(int zeile, int spalte, int zeilen, int spalten
     m_plaetze.append({zeile, spalte, zeilen, spalten});
 }
 
+void AnordnungsRaster::neueVorlage(const Vorlage& vorlage)
+{
+    m_vorlagen.append(vorlage);
+    if (m_vorlagen.size() == 1)
+        wendeVorlageAn(vorlage);
+}
+
+void AnordnungsRaster::wendeVorlageAn(const Vorlage& v)
+{
+    m_vorlage = v.id;
+    m_plaetze = v.plaetze;
+    m_standard = v.belegung;
+    for (int i = 0; i < 8; ++i) {
+        m_raster->setColumnStretch(i, i < v.spaltenGewicht.size() ? v.spaltenGewicht.at(i) : 0);
+        m_raster->setRowStretch(i, i < v.zeilenGewicht.size() ? v.zeilenGewicht.at(i) : 0);
+    }
+}
+
+void AnordnungsRaster::waehleVorlage(const QString& id)
+{
+    for (const Vorlage& v : std::as_const(m_vorlagen)) {
+        if (v.id != id)
+            continue;
+        wendeVorlageAn(v);
+        m_reihenfolge = v.belegung;
+        QSettings().setValue(m_schluessel + QStringLiteral("_vorlage"), id);
+        QSettings().setValue(m_schluessel, m_reihenfolge);
+        ordneAn();
+        emit anordnungGeaendert();
+        return;
+    }
+}
+
+QIcon AnordnungsRaster::vorschau(const QString& id) const
+{
+    // Plätze als kleine Rechtecke, Breiten/Höhen nach Gewichtung
+    for (const Vorlage& v : m_vorlagen) {
+        if (v.id != id)
+            continue;
+        int spalten = 0, zeilen = 0;
+        for (const Platz& p : v.plaetze) {
+            spalten = qMax(spalten, p.spalte + p.spalten);
+            zeilen = qMax(zeilen, p.zeile + p.zeilen);
+        }
+        auto gewicht = [](const QList<int>& g, int i) { return qMax(1, i < g.size() ? g.at(i) : 1); };
+        QVector<double> x(spalten + 1, 0.0), y(zeilen + 1, 0.0);
+        for (int i = 0; i < spalten; ++i)
+            x[i + 1] = x[i] + gewicht(v.spaltenGewicht, i);
+        for (int i = 0; i < zeilen; ++i)
+            y[i + 1] = y[i] + gewicht(v.zeilenGewicht, i);
+        QIcon icon;
+        for (int g : {32, 64}) {
+            QPixmap pm(g, g);
+            pm.fill(Qt::transparent);
+            QPainter p(&pm);
+            p.setRenderHint(QPainter::Antialiasing, true);
+            const double s = g / 32.0, rand = 3 * s, luecke = 1.5 * s;
+            const double b = g - 2 * rand, h = g - 2 * rand - 6 * s;
+            for (int i = 0; i < v.plaetze.size(); ++i) {
+                const Platz& pl = v.plaetze.at(i);
+                const QRectF r(rand + b * x[pl.spalte] / x[spalten] + luecke / 2,
+                               rand + 3 * s + h * y[pl.zeile] / y[zeilen] + luecke / 2,
+                               b * (x[pl.spalte + pl.spalten] - x[pl.spalte]) / x[spalten] - luecke,
+                               h * (y[pl.zeile + pl.zeilen] - y[pl.zeile]) / y[zeilen] - luecke);
+                // Platz der Karte "karte" (Lageplan) in Orange hervorheben
+                const bool istKarte = i < v.belegung.size() && v.belegung.at(i) == QLatin1String("karte");
+                p.setPen(Qt::NoPen);
+                p.setBrush(istKarte ? QColor(245, 158, 11) : QColor(125, 141, 163));
+                p.drawRoundedRect(r, 1.5 * s, 1.5 * s);
+            }
+            p.end();
+            icon.addPixmap(pm);
+        }
+        return icon;
+    }
+    return QIcon();
+}
+
 void AnordnungsRaster::fuegeHinzu(const QString& id, QWidget* karte, int griffHoehe)
 {
     karte->setParent(this);
@@ -37,7 +116,8 @@ void AnordnungsRaster::fuegeHinzu(const QString& id, QWidget* karte, int griffHo
     karte->setMouseTracking(true);
     m_karten.insert(id, karte);
     m_griff.insert(karte, griffHoehe);
-    m_standard.append(id);
+    if (m_vorlagen.isEmpty())
+        m_standard.append(id);
     m_reihenfolge = m_standard;
     ordneAn();
 }
@@ -45,6 +125,11 @@ void AnordnungsRaster::fuegeHinzu(const QString& id, QWidget* karte, int griffHo
 void AnordnungsRaster::ladeAnordnung()
 {
     // nur übernehmen, wenn genau dieselben Karten gespeichert sind
+    const QString vorlage = QSettings().value(m_schluessel + QStringLiteral("_vorlage")).toString();
+    for (const Vorlage& v : std::as_const(m_vorlagen))
+        if (v.id == vorlage)
+            wendeVorlageAn(v);
+    m_reihenfolge = m_standard;
     const QStringList gespeichert = QSettings().value(m_schluessel).toStringList();
     QStringList a = gespeichert, b = m_standard;
     a.sort();
@@ -56,6 +141,7 @@ void AnordnungsRaster::ladeAnordnung()
 
 void AnordnungsRaster::zuruecksetzen()
 {
+    // Belegung der aktuellen Vorlage wiederherstellen
     m_reihenfolge = m_standard;
     QSettings().remove(m_schluessel);
     ordneAn();
@@ -68,7 +154,8 @@ void AnordnungsRaster::ordneAn()
         m_raster->removeWidget(w);
     for (int i = 0; i < m_reihenfolge.size() && i < m_plaetze.size(); ++i) {
         const Platz& p = m_plaetze.at(i);
-        m_raster->addWidget(m_karten.value(m_reihenfolge.at(i)), p.zeile, p.spalte, p.zeilen, p.spalten);
+        if (QWidget* w = m_karten.value(m_reihenfolge.at(i))) // noch nicht hinzugefügte Karten überspringen
+            m_raster->addWidget(w, p.zeile, p.spalte, p.zeilen, p.spalten);
     }
 }
 

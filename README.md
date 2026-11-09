@@ -145,7 +145,11 @@ für Solarparks):
   und Karten lassen sich mit der Maus ziehen (Karten an der Überschrift) und
   rasten auf festen Plätzen ein – fünf Plätze für die Kacheln, vier für die
   Karten (oben breit/schmal, unten breit/schmal). Die Karte tauscht dabei
-  den Platz mit der Karte, die dort lag. Die Anordnung wird gespeichert;
+  den Platz mit der Karte, die dort lag. Über den Knopf *Anordnung* stehen
+  sechs vordefinierte Anordnungen mit Vorschaubild zur Wahl (Standard,
+  Karte groß, Karte oben/Listen darunter, Listen oben/Karte darunter, vier
+  gleich große Felder, Alarme zuerst); auch darin lassen sich die Karten
+  per Ziehen tauschen. Anordnung und Belegung werden gespeichert;
   *Anordnung zurücksetzen* stellt die Vorgabe wieder her.
 - **Kennzahlenkacheln** (`src/ui/kennzahl_kachel.*`) auf Übersicht,
   Statistik und im Detaildialog: farbiger Symbolkreis, großer Wert, Notiz.

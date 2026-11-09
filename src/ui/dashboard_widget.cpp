@@ -3,7 +3,11 @@
 #include <algorithm>
 #include <map>
 
+#include <QActionGroup>
 #include <QGridLayout>
+#include <QMenu>
+#include <QProxyStyle>
+#include <QStyleFactory>
 #include <QGroupBox>
 #include <QHBoxLayout>
 #include <QHeaderView>
@@ -48,6 +52,22 @@ void leer(QTreeWidget* t, const QString& text)
     it->setFlags(Qt::ItemIsEnabled);
     it->setFirstColumnSpanned(true);
 }
+
+/// Menü mit größeren Symbolen (Vorschaubilder der Anordnungen).
+class GrosseMenueSymbole : public QProxyStyle {
+public:
+    explicit GrosseMenueSymbole(QObject* eltern)
+        : QProxyStyle(QStyleFactory::create(QStringLiteral("Fusion")))
+    {
+        setParent(eltern);
+    }
+    int pixelMetric(PixelMetric m, const QStyleOption* o = nullptr, const QWidget* w = nullptr) const override
+    {
+        if (m == PM_SmallIconSize)
+            return 30;
+        return QProxyStyle::pixelMetric(m, o, w);
+    }
+};
 
 /// Einheitliche Zeilenhöhe, auch für Zeilen ohne Symbol.
 class ZeilenDelegate : public QStyledItemDelegate {
@@ -128,15 +148,23 @@ DashboardWidget::DashboardWidget(const AppKontext& kontext, const QList<QAction*
                 emit anlageOeffnen(id);
         });
 
-    // Vier Plätze: oben breit/schmal, unten breit/schmal
+    // Karten auf festen Plätzen; mehrere vordefinierte Anordnungen zur Auswahl
     m_kartenRaster = new AnordnungsRaster(QStringLiteral("uebersicht/karten"));
-    m_kartenRaster->neuerPlatz(0, 0);
-    m_kartenRaster->neuerPlatz(0, 1);
-    m_kartenRaster->neuerPlatz(1, 0);
-    m_kartenRaster->neuerPlatz(1, 1);
-    m_kartenRaster->raster()->setColumnStretch(0, 3);
-    m_kartenRaster->raster()->setColumnStretch(1, 2);
-    m_kartenRaster->raster()->setRowStretch(0, 1);
+    using V = AnordnungsRaster::Vorlage;
+    const QString k = QStringLiteral("karte"), a = QStringLiteral("alarme"), l = QStringLiteral("verluste"),
+                  f = QStringLiteral("fehlerbilder");
+    m_kartenRaster->neueVorlage(V{QStringLiteral("standard"), tr("Standard"),
+                                  {{0, 0}, {0, 1}, {1, 0}, {1, 1}}, {3, 2}, {1, 0}, {k, a, l, f}});
+    m_kartenRaster->neueVorlage(V{QStringLiteral("karte_gross"), tr("Karte groß"),
+                                  {{0, 0, 3, 1}, {0, 1}, {1, 1}, {2, 1}}, {3, 2}, {1, 1, 1}, {k, a, l, f}});
+    m_kartenRaster->neueVorlage(V{QStringLiteral("karte_oben"), tr("Karte oben, Listen darunter"),
+                                  {{0, 0, 1, 3}, {1, 0}, {1, 1}, {1, 2}}, {1, 1, 1}, {1, 0}, {k, a, l, f}});
+    m_kartenRaster->neueVorlage(V{QStringLiteral("listen_oben"), tr("Listen oben, Karte darunter"),
+                                  {{0, 0}, {0, 1}, {0, 2}, {1, 0, 1, 3}}, {1, 1, 1}, {0, 1}, {a, l, f, k}});
+    m_kartenRaster->neueVorlage(V{QStringLiteral("gleich"), tr("Vier gleich große Felder"),
+                                  {{0, 0}, {0, 1}, {1, 0}, {1, 1}}, {1, 1}, {1, 1}, {k, a, l, f}});
+    m_kartenRaster->neueVorlage(V{QStringLiteral("alarme_zuerst"), tr("Alarme zuerst"),
+                                  {{0, 0, 1, 2}, {1, 0}, {1, 1}, {2, 0, 1, 2}}, {3, 2}, {0, 1, 0}, {a, k, f, l}});
     m_kartenRaster->fuegeHinzu(QStringLiteral("karte"),
                                neueGruppe(tr("Anlagenkarte – Handlungsbedarf"), karte, tr("Karte öffnen"), Ziel::Karte),
                                kGriffHoehe);
@@ -174,7 +202,43 @@ DashboardWidget::DashboardWidget(const AppKontext& kontext, const QList<QAction*
 void DashboardWidget::anordnungZuruecksetzen()
 {
     m_kachelRaster->zuruecksetzen();
-    m_kartenRaster->zuruecksetzen();
+    m_kartenRaster->waehleVorlage(m_kartenRaster->vorlagen().constFirst().id);
+}
+
+QAction* DashboardWidget::anordnungsAktion()
+{
+    // Knopf "Anordnung" mit Menü: vordefinierte Anordnungen (mit Vorschau)
+    // und Zurücksetzen auf die Standardanordnung
+    auto* aktion = new QAction(Stil::icon(Stil::Symbol::Uebersicht, Stil::text()), tr("Anordnung"), this);
+    aktion->setToolTip(tr("Vordefinierte Anordnung der Karten wählen"));
+    auto* menue = new QMenu(this);
+    auto* gruppe = new QActionGroup(menue);
+    menue->setStyle(new GrosseMenueSymbole(menue)); // größere Vorschaubilder
+    for (const AnordnungsRaster::Vorlage& v : m_kartenRaster->vorlagen()) {
+        QAction* a = menue->addAction(m_kartenRaster->vorschau(v.id), v.name);
+        a->setCheckable(true);
+        gruppe->addAction(a);
+        connect(a, &QAction::triggered, this, [this, id = v.id] { m_kartenRaster->waehleVorlage(id); });
+    }
+    menue->addSeparator();
+    menue->addAction(tr("Anordnung zurücksetzen"), this, &DashboardWidget::anordnungZuruecksetzen);
+    // gewählte Anordnung fett und mit Haken markieren
+    auto markiere = [this, gruppe] {
+        const auto& vorlagen = m_kartenRaster->vorlagen();
+        for (int i = 0; i < vorlagen.size() && i < gruppe->actions().size(); ++i) {
+            QAction* a = gruppe->actions().at(i);
+            const bool aktiv = vorlagen.at(i).id == m_kartenRaster->aktuelleVorlage();
+            a->setChecked(aktiv);
+            QFont f = a->font();
+            f.setBold(aktiv);
+            a->setFont(f);
+            a->setText(aktiv ? vorlagen.at(i).name + QStringLiteral("  ✓") : vorlagen.at(i).name);
+        }
+    };
+    markiere();
+    connect(m_kartenRaster, &AnordnungsRaster::anordnungGeaendert, menue, markiere);
+    aktion->setMenu(menue);
+    return aktion;
 }
 
 QGroupBox* DashboardWidget::neueGruppe(const QString& titel, QWidget* inhalt, const QString& linkText, Ziel sprung)

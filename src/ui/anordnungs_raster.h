@@ -2,6 +2,7 @@
 
 #include <QCursor>
 #include <QHash>
+#include <QIcon>
 #include <QPointer>
 #include <QRect>
 #include <QStringList>
@@ -21,16 +22,40 @@ class QGridLayout;
  * die bisher dort lag. Der verlassene Platz zeigt währenddessen einen
  * gestrichelten Platzhalter.
  *
- * Die Plätze (Zeile, Spalte, Spannweite) sind vorgegeben; die Anordnung
- * wird in QSettings unter dem übergebenen Schlüssel gespeichert.
+ * Die Plätze (Zeile, Spalte, Spannweite) sind vorgegeben. Zusätzlich kann
+ * es mehrere vordefinierte Anordnungen (Vorlagen) mit eigenen Plätzen
+ * geben, z. B. "Karte groß" oder "Listen nebeneinander". Gewählte Vorlage
+ * und Belegung werden in QSettings unter dem übergebenen Schlüssel
+ * gespeichert.
  */
 class AnordnungsRaster : public QWidget {
     Q_OBJECT
 public:
     explicit AnordnungsRaster(const QString& schluessel, QWidget* parent = nullptr);
 
+    struct Platz {
+        int zeile, spalte, zeilen = 1, spalten = 1;
+    };
+    /// Vordefinierte Anordnung: Plätze, Gewichtung der Spalten/Zeilen und Belegung.
+    struct Vorlage {
+        QString      id;
+        QString      name;
+        QList<Platz> plaetze;
+        QList<int>   spaltenGewicht;
+        QList<int>   zeilenGewicht;
+        QStringList  belegung;   ///< Karten-ids je Platz
+    };
+
     /// Vorgegebenen Platz anlegen; Reihenfolge der Aufrufe = Reihenfolge der Plätze.
     void neuerPlatz(int zeile, int spalte, int zeilen = 1, int spalten = 1);
+    /// Vordefinierte Anordnung anbieten (die erste ist die Standardanordnung).
+    void neueVorlage(const Vorlage& vorlage);
+    /// Vordefinierte Anordnung anwenden und merken.
+    void waehleVorlage(const QString& id);
+    const QList<Vorlage>& vorlagen() const { return m_vorlagen; }
+    QString aktuelleVorlage() const { return m_vorlage; }
+    /// Kleines Vorschaubild einer Vorlage (Rechtecke der Plätze).
+    QIcon vorschau(const QString& id) const;
     /**
      * @brief Karte hinzufügen; ohne gespeicherte Anordnung kommt sie auf den nächsten freien Platz.
      * @param griffHoehe Höhe des Bereichs oben, an dem gezogen werden kann (0 = ganze Karte)
@@ -50,10 +75,8 @@ protected:
     bool eventFilter(QObject* obj, QEvent* event) override;
 
 private:
-    struct Platz {
-        int zeile, spalte, zeilen, spalten;
-    };
     void ordneAn();
+    void wendeVorlageAn(const Vorlage& v);
     void beginneZiehen();
     void beendeZiehen(const QPoint& pos);
     int platzBei(const QPoint& pos) const;
@@ -62,6 +85,8 @@ private:
     QString        m_schluessel;
     QGridLayout*   m_raster = nullptr;
     QList<Platz>   m_plaetze;
+    QList<Vorlage> m_vorlagen;
+    QString        m_vorlage;           ///< id der gewählten Vorlage
     QStringList    m_standard;          ///< ids in der vorgegebenen Reihenfolge
     QStringList    m_reihenfolge;       ///< id je Platz
     QHash<QString, QWidget*> m_karten;
