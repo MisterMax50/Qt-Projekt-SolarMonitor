@@ -83,7 +83,7 @@ int main(int argc, char* argv[])
     const QCommandLineOption datenOpt(QStringLiteral("daten"),
                                       QStringLiteral("Datenordner mit anlagen.csv (Standard: ./data)"),
                                       QStringLiteral("ordner"));
-    const QCommandLineOption spracheOpt(QStringLiteral("lang"), QStringLiteral("Sprache: de oder en"),
+    const QCommandLineOption spracheOpt(QStringLiteral("lang"), QStringLiteral("Sprache: de, en, fr oder zh"),
                                         QStringLiteral("sprache"));
     const QCommandLineOption ohneIntroOpt(QStringLiteral("kein-intro"), QStringLiteral("Startanimation überspringen"));
     parser.addOption(datenOpt);

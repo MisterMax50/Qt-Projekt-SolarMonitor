@@ -719,8 +719,7 @@ QWidget* MainWindow::baueKopfzeile()
     connect(intro, &QAction::toggled, this, [](bool an) { QSettings().setValue(QStringLiteral("intro"), an); });
     QMenu* sprache = menue->addMenu(tr("&Sprache"));
     auto* sprachen = new QActionGroup(sprache);
-    for (const auto& [kuerzel, name] : {std::pair{QStringLiteral("de"), QStringLiteral("Deutsch")},
-                                        std::pair{QStringLiteral("en"), QStringLiteral("English")}}) {
+    for (const auto& [kuerzel, name] : Sprache::verfuegbar()) {
         QAction* a = sprache->addAction(name);
         a->setCheckable(true);
         a->setChecked(Sprache::aktuell() == kuerzel);

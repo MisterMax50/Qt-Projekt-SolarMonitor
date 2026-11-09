@@ -342,7 +342,7 @@
 <context>
     <name>Anzeige</name>
     <message>
-        <location filename="../src/util/anzeige.cpp" line="+28"/>
+        <location filename="../src/util/anzeige.cpp" line="+40"/>
         <source>Dach (privat)</source>
         <translation>Dach (privat)</translation>
     </message>
@@ -1522,7 +1522,7 @@ Grund: %1</translation>
 <context>
     <name>KarteView</name>
     <message>
-        <location filename="../src/ui/karte_view.cpp" line="+546"/>
+        <location filename="../src/ui/karte_view.cpp" line="+588"/>
         <source>Wetterstation</source>
         <translation>Wetterstation</translation>
     </message>
@@ -1748,7 +1748,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="+320"/>
+        <location filename="../src/ui/mainwindow.cpp" line="+322"/>
         <source>SolarMonitor – Monitoring der PV-Flotte</source>
         <translation>SolarMonitor – Monitoring der PV-Flotte</translation>
     </message>
@@ -1854,7 +1854,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>&amp;Sprache</translation>
     </message>
     <message>
-        <location line="+86"/>
+        <location line="+85"/>
         <source>%1 offene Störungen, davon %2 kritisch</source>
         <translation>%1 offene Störungen, davon %2 kritisch</translation>
     </message>
@@ -1915,13 +1915,13 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Filter zurücksetzen</translation>
     </message>
     <message>
-        <location line="-479"/>
+        <location line="-478"/>
         <location line="+196"/>
         <source>Übersicht</source>
         <translation>Übersicht</translation>
     </message>
     <message>
-        <location line="+194"/>
+        <location line="+193"/>
         <source>%1 Anlagen mit erkanntem Fehlerbild</source>
         <translation>%1 Anlagen mit erkanntem Fehlerbild</translation>
     </message>
@@ -2053,12 +2053,12 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Wiederholen: %1 (Strg+Y)</translation>
     </message>
     <message>
-        <location line="-522"/>
+        <location line="-521"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation>Benutzer &amp;wechseln …</translation>
     </message>
     <message>
-        <location line="+35"/>
+        <location line="+34"/>
         <source>&amp;Beenden</source>
         <translation>&amp;Beenden</translation>
     </message>
@@ -2124,12 +2124,12 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Anlage:</translation>
     </message>
     <message>
-        <location line="-548"/>
+        <location line="-547"/>
         <source>Exportieren</source>
         <translation>Exportieren</translation>
     </message>
     <message>
-        <location line="+709"/>
+        <location line="+708"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>Nur für die Rolle Administrator.</translation>
     </message>
@@ -2204,12 +2204,12 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Änderungsverlauf …</translation>
     </message>
     <message>
-        <location line="-892"/>
+        <location line="-893"/>
         <source>Anmeldung – SolarMonitor</source>
         <translation>Anmeldung – SolarMonitor</translation>
     </message>
     <message>
-        <location line="+307"/>
+        <location line="+309"/>
         <source>Auswertung</source>
         <translation>Auswertung</translation>
     </message>
@@ -2224,7 +2224,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Logo-Animation beim Programmstart zeigen</translation>
     </message>
     <message>
-        <location line="+37"/>
+        <location line="+36"/>
         <source>SolarMonitor beenden (Strg+Q)</source>
         <translation>SolarMonitor beenden (Strg+Q)</translation>
     </message>
@@ -2404,12 +2404,12 @@ Jetzt öffnen?</translation>
         <translation>&lt;Ausgangszustand nach dem Laden&gt;</translation>
     </message>
     <message>
-        <location line="-1289"/>
+        <location line="-1288"/>
         <source>Angemeldet als %1.</source>
         <translation>Angemeldet als %1.</translation>
     </message>
     <message>
-        <location line="+1308"/>
+        <location line="+1307"/>
         <source>Über SolarMonitor</source>
         <translation>Über SolarMonitor</translation>
     </message>

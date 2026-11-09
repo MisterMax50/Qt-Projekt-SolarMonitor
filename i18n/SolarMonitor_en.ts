@@ -342,7 +342,7 @@
 <context>
     <name>Anzeige</name>
     <message>
-        <location filename="../src/util/anzeige.cpp" line="+28"/>
+        <location filename="../src/util/anzeige.cpp" line="+40"/>
         <source>Dach (privat)</source>
         <translation>Rooftop (private)</translation>
     </message>
@@ -1522,7 +1522,7 @@ Reason: %1</translation>
 <context>
     <name>KarteView</name>
     <message>
-        <location filename="../src/ui/karte_view.cpp" line="+546"/>
+        <location filename="../src/ui/karte_view.cpp" line="+588"/>
         <source>Wetterstation</source>
         <translation>Weather station</translation>
     </message>
@@ -1748,7 +1748,7 @@ Administrator: additionally edit and export master data</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="+320"/>
+        <location filename="../src/ui/mainwindow.cpp" line="+322"/>
         <source>SolarMonitor – Monitoring der PV-Flotte</source>
         <translation>SolarMonitor – PV fleet monitoring</translation>
     </message>
@@ -1854,7 +1854,7 @@ Administrator: additionally edit and export master data</translation>
         <translation>&amp;Language</translation>
     </message>
     <message>
-        <location line="+86"/>
+        <location line="+85"/>
         <source>%1 offene Störungen, davon %2 kritisch</source>
         <translation>%1 open faults, %2 of them critical</translation>
     </message>
@@ -1915,13 +1915,13 @@ Administrator: additionally edit and export master data</translation>
         <translation>Reset filters</translation>
     </message>
     <message>
-        <location line="-479"/>
+        <location line="-478"/>
         <location line="+196"/>
         <source>Übersicht</source>
         <translation>Overview</translation>
     </message>
     <message>
-        <location line="+194"/>
+        <location line="+193"/>
         <source>%1 Anlagen mit erkanntem Fehlerbild</source>
         <translation>%1 plants with a detected fault pattern</translation>
     </message>
@@ -2053,12 +2053,12 @@ Administrator: additionally edit and export master data</translation>
         <translation>Redo: %1 (Ctrl+Y)</translation>
     </message>
     <message>
-        <location line="-522"/>
+        <location line="-521"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation>S&amp;witch user …</translation>
     </message>
     <message>
-        <location line="+35"/>
+        <location line="+34"/>
         <source>&amp;Beenden</source>
         <translation>&amp;Quit</translation>
     </message>
@@ -2124,12 +2124,12 @@ Administrator: additionally edit and export master data</translation>
         <translation>Plant:</translation>
     </message>
     <message>
-        <location line="-548"/>
+        <location line="-547"/>
         <source>Exportieren</source>
         <translation>Export</translation>
     </message>
     <message>
-        <location line="+709"/>
+        <location line="+708"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>Administrator role only.</translation>
     </message>
@@ -2204,12 +2204,12 @@ Administrator: additionally edit and export master data</translation>
         <translation>Change history …</translation>
     </message>
     <message>
-        <location line="-892"/>
+        <location line="-893"/>
         <source>Anmeldung – SolarMonitor</source>
         <translation>Sign in – SolarMonitor</translation>
     </message>
     <message>
-        <location line="+307"/>
+        <location line="+309"/>
         <source>Auswertung</source>
         <translation>Analysis</translation>
     </message>
@@ -2224,7 +2224,7 @@ Administrator: additionally edit and export master data</translation>
         <translation>Show the logo animation when the program starts</translation>
     </message>
     <message>
-        <location line="+37"/>
+        <location line="+36"/>
         <source>SolarMonitor beenden (Strg+Q)</source>
         <translation>Quit SolarMonitor (Ctrl+Q)</translation>
     </message>
@@ -2404,12 +2404,12 @@ Open it now?</translation>
         <translation>&lt;Initial state after loading&gt;</translation>
     </message>
     <message>
-        <location line="-1289"/>
+        <location line="-1288"/>
         <source>Angemeldet als %1.</source>
         <translation>Signed in as %1.</translation>
     </message>
     <message>
-        <location line="+1308"/>
+        <location line="+1307"/>
         <source>Über SolarMonitor</source>
         <translation>About SolarMonitor</translation>
     </message>

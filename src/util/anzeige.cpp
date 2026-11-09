@@ -11,16 +11,28 @@ QLocale& locale()
     static QLocale l(QLocale::German, QLocale::Germany);
     return l;
 }
-bool englisch()
+/// Datumsformat passend zur Sprache
+QString datumsFormat()
 {
-    return locale().language() == QLocale::English;
+    switch (locale().language()) {
+    case QLocale::English:
+    case QLocale::French: return QStringLiteral("dd/MM/yyyy");
+    case QLocale::Chinese: return QStringLiteral("yyyy-MM-dd");
+    default: return QStringLiteral("dd.MM.yyyy");
+    }
 }
 } // namespace
 
 void Anzeige::setSprache(const QString& sprache)
 {
-    locale() = (sprache == QLatin1String("en")) ? QLocale(QLocale::English, QLocale::UnitedKingdom)
-                                                : QLocale(QLocale::German, QLocale::Germany);
+    if (sprache == QLatin1String("en"))
+        locale() = QLocale(QLocale::English, QLocale::UnitedKingdom);
+    else if (sprache == QLatin1String("fr"))
+        locale() = QLocale(QLocale::French, QLocale::France);
+    else if (sprache == QLatin1String("zh"))
+        locale() = QLocale(QLocale::Chinese, QLocale::SimplifiedChineseScript, QLocale::China);
+    else
+        locale() = QLocale(QLocale::German, QLocale::Germany);
 }
 
 QString Anzeige::typName(const QString& roh)
@@ -142,12 +154,12 @@ QString Anzeige::datum(const QDate& d)
 {
     if (!d.isValid())
         return QStringLiteral("–");
-    return d.toString(englisch() ? QStringLiteral("dd/MM/yyyy") : QStringLiteral("dd.MM.yyyy"));
+    return d.toString(datumsFormat());
 }
 
 QString Anzeige::zeitpunkt(const QDateTime& dt)
 {
     if (!dt.isValid())
         return QStringLiteral("–");
-    return dt.toString(englisch() ? QStringLiteral("dd/MM/yyyy hh:mm") : QStringLiteral("dd.MM.yyyy hh:mm"));
+    return dt.toString(datumsFormat() + QStringLiteral(" hh:mm"));
 }

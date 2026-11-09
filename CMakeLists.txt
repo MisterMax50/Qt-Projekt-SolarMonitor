@@ -158,6 +158,8 @@ qt_add_translations(${ZIEL}
     TS_FILES
         i18n/SolarMonitor_de.ts
         i18n/SolarMonitor_en.ts
+        i18n/SolarMonitor_fr.ts
+        i18n/SolarMonitor_zh.ts
     RESOURCE_PREFIX /i18n
 )
 

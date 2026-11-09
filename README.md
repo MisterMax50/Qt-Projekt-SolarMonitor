@@ -109,7 +109,7 @@ zeichnen sich, dann blendet der Schriftzug ein. Klick oder Taste
 Das Programm startet im **Vollbild**; im Benutzermenü oben rechts bzw. mit F11
 wird auf ein maximiertes Fenster umgeschaltet. Die Wahl wird gespeichert.
 
-Sprache (Deutsch/Englisch, zur Laufzeit) und Design (hell/dunkel) stehen
+Sprache (Deutsch, Englisch, Französisch, Chinesisch – zur Laufzeit) und Design (hell/dunkel) stehen
 ebenfalls im Benutzermenü. Sprache, Design, Vollbild und Fenstergröße werden
 gespeichert (QSettings).
 

@@ -16,7 +16,10 @@ QString g_aktuell = QStringLiteral("de");
 
 bool Sprache::setze(const QString& kuerzel)
 {
-    const QString neu = (kuerzel == QLatin1String("en")) ? QStringLiteral("en") : QStringLiteral("de");
+    QString neu = QStringLiteral("de");
+    for (const auto& [k, name] : verfuegbar())
+        if (k == kuerzel)
+            neu = k;
 
     if (g_app) {
         QCoreApplication::removeTranslator(g_app.get());
@@ -28,19 +31,20 @@ bool Sprache::setze(const QString& kuerzel)
     }
 
     // Deutsch ist die Quellsprache; SolarMonitor_de enthält nur Pluralformen
-    // und darf daher fehlen. Für Englisch ist die Übersetzung Pflicht.
+    // und darf daher fehlen. Für alle anderen Sprachen ist sie Pflicht.
     bool ok = true;
     auto t = std::make_unique<QTranslator>();
     if (t->load(QStringLiteral("SolarMonitor_") + neu, QStringLiteral(":/i18n"))) {
         QCoreApplication::installTranslator(t.get());
         g_app = std::move(t);
-    } else if (neu == QLatin1String("en")) {
+    } else if (neu != QLatin1String("de")) {
         ok = false;
     }
 
     // Qt-Standardtexte (OK/Abbrechen, Dateidialog …) in der Zielsprache
     auto qt = std::make_unique<QTranslator>();
-    if (qt->load(QStringLiteral("qtbase_") + neu, QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
+    const QString qtName = neu == QLatin1String("zh") ? QStringLiteral("qtbase_zh_CN") : QStringLiteral("qtbase_") + neu;
+    if (qt->load(qtName, QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
         QCoreApplication::installTranslator(qt.get());
         g_qt = std::move(qt);
     }
@@ -53,4 +57,12 @@ bool Sprache::setze(const QString& kuerzel)
 QString Sprache::aktuell()
 {
     return g_aktuell;
+}
+
+QList<QPair<QString, QString>> Sprache::verfuegbar()
+{
+    return {{QStringLiteral("de"), QStringLiteral("Deutsch")},
+            {QStringLiteral("en"), QStringLiteral("English")},
+            {QStringLiteral("fr"), QStringLiteral("Français")},
+            {QStringLiteral("zh"), QStringLiteral("中文（简体）")}};
 }
