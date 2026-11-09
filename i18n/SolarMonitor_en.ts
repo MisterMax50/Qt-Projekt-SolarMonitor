@@ -690,7 +690,7 @@ Click a dot to open the plant, use the mouse wheel to zoom.</translation>
     <message>
         <location line="+11"/>
         <source>Anordnung zurücksetzen</source>
-        <translation type="unfinished">Reset layout</translation>
+        <translation>Reset layout</translation>
     </message>
     <message>
         <location line="+23"/>

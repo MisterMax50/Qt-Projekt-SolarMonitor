@@ -650,7 +650,7 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</source>
     <message>
         <location filename="../src/ui/dashboard_widget.cpp" line="224"/>
         <source>Anordnung zurücksetzen</source>
-        <translation type="unfinished">重置布局</translation>
+        <translation>重置布局</translation>
     </message>
     <message>
         <location filename="../src/ui/dashboard_widget.cpp" line="247"/>

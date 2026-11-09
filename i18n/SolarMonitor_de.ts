@@ -690,7 +690,7 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</translation>
     <message>
         <location line="+11"/>
         <source>Anordnung zurücksetzen</source>
-        <translation type="unfinished">Anordnung zurücksetzen</translation>
+        <translation>Anordnung zurücksetzen</translation>
     </message>
     <message>
         <location line="+23"/>

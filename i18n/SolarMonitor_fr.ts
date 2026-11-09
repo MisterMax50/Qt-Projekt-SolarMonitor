@@ -650,7 +650,7 @@ Cliquez sur un point pour ouvrir l&apos;installation, molette pour zoomer.</tran
     <message>
         <location filename="../src/ui/dashboard_widget.cpp" line="224"/>
         <source>Anordnung zurücksetzen</source>
-        <translation type="unfinished">Réinitialiser la disposition</translation>
+        <translation>Réinitialiser la disposition</translation>
     </message>
     <message>
         <location filename="../src/ui/dashboard_widget.cpp" line="247"/>
