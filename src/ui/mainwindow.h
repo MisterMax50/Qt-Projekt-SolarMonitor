@@ -93,6 +93,8 @@ private slots:
     void seiteGewechselt(int index);
     /// Abo-Modus (Spaß-Funktion): Werbung aus- bzw. einblenden und merken.
     void setzePremium(bool an);
+    /// Abo abschließen über den erfundenen Bezahlablauf "SolarMonitor Pay".
+    void premiumKaufen();
     void angemeldet(const QString& kennung);
 
 private:

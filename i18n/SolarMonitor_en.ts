@@ -2249,7 +2249,7 @@ Administrator: additionally manage master data and users</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="+434"/>
+        <location filename="../src/ui/mainwindow.cpp" line="+435"/>
         <source>SolarMonitor – Monitoring der PV-Flotte</source>
         <translation>SolarMonitor – PV fleet monitoring</translation>
     </message>
@@ -2330,7 +2330,7 @@ Administrator: additionally manage master data and users</translation>
         <translation>Monitoring</translation>
     </message>
     <message>
-        <location line="+141"/>
+        <location line="+147"/>
         <source>&amp;Dunkles Design</source>
         <translation>&amp;Dark theme</translation>
     </message>
@@ -2360,7 +2360,7 @@ Administrator: additionally manage master data and users</translation>
         <translation>No critical faults open</translation>
     </message>
     <message>
-        <location line="+74"/>
+        <location line="+96"/>
         <source>Alle Status</source>
         <translation>All statuses</translation>
     </message>
@@ -2406,18 +2406,18 @@ Administrator: additionally manage master data and users</translation>
         <translation>Reset filters</translation>
     </message>
     <message>
-        <location line="-618"/>
+        <location line="-646"/>
         <location line="+247"/>
         <source>Übersicht</source>
         <translation>Overview</translation>
     </message>
     <message>
-        <location line="+255"/>
+        <location line="+261"/>
         <source>%1 Anlagen mit erkanntem Fehlerbild</source>
         <translation>%1 plants with a detected fault pattern</translation>
     </message>
     <message>
-        <location line="+65"/>
+        <location line="+87"/>
         <source>Filter zurücksetzen (%1)</source>
         <translation>Reset filters (%1)</translation>
     </message>
@@ -2544,12 +2544,12 @@ Administrator: additionally manage master data and users</translation>
         <translation>Redo: %1 (Ctrl+Y)</translation>
     </message>
     <message>
-        <location line="-609"/>
+        <location line="-637"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation>S&amp;witch user …</translation>
     </message>
     <message>
-        <location line="+84"/>
+        <location line="+90"/>
         <source>&amp;Beenden</source>
         <translation>&amp;Quit</translation>
     </message>
@@ -2569,7 +2569,7 @@ Administrator: additionally manage master data and users</translation>
         <translation>%1 errors on import</translation>
     </message>
     <message>
-        <location line="+73"/>
+        <location line="+95"/>
         <source>Anlagen durchsuchen (Strg+F)</source>
         <translation>Search plants (Ctrl+F)</translation>
     </message>
@@ -2615,12 +2615,12 @@ Administrator: additionally manage master data and users</translation>
         <translation>Plant:</translation>
     </message>
     <message>
-        <location line="-636"/>
+        <location line="-664"/>
         <source>Exportieren</source>
         <translation>Export</translation>
     </message>
     <message>
-        <location line="+798"/>
+        <location line="+826"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>Administrator role only.</translation>
     </message>
@@ -2695,7 +2695,7 @@ Administrator: additionally manage master data and users</translation>
         <translation>Change history …</translation>
     </message>
     <message>
-        <location line="-1143"/>
+        <location line="-1171"/>
         <source>Daten werden geladen …</source>
         <translation>Loading data …</translation>
     </message>
@@ -2785,7 +2785,7 @@ Administrator: additionally manage master data and users</translation>
         <translation>Subscription mode: removes the (made-up) ads. Costs €0.00.</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+18"/>
         <source>&amp;Intro beim Start</source>
         <translation>&amp;Intro at startup</translation>
     </message>
@@ -2810,7 +2810,12 @@ Administrator: additionally manage master data and users</translation>
         <translation>Quit SolarMonitor (Ctrl+Q)</translation>
     </message>
     <message>
-        <location line="+85"/>
+        <location line="+89"/>
+        <source>Zahlung abgebrochen – die Werbung bleibt.</source>
+        <translation>Payment cancelled – the ads stay.</translation>
+    </message>
+    <message>
+        <location line="+18"/>
         <source>Danke für Ihr Abo! SolarMonitor Premium ist aktiv – werbefrei für sagenhafte 0,00 € im Monat.</source>
         <translation>Thanks for subscribing! SolarMonitor Premium is active – ad-free for a whopping €0.00 a month.</translation>
     </message>
@@ -3000,12 +3005,12 @@ Open it now?</translation>
         <translation>&lt;Initial state after loading&gt;</translation>
     </message>
     <message>
-        <location line="-1438"/>
+        <location line="-1466"/>
         <source>Angemeldet als %1.</source>
         <translation>Signed in as %1.</translation>
     </message>
     <message>
-        <location line="+1457"/>
+        <location line="+1485"/>
         <source>Über SolarMonitor</source>
         <translation>About SolarMonitor</translation>
     </message>
@@ -4759,6 +4764,263 @@ Your cart stays empty and your money stays with you.</translation>
         <location line="+7"/>
         <source>Windows Hello gibt es nur unter Windows.</source>
         <translation>Windows Hello is only available on Windows.</translation>
+    </message>
+</context>
+<context>
+    <name>ZahlungDialog</name>
+    <message>
+        <location filename="../src/ui/zahlung_dialog.cpp" line="+113"/>
+        <source>SolarMonitor Pay – Premium abschließen</source>
+        <translation>SolarMonitor Pay – get Premium</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Die Spaßkasse – hier fließt kein echtes Geld</source>
+        <translation>The joke checkout – no real money changes hands</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>TESTMODUS</source>
+        <translation>TEST MODE</translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Zurück</source>
+        <translation>Back</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Abbrechen</source>
+        <translation>Cancel</translation>
+    </message>
+    <message>
+        <location line="+35"/>
+        <location line="+280"/>
+        <source>Verbinde mit der Sonne …</source>
+        <translation>Connecting to the sun …</translation>
+    </message>
+    <message>
+        <location line="-279"/>
+        <source>Prüfe die Wolkenlage über dem Bodensee …</source>
+        <translation>Checking the clouds over Lake Constance …</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Bucht 0,00 € ab …</source>
+        <translation>Charging €0.00 …</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Entsorgt die Werbung fachgerecht …</source>
+        <translation>Disposing of the ads properly …</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Ihre Bestellung</source>
+        <translation>Your order</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; (werbefrei)</source>
+        <translation>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; (ad-free)</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Keine Werbebanner mehr</source>
+        <translation>No more ad banners</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Keine Popups im Minutentakt</source>
+        <translation>No popups every minute</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Goldenes PREMIUM-Abzeichen im Kopf</source>
+        <translation>Golden PREMIUM badge in the header</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Jederzeit im Kontomenü kündbar</source>
+        <translation>Cancel anytime in the account menu</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Monatlicher Preis</source>
+        <translation>Monthly price</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+90"/>
+        <source>0,00 €</source>
+        <translation>€0.00</translation>
+    </message>
+    <message>
+        <location line="-91"/>
+        <source>Einrichtungsgebühr</source>
+        <translation>Setup fee</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Heute fällig</source>
+        <translation>Due today</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Bei SolarMonitor Pay anmelden</source>
+        <translation>Sign in to SolarMonitor Pay</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Testmodus: Jede vierstellige Sonnen-PIN funktioniert. Bitte keine echte PIN und kein echtes Passwort eingeben – die Eingabe wird weder gespeichert noch gesendet.</source>
+        <translation>Test mode: any four-digit Sun PIN works. Please don&apos;t enter a real PIN or password – the input is neither stored nor sent.</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Konto</source>
+        <translation>Account</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Sonnen-PIN (4 Ziffern)</source>
+        <translation>Sun PIN (4 digits)</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Zahlart wählen</source>
+        <translation>Choose payment method</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Sonnenstunden-Guthaben</source>
+        <translation>Sunshine-hour credit</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>1.234 kWh verfügbar · wird nicht belastet</source>
+        <translation>1,234 kWh available · will not be charged</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Kilowattkekse</source>
+        <translation>Kilowatt Cookies</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>3 Stück in der Dose · bleiben alle drin</source>
+        <translation>3 in the tin · all of them stay there</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Ein freundliches Lächeln</source>
+        <translation>A friendly smile</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>unbegrenzt verfügbar</source>
+        <translation>unlimited</translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>Prüfen und abonnieren</source>
+        <translation>Review and subscribe</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Produkt</source>
+        <translation>Product</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>SolarMonitor Premium</source>
+        <translation>SolarMonitor Premium</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Zahlart</source>
+        <translation>Payment method</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Laufzeit</source>
+        <translation>Term</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>monatlich, jederzeit kündbar</source>
+        <translation>monthly, cancel anytime</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Betrag</source>
+        <translation>Amount</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Ich akzeptiere die AGB (3.874 Seiten, sinngemäß: „Werbung weg, alles gut“).</source>
+        <translation>I accept the terms (3,874 pages, roughly: “ads gone, all good”).</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Zahlung wird verarbeitet …</source>
+        <translation>Processing payment …</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Bitte das Fenster nicht schließen. (Es würde aber auch nichts passieren.)</source>
+        <translation>Please don&apos;t close the window. (Nothing would happen if you did, though.)</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Zahlung erfolgreich!</source>
+        <translation>Payment successful!</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Eine Quittung haben wir Ihnen nicht geschickt – es gibt ja auch nichts zu quittieren.</source>
+        <translation>We didn&apos;t send you a receipt – there&apos;s nothing to receipt anyway.</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Schritt %1 von 4</source>
+        <translation>Step %1 of 4</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Weiter mit SolarMonitor Pay</source>
+        <translation>Continue with SolarMonitor Pay</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Anmelden</source>
+        <translation>Sign in</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Weiter</source>
+        <translation>Next</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Jetzt abonnieren · 0,00 €</source>
+        <translation>Subscribe now · €0.00</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; ist aktiv.&lt;br&gt;Transaktion: %1&lt;br&gt;Betrag: 0,00 € · Zahlart: %2&lt;br&gt;Datum: %3</source>
+        <translation>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; is active.&lt;br&gt;Transaction: %1&lt;br&gt;Amount: €0.00 · Payment method: %2&lt;br&gt;Date: %3</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Fertig</source>
+        <translation>Done</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Bitte eine vierstellige Sonnen-PIN eingeben (z. B. 1234).</source>
+        <translation>Please enter a four-digit Sun PIN (e.g. 1234).</translation>
     </message>
 </context>
 </TS>

@@ -60,6 +60,7 @@
 #include "ui/login_seite.h"
 #include "ui/benutzer_seite.h"
 #include "ui/werbung.h"
+#include "ui/zahlung_dialog.h"
 #include "model/benutzer.h"
 #include "util/windows_hello.h"
 #include "ui/datenordner_seite.h"
@@ -652,7 +653,7 @@ void MainWindow::baueUi()
     auto* wv = new QVBoxLayout(m_werbungsBereich);
     wv->setContentsMargins(24, 0, 24, 16);
     auto* banner = new WerbeBanner(m_werbungsBereich);
-    connect(banner, &WerbeBanner::premiumGewuenscht, this, [this] { setzePremium(true); });
+    connect(banner, &WerbeBanner::premiumGewuenscht, this, &MainWindow::premiumKaufen);
     if (!m_werbeSteuerung) {
         // Popup-Werbung jede Minute – nur über dem Programm, nie über Anmeldung oder offenen Dialogen
         m_werbeSteuerung = new WerbeSteuerung(this, [this]() -> QWidget* {
@@ -662,7 +663,7 @@ void MainWindow::baueUi()
                 return nullptr;
             return m_programm;
         });
-        connect(m_werbeSteuerung, &WerbeSteuerung::premiumGewuenscht, this, [this] { setzePremium(true); });
+        connect(m_werbeSteuerung, &WerbeSteuerung::premiumGewuenscht, this, &MainWindow::premiumKaufen);
     }
     connect(banner, &WerbeBanner::webseiteGewuenscht, m_werbeSteuerung, &WerbeSteuerung::oeffneWebseite);
     m_werbeSteuerung->setAktiv(!QSettings().value(QStringLiteral("premium"), false).toBool());
@@ -960,7 +961,13 @@ QWidget* MainWindow::baueKopfzeile()
     m_aktPremium->setCheckable(true);
     m_aktPremium->setChecked(QSettings().value(QStringLiteral("premium"), false).toBool());
     m_aktPremium->setToolTip(tr("Abo-Modus: entfernt die (erfundene) Werbung. Kostet 0,00 €."));
-    connect(m_aktPremium, &QAction::toggled, this, &MainWindow::setzePremium);
+    connect(m_aktPremium, &QAction::toggled, this, [this](bool an) {
+        // Einschalten geht über den (erfundenen) Bezahlablauf, Ausschalten sofort
+        if (an)
+            premiumKaufen();
+        else
+            setzePremium(false);
+    });
     QAction* dunkel = menue->addAction(Stil::icon(Stil::Symbol::Mond, Stil::text()), tr("&Dunkles Design"));
     dunkel->setCheckable(true);
     dunkel->setChecked(Stil::istDunkel());
@@ -1085,6 +1092,28 @@ void MainWindow::aktualisiereNavigation()
         m_glocke->setToolTip(kritisch > 0 ? tr("%1 kritische Störungen offen – anzeigen").arg(kritisch)
                                           : tr("Keine kritischen Störungen offen"));
     }
+}
+
+void MainWindow::premiumKaufen()
+{
+    if (QSettings().value(QStringLiteral("premium"), false).toBool())
+        return;
+    // Spaß-Bezahlablauf "SolarMonitor Pay" – kein echtes Geld, nichts wird gesendet
+    QString konto = m_angemeldet;
+    if (m_benutzer)
+        if (const Benutzer* b = m_benutzer->finde(m_angemeldet))
+            konto = b->name;
+    ZahlungDialog zahlung(konto, this);
+    if (zahlung.exec() == QDialog::Accepted) {
+        setzePremium(true);
+        return;
+    }
+    // abgebrochen: Menüeintrag zurücksetzen, Werbung bleibt
+    if (m_aktPremium && m_aktPremium->isChecked()) {
+        QSignalBlocker sperre(m_aktPremium);
+        m_aktPremium->setChecked(false);
+    }
+    meldung(tr("Zahlung abgebrochen – die Werbung bleibt."), 4000, true);
 }
 
 void MainWindow::setzePremium(bool an)

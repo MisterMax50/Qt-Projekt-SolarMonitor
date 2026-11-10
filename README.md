@@ -202,9 +202,15 @@ für Solarparks):
   **dritten Klick** – die beiden Klicks davor öffnen jeweils die Webseite.
   Die „Webseite“ ist ein eigenes Fenster im Browser-Look, komplett im
   Programm gezeichnet (keine Internetverbindung, Adressen auf `.example`).
-  Im Kontomenü schaltet *SolarMonitor Premium (werbefrei)* das „Abo“ für
-  0,00 € ein: Banner, Popups und offene Werbeseiten verschwinden, im Kopf
-  erscheint ein PREMIUM-Abzeichen. Die Einstellung wird gespeichert.
+  Im Kontomenü startet *SolarMonitor Premium (werbefrei)* das „Abo“ für
+  0,00 €. Es läuft über den erfundenen Bezahlablauf **SolarMonitor Pay**
+  (`src/ui/zahlung_dialog.*`): Bestellung → Anmelden mit beliebiger
+  vierstelliger „Sonnen-PIN“ → Zahlart (Sonnenstunden, Kilowattkekse,
+  Lächeln) → Prüfen mit AGB-Haken → Verarbeitung → Quittung. Nichts wird
+  gespeichert oder gesendet, es fließt kein Geld. Nach dem Abschluss
+  verschwinden Banner, Popups und offene Werbeseiten, und im Kopf erscheint
+  ein PREMIUM-Abzeichen; bei Abbruch bleibt die Werbung. Ausschalten im
+  Kontomenü wirkt sofort. Die Einstellung wird gespeichert.
 - Farben: Dunkelblau (Seitenleiste) und Sonnen-Orange (Akzent, Hauptknöpfe);
   Grün/Orange/Rot nur für den Zustand der Anlagen. Alles steht in einem
   Stylesheet in `src/util/stil.cpp` (hell und dunkel), Grundlage ist der

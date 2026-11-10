@@ -2249,7 +2249,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="+434"/>
+        <location filename="../src/ui/mainwindow.cpp" line="+435"/>
         <source>SolarMonitor – Monitoring der PV-Flotte</source>
         <translation>SolarMonitor – Monitoring der PV-Flotte</translation>
     </message>
@@ -2330,7 +2330,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Überwachung</translation>
     </message>
     <message>
-        <location line="+141"/>
+        <location line="+147"/>
         <source>&amp;Dunkles Design</source>
         <translation>&amp;Dunkles Design</translation>
     </message>
@@ -2360,7 +2360,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Keine kritischen Störungen offen</translation>
     </message>
     <message>
-        <location line="+74"/>
+        <location line="+96"/>
         <source>Alle Status</source>
         <translation>Alle Status</translation>
     </message>
@@ -2406,18 +2406,18 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Filter zurücksetzen</translation>
     </message>
     <message>
-        <location line="-618"/>
+        <location line="-646"/>
         <location line="+247"/>
         <source>Übersicht</source>
         <translation>Übersicht</translation>
     </message>
     <message>
-        <location line="+255"/>
+        <location line="+261"/>
         <source>%1 Anlagen mit erkanntem Fehlerbild</source>
         <translation>%1 Anlagen mit erkanntem Fehlerbild</translation>
     </message>
     <message>
-        <location line="+65"/>
+        <location line="+87"/>
         <source>Filter zurücksetzen (%1)</source>
         <translation>Filter zurücksetzen (%1)</translation>
     </message>
@@ -2544,12 +2544,12 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Wiederholen: %1 (Strg+Y)</translation>
     </message>
     <message>
-        <location line="-609"/>
+        <location line="-637"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation>Benutzer &amp;wechseln …</translation>
     </message>
     <message>
-        <location line="+84"/>
+        <location line="+90"/>
         <source>&amp;Beenden</source>
         <translation>&amp;Beenden</translation>
     </message>
@@ -2569,7 +2569,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>%1 Fehler beim Einlesen</translation>
     </message>
     <message>
-        <location line="+73"/>
+        <location line="+95"/>
         <source>Anlagen durchsuchen (Strg+F)</source>
         <translation>Anlagen durchsuchen (Strg+F)</translation>
     </message>
@@ -2615,12 +2615,12 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Anlage:</translation>
     </message>
     <message>
-        <location line="-636"/>
+        <location line="-664"/>
         <source>Exportieren</source>
         <translation>Exportieren</translation>
     </message>
     <message>
-        <location line="+798"/>
+        <location line="+826"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>Nur für die Rolle Administrator.</translation>
     </message>
@@ -2695,7 +2695,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Änderungsverlauf …</translation>
     </message>
     <message>
-        <location line="-1143"/>
+        <location line="-1171"/>
         <source>Daten werden geladen …</source>
         <translation>Daten werden geladen …</translation>
     </message>
@@ -2785,7 +2785,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Abo-Modus: entfernt die (erfundene) Werbung. Kostet 0,00 €.</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+18"/>
         <source>&amp;Intro beim Start</source>
         <translation>&amp;Intro beim Start</translation>
     </message>
@@ -2810,7 +2810,12 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>SolarMonitor beenden (Strg+Q)</translation>
     </message>
     <message>
-        <location line="+85"/>
+        <location line="+89"/>
+        <source>Zahlung abgebrochen – die Werbung bleibt.</source>
+        <translation>Zahlung abgebrochen – die Werbung bleibt.</translation>
+    </message>
+    <message>
+        <location line="+18"/>
         <source>Danke für Ihr Abo! SolarMonitor Premium ist aktiv – werbefrei für sagenhafte 0,00 € im Monat.</source>
         <translation>Danke für Ihr Abo! SolarMonitor Premium ist aktiv – werbefrei für sagenhafte 0,00 € im Monat.</translation>
     </message>
@@ -3000,12 +3005,12 @@ Jetzt öffnen?</translation>
         <translation>&lt;Ausgangszustand nach dem Laden&gt;</translation>
     </message>
     <message>
-        <location line="-1438"/>
+        <location line="-1466"/>
         <source>Angemeldet als %1.</source>
         <translation>Angemeldet als %1.</translation>
     </message>
     <message>
-        <location line="+1457"/>
+        <location line="+1485"/>
         <source>Über SolarMonitor</source>
         <translation>Über SolarMonitor</translation>
     </message>
@@ -4759,6 +4764,263 @@ Ihr Warenkorb bleibt leer und Ihr Geld bei Ihnen.</translation>
         <location line="+7"/>
         <source>Windows Hello gibt es nur unter Windows.</source>
         <translation>Windows Hello gibt es nur unter Windows.</translation>
+    </message>
+</context>
+<context>
+    <name>ZahlungDialog</name>
+    <message>
+        <location filename="../src/ui/zahlung_dialog.cpp" line="+113"/>
+        <source>SolarMonitor Pay – Premium abschließen</source>
+        <translation>SolarMonitor Pay – Premium abschließen</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Die Spaßkasse – hier fließt kein echtes Geld</source>
+        <translation>Die Spaßkasse – hier fließt kein echtes Geld</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>TESTMODUS</source>
+        <translation>TESTMODUS</translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Zurück</source>
+        <translation>Zurück</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Abbrechen</source>
+        <translation>Abbrechen</translation>
+    </message>
+    <message>
+        <location line="+35"/>
+        <location line="+280"/>
+        <source>Verbinde mit der Sonne …</source>
+        <translation>Verbinde mit der Sonne …</translation>
+    </message>
+    <message>
+        <location line="-279"/>
+        <source>Prüfe die Wolkenlage über dem Bodensee …</source>
+        <translation>Prüfe die Wolkenlage über dem Bodensee …</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Bucht 0,00 € ab …</source>
+        <translation>Bucht 0,00 € ab …</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Entsorgt die Werbung fachgerecht …</source>
+        <translation>Entsorgt die Werbung fachgerecht …</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Ihre Bestellung</source>
+        <translation>Ihre Bestellung</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; (werbefrei)</source>
+        <translation>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; (werbefrei)</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Keine Werbebanner mehr</source>
+        <translation>Keine Werbebanner mehr</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Keine Popups im Minutentakt</source>
+        <translation>Keine Popups im Minutentakt</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Goldenes PREMIUM-Abzeichen im Kopf</source>
+        <translation>Goldenes PREMIUM-Abzeichen im Kopf</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Jederzeit im Kontomenü kündbar</source>
+        <translation>Jederzeit im Kontomenü kündbar</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Monatlicher Preis</source>
+        <translation>Monatlicher Preis</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+90"/>
+        <source>0,00 €</source>
+        <translation>0,00 €</translation>
+    </message>
+    <message>
+        <location line="-91"/>
+        <source>Einrichtungsgebühr</source>
+        <translation>Einrichtungsgebühr</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Heute fällig</source>
+        <translation>Heute fällig</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Bei SolarMonitor Pay anmelden</source>
+        <translation>Bei SolarMonitor Pay anmelden</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Testmodus: Jede vierstellige Sonnen-PIN funktioniert. Bitte keine echte PIN und kein echtes Passwort eingeben – die Eingabe wird weder gespeichert noch gesendet.</source>
+        <translation>Testmodus: Jede vierstellige Sonnen-PIN funktioniert. Bitte keine echte PIN und kein echtes Passwort eingeben – die Eingabe wird weder gespeichert noch gesendet.</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Konto</source>
+        <translation>Konto</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Sonnen-PIN (4 Ziffern)</source>
+        <translation>Sonnen-PIN (4 Ziffern)</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Zahlart wählen</source>
+        <translation>Zahlart wählen</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Sonnenstunden-Guthaben</source>
+        <translation>Sonnenstunden-Guthaben</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>1.234 kWh verfügbar · wird nicht belastet</source>
+        <translation>1.234 kWh verfügbar · wird nicht belastet</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Kilowattkekse</source>
+        <translation>Kilowattkekse</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>3 Stück in der Dose · bleiben alle drin</source>
+        <translation>3 Stück in der Dose · bleiben alle drin</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Ein freundliches Lächeln</source>
+        <translation>Ein freundliches Lächeln</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>unbegrenzt verfügbar</source>
+        <translation>unbegrenzt verfügbar</translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>Prüfen und abonnieren</source>
+        <translation>Prüfen und abonnieren</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Produkt</source>
+        <translation>Produkt</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>SolarMonitor Premium</source>
+        <translation>SolarMonitor Premium</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Zahlart</source>
+        <translation>Zahlart</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Laufzeit</source>
+        <translation>Laufzeit</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>monatlich, jederzeit kündbar</source>
+        <translation>monatlich, jederzeit kündbar</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Betrag</source>
+        <translation>Betrag</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Ich akzeptiere die AGB (3.874 Seiten, sinngemäß: „Werbung weg, alles gut“).</source>
+        <translation>Ich akzeptiere die AGB (3.874 Seiten, sinngemäß: „Werbung weg, alles gut“).</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Zahlung wird verarbeitet …</source>
+        <translation>Zahlung wird verarbeitet …</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Bitte das Fenster nicht schließen. (Es würde aber auch nichts passieren.)</source>
+        <translation>Bitte das Fenster nicht schließen. (Es würde aber auch nichts passieren.)</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Zahlung erfolgreich!</source>
+        <translation>Zahlung erfolgreich!</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Eine Quittung haben wir Ihnen nicht geschickt – es gibt ja auch nichts zu quittieren.</source>
+        <translation>Eine Quittung haben wir Ihnen nicht geschickt – es gibt ja auch nichts zu quittieren.</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Schritt %1 von 4</source>
+        <translation>Schritt %1 von 4</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Weiter mit SolarMonitor Pay</source>
+        <translation>Weiter mit SolarMonitor Pay</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Anmelden</source>
+        <translation>Anmelden</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Weiter</source>
+        <translation>Weiter</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Jetzt abonnieren · 0,00 €</source>
+        <translation>Jetzt abonnieren · 0,00 €</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; ist aktiv.&lt;br&gt;Transaktion: %1&lt;br&gt;Betrag: 0,00 € · Zahlart: %2&lt;br&gt;Datum: %3</source>
+        <translation>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; ist aktiv.&lt;br&gt;Transaktion: %1&lt;br&gt;Betrag: 0,00 € · Zahlart: %2&lt;br&gt;Datum: %3</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Fertig</source>
+        <translation>Fertig</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Bitte eine vierstellige Sonnen-PIN eingeben (z. B. 1234).</source>
+        <translation>Bitte eine vierstellige Sonnen-PIN eingeben (z. B. 1234).</translation>
     </message>
 </context>
 </TS>

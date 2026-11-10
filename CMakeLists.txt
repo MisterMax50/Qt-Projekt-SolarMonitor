@@ -108,6 +108,8 @@ set(PROJEKT_QUELLEN
     src/ui/anordnungs_raster.cpp
     src/ui/benutzer_seite.cpp
     src/ui/werbung.cpp
+    src/ui/zahlung_dialog.h
+    src/ui/zahlung_dialog.cpp
     src/ui/pdf_bericht.cpp
     src/ui/pruefprotokoll_widget.cpp
     src/ui/serviceplanung.cpp
