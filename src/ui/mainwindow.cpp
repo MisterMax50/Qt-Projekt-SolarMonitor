@@ -799,10 +799,6 @@ QWidget* MainWindow::baueNavigation()
     eintrag(Stil::Symbol::Statistik, tr("Statistik"), ReiterStatistik);
     eintrag(Stil::Symbol::Werkzeug, tr("Serviceplanung"), ReiterService);
     eintrag(Stil::Symbol::Pruefung, tr("Datenprüfung"), ReiterPruefung);
-    if (m_kontext.darf(Recht::BenutzerVerwalten)) {
-        abschnitt(tr("Verwaltung"));
-        eintrag(Stil::Symbol::Benutzer, tr("Benutzerverwaltung"), ReiterBenutzer);
-    }
     connect(m_navigation, &QListWidget::currentItemChanged, this, [this](QListWidgetItem* it) {
         if (it && it->data(kSeiteRolle).toInt() >= 0)
             m_tabs->setCurrentIndex(it->data(kSeiteRolle).toInt());
@@ -883,6 +879,11 @@ QWidget* MainWindow::baueKopfzeile()
     auto* menue = new QMenu(benutzer);
     menue->addAction(Stil::icon(Stil::Symbol::Benutzer, Stil::text()), tr("Benutzer &wechseln …"), this,
                      &MainWindow::benutzerWechseln);
+    if (m_kontext.darf(Recht::BenutzerVerwalten)) {
+        // nur für Administratoren: Seite "Benutzerverwaltung"
+        menue->addAction(Stil::icon(Stil::Symbol::Werkzeug, Stil::text()), tr("Benutzer&verwaltung"), this,
+                         [this] { m_tabs->setCurrentIndex(ReiterBenutzer); });
+    }
     menue->addAction(m_aktVerlauf);
     menue->addAction(Stil::icon(Stil::Symbol::Liste, Stil::text()), tr("Daten&ordner ändern …"), this,
                      [this] { zeigeDatenordner(QString(), true); });
@@ -956,13 +957,16 @@ void MainWindow::seiteGewechselt(int index)
         return;
     m_seitenTitel->setText(w->windowTitle());
     m_seitenHinweis->setText(w->property("hinweis").toString());
+    // passenden Eintrag der Seitenleiste markieren; Seiten aus dem
+    // Benutzermenü (Benutzerverwaltung) haben keinen, dann nichts markieren
+    QSignalBlocker sperre(m_navigation);
+    m_navigation->setCurrentRow(-1);
     for (int i = 0; i < m_navigation->count(); ++i)
         if (m_navigation->item(i)->data(kSeiteRolle).toInt() == index) {
-            QSignalBlocker sperre(m_navigation);
             m_navigation->setCurrentRow(i);
-            m_navigation->viewport()->update();
             break;
         }
+    m_navigation->viewport()->update();
 }
 
 void MainWindow::aktualisiereNavigation()

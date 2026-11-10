@@ -2273,7 +2273,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Überwachung</translation>
     </message>
     <message>
-        <location line="+97"/>
+        <location line="+98"/>
         <source>&amp;Dunkles Design</source>
         <translation>&amp;Dunkles Design</translation>
     </message>
@@ -2288,7 +2288,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>&amp;Sprache</translation>
     </message>
     <message>
-        <location line="+86"/>
+        <location line="+89"/>
         <source>%1 offene Störungen, davon %2 kritisch</source>
         <translation>%1 offene Störungen, davon %2 kritisch</translation>
     </message>
@@ -2349,13 +2349,13 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Filter zurücksetzen</translation>
     </message>
     <message>
-        <location line="-520"/>
+        <location line="-524"/>
         <location line="+222"/>
         <source>Übersicht</source>
         <translation>Übersicht</translation>
     </message>
     <message>
-        <location line="+202"/>
+        <location line="+206"/>
         <source>%1 Anlagen mit erkanntem Fehlerbild</source>
         <translation>%1 Anlagen mit erkanntem Fehlerbild</translation>
     </message>
@@ -2487,12 +2487,12 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Wiederholen: %1 (Strg+Y)</translation>
     </message>
     <message>
-        <location line="-532"/>
+        <location line="-540"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation>Benutzer &amp;wechseln …</translation>
     </message>
     <message>
-        <location line="+36"/>
+        <location line="+41"/>
         <source>&amp;Beenden</source>
         <translation>&amp;Beenden</translation>
     </message>
@@ -2507,7 +2507,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>&amp;Über SolarMonitor</translation>
     </message>
     <message>
-        <location line="+79"/>
+        <location line="+82"/>
         <source>%1 Fehler beim Einlesen</source>
         <translation>%1 Fehler beim Einlesen</translation>
     </message>
@@ -2558,12 +2558,12 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Anlage:</translation>
     </message>
     <message>
-        <location line="-563"/>
+        <location line="-567"/>
         <source>Exportieren</source>
         <translation>Exportieren</translation>
     </message>
     <message>
-        <location line="+725"/>
+        <location line="+729"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>Nur für die Rolle Administrator.</translation>
     </message>
@@ -2638,7 +2638,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Änderungsverlauf …</translation>
     </message>
     <message>
-        <location line="-1045"/>
+        <location line="-1049"/>
         <source>Daten werden geladen …</source>
         <translation>Daten werden geladen …</translation>
     </message>
@@ -2664,12 +2664,11 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
     </message>
     <message>
         <location line="+56"/>
-        <location line="+176"/>
         <source>Benutzerverwaltung</source>
         <translation>Benutzerverwaltung</translation>
     </message>
     <message>
-        <location line="-175"/>
+        <location line="+1"/>
         <source>Konten anlegen, Rollen vergeben, PINs zurücksetzen und Zugänge sperren</source>
         <translation>Konten anlegen, Rollen vergeben, PINs zurücksetzen und Zugänge sperren</translation>
     </message>
@@ -2679,17 +2678,17 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Auswertung</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <source>Verwaltung</source>
-        <translation>Verwaltung</translation>
-    </message>
-    <message>
-        <location line="+79"/>
+        <location line="+80"/>
         <source>Angemeldet als %1 (%2)</source>
         <translation>Angemeldet als %1 (%2)</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+6"/>
+        <source>Benutzer&amp;verwaltung</source>
+        <translation>Benutzer&amp;verwaltung</translation>
+    </message>
+    <message>
+        <location line="+4"/>
         <source>Daten&amp;ordner ändern …</source>
         <translation>Daten&amp;ordner ändern …</translation>
     </message>
@@ -2709,7 +2708,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>SolarMonitor beenden (Strg+Q)</translation>
     </message>
     <message>
-        <location line="+549"/>
+        <location line="+552"/>
         <source>Bitte zuerst eine Anlage in der Liste auswählen.</source>
         <translation>Bitte zuerst eine Anlage in der Liste auswählen.</translation>
     </message>
@@ -2889,12 +2888,12 @@ Jetzt öffnen?</translation>
         <translation>&lt;Ausgangszustand nach dem Laden&gt;</translation>
     </message>
     <message>
-        <location line="-1340"/>
+        <location line="-1344"/>
         <source>Angemeldet als %1.</source>
         <translation>Angemeldet als %1.</translation>
     </message>
     <message>
-        <location line="+1359"/>
+        <location line="+1363"/>
         <source>Über SolarMonitor</source>
         <translation>Über SolarMonitor</translation>
     </message>

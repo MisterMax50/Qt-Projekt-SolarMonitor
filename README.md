@@ -72,8 +72,8 @@ Angemeldet wird mit **Benutzer und PIN**. Jedes Konto hat eine Rolle:
 Beim ersten Start werden drei Demo-Konten angelegt:
 `betrieb` / 0000, `service` / 5678, `admin` / 1234.
 
-**Benutzerverwaltung** (Seitenleiste → *Verwaltung*, nur für
-Administratoren, `src/ui/benutzer_seite.*`, `src/model/benutzer.*`):
+**Benutzerverwaltung** (Benutzermenü oben rechts → *Benutzerverwaltung*,
+nur für Administratoren, `src/ui/benutzer_seite.*`, `src/model/benutzer.*`):
 Benutzer anlegen (Name, Benutzername, Rolle, PIN), bearbeiten, sperren,
 PIN zurücksetzen und löschen. Schutzregeln: Es bleibt immer mindestens ein
 aktiver Administrator; das eigene Konto kann nicht gelöscht, gesperrt oder
