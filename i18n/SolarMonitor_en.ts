@@ -2324,7 +2324,7 @@ Administrator: additionally manage master data and users</translation>
         <translation>Monitoring</translation>
     </message>
     <message>
-        <location line="+134"/>
+        <location line="+135"/>
         <source>&amp;Dunkles Design</source>
         <translation>&amp;Dark theme</translation>
     </message>
@@ -2400,13 +2400,13 @@ Administrator: additionally manage master data and users</translation>
         <translation>Reset filters</translation>
     </message>
     <message>
-        <location line="-560"/>
+        <location line="-561"/>
         <location line="+222"/>
         <source>Übersicht</source>
         <translation>Overview</translation>
     </message>
     <message>
-        <location line="+242"/>
+        <location line="+243"/>
         <source>%1 Anlagen mit erkanntem Fehlerbild</source>
         <translation>%1 plants with a detected fault pattern</translation>
     </message>
@@ -2538,12 +2538,12 @@ Administrator: additionally manage master data and users</translation>
         <translation>Redo: %1 (Ctrl+Y)</translation>
     </message>
     <message>
-        <location line="-576"/>
+        <location line="-577"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation>S&amp;witch user …</translation>
     </message>
     <message>
-        <location line="+77"/>
+        <location line="+78"/>
         <source>&amp;Beenden</source>
         <translation>&amp;Quit</translation>
     </message>
@@ -2609,12 +2609,12 @@ Administrator: additionally manage master data and users</translation>
         <translation>Plant:</translation>
     </message>
     <message>
-        <location line="-603"/>
+        <location line="-604"/>
         <source>Exportieren</source>
         <translation>Export</translation>
     </message>
     <message>
-        <location line="+765"/>
+        <location line="+766"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>Administrator role only.</translation>
     </message>
@@ -2689,7 +2689,7 @@ Administrator: additionally manage master data and users</translation>
         <translation>Change history …</translation>
     </message>
     <message>
-        <location line="-1085"/>
+        <location line="-1086"/>
         <source>Daten werden geladen …</source>
         <translation>Loading data …</translation>
     </message>
@@ -2744,17 +2744,17 @@ Administrator: additionally manage master data and users</translation>
         <translation>Sign in with Windows &amp;Hello</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+9"/>
         <source>Statt der PIN per Fingerabdruck, Gesicht oder Windows-PIN anmelden</source>
         <translation>Sign in with fingerprint, face or Windows PIN instead of the PIN</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+4"/>
         <source>Anmeldung mit Windows Hello ausgeschaltet.</source>
         <translation>Sign-in with Windows Hello turned off.</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+13"/>
         <source>Windows Hello für SolarMonitor einrichten</source>
         <translation>Set up Windows Hello for SolarMonitor</translation>
     </message>
@@ -2964,12 +2964,12 @@ Open it now?</translation>
         <translation>&lt;Initial state after loading&gt;</translation>
     </message>
     <message>
-        <location line="-1380"/>
+        <location line="-1381"/>
         <source>Angemeldet als %1.</source>
         <translation>Signed in as %1.</translation>
     </message>
     <message>
-        <location line="+1399"/>
+        <location line="+1400"/>
         <source>Über SolarMonitor</source>
         <translation>About SolarMonitor</translation>
     </message>
@@ -4391,7 +4391,7 @@ Measured over land around Lake Constance, not straight across the water.</transl
 <context>
     <name>WindowsHello</name>
     <message>
-        <location filename="../src/util/windows_hello.cpp" line="+31"/>
+        <location filename="../src/util/windows_hello.cpp" line="+32"/>
         <source>Kein Fingerabdruckleser bzw. keine Windows-Hello-Kamera gefunden.</source>
         <translation>No fingerprint reader or Windows Hello camera found.</translation>
     </message>
@@ -4411,12 +4411,17 @@ Measured over land around Lake Constance, not straight across the water.</transl
         <translation>Windows Hello is busy. Please try again.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Windows Hello konnte nicht abgefragt werden.</source>
-        <translation>Windows Hello could not be queried.</translation>
+        <location line="+2"/>
+        <source>Windows Hello konnte nicht abgefragt werden: %1</source>
+        <translation>Windows Hello could not be queried: %1</translation>
     </message>
     <message>
-        <location line="+24"/>
+        <location line="+37"/>
+        <source>Windows Hello konnte die Anmeldung nicht bestätigen: %1</source>
+        <translation>Windows Hello could not confirm the sign-in: %1</translation>
+    </message>
+    <message>
+        <location line="-11"/>
         <source>Zu viele Fehlversuche bei Windows Hello.</source>
         <translation>Too many failed Windows Hello attempts.</translation>
     </message>
@@ -4426,12 +4431,7 @@ Measured over land around Lake Constance, not straight across the water.</transl
         <translation>Windows Hello is not available.</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <source>Windows Hello konnte die Anmeldung nicht bestätigen.</source>
-        <translation>Windows Hello could not confirm the sign-in.</translation>
-    </message>
-    <message>
-        <location line="+15"/>
+        <location line="+20"/>
         <location line="+7"/>
         <source>Windows Hello gibt es nur unter Windows.</source>
         <translation>Windows Hello is only available on Windows.</translation>

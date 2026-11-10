@@ -894,14 +894,8 @@ QWidget* MainWindow::baueKopfzeile()
         hello->setChecked(b && !b->helloKonto.isEmpty());
     };
     helloStand();
-    connect(menue, &QMenu::aboutToShow, hello, [hello, helloStand] {
-        // Verfügbarkeit erst beim Öffnen des Menüs prüfen (einmalig, dann gemerkt)
-        QString grund;
-        const bool da = WindowsHello::verfuegbar(&grund);
-        hello->setEnabled(da || hello->isChecked());
-        hello->setToolTip(da ? tr("Statt der PIN per Fingerabdruck, Gesicht oder Windows-PIN anmelden") : grund);
-        helloStand();
-    });
+    menue->setToolTipsVisible(true);
+    hello->setToolTip(tr("Statt der PIN per Fingerabdruck, Gesicht oder Windows-PIN anmelden"));
     connect(hello, &QAction::toggled, this, [this, helloStand](bool an) {
         if (!an) {
             const QString f = m_benutzer->setzeHello(m_angemeldet, QString());
@@ -909,7 +903,14 @@ QWidget* MainWindow::baueKopfzeile()
             helloStand();
             return;
         }
-        // Einschalten nur nach erfolgreicher Bestätigung
+        // Einschalten nur nach erfolgreicher Bestätigung; ist Hello nicht
+        // nutzbar, den Grund deutlich anzeigen (Menüpunkt bleibt anklickbar)
+        QString grund;
+        if (!WindowsHello::verfuegbar(&grund)) {
+            meldung(grund, 9000, true);
+            helloStand();
+            return;
+        }
         QString fehler;
         const auto ergebnis = WindowsHello::pruefe(this, tr("Windows Hello für SolarMonitor einrichten"), &fehler);
         if (ergebnis == WindowsHello::Ergebnis::Bestaetigt) {

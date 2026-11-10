@@ -8,9 +8,23 @@
 
 #include <windows.h>
 
+#include <cstdio>
 #include <string>
 
 namespace hello_win32 {
+
+/// Beschreibung des letzten technischen Fehlers (Schritt und HRESULT), für die Fehlersuche.
+inline std::wstring& letzterFehler()
+{
+    static std::wstring f;
+    return f;
+}
+inline void merkeFehler(const wchar_t* schritt, HRESULT hr)
+{
+    wchar_t text[160];
+    std::swprintf(text, 160, L"%ls (0x%08lX)", schritt, static_cast<unsigned long>(hr));
+    letzterFehler() = text;
+}
 
 using HSTRING_ = void*;
 
@@ -70,8 +84,10 @@ struct Combase {
     Combase()
     {
         HMODULE dll = LoadLibraryW(L"combase.dll");
-        if (!dll)
+        if (!dll) {
+            merkeFehler(L"combase.dll nicht geladen", HRESULT_FROM_WIN32(GetLastError()));
             return;
+        }
         roInitialize = reinterpret_cast<RoInitialize_t>(reinterpret_cast<void*>(GetProcAddress(dll, "RoInitialize")));
         factory = reinterpret_cast<RoGetActivationFactory_t>(
             reinterpret_cast<void*>(GetProcAddress(dll, "RoGetActivationFactory")));
@@ -80,7 +96,9 @@ struct Combase {
         loesche = reinterpret_cast<WindowsDeleteString_t>(
             reinterpret_cast<void*>(GetProcAddress(dll, "WindowsDeleteString")));
         ok = roInitialize && factory && erzeuge && loesche;
-        if (ok)
+        if (!ok)
+            merkeFehler(L"WinRT-Funktionen in combase.dll fehlen", E_NOINTERFACE);
+        else
             roInitialize(0); // RO_INIT_SINGLETHREADED; ist COM schon initialisiert, ist das in Ordnung
     }
 };
@@ -99,12 +117,19 @@ inline IUserConsentVerifierStatics_* statics()
         return nullptr;
     static const wchar_t name[] = L"Windows.Security.Credentials.UI.UserConsentVerifier";
     HSTRING_ klasse = nullptr;
-    if (FAILED(c.erzeuge(name, UINT32(sizeof(name) / sizeof(wchar_t) - 1), &klasse)))
+    HRESULT hr = c.erzeuge(name, UINT32(sizeof(name) / sizeof(wchar_t) - 1), &klasse);
+    if (FAILED(hr)) {
+        merkeFehler(L"WindowsCreateString", hr);
         return nullptr;
+    }
     IUserConsentVerifierStatics_* s = nullptr;
-    const HRESULT hr = c.factory(klasse, IID_IUserConsentVerifierStatics, reinterpret_cast<void**>(&s));
+    hr = c.factory(klasse, IID_IUserConsentVerifierStatics, reinterpret_cast<void**>(&s));
     c.loesche(klasse);
-    return SUCCEEDED(hr) ? s : nullptr;
+    if (FAILED(hr) || !s) {
+        merkeFehler(L"RoGetActivationFactory(UserConsentVerifier)", hr);
+        return nullptr;
+    }
+    return s;
 }
 
 /**
@@ -116,15 +141,34 @@ template <typename Pumpe>
 bool warte(IAsyncOperationInt_* op, int* ergebnis, Pumpe pumpe)
 {
     IAsyncInfo_* info = nullptr;
-    if (FAILED(op->QueryInterface(IID_IAsyncInfo, reinterpret_cast<void**>(&info))) || !info)
+    HRESULT hr = op->QueryInterface(IID_IAsyncInfo, reinterpret_cast<void**>(&info));
+    if (FAILED(hr) || !info) {
+        merkeFehler(L"QueryInterface(IAsyncInfo)", hr);
         return false;
+    }
     int status = 0;
-    while (SUCCEEDED(info->get_Status(&status)) && status == 0) {
+    while (SUCCEEDED(hr = info->get_Status(&status)) && status == 0) {
         pumpe();
         Sleep(15);
     }
+    if (status == 3) { // Fehler: Code der Operation merken
+        HRESULT code = S_OK;
+        info->get_ErrorCode(&code);
+        merkeFehler(L"Windows-Operation fehlgeschlagen", code);
+    } else if (status == 2) {
+        merkeFehler(L"Windows-Operation abgebrochen", E_ABORT);
+    } else if (FAILED(hr)) {
+        merkeFehler(L"IAsyncInfo::get_Status", hr);
+    }
     info->Release();
-    return status == 1 && SUCCEEDED(op->GetResults(ergebnis));
+    if (status != 1)
+        return false;
+    hr = op->GetResults(ergebnis);
+    if (FAILED(hr)) {
+        merkeFehler(L"GetResults", hr);
+        return false;
+    }
+    return true;
 }
 
 template <typename Pumpe>
@@ -135,7 +179,10 @@ Verfuegbarkeit verfuegbarkeit(Pumpe pumpe)
         return Verfuegbarkeit::Fehler;
     IAsyncOperationInt_* op = nullptr;
     int ergebnis = int(Verfuegbarkeit::Fehler);
-    const bool ok = SUCCEEDED(s->CheckAvailabilityAsync(&op)) && op && warte(op, &ergebnis, pumpe);
+    const HRESULT hr = s->CheckAvailabilityAsync(&op);
+    if (FAILED(hr) || !op)
+        merkeFehler(L"CheckAvailabilityAsync", hr);
+    const bool ok = SUCCEEDED(hr) && op && warte(op, &ergebnis, pumpe);
     if (op)
         op->Release();
     s->Release();
@@ -150,7 +197,9 @@ Pruefung pruefe(HWND fenster, const std::wstring& nachricht, Pumpe pumpe)
     if (!s)
         return Pruefung::Fehler;
     IUserConsentVerifierInterop_* interop = nullptr;
-    if (FAILED(s->QueryInterface(IID_IUserConsentVerifierInterop, reinterpret_cast<void**>(&interop))) || !interop) {
+    HRESULT hr = s->QueryInterface(IID_IUserConsentVerifierInterop, reinterpret_cast<void**>(&interop));
+    if (FAILED(hr) || !interop) {
+        merkeFehler(L"QueryInterface(IUserConsentVerifierInterop)", hr);
         s->Release();
         return Pruefung::Fehler;
     }
@@ -158,9 +207,10 @@ Pruefung pruefe(HWND fenster, const std::wstring& nachricht, Pumpe pumpe)
     combase().erzeuge(nachricht.c_str(), UINT32(nachricht.size()), &text);
     IAsyncOperationInt_* op = nullptr;
     int ergebnis = int(Pruefung::Fehler);
-    const bool ok = SUCCEEDED(interop->RequestVerificationForWindowAsync(fenster, text, IID_AsyncOpErgebnis,
-                                                                         reinterpret_cast<void**>(&op)))
-        && op && warte(op, &ergebnis, pumpe);
+    hr = interop->RequestVerificationForWindowAsync(fenster, text, IID_AsyncOpErgebnis, reinterpret_cast<void**>(&op));
+    if (FAILED(hr) || !op)
+        merkeFehler(L"RequestVerificationForWindowAsync", hr);
+    const bool ok = SUCCEEDED(hr) && op && warte(op, &ergebnis, pumpe);
     if (op)
         op->Release();
     if (text)

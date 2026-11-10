@@ -2324,7 +2324,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Überwachung</translation>
     </message>
     <message>
-        <location line="+134"/>
+        <location line="+135"/>
         <source>&amp;Dunkles Design</source>
         <translation>&amp;Dunkles Design</translation>
     </message>
@@ -2400,13 +2400,13 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Filter zurücksetzen</translation>
     </message>
     <message>
-        <location line="-560"/>
+        <location line="-561"/>
         <location line="+222"/>
         <source>Übersicht</source>
         <translation>Übersicht</translation>
     </message>
     <message>
-        <location line="+242"/>
+        <location line="+243"/>
         <source>%1 Anlagen mit erkanntem Fehlerbild</source>
         <translation>%1 Anlagen mit erkanntem Fehlerbild</translation>
     </message>
@@ -2538,12 +2538,12 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Wiederholen: %1 (Strg+Y)</translation>
     </message>
     <message>
-        <location line="-576"/>
+        <location line="-577"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation>Benutzer &amp;wechseln …</translation>
     </message>
     <message>
-        <location line="+77"/>
+        <location line="+78"/>
         <source>&amp;Beenden</source>
         <translation>&amp;Beenden</translation>
     </message>
@@ -2609,12 +2609,12 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Anlage:</translation>
     </message>
     <message>
-        <location line="-603"/>
+        <location line="-604"/>
         <source>Exportieren</source>
         <translation>Exportieren</translation>
     </message>
     <message>
-        <location line="+765"/>
+        <location line="+766"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>Nur für die Rolle Administrator.</translation>
     </message>
@@ -2689,7 +2689,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Änderungsverlauf …</translation>
     </message>
     <message>
-        <location line="-1085"/>
+        <location line="-1086"/>
         <source>Daten werden geladen …</source>
         <translation>Daten werden geladen …</translation>
     </message>
@@ -2744,17 +2744,17 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Anmeldung mit Windows &amp;Hello</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+9"/>
         <source>Statt der PIN per Fingerabdruck, Gesicht oder Windows-PIN anmelden</source>
         <translation>Statt der PIN per Fingerabdruck, Gesicht oder Windows-PIN anmelden</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+4"/>
         <source>Anmeldung mit Windows Hello ausgeschaltet.</source>
         <translation>Anmeldung mit Windows Hello ausgeschaltet.</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+13"/>
         <source>Windows Hello für SolarMonitor einrichten</source>
         <translation>Windows Hello für SolarMonitor einrichten</translation>
     </message>
@@ -2964,12 +2964,12 @@ Jetzt öffnen?</translation>
         <translation>&lt;Ausgangszustand nach dem Laden&gt;</translation>
     </message>
     <message>
-        <location line="-1380"/>
+        <location line="-1381"/>
         <source>Angemeldet als %1.</source>
         <translation>Angemeldet als %1.</translation>
     </message>
     <message>
-        <location line="+1399"/>
+        <location line="+1400"/>
         <source>Über SolarMonitor</source>
         <translation>Über SolarMonitor</translation>
     </message>
@@ -4391,7 +4391,7 @@ Gemessen wird auf dem Landweg um den Bodensee herum, nicht quer über das Wasser
 <context>
     <name>WindowsHello</name>
     <message>
-        <location filename="../src/util/windows_hello.cpp" line="+31"/>
+        <location filename="../src/util/windows_hello.cpp" line="+32"/>
         <source>Kein Fingerabdruckleser bzw. keine Windows-Hello-Kamera gefunden.</source>
         <translation>Kein Fingerabdruckleser bzw. keine Windows-Hello-Kamera gefunden.</translation>
     </message>
@@ -4411,12 +4411,17 @@ Gemessen wird auf dem Landweg um den Bodensee herum, nicht quer über das Wasser
         <translation>Windows Hello ist gerade belegt. Bitte erneut versuchen.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Windows Hello konnte nicht abgefragt werden.</source>
-        <translation>Windows Hello konnte nicht abgefragt werden.</translation>
+        <location line="+2"/>
+        <source>Windows Hello konnte nicht abgefragt werden: %1</source>
+        <translation>Windows Hello konnte nicht abgefragt werden: %1</translation>
     </message>
     <message>
-        <location line="+24"/>
+        <location line="+37"/>
+        <source>Windows Hello konnte die Anmeldung nicht bestätigen: %1</source>
+        <translation>Windows Hello konnte die Anmeldung nicht bestätigen: %1</translation>
+    </message>
+    <message>
+        <location line="-11"/>
         <source>Zu viele Fehlversuche bei Windows Hello.</source>
         <translation>Zu viele Fehlversuche bei Windows Hello.</translation>
     </message>
@@ -4426,12 +4431,7 @@ Gemessen wird auf dem Landweg um den Bodensee herum, nicht quer über das Wasser
         <translation>Windows Hello ist nicht verfügbar.</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <source>Windows Hello konnte die Anmeldung nicht bestätigen.</source>
-        <translation>Windows Hello konnte die Anmeldung nicht bestätigen.</translation>
-    </message>
-    <message>
-        <location line="+15"/>
+        <location line="+20"/>
         <location line="+7"/>
         <source>Windows Hello gibt es nur unter Windows.</source>
         <translation>Windows Hello gibt es nur unter Windows.</translation>

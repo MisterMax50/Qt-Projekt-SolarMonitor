@@ -22,8 +22,9 @@ bool WindowsHello::verfuegbar(QString* grund)
     using V = hello_win32::Verfuegbarkeit;
     if (!g_geprueft) {
         g_verfuegbarkeit = hello_win32::verfuegbarkeit(pumpe);
-        // "belegt" ist nur vorübergehend – beim nächsten Mal erneut fragen
-        g_geprueft = g_verfuegbarkeit != V::Belegt;
+        // nur ein eindeutiges Ergebnis merken; "belegt" und technische
+        // Fehler beim nächsten Mal erneut prüfen
+        g_geprueft = g_verfuegbarkeit != V::Belegt && g_verfuegbarkeit != V::Fehler;
     }
     if (grund) {
         switch (g_verfuegbarkeit) {
@@ -32,7 +33,10 @@ bool WindowsHello::verfuegbar(QString* grund)
         case V::NichtEingerichtet: *grund = tr("Windows Hello ist für dieses Windows-Konto nicht eingerichtet (Windows-Einstellungen → Konten → Anmeldeoptionen)."); break;
         case V::Richtlinie: *grund = tr("Windows Hello ist durch eine Richtlinie deaktiviert."); break;
         case V::Belegt: *grund = tr("Windows Hello ist gerade belegt. Bitte erneut versuchen."); break;
-        default: *grund = tr("Windows Hello konnte nicht abgefragt werden."); break;
+        default:
+            *grund = tr("Windows Hello konnte nicht abgefragt werden: %1")
+                         .arg(QString::fromStdWString(hello_win32::letzterFehler()));
+            break;
         }
     }
     return g_verfuegbarkeit == V::Verfuegbar;
@@ -67,7 +71,8 @@ WindowsHello::Ergebnis WindowsHello::pruefe(QWidget* fenster, const QString& nac
         return Ergebnis::NichtVerfuegbar;
     default:
         if (fehler)
-            *fehler = tr("Windows Hello konnte die Anmeldung nicht bestätigen.");
+            *fehler = tr("Windows Hello konnte die Anmeldung nicht bestätigen: %1")
+                          .arg(QString::fromStdWString(hello_win32::letzterFehler()));
         return Ergebnis::Fehler;
     }
 }
