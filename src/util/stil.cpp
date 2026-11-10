@@ -234,18 +234,54 @@ QMenu::item:disabled { color: %GED%; }
 QMenu::separator { height: 1px; background: %LINIE%; margin: 5px 4px; }
 QMenu::icon { padding-left: 8px; }
 QToolTip { background: %SEITE%; color: #ffffff; border: none; padding: 5px 8px; }
-QFrame#Werbung { background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 %FLAECHE%, stop:1 %AUSW%);
-    border: 1px dashed %LINIESTARK%; border-radius: 8px; }
-QFrame#Werbung:hover { border-color: %AKZ%; }
-QLabel#WerbungHinweis { color: %GED%; font-size: 7.5pt; font-weight: 600; border: 1px solid %LINIESTARK%;
-    border-radius: 3px; padding: 0 4px; }
-QLabel#WerbungTitel { font-size: 11pt; font-weight: 700; }
-QLabel#WerbungText { color: %GED%; }
-QPushButton#WerbungAktion { background: %AKZFL%; color: #ffffff; border: none; border-radius: 16px; padding: 7px 18px;
-    font-weight: 600; }
-QPushButton#WerbungAktion:hover { background: %AKZH%; }
-QToolButton#WerbungSchliessen { color: %GED%; font-size: 13pt; border: none; padding: 0 4px; }
-QToolButton#WerbungSchliessen:hover { color: %TEXT%; background: transparent; }
+QFrame#Werbung { background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #fff7d6, stop:0.55 #ffe08a, stop:1 #ffb347);
+    border: 2px solid #e11d48; border-radius: 8px; }
+QLabel#WerbungHinweis { color: #7c2d12; font-size: 7.5pt; font-weight: 700; border: 1px solid #7c2d12;
+    border-radius: 3px; padding: 0 4px; background: transparent; }
+QLabel#WerbungSticker { color: #ffffff; background: #e11d48; font-size: 8pt; font-weight: 900; border-radius: 4px; padding: 1px 8px; }
+QLabel#WerbungSticker[blink="true"] { color: #b91c1c; background: #facc15; }
+QLabel#WerbungTitel { color: #7c2d12; font-size: 14pt; font-weight: 900; background: transparent; }
+QLabel#WerbungText { color: #431407; background: transparent; }
+QLabel#WerbungCountdown { color: #b91c1c; font-weight: 800; background: transparent; }
+QPushButton#WerbungAktion { background: #e11d48; color: #ffffff; border: 2px solid #9f1239; border-radius: 16px;
+    padding: 8px 22px; font-weight: 900; font-size: 11pt; }
+QPushButton#WerbungAktion[blink="true"] { background: #16a34a; border-color: #14532d; }
+QPushButton#WerbungAktion:hover { background: #be123c; }
+QToolButton#WerbungSchliessen { color: #7c2d12; font-size: 13pt; border: none; padding: 0 4px; background: transparent; }
+QToolButton#WerbungSchliessen:hover { color: #000000; background: transparent; }
+QFrame#WerbePopupKarte { background: #fffbea; border: 3px solid #e11d48; border-radius: 14px; }
+QLabel#WerbePopupKopf { background: #e11d48; color: #ffffff; font-size: 13pt; font-weight: 900; padding: 12px 24px;
+    border-top-left-radius: 10px; border-top-right-radius: 10px; }
+QLabel#WerbePopupKopf[blink="true"] { background: #facc15; color: #b91c1c; }
+QLabel#WerbePopupTitel { color: #7c2d12; font-size: 22pt; font-weight: 900; background: transparent; }
+QLabel#WerbePopupText { color: #431407; font-size: 11pt; background: transparent; }
+QLabel#WerbePopupPreis, QLabel#WerbeSeitePreis { color: #b91c1c; font-size: 15pt; background: transparent; }
+QLabel#WerbePopupKlein { color: #a8a29e; font-size: 7.5pt; background: transparent; }
+QPushButton#WerbePopupPremium { color: #78716c; background: transparent; border: none; text-decoration: underline;
+    font-size: 8.5pt; padding: 2px; }
+QPushButton#WerbePopupPremium:hover { color: #44403c; }
+QToolButton#WerbePopupKreuz { color: rgba(255, 255, 255, 110); background: transparent; border: none; padding: 0;
+    font-size: 7pt; }
+QToolButton#WerbePopupKreuz:hover { color: rgba(255, 255, 255, 200); background: transparent; }
+QWidget#WerbeSeite { background: #ffffff; }
+QWidget#WerbeSeiteReiter { background: #dfe1e5; }
+QLabel#WerbeSeiteTab { background: #ffffff; color: #202124; padding: 7px 14px; border-top-left-radius: 8px;
+    border-top-right-radius: 8px; }
+QWidget#WerbeSeiteLeiste { background: #ffffff; border-bottom: 1px solid #dadce0; }
+QToolButton#WerbeSeiteNav { color: #9aa0a6; background: transparent; border: none; font-size: 12pt; padding: 2px 6px; }
+QLineEdit#WerbeSeiteAdresse { background: #f1f3f4; color: #202124; border: none; border-radius: 14px; padding: 5px 14px; }
+QScrollArea#WerbeSeiteScroll, QWidget#WerbeSeiteInhalt { background: #fffbea; }
+QLabel#WerbeSeiteGewinn { background: #e11d48; color: #ffffff; font-size: 16pt; font-weight: 900; padding: 12px;
+    border-radius: 8px; }
+QLabel#WerbeSeiteGewinn[blink="true"] { background: #facc15; color: #b91c1c; }
+QLabel#WerbeSeiteTitel { color: #7c2d12; font-size: 30pt; font-weight: 900; background: transparent; }
+QLabel#WerbeSeiteText { color: #431407; font-size: 11pt; background: transparent; }
+QFrame#WerbeSeiteBox { background: #ffffff; border: 2px dashed #f59e0b; border-radius: 10px; }
+QLabel#WerbeSeiteBoxTitel { color: #15803d; font-size: 12pt; font-weight: 800; background: transparent; }
+QFrame#WerbeSeiteFuss { background: #f5f5f4; border-radius: 8px; }
+QFrame#WerbeSeiteFuss QLabel { color: #57534e; background: transparent; }
+QPushButton#WerbeSeitePremium { background: #1f2937; color: #fde68a; border: none; border-radius: 6px; padding: 8px 16px;
+    font-weight: 700; }
 QLabel#PremiumChip { color: #3b2a05; font-size: 7.5pt; font-weight: 800; letter-spacing: 1px; border-radius: 10px;
     padding: 3px 10px; background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #fde68a, stop:0.5 #f59e0b, stop:1 #fbbf24); }
 QLabel#Toast { background: %SEITE%; color: #ffffff; border-radius: 8px; padding: 10px 16px; }

@@ -193,12 +193,18 @@ für Solarparks):
   (`src/ui/login_seite.*`) ist eine Karte auf dunkelblauem Grund mit
   Markenfläche links und Formular rechts; *Benutzer wechseln* zeigt sie
   ebenfalls im Fenster, mit „Zurück“ geht es ohne Wechsel weiter.
-- **Abo-Modus (nur zum Spaß)**: Ohne Abo läuft unter jeder Seite ein Banner
-  mit erfundener Werbung (`src/ui/werbung.*`, sechs Anzeigen, Wechsel alle
-  9 s). Im Kontomenü schaltet *SolarMonitor Premium (werbefrei)* das „Abo“
-  für 0,00 € ein: Die Werbung verschwindet und im Kopf erscheint ein
-  PREMIUM-Abzeichen. Ein Klick auf die Anzeige oder das × bietet ebenfalls
-  Premium an. Die Einstellung wird gespeichert.
+- **Abo-Modus (nur zum Spaß)** (`src/ui/werbung.*`): Ohne Abo läuft unter
+  jeder Seite ein lautes Banner mit erfundener Werbung (sechs Anzeigen,
+  Wechsel alle 6 s, blinkender „NUR HEUTE!“-Sticker, Countdown, Lauftext);
+  ein Klick darauf öffnet die „Webseite“ der Anzeige. Zusätzlich erscheint
+  **jede Minute eine Popup-Werbung** über dem Programm (nie über Anmeldung
+  oder offenen Dialogen). Ihr Kreuz ist winzig und schließt erst beim
+  **dritten Klick** – die beiden Klicks davor öffnen jeweils die Webseite.
+  Die „Webseite“ ist ein eigenes Fenster im Browser-Look, komplett im
+  Programm gezeichnet (keine Internetverbindung, Adressen auf `.example`).
+  Im Kontomenü schaltet *SolarMonitor Premium (werbefrei)* das „Abo“ für
+  0,00 € ein: Banner, Popups und offene Werbeseiten verschwinden, im Kopf
+  erscheint ein PREMIUM-Abzeichen. Die Einstellung wird gespeichert.
 - Farben: Dunkelblau (Seitenleiste) und Sonnen-Orange (Akzent, Hauptknöpfe);
   Grün/Orange/Rot nur für den Zustand der Anlagen. Alles steht in einem
   Stylesheet in `src/util/stil.cpp` (hell und dunkel), Grundlage ist der

@@ -179,6 +179,7 @@ private:
     class QToolButton* m_glocke = nullptr;
     class QToolButton* m_benutzerKnopf = nullptr;
     QWidget*      m_werbungsBereich = nullptr;  ///< Spaß-Werbung (ohne Premium)
+    class WerbeSteuerung* m_werbeSteuerung = nullptr;  ///< Popup-Werbung im Minutentakt (lebt mit dem Fenster)
     QLabel*       m_premiumChip = nullptr;
     QAction*      m_aktPremium = nullptr;
     class Benutzerverwaltung* m_benutzer = nullptr;

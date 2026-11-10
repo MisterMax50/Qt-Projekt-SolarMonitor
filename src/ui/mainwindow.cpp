@@ -653,6 +653,19 @@ void MainWindow::baueUi()
     wv->setContentsMargins(24, 0, 24, 16);
     auto* banner = new WerbeBanner(m_werbungsBereich);
     connect(banner, &WerbeBanner::premiumGewuenscht, this, [this] { setzePremium(true); });
+    if (!m_werbeSteuerung) {
+        // Popup-Werbung jede Minute – nur über dem Programm, nie über Anmeldung oder offenen Dialogen
+        m_werbeSteuerung = new WerbeSteuerung(this, [this]() -> QWidget* {
+            if (!m_programm || !m_ebenen || m_ebenen->currentWidget() != m_programm)
+                return nullptr;
+            if (!isVisible() || isMinimized() || QApplication::activeModalWidget())
+                return nullptr;
+            return m_programm;
+        });
+        connect(m_werbeSteuerung, &WerbeSteuerung::premiumGewuenscht, this, [this] { setzePremium(true); });
+    }
+    connect(banner, &WerbeBanner::webseiteGewuenscht, m_werbeSteuerung, &WerbeSteuerung::oeffneWebseite);
+    m_werbeSteuerung->setAktiv(!QSettings().value(QStringLiteral("premium"), false).toBool());
     wv->addWidget(banner);
     rv->addWidget(m_werbungsBereich);
     m_werbungsBereich->setVisible(!QSettings().value(QStringLiteral("premium"), false).toBool());
@@ -1082,6 +1095,8 @@ void MainWindow::setzePremium(bool an)
         m_werbungsBereich->setVisible(!an);
     if (m_premiumChip)
         m_premiumChip->setVisible(an);
+    if (m_werbeSteuerung)
+        m_werbeSteuerung->setAktiv(!an);
     if (m_aktPremium && m_aktPremium->isChecked() != an) {
         QSignalBlocker sperre(m_aktPremium);
         m_aktPremium->setChecked(an);
