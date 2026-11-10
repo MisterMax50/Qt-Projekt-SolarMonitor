@@ -256,6 +256,17 @@ für Solarparks):
     Gesperrte Einträge tragen ein Schloss bzw. den Zusatz „Ultimate“; ein
     Klick darauf bietet das Upgrade an.
 
+  **Keks-Banner** (`src/ui/keks_banner.*`, Parodie auf Cookie-Banner): Ohne
+  Abo schiebt sich nach der Anmeldung einmal pro Programmstart ein Banner
+  von unten ins Fenster und sperrt es bis zur Wahl – mit riesigem „ALLE
+  AKZEPTIEREN“ und einem unscheinbaren Link zu den Einstellungen. Dort warten
+  47 Schalter in sechs Kategorien (u. a. Sonnen-Analyse, Wolken-Tracking,
+  „Partner mit berechtigtem Interesse“ wie die Tauben vom Dach), alle
+  vorausgewählt; „Alle ablehnen“ ist klein und grau und fragt noch einmal
+  nach. Es werden keine Daten erhoben oder gespeichert. Erneut aufrufen:
+  Kontomenü → *Keks-Einstellungen*. Mit Premium oder Ultimate entfällt der
+  Banner.
+
   Ein Upgrade läuft über den erfundenen Bezahlablauf **SolarMonitor Pay**
   (`src/ui/zahlung_dialog.*`): Bestellung → Anmelden mit beliebiger
   vierstelliger „Sonnen-PIN“ → Zahlart (Sonnenstunden, Kilowattkekse,

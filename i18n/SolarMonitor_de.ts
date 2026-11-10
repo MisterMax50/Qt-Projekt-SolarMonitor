@@ -34,6 +34,11 @@
         <translation>Keine Popups im Minutentakt</translation>
     </message>
     <message>
+        <location line="+0"/>
+        <source>Kein Keks-Banner beim Start</source>
+        <translation>Kein Keks-Banner beim Start</translation>
+    </message>
+    <message>
         <location line="+2"/>
         <location line="+13"/>
         <source>Dunkles Design</source>
@@ -2423,6 +2428,397 @@ PR %1</translation>
     </message>
 </context>
 <context>
+    <name>KeksBanner</name>
+    <message>
+        <location filename="../src/ui/keks_banner.cpp" line="+327"/>
+        <source>Wir verwenden Kekse!</source>
+        <translation>Wir verwenden Kekse!</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>SolarMonitor und unsere 1.337 Partner verwenden Kekse, um Ihr Erlebnis zu verbessern, Ihre Sonnenstunden zu zählen und Ihre Lieblingswolke zu ermitteln. Mit „Alle akzeptieren“ stimmen Sie zu, dass wir Kekse backen, essen und darüber reden. Ihre Einwilligung können Sie jederzeit in den Keks-Einstellungen im Kontomenü ändern.</source>
+        <translation>SolarMonitor und unsere 1.337 Partner verwenden Kekse, um Ihr Erlebnis zu verbessern, Ihre Sonnenstunden zu zählen und Ihre Lieblingswolke zu ermitteln. Mit „Alle akzeptieren“ stimmen Sie zu, dass wir Kekse backen, essen und darüber reden. Ihre Einwilligung können Sie jederzeit in den Keks-Einstellungen im Kontomenü ändern.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Spaß-Funktion: Es werden keinerlei Daten erhoben. Mit Premium oder Ultimate entfällt dieser Banner.</source>
+        <translation>Spaß-Funktion: Es werden keinerlei Daten erhoben. Mit Premium oder Ultimate entfällt dieser Banner.</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>ALLE AKZEPTIEREN</source>
+        <translation>ALLE AKZEPTIEREN</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Einstellungen (%1 Schalter)</source>
+        <translation>Einstellungen (%1 Schalter)</translation>
+    </message>
+</context>
+<context>
+    <name>KeksEinstellungen</name>
+    <message>
+        <location line="-312"/>
+        <source>Unbedingt notwendige Kekse</source>
+        <translation>Unbedingt notwendige Kekse</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Ohne diese Kekse geht gar nichts. Sagen jedenfalls die Kekse.</source>
+        <translation>Ohne diese Kekse geht gar nichts. Sagen jedenfalls die Kekse.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Sitzungskeks</source>
+        <translation>Sitzungskeks</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Anmeldekeks</source>
+        <translation>Anmeldekeks</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Keks, der sich merkt, dass Sie Kekse abgelehnt haben</source>
+        <translation>Keks, der sich merkt, dass Sie Kekse abgelehnt haben</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Keks für diesen Keks-Banner</source>
+        <translation>Keks für diesen Keks-Banner</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Funktionale Kekse</source>
+        <translation>Funktionale Kekse</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Machen SolarMonitor bequemer. Oder krümeliger.</source>
+        <translation>Machen SolarMonitor bequemer. Oder krümeliger.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Sprachkeks</source>
+        <translation>Sprachkeks</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Designkeks (hell oder dunkel gebacken)</source>
+        <translation>Designkeks (hell oder dunkel gebacken)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Lieblingsanlagen-Keks</source>
+        <translation>Lieblingsanlagen-Keks</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Zuletzt-gesehen-Keks</source>
+        <translation>Zuletzt-gesehen-Keks</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Spaltenbreiten-Keks</source>
+        <translation>Spaltenbreiten-Keks</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Kartenausschnitt-Keks</source>
+        <translation>Kartenausschnitt-Keks</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Zoomstufen-Keks</source>
+        <translation>Zoomstufen-Keks</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Mausrad-Geschwindigkeits-Keks</source>
+        <translation>Mausrad-Geschwindigkeits-Keks</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Sonnen-Analyse</source>
+        <translation>Sonnen-Analyse</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Wir möchten Sie und die Sonne besser verstehen.</source>
+        <translation>Wir möchten Sie und die Sonne besser verstehen.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Zählt Ihre Blicke in die Sonne</source>
+        <translation>Zählt Ihre Blicke in die Sonne</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Misst, wie oft Sie „nur noch kurz“ sagen</source>
+        <translation>Misst, wie oft Sie „nur noch kurz“ sagen</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Sonnenbrillen-Erkennung</source>
+        <translation>Sonnenbrillen-Erkennung</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Sonnencreme-Faktor-Schätzer</source>
+        <translation>Sonnencreme-Faktor-Schätzer</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Mittagspausen-Detektor</source>
+        <translation>Mittagspausen-Detektor</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Schattenwurf-Statistik</source>
+        <translation>Schattenwurf-Statistik</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Lieblingssonnenstrahl</source>
+        <translation>Lieblingssonnenstrahl</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Sonnenuntergangs-Seufzer-Zähler</source>
+        <translation>Sonnenuntergangs-Seufzer-Zähler</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Vitamin-D-Spiegel (geschätzt, sehr ungenau)</source>
+        <translation>Vitamin-D-Spiegel (geschätzt, sehr ungenau)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Wolken-Tracking</source>
+        <translation>Wolken-Tracking</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Damit wir wissen, welche Wolken Sie mögen.</source>
+        <translation>Damit wir wissen, welche Wolken Sie mögen.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Lieblingswolke ermitteln</source>
+        <translation>Lieblingswolke ermitteln</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Wolkenform-Analyse (Schaf? Drache? Toast?)</source>
+        <translation>Wolkenform-Analyse (Schaf? Drache? Toast?)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Regenschirm-Vorhersage</source>
+        <translation>Regenschirm-Vorhersage</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Föhn-Keks</source>
+        <translation>Föhn-Keks</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Nebel-über-dem-See-Keks</source>
+        <translation>Nebel-über-dem-See-Keks</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Wolkenschieber-Pro-Testabo</source>
+        <translation>Wolkenschieber-Pro-Testabo</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Gewitter-Angst-Index</source>
+        <translation>Gewitter-Angst-Index</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Regenbogen-Sammelalbum</source>
+        <translation>Regenbogen-Sammelalbum</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Marketing und Kilowattkekse</source>
+        <translation>Marketing und Kilowattkekse</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Damit Sie Werbung sehen, die so gut zu Ihnen passt wie Socken zu Sandalen.</source>
+        <translation>Damit Sie Werbung sehen, die so gut zu Ihnen passt wie Socken zu Sandalen.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Kilowattkekse-Empfehlungen</source>
+        <translation>Kilowattkekse-Empfehlungen</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>SonnenPutz-3000-Verfolgung über alle Seiten</source>
+        <translation>SonnenPutz-3000-Verfolgung über alle Seiten</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Tretboot-Werbung am Bodensee</source>
+        <translation>Tretboot-Werbung am Bodensee</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Personalisierte PV-Horoskope</source>
+        <translation>Personalisierte PV-Horoskope</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Einspeise-Lotto-Newsletter</source>
+        <translation>Einspeise-Lotto-Newsletter</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Krümel-Tracking</source>
+        <translation>Krümel-Tracking</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Krümel-zu-Keks-Rekonstruktion</source>
+        <translation>Krümel-zu-Keks-Rekonstruktion</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Werbung für Werbung</source>
+        <translation>Werbung für Werbung</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Werbung gegen Werbung</source>
+        <translation>Werbung gegen Werbung</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Premium-Erinnerung alle fünf Minuten</source>
+        <translation>Premium-Erinnerung alle fünf Minuten</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Partner mit berechtigtem Interesse</source>
+        <translation>Partner mit berechtigtem Interesse</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Diese Partner finden ihr Interesse sehr berechtigt. Sie können einzeln widersprechen (Schalter aus).</source>
+        <translation>Diese Partner finden ihr Interesse sehr berechtigt. Sie können einzeln widersprechen (Schalter aus).</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Die Tauben vom Dach</source>
+        <translation>Die Tauben vom Dach</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Der Schornsteinfeger</source>
+        <translation>Der Schornsteinfeger</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Ihr Wechselrichter (er will nur reden)</source>
+        <translation>Ihr Wechselrichter (er will nur reden)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Wetterstation WS07</source>
+        <translation>Wetterstation WS07</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Der Bodensee</source>
+        <translation>Der Bodensee</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Ein sehr neugieriger Kormoran</source>
+        <translation>Ein sehr neugieriger Kormoran</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>1.329 weitere Partner</source>
+        <translation>1.329 weitere Partner</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Die Sonne selbst</source>
+        <translation>Die Sonne selbst</translation>
+    </message>
+    <message>
+        <location line="+71"/>
+        <source>Keks-Einstellungen</source>
+        <translation>Keks-Einstellungen</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>&lt;b&gt;Ihre Keks-Einstellungen&lt;/b&gt;&lt;br&gt;%1 Kekse, sorgfältig für Sie vorausgewählt.</source>
+        <translation>&lt;b&gt;Ihre Keks-Einstellungen&lt;/b&gt;&lt;br&gt;%1 Kekse, sorgfältig für Sie vorausgewählt.</translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Immer aktiv</source>
+        <translation>Immer aktiv</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Alle Kekse dieser Kategorie</source>
+        <translation>Alle Kekse dieser Kategorie</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>immer aktiv</source>
+        <translation>immer aktiv</translation>
+    </message>
+    <message>
+        <location line="+52"/>
+        <source>Alle ablehnen</source>
+        <translation>Alle ablehnen</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Auswahl speichern</source>
+        <translation>Auswahl speichern</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Alle akzeptieren</source>
+        <translation>Alle akzeptieren</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Alle ablehnen?</source>
+        <translation>Alle ablehnen?</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Wirklich alle %1 abwählbaren Kekse ablehnen?</source>
+        <translation>Wirklich alle %1 abwählbaren Kekse ablehnen?</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Die Kekse wären dann sehr traurig.</source>
+        <translation>Die Kekse wären dann sehr traurig.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Ja, ablehnen</source>
+        <translation>Ja, ablehnen</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Nein, doch Kekse</source>
+        <translation>Nein, doch Kekse</translation>
+    </message>
+</context>
+<context>
     <name>LoginSeite</name>
     <message>
         <location filename="../src/ui/login_seite.cpp" line="+40"/>
@@ -2514,12 +2910,12 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="+445"/>
+        <location filename="../src/ui/mainwindow.cpp" line="+446"/>
         <source>SolarMonitor – Monitoring der PV-Flotte</source>
         <translation>SolarMonitor – Monitoring der PV-Flotte</translation>
     </message>
     <message>
-        <location line="+161"/>
+        <location line="+164"/>
         <location line="+240"/>
         <source>Anlagen</source>
         <translation>Anlagen</translation>
@@ -2610,7 +3006,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>&amp;Sprache</translation>
     </message>
     <message>
-        <location line="+123"/>
+        <location line="+125"/>
         <source>%1 offene Störungen, davon %2 kritisch</source>
         <translation>%1 offene Störungen, davon %2 kritisch</translation>
     </message>
@@ -2625,7 +3021,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Keine kritischen Störungen offen</translation>
     </message>
     <message>
-        <location line="+328"/>
+        <location line="+360"/>
         <source>Alle Status</source>
         <translation>Alle Status</translation>
     </message>
@@ -2671,7 +3067,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Filter zurücksetzen</translation>
     </message>
     <message>
-        <location line="-941"/>
+        <location line="-975"/>
         <location line="+248"/>
         <source>Übersicht</source>
         <translation>Übersicht</translation>
@@ -2700,6 +3096,11 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <location line="+10"/>
         <source>&amp;Einführungstour starten</source>
         <translation>&amp;Einführungstour starten</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>&amp;Keks-Einstellungen …</source>
+        <translation>&amp;Keks-Einstellungen …</translation>
     </message>
     <message>
         <location line="+87"/>
@@ -2768,13 +3169,13 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location line="+234"/>
+        <location line="+266"/>
         <location line="+14"/>
         <source>Rückgängig</source>
         <translation>Rückgängig</translation>
     </message>
     <message>
-        <location line="-247"/>
+        <location line="-279"/>
         <source>Jede Änderung an Anlagen und Störungen lässt sich mit &lt;b&gt;Strg+Z&lt;/b&gt; zurücknehmen und mit &lt;b&gt;Strg+Y&lt;/b&gt; wiederholen. Den ganzen Verlauf zeigt &lt;i&gt;Exportieren → Änderungsverlauf&lt;/i&gt;.</source>
         <translation>Jede Änderung an Anlagen und Störungen lässt sich mit &lt;b&gt;Strg+Z&lt;/b&gt; zurücknehmen und mit &lt;b&gt;Strg+Y&lt;/b&gt; wiederholen. Den ganzen Verlauf zeigt &lt;i&gt;Exportieren → Änderungsverlauf&lt;/i&gt;.</translation>
     </message>
@@ -2829,7 +3230,32 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Das war&apos;s schon. Viel Erfolg mit SolarMonitor!</translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+23"/>
+        <source>(Keine Sorge: Es werden keinerlei Daten erhoben.)</source>
+        <translation>(Keine Sorge: Es werden keinerlei Daten erhoben.)</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Mmh! Alle %1 Kekse akzeptiert. %2</source>
+        <translation>Mmh! Alle %1 Kekse akzeptiert. %2</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Alle Kekse abgelehnt. Die 4 notwendigen backen wir trotzdem. %1</source>
+        <translation>Alle Kekse abgelehnt. Die 4 notwendigen backen wir trotzdem. %1</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>%1 von %2 Keksen akzeptiert – gute Wahl. %3</source>
+        <translation>%1 von %2 Keksen akzeptiert – gute Wahl. %3</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Keks-Einstellungen gespeichert: %1 von %2 Keksen aktiv. (Es werden keinerlei Daten erhoben.)</source>
+        <translation>Keks-Einstellungen gespeichert: %1 von %2 Keksen aktiv. (Es werden keinerlei Daten erhoben.)</translation>
+    </message>
+    <message>
+        <location line="+10"/>
         <source>★ %1 ist jetzt ein Favorit und erscheint in der Übersicht.</source>
         <translation>★ %1 ist jetzt ein Favorit und erscheint in der Übersicht.</translation>
     </message>
@@ -3081,22 +3507,22 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Wiederholen: %1 (Strg+Y)</translation>
     </message>
     <message>
-        <location line="-957"/>
+        <location line="-991"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation>Benutzer &amp;wechseln …</translation>
     </message>
     <message>
-        <location line="+148"/>
+        <location line="+150"/>
         <source>&amp;Beenden</source>
         <translation>&amp;Beenden</translation>
     </message>
     <message>
-        <location line="-23"/>
+        <location line="-25"/>
         <source>Die Übersetzung konnte nicht geladen werden.</source>
         <translation>Die Übersetzung konnte nicht geladen werden.</translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+24"/>
         <source>&amp;Über SolarMonitor</source>
         <translation>&amp;Über SolarMonitor</translation>
     </message>
@@ -3106,7 +3532,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>%1 Fehler beim Einlesen</translation>
     </message>
     <message>
-        <location line="+327"/>
+        <location line="+359"/>
         <source>Anlagen durchsuchen (Strg+F)</source>
         <translation>Anlagen durchsuchen (Strg+F)</translation>
     </message>
@@ -3152,12 +3578,12 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Anlage:</translation>
     </message>
     <message>
-        <location line="-965"/>
+        <location line="-999"/>
         <source>Exportieren</source>
         <translation>Exportieren</translation>
     </message>
     <message>
-        <location line="+1146"/>
+        <location line="+1180"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>Nur für die Rolle Administrator.</translation>
     </message>
@@ -3247,7 +3673,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Änderungsverlauf …</translation>
     </message>
     <message>
-        <location line="-1493"/>
+        <location line="-1530"/>
         <source>Daten werden geladen …</source>
         <translation>Daten werden geladen …</translation>
     </message>
@@ -3267,7 +3693,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Datenordner – SolarMonitor</translation>
     </message>
     <message>
-        <location line="+125"/>
+        <location line="+128"/>
         <source>Zustand der Flotte auf einen Blick · Kacheln und Karten lassen sich per Ziehen verschieben</source>
         <translation>Zustand der Flotte auf einen Blick · Kacheln und Karten lassen sich per Ziehen verschieben</translation>
     </message>
@@ -3337,8 +3763,8 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Logo-Animation beim Programmstart zeigen</translation>
     </message>
     <message>
-        <location line="+66"/>
-        <location line="+256"/>
+        <location line="+68"/>
+        <location line="+288"/>
         <source>PREMIUM</source>
         <translation>PREMIUM</translation>
     </message>
@@ -3348,12 +3774,12 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>SolarMonitor Premium ist aktiv – werbefrei</translation>
     </message>
     <message>
-        <location line="-246"/>
+        <location line="-278"/>
         <source>SolarMonitor beenden (Strg+Q)</source>
         <translation>SolarMonitor beenden (Strg+Q)</translation>
     </message>
     <message>
-        <location line="+182"/>
+        <location line="+214"/>
         <source>Zahlung abgebrochen – die Werbung bleibt.</source>
         <translation>Zahlung abgebrochen – die Werbung bleibt.</translation>
     </message>
@@ -3533,12 +3959,12 @@ Jetzt öffnen?</translation>
         <translation>&lt;Ausgangszustand nach dem Laden&gt;</translation>
     </message>
     <message>
-        <location line="-1801"/>
+        <location line="-1838"/>
         <source>Angemeldet als %1.</source>
         <translation>Angemeldet als %1.</translation>
     </message>
     <message>
-        <location line="+1820"/>
+        <location line="+1857"/>
         <source>Über SolarMonitor</source>
         <translation>Über SolarMonitor</translation>
     </message>

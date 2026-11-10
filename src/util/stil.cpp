@@ -248,6 +248,21 @@ QPushButton#TourUeberspringen:hover { color: %TEXT%; text-decoration: underline;
 QPushButton#TourWeiter { background: %AKZ%; color: #ffffff; border: none; border-radius: 6px; padding: 7px 16px;
     font-weight: 700; }
 QPushButton#TourWeiter:hover { background: %AKZH%; }
+QFrame#KeksKarte { background: %FLAECHE%; border: 1px solid %LINIE%; border-radius: 14px; }
+QLabel#KeksTitel { color: %TEXT%; font-size: 16pt; font-weight: 800; background: transparent; }
+QLabel#KeksText { color: %TEXT%; background: transparent; }
+QPushButton#KeksAlleRiesig { background: #f59e0b; color: #1f1300; border: none; border-radius: 12px;
+    padding: 18px 44px; font-size: 16pt; font-weight: 900; }
+QPushButton#KeksAlleRiesig:hover { background: #fbbf24; }
+QPushButton#KeksEinstellungenLink { background: transparent; border: none; color: %GED%; font-size: 8pt;
+    text-decoration: underline; padding: 2px; }
+QPushButton#KeksEinstellungenLink:hover { color: %TEXT%; }
+QFrame#KeksKategorie { background: %FLAECHE%; border: 1px solid %LINIE%; border-radius: 10px; }
+QPushButton#KeksAlle { background: #f59e0b; color: #1f1300; border: none; border-radius: 8px; padding: 9px 22px;
+    font-weight: 800; }
+QPushButton#KeksAlle:hover { background: #fbbf24; }
+QPushButton#KeksAblehnen { background: transparent; border: none; color: %GED%; font-size: 8pt; padding: 2px; }
+QPushButton#KeksAblehnen:hover { color: %TEXT%; text-decoration: underline; }
 QFrame#Werbung { background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #fff7d6, stop:0.55 #ffe08a, stop:1 #ffb347);
     border: 2px solid #e11d48; border-radius: 8px; }
 QLabel#WerbungHinweis { color: #7c2d12; font-size: 7.5pt; font-weight: 700; border: 1px solid #7c2d12;

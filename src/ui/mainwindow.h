@@ -111,6 +111,9 @@ private slots:
     void favoritUmschalten(const QString& anlageId);
     /// Einführungstour (Hinweisblasen) starten.
     void starteEinfuehrung();
+    /// Keks-Banner (Spaß, nur ohne Abo, einmal pro Programmstart).
+    void zeigeKeksBanner(bool nurEinmal = true);
+    void zeigeKeksEinstellungen();
     void angemeldet(const QString& kennung);
 
 private:
@@ -232,6 +235,8 @@ private:
     QProgressBar* m_fortschritt = nullptr;
 
     QPointer<class Einfuehrung> m_einfuehrung; ///< laufende Tour (sonst leer)
+    QPointer<class KeksBanner>  m_keksBanner;
+    bool m_keksGezeigt = false;
     QAction* m_aktFavorit = nullptr;   ///< markierte Anlage an-/abpinnen (Strg+D)
     QAction* m_aktVergleich = nullptr; ///< zwei Anlagen vergleichen
     class QCheckBox* m_nurFavoriten = nullptr;

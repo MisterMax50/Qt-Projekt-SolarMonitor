@@ -120,6 +120,8 @@ set(PROJEKT_QUELLEN
     src/util/sonnenstand.cpp
     src/ui/einfuehrung.h
     src/ui/einfuehrung.cpp
+    src/ui/keks_banner.h
+    src/ui/keks_banner.cpp
     src/ui/pdf_bericht.cpp
     src/ui/pruefprotokoll_widget.cpp
     src/ui/serviceplanung.cpp

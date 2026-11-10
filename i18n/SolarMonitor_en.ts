@@ -34,6 +34,11 @@
         <translation>No popups every minute</translation>
     </message>
     <message>
+        <location line="+0"/>
+        <source>Kein Keks-Banner beim Start</source>
+        <translation>No cookie banner at startup</translation>
+    </message>
+    <message>
         <location line="+2"/>
         <location line="+13"/>
         <source>Dunkles Design</source>
@@ -2423,6 +2428,397 @@ PR %1</translation>
     </message>
 </context>
 <context>
+    <name>KeksBanner</name>
+    <message>
+        <location filename="../src/ui/keks_banner.cpp" line="+327"/>
+        <source>Wir verwenden Kekse!</source>
+        <translation>We use cookies!</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>SolarMonitor und unsere 1.337 Partner verwenden Kekse, um Ihr Erlebnis zu verbessern, Ihre Sonnenstunden zu zählen und Ihre Lieblingswolke zu ermitteln. Mit „Alle akzeptieren“ stimmen Sie zu, dass wir Kekse backen, essen und darüber reden. Ihre Einwilligung können Sie jederzeit in den Keks-Einstellungen im Kontomenü ändern.</source>
+        <translation>SolarMonitor and our 1,337 partners use cookies to improve your experience, count your hours of sunshine and determine your favourite cloud. By clicking “Accept all” you agree that we bake cookies, eat them and talk about them. You can change your consent at any time in the cookie settings in the account menu.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Spaß-Funktion: Es werden keinerlei Daten erhoben. Mit Premium oder Ultimate entfällt dieser Banner.</source>
+        <translation>Joke feature: no data whatsoever is collected. With Premium or Ultimate this banner disappears.</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>ALLE AKZEPTIEREN</source>
+        <translation>ACCEPT ALL</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Einstellungen (%1 Schalter)</source>
+        <translation>Settings (%1 switches)</translation>
+    </message>
+</context>
+<context>
+    <name>KeksEinstellungen</name>
+    <message>
+        <location line="-312"/>
+        <source>Unbedingt notwendige Kekse</source>
+        <translation>Strictly necessary cookies</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Ohne diese Kekse geht gar nichts. Sagen jedenfalls die Kekse.</source>
+        <translation>Nothing works without these cookies. At least that&apos;s what the cookies say.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Sitzungskeks</source>
+        <translation>Session cookie</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Anmeldekeks</source>
+        <translation>Login cookie</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Keks, der sich merkt, dass Sie Kekse abgelehnt haben</source>
+        <translation>Cookie that remembers you rejected cookies</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Keks für diesen Keks-Banner</source>
+        <translation>Cookie for this cookie banner</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Funktionale Kekse</source>
+        <translation>Functional cookies</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Machen SolarMonitor bequemer. Oder krümeliger.</source>
+        <translation>Make SolarMonitor more convenient. Or crumblier.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Sprachkeks</source>
+        <translation>Language cookie</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Designkeks (hell oder dunkel gebacken)</source>
+        <translation>Design cookie (baked light or dark)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Lieblingsanlagen-Keks</source>
+        <translation>Favourite plants cookie</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Zuletzt-gesehen-Keks</source>
+        <translation>Recently viewed cookie</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Spaltenbreiten-Keks</source>
+        <translation>Column width cookie</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Kartenausschnitt-Keks</source>
+        <translation>Map view cookie</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Zoomstufen-Keks</source>
+        <translation>Zoom level cookie</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Mausrad-Geschwindigkeits-Keks</source>
+        <translation>Mouse wheel speed cookie</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Sonnen-Analyse</source>
+        <translation>Sun analytics</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Wir möchten Sie und die Sonne besser verstehen.</source>
+        <translation>We&apos;d like to understand you and the sun better.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Zählt Ihre Blicke in die Sonne</source>
+        <translation>Counts your glances at the sun</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Misst, wie oft Sie „nur noch kurz“ sagen</source>
+        <translation>Measures how often you say “just a sec”</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Sonnenbrillen-Erkennung</source>
+        <translation>Sunglasses detection</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Sonnencreme-Faktor-Schätzer</source>
+        <translation>Sunscreen factor estimator</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Mittagspausen-Detektor</source>
+        <translation>Lunch break detector</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Schattenwurf-Statistik</source>
+        <translation>Shadow casting statistics</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Lieblingssonnenstrahl</source>
+        <translation>Favourite sunbeam</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Sonnenuntergangs-Seufzer-Zähler</source>
+        <translation>Sunset sigh counter</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Vitamin-D-Spiegel (geschätzt, sehr ungenau)</source>
+        <translation>Vitamin D level (estimated, very inaccurate)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Wolken-Tracking</source>
+        <translation>Cloud tracking</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Damit wir wissen, welche Wolken Sie mögen.</source>
+        <translation>So we know which clouds you like.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Lieblingswolke ermitteln</source>
+        <translation>Determine favourite cloud</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Wolkenform-Analyse (Schaf? Drache? Toast?)</source>
+        <translation>Cloud shape analysis (sheep? dragon? toast?)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Regenschirm-Vorhersage</source>
+        <translation>Umbrella forecast</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Föhn-Keks</source>
+        <translation>Foehn wind cookie</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Nebel-über-dem-See-Keks</source>
+        <translation>Fog-over-the-lake cookie</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Wolkenschieber-Pro-Testabo</source>
+        <translation>Cloud Pusher Pro trial</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Gewitter-Angst-Index</source>
+        <translation>Thunderstorm anxiety index</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Regenbogen-Sammelalbum</source>
+        <translation>Rainbow collection album</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Marketing und Kilowattkekse</source>
+        <translation>Marketing and Kilowatt Cookies</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Damit Sie Werbung sehen, die so gut zu Ihnen passt wie Socken zu Sandalen.</source>
+        <translation>So you see ads that suit you as well as socks suit sandals.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Kilowattkekse-Empfehlungen</source>
+        <translation>Kilowatt Cookies recommendations</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>SonnenPutz-3000-Verfolgung über alle Seiten</source>
+        <translation>SunScrub 3000 tracking across all pages</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Tretboot-Werbung am Bodensee</source>
+        <translation>Pedal boat ads on Lake Constance</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Personalisierte PV-Horoskope</source>
+        <translation>Personalised PV horoscopes</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Einspeise-Lotto-Newsletter</source>
+        <translation>Feed-in Lottery newsletter</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Krümel-Tracking</source>
+        <translation>Crumb tracking</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Krümel-zu-Keks-Rekonstruktion</source>
+        <translation>Crumb-to-cookie reconstruction</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Werbung für Werbung</source>
+        <translation>Ads for ads</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Werbung gegen Werbung</source>
+        <translation>Ads against ads</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Premium-Erinnerung alle fünf Minuten</source>
+        <translation>Premium reminder every five minutes</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Partner mit berechtigtem Interesse</source>
+        <translation>Partners with legitimate interest</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Diese Partner finden ihr Interesse sehr berechtigt. Sie können einzeln widersprechen (Schalter aus).</source>
+        <translation>These partners consider their interest very legitimate. You can object individually (switch off).</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Die Tauben vom Dach</source>
+        <translation>The pigeons on the roof</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Der Schornsteinfeger</source>
+        <translation>The chimney sweep</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Ihr Wechselrichter (er will nur reden)</source>
+        <translation>Your inverter (it just wants to talk)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Wetterstation WS07</source>
+        <translation>Weather station WS07</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Der Bodensee</source>
+        <translation>Lake Constance</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Ein sehr neugieriger Kormoran</source>
+        <translation>A very curious cormorant</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>1.329 weitere Partner</source>
+        <translation>1,329 other partners</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Die Sonne selbst</source>
+        <translation>The sun itself</translation>
+    </message>
+    <message>
+        <location line="+71"/>
+        <source>Keks-Einstellungen</source>
+        <translation>Cookie settings</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>&lt;b&gt;Ihre Keks-Einstellungen&lt;/b&gt;&lt;br&gt;%1 Kekse, sorgfältig für Sie vorausgewählt.</source>
+        <translation>&lt;b&gt;Your cookie settings&lt;/b&gt;&lt;br&gt;%1 cookies, carefully preselected for you.</translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Immer aktiv</source>
+        <translation>Always active</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Alle Kekse dieser Kategorie</source>
+        <translation>All cookies in this category</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>immer aktiv</source>
+        <translation>always active</translation>
+    </message>
+    <message>
+        <location line="+52"/>
+        <source>Alle ablehnen</source>
+        <translation>Reject all</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Auswahl speichern</source>
+        <translation>Save selection</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Alle akzeptieren</source>
+        <translation>Accept all</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Alle ablehnen?</source>
+        <translation>Reject all?</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Wirklich alle %1 abwählbaren Kekse ablehnen?</source>
+        <translation>Really reject all %1 optional cookies?</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Die Kekse wären dann sehr traurig.</source>
+        <translation>The cookies would be very sad.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Ja, ablehnen</source>
+        <translation>Yes, reject</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Nein, doch Kekse</source>
+        <translation>No, cookies after all</translation>
+    </message>
+</context>
+<context>
     <name>LoginSeite</name>
     <message>
         <location filename="../src/ui/login_seite.cpp" line="+40"/>
@@ -2514,12 +2910,12 @@ Administrator: additionally manage master data and users</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="+445"/>
+        <location filename="../src/ui/mainwindow.cpp" line="+446"/>
         <source>SolarMonitor – Monitoring der PV-Flotte</source>
         <translation>SolarMonitor – PV fleet monitoring</translation>
     </message>
     <message>
-        <location line="+161"/>
+        <location line="+164"/>
         <location line="+240"/>
         <source>Anlagen</source>
         <translation>Plants</translation>
@@ -2610,7 +3006,7 @@ Administrator: additionally manage master data and users</translation>
         <translation>&amp;Language</translation>
     </message>
     <message>
-        <location line="+123"/>
+        <location line="+125"/>
         <source>%1 offene Störungen, davon %2 kritisch</source>
         <translation>%1 open faults, %2 of them critical</translation>
     </message>
@@ -2625,7 +3021,7 @@ Administrator: additionally manage master data and users</translation>
         <translation>No critical faults open</translation>
     </message>
     <message>
-        <location line="+328"/>
+        <location line="+360"/>
         <source>Alle Status</source>
         <translation>All statuses</translation>
     </message>
@@ -2671,7 +3067,7 @@ Administrator: additionally manage master data and users</translation>
         <translation>Reset filters</translation>
     </message>
     <message>
-        <location line="-941"/>
+        <location line="-975"/>
         <location line="+248"/>
         <source>Übersicht</source>
         <translation>Overview</translation>
@@ -2700,6 +3096,11 @@ Administrator: additionally manage master data and users</translation>
         <location line="+10"/>
         <source>&amp;Einführungstour starten</source>
         <translation>Start &amp;introductory tour</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>&amp;Keks-Einstellungen …</source>
+        <translation>&amp;Cookie settings …</translation>
     </message>
     <message>
         <location line="+87"/>
@@ -2768,13 +3169,13 @@ Administrator: additionally manage master data and users</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location line="+234"/>
+        <location line="+266"/>
         <location line="+14"/>
         <source>Rückgängig</source>
         <translation>Undo</translation>
     </message>
     <message>
-        <location line="-247"/>
+        <location line="-279"/>
         <source>Jede Änderung an Anlagen und Störungen lässt sich mit &lt;b&gt;Strg+Z&lt;/b&gt; zurücknehmen und mit &lt;b&gt;Strg+Y&lt;/b&gt; wiederholen. Den ganzen Verlauf zeigt &lt;i&gt;Exportieren → Änderungsverlauf&lt;/i&gt;.</source>
         <translation>Every change to plants and faults can be undone with &lt;b&gt;Ctrl+Z&lt;/b&gt; and redone with &lt;b&gt;Ctrl+Y&lt;/b&gt;. &lt;i&gt;Export → Change history&lt;/i&gt; shows the full history.</translation>
     </message>
@@ -2829,7 +3230,32 @@ Administrator: additionally manage master data and users</translation>
         <translation>That&apos;s it. Good luck with SolarMonitor!</translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+23"/>
+        <source>(Keine Sorge: Es werden keinerlei Daten erhoben.)</source>
+        <translation>(Don&apos;t worry: no data whatsoever is collected.)</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Mmh! Alle %1 Kekse akzeptiert. %2</source>
+        <translation>Yum! All %1 cookies accepted. %2</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Alle Kekse abgelehnt. Die 4 notwendigen backen wir trotzdem. %1</source>
+        <translation>All cookies rejected. We&apos;ll still bake the 4 necessary ones. %1</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>%1 von %2 Keksen akzeptiert – gute Wahl. %3</source>
+        <translation>%1 of %2 cookies accepted – good choice. %3</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Keks-Einstellungen gespeichert: %1 von %2 Keksen aktiv. (Es werden keinerlei Daten erhoben.)</source>
+        <translation>Cookie settings saved: %1 of %2 cookies active. (No data whatsoever is collected.)</translation>
+    </message>
+    <message>
+        <location line="+10"/>
         <source>★ %1 ist jetzt ein Favorit und erscheint in der Übersicht.</source>
         <translation>★ %1 is now a favourite and appears in the overview.</translation>
     </message>
@@ -3081,22 +3507,22 @@ Administrator: additionally manage master data and users</translation>
         <translation>Redo: %1 (Ctrl+Y)</translation>
     </message>
     <message>
-        <location line="-957"/>
+        <location line="-991"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation>S&amp;witch user …</translation>
     </message>
     <message>
-        <location line="+148"/>
+        <location line="+150"/>
         <source>&amp;Beenden</source>
         <translation>&amp;Quit</translation>
     </message>
     <message>
-        <location line="-23"/>
+        <location line="-25"/>
         <source>Die Übersetzung konnte nicht geladen werden.</source>
         <translation>The translation could not be loaded.</translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+24"/>
         <source>&amp;Über SolarMonitor</source>
         <translation>&amp;About SolarMonitor</translation>
     </message>
@@ -3106,7 +3532,7 @@ Administrator: additionally manage master data and users</translation>
         <translation>%1 errors on import</translation>
     </message>
     <message>
-        <location line="+327"/>
+        <location line="+359"/>
         <source>Anlagen durchsuchen (Strg+F)</source>
         <translation>Search plants (Ctrl+F)</translation>
     </message>
@@ -3152,12 +3578,12 @@ Administrator: additionally manage master data and users</translation>
         <translation>Plant:</translation>
     </message>
     <message>
-        <location line="-965"/>
+        <location line="-999"/>
         <source>Exportieren</source>
         <translation>Export</translation>
     </message>
     <message>
-        <location line="+1146"/>
+        <location line="+1180"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>Administrator role only.</translation>
     </message>
@@ -3247,7 +3673,7 @@ Administrator: additionally manage master data and users</translation>
         <translation>Change history …</translation>
     </message>
     <message>
-        <location line="-1493"/>
+        <location line="-1530"/>
         <source>Daten werden geladen …</source>
         <translation>Loading data …</translation>
     </message>
@@ -3267,7 +3693,7 @@ Administrator: additionally manage master data and users</translation>
         <translation>Data folder – SolarMonitor</translation>
     </message>
     <message>
-        <location line="+125"/>
+        <location line="+128"/>
         <source>Zustand der Flotte auf einen Blick · Kacheln und Karten lassen sich per Ziehen verschieben</source>
         <translation>Fleet status at a glance · tiles and cards can be moved by dragging</translation>
     </message>
@@ -3337,8 +3763,8 @@ Administrator: additionally manage master data and users</translation>
         <translation>Show the logo animation when the program starts</translation>
     </message>
     <message>
-        <location line="+66"/>
-        <location line="+256"/>
+        <location line="+68"/>
+        <location line="+288"/>
         <source>PREMIUM</source>
         <translation>PREMIUM</translation>
     </message>
@@ -3348,12 +3774,12 @@ Administrator: additionally manage master data and users</translation>
         <translation>SolarMonitor Premium is active – ad-free</translation>
     </message>
     <message>
-        <location line="-246"/>
+        <location line="-278"/>
         <source>SolarMonitor beenden (Strg+Q)</source>
         <translation>Quit SolarMonitor (Ctrl+Q)</translation>
     </message>
     <message>
-        <location line="+182"/>
+        <location line="+214"/>
         <source>Zahlung abgebrochen – die Werbung bleibt.</source>
         <translation>Payment cancelled – the ads stay.</translation>
     </message>
@@ -3533,12 +3959,12 @@ Open it now?</translation>
         <translation>&lt;Initial state after loading&gt;</translation>
     </message>
     <message>
-        <location line="-1801"/>
+        <location line="-1838"/>
         <source>Angemeldet als %1.</source>
         <translation>Signed in as %1.</translation>
     </message>
     <message>
-        <location line="+1820"/>
+        <location line="+1857"/>
         <source>Über SolarMonitor</source>
         <translation>About SolarMonitor</translation>
     </message>

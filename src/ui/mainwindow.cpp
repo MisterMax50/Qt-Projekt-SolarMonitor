@@ -63,6 +63,7 @@
 #include "ui/zahlung_dialog.h"
 #include "model/favoriten.h"
 #include "ui/einfuehrung.h"
+#include "ui/keks_banner.h"
 #include "ui/vergleich_dialog.h"
 #include "util/abo.h"
 #include "model/benutzer.h"
@@ -504,8 +505,11 @@ void MainWindow::angemeldet(const QString& kennung)
     else
         meldung(tr("Angemeldet als %1.").arg(b->name), 5000);
     // Beim ersten Anmelden dieses Benutzers die Einführungstour zeigen
+    // Keks-Banner (ohne Abo) kommt danach bzw. nach der Tour
     if (!QSettings().value(QStringLiteral("einfuehrung/") + kennung, false).toBool())
         QTimer::singleShot(600, this, &MainWindow::starteEinfuehrung);
+    else
+        QTimer::singleShot(900, this, [this] { zeigeKeksBanner(); });
 }
 
 void MainWindow::setzeVollbild(bool an)
@@ -679,7 +683,7 @@ void MainWindow::baueUi()
         m_werbeSteuerung = new WerbeSteuerung(this, [this]() -> QWidget* {
             if (!m_programm || !m_ebenen || m_ebenen->currentWidget() != m_programm)
                 return nullptr;
-            if (!isVisible() || isMinimized() || QApplication::activeModalWidget() || m_einfuehrung)
+            if (!isVisible() || isMinimized() || QApplication::activeModalWidget() || m_einfuehrung || m_keksBanner)
                 return nullptr;
             return m_programm;
         });
@@ -1075,6 +1079,8 @@ QWidget* MainWindow::baueKopfzeile()
     menue->addSeparator();
     menue->addAction(Stil::icon(Stil::Symbol::Kompass, Stil::text()), tr("&Einführungstour starten"), this,
                      &MainWindow::starteEinfuehrung);
+    menue->addAction(QIcon(keksBild(16, devicePixelRatioF())), tr("&Keks-Einstellungen …"), this,
+                     &MainWindow::zeigeKeksEinstellungen);
     menue->addAction(Stil::icon(Stil::Symbol::Info, Stil::text()), tr("&Über SolarMonitor"), this, &MainWindow::zeigeUeber);
     QAction* beenden = menue->addAction(Stil::icon(Stil::Symbol::Abmelden, Stil::text()), tr("&Beenden"), this, &QWidget::close);
     beenden->setShortcut(QKeySequence::Quit);
@@ -1236,8 +1242,40 @@ void MainWindow::starteEinfuehrung()
         QSettings().setValue(QStringLiteral("einfuehrung/") + m_angemeldet, true);
         if (m_tabs)
             m_tabs->setCurrentIndex(vorherSeite == ReiterUebersicht ? ReiterUebersicht : vorherSeite);
+        QTimer::singleShot(400, this, [this] { zeigeKeksBanner(); });
     });
     m_einfuehrung->starte();
+}
+
+void MainWindow::zeigeKeksBanner(bool nurEinmal)
+{
+    // Spaß: nur ohne Abo, nur über dem Programm und nicht während Tour oder Dialogen
+    if (Abo::werbefrei() || m_keksBanner || m_einfuehrung || (nurEinmal && m_keksGezeigt))
+        return;
+    if (!m_programm || m_ebenen->currentWidget() != m_programm || QApplication::activeModalWidget())
+        return;
+    m_keksGezeigt = true;
+    m_keksBanner = new KeksBanner(m_programm);
+    connect(m_keksBanner, &KeksBanner::entschieden, this, [this](int an, int gesamt) {
+        const QString hinweis = tr("(Keine Sorge: Es werden keinerlei Daten erhoben.)");
+        if (an == gesamt)
+            meldung(tr("Mmh! Alle %1 Kekse akzeptiert. %2").arg(gesamt).arg(hinweis), 6000);
+        else if (an <= 4)
+            meldung(tr("Alle Kekse abgelehnt. Die 4 notwendigen backen wir trotzdem. %1").arg(hinweis), 6000);
+        else
+            meldung(tr("%1 von %2 Keksen akzeptiert – gute Wahl. %3").arg(an).arg(gesamt).arg(hinweis), 6000);
+    });
+    m_keksBanner->zeige();
+}
+
+void MainWindow::zeigeKeksEinstellungen()
+{
+    KeksEinstellungen dlg(this);
+    if (dlg.exec() == QDialog::Accepted)
+        meldung(tr("Keks-Einstellungen gespeichert: %1 von %2 Keksen aktiv. (Es werden keinerlei Daten erhoben.)")
+                    .arg(dlg.anzahlAn())
+                    .arg(dlg.anzahl()),
+                5000);
 }
 
 void MainWindow::favoritUmschalten(const QString& anlageId)

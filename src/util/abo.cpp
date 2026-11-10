@@ -71,7 +71,7 @@ QString Abo::preis(Stufe s)
 
 QStringList Abo::vorteile(Stufe s)
 {
-    QStringList v{tr("Keine Werbebanner mehr"), tr("Keine Popups im Minutentakt")};
+    QStringList v{tr("Keine Werbebanner mehr"), tr("Keine Popups im Minutentakt"), tr("Kein Keks-Banner beim Start")};
     if (s == Stufe::Ultimate)
         v << tr("Dunkles Design") << tr("Vordefinierte Dashboard-Anordnungen")
           << tr("Sprachpaket International (Français, 中文)") << tr("Intro beim Start abschaltbar")
