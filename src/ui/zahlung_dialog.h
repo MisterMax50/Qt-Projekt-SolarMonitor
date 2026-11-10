@@ -2,6 +2,8 @@
 
 #include <QDialog>
 
+#include "util/abo.h"
+
 class QButtonGroup;
 class QCheckBox;
 class QLabel;
@@ -12,7 +14,7 @@ class QStackedWidget;
 class QTimer;
 
 /**
- * @brief Spaß-Funktion: erfundener Bezahlablauf für "SolarMonitor Premium".
+ * @brief Spaß-Funktion: erfundener Bezahlablauf für SolarMonitor Premium/Ultimate.
  *
  * "SolarMonitor Pay" ist frei erfunden und läuft komplett im Programm:
  * keine Verbindung nach außen, nichts wird gespeichert, es fließt kein Geld.
@@ -23,7 +25,7 @@ class QTimer;
 class ZahlungDialog : public QDialog {
     Q_OBJECT
 public:
-    explicit ZahlungDialog(const QString& kontoName, QWidget* parent = nullptr);
+    ZahlungDialog(const QString& kontoName, Abo::Stufe stufe, QWidget* parent = nullptr);
 
     /// Dauer der "Verarbeitung" in ms (für Tests verkürzbar)
     static int verarbeitungMs;
@@ -62,4 +64,5 @@ private:
     QLabel*         m_quittung = nullptr;
     QTimer*         m_takt = nullptr;
     int             m_verarbeitet = 0;
+    Abo::Stufe      m_stufe;
 };

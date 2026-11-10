@@ -25,6 +25,7 @@
 #include "ui/anordnungs_raster.h"
 #include "ui/kennzahl_kachel.h"
 #include "util/anzeige.h"
+#include "util/abo.h"
 #include "util/stil.h"
 
 namespace {
@@ -214,29 +215,45 @@ QAction* DashboardWidget::anordnungsAktion()
     auto* menue = new QMenu(this);
     auto* gruppe = new QActionGroup(menue);
     menue->setStyle(new GrosseMenueSymbole(menue)); // größere Vorschaubilder
-    for (const AnordnungsRaster::Vorlage& v : m_kartenRaster->vorlagen()) {
-        QAction* a = menue->addAction(m_kartenRaster->vorschau(v.id), v.name);
-        a->setCheckable(true);
-        gruppe->addAction(a);
-        connect(a, &QAction::triggered, this, [this, id = v.id] { m_kartenRaster->waehleVorlage(id); });
-    }
-    menue->addSeparator();
-    menue->addAction(tr("Anordnung zurücksetzen"), this, &DashboardWidget::anordnungZuruecksetzen);
-    // gewählte Anordnung fett und mit Haken markieren
+    // gewählte Anordnung fett und mit Haken markieren; ohne Ultimate sind alle
+    // Vorlagen außer "Standard" gesperrt (Spaß-Abo, siehe util/abo.h)
     auto markiere = [this, gruppe] {
         const auto& vorlagen = m_kartenRaster->vorlagen();
+        const bool frei = Abo::erlaubt(Abo::Funktion::Anordnungen);
         for (int i = 0; i < vorlagen.size() && i < gruppe->actions().size(); ++i) {
             QAction* a = gruppe->actions().at(i);
-            const bool aktiv = vorlagen.at(i).id == m_kartenRaster->aktuelleVorlage();
+            const auto& v = vorlagen.at(i);
+            const bool aktiv = v.id == m_kartenRaster->aktuelleVorlage();
             a->setChecked(aktiv);
             QFont f = a->font();
             f.setBold(aktiv);
             a->setFont(f);
-            a->setText(aktiv ? vorlagen.at(i).name + QStringLiteral("  ✓") : vorlagen.at(i).name);
+            QString text = v.name;
+            if (!frei && v.id != QLatin1String("standard"))
+                text += QStringLiteral("  ·  ") + tr("Ultimate");
+            if (aktiv)
+                text += QStringLiteral("  ✓");
+            a->setText(text);
         }
     };
+    for (const AnordnungsRaster::Vorlage& v : m_kartenRaster->vorlagen()) {
+        QAction* a = menue->addAction(m_kartenRaster->vorschau(v.id), v.name);
+        a->setCheckable(true);
+        gruppe->addAction(a);
+        connect(a, &QAction::triggered, this, [this, id = v.id, markiere] {
+            if (id != QLatin1String("standard") && !Abo::pruefe(Abo::Funktion::Anordnungen)
+                && !Abo::erlaubt(Abo::Funktion::Anordnungen)) {
+                markiere();
+                return;
+            }
+            m_kartenRaster->waehleVorlage(id);
+        });
+    }
+    menue->addSeparator();
+    menue->addAction(tr("Anordnung zurücksetzen"), this, &DashboardWidget::anordnungZuruecksetzen);
     markiere();
     connect(m_kartenRaster, &AnordnungsRaster::anordnungGeaendert, menue, markiere);
+    connect(Abo::instanz(), &Abo::stufeGeaendert, menue, markiere);
     aktion->setMenu(menue);
     return aktion;
 }

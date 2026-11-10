@@ -106,11 +106,12 @@ QPixmap haken(int g, qreal dpr)
 
 } // namespace
 
-ZahlungDialog::ZahlungDialog(const QString& kontoName, QWidget* parent)
+ZahlungDialog::ZahlungDialog(const QString& kontoName, Abo::Stufe stufe, QWidget* parent)
     : QDialog(parent)
+    , m_stufe(stufe)
 {
     setObjectName(QStringLiteral("Zahlung"));
-    setWindowTitle(tr("SolarMonitor Pay – Premium abschließen"));
+    setWindowTitle(tr("SolarMonitor Pay – %1 abschließen").arg(Abo::name(stufe)));
     setStyleSheet(QString::fromUtf8(kStil));
     setModal(true);
     setFixedWidth(520);
@@ -189,10 +190,13 @@ ZahlungDialog::ZahlungDialog(const QString& kontoName, QWidget* parent)
         static const char* const schritte[] = {
             QT_TR_NOOP("Verbinde mit der Sonne …"),
             QT_TR_NOOP("Prüfe die Wolkenlage über dem Bodensee …"),
-            QT_TR_NOOP("Bucht 9,99 € ab …"),
+            QT_TR_NOOP("Bucht %1 ab …"),
             QT_TR_NOOP("Entsorgt die Werbung fachgerecht …"),
         };
-        m_status->setText(tr(schritte[qMin(3, prozent / 25)]));
+        QString text = tr(schritte[qMin(3, prozent / 25)]);
+        if (text.contains(QLatin1String("%1")))
+            text = text.arg(Abo::preis(m_stufe));
+        m_status->setText(text);
         if (prozent >= 100) {
             m_takt->stop();
             geheZu(Fertig);
@@ -216,19 +220,18 @@ QWidget* ZahlungDialog::baueBestellung()
     auto* bv = new QVBoxLayout(b);
     bv->setContentsMargins(16, 14, 16, 14);
     bv->setSpacing(6);
-    auto* produkt = new QLabel(tr("<b>SolarMonitor Premium</b> (werbefrei)"), b);
+    auto* produkt = new QLabel(QStringLiteral("<b>%1</b>").arg(Abo::name(m_stufe)), b);
     bv->addWidget(produkt);
-    for (const QString& vorteil : {tr("Keine Werbebanner mehr"), tr("Keine Popups im Minutentakt"),
-                                   tr("Goldenes PREMIUM-Abzeichen im Kopf"), tr("Jederzeit im Kontomenü kündbar")})
+    for (const QString& vorteil : Abo::vorteile(m_stufe))
         bv->addWidget(new QLabel(QStringLiteral("✔  ") + vorteil, b));
     v->addWidget(b);
 
     auto* summe = box(w);
     auto* sv = new QVBoxLayout(summe);
     sv->setContentsMargins(16, 12, 16, 12);
-    sv->addLayout(zeile(tr("Monatlicher Preis"), new QLabel(tr("9,99 €"))));
+    sv->addLayout(zeile(tr("Monatlicher Preis"), new QLabel(Abo::preis(m_stufe))));
     sv->addLayout(zeile(tr("Einrichtungsgebühr"), new QLabel(tr("0,00 €"))));
-    auto* betrag = new QLabel(tr("9,99 €"));
+    auto* betrag = new QLabel(Abo::preis(m_stufe));
     betrag->setObjectName(QStringLiteral("ZahlungBetrag"));
     sv->addLayout(zeile(tr("Heute fällig"), betrag));
     v->addWidget(summe);
@@ -314,11 +317,11 @@ QWidget* ZahlungDialog::bauePruefen()
     auto* bv = new QVBoxLayout(b);
     bv->setContentsMargins(16, 12, 16, 12);
     bv->setSpacing(6);
-    bv->addLayout(zeile(tr("Produkt"), new QLabel(tr("SolarMonitor Premium"))));
+    bv->addLayout(zeile(tr("Produkt"), new QLabel(Abo::name(m_stufe))));
     m_pruefZahlart = new QLabel;
     bv->addLayout(zeile(tr("Zahlart"), m_pruefZahlart));
     bv->addLayout(zeile(tr("Laufzeit"), new QLabel(tr("monatlich, jederzeit kündbar"))));
-    auto* betrag = new QLabel(tr("9,99 €"));
+    auto* betrag = new QLabel(Abo::preis(m_stufe));
     betrag->setObjectName(QStringLiteral("ZahlungBetrag"));
     bv->addLayout(zeile(tr("Betrag"), betrag));
     v->addWidget(b);
@@ -412,7 +415,7 @@ void ZahlungDialog::geheZu(int schritt)
         break;
     case Pruefen:
         m_pruefZahlart->setText(zahlartText());
-        m_weiter->setText(tr("Jetzt abonnieren · 9,99 €"));
+        m_weiter->setText(tr("Jetzt abonnieren · %1").arg(Abo::preis(m_stufe)));
         m_weiter->setEnabled(m_agb->isChecked());
         break;
     case Verarbeitung:
@@ -422,9 +425,8 @@ void ZahlungDialog::geheZu(int schritt)
         const QString nr = QStringLiteral("SMP-%1-%2")
                                .arg(QDate::currentDate().year())
                                .arg(QRandomGenerator::global()->bounded(100000, 999999));
-        m_quittung->setText(tr("<b>SolarMonitor Premium</b> ist aktiv.<br>Transaktion: %1<br>Betrag: 9,99 € · "
-                               "Zahlart: %2<br>Datum: %3")
-                                .arg(nr, zahlartText().toHtmlEscaped(),
+        m_quittung->setText(tr("<b>%1</b> ist aktiv.<br>Transaktion: %2<br>Betrag: %3 · Zahlart: %4<br>Datum: %5")
+                                .arg(Abo::name(m_stufe), nr, Abo::preis(m_stufe), zahlartText().toHtmlEscaped(),
                                      QLocale().toString(QDateTime::currentDateTime(), QLocale::ShortFormat)));
         m_weiter->setText(tr("Fertig"));
         break;

@@ -202,15 +202,24 @@ für Solarparks):
   **dritten Klick** – die beiden Klicks davor öffnen jeweils die Webseite.
   Die „Webseite“ ist ein eigenes Fenster im Browser-Look, komplett im
   Programm gezeichnet (keine Internetverbindung, Adressen auf `.example`).
-  Im Kontomenü startet *SolarMonitor Premium (werbefrei)* das „Abo“ für
-  9,99 € im Monat (Spielgeld). Es läuft über den erfundenen Bezahlablauf **SolarMonitor Pay**
+  Im Kontomenü unter *Abo* gibt es drei Stufen (alles Spielgeld,
+  `src/util/abo.*`):
+  - **Kostenlos** – mit Werbung
+  - **Premium** (9,99 €/Monat) – werbefrei, goldenes PREMIUM-Abzeichen
+  - **Ultimate** (19,99 €/Monat) – werbefrei, violettes ULTIMATE-Abzeichen
+    und die Funktionen hinter der **Paywall**: dunkles Design, die
+    vordefinierten Dashboard-Anordnungen (außer „Standard“), das
+    Sprachpaket Französisch/Chinesisch und das Abschalten des Intros.
+    Gesperrte Einträge tragen ein Schloss bzw. den Zusatz „Ultimate“; ein
+    Klick darauf bietet das Upgrade an.
+
+  Ein Upgrade läuft über den erfundenen Bezahlablauf **SolarMonitor Pay**
   (`src/ui/zahlung_dialog.*`): Bestellung → Anmelden mit beliebiger
   vierstelliger „Sonnen-PIN“ → Zahlart (Sonnenstunden, Kilowattkekse,
   Lächeln) → Prüfen mit AGB-Haken → Verarbeitung → Quittung. Nichts wird
-  gespeichert oder gesendet, es fließt kein Geld. Nach dem Abschluss
-  verschwinden Banner, Popups und offene Werbeseiten, und im Kopf erscheint
-  ein PREMIUM-Abzeichen; bei Abbruch bleibt die Werbung. Ausschalten im
-  Kontomenü wirkt sofort. Die Einstellung wird gespeichert.
+  gespeichert oder gesendet, es fließt kein Geld. Herabstufen wirkt sofort;
+  gesperrte Einstellungen springen dann auf hell, Deutsch und Intro an
+  zurück. Über `--lang` bleibt jede Sprache auch ohne Ultimate wählbar.
 - Farben: Dunkelblau (Seitenleiste) und Sonnen-Orange (Akzent, Hauptknöpfe);
   Grün/Orange/Rot nur für den Zustand der Anlagen. Alles steht in einem
   Stylesheet in `src/util/stil.cpp` (hell und dunkel), Grundlage ist der

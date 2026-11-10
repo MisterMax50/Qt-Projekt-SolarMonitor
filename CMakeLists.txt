@@ -110,6 +110,8 @@ set(PROJEKT_QUELLEN
     src/ui/werbung.cpp
     src/ui/zahlung_dialog.h
     src/ui/zahlung_dialog.cpp
+    src/util/abo.h
+    src/util/abo.cpp
     src/ui/pdf_bericht.cpp
     src/ui/pruefprotokoll_widget.cpp
     src/ui/serviceplanung.cpp

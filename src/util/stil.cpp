@@ -284,6 +284,8 @@ QPushButton#WerbeSeitePremium { background: #1f2937; color: #fde68a; border: non
     font-weight: 700; }
 QLabel#PremiumChip { color: #3b2a05; font-size: 7.5pt; font-weight: 800; letter-spacing: 1px; border-radius: 10px;
     padding: 3px 10px; background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #fde68a, stop:0.5 #f59e0b, stop:1 #fbbf24); }
+QLabel#PremiumChip[ultimate="true"] { color: #ffffff;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #a855f7, stop:0.5 #6d28d9, stop:1 #db2777); }
 QLabel#Toast { background: %SEITE%; color: #ffffff; border-radius: 8px; padding: 10px 16px; }
 QLabel#Toast[hinweis="true"] { border-left: 4px solid %AKZ%; padding-left: 14px; }
 QProgressBar { background: %LINIE%; border: none; border-radius: 3px; max-height: 6px; color: transparent; }
@@ -583,6 +585,14 @@ QIcon Stil::icon(Symbol symbol, const QColor& farbeWunsch)
             p.drawLine(QPointF(10, 13), QPointF(10, 20.5));
             p.drawLine(QPointF(14, 13), QPointF(14, 19));
             p.drawLine(QPointF(4.5, 14), QPointF(4.5, 17));
+            break;
+        case Symbol::Schloss:
+            // Vorhängeschloss: Bügel + Körper mit Schlüsselloch
+            p.drawArc(QRectF(8, 3.5, 8, 10), 0, 180 * 16);
+            p.drawLine(QPointF(8, 8.5), QPointF(8, 11));
+            p.drawLine(QPointF(16, 8.5), QPointF(16, 11));
+            p.drawRoundedRect(QRectF(5, 11, 14, 9.5), 2, 2);
+            p.drawLine(QPointF(12, 14.5), QPointF(12, 17));
             break;
         case Symbol::Schliessen:
             // Tür: Türblatt mit Klinke, darunter der Boden

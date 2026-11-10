@@ -61,6 +61,7 @@
 #include "ui/benutzer_seite.h"
 #include "ui/werbung.h"
 #include "ui/zahlung_dialog.h"
+#include "util/abo.h"
 #include "model/benutzer.h"
 #include "util/windows_hello.h"
 #include "ui/datenordner_seite.h"
@@ -266,6 +267,10 @@ MainWindow::MainWindow(std::unique_ptr<Datensatz> datensatz, QWidget* parent)
     m_ebenen->addWidget(m_intro);
     neueLoginSeite();
     setCentralWidget(m_ebenen);
+
+    // Spaß-Abo: Stufenwechsel und Paywall der Ultimate-Funktionen
+    connect(Abo::instanz(), &Abo::stufeGeaendert, this, &MainWindow::aboAnwenden);
+    connect(Abo::instanz(), &Abo::paywall, this, &MainWindow::zeigePaywall);
 }
 
 MainWindow::~MainWindow()
@@ -331,7 +336,7 @@ void MainWindow::trenneDaten()
     m_benutzerKnopf = nullptr;
     m_werbungsBereich = nullptr;
     m_premiumChip = nullptr;
-    m_aktPremium = nullptr;
+    m_aboMenue = nullptr;
     m_navigation = nullptr;
     m_anlageInfo = nullptr;
     m_filterReset = nullptr;
@@ -666,10 +671,10 @@ void MainWindow::baueUi()
         connect(m_werbeSteuerung, &WerbeSteuerung::premiumGewuenscht, this, &MainWindow::premiumKaufen);
     }
     connect(banner, &WerbeBanner::webseiteGewuenscht, m_werbeSteuerung, &WerbeSteuerung::oeffneWebseite);
-    m_werbeSteuerung->setAktiv(!QSettings().value(QStringLiteral("premium"), false).toBool());
+    m_werbeSteuerung->setAktiv(!Abo::werbefrei());
     wv->addWidget(banner);
     rv->addWidget(m_werbungsBereich);
-    m_werbungsBereich->setVisible(!QSettings().value(QStringLiteral("premium"), false).toBool());
+    m_werbungsBereich->setVisible(!Abo::werbefrei());
 
     auto* zentrum = new QWidget;
     auto* h = new QHBoxLayout(zentrum);
@@ -956,22 +961,44 @@ QWidget* MainWindow::baueKopfzeile()
     menue->addAction(Stil::icon(Stil::Symbol::Liste, Stil::text()), tr("Daten&ordner ändern …"), this,
                      [this] { zeigeDatenordner(QString(), true); });
     menue->addSeparator();
-    // Abo-Modus (nur zum Spaß): entfernt die Spaß-Werbung
-    m_aktPremium = menue->addAction(tr("SolarMonitor &Premium (werbefrei)"));
-    m_aktPremium->setCheckable(true);
-    m_aktPremium->setChecked(QSettings().value(QStringLiteral("premium"), false).toBool());
-    m_aktPremium->setToolTip(tr("Abo-Modus: entfernt die (erfundene) Werbung. Kostet 9,99 € im Monat (Spielgeld)."));
-    connect(m_aktPremium, &QAction::toggled, this, [this](bool an) {
-        // Einschalten geht über den (erfundenen) Bezahlablauf, Ausschalten sofort
-        if (an)
-            premiumKaufen();
-        else
-            setzePremium(false);
-    });
-    QAction* dunkel = menue->addAction(Stil::icon(Stil::Symbol::Mond, Stil::text()), tr("&Dunkles Design"));
+    // Abo (nur zum Spaß): Kostenlos mit Werbung, Premium werbefrei, Ultimate mit Extras
+    m_aboMenue = menue->addMenu(Stil::icon(Stil::Symbol::Euro, Stil::text()), QString());
+    m_aboMenue->setToolTipsVisible(true);
+    auto* aboGruppe = new QActionGroup(m_aboMenue);
+    for (Abo::Stufe st : {Abo::Stufe::Kostenlos, Abo::Stufe::Premium, Abo::Stufe::Ultimate}) {
+        QString text;
+        switch (st) {
+        case Abo::Stufe::Kostenlos:
+            text = tr("Kostenlos (mit Werbung)");
+            break;
+        case Abo::Stufe::Premium:
+            text = tr("Premium – werbefrei · %1/Monat").arg(Abo::preis(st));
+            break;
+        case Abo::Stufe::Ultimate:
+            text = tr("Ultimate – werbefrei + alle Funktionen · %1/Monat").arg(Abo::preis(st));
+            break;
+        }
+        QAction* a = m_aboMenue->addAction(text);
+        a->setCheckable(true);
+        a->setData(int(st));
+        a->setToolTip(Abo::vorteile(st).join(QStringLiteral(" · ")));
+        aboGruppe->addAction(a);
+        connect(a, &QAction::triggered, this, [this, st] { waehleAbo(int(st)); });
+    }
+    aktualisiereAboMenue();
+
+    // Ultimate-Funktionen: Schloss-Symbol, solange gesperrt
+    QAction* dunkel = menue->addAction(tr("&Dunkles Design"));
     dunkel->setCheckable(true);
     dunkel->setChecked(Stil::istDunkel());
-    connect(dunkel, &QAction::toggled, this, &MainWindow::setzeDesign);
+    connect(dunkel, &QAction::toggled, this, [this, dunkel](bool an) {
+        if (an && !Abo::pruefe(Abo::Funktion::DunklesDesign) && !Abo::erlaubt(Abo::Funktion::DunklesDesign)) {
+            QSignalBlocker sperre(dunkel);
+            dunkel->setChecked(false);
+            return;
+        }
+        setzeDesign(an);
+    });
     QAction* vollbild = menue->addAction(Stil::icon(Stil::Symbol::Vollbild, Stil::text()), tr("&Vollbild"));
     vollbild->setCheckable(true);
     vollbild->setChecked(isFullScreen() || QSettings().value(QStringLiteral("vollbild"), true).toBool());
@@ -982,20 +1009,54 @@ QWidget* MainWindow::baueKopfzeile()
     intro->setCheckable(true);
     intro->setChecked(QSettings().value(QStringLiteral("intro"), true).toBool());
     intro->setToolTip(tr("Logo-Animation beim Programmstart zeigen"));
-    connect(intro, &QAction::toggled, this, [](bool an) { QSettings().setValue(QStringLiteral("intro"), an); });
+    connect(intro, &QAction::toggled, this, [intro](bool an) {
+        if (!an && !Abo::pruefe(Abo::Funktion::IntroAus) && !Abo::erlaubt(Abo::Funktion::IntroAus)) {
+            QSignalBlocker sperre(intro);
+            intro->setChecked(true);
+            return;
+        }
+        QSettings().setValue(QStringLiteral("intro"), an);
+    });
     QMenu* sprache = menue->addMenu(tr("&Sprache"));
     auto* sprachen = new QActionGroup(sprache);
+    QList<QAction*> paketSprachen;
     for (const auto& [kuerzel, sprachName] : Sprache::verfuegbar()) {
         QAction* a = sprache->addAction(sprachName);
         a->setCheckable(true);
         a->setChecked(Sprache::aktuell() == kuerzel);
+        a->setData(kuerzel);
         sprachen->addAction(a);
-        connect(a, &QAction::triggered, this, [this, k = kuerzel] {
+        if (Abo::istPaketSprache(kuerzel))
+            paketSprachen << a;
+        connect(a, &QAction::triggered, this, [this, k = kuerzel, sprachen] {
+            if (Abo::istPaketSprache(k) && !Abo::pruefe(Abo::Funktion::Sprachpaket)
+                && !Abo::erlaubt(Abo::Funktion::Sprachpaket)) {
+                // gesperrt: Haken zurück auf die aktuelle Sprache
+                for (QAction* x : sprachen->actions())
+                    x->setChecked(x->data().toString() == Sprache::aktuell());
+                return;
+            }
             QSettings().setValue(QStringLiteral("sprache"), k);
             if (k != Sprache::aktuell() && !Sprache::setze(k))
                 QMessageBox::warning(this, QStringLiteral("SolarMonitor"), tr("Die Übersetzung konnte nicht geladen werden."));
         });
     }
+    auto schloesser = [dunkel, intro, paketSprachen] {
+        const bool frei = Abo::stufe() == Abo::Stufe::Ultimate;
+        const QIcon schloss = Stil::icon(Stil::Symbol::Schloss, Stil::textGedimmt());
+        dunkel->setIcon(frei ? Stil::icon(Stil::Symbol::Mond, Stil::text()) : schloss);
+        intro->setIcon(frei ? QIcon() : schloss);
+        for (QAction* a : paketSprachen)
+            a->setIcon(frei ? QIcon() : schloss);
+        const QString hinweis = frei ? QString() : tr("Nur mit SolarMonitor Ultimate");
+        dunkel->setToolTip(hinweis);
+        for (QAction* a : paketSprachen)
+            a->setToolTip(hinweis);
+    };
+    schloesser();
+    sprache->setToolTipsVisible(true);
+    menue->setToolTipsVisible(true);
+    connect(Abo::instanz(), &Abo::stufeGeaendert, menue, schloesser);
     menue->addSeparator();
     menue->addAction(Stil::icon(Stil::Symbol::Info, Stil::text()), tr("&Über SolarMonitor"), this, &MainWindow::zeigeUeber);
     QAction* beenden = menue->addAction(Stil::icon(Stil::Symbol::Abmelden, Stil::text()), tr("&Beenden"), this, &QWidget::close);
@@ -1013,8 +1074,7 @@ QWidget* MainWindow::baueKopfzeile()
     h->addWidget(trenner);
     m_premiumChip = new QLabel(tr("PREMIUM"), kopf);
     m_premiumChip->setObjectName(QStringLiteral("PremiumChip"));
-    m_premiumChip->setToolTip(tr("SolarMonitor Premium ist aktiv – werbefrei"));
-    m_premiumChip->setVisible(QSettings().value(QStringLiteral("premium"), false).toBool());
+    aktualisiereAboChip();
     m_premiumChip->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     h->addWidget(m_premiumChip, 0, Qt::AlignVCenter);
     h->addWidget(benutzer);
@@ -1096,44 +1156,132 @@ void MainWindow::aktualisiereNavigation()
 
 void MainWindow::premiumKaufen()
 {
-    if (QSettings().value(QStringLiteral("premium"), false).toBool())
-        return;
+    aboKaufen(int(Abo::Stufe::Premium));
+}
+
+bool MainWindow::aboKaufen(int stufe)
+{
+    const auto ziel = Abo::Stufe(stufe);
+    if (Abo::stufe() >= ziel)
+        return true;
     // Spaß-Bezahlablauf "SolarMonitor Pay" – kein echtes Geld, nichts wird gesendet
     QString konto = m_angemeldet;
     if (m_benutzer)
         if (const Benutzer* b = m_benutzer->finde(m_angemeldet))
             konto = b->name;
-    ZahlungDialog zahlung(konto, this);
-    if (zahlung.exec() == QDialog::Accepted) {
-        setzePremium(true);
+    ZahlungDialog zahlung(konto, ziel, this);
+    const bool bezahlt = zahlung.exec() == QDialog::Accepted;
+    if (bezahlt) {
+        Abo::setzeStufe(ziel);
+        meldung(ziel == Abo::Stufe::Ultimate
+                    ? tr("Danke für Ihr Abo! SolarMonitor Ultimate ist aktiv – werbefrei und mit allen Funktionen "
+                         "für %1 im Monat. (Keine Sorge: Spielgeld.)").arg(Abo::preis(ziel))
+                    : tr("Danke für Ihr Abo! SolarMonitor Premium ist aktiv – werbefrei für %1 im Monat. "
+                         "(Keine Sorge: Spielgeld.)").arg(Abo::preis(ziel)),
+                6000);
+    } else {
+        meldung(Abo::werbefrei() ? tr("Zahlung abgebrochen – es bleibt beim bisherigen Abo.")
+                                 : tr("Zahlung abgebrochen – die Werbung bleibt."),
+                4000, true);
+    }
+    aktualisiereAboMenue();
+    return bezahlt;
+}
+
+void MainWindow::waehleAbo(int stufe)
+{
+    const auto ziel = Abo::Stufe(stufe);
+    const auto alt = Abo::stufe();
+    if (ziel == alt) {
+        aktualisiereAboMenue();
         return;
     }
-    // abgebrochen: Menüeintrag zurücksetzen, Werbung bleibt
-    if (m_aktPremium && m_aktPremium->isChecked()) {
-        QSignalBlocker sperre(m_aktPremium);
-        m_aktPremium->setChecked(false);
+    if (ziel > alt) {
+        aboKaufen(stufe);
+        return;
     }
-    meldung(tr("Zahlung abgebrochen – die Werbung bleibt."), 4000, true);
+    // Herabstufen geht sofort (Geld zurück gibt es nicht – es war ja auch keins)
+    Abo::setzeStufe(ziel);
+    meldung(ziel == Abo::Stufe::Kostenlos
+                ? tr("Abo gekündigt. Die Werbung ist zurück.")
+                : tr("Abo auf Premium umgestellt. Die Ultimate-Funktionen sind wieder gesperrt."),
+            5000);
 }
 
 void MainWindow::setzePremium(bool an)
 {
-    const bool vorher = QSettings().value(QStringLiteral("premium"), false).toBool();
-    QSettings().setValue(QStringLiteral("premium"), an);
+    Abo::setzeStufe(an ? Abo::Stufe::Premium : Abo::Stufe::Kostenlos);
+}
+
+void MainWindow::aboAnwenden()
+{
+    const bool werbefrei = Abo::werbefrei();
     if (m_werbungsBereich)
-        m_werbungsBereich->setVisible(!an);
-    if (m_premiumChip)
-        m_premiumChip->setVisible(an);
+        m_werbungsBereich->setVisible(!werbefrei);
     if (m_werbeSteuerung)
-        m_werbeSteuerung->setAktiv(!an);
-    if (m_aktPremium && m_aktPremium->isChecked() != an) {
-        QSignalBlocker sperre(m_aktPremium);
-        m_aktPremium->setChecked(an);
+        m_werbeSteuerung->setAktiv(!werbefrei);
+    aktualisiereAboChip();
+    aktualisiereAboMenue();
+    if (Abo::stufe() == Abo::Stufe::Ultimate)
+        return;
+    // ohne Ultimate: gesperrte Funktionen auf die freie Einstellung zurück
+    QSettings einstellungen;
+    if (!einstellungen.value(QStringLiteral("intro"), true).toBool())
+        einstellungen.setValue(QStringLiteral("intro"), true);
+    if (Abo::istPaketSprache(Sprache::aktuell())) {
+        einstellungen.setValue(QStringLiteral("sprache"), QStringLiteral("de"));
+        Sprache::setze(QStringLiteral("de"));
     }
-    if (an != vorher)
-        meldung(an ? tr("Danke für Ihr Abo! SolarMonitor Premium ist aktiv – werbefrei für 9,99 € im Monat. (Keine Sorge: Spielgeld.)")
-                   : tr("Premium beendet. Die Werbung ist zurück."),
-                6000);
+    if (Stil::istDunkel())
+        setzeDesign(false);
+}
+
+void MainWindow::aktualisiereAboChip()
+{
+    if (!m_premiumChip)
+        return;
+    const auto st = Abo::stufe();
+    const bool ultimate = st == Abo::Stufe::Ultimate;
+    m_premiumChip->setVisible(st != Abo::Stufe::Kostenlos);
+    m_premiumChip->setText(ultimate ? tr("ULTIMATE") : tr("PREMIUM"));
+    m_premiumChip->setToolTip(ultimate ? tr("SolarMonitor Ultimate ist aktiv – werbefrei, alle Funktionen frei")
+                                       : tr("SolarMonitor Premium ist aktiv – werbefrei"));
+    m_premiumChip->setProperty("ultimate", ultimate);
+    m_premiumChip->style()->unpolish(m_premiumChip);
+    m_premiumChip->style()->polish(m_premiumChip);
+}
+
+void MainWindow::aktualisiereAboMenue()
+{
+    if (!m_aboMenue)
+        return;
+    const auto st = Abo::stufe();
+    m_aboMenue->setTitle(tr("&Abo: %1").arg(st == Abo::Stufe::Kostenlos ? tr("Kostenlos")
+                                            : st == Abo::Stufe::Premium  ? QStringLiteral("Premium")
+                                                                         : QStringLiteral("Ultimate")));
+    for (QAction* a : m_aboMenue->actions())
+        a->setChecked(a->data().toInt() == int(st));
+}
+
+void MainWindow::zeigePaywall(Abo::Funktion f)
+{
+    // Paywall: Funktion gibt es nur mit Ultimate – Upgrade anbieten
+    QMessageBox frage(this);
+    frage.setWindowTitle(QStringLiteral("SolarMonitor Ultimate"));
+    frage.setIconPixmap(Stil::icon(Stil::Symbol::Schloss, QColor(109, 40, 217)).pixmap(48, 48));
+    frage.setText(tr("<b>„%1“ gibt es nur mit SolarMonitor Ultimate.</b>").arg(Abo::funktionsName(f)));
+    QString liste;
+    for (const QString& v : Abo::vorteile(Abo::Stufe::Ultimate))
+        liste += QStringLiteral("✔ %1<br>").arg(v.toHtmlEscaped());
+    frage.setInformativeText(tr("Ultimate enthält:<br>%1<br>Für nur %2 im Monat (Spielgeld).")
+                                 .arg(liste, Abo::preis(Abo::Stufe::Ultimate)));
+    QPushButton* holen =
+        frage.addButton(tr("Ultimate holen – %1").arg(Abo::preis(Abo::Stufe::Ultimate)), QMessageBox::AcceptRole);
+    frage.addButton(tr("Vielleicht später"), QMessageBox::RejectRole);
+    frage.setDefaultButton(holen);
+    frage.exec();
+    if (frage.clickedButton() == holen)
+        aboKaufen(int(Abo::Stufe::Ultimate));
 }
 
 void MainWindow::meldung(const QString& text, int dauerMs, bool hinweis)

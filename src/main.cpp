@@ -8,6 +8,7 @@
 
 #include "model/datensatz.h"
 #include "ui/mainwindow.h"
+#include "util/abo.h"
 #include "util/sprache.h"
 #include "util/stil.h"
 
@@ -83,9 +84,15 @@ int main(int argc, char* argv[])
 
     // Gespeicherte Einstellungen (Sprache, Design); --lang hat Vorrang
     QSettings einstellungen;
-    Stil::anwenden(einstellungen.value(QStringLiteral("dunkel"), false).toBool());
-    Sprache::setze(parser.isSet(spracheOpt) ? parser.value(spracheOpt).toLower()
-                                            : einstellungen.value(QStringLiteral("sprache"), QStringLiteral("de")).toString());
+    // Dunkles Design gehört zum (Spaß-)Abo Ultimate
+    Stil::anwenden(einstellungen.value(QStringLiteral("dunkel"), false).toBool()
+                   && Abo::erlaubt(Abo::Funktion::DunklesDesign));
+    // gespeicherte Sprache; Französisch/Chinesisch (Sprachpaket) nur mit Ultimate,
+    // über --lang bleibt jede Sprache wählbar
+    QString gespeichert = einstellungen.value(QStringLiteral("sprache"), QStringLiteral("de")).toString();
+    if (Abo::istPaketSprache(gespeichert) && !Abo::erlaubt(Abo::Funktion::Sprachpaket))
+        gespeichert = QStringLiteral("de");
+    Sprache::setze(parser.isSet(spracheOpt) ? parser.value(spracheOpt).toLower() : gespeichert);
 
     // ---------- Daten laden; fehlen sie, fragt das Fenster nach der Anmeldung nach dem Ordner ----------
     auto datensatz = Datensatz::lade(findeDatenordner(parser.value(datenOpt)));
@@ -93,6 +100,7 @@ int main(int argc, char* argv[])
     // ---------- Hauptfenster: Intro → Anmeldung → (Datenordner) → Programm ----------
     MainWindow fenster(std::move(datensatz));
     // Intro abschaltbar im Benutzermenü oder mit --kein-intro
-    fenster.starte(!parser.isSet(ohneIntroOpt) && einstellungen.value(QStringLiteral("intro"), true).toBool());
+    fenster.starte(!parser.isSet(ohneIntroOpt) && (einstellungen.value(QStringLiteral("intro"), true).toBool()
+                                                         || !Abo::erlaubt(Abo::Funktion::IntroAus)));
     return app.exec();
 }

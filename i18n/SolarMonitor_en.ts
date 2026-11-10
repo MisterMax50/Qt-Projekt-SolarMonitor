@@ -2,6 +2,82 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en_GB" sourcelanguage="de_DE">
 <context>
+    <name>Abo</name>
+    <message>
+        <location filename="../src/util/abo.cpp" line="+56"/>
+        <source>Kostenlos</source>
+        <translation>Free</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>9,99 €</source>
+        <translation>€9.99</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>19,99 €</source>
+        <translation>€19.99</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>0,00 €</source>
+        <translation>€0.00</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Keine Werbebanner mehr</source>
+        <translation>No more ad banners</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Keine Popups im Minutentakt</source>
+        <translation>No popups every minute</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location line="+13"/>
+        <source>Dunkles Design</source>
+        <translation>Dark design</translation>
+    </message>
+    <message>
+        <location line="-13"/>
+        <location line="+15"/>
+        <source>Vordefinierte Dashboard-Anordnungen</source>
+        <translation>Predefined dashboard layouts</translation>
+    </message>
+    <message>
+        <location line="-14"/>
+        <location line="+16"/>
+        <source>Sprachpaket International (Français, 中文)</source>
+        <translation>International language pack (Français, 中文)</translation>
+    </message>
+    <message>
+        <location line="-16"/>
+        <source>Intro beim Start abschaltbar</source>
+        <translation>Startup intro can be turned off</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Violettes ULTIMATE-Abzeichen im Kopf</source>
+        <translation>Purple ULTIMATE badge in the header</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Goldenes PREMIUM-Abzeichen im Kopf</source>
+        <translation>Golden PREMIUM badge in the header</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Jederzeit im Kontomenü kündbar</source>
+        <translation>Cancel anytime in the account menu</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Intro beim Start abschalten</source>
+        <translation>Turning off the startup intro</translation>
+    </message>
+</context>
+<context>
     <name>AnlageAendern</name>
     <message>
         <location filename="../src/ui/aenderungen.cpp" line="+16"/>
@@ -815,7 +891,7 @@ Tip: instead of deleting, the account can also be locked.</translation>
 <context>
     <name>DashboardWidget</name>
     <message>
-        <location filename="../src/ui/dashboard_widget.cpp" line="+135"/>
+        <location filename="../src/ui/dashboard_widget.cpp" line="+136"/>
         <source>Rot: kritische Störung, gestört oder Fehlerbild · Orange: offene Störung oder Wartung · Grün: in Ordnung
 Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</source>
         <translation>Red: critical fault, faulty or fault pattern · orange: open fault or maintenance · green: OK
@@ -862,7 +938,7 @@ Click a dot to open the plant, use the mouse wheel to zoom.</translation>
         <translation>Go to plant list</translation>
     </message>
     <message>
-        <location line="+131"/>
+        <location line="+147"/>
         <source>%1 gestört · %2 in Wartung</source>
         <translation>%1 faulty · %2 in maintenance</translation>
     </message>
@@ -902,7 +978,7 @@ Click a dot to open the plant, use the mouse wheel to zoom.</translation>
         <translation>%1 in 14 days</translation>
     </message>
     <message>
-        <location line="-269"/>
+        <location line="-285"/>
         <source>Anlagen in Betrieb</source>
         <translation>Plants in operation</translation>
     </message>
@@ -1019,12 +1095,17 @@ Click a dot to open the plant, use the mouse wheel to zoom.</translation>
         <translation>Choose a predefined layout for the cards</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+19"/>
+        <source>Ultimate</source>
+        <translation>Ultimate</translation>
+    </message>
+    <message>
+        <location line="+20"/>
         <source>Anordnung zurücksetzen</source>
         <translation>Reset layout</translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+11"/>
         <source>An der Überschrift ziehen, um die Karte auf einen anderen Platz zu verschieben</source>
         <translation>Drag the title to move the card to another position</translation>
     </message>
@@ -2249,7 +2330,7 @@ Administrator: additionally manage master data and users</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="+435"/>
+        <location filename="../src/ui/mainwindow.cpp" line="+440"/>
         <source>SolarMonitor – Monitoring der PV-Flotte</source>
         <translation>SolarMonitor – PV fleet monitoring</translation>
     </message>
@@ -2330,27 +2411,22 @@ Administrator: additionally manage master data and users</translation>
         <translation>Monitoring</translation>
     </message>
     <message>
-        <location line="+139"/>
-        <source>Abo-Modus: entfernt die (erfundene) Werbung. Kostet 9,99 € im Monat (Spielgeld).</source>
-        <translation>Subscription mode: removes the (made-up) ads. Costs €9.99 a month (play money).</translation>
-    </message>
-    <message>
-        <location line="+8"/>
+        <location line="+162"/>
         <source>&amp;Dunkles Design</source>
         <translation>&amp;Dark theme</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+11"/>
         <source>&amp;Vollbild</source>
         <translation>&amp;Full screen</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+18"/>
         <source>&amp;Sprache</source>
         <translation>&amp;Language</translation>
     </message>
     <message>
-        <location line="+95"/>
+        <location line="+121"/>
         <source>%1 offene Störungen, davon %2 kritisch</source>
         <translation>%1 open faults, %2 of them critical</translation>
     </message>
@@ -2365,12 +2441,7 @@ Administrator: additionally manage master data and users</translation>
         <translation>No critical faults open</translation>
     </message>
     <message>
-        <location line="+41"/>
-        <source>Danke für Ihr Abo! SolarMonitor Premium ist aktiv – werbefrei für 9,99 € im Monat. (Keine Sorge: Spielgeld.)</source>
-        <translation>Thanks for subscribing! SolarMonitor Premium is active – ad-free for €9.99 a month. (Don&apos;t worry: play money.)</translation>
-    </message>
-    <message>
-        <location line="+55"/>
+        <location line="+184"/>
         <source>Alle Status</source>
         <translation>All statuses</translation>
     </message>
@@ -2416,18 +2487,103 @@ Administrator: additionally manage master data and users</translation>
         <translation>Reset filters</translation>
     </message>
     <message>
-        <location line="-646"/>
+        <location line="-789"/>
         <location line="+247"/>
         <source>Übersicht</source>
         <translation>Overview</translation>
     </message>
     <message>
-        <location line="+261"/>
+        <location line="+142"/>
+        <source>Kostenlos (mit Werbung)</source>
+        <translation>Free (with ads)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Premium – werbefrei · %1/Monat</source>
+        <translation>Premium – ad-free · %1/month</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Ultimate – werbefrei + alle Funktionen · %1/Monat</source>
+        <translation>Ultimate – ad-free + all features · %1/month</translation>
+    </message>
+    <message>
+        <location line="+73"/>
+        <source>Nur mit SolarMonitor Ultimate</source>
+        <translation>Only with SolarMonitor Ultimate</translation>
+    </message>
+    <message>
+        <location line="+95"/>
         <source>%1 Anlagen mit erkanntem Fehlerbild</source>
         <translation>%1 plants with a detected fault pattern</translation>
     </message>
     <message>
-        <location line="+87"/>
+        <location line="+31"/>
+        <source>Danke für Ihr Abo! SolarMonitor Ultimate ist aktiv – werbefrei und mit allen Funktionen für %1 im Monat. (Keine Sorge: Spielgeld.)</source>
+        <translation>Thanks for subscribing! SolarMonitor Ultimate is active – ad-free with all features for %1 a month. (Don&apos;t worry: play money.)</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Danke für Ihr Abo! SolarMonitor Premium ist aktiv – werbefrei für %1 im Monat. (Keine Sorge: Spielgeld.)</source>
+        <translation>Thanks for subscribing! SolarMonitor Premium is active – ad-free for %1 a month. (Don&apos;t worry: play money.)</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Zahlung abgebrochen – es bleibt beim bisherigen Abo.</source>
+        <translation>Payment cancelled – your current subscription stays.</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Abo gekündigt. Die Werbung ist zurück.</source>
+        <translation>Subscription cancelled. The ads are back.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Abo auf Premium umgestellt. Die Ultimate-Funktionen sind wieder gesperrt.</source>
+        <translation>Switched to Premium. The Ultimate features are locked again.</translation>
+    </message>
+    <message>
+        <location line="+39"/>
+        <source>ULTIMATE</source>
+        <translation>ULTIMATE</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>SolarMonitor Ultimate ist aktiv – werbefrei, alle Funktionen frei</source>
+        <translation>SolarMonitor Ultimate is active – ad-free, all features unlocked</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>&amp;Abo: %1</source>
+        <translation>&amp;Subscription: %1</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Kostenlos</source>
+        <translation>Free</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>&lt;b&gt;„%1“ gibt es nur mit SolarMonitor Ultimate.&lt;/b&gt;</source>
+        <translation>&lt;b&gt;“%1” is only available with SolarMonitor Ultimate.&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Ultimate enthält:&lt;br&gt;%1&lt;br&gt;Für nur %2 im Monat (Spielgeld).</source>
+        <translation>Ultimate includes:&lt;br&gt;%1&lt;br&gt;For only %2 a month (play money).</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Ultimate holen – %1</source>
+        <translation>Get Ultimate – %1</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Vielleicht später</source>
+        <translation>Maybe later</translation>
+    </message>
+    <message>
+        <location line="+41"/>
         <source>Filter zurücksetzen (%1)</source>
         <translation>Reset filters (%1)</translation>
     </message>
@@ -2554,32 +2710,32 @@ Administrator: additionally manage master data and users</translation>
         <translation>Redo: %1 (Ctrl+Y)</translation>
     </message>
     <message>
-        <location line="-637"/>
+        <location line="-780"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation>S&amp;witch user …</translation>
     </message>
     <message>
-        <location line="+90"/>
+        <location line="+146"/>
         <source>&amp;Beenden</source>
         <translation>&amp;Quit</translation>
     </message>
     <message>
-        <location line="-5"/>
+        <location line="-21"/>
         <source>Die Übersetzung konnte nicht geladen werden.</source>
         <translation>The translation could not be loaded.</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+20"/>
         <source>&amp;Über SolarMonitor</source>
         <translation>&amp;About SolarMonitor</translation>
     </message>
     <message>
-        <location line="+88"/>
+        <location line="+87"/>
         <source>%1 Fehler beim Einlesen</source>
         <translation>%1 errors on import</translation>
     </message>
     <message>
-        <location line="+95"/>
+        <location line="+183"/>
         <source>Anlagen durchsuchen (Strg+F)</source>
         <translation>Search plants (Ctrl+F)</translation>
     </message>
@@ -2625,12 +2781,12 @@ Administrator: additionally manage master data and users</translation>
         <translation>Plant:</translation>
     </message>
     <message>
-        <location line="-664"/>
+        <location line="-807"/>
         <source>Exportieren</source>
         <translation>Export</translation>
     </message>
     <message>
-        <location line="+826"/>
+        <location line="+969"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>Administrator role only.</translation>
     </message>
@@ -2705,7 +2861,7 @@ Administrator: additionally manage master data and users</translation>
         <translation>Change history …</translation>
     </message>
     <message>
-        <location line="-1171"/>
+        <location line="-1314"/>
         <source>Daten werden geladen …</source>
         <translation>Loading data …</translation>
     </message>
@@ -2785,12 +2941,7 @@ Administrator: additionally manage master data and users</translation>
         <translation>Change data &amp;folder …</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <source>SolarMonitor &amp;Premium (werbefrei)</source>
-        <translation>SolarMonitor &amp;Premium (ad-free)</translation>
-    </message>
-    <message>
-        <location line="+21"/>
+        <location line="+47"/>
         <source>&amp;Intro beim Start</source>
         <translation>&amp;Intro at startup</translation>
     </message>
@@ -2800,7 +2951,8 @@ Administrator: additionally manage master data and users</translation>
         <translation>Show the logo animation when the program starts</translation>
     </message>
     <message>
-        <location line="+30"/>
+        <location line="+64"/>
+        <location line="+171"/>
         <source>PREMIUM</source>
         <translation>PREMIUM</translation>
     </message>
@@ -2810,22 +2962,17 @@ Administrator: additionally manage master data and users</translation>
         <translation>SolarMonitor Premium is active – ad-free</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="-161"/>
         <source>SolarMonitor beenden (Strg+Q)</source>
         <translation>Quit SolarMonitor (Ctrl+Q)</translation>
     </message>
     <message>
-        <location line="+89"/>
+        <location line="+97"/>
         <source>Zahlung abgebrochen – die Werbung bleibt.</source>
         <translation>Payment cancelled – the ads stay.</translation>
     </message>
     <message>
-        <location line="+19"/>
-        <source>Premium beendet. Die Werbung ist zurück.</source>
-        <translation>Premium ended. The ads are back.</translation>
-    </message>
-    <message>
-        <location line="+486"/>
+        <location line="+585"/>
         <source>Bitte zuerst eine Anlage in der Liste auswählen.</source>
         <translation>Please select a plant in the list first.</translation>
     </message>
@@ -3005,12 +3152,12 @@ Open it now?</translation>
         <translation>&lt;Initial state after loading&gt;</translation>
     </message>
     <message>
-        <location line="-1466"/>
+        <location line="-1609"/>
         <source>Angemeldet als %1.</source>
         <translation>Signed in as %1.</translation>
     </message>
     <message>
-        <location line="+1485"/>
+        <location line="+1628"/>
         <source>Über SolarMonitor</source>
         <translation>About SolarMonitor</translation>
     </message>
@@ -4769,12 +4916,7 @@ Your cart stays empty and your money stays with you.</translation>
 <context>
     <name>ZahlungDialog</name>
     <message>
-        <location filename="../src/ui/zahlung_dialog.cpp" line="+113"/>
-        <source>SolarMonitor Pay – Premium abschließen</source>
-        <translation>SolarMonitor Pay – get Premium</translation>
-    </message>
-    <message>
-        <location line="+13"/>
+        <location filename="../src/ui/zahlung_dialog.cpp" line="+127"/>
         <source>Die Spaßkasse – hier fließt kein echtes Geld</source>
         <translation>The joke checkout – no real money changes hands</translation>
     </message>
@@ -4795,69 +4937,42 @@ Your cart stays empty and your money stays with you.</translation>
     </message>
     <message>
         <location line="+35"/>
-        <location line="+280"/>
+        <location line="+281"/>
         <source>Verbinde mit der Sonne …</source>
         <translation>Connecting to the sun …</translation>
     </message>
     <message>
-        <location line="-279"/>
+        <location line="-280"/>
         <source>Prüfe die Wolkenlage über dem Bodensee …</source>
         <translation>Checking the clouds over Lake Constance …</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Bucht 9,99 € ab …</source>
-        <translation>Charging €9.99 …</translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Entsorgt die Werbung fachgerecht …</source>
         <translation>Disposing of the ads properly …</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+23"/>
         <source>Ihre Bestellung</source>
         <translation>Your order</translation>
     </message>
     <message>
-        <location line="+6"/>
-        <source>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; (werbefrei)</source>
-        <translation>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; (ad-free)</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Keine Werbebanner mehr</source>
-        <translation>No more ad banners</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Keine Popups im Minutentakt</source>
-        <translation>No popups every minute</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Goldenes PREMIUM-Abzeichen im Kopf</source>
-        <translation>Golden PREMIUM badge in the header</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Jederzeit im Kontomenü kündbar</source>
-        <translation>Cancel anytime in the account menu</translation>
-    </message>
-    <message>
-        <location line="+7"/>
+        <location line="+15"/>
         <source>Monatlicher Preis</source>
         <translation>Monthly price</translation>
     </message>
     <message>
-        <location line="+0"/>
-        <location line="+2"/>
-        <location line="+90"/>
-        <source>9,99 €</source>
-        <translation>€9.99</translation>
+        <location line="-118"/>
+        <source>SolarMonitor Pay – %1 abschließen</source>
+        <translation>SolarMonitor Pay – get %1</translation>
     </message>
     <message>
-        <location line="-91"/>
+        <location line="+79"/>
+        <source>Bucht %1 ab …</source>
+        <translation>Charging %1 …</translation>
+    </message>
+    <message>
+        <location line="+40"/>
         <source>0,00 €</source>
         <translation>€0.00</translation>
     </message>
@@ -4937,12 +5052,17 @@ Your cart stays empty and your money stays with you.</translation>
         <translation>Product</translation>
     </message>
     <message>
-        <location line="+0"/>
-        <source>SolarMonitor Premium</source>
-        <translation>SolarMonitor Premium</translation>
+        <location line="+98"/>
+        <source>Jetzt abonnieren · %1</source>
+        <translation>Subscribe now · %1</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+10"/>
+        <source>&lt;b&gt;%1&lt;/b&gt; ist aktiv.&lt;br&gt;Transaktion: %2&lt;br&gt;Betrag: %3 · Zahlart: %4&lt;br&gt;Datum: %5</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; is active.&lt;br&gt;Transaction: %2&lt;br&gt;Amount: %3 · Payment method: %4&lt;br&gt;Date: %5</translation>
+    </message>
+    <message>
+        <location line="-106"/>
         <source>Zahlart</source>
         <translation>Payment method</translation>
     </message>
@@ -5007,17 +5127,7 @@ Your cart stays empty and your money stays with you.</translation>
         <translation>Next</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <source>Jetzt abonnieren · 9,99 €</source>
-        <translation>Subscribe now · €9.99</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; ist aktiv.&lt;br&gt;Transaktion: %1&lt;br&gt;Betrag: 9,99 € · Zahlart: %2&lt;br&gt;Datum: %3</source>
-        <translation>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; is active.&lt;br&gt;Transaction: %1&lt;br&gt;Amount: €9.99 · Payment method: %2&lt;br&gt;Date: %3</translation>
-    </message>
-    <message>
-        <location line="+4"/>
+        <location line="+17"/>
         <source>Fertig</source>
         <translation>Done</translation>
     </message>

@@ -5,6 +5,7 @@
 #include <QMainWindow>
 
 #include "ui/app_kontext.h"
+#include "util/abo.h"
 
 class AnlageFilterModel;
 class Datensatz;
@@ -93,11 +94,19 @@ private slots:
     void seiteGewechselt(int index);
     /// Abo-Modus (Spaß-Funktion): Werbung aus- bzw. einblenden und merken.
     void setzePremium(bool an);
+    /// Abo-Stufe wählen: Upgrade über den Bezahlablauf, Downgrade sofort.
+    void waehleAbo(int stufe);
+    /// Upgrade auf die Stufe über den erfundenen Bezahlablauf "SolarMonitor Pay".
+    bool aboKaufen(int stufe);
+    void aboAnwenden();                      ///< Werbung, Abzeichen, Menü und Sperren an die Stufe anpassen
+    void zeigePaywall(Abo::Funktion f);      ///< Ultimate-Angebot für eine gesperrte Funktion
     /// Abo abschließen über den erfundenen Bezahlablauf "SolarMonitor Pay".
     void premiumKaufen();
     void angemeldet(const QString& kennung);
 
 private:
+    void aktualisiereAboChip();
+    void aktualisiereAboMenue();
     /// Merkt sich die Filtereinstellungen über einen Neuaufbau der Oberfläche hinweg.
     struct FilterZustand {
         QString suche, status, typ, ort;
@@ -183,7 +192,7 @@ private:
     QWidget*      m_werbungsBereich = nullptr;  ///< Spaß-Werbung (ohne Premium)
     class WerbeSteuerung* m_werbeSteuerung = nullptr;  ///< Popup-Werbung im Minutentakt (lebt mit dem Fenster)
     QLabel*       m_premiumChip = nullptr;
-    QAction*      m_aktPremium = nullptr;
+    QMenu*        m_aboMenue = nullptr;   ///< Kontomenü > Abo (Kostenlos/Premium/Ultimate)
     class Benutzerverwaltung* m_benutzer = nullptr;
     QString       m_angemeldet;   ///< Benutzername des angemeldeten Kontos
     QLabel*       m_toast = nullptr;
