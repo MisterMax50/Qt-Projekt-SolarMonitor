@@ -10,11 +10,14 @@
 #include <QPushButton>
 #include <QScrollArea>
 #include <QStackedWidget>
+#include <QToolButton>
 #include <QVBoxLayout>
 
 #include "eval/flotten_analyse.h"
 #include "model/datenbasis.h"
+#include "model/favoriten.h"
 #include "util/anzeige.h"
+#include "util/stil.h"
 
 namespace {
 
@@ -49,7 +52,22 @@ AnlageInfo::AnlageInfo(const AppKontext& kontext, QWidget* parent)
     m_titel->setObjectName(QStringLiteral("DetailTitel"));
     m_untertitel = new QLabel(inhalt);
     m_untertitel->setObjectName(QStringLiteral("Gedimmt"));
-    v->addWidget(m_titel);
+    // Stern rechts neben dem Titel: Anlage als Favorit anpinnen
+    m_favorit = new QToolButton(inhalt);
+    m_favorit->setObjectName(QStringLiteral("FavoritKnopf"));
+    m_favorit->setAutoRaise(true);
+    m_favorit->setIconSize(QSize(22, 22));
+    m_favorit->setCursor(Qt::PointingHandCursor);
+    connect(m_favorit, &QToolButton::clicked, this, [this] {
+        if (!m_anlageId.isEmpty())
+            Favoriten::instanz()->umschalten(m_anlageId);
+    });
+    connect(Favoriten::instanz(), &Favoriten::geaendert, this, &AnlageInfo::aktualisiereFavorit);
+    auto* titelZeile = new QHBoxLayout;
+    titelZeile->setSpacing(4);
+    titelZeile->addWidget(m_titel, 1);
+    titelZeile->addWidget(m_favorit, 0, Qt::AlignTop);
+    v->addLayout(titelZeile);
     v->addWidget(m_untertitel);
 
     auto neueGruppe = [&](const QString& titel) {
@@ -150,6 +168,7 @@ void AnlageInfo::aktualisiere()
         return;
 
     m_titel->setText(tr("Anlage %1").arg(a->anlageId));
+    aktualisiereFavorit();
     m_untertitel->setText(QStringLiteral("%1, %2").arg(a->ort, Anzeige::typName(a->typ)));
 
     m_status->setText(mitPunkt(Anzeige::statusFarbe(a->status), Anzeige::statusName(a->status)));
@@ -208,4 +227,14 @@ void AnlageInfo::aktualisiere()
                                    Anzeige::stoerungsStatusName(neueste->status)));
     }
     m_bearbeiten->setEnabled(m_kontext.darf(Recht::StammdatenBearbeiten));
+}
+
+void AnlageInfo::aktualisiereFavorit()
+{
+    if (!m_favorit)
+        return;
+    const bool an = !m_anlageId.isEmpty() && Favoriten::instanz()->ist(m_anlageId);
+    m_favorit->setIcon(an ? Stil::icon(Stil::Symbol::SternVoll, QColor(234, 179, 8))
+                          : Stil::icon(Stil::Symbol::Stern, Stil::textGedimmt()));
+    m_favorit->setToolTip(an ? tr("Aus den Favoriten entfernen (Strg+D)") : tr("Zu den Favoriten hinzufügen (Strg+D)"));
 }

@@ -7,6 +7,9 @@
 #include <QStyle>
 #include <QVBoxLayout>
 
+#include <algorithm>
+#include <cmath>
+
 namespace {
 constexpr int kKreis = 42;
 } // namespace
@@ -28,6 +31,9 @@ KennzahlKachel::KennzahlKachel(Stil::Symbol symbol, const QColor& farbe, const Q
     t->setWordWrap(true); // lange Titel umbrechen statt abschneiden
     m_wert = new QLabel(QStringLiteral("–"), this);
     m_wert->setObjectName(QStringLiteral("KachelWert"));
+    // Breite bestimmt die Kachel, nicht der Wert: bei wenig Platz wird die Schrift kleiner (passeWertAn)
+    m_wert->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Preferred);
+    m_wert->setMinimumWidth(1);
     m_notiz = new QLabel(this);
     m_notiz->setObjectName(QStringLiteral("KachelNotiz"));
     m_notiz->setWordWrap(true);
@@ -51,6 +57,37 @@ void KennzahlKachel::setzeWert(const QString& wert, const QString& notiz)
 {
     m_wert->setText(wert);
     m_notiz->setText(notiz); // bleibt auch leer sichtbar, damit alle Kacheln gleich hoch sind
+    passeWertAn();
+}
+
+void KennzahlKachel::resizeEvent(QResizeEvent* event)
+{
+    QFrame::resizeEvent(event);
+    passeWertAn();
+}
+
+void KennzahlKachel::passeWertAn()
+{
+    // Grundgröße einmal aus dem Stylesheet übernehmen
+    if (m_basisPunkte <= 0.0) {
+        ensurePolished();
+        m_wert->ensurePolished();
+        m_basisPunkte = m_wert->font().pointSizeF();
+        if (m_basisPunkte <= 0.0)
+            return;
+    }
+    QFont f = m_wert->font();
+    f.setPointSizeF(m_basisPunkte);
+    const int verfuegbar = width() - 16 - 16 - kKreis - 14 - 2;
+    const int noetig = QFontMetrics(f).horizontalAdvance(m_wert->text());
+    double punkte = m_basisPunkte;
+    if (noetig > verfuegbar && verfuegbar > 0)
+        punkte = std::max(m_basisPunkte * 0.6, m_basisPunkte * verfuegbar / noetig);
+    if (std::abs(punkte - m_aktuellePunkte) < 0.05)
+        return;
+    m_aktuellePunkte = punkte;
+    // lokales Stylesheet überstimmt die Schriftgröße aus dem globalen Stil
+    m_wert->setStyleSheet(punkte < m_basisPunkte ? QStringLiteral("font-size: %1pt;").arg(punkte, 0, 'f', 1) : QString());
 }
 
 void KennzahlKachel::setzeFarbe(const QColor& farbe)

@@ -8,6 +8,7 @@ class QFormLayout;
 class QLabel;
 class QPushButton;
 class QStackedWidget;
+class QToolButton;
 
 /**
  * @brief Detailbereich rechts neben der Anlagentabelle.
@@ -34,6 +35,7 @@ signals:
 
 private:
     void aktualisiere();
+    void aktualisiereFavorit();
     QLabel* zeile(QFormLayout* form, const QString& titel);
 
     AppKontext m_kontext;
@@ -48,4 +50,5 @@ private:
     QLabel *m_offen = nullptr, *m_letzte = nullptr;
     QPushButton* m_details = nullptr;
     QPushButton* m_bearbeiten = nullptr;
+    QToolButton* m_favorit = nullptr;
 };

@@ -112,6 +112,14 @@ set(PROJEKT_QUELLEN
     src/ui/zahlung_dialog.cpp
     src/util/abo.h
     src/util/abo.cpp
+    src/model/favoriten.h
+    src/model/favoriten.cpp
+    src/ui/vergleich_dialog.h
+    src/ui/vergleich_dialog.cpp
+    src/util/sonnenstand.h
+    src/util/sonnenstand.cpp
+    src/ui/einfuehrung.h
+    src/ui/einfuehrung.cpp
     src/ui/pdf_bericht.cpp
     src/ui/pruefprotokoll_widget.cpp
     src/ui/serviceplanung.cpp

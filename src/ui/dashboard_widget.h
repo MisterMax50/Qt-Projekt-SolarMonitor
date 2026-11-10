@@ -16,8 +16,9 @@ class AnordnungsRaster;
  * @brief Startseite "Übersicht": der Zustand der Flotte auf einen Blick.
  *
  * Aufgebaut wie die Startseite eines Monitoring-Portals für Solarparks:
- * - oben fünf Kennzahlenkacheln (Betrieb, Störungen, PR, Verlust,
- *   Datenqualität); ein Klick öffnet die passende Seite
+ * - oben sechs Kennzahlenkacheln (Betrieb, Störungen, PR, Verlust,
+ *   Datenqualität, vermiedenes CO₂); ein Klick öffnet die passende Seite
+ * - darunter die Favoriten (angepinnte Anlagen des Benutzers)
  * - Mitte: Karte der Flotte, gefärbt nach Handlungsbedarf (KarteView,
  *   Modus Kompakt), daneben die aktiven kritischen Alarme
  * - unten: größte Ertragsverluste und erkannte Fehlerbilder.
@@ -37,7 +38,7 @@ public:
     DashboardWidget(const AppKontext& kontext, const QList<QAction*>& schnellzugriff = {}, QWidget* parent = nullptr);
 
     /// Seiten, zu denen die Übersicht springen kann.
-    enum class Ziel { Anlagen, Stoerungen, Karte, Statistik, Serviceplanung, Datenpruefung };
+    enum class Ziel { Anlagen, Stoerungen, Karte, Statistik, Serviceplanung, Datenpruefung, Favoriten };
 
     /// Ohne Ultimate (Spaß-Abo) eine Ultimate-Anordnung auf "Standard" zurücksetzen.
     void pruefeAboAnordnung();
@@ -55,6 +56,7 @@ private:
     QTreeWidget* neueListe(const QStringList& spalten);
     void spaeterAktualisieren();
     void aktualisiere();
+    void aktualisiereFavoriten();
 
     AppKontext m_kontext;
     bool       m_geplant = false;
@@ -66,6 +68,8 @@ private:
     KennzahlKachel* m_pr = nullptr;
     KennzahlKachel* m_verlust = nullptr;
     KennzahlKachel* m_daten = nullptr;
+    KennzahlKachel* m_co2 = nullptr;
+    QWidget*     m_favoritenInhalt = nullptr; ///< Leiste der angepinnten Anlagen
     QTreeWidget* m_dringend = nullptr;
     QTreeWidget* m_verluste = nullptr;
     QTreeWidget* m_fehlerbilder = nullptr;

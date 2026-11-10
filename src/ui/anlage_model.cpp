@@ -2,10 +2,13 @@
 
 #include <QApplication>
 #include <QBrush>
+#include <QPainter>
+#include <QPixmap>
 #include <QStyle>
 
 #include "eval/flotten_analyse.h"
 #include "model/datenbasis.h"
+#include "model/favoriten.h"
 #include "util/anzeige.h"
 #include "util/stil.h"
 
@@ -18,6 +21,30 @@ AnlageModel::AnlageModel(const AppKontext& kontext, QObject* parent)
     , m_kontext(kontext)
     , m_warnIcon(Stil::icon(Stil::Symbol::Warnung, QColor(217, 119, 6)))
 {
+    // Favoriten: goldener Stern vor der Anlagen-ID (mit Warnhinweis kombiniert)
+    const QColor gold(234, 179, 8);
+    m_sternIcon = Stil::icon(Stil::Symbol::SternVoll, gold);
+    QIcon kombiniert;
+    for (int g : {16, 24, 32}) {
+        // Stern mit kleinem Warndreieck unten rechts (gleiche Größe wie die Einzel-Symbole)
+        QPixmap pm(g, g);
+        pm.fill(Qt::transparent);
+        QPainter p(&pm);
+        m_sternIcon.paint(&p, QRect(0, 0, g, g));
+        const int w = g * 3 / 5;
+        p.setRenderHint(QPainter::Antialiasing, true);
+        p.setPen(Qt::NoPen);
+        p.setBrush(QColor(255, 255, 255, 220));
+        p.drawEllipse(QRect(g - w - 1, g - w - 1, w + 2, w + 2));
+        m_warnIcon.paint(&p, QRect(g - w, g - w, w, w));
+        p.end();
+        kombiniert.addPixmap(pm);
+    }
+    m_sternWarnIcon = kombiniert;
+    connect(Favoriten::instanz(), &Favoriten::geaendert, this, [this] {
+        if (rowCount() > 0)
+            emit dataChanged(index(0, SpId), index(rowCount() - 1, SpId), {Qt::DecorationRole, Qt::ToolTipRole});
+    });
     connect(m_kontext.daten, &Datenbasis::anlageGeaendert, this, &AnlageModel::anlageGeaendert);
     connect(m_kontext.daten, &Datenbasis::stoerungenGeaendert, this, &AnlageModel::anlageGeaendert);
     connect(m_kontext.analyse, &FlottenAnalyse::fertig, this, &AnlageModel::kennzahlenGeaendert);
@@ -112,8 +139,14 @@ QVariant AnlageModel::data(const QModelIndex& index, int rolle) const
             return Anzeige::statusFarbe(a->status);
         if (sp == SpPr && hatKz && k->auswertung.pr > 0.0)
             return Anzeige::prFarbe(k->auswertung.pr);
-        if (sp == SpId && !m_kontext.daten->pruefmeldungenFuer(a->anlageId).isEmpty())
-            return m_warnIcon;
+        if (sp == SpId) {
+            const bool favorit = Favoriten::instanz()->ist(a->anlageId);
+            const bool warnung = !m_kontext.daten->pruefmeldungenFuer(a->anlageId).isEmpty();
+            if (favorit)
+                return warnung ? m_sternWarnIcon : m_sternIcon;
+            if (warnung)
+                return m_warnIcon;
+        }
         return {};
     }
 
@@ -129,8 +162,11 @@ QVariant AnlageModel::data(const QModelIndex& index, int rolle) const
             QStringList zeilen;
             for (const Pruefmeldung& m : m_kontext.daten->pruefmeldungenFuer(a->anlageId))
                 zeilen.append(QStringLiteral("• ") + m.text);
-            return zeilen.isEmpty() ? QString()
-                                    : tr("Datenprüfung:") + QLatin1Char('\n') + zeilen.join(QLatin1Char('\n'));
+            QString text = zeilen.isEmpty() ? QString()
+                                            : tr("Datenprüfung:") + QLatin1Char('\n') + zeilen.join(QLatin1Char('\n'));
+            if (Favoriten::instanz()->ist(a->anlageId))
+                text = tr("★ Favorit") + (text.isEmpty() ? QString() : QStringLiteral("\n\n") + text);
+            return text;
         }
         if (sp == SpAuffaellig && k) {
             if (!k->ok)
@@ -215,6 +251,18 @@ AnlageFilterModel::AnlageFilterModel(QObject* parent)
 {
     setSortRole(AnlageModel::SortierRolle);
     setDynamicSortFilter(true);
+    // "nur Favoriten" sofort nachführen, wenn eine Anlage an- oder abgepinnt wird
+    connect(Favoriten::instanz(), &Favoriten::geaendert, this, [this] {
+        if (m_nurFavoriten)
+            aendereFilter([] {});
+    });
+}
+
+void AnlageFilterModel::setNurFavoriten(bool an)
+{
+    aendereFilter([&] {
+        m_nurFavoriten = an;
+    });
 }
 
 void AnlageFilterModel::setSuchtext(const QString& text)
@@ -285,6 +333,8 @@ bool AnlageFilterModel::filterAcceptsRow(int quellZeile, const QModelIndex&) con
     if (m_maxKwp > 0.0 && a->leistungKwp > m_maxKwp)
         return false;
     if (m_nurAuffaellig && !m->istAuffaellig(quellZeile))
+        return false;
+    if (m_nurFavoriten && !Favoriten::instanz()->ist(a->anlageId))
         return false;
     if (m_nurOffen && m->data(m->index(quellZeile, AnlageModel::SpOffeneStoerungen)).toInt() == 0)
         return false;

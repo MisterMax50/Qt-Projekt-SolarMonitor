@@ -106,10 +106,10 @@ wechseln* im Benutzermenü meldet neu an.
 
 | Seite (Navigation links) | Inhalt |
 |---|---|
-| Übersicht (Startseite) | Gruppenfeld „Flottenstatus“ mit Kennzahlen als Links zur passenden Seite (Anlagen in Betrieb, offene/kritische Störungen, Median-PR, Ertragsverlust, Datenprüfung), Karte der Flotte gefärbt nach Handlungsbedarf (rot: kritische Störung, gestört oder Fehlerbild; orange: offene Störung oder Wartung), Listen mit offenen kritischen Störungen, größten Ertragsverlusten und Fehlerbildern (Doppelklick öffnet die Anlage). Aktualisiert sich bei jeder Änderung (`src/ui/dashboard_widget.*`) |
-| Anlagen | Tabelle (QAbstractTableModel + QSortFilterProxyModel) mit Detailbereich rechts, Suche nach ID/Ort/Wetterstation (Suchfeld in der Kopfzeile), kombinierbare Filter (Status, Typ, Ort, Leistungsbereich, nur mit Fehlerbild, nur mit offenen Störungen), Sortierung u. a. nach Leistung, Inbetriebnahme und PR, Kontextmenü |
+| Übersicht (Startseite) | Kennzahlenkacheln mit Links zur passenden Seite (Anlagen in Betrieb, offene/kritische Störungen, Median-PR, Ertragsverlust, Datenprüfung, vermiedenes CO₂), Leiste mit den Favoriten, Karte der Flotte gefärbt nach Handlungsbedarf (rot: kritische Störung, gestört oder Fehlerbild; orange: offene Störung oder Wartung), Listen mit offenen kritischen Störungen, größten Ertragsverlusten und Fehlerbildern (Doppelklick öffnet die Anlage). Aktualisiert sich bei jeder Änderung (`src/ui/dashboard_widget.*`) |
+| Anlagen | Tabelle (QAbstractTableModel + QSortFilterProxyModel) mit Detailbereich rechts, Suche nach ID/Ort/Wetterstation (Suchfeld in der Kopfzeile), kombinierbare Filter (Status, Typ, Ort, Leistungsbereich, nur mit Fehlerbild, nur mit offenen Störungen, nur Favoriten), Favoriten (Strg+D), Vergleich zweier Anlagen, Sortierung u. a. nach Leistung, Inbetriebnahme und PR, Kontextmenü |
 | Störungen | Störungsliste mit Filtern, Kontextmenü (Status ändern, Anlage öffnen) |
-| Karte | OpenStreetMap-Hintergrund, Anlagen und Wetterstationen, Färbung nach Status/PR/Auffälligkeit/Handlungsbedarf, Zoom/Pan, Klick öffnet die Anlage, geplante Tour |
+| Karte | OpenStreetMap-Hintergrund, Anlagen und Wetterstationen, Färbung nach Status/PR/Auffälligkeit/Handlungsbedarf, Zoom/Pan, Klick öffnet die Anlage, geplante Tour, Sonnenstand mit Tag/Nacht |
 | Statistik | Leistung je Typ und Ort, Altersverteilung, Störungen je Fehlercode und Schwere, PR je Wetterstation |
 | Serviceplanung | Priorisierte Einsatzliste nach geschätztem Verlust in €, Tourenplanung im Umkreis eines Startpunkts mit Autoroute (OSRM) oder Luftlinie (Nearest Neighbour + 2-opt) |
 | Datenprüfung | Alle Befunde beim Einlesen mit Datei und Zeilennummer |
@@ -128,6 +128,49 @@ Rückgängig* (Strg+Z) bzw. *Wiederholen* (Strg+Y) nennt die betroffene
 die `*_out.csv` neu geschrieben und die Kennzahlen der Anlage neu berechnet.
 Beim Benutzerwechsel wird der Verlauf geleert, damit eine Rolle nicht die
 Änderungen einer anderen zurücknimmt.
+
+Nach jeder Änderung erscheint unten rechts eine **Einblendung mit Link**
+(„✓ Status von ST01544 … – gespeichert · *Rückgängig*“); nach Rückgängig
+bietet sie *Wiederholen* an. So lässt sich ein Versehen sofort mit einem
+Klick zurücknehmen.
+
+**Favoriten** (`src/model/favoriten.*`): Wichtige Anlagen lassen sich
+anpinnen – mit Strg+D bzw. dem Knopf *Favorit* auf der Seite *Anlagen*, per
+Rechtsklick oder über den Stern im Detailbereich. Favoriten tragen in der
+Tabelle einen goldenen Stern vor der ID, der Filter *nur Favoriten* zeigt
+nur sie, und auf der Übersicht stehen sie als eigene Leiste (Farbe:
+kritisch/offen/Status, Klick öffnet die Anlage). Jeder Benutzer hat eigene
+Favoriten (QSettings `favoriten/<kennung>`).
+
+**Anlagen vergleichen** (`src/ui/vergleich_dialog.*`, Knopf *Vergleichen*
+oder Rechtsklick → *Vergleichen mit …*): zwei durchsuchbare Auswahllisten
+(Favoriten zuerst; vorgeschlagen wird ein weiterer Favorit oder eine Anlage
+ähnlicher Leistung an derselben Wetterstation), eine Tabelle mit Stammdaten
+und Kennzahlen – der bessere Wert grün mit ▲ – und darunter der
+spezifische Tagesertrag (kWh/kWp) beider Anlagen als gruppiertes
+Balkendiagramm. Die Tageswerte werden aus den Verläufen berechnet, die dazu
+im Hintergrund geladen werden.
+
+**Sonnenstand auf der Karte** (`src/util/sonnenstand.*`): eine Leiste über
+der Karte mit Datum, Uhrzeit-Regler und *Jetzt*. Die Sonnenposition wird
+ohne Internet nach dem Algorithmus des Astronomical Almanac berechnet
+(Genauigkeit etwa 0,1°) – für die Mitte der Flotte. Nachts wird die Karte
+abgedunkelt (stufenlos bis −12°), kurz vor Sonnenuntergang leicht orange
+getönt; unten links zeigt ein Kompass Richtung und Höhe der Sonne. Dazu
+Auf- und Untergang, Tageslänge und Mittagshöhe des gewählten Tags.
+
+**CO₂-Kachel** auf der Übersicht: vermiedene Treibhausgase der Flotte im
+Auswertungszeitraum = Energie × 690 g CO₂-Äquivalente je kWh
+(Netto-Vermeidungsfaktor der Photovoltaik laut Umweltbundesamt), dazu der
+Vergleich mit Buchen (etwa 12,5 kg CO₂ je Baum und Jahr). Ist es in der
+Kachelreihe eng, wird der große Wert automatisch kleiner gesetzt.
+
+**Einführungstour** (`src/ui/einfuehrung.*`): Beim ersten Anmelden eines
+Benutzers führen zwölf Hinweisblasen durch Navigation, Kennzahlen,
+Favoriten, Anlagenliste, Vergleich, Rückgängig, Karte mit Sonnenstand,
+Suche, Glocke und Kontomenü. Das jeweilige Ziel bleibt hell ausgespart und
+orange umrandet, die Seite wechselt automatisch. → / Enter weiter, ← zurück,
+Esc beendet. Erneut starten: Kontomenü → *Einführungstour starten*.
 
 **PDF-Berichte** (`src/ui/pdf_bericht.*`, alle Rollen):
 - *Anlagenbericht* (Detaildialog, Kontextmenü oder *Exportieren* auf der
@@ -175,7 +218,7 @@ für Solarparks):
   neben der Anlagentabelle (`src/ui/anlage_info.*`).
 - **Übersicht frei anordnen** (`src/ui/anordnungs_raster.*`): Kennzahlenkacheln
   und Karten lassen sich mit der Maus ziehen (Karten an der Überschrift) und
-  rasten auf festen Plätzen ein – fünf Plätze für die Kacheln, vier für die
+  rasten auf festen Plätzen ein – sechs Plätze für die Kacheln, vier für die
   Karten (oben breit/schmal, unten breit/schmal). Die Karte tauscht dabei
   den Platz mit der Karte, die dort lag. Über den Knopf *Anordnung* stehen
   sechs vordefinierte Anordnungen mit Vorschaubild zur Wahl (Standard,
@@ -328,11 +371,13 @@ Nutzung gedacht).
 ```
 src/
 ├── main.cpp          Start: Datenordner suchen, Laden, Hauptfenster
-├── model/            Datenklassen, Datenbasis (CSV laden/prüfen/exportieren), Rollen
+├── model/            Datenklassen, Datenbasis (CSV laden/prüfen/exportieren), Rollen, Benutzer, Favoriten
 ├── repo/             CSV-Leser, Verlaufsindex + JSON-Parser + LRU-Cache
 ├── eval/             Ertragsauswertung, Flottenanalyse, Tourenplanung, Schwellwerte
-├── util/             Anzeige-Formatierung, Zeitstempel, Geo, Gewässer (Bodensee), Sprachumschaltung
-└── ui/               Hauptfenster, Modelle, Dialoge, Diagramme, Karte, Statistik, Service
+├── util/             Anzeige-Formatierung, Zeitstempel, Geo, Gewässer (Bodensee), Sprachumschaltung,
+│                     Stil, Sonnenstand, Abo, Windows Hello
+└── ui/               Hauptfenster, Modelle, Dialoge, Diagramme, Karte, Statistik, Service,
+                      Vergleich, Einführungstour, Werbung, Bezahlablauf
 i18n/                 SolarMonitor_en/_fr/_zh.ts (vollständig), SolarMonitor_de.ts (Pluralformen)
 ```
 

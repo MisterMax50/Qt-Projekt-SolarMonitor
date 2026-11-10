@@ -29,9 +29,11 @@ signals:
 
 protected:
     void mouseReleaseEvent(QMouseEvent* event) override;
+    void resizeEvent(QResizeEvent* event) override;
 
 private:
     void zeichneSymbol();
+    void passeWertAn(); ///< Schrift des Werts verkleinern, wenn er nicht in die Kachel passt
 
     Stil::Symbol m_symbol;
     QColor  m_farbe;
@@ -39,4 +41,6 @@ private:
     QLabel* m_symbolLabel = nullptr;
     QLabel* m_wert = nullptr;
     QLabel* m_notiz = nullptr;
+    double  m_basisPunkte = 0.0;    ///< Schriftgröße des Werts laut Stil
+    double  m_aktuellePunkte = 0.0;
 };

@@ -6,12 +6,14 @@
 
 #include <QCheckBox>
 #include <QComboBox>
+#include <QDateEdit>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QMouseEvent>
 #include <QPainter>
 #include <QPainterPath>
 #include <QPushButton>
+#include <QSlider>
 #include <QTimer>
 #include <QToolTip>
 #include <QVBoxLayout>
@@ -28,6 +30,7 @@
 #include "util/anzeige.h"
 #include "util/geo.h"
 #include "util/gewaesser.h"
+#include "util/sonnenstand.h"
 
 namespace {
 constexpr double kPi = 3.14159265358979323846;
@@ -202,6 +205,15 @@ public:
         update();
     }
     void setHintergrund(bool an) { m_hintergrund = an; update(); }
+    /// Sonnenstand anzeigen: Nacht abdunkeln, Kompass mit Sonnenrichtung unten links
+    void setSonne(bool an, double hoeheGrad = 0.0, double azimutGrad = 0.0, const QString& zeitText = QString())
+    {
+        m_sonneAn = an;
+        m_sonneHoehe = hoeheGrad;
+        m_sonneAzimut = azimutGrad;
+        m_sonneZeit = zeitText;
+        update();
+    }
 
 protected:
     void paintEvent(QPaintEvent*) override;
@@ -342,6 +354,10 @@ private:
     UmkreisFlaeche   m_umkreis;
     QString m_markiert;
     bool    m_zeigeStationen = true;
+    bool    m_sonneAn = false;
+    double  m_sonneHoehe = 0.0, m_sonneAzimut = 0.0;
+    QString m_sonneZeit;
+    void    zeichneSonne(QPainter& p);
 
     KachelLader* m_lader;
     bool    m_hintergrund = true;
@@ -522,6 +538,17 @@ void KartenFlaeche::paintEvent(QPaintEvent*)
     else
         zeichneGitter(p, klein);
 
+    // Tag/Nacht: unter dem Horizont abdunkeln (bis −12° = nautische Dämmerung),
+    // kurz vor Sonnenuntergang leicht orange tönen
+    if (m_sonneAn) {
+        if (m_sonneHoehe < 0.0) {
+            const double t = std::clamp(-m_sonneHoehe / 12.0, 0.0, 1.0);
+            p.fillRect(rect(), QColor(10, 18, 48, int(40 + 110 * t)));
+        } else if (m_sonneHoehe < 6.0) {
+            p.fillRect(rect(), QColor(255, 140, 40, int(36 * (1.0 - m_sonneHoehe / 6.0))));
+        }
+    }
+
     // Umkreis um den Startpunkt: auf dem Landweg erreichbare Fläche, Seen ausgespart
     if (!m_umkreis.flaechen.isEmpty()) {
         QPainterPath land;
@@ -624,6 +651,9 @@ void KartenFlaeche::paintEvent(QPaintEvent*)
         }
     }
 
+    if (m_sonneAn)
+        zeichneSonne(p);
+
     // Legende
     p.setFont(font());
     const int zeilenHoehe = 18;
@@ -702,6 +732,73 @@ void KartenFlaeche::paintEvent(QPaintEvent*)
                Anzeige::zahl(km, km < 1 ? 1 : 0) + QStringLiteral(" km"));
 }
 
+void KartenFlaeche::zeichneSonne(QPainter& p)
+{
+    // Kasten unten links: Kompassrose mit Sonnenrichtung, daneben Höhe und Uhrzeit
+    p.save();
+    p.setFont(font());
+    const QFontMetrics fm = p.fontMetrics();
+    const bool tag = m_sonneHoehe >= -0.833;
+    const QString zeile1 = tag ? KarteView::tr("Sonne %1° über dem Horizont").arg(qRound(m_sonneHoehe))
+                               : KarteView::tr("Sonne %1° unter dem Horizont").arg(qRound(-m_sonneHoehe));
+    const QString zeile2 = KarteView::tr("Richtung %1 (%2°)").arg(Sonnenstand::richtung(m_sonneAzimut))
+                               .arg(qRound(m_sonneAzimut));
+    const QString zeile3 = tag ? (m_sonneHoehe < 6.0 ? KarteView::tr("tief stehend – kaum Ertrag")
+                                                      : KarteView::tr("Module liefern Strom"))
+                               : KarteView::tr("Nacht – kein Ertrag");
+    const double textBreite = std::max({fm.horizontalAdvance(zeile1), fm.horizontalAdvance(zeile2),
+                                        fm.horizontalAdvance(zeile3), fm.horizontalAdvance(m_sonneZeit)});
+    const double r = 30;
+    const QRectF box(8, height() - 2 * r - 30 - 8, 2 * r + 28 + textBreite + 16, 2 * r + 30);
+    p.setPen(QColor(160, 160, 160));
+    p.setBrush(QColor(255, 255, 255, 228));
+    p.drawRoundedRect(box, 6, 6);
+
+    const QPointF c(box.left() + 14 + r, box.center().y());
+    p.setPen(QPen(QColor(150, 150, 150), 1));
+    p.setBrush(QColor(240, 244, 250));
+    p.drawEllipse(c, r, r);
+    // Himmelsrichtungen
+    QFont klein = font();
+    klein.setPointSizeF(klein.pointSizeF() * 0.75);
+    klein.setBold(true);
+    p.setFont(klein);
+    p.setPen(QColor(90, 90, 90));
+    const struct { const char* name; double w; } marken[] = {{"N", 0}, {"O", 90}, {"S", 180}, {"W", 270}};
+    for (const auto& m : marken) {
+        const double rad = (m.w - 90.0) * kPi / 180.0;
+        const QPointF q = c + QPointF(std::cos(rad), std::sin(rad)) * (r - 8);
+        p.drawText(QRectF(q.x() - 8, q.y() - 7, 16, 14), Qt::AlignCenter,
+                   QCoreApplication::translate("Sonnenstand", m.name));
+    }
+    // Sonne auf dem Kreis; Abstand zur Mitte zeigt die Höhe (Mitte = Zenit)
+    const double rad = (m_sonneAzimut - 90.0) * kPi / 180.0;
+    const double abstand = tag ? (r - 2) * (1.0 - std::clamp(m_sonneHoehe, 0.0, 90.0) / 90.0) : r - 2;
+    const QPointF sonne = c + QPointF(std::cos(rad), std::sin(rad)) * abstand;
+    p.setPen(QPen(tag ? QColor(245, 158, 11) : QColor(120, 130, 160), 1.5, Qt::DashLine));
+    p.drawLine(c, sonne);
+    p.setPen(QPen(Qt::white, 1.5));
+    p.setBrush(tag ? QColor(250, 190, 30) : QColor(130, 140, 170));
+    p.drawEllipse(sonne, 6.5, 6.5);
+
+    p.setFont(font());
+    const double tx = c.x() + r + 14;
+    double ty = box.top() + 8;
+    QFont fett = font();
+    fett.setBold(true);
+    p.setFont(fett);
+    p.setPen(QColor(30, 30, 40));
+    p.drawText(QRectF(tx, ty, textBreite + 4, fm.height()), Qt::AlignVCenter, m_sonneZeit);
+    p.setFont(font());
+    ty += fm.height() + 2;
+    for (const QString& z : {zeile1, zeile2, zeile3}) {
+        p.setPen(z == zeile3 ? QColor(90, 90, 100) : QColor(30, 30, 40));
+        p.drawText(QRectF(tx, ty, textBreite + 4, fm.height()), Qt::AlignVCenter, z);
+        ty += fm.height() + 1;
+    }
+    p.restore();
+}
+
 // ===================================================================
 //  KarteView
 // ===================================================================
@@ -753,12 +850,88 @@ KarteView::KarteView(const AppKontext& kontext, QWidget* parent, Modus modus)
     leiste->addStretch();
     leiste->addWidget(m_info);
 
+    // Sonnenstand und Tag/Nacht (offline berechnet) mit Datum und Uhrzeit zum Durchspielen
+    auto* sonnenWidget = new QWidget(this);
+    auto* sonnenLeiste = new QHBoxLayout(sonnenWidget);
+    sonnenLeiste->setContentsMargins(0, 0, 0, 0);
+    m_sonneAn = new QCheckBox(tr("Sonnenstand und Tag/Nacht"), this);
+    m_sonneAn->setChecked(true);
+    m_sonneAn->setToolTip(tr("Zeigt, wo die Sonne gerade steht, und dunkelt die Karte nachts ab.\n"
+                             "Berechnet ohne Internet für die Mitte der Flotte."));
+    m_sonneDatum = new QDateEdit(QDate::currentDate(), this);
+    m_sonneDatum->setCalendarPopup(true);
+    m_sonneDatum->setDisplayFormat(QStringLiteral("dd.MM.yyyy"));
+    m_sonneUhr = new QSlider(Qt::Horizontal, this);
+    m_sonneUhr->setRange(0, 24 * 60 - 1);
+    m_sonneUhr->setPageStep(60);
+    m_sonneUhr->setMinimumWidth(180);
+    m_sonneUhr->setToolTip(tr("Uhrzeit verschieben, um den Tagesverlauf zu sehen"));
+    m_sonneZeit = new QLabel(this);
+    m_sonneZeit->setMinimumWidth(44);
+    auto* jetzt = new QPushButton(tr("Jetzt"), this);
+    jetzt->setToolTip(tr("Zurück zur aktuellen Uhrzeit (läuft dann mit)"));
+    m_sonneTag = new QLabel(this);
+    m_sonneTag->setObjectName(QStringLiteral("Gedimmt"));
+    m_sonneTag->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Preferred);
+    sonnenLeiste->addWidget(m_sonneAn);
+    sonnenLeiste->addWidget(m_sonneDatum);
+    sonnenLeiste->addWidget(m_sonneUhr, 1);
+    sonnenLeiste->addWidget(m_sonneZeit);
+    sonnenLeiste->addWidget(jetzt);
+    sonnenLeiste->addSpacing(8);
+    sonnenLeiste->addWidget(m_sonneTag, 2);
+
     auto* v = new QVBoxLayout(this);
     v->addWidget(leistenWidget);
+    v->addWidget(sonnenWidget);
     v->addWidget(m_flaeche, 1);
+
+    // Bezugspunkt: Mittelpunkt der Anlagen (sonst Bodensee)
+    int anzahl = 0;
+    for (const Anlage& a : m_kontext.daten->anlagen())
+        if (a.hatGueltigeKoordinaten()) {
+            m_sonneOrt += QPointF(a.lat, a.lon);
+            ++anzahl;
+        }
+    m_sonneOrt = anzahl > 0 ? m_sonneOrt / anzahl : QPointF(47.6, 9.4);
+
+    auto aufJetzt = [this] {
+        m_sonneMitlaufen = true;
+        const QDateTime n = QDateTime::currentDateTime().toTimeZone(Sonnenstand::zone());
+        QSignalBlocker s1(m_sonneDatum), s2(m_sonneUhr);
+        m_sonneDatum->setDate(n.date());
+        m_sonneUhr->setValue(n.time().hour() * 60 + n.time().minute());
+        aktualisiereSonne();
+    };
+    connect(jetzt, &QPushButton::clicked, this, aufJetzt);
+    connect(m_sonneUhr, &QSlider::valueChanged, this, [this] {
+        m_sonneMitlaufen = false;
+        aktualisiereSonne();
+    });
+    connect(m_sonneDatum, &QDateEdit::dateChanged, this, [this] {
+        m_sonneMitlaufen = false;
+        aktualisiereSonne();
+    });
+    connect(m_sonneAn, &QCheckBox::toggled, this, [this, sonnenLeiste](bool an) {
+        for (int i = 1; i < sonnenLeiste->count(); ++i)
+            if (QWidget* w = sonnenLeiste->itemAt(i)->widget())
+                w->setEnabled(an);
+        aktualisiereSonne();
+    });
+    auto* minutenTakt = new QTimer(this);
+    minutenTakt->setInterval(30 * 1000);
+    connect(minutenTakt, &QTimer::timeout, this, [this, aufJetzt] {
+        if (m_sonneMitlaufen && m_sonneAn->isChecked())
+            aufJetzt();
+    });
+    minutenTakt->start();
+    aufJetzt();
+
     if (modus == Modus::Kompakt) {
         // Übersicht: nur die Karte, Fokus auf Handlungsbedarf
         leistenWidget->hide();
+        sonnenWidget->hide();
+        m_sonneAn->setChecked(false);
         v->setContentsMargins(0, 0, 0, 0);
         m_faerbung->setCurrentIndex(3);
         m_stationen->setChecked(false);
@@ -778,6 +951,42 @@ KarteView::KarteView(const AppKontext& kontext, QWidget* parent, Modus modus)
     connect(m_kontext.daten, &Datenbasis::stoerungenGeaendert, this, &KarteView::aktualisiere);
 
     aktualisiere();
+}
+
+void KarteView::aktualisiereSonne()
+{
+    if (!m_sonneAn->isChecked()) {
+        m_flaeche->setSonne(false);
+        m_sonneZeit->clear();
+        m_sonneTag->clear();
+        return;
+    }
+    const QTimeZone zone = Sonnenstand::zone();
+    const QDate datum = m_sonneDatum->date();
+    const int minute = m_sonneUhr->value();
+    const QDateTime zeit(datum, QTime(minute / 60, minute % 60), zone);
+    const Sonnenstand::Position pos = Sonnenstand::berechne(zeit, m_sonneOrt.x(), m_sonneOrt.y());
+    const QString uhr = zeit.time().toString(QStringLiteral("HH:mm"));
+    m_sonneZeit->setText(uhr);
+    m_flaeche->setSonne(true, pos.hoeheGrad, pos.azimutGrad,
+                        m_sonneMitlaufen ? tr("Jetzt, %1 Uhr").arg(uhr) : tr("%1, %2 Uhr").arg(Anzeige::datum(datum), uhr));
+
+    // Tageswerte nur neu berechnen, wenn sich das Datum ändert
+    if (datum != m_sonneTagFuer) {
+        m_sonneTagFuer = datum;
+        const Sonnenstand::Tag t = Sonnenstand::tag(datum, m_sonneOrt.x(), m_sonneOrt.y(), zone);
+        if (t.aufgang.isValid() && t.untergang.isValid())
+            m_sonneTagText = tr("Aufgang %1 · Untergang %2 · Tageslänge %3 h %4 min · Mittagshöhe %5°")
+                                 .arg(t.aufgang.time().toString(QStringLiteral("HH:mm")),
+                                      t.untergang.time().toString(QStringLiteral("HH:mm")))
+                                 .arg(t.tageslichtMinuten / 60)
+                                 .arg(t.tageslichtMinuten % 60)
+                                 .arg(qRound(t.mittagsHoeheGrad));
+        else
+            m_sonneTagText.clear();
+    }
+    m_sonneTag->setText(m_sonneTagText);
+    m_sonneTag->setToolTip(m_sonneTagText);
 }
 
 void KarteView::aktualisiere()

@@ -2,7 +2,10 @@
 
 #include <memory>
 
+#include <functional>
+
 #include <QMainWindow>
+#include <QPointer>
 
 #include "ui/app_kontext.h"
 #include "util/abo.h"
@@ -102,6 +105,12 @@ private slots:
     void zeigePaywall(Abo::Funktion f);      ///< Ultimate-Angebot für eine gesperrte Funktion
     /// Abo abschließen über den erfundenen Bezahlablauf "SolarMonitor Pay".
     void premiumKaufen();
+    /// Zwei Anlagen nebeneinander vergleichen (@p erste vorbelegt).
+    void oeffneVergleich(const QString& erste = QString());
+    /// Markierte Anlage an- oder abpinnen.
+    void favoritUmschalten(const QString& anlageId);
+    /// Einführungstour (Hinweisblasen) starten.
+    void starteEinfuehrung();
     void angemeldet(const QString& kennung);
 
 private:
@@ -111,7 +120,7 @@ private:
     struct FilterZustand {
         QString suche, status, typ, ort;
         double  minKwp = 0.0, maxKwp = 0.0;
-        bool    nurAuffaellig = false, nurOffen = false;
+        bool    nurAuffaellig = false, nurOffen = false, nurFavoriten = false;
         QString stoerSuche, stoerSchwere, stoerAnlage;
         int     stoerStatus = 0;
     };
@@ -142,6 +151,9 @@ private:
                    QWidget* links = nullptr);
     /// Kurze Einblendung unten rechts (ersetzt die Statusleiste).
     void meldung(const QString& text, int dauerMs = 5000, bool hinweis = false);
+    /// Einblendung mit einem Link am Ende (z. B. "Rückgängig"), der @p aktion ausführt.
+    void meldungMitAktion(const QString& text, const QString& linkText, std::function<void()> aktion,
+                          int dauerMs = 7000);
     /// Markierte Anlage; ist keine markiert, erscheint ein kurzer Hinweis.
     QString markierteAnlageOderHinweis();
     void aktualisiereFilterKnopf();
@@ -197,6 +209,13 @@ private:
     QString       m_angemeldet;   ///< Benutzername des angemeldeten Kontos
     QLabel*       m_toast = nullptr;
     class QTimer* m_toastTimer = nullptr;
+    std::function<void()> m_toastAktion; ///< Link in der Einblendung (leer = keiner)
+
+    // Rückmeldung zu Rückgängig/Wiederholen: woher kam die letzte Änderung am Stapel?
+    enum class UndoQuelle { Keine, Neu, Rueckgaengig, Wiederholen };
+    UndoQuelle m_undoQuelle = UndoQuelle::Keine;
+    void fuehreAus(class QUndoCommand* befehl); ///< push() mit Rückmeldung
+    void undoStandGeaendert(int index);
     QListWidget*  m_navigation = nullptr;
     AnlageInfo*   m_anlageInfo = nullptr;
     QPushButton*  m_filterReset = nullptr;
@@ -212,6 +231,10 @@ private:
     QLabel*       m_stoerungsZaehler = nullptr;
     QProgressBar* m_fortschritt = nullptr;
 
+    QPointer<class Einfuehrung> m_einfuehrung; ///< laufende Tour (sonst leer)
+    QAction* m_aktFavorit = nullptr;   ///< markierte Anlage an-/abpinnen (Strg+D)
+    QAction* m_aktVergleich = nullptr; ///< zwei Anlagen vergleichen
+    class QCheckBox* m_nurFavoriten = nullptr;
     QAction* m_aktDetails = nullptr;
     QAction* m_aktBearbeiten = nullptr;
     QAction* m_aktStoerung = nullptr;

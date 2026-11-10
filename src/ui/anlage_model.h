@@ -44,6 +44,8 @@ public slots:
 private:
     AppKontext m_kontext;
     QIcon      m_warnIcon; ///< einmal erzeugt, nicht bei jedem data()-Aufruf
+    QIcon      m_sternIcon;     ///< Favorit
+    QIcon      m_sternWarnIcon; ///< Favorit mit Hinweis aus der Datenprüfung
 };
 
 /**
@@ -64,6 +66,7 @@ public:
     void setLeistungsbereich(double minKwp, double maxKwp); ///< ≤ 0 = offen
     void setNurAuffaellige(bool an);
     void setNurOffeneStoerungen(bool an);
+    void setNurFavoriten(bool an);                   ///< nur angepinnte Anlagen
 
 protected:
     bool filterAcceptsRow(int quellZeile, const QModelIndex& quellParent) const override;
@@ -77,4 +80,5 @@ private:
     double  m_maxKwp = 0.0;
     bool    m_nurAuffaellig = false;
     bool    m_nurOffen = false;
+    bool    m_nurFavoriten = false;
 };

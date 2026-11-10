@@ -88,12 +88,12 @@
 <context>
     <name>AnlageInfo</name>
     <message>
-        <location filename="../src/ui/anlage_info.cpp" line="+37"/>
+        <location filename="../src/ui/anlage_info.cpp" line="+40"/>
         <source>Wählen Sie eine Anlage aus, um hier ihre Angaben zu sehen.</source>
         <translation>Wählen Sie eine Anlage aus, um hier ihre Angaben zu sehen.</translation>
     </message>
     <message>
-        <location line="+28"/>
+        <location line="+43"/>
         <source>Stammdaten</source>
         <translation>Stammdaten</translation>
     </message>
@@ -193,7 +193,7 @@
         <translation>Anlage %1</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+18"/>
         <source>Auswertung läuft …</source>
         <translation>Auswertung läuft …</translation>
     </message>
@@ -223,21 +223,36 @@
         <source>%1, davon %2 kritisch</source>
         <translation>%1, davon %2 kritisch</translation>
     </message>
+    <message>
+        <location line="+24"/>
+        <source>Aus den Favoriten entfernen (Strg+D)</source>
+        <translation>Aus den Favoriten entfernen (Strg+D)</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Zu den Favoriten hinzufügen (Strg+D)</source>
+        <translation>Zu den Favoriten hinzufügen (Strg+D)</translation>
+    </message>
 </context>
 <context>
     <name>AnlageModel</name>
     <message>
-        <location filename="../src/ui/anlage_model.cpp" line="+81"/>
+        <location filename="../src/ui/anlage_model.cpp" line="+108"/>
         <source>Verlauf defekt</source>
         <translation>Verlauf defekt</translation>
     </message>
     <message>
-        <location line="+52"/>
+        <location line="+58"/>
         <source>Datenprüfung:</source>
         <translation>Datenprüfung:</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+2"/>
+        <source>★ Favorit</source>
+        <translation>★ Favorit</translation>
+    </message>
+    <message>
+        <location line="+12"/>
         <source>Median der Wetterstation %1: %2</source>
         <translation>Median der Wetterstation %1: %2</translation>
     </message>
@@ -891,7 +906,7 @@ Tipp: Statt zu löschen kann das Konto auch gesperrt werden.</translation>
 <context>
     <name>DashboardWidget</name>
     <message>
-        <location filename="../src/ui/dashboard_widget.cpp" line="+136"/>
+        <location filename="../src/ui/dashboard_widget.cpp" line="+162"/>
         <source>Rot: kritische Störung, gestört oder Fehlerbild · Orange: offene Störung oder Wartung · Grün: in Ordnung
 Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</source>
         <translation>Rot: kritische Störung, gestört oder Fehlerbild · Orange: offene Störung oder Wartung · Grün: in Ordnung
@@ -938,7 +953,7 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</translation>
         <translation>Zur Anlagenliste</translation>
     </message>
     <message>
-        <location line="+147"/>
+        <location line="+161"/>
         <source>%1 gestört · %2 in Wartung</source>
         <translation>%1 gestört · %2 in Wartung</translation>
     </message>
@@ -968,7 +983,7 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</translation>
         <translation>Flottenanalyse läuft …</translation>
     </message>
     <message>
-        <location line="+30"/>
+        <location line="+31"/>
         <source>%1 von %2 Anlagen ausgewertet</source>
         <translation>%1 von %2 Anlagen ausgewertet</translation>
     </message>
@@ -978,7 +993,7 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</translation>
         <translation>%1 in 14 Tagen</translation>
     </message>
     <message>
-        <location line="-285"/>
+        <location line="-316"/>
         <source>Anlagen in Betrieb</source>
         <translation>Anlagen in Betrieb</translation>
     </message>
@@ -1003,12 +1018,38 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</translation>
         <translation>Datenqualität</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+1"/>
+        <source>CO₂ vermieden</source>
+        <translation>CO₂ vermieden</translation>
+    </message>
+    <message>
+        <location line="+14"/>
         <source>Klick öffnet die Seite · Ziehen verschiebt die Kachel</source>
         <translation>Klick öffnet die Seite · Ziehen verschiebt die Kachel</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+4"/>
+        <source>Vermiedene Treibhausgase durch den Solarstrom der Flotte im Auswertungszeitraum.
+Grundlage: Netto-Vermeidungsfaktor Photovoltaik 690 g CO₂-Äquivalente je kWh (Umweltbundesamt);
+eine Buche bindet etwa 12,5 kg CO₂ im Jahr.
+Klick öffnet die Statistik · Ziehen verschiebt die Kachel</source>
+        <translation>Vermiedene Treibhausgase durch den Solarstrom der Flotte im Auswertungszeitraum.
+Grundlage: Netto-Vermeidungsfaktor Photovoltaik 690 g CO₂-Äquivalente je kWh (Umweltbundesamt);
+eine Buche bindet etwa 12,5 kg CO₂ im Jahr.
+Klick öffnet die Statistik · Ziehen verschiebt die Kachel</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Favoriten</source>
+        <translation>Favoriten</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Alle Favoriten in der Anlagenliste</source>
+        <translation>Alle Favoriten in der Anlagenliste</translation>
+    </message>
+    <message>
+        <location line="+14"/>
         <location line="+1"/>
         <source>Anlage</source>
         <translation>Anlage</translation>
@@ -1085,7 +1126,7 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</translation>
         <translation>Alarme zuerst</translation>
     </message>
     <message>
-        <location line="+46"/>
+        <location line="+59"/>
         <source>Anordnung</source>
         <translation>Anordnung</translation>
     </message>
@@ -1115,7 +1156,22 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</translation>
         <translation>Doppelklick öffnet die Anlage</translation>
     </message>
     <message>
-        <location line="+112"/>
+        <location line="+111"/>
+        <source>%1 t</source>
+        <translation>%1 t</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>%1 kg</source>
+        <translation>%1 kg</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>in 14 Tagen · ≈ %1 Buchen in einem Jahr</source>
+        <translation>in 14 Tagen · ≈ %1 Buchen in einem Jahr</translation>
+    </message>
+    <message>
+        <location line="+6"/>
         <source>Keine nennenswerten Verluste.</source>
         <translation>Keine nennenswerten Verluste.</translation>
     </message>
@@ -1138,6 +1194,29 @@ Klick auf einen Punkt öffnet die Anlage, Mausrad zoomt.</translation>
         <location line="+0"/>
         <source>Befund</source>
         <translation>Befund</translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>Noch keine Favoriten. Wichtige Anlagen in der Anlagenliste mit Strg+D, per Rechtsklick oder über den Stern im Detailbereich anpinnen.</source>
+        <translation>Noch keine Favoriten. Wichtige Anlagen in der Anlagenliste mit Strg+D, per Rechtsklick oder über den Stern im Detailbereich anpinnen.</translation>
+    </message>
+    <message numerus="yes">
+        <location line="+28"/>
+        <source>%n offene Störung(en)</source>
+        <translation>
+            <numerusform>%n offene Störung</numerusform>
+            <numerusform>%n offene Störungen</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>%1 in %2 · %3 kWp · Klick öffnet die Anlage</source>
+        <translation>%1 in %2 · %3 kWp · Klick öffnet die Anlage</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>+%1 weitere</source>
+        <translation>+%1 weitere</translation>
     </message>
 </context>
 <context>
@@ -2038,6 +2117,39 @@ Grund: %1</translation>
     </message>
 </context>
 <context>
+    <name>Einfuehrung</name>
+    <message>
+        <location filename="../src/ui/einfuehrung.cpp" line="+49"/>
+        <source>Tour beenden</source>
+        <translation>Tour beenden</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Zurück</source>
+        <translation>Zurück</translation>
+    </message>
+    <message>
+        <location line="+52"/>
+        <source>Schritt %1 von %2</source>
+        <translation>Schritt %1 von %2</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Los geht&apos;s</source>
+        <translation>Los geht&apos;s</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Tour starten</source>
+        <translation>Tour starten</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Weiter</source>
+        <translation>Weiter</translation>
+    </message>
+</context>
+<context>
     <name>ErtragsAuswertung</name>
     <message>
         <location filename="../src/eval/ertrags_auswertung.cpp" line="+39"/>
@@ -2084,7 +2196,7 @@ Grund: %1</translation>
 <context>
     <name>KarteView</name>
     <message>
-        <location filename="../src/ui/karte_view.cpp" line="+655"/>
+        <location filename="../src/ui/karte_view.cpp" line="+685"/>
         <source>Wetterstation</source>
         <translation>Wetterstation</translation>
     </message>
@@ -2099,7 +2211,37 @@ Grund: %1</translation>
         <translation>Route: OSRM, Daten © OpenStreetMap-Mitwirkende</translation>
     </message>
     <message>
-        <location line="+50"/>
+        <location line="+37"/>
+        <source>Sonne %1° über dem Horizont</source>
+        <translation>Sonne %1° über dem Horizont</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Sonne %1° unter dem Horizont</source>
+        <translation>Sonne %1° unter dem Horizont</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Richtung %1 (%2°)</source>
+        <translation>Richtung %1 (%2°)</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>tief stehend – kaum Ertrag</source>
+        <translation>tief stehend – kaum Ertrag</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Module liefern Strom</source>
+        <translation>Module liefern Strom</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Nacht – kein Ertrag</source>
+        <translation>Nacht – kein Ertrag</translation>
+    </message>
+    <message>
+        <location line="+74"/>
         <source>Status</source>
         <translation>Status</translation>
     </message>
@@ -2163,7 +2305,49 @@ gespeichert; danach funktioniert die Karte auch offline.</translation>
         <translation>Färbung:</translation>
     </message>
     <message>
-        <location line="+52"/>
+        <location line="+13"/>
+        <source>Sonnenstand und Tag/Nacht</source>
+        <translation>Sonnenstand und Tag/Nacht</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Zeigt, wo die Sonne gerade steht, und dunkelt die Karte nachts ab.
+Berechnet ohne Internet für die Mitte der Flotte.</source>
+        <translation>Zeigt, wo die Sonne gerade steht, und dunkelt die Karte nachts ab.
+Berechnet ohne Internet für die Mitte der Flotte.</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Uhrzeit verschieben, um den Tagesverlauf zu sehen</source>
+        <translation>Uhrzeit verschieben, um den Tagesverlauf zu sehen</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Jetzt</source>
+        <translation>Jetzt</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Zurück zur aktuellen Uhrzeit (läuft dann mit)</source>
+        <translation>Zurück zur aktuellen Uhrzeit (läuft dann mit)</translation>
+    </message>
+    <message>
+        <location line="+100"/>
+        <source>Jetzt, %1 Uhr</source>
+        <translation>Jetzt, %1 Uhr</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>%1, %2 Uhr</source>
+        <translation>%1, %2 Uhr</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Aufgang %1 · Untergang %2 · Tageslänge %3 h %4 min · Mittagshöhe %5°</source>
+        <translation>Aufgang %1 · Untergang %2 · Tageslänge %3 h %4 min · Mittagshöhe %5°</translation>
+    </message>
+    <message>
+        <location line="+29"/>
         <source>%1 – %2, %3
 %4 kWp, %5</source>
         <translation>%1 – %2, %3
@@ -2330,23 +2514,23 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="+440"/>
+        <location filename="../src/ui/mainwindow.cpp" line="+445"/>
         <source>SolarMonitor – Monitoring der PV-Flotte</source>
         <translation>SolarMonitor – Monitoring der PV-Flotte</translation>
     </message>
     <message>
-        <location line="+152"/>
-        <location line="+239"/>
+        <location line="+161"/>
+        <location line="+240"/>
         <source>Anlagen</source>
         <translation>Anlagen</translation>
     </message>
     <message>
-        <location line="-239"/>
+        <location line="-240"/>
         <source>Alle PV-Anlagen der Flotte · Doppelklick öffnet die Details</source>
         <translation>Alle PV-Anlagen der Flotte · Doppelklick öffnet die Details</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+5"/>
         <location line="+236"/>
         <source>Störungen</source>
         <translation>Störungen</translation>
@@ -2426,7 +2610,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>&amp;Sprache</translation>
     </message>
     <message>
-        <location line="+121"/>
+        <location line="+123"/>
         <source>%1 offene Störungen, davon %2 kritisch</source>
         <translation>%1 offene Störungen, davon %2 kritisch</translation>
     </message>
@@ -2441,7 +2625,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Keine kritischen Störungen offen</translation>
     </message>
     <message>
-        <location line="+184"/>
+        <location line="+328"/>
         <source>Alle Status</source>
         <translation>Alle Status</translation>
     </message>
@@ -2482,13 +2666,13 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
     </message>
     <message>
         <location line="-48"/>
-        <location line="+51"/>
+        <location line="+56"/>
         <source>Filter zurücksetzen</source>
         <translation>Filter zurücksetzen</translation>
     </message>
     <message>
-        <location line="-789"/>
-        <location line="+247"/>
+        <location line="-941"/>
+        <location line="+248"/>
         <source>Übersicht</source>
         <translation>Übersicht</translation>
     </message>
@@ -2513,9 +2697,146 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Nur mit SolarMonitor Ultimate</translation>
     </message>
     <message>
-        <location line="+95"/>
+        <location line="+10"/>
+        <source>&amp;Einführungstour starten</source>
+        <translation>&amp;Einführungstour starten</translation>
+    </message>
+    <message>
+        <location line="+87"/>
         <source>%1 Anlagen mit erkanntem Fehlerbild</source>
         <translation>%1 Anlagen mit erkanntem Fehlerbild</translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>Willkommen bei SolarMonitor</source>
+        <translation>Willkommen bei SolarMonitor</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>In einer knappen Minute zeigen wir Ihnen die wichtigsten Stellen der Oberfläche.&lt;br&gt;&lt;br&gt;Weiter mit &lt;b&gt;→&lt;/b&gt; oder Enter, zurück mit &lt;b&gt;←&lt;/b&gt;, abbrechen mit &lt;b&gt;Esc&lt;/b&gt;. Die Tour lässt sich jederzeit im Kontomenü oben rechts erneut starten.</source>
+        <translation>In einer knappen Minute zeigen wir Ihnen die wichtigsten Stellen der Oberfläche.&lt;br&gt;&lt;br&gt;Weiter mit &lt;b&gt;→&lt;/b&gt; oder Enter, zurück mit &lt;b&gt;←&lt;/b&gt;, abbrechen mit &lt;b&gt;Esc&lt;/b&gt;. Die Tour lässt sich jederzeit im Kontomenü oben rechts erneut starten.</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Navigation</source>
+        <translation>Navigation</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Hier wechseln Sie zwischen Übersicht, Anlagen, Störungen, Karte, Statistik, Serviceplanung und Datenprüfung. Zahlen an den Einträgen zeigen offene Punkte.</source>
+        <translation>Hier wechseln Sie zwischen Übersicht, Anlagen, Störungen, Karte, Statistik, Serviceplanung und Datenprüfung. Zahlen an den Einträgen zeigen offene Punkte.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Kennzahlen</source>
+        <translation>Kennzahlen</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Der Zustand der Flotte auf einen Blick – inklusive vermiedenem CO₂. Ein Klick auf eine Kachel öffnet die passende Seite; per Ziehen lassen sich Kacheln und Karten umordnen.</source>
+        <translation>Der Zustand der Flotte auf einen Blick – inklusive vermiedenem CO₂. Ein Klick auf eine Kachel öffnet die passende Seite; per Ziehen lassen sich Kacheln und Karten umordnen.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Favoriten</source>
+        <translation>Favoriten</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Ihre wichtigsten Anlagen immer im Blick. Anpinnen geht in der Anlagenliste mit &lt;b&gt;Strg+D&lt;/b&gt;, per Rechtsklick oder über den Stern im Detailbereich.</source>
+        <translation>Ihre wichtigsten Anlagen immer im Blick. Anpinnen geht in der Anlagenliste mit &lt;b&gt;Strg+D&lt;/b&gt;, per Rechtsklick oder über den Stern im Detailbereich.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Anlagenliste</source>
+        <translation>Anlagenliste</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Alle Anlagen mit Kennzahlen. Doppelklick öffnet die Details, rechts daneben stehen die wichtigsten Angaben zur markierten Anlage. Die Filter darüber grenzen die Liste ein – auch auf Favoriten.</source>
+        <translation>Alle Anlagen mit Kennzahlen. Doppelklick öffnet die Details, rechts daneben stehen die wichtigsten Angaben zur markierten Anlage. Die Filter darüber grenzen die Liste ein – auch auf Favoriten.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Anlagen vergleichen</source>
+        <translation>Anlagen vergleichen</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Zwei Anlagen nebeneinander: Stammdaten und Kennzahlen, der bessere Wert grün markiert, dazu die Tageserträge im Diagramm.</source>
+        <translation>Zwei Anlagen nebeneinander: Stammdaten und Kennzahlen, der bessere Wert grün markiert, dazu die Tageserträge im Diagramm.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location line="+234"/>
+        <location line="+14"/>
+        <source>Rückgängig</source>
+        <translation>Rückgängig</translation>
+    </message>
+    <message>
+        <location line="-247"/>
+        <source>Jede Änderung an Anlagen und Störungen lässt sich mit &lt;b&gt;Strg+Z&lt;/b&gt; zurücknehmen und mit &lt;b&gt;Strg+Y&lt;/b&gt; wiederholen. Den ganzen Verlauf zeigt &lt;i&gt;Exportieren → Änderungsverlauf&lt;/i&gt;.</source>
+        <translation>Jede Änderung an Anlagen und Störungen lässt sich mit &lt;b&gt;Strg+Z&lt;/b&gt; zurücknehmen und mit &lt;b&gt;Strg+Y&lt;/b&gt; wiederholen. Den ganzen Verlauf zeigt &lt;i&gt;Exportieren → Änderungsverlauf&lt;/i&gt;.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Karte und Sonnenstand</source>
+        <translation>Karte und Sonnenstand</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Lage aller Anlagen und Wetterstationen. Die Leiste darüber zeigt den Sonnenstand: Nachts wird die Karte dunkel, mit dem Regler spielen Sie den Tagesverlauf durch – so wird klar, warum abends kein Ertrag kommt.</source>
+        <translation>Lage aller Anlagen und Wetterstationen. Die Leiste darüber zeigt den Sonnenstand: Nachts wird die Karte dunkel, mit dem Regler spielen Sie den Tagesverlauf durch – so wird klar, warum abends kein Ertrag kommt.</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Suche</source>
+        <translation>Suche</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&lt;b&gt;Strg+F&lt;/b&gt; springt hierher. Gesucht wird in Anlagen-ID, Ort und Wetterstation.</source>
+        <translation>&lt;b&gt;Strg+F&lt;/b&gt; springt hierher. Gesucht wird in Anlagen-ID, Ort und Wetterstation.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Kritische Störungen</source>
+        <translation>Kritische Störungen</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Die Glocke zeigt, wie viele kritische Störungen offen sind; ein Klick öffnet die Liste.</source>
+        <translation>Die Glocke zeigt, wie viele kritische Störungen offen sind; ein Klick öffnet die Liste.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Kontomenü</source>
+        <translation>Kontomenü</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Sprache, Design, Abo, Benutzer wechseln und Abmelden – und hier starten Sie diese Tour erneut.</source>
+        <translation>Sprache, Design, Abo, Benutzer wechseln und Abmelden – und hier starten Sie diese Tour erneut.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Fertig!</source>
+        <translation>Fertig!</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Das war&apos;s schon. Viel Erfolg mit SolarMonitor!</source>
+        <translation>Das war&apos;s schon. Viel Erfolg mit SolarMonitor!</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>★ %1 ist jetzt ein Favorit und erscheint in der Übersicht.</source>
+        <translation>★ %1 ist jetzt ein Favorit und erscheint in der Übersicht.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>%1 aus den Favoriten entfernt.</source>
+        <translation>%1 aus den Favoriten entfernt.</translation>
     </message>
     <message>
         <location line="+31"/>
@@ -2583,12 +2904,42 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Vielleicht später</translation>
     </message>
     <message>
-        <location line="+41"/>
+        <location line="+68"/>
+        <source>✓ %1 – gespeichert</source>
+        <translation>✓ %1 – gespeichert</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>↶ Rückgängig gemacht: %1</source>
+        <translation>↶ Rückgängig gemacht: %1</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Wiederholen</source>
+        <translation>Wiederholen</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>↷ Wiederholt: %1</source>
+        <translation>↷ Wiederholt: %1</translation>
+    </message>
+    <message>
+        <location line="+18"/>
         <source>Filter zurücksetzen (%1)</source>
         <translation>Filter zurücksetzen (%1)</translation>
     </message>
     <message>
-        <location line="+210"/>
+        <location line="+50"/>
+        <source>nur Favoriten</source>
+        <translation>nur Favoriten</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Nur angepinnte Anlagen zeigen (anpinnen mit Strg+D oder dem Stern im Detailbereich)</source>
+        <translation>Nur angepinnte Anlagen zeigen (anpinnen mit Strg+D oder dem Stern im Detailbereich)</translation>
+    </message>
+    <message>
+        <location line="+169"/>
         <source>Suche nach Störung, Anlage, Code oder Beschreibung</source>
         <translation>Suche nach Störung, Anlage, Code oder Beschreibung</translation>
     </message>
@@ -2629,6 +2980,26 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
     </message>
     <message>
         <location line="+6"/>
+        <source>&amp;Favorit</source>
+        <translation>&amp;Favorit</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Markierte Anlage zu den Favoriten hinzufügen oder entfernen (Strg+D)</source>
+        <translation>Markierte Anlage zu den Favoriten hinzufügen oder entfernen (Strg+D)</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>&amp;Vergleichen …</source>
+        <translation>&amp;Vergleichen …</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Zwei Anlagen nebeneinander vergleichen</source>
+        <translation>Zwei Anlagen nebeneinander vergleichen</translation>
+    </message>
+    <message>
+        <location line="+3"/>
         <source>Störung &amp;erfassen …</source>
         <translation>Störung &amp;erfassen …</translation>
     </message>
@@ -2669,13 +3040,13 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location line="+9"/>
+        <location line="+17"/>
         <source>&amp;Rückgängig</source>
         <translation>&amp;Rückgängig</translation>
     </message>
     <message>
-        <location line="-7"/>
-        <location line="+10"/>
+        <location line="-15"/>
+        <location line="+18"/>
         <source>&amp;Wiederholen</source>
         <translation>&amp;Wiederholen</translation>
     </message>
@@ -2710,22 +3081,22 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Wiederholen: %1 (Strg+Y)</translation>
     </message>
     <message>
-        <location line="-780"/>
+        <location line="-957"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation>Benutzer &amp;wechseln …</translation>
     </message>
     <message>
-        <location line="+146"/>
+        <location line="+148"/>
         <source>&amp;Beenden</source>
         <translation>&amp;Beenden</translation>
     </message>
     <message>
-        <location line="-21"/>
+        <location line="-23"/>
         <source>Die Übersetzung konnte nicht geladen werden.</source>
         <translation>Die Übersetzung konnte nicht geladen werden.</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+22"/>
         <source>&amp;Über SolarMonitor</source>
         <translation>&amp;Über SolarMonitor</translation>
     </message>
@@ -2735,7 +3106,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>%1 Fehler beim Einlesen</translation>
     </message>
     <message>
-        <location line="+183"/>
+        <location line="+327"/>
         <source>Anlagen durchsuchen (Strg+F)</source>
         <translation>Anlagen durchsuchen (Strg+F)</translation>
     </message>
@@ -2745,13 +3116,13 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Sucht in Anlagen-ID, Ort und Wetterstation</translation>
     </message>
     <message>
-        <location line="+49"/>
-        <location line="+181"/>
+        <location line="+54"/>
+        <location line="+188"/>
         <source>Status:</source>
         <translation>Status:</translation>
     </message>
     <message>
-        <location line="-178"/>
+        <location line="-185"/>
         <source>Typ:</source>
         <translation>Typ:</translation>
     </message>
@@ -2766,7 +3137,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Leistung:</translation>
     </message>
     <message>
-        <location line="+108"/>
+        <location line="+115"/>
         <source>Keine Anlage entspricht den gewählten Filtern.</source>
         <translation>Keine Anlage entspricht den gewählten Filtern.</translation>
     </message>
@@ -2781,12 +3152,12 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Anlage:</translation>
     </message>
     <message>
-        <location line="-807"/>
+        <location line="-965"/>
         <source>Exportieren</source>
         <translation>Exportieren</translation>
     </message>
     <message>
-        <location line="+969"/>
+        <location line="+1146"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>Nur für die Rolle Administrator.</translation>
     </message>
@@ -2821,7 +3192,22 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>%1 von %2 Störungen</translation>
     </message>
     <message>
-        <location line="+52"/>
+        <location line="+53"/>
+        <source>Aus den Favoriten entfernen</source>
+        <translation>Aus den Favoriten entfernen</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Zu den Favoriten hinzufügen</source>
+        <translation>Zu den Favoriten hinzufügen</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Vergleichen mit …</source>
+        <translation>Vergleichen mit …</translation>
+    </message>
+    <message>
+        <location line="+3"/>
         <source>Störungen dieser Anlage anzeigen</source>
         <translation>Störungen dieser Anlage anzeigen</translation>
     </message>
@@ -2856,12 +3242,12 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Anlage</translation>
     </message>
     <message>
-        <location line="-162"/>
+        <location line="-179"/>
         <source>Änderungsverlauf …</source>
         <translation>Änderungsverlauf …</translation>
     </message>
     <message>
-        <location line="-1314"/>
+        <location line="-1493"/>
         <source>Daten werden geladen …</source>
         <translation>Daten werden geladen …</translation>
     </message>
@@ -2881,12 +3267,12 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Datenordner – SolarMonitor</translation>
     </message>
     <message>
-        <location line="+116"/>
+        <location line="+125"/>
         <source>Zustand der Flotte auf einen Blick · Kacheln und Karten lassen sich per Ziehen verschieben</source>
         <translation>Zustand der Flotte auf einen Blick · Kacheln und Karten lassen sich per Ziehen verschieben</translation>
     </message>
     <message>
-        <location line="+56"/>
+        <location line="+57"/>
         <source>Benutzerverwaltung</source>
         <translation>Benutzerverwaltung</translation>
     </message>
@@ -2951,8 +3337,8 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Logo-Animation beim Programmstart zeigen</translation>
     </message>
     <message>
-        <location line="+64"/>
-        <location line="+171"/>
+        <location line="+66"/>
+        <location line="+256"/>
         <source>PREMIUM</source>
         <translation>PREMIUM</translation>
     </message>
@@ -2962,22 +3348,22 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>SolarMonitor Premium ist aktiv – werbefrei</translation>
     </message>
     <message>
-        <location line="-161"/>
+        <location line="-246"/>
         <source>SolarMonitor beenden (Strg+Q)</source>
         <translation>SolarMonitor beenden (Strg+Q)</translation>
     </message>
     <message>
-        <location line="+97"/>
+        <location line="+182"/>
         <source>Zahlung abgebrochen – die Werbung bleibt.</source>
         <translation>Zahlung abgebrochen – die Werbung bleibt.</translation>
     </message>
     <message>
-        <location line="+585"/>
+        <location line="+675"/>
         <source>Bitte zuerst eine Anlage in der Liste auswählen.</source>
         <translation>Bitte zuerst eine Anlage in der Liste auswählen.</translation>
     </message>
     <message>
-        <location line="+72"/>
+        <location line="+81"/>
         <source>Die Anlage %1 ist nicht vorhanden.</source>
         <translation>Die Anlage %1 ist nicht vorhanden.</translation>
     </message>
@@ -2994,12 +3380,12 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location line="+48"/>
+        <location line="+45"/>
         <source>Speichern fehlgeschlagen</source>
         <translation>Speichern fehlgeschlagen</translation>
     </message>
     <message>
-        <location line="-48"/>
+        <location line="-45"/>
         <source>Anlage %1 ist unbekannt.</source>
         <translation>Anlage %1 ist unbekannt.</translation>
     </message>
@@ -3009,12 +3395,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Störungen dürfen nur von den Rollen Service und Administrator erfasst werden.</translation>
     </message>
     <message>
-        <location line="+9"/>
-        <source>Störung %1 für Anlage %2 erfasst (Strg+Z macht es rückgängig).</source>
-        <translation>Störung %1 für Anlage %2 erfasst (Strg+Z macht es rückgängig).</translation>
-    </message>
-    <message>
-        <location line="+16"/>
+        <location line="+22"/>
         <source>Störung %1 ist unbekannt.</source>
         <translation>Störung %1 ist unbekannt.</translation>
     </message>
@@ -3152,12 +3533,12 @@ Jetzt öffnen?</translation>
         <translation>&lt;Ausgangszustand nach dem Laden&gt;</translation>
     </message>
     <message>
-        <location line="-1609"/>
+        <location line="-1801"/>
         <source>Angemeldet als %1.</source>
         <translation>Angemeldet als %1.</translation>
     </message>
     <message>
-        <location line="+1628"/>
+        <location line="+1820"/>
         <source>Über SolarMonitor</source>
         <translation>Über SolarMonitor</translation>
     </message>
@@ -4095,6 +4476,89 @@ Gemessen wird auf dem Landweg um den Bodensee herum, nicht quer über das Wasser
     </message>
 </context>
 <context>
+    <name>Sonnenstand</name>
+    <message>
+        <location filename="../src/util/sonnenstand.cpp" line="+87"/>
+        <source>N</source>
+        <translation>N</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>NNO</source>
+        <translation>NNO</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>NO</source>
+        <translation>NO</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>ONO</source>
+        <translation>ONO</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>O</source>
+        <translation>O</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>OSO</source>
+        <translation>OSO</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>SO</source>
+        <translation>SO</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>SSO</source>
+        <translation>SSO</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>S</source>
+        <translation>S</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>SSW</source>
+        <translation>SSW</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>SW</source>
+        <translation>SW</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>WSW</source>
+        <translation>WSW</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>W</source>
+        <translation>W</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>WNW</source>
+        <translation>WNW</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>NW</source>
+        <translation>NW</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>NNW</source>
+        <translation>NNW</translation>
+    </message>
+</context>
+<context>
     <name>StatistikWidget</name>
     <message>
         <location filename="../src/ui/statistik_widget.cpp" line="+30"/>
@@ -4435,6 +4899,162 @@ Gemessen wird auf dem Landweg um den Bodensee herum, nicht quer über das Wasser
         <location line="+1"/>
         <source>Behoben am</source>
         <translation>Behoben am</translation>
+    </message>
+</context>
+<context>
+    <name>TagesVergleich</name>
+    <message>
+        <location filename="../src/ui/vergleich_dialog.cpp" line="+437"/>
+        <source>Spezifischer Tagesertrag (kWh/kWp)</source>
+        <translation>Spezifischer Tagesertrag (kWh/kWp)</translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>Keine Tageswerte vorhanden.</source>
+        <translation>Keine Tageswerte vorhanden.</translation>
+    </message>
+</context>
+<context>
+    <name>VergleichDialog</name>
+    <message>
+        <location line="-403"/>
+        <source>Anlagen vergleichen</source>
+        <translation>Anlagen vergleichen</translation>
+    </message>
+    <message>
+        <location line="+38"/>
+        <source>Öffnen …</source>
+        <translation>Öffnen …</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Anlage A:</source>
+        <translation>Anlage A:</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Anlage B:</source>
+        <translation>Anlage B:</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>A und B tauschen</source>
+        <translation>A und B tauschen</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Merkmal</source>
+        <translation>Merkmal</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Anlage A</source>
+        <translation>Anlage A</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Anlage B</source>
+        <translation>Anlage B</translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Grün: jeweils der bessere Wert. Der Tagesvergleich zeigt den spezifischen Ertrag (kWh je kWp), damit unterschiedlich große Anlagen vergleichbar sind.</source>
+        <translation>Grün: jeweils der bessere Wert. Der Tagesvergleich zeigt den spezifischen Ertrag (kWh je kWp), damit unterschiedlich große Anlagen vergleichbar sind.</translation>
+    </message>
+    <message>
+        <location line="+124"/>
+        <source>Tageswerte werden aus den Verläufen berechnet …</source>
+        <translation>Tageswerte werden aus den Verläufen berechnet …</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Kein auswertbarer Verlauf für: %1</source>
+        <translation>Kein auswertbarer Verlauf für: %1</translation>
+    </message>
+    <message>
+        <location line="+36"/>
+        <source>Ort</source>
+        <translation>Ort</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Typ</source>
+        <translation>Typ</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Status</source>
+        <translation>Status</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Installierte Leistung</source>
+        <translation>Installierte Leistung</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Ausrichtung / Neigung</source>
+        <translation>Ausrichtung / Neigung</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Wechselrichter</source>
+        <translation>Wechselrichter</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Wetterstation</source>
+        <translation>Wetterstation</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>In Betrieb seit</source>
+        <translation>In Betrieb seit</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Energie (14 Tage)</source>
+        <translation>Energie (14 Tage)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Spezifischer Ertrag</source>
+        <translation>Spezifischer Ertrag</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Performance Ratio</source>
+        <translation>Performance Ratio</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>PR-Median der Wetterstation</source>
+        <translation>PR-Median der Wetterstation</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Geschätzter Ertragsverlust</source>
+        <translation>Geschätzter Ertragsverlust</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Datenabdeckung</source>
+        <translation>Datenabdeckung</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Offene Störungen</source>
+        <translation>Offene Störungen</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Erkannte Fehlerbilder</source>
+        <translation>Erkannte Fehlerbilder</translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>keine</source>
+        <translation>keine</translation>
     </message>
 </context>
 <context>

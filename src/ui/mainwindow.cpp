@@ -61,6 +61,9 @@
 #include "ui/benutzer_seite.h"
 #include "ui/werbung.h"
 #include "ui/zahlung_dialog.h"
+#include "model/favoriten.h"
+#include "ui/einfuehrung.h"
+#include "ui/vergleich_dialog.h"
 #include "util/abo.h"
 #include "model/benutzer.h"
 #include "util/windows_hello.h"
@@ -253,6 +256,7 @@ MainWindow::MainWindow(std::unique_ptr<Datensatz> datensatz, QWidget* parent)
 {
     m_undo = new QUndoStack(this);
     m_undo->setUndoLimit(100);
+    connect(m_undo, &QUndoStack::indexChanged, this, &MainWindow::undoStandGeaendert);
     m_benutzer = new Benutzerverwaltung(this);
     uebernimmDaten(std::move(datensatz));
 
@@ -340,6 +344,7 @@ void MainWindow::trenneDaten()
     m_navigation = nullptr;
     m_anlageInfo = nullptr;
     m_filterReset = nullptr;
+    m_nurFavoriten = nullptr;
     m_anlagenTabelle = m_stoerungsTabelle = nullptr;
     m_karte = nullptr;
     m_suche = m_stoerAnlage = nullptr;
@@ -491,12 +496,16 @@ void MainWindow::angemeldet(const QString& kennung)
     if (wechsel && (rolle != m_kontext.rolle || andererBenutzer))
         m_undo->clear();
     m_kontext.rolle = rolle;
+    Favoriten::instanz()->setzeBenutzer(kennung);
     baueUi();
     zeigeProgramm();
     if (!wechsel)
         QTimer::singleShot(0, m_kontext.analyse, &FlottenAnalyse::starte); // Auswertung im Hintergrund
     else
         meldung(tr("Angemeldet als %1.").arg(b->name), 5000);
+    // Beim ersten Anmelden dieses Benutzers die Einführungstour zeigen
+    if (!QSettings().value(QStringLiteral("einfuehrung/") + kennung, false).toBool())
+        QTimer::singleShot(600, this, &MainWindow::starteEinfuehrung);
 }
 
 void MainWindow::setzeVollbild(bool an)
@@ -577,6 +586,11 @@ void MainWindow::baueUi()
         case DashboardWidget::Ziel::Statistik: m_tabs->setCurrentIndex(ReiterStatistik); break;
         case DashboardWidget::Ziel::Serviceplanung: m_tabs->setCurrentIndex(ReiterService); break;
         case DashboardWidget::Ziel::Datenpruefung: m_tabs->setCurrentIndex(ReiterPruefung); break;
+        case DashboardWidget::Ziel::Favoriten:
+            if (m_nurFavoriten)
+                m_nurFavoriten->setChecked(true);
+            m_tabs->setCurrentIndex(ReiterAnlagen);
+            break;
         }
     });
     QAction* anordnung = uebersicht->anordnungsAktion();
@@ -591,7 +605,8 @@ void MainWindow::baueUi()
 
     m_tabs->addWidget(seite(tr("Anlagen"), tr("Alle PV-Anlagen der Flotte · Doppelklick öffnet die Details"),
                             baueAnlagenSeite(),
-                            {m_aktRueckgaengig, m_aktWiederholen, nullptr, m_aktDetails, m_aktBearbeiten, m_aktStoerung},
+                            {m_aktRueckgaengig, m_aktWiederholen, nullptr, m_aktFavorit, m_aktVergleich, nullptr,
+                             m_aktDetails, m_aktBearbeiten, m_aktStoerung},
                             {m_aktExportAnlagen, m_aktPdfAnlage, nullptr, m_aktVerlauf}, m_anlagenZaehler));
     m_tabs->addWidget(seite(tr("Störungen"), tr("Störungsmeldungen seit 2024 · Rechtsklick ändert den Status"),
                             baueStoerungsSeite(), {m_aktRueckgaengig, m_aktWiederholen}, {m_aktExportStoerungen},
@@ -664,7 +679,7 @@ void MainWindow::baueUi()
         m_werbeSteuerung = new WerbeSteuerung(this, [this]() -> QWidget* {
             if (!m_programm || !m_ebenen || m_ebenen->currentWidget() != m_programm)
                 return nullptr;
-            if (!isVisible() || isMinimized() || QApplication::activeModalWidget())
+            if (!isVisible() || isMinimized() || QApplication::activeModalWidget() || m_einfuehrung)
                 return nullptr;
             return m_programm;
         });
@@ -1058,6 +1073,8 @@ QWidget* MainWindow::baueKopfzeile()
     menue->setToolTipsVisible(true);
     connect(Abo::instanz(), &Abo::stufeGeaendert, menue, schloesser);
     menue->addSeparator();
+    menue->addAction(Stil::icon(Stil::Symbol::Kompass, Stil::text()), tr("&Einführungstour starten"), this,
+                     &MainWindow::starteEinfuehrung);
     menue->addAction(Stil::icon(Stil::Symbol::Info, Stil::text()), tr("&Über SolarMonitor"), this, &MainWindow::zeigeUeber);
     QAction* beenden = menue->addAction(Stil::icon(Stil::Symbol::Abmelden, Stil::text()), tr("&Beenden"), this, &QWidget::close);
     beenden->setShortcut(QKeySequence::Quit);
@@ -1152,6 +1169,91 @@ void MainWindow::aktualisiereNavigation()
         m_glocke->setToolTip(kritisch > 0 ? tr("%1 kritische Störungen offen – anzeigen").arg(kritisch)
                                           : tr("Keine kritischen Störungen offen"));
     }
+}
+
+void MainWindow::starteEinfuehrung()
+{
+    if (m_einfuehrung || !m_programm || !m_tabs || m_ebenen->currentWidget() != m_programm)
+        return;
+    const int vorherSeite = m_tabs->currentIndex();
+    // Knopf einer Seitenaktion finden (für Hervorhebungen in der Aktionszeile)
+    auto knopf = [this](int reiter, QAction* aktion) -> QWidget* {
+        if (QWidget* seite = m_tabs->widget(reiter))
+            for (QToolButton* k : seite->findChildren<QToolButton*>())
+                if (k->defaultAction() == aktion)
+                    return k;
+        return nullptr;
+    };
+    auto seite = [this](int reiter) { return [this, reiter] { m_tabs->setCurrentIndex(reiter); }; };
+    auto inSeite = [this](int reiter, const char* name) -> QWidget* {
+        QWidget* s = m_tabs->widget(reiter);
+        return s ? s->findChild<QWidget*>(QLatin1String(name)) : nullptr;
+    };
+
+    QVector<Einfuehrung::Schritt> schritte{
+        {nullptr, tr("Willkommen bei SolarMonitor"),
+         tr("In einer knappen Minute zeigen wir Ihnen die wichtigsten Stellen der Oberfläche.<br><br>"
+            "Weiter mit <b>→</b> oder Enter, zurück mit <b>←</b>, abbrechen mit <b>Esc</b>. Die Tour lässt sich "
+            "jederzeit im Kontomenü oben rechts erneut starten."),
+         seite(ReiterUebersicht)},
+        {[this] { return static_cast<QWidget*>(m_navigation); }, tr("Navigation"),
+         tr("Hier wechseln Sie zwischen Übersicht, Anlagen, Störungen, Karte, Statistik, Serviceplanung und "
+            "Datenprüfung. Zahlen an den Einträgen zeigen offene Punkte.")},
+        {[inSeite] { return inSeite(ReiterUebersicht, "UebersichtKacheln"); }, tr("Kennzahlen"),
+         tr("Der Zustand der Flotte auf einen Blick – inklusive vermiedenem CO₂. Ein Klick auf eine Kachel öffnet "
+            "die passende Seite; per Ziehen lassen sich Kacheln und Karten umordnen."),
+         seite(ReiterUebersicht)},
+        {[inSeite] { return inSeite(ReiterUebersicht, "FavoritenGruppe"); }, tr("Favoriten"),
+         tr("Ihre wichtigsten Anlagen immer im Blick. Anpinnen geht in der Anlagenliste mit <b>Strg+D</b>, per "
+            "Rechtsklick oder über den Stern im Detailbereich.")},
+        {[this] { return static_cast<QWidget*>(m_anlagenTabelle); }, tr("Anlagenliste"),
+         tr("Alle Anlagen mit Kennzahlen. Doppelklick öffnet die Details, rechts daneben stehen die wichtigsten "
+            "Angaben zur markierten Anlage. Die Filter darüber grenzen die Liste ein – auch auf Favoriten."),
+         seite(ReiterAnlagen)},
+        {[knopf, this] { return knopf(ReiterAnlagen, m_aktVergleich); }, tr("Anlagen vergleichen"),
+         tr("Zwei Anlagen nebeneinander: Stammdaten und Kennzahlen, der bessere Wert grün markiert, dazu die "
+            "Tageserträge im Diagramm.")},
+        {[knopf, this] { return knopf(ReiterAnlagen, m_aktRueckgaengig); }, tr("Rückgängig"),
+         tr("Jede Änderung an Anlagen und Störungen lässt sich mit <b>Strg+Z</b> zurücknehmen und mit "
+            "<b>Strg+Y</b> wiederholen. Den ganzen Verlauf zeigt <i>Exportieren → Änderungsverlauf</i>.")},
+        {[this] { return static_cast<QWidget*>(m_karte); }, tr("Karte und Sonnenstand"),
+         tr("Lage aller Anlagen und Wetterstationen. Die Leiste darüber zeigt den Sonnenstand: Nachts wird die "
+            "Karte dunkel, mit dem Regler spielen Sie den Tagesverlauf durch – so wird klar, warum abends kein "
+            "Ertrag kommt."),
+         seite(ReiterKarte)},
+        {[this] { return static_cast<QWidget*>(m_suche); }, tr("Suche"),
+         tr("<b>Strg+F</b> springt hierher. Gesucht wird in Anlagen-ID, Ort und Wetterstation."),
+         seite(ReiterUebersicht)},
+        {[this] { return static_cast<QWidget*>(m_glocke); }, tr("Kritische Störungen"),
+         tr("Die Glocke zeigt, wie viele kritische Störungen offen sind; ein Klick öffnet die Liste.")},
+        {[this] { return static_cast<QWidget*>(m_benutzerKnopf); }, tr("Kontomenü"),
+         tr("Sprache, Design, Abo, Benutzer wechseln und Abmelden – und hier starten Sie diese Tour erneut.")},
+        {nullptr, tr("Fertig!"), tr("Das war's schon. Viel Erfolg mit SolarMonitor!")},
+    };
+
+    m_einfuehrung = new Einfuehrung(m_programm, std::move(schritte));
+    connect(m_einfuehrung, &Einfuehrung::beendet, this, [this, vorherSeite](bool) {
+        QSettings().setValue(QStringLiteral("einfuehrung/") + m_angemeldet, true);
+        if (m_tabs)
+            m_tabs->setCurrentIndex(vorherSeite == ReiterUebersicht ? ReiterUebersicht : vorherSeite);
+    });
+    m_einfuehrung->starte();
+}
+
+void MainWindow::favoritUmschalten(const QString& anlageId)
+{
+    Favoriten* fav = Favoriten::instanz();
+    fav->umschalten(anlageId);
+    meldung(fav->ist(anlageId) ? tr("★ %1 ist jetzt ein Favorit und erscheint in der Übersicht.").arg(anlageId)
+                               : tr("%1 aus den Favoriten entfernt.").arg(anlageId),
+            3000);
+}
+
+void MainWindow::oeffneVergleich(const QString& erste)
+{
+    VergleichDialog dlg(m_kontext, erste, this);
+    connect(&dlg, &VergleichDialog::anlageOeffnen, this, [this](const QString& id) { oeffneAnlage(id); });
+    dlg.exec();
 }
 
 void MainWindow::premiumKaufen()
@@ -1291,11 +1393,22 @@ void MainWindow::meldung(const QString& text, int dauerMs, bool hinweis)
         m_toast = new QLabel(this);
         m_toast->setObjectName(QStringLiteral("Toast"));
         m_toast->setWordWrap(true);
+        m_toast->setTextFormat(Qt::RichText);
+        m_toast->setTextInteractionFlags(Qt::LinksAccessibleByMouse);
+        m_toast->setOpenExternalLinks(false);
+        connect(m_toast, &QLabel::linkActivated, this, [this] {
+            const auto aktion = m_toastAktion;
+            m_toastAktion = {};
+            m_toast->hide();
+            if (aktion)
+                aktion();
+        });
         m_toastTimer = new QTimer(this);
         m_toastTimer->setSingleShot(true);
         connect(m_toastTimer, &QTimer::timeout, m_toast, &QWidget::hide);
     }
-    m_toast->setText(text);
+    m_toastAktion = {};
+    m_toast->setText(text.toHtmlEscaped());
     // Hinweise (z. B. "erst Anlage auswählen") mit orangem Balken links
     if (m_toast->property("hinweis").toBool() != hinweis) {
         m_toast->setProperty("hinweis", hinweis);
@@ -1311,13 +1424,61 @@ void MainWindow::meldung(const QString& text, int dauerMs, bool hinweis)
     m_toastTimer->start(dauerMs);
 }
 
+void MainWindow::meldungMitAktion(const QString& text, const QString& linkText, std::function<void()> aktion,
+                                  int dauerMs)
+{
+    // Text mit Abstand als Link anhängen; Breite für beides reservieren
+    meldung(text + QStringLiteral("      ") + linkText, dauerMs);
+    m_toast->setText(QStringLiteral("%1&nbsp;&nbsp;&nbsp;<a href=\"aktion\" style=\"color:%2; font-weight:600;\">%3</a>")
+                         .arg(text.toHtmlEscaped(), Stil::istDunkel() ? QStringLiteral("#fbbf24") : QStringLiteral("#d97706"),
+                              linkText.toHtmlEscaped()));
+    m_toastAktion = std::move(aktion);
+}
+
+void MainWindow::fuehreAus(QUndoCommand* befehl)
+{
+    m_undoQuelle = UndoQuelle::Neu;
+    m_undo->push(befehl); // ruft redo() auf und meldet den neuen Stand (undoStandGeaendert)
+    m_undoQuelle = UndoQuelle::Keine;
+}
+
+void MainWindow::undoStandGeaendert(int index)
+{
+    // Rückmeldung mit Link zum direkten Zurücknehmen bzw. Wiederholen
+    switch (m_undoQuelle) {
+    case UndoQuelle::Neu:
+        meldungMitAktion(tr("✓ %1 – gespeichert").arg(m_undo->text(index - 1)), tr("Rückgängig"), [this] {
+            m_undoQuelle = UndoQuelle::Rueckgaengig;
+            m_undo->undo();
+            m_undoQuelle = UndoQuelle::Keine;
+        });
+        break;
+    case UndoQuelle::Rueckgaengig:
+        meldungMitAktion(tr("↶ Rückgängig gemacht: %1").arg(m_undo->text(index)), tr("Wiederholen"), [this] {
+            m_undoQuelle = UndoQuelle::Wiederholen;
+            m_undo->redo();
+            m_undoQuelle = UndoQuelle::Keine;
+        });
+        break;
+    case UndoQuelle::Wiederholen:
+        meldungMitAktion(tr("↷ Wiederholt: %1").arg(m_undo->text(index - 1)), tr("Rückgängig"), [this] {
+            m_undoQuelle = UndoQuelle::Rueckgaengig;
+            m_undo->undo();
+            m_undoQuelle = UndoQuelle::Keine;
+        });
+        break;
+    case UndoQuelle::Keine:
+        break; // z. B. Sprung im Änderungsverlauf: dort sieht man den Stand ohnehin
+    }
+}
+
 void MainWindow::aktualisiereFilterKnopf()
 {
     if (!m_filterReset)
         return;
     const int aktiv = int(!m_filter.suche.isEmpty()) + int(!m_filter.status.isEmpty()) + int(!m_filter.typ.isEmpty())
                     + int(!m_filter.ort.isEmpty()) + int(m_filter.minKwp > 0) + int(m_filter.maxKwp > 0)
-                    + int(m_filter.nurAuffaellig) + int(m_filter.nurOffen);
+                    + int(m_filter.nurAuffaellig) + int(m_filter.nurOffen) + int(m_filter.nurFavoriten);
     m_filterReset->setText(aktiv > 0 ? tr("Filter zurücksetzen (%1)").arg(aktiv) : tr("Filter zurücksetzen"));
     m_filterReset->setEnabled(aktiv > 0);
 }
@@ -1368,6 +1529,11 @@ QWidget* MainWindow::baueAnlagenSeite()
     nurAuffaellig->setToolTip(tr("Anlagen, bei denen die Flottenanalyse ein Fehlerbild erkannt hat"));
     auto* nurOffen = new QCheckBox(tr("nur mit offenen Störungen"), seite);
     nurOffen->setChecked(m_filter.nurOffen);
+    m_nurFavoriten = new QCheckBox(tr("nur Favoriten"), seite);
+    m_nurFavoriten->setIcon(Stil::icon(Stil::Symbol::SternVoll, QColor(234, 179, 8)));
+    m_nurFavoriten->setChecked(m_filter.nurFavoriten);
+    m_nurFavoriten->setToolTip(tr("Nur angepinnte Anlagen zeigen (anpinnen mit Strg+D oder dem Stern im Detailbereich)"));
+    m_anlageFilter->setNurFavoriten(m_filter.nurFavoriten);
 
     auto* zuruecksetzen = new QPushButton(tr("Filter zurücksetzen"), seite);
     m_filterReset = zuruecksetzen;
@@ -1395,6 +1561,7 @@ QWidget* MainWindow::baueAnlagenSeite()
     zeile2->setSpacing(16);
     zeile2->addWidget(nurAuffaellig);
     zeile2->addWidget(nurOffen);
+    zeile2->addWidget(m_nurFavoriten);
     zeile2->addStretch();
     zeile2->addWidget(zuruecksetzen);
     for (QComboBox* c : {status, typ, ort}) {
@@ -1484,6 +1651,11 @@ QWidget* MainWindow::baueAnlagenSeite()
         m_anlageFilter->setNurOffeneStoerungen(an);
         aktualisiereFilterKnopf();
     });
+    connect(m_nurFavoriten, &QCheckBox::toggled, this, [this](bool an) {
+        m_filter.nurFavoriten = an;
+        m_anlageFilter->setNurFavoriten(an);
+        aktualisiereFilterKnopf();
+    });
     connect(zuruecksetzen, &QPushButton::clicked, this, [=] {
         m_suche->clear();
         status->setCurrentIndex(0);
@@ -1493,6 +1665,7 @@ QWidget* MainWindow::baueAnlagenSeite()
         maxKwp->setValue(0.0);
         nurAuffaellig->setChecked(false);
         nurOffen->setChecked(false);
+        m_nurFavoriten->setChecked(false);
     });
 
     m_anlagenLeer = new QLabel(tr("Keine Anlage entspricht den gewählten Filtern."), seite);
@@ -1632,7 +1805,7 @@ void MainWindow::erzeugeAktionen()
     // Aktionen werden bei jedem Neuaufbau neu erzeugt (Texte in aktueller Sprache)
     for (QAction* alt : {m_aktDetails, m_aktBearbeiten, m_aktStoerung, m_aktExportAnlagen, m_aktExportStoerungen,
                          m_aktExportBericht, m_aktPdfAnlage, m_aktPdfFlotte, m_aktRueckgaengig, m_aktWiederholen,
-                         m_aktAnalyse, m_aktVerlauf})
+                         m_aktAnalyse, m_aktVerlauf, m_aktFavorit, m_aktVergleich})
         if (alt)
             alt->deleteLater();
 
@@ -1651,6 +1824,17 @@ void MainWindow::erzeugeAktionen()
         if (const QString id = markierteAnlageOderHinweis(); !id.isEmpty())
             bearbeiteAnlage(id);
     });
+    m_aktFavorit = new QAction(Stil::icon(Stil::Symbol::Stern, f), tr("&Favorit"), this);
+    m_aktFavorit->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_D));
+    m_aktFavorit->setToolTip(tr("Markierte Anlage zu den Favoriten hinzufügen oder entfernen (Strg+D)"));
+    connect(m_aktFavorit, &QAction::triggered, this, [this] {
+        if (const QString id = markierteAnlageOderHinweis(); !id.isEmpty())
+            favoritUmschalten(id);
+    });
+    m_aktVergleich = new QAction(Stil::icon(Stil::Symbol::Vergleich, f), tr("&Vergleichen …"), this);
+    m_aktVergleich->setToolTip(tr("Zwei Anlagen nebeneinander vergleichen"));
+    connect(m_aktVergleich, &QAction::triggered, this, [this] { oeffneVergleich(markierteAnlage()); });
+
     m_aktStoerung = new QAction(Stil::icon(Stil::Symbol::Plus, f), tr("Störung &erfassen …"), this);
     connect(m_aktStoerung, &QAction::triggered, this, [this] {
         if (const QString id = markierteAnlageOderHinweis(); !id.isEmpty())
@@ -1684,8 +1868,16 @@ void MainWindow::erzeugeAktionen()
     m_aktRueckgaengig->setShortcut(QKeySequence::Undo);
     m_aktWiederholen = new QAction(Stil::icon(Stil::Symbol::Wiederholen, f), tr("&Wiederholen"), this);
     m_aktWiederholen->setShortcuts({QKeySequence(Qt::CTRL | Qt::Key_Y), QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_Z)});
-    connect(m_aktRueckgaengig, &QAction::triggered, m_undo, &QUndoStack::undo);
-    connect(m_aktWiederholen, &QAction::triggered, m_undo, &QUndoStack::redo);
+    connect(m_aktRueckgaengig, &QAction::triggered, this, [this] {
+        m_undoQuelle = UndoQuelle::Rueckgaengig;
+        m_undo->undo();
+        m_undoQuelle = UndoQuelle::Keine;
+    });
+    connect(m_aktWiederholen, &QAction::triggered, this, [this] {
+        m_undoQuelle = UndoQuelle::Wiederholen;
+        m_undo->redo();
+        m_undoQuelle = UndoQuelle::Keine;
+    });
     auto beschrifte = [this] {
         const QString u = m_undo->undoText(), w = m_undo->redoText();
         m_aktRueckgaengig->setEnabled(m_undo->canUndo());
@@ -1707,7 +1899,7 @@ void MainWindow::baueMenues()
     m_anlagenTabelle->addAction(m_aktDetails);
     // Tastenkürzel gelten im ganzen Fenster, auch wenn die Seite mit dem
     // passenden Knopf gerade nicht sichtbar ist
-    addActions({m_aktRueckgaengig, m_aktWiederholen, m_aktBearbeiten});
+    addActions({m_aktRueckgaengig, m_aktWiederholen, m_aktBearbeiten, m_aktFavorit});
 
     auto* sucheKurz = new QShortcut(QKeySequence::Find, m_tabs);
     connect(sucheKurz, &QShortcut::activated, this, [this] {
@@ -1793,6 +1985,15 @@ void MainWindow::anlagenKontextmenue(const QPoint& pos)
     menue.addAction(m_aktStoerung);
     menue.addAction(m_aktPdfAnlage);
     menue.addSeparator();
+    const bool favorit = Favoriten::instanz()->ist(id);
+    QAction* fav = menue.addAction(favorit ? tr("Aus den Favoriten entfernen") : tr("Zu den Favoriten hinzufügen"), this,
+                                   [this, id] { favoritUmschalten(id); });
+    fav->setIcon(favorit ? Stil::icon(Stil::Symbol::Stern, Stil::text())
+                         : Stil::icon(Stil::Symbol::SternVoll, QColor(234, 179, 8)));
+    fav->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_D));
+    menue.addAction(Stil::icon(Stil::Symbol::Vergleich, Stil::text()), tr("Vergleichen mit …"), this,
+                    [this, id] { oeffneVergleich(id); });
+    menue.addSeparator();
     menue.addAction(tr("Störungen dieser Anlage anzeigen"), this, [this, id] {
         m_stoerAnlage->setText(id);
         m_stoerStatus->setCurrentIndex(0);
@@ -1873,8 +2074,8 @@ void MainWindow::bearbeiteAnlage(const QString& anlageId, QWidget* parent)
         return;
     }
     // Ausführen über den Undo-Stack (ruft redo() sofort auf)
-    m_undo->push(new AnlageAendern(m_kontext.daten, *vorher, dlg.anlage(),
-                                   [this](const QString& id) { nachAnlagenAenderung(id); }));
+    fuehreAus(new AnlageAendern(m_kontext.daten, *vorher, dlg.anlage(),
+                                [this](const QString& id) { nachAnlagenAenderung(id); }));
 }
 
 void MainWindow::nachAnlagenAenderung(const QString& anlageId)
@@ -1900,10 +2101,7 @@ void MainWindow::erfasseStoerung(const QString& anlageId, QWidget* parent)
         return;
     auto* befehl = new StoerungErfassen(m_kontext.daten, dlg.stoerung(),
                                         [this](const QString& id) { nachStoerungsAenderung(id); });
-    m_undo->push(befehl);
-    meldung(tr("Störung %1 für Anlage %2 erfasst (Strg+Z macht es rückgängig).")
-                                 .arg(befehl->stoerungId(), anlageId),
-                             6000);
+    fuehreAus(befehl);
 }
 
 void MainWindow::oeffneStoerung(const QString& stoerungId, QWidget* parent)
@@ -1920,8 +2118,8 @@ void MainWindow::oeffneStoerung(const QString& stoerungId, QWidget* parent)
         QMessageBox::warning(this, tr("Speichern fehlgeschlagen"), tr("Störung %1 ist unbekannt.").arg(stoerungId));
         return;
     }
-    m_undo->push(new StoerungAendern(m_kontext.daten, *vorher, dlg.stoerung(),
-                                     [this](const QString& id) { nachStoerungsAenderung(id); }));
+    fuehreAus(new StoerungAendern(m_kontext.daten, *vorher, dlg.stoerung(),
+                                  [this](const QString& id) { nachStoerungsAenderung(id); }));
 }
 
 void MainWindow::setzeStoerungsStatus(const QString& stoerungId, const QString& status)
@@ -1932,8 +2130,8 @@ void MainWindow::setzeStoerungsStatus(const QString& stoerungId, const QString& 
     Stoerung neu = *alt;
     neu.status = status;
     neu.behobenAm = (status == QLatin1String("behoben")) ? Zeit::jetzt() : QDateTime();
-    m_undo->push(new StoerungAendern(m_kontext.daten, *alt, neu,
-                                     [this](const QString& id) { nachStoerungsAenderung(id); }));
+    fuehreAus(new StoerungAendern(m_kontext.daten, *alt, neu,
+                                  [this](const QString& id) { nachStoerungsAenderung(id); }));
 }
 
 void MainWindow::speichereAnlagen()

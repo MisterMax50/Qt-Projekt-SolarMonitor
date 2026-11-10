@@ -2,6 +2,8 @@
 
 #include <QPointF>
 #include <QVector>
+#include <QDate>
+#include <QPointF>
 #include <QWidget>
 
 #include "ui/app_kontext.h"
@@ -9,6 +11,8 @@
 class QComboBox;
 class QCheckBox;
 class QLabel;
+class QDateEdit;
+class QSlider;
 class KartenFlaeche;
 class KachelLader;
 
@@ -58,4 +62,16 @@ private:
     QComboBox*     m_faerbung = nullptr;
     QCheckBox*     m_stationen = nullptr;
     QLabel*        m_info = nullptr;
+
+    // Sonnenstand
+    void aktualisiereSonne();
+    QCheckBox*     m_sonneAn = nullptr;
+    QDateEdit*     m_sonneDatum = nullptr;
+    QSlider*       m_sonneUhr = nullptr;
+    QLabel*        m_sonneZeit = nullptr;
+    QLabel*        m_sonneTag = nullptr;
+    QPointF        m_sonneOrt;            ///< (lat, lon) Mitte der Flotte
+    bool           m_sonneMitlaufen = true; ///< folgt der aktuellen Uhrzeit
+    QDate          m_sonneTagFuer;
+    QString        m_sonneTagText;
 };

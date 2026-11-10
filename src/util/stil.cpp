@@ -234,6 +234,20 @@ QMenu::item:disabled { color: %GED%; }
 QMenu::separator { height: 1px; background: %LINIE%; margin: 5px 4px; }
 QMenu::icon { padding-left: 8px; }
 QToolTip { background: %SEITE%; color: #ffffff; border: none; padding: 5px 8px; }
+QToolButton#FavoritChip { background: %FLAECHE%; color: %TEXT%; border: 1px solid %LINIE%; border-radius: 8px;
+    padding: 6px 14px 6px 10px; text-align: left; }
+QToolButton#FavoritChip:hover { border-color: %AKZ%; background: %AKZFL%; }
+QToolButton#FavoritKnopf { border: none; background: transparent; padding: 2px; }
+QToolButton#FavoritKnopf:hover { background: %HOVER%; border-radius: 6px; }
+QFrame#TourBlase { background: %FLAECHE%; border: 1px solid %LINIE%; border-radius: 12px; }
+QLabel#TourZaehler { color: %AKZ%; font-size: 8.5pt; font-weight: 700; background: transparent; }
+QLabel#TourTitel { color: %TEXT%; font-size: 13pt; font-weight: 800; background: transparent; }
+QLabel#TourText { color: %TEXT%; background: transparent; }
+QPushButton#TourUeberspringen { background: transparent; border: none; color: %GED%; padding: 6px 4px; }
+QPushButton#TourUeberspringen:hover { color: %TEXT%; text-decoration: underline; }
+QPushButton#TourWeiter { background: %AKZ%; color: #ffffff; border: none; border-radius: 6px; padding: 7px 16px;
+    font-weight: 700; }
+QPushButton#TourWeiter:hover { background: %AKZH%; }
 QFrame#Werbung { background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #fff7d6, stop:0.55 #ffe08a, stop:1 #ffb347);
     border: 2px solid #e11d48; border-radius: 8px; }
 QLabel#WerbungHinweis { color: #7c2d12; font-size: 7.5pt; font-weight: 700; border: 1px solid #7c2d12;
@@ -585,6 +599,47 @@ QIcon Stil::icon(Symbol symbol, const QColor& farbeWunsch)
             p.drawLine(QPointF(10, 13), QPointF(10, 20.5));
             p.drawLine(QPointF(14, 13), QPointF(14, 19));
             p.drawLine(QPointF(4.5, 14), QPointF(4.5, 17));
+            break;
+        case Symbol::Stern:
+        case Symbol::SternVoll: {
+            // fünfzackiger Stern; gefüllt für "ist Favorit"
+            QPolygonF stern;
+            for (int i = 0; i < 10; ++i) {
+                const double r = (i % 2 == 0) ? 9.5 : 4.2;
+                const double w = (-90.0 + i * 36.0) * 3.14159265358979 / 180.0;
+                stern << QPointF(12 + r * std::cos(w), 12.6 + r * std::sin(w));
+            }
+            if (symbol == Symbol::SternVoll) {
+                p.setPen(QPen(farbe, 1.4, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+                p.setBrush(farbe);
+            }
+            p.drawPolygon(stern);
+            break;
+        }
+        case Symbol::Vergleich:
+            // zwei Balkenpaare nebeneinander
+            p.drawLine(QPointF(3, 21), QPointF(21, 21));
+            p.drawRect(QRectF(4.5, 9, 3.5, 12));
+            p.drawRect(QRectF(9, 13, 3.5, 8));
+            p.drawRect(QRectF(13.5, 5, 3.5, 16));
+            p.drawRect(QRectF(18, 11, 2.5, 10));
+            break;
+        case Symbol::Blatt: {
+            // Blatt mit Mittelrippe
+            QPainterPath blatt;
+            blatt.moveTo(5, 19);
+            blatt.cubicTo(4, 9, 11, 4, 20, 4);
+            blatt.cubicTo(20, 13, 15, 20, 5, 19);
+            p.drawPath(blatt);
+            p.drawLine(QPointF(5, 19), QPointF(14, 10));
+            break;
+        }
+        case Symbol::Kompass:
+            p.drawEllipse(QPointF(12, 12), 9, 9);
+            p.drawLine(QPointF(12, 6), QPointF(14.5, 12));
+            p.drawLine(QPointF(14.5, 12), QPointF(12, 18));
+            p.drawLine(QPointF(12, 18), QPointF(9.5, 12));
+            p.drawLine(QPointF(9.5, 12), QPointF(12, 6));
             break;
         case Symbol::Schloss:
             // Vorhängeschloss: Bügel + Körper mit Schlüsselloch

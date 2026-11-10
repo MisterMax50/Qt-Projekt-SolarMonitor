@@ -12,15 +12,18 @@
 #include <QHBoxLayout>
 #include <QHeaderView>
 #include <QLabel>
+#include <QPainter>
 #include <QScrollArea>
 #include <QSet>
 #include <QStyledItemDelegate>
 #include <QTimer>
+#include <QToolButton>
 #include <QTreeWidget>
 #include <QVBoxLayout>
 
 #include "eval/flotten_analyse.h"
 #include "model/datenbasis.h"
+#include "model/favoriten.h"
 #include "ui/karte_view.h"
 #include "ui/anordnungs_raster.h"
 #include "ui/kennzahl_kachel.h"
@@ -39,6 +42,13 @@ const QColor kOrange(217, 119, 6);
 const QColor kBlau(37, 99, 235);
 const QColor kViolett(124, 58, 237);
 constexpr int kIdRolle = Qt::UserRole + 10;
+constexpr int kMaxFavoriten = 6; ///< so viele Favoriten passen nebeneinander
+
+// CO₂-Kachel: Netto-Vermeidungsfaktor der Photovoltaik laut Umweltbundesamt
+// (690 g CO₂-Äquivalente je kWh) und die übliche Faustzahl, dass eine Buche
+// etwa 12,5 kg CO₂ pro Jahr bindet (Wald-Zentrum der Universität Münster).
+constexpr double kCo2KgProKwh = 0.690;
+constexpr double kCo2KgProBucheUndJahr = 12.5;
 
 QString zielName(DashboardWidget::Ziel z)
 {
@@ -114,13 +124,16 @@ DashboardWidget::DashboardWidget(const AppKontext& kontext, const QList<QAction*
     m_pr = kachel(Stil::Symbol::Statistik, kBlau, tr("Performance Ratio (Median)"), Ziel::Statistik);
     m_verlust = kachel(Stil::Symbol::Euro, kOrange, tr("Geschätzter Ertragsverlust"), Ziel::Serviceplanung);
     m_daten = kachel(Stil::Symbol::Pruefung, kViolett, tr("Datenqualität"), Ziel::Datenpruefung);
+    m_co2 = kachel(Stil::Symbol::Blatt, kGruen, tr("CO₂ vermieden"), Ziel::Statistik);
     // Kacheln und Karten lassen sich per Ziehen auf feste Plätze verschieben
     m_kachelRaster = new AnordnungsRaster(QStringLiteral("uebersicht/kacheln"));
+    m_kachelRaster->setObjectName(QStringLiteral("UebersichtKacheln"));
     const QList<QPair<QString, KennzahlKachel*>> kachelListe{{QStringLiteral("betrieb"), m_betrieb},
                                                              {QStringLiteral("stoerungen"), m_stoerungen},
                                                              {QStringLiteral("pr"), m_pr},
                                                              {QStringLiteral("verlust"), m_verlust},
-                                                             {QStringLiteral("daten"), m_daten}};
+                                                             {QStringLiteral("daten"), m_daten},
+                                                             {QStringLiteral("co2"), m_co2}};
     for (int i = 0; i < kachelListe.size(); ++i) {
         m_kachelRaster->neuerPlatz(0, i);
         m_kachelRaster->raster()->setColumnStretch(i, 1);
@@ -129,6 +142,19 @@ DashboardWidget::DashboardWidget(const AppKontext& kontext, const QList<QAction*
     }
     m_kachelRaster->ladeAnordnung();
     v->addWidget(m_kachelRaster);
+    m_co2->setToolTip(tr("Vermiedene Treibhausgase durch den Solarstrom der Flotte im Auswertungszeitraum.\n"
+                         "Grundlage: Netto-Vermeidungsfaktor Photovoltaik 690 g CO₂-Äquivalente je kWh "
+                         "(Umweltbundesamt);\neine Buche bindet etwa 12,5 kg CO₂ im Jahr.\n"
+                         "Klick öffnet die Statistik · Ziehen verschiebt die Kachel"));
+
+    // ---------- Favoriten des Benutzers ----------
+    m_favoritenInhalt = new QWidget;
+    auto* favoriten = neueGruppe(tr("Favoriten"), m_favoritenInhalt, tr("Alle Favoriten in der Anlagenliste"),
+                                 Ziel::Favoriten);
+    favoriten->setObjectName(QStringLiteral("FavoritenGruppe"));
+    favoriten->setToolTip(QString());
+    v->addWidget(favoriten);
+    connect(Favoriten::instanz(), &Favoriten::geaendert, this, &DashboardWidget::aktualisiereFavoriten);
 
     // ---------- Karte und Alarmliste nebeneinander ----------
     auto* karte = new KarteView(m_kontext, nullptr, KarteView::Modus::Kompakt);
@@ -325,6 +351,7 @@ void DashboardWidget::aktualisiere()
 {
     const Datenbasis& d = *m_kontext.daten;
     const FlottenAnalyse& fa = *m_kontext.analyse;
+    aktualisiereFavoriten();
 
     // ---------- Anlagen ----------
     int inBetrieb = 0, gestoert = 0, wartung = 0;
@@ -377,7 +404,7 @@ void DashboardWidget::aktualisiere()
     m_fehlerbilder->clear();
     if (!fa.istFertig()) {
         const QString laeuft = tr("Flottenanalyse läuft …");
-        for (KennzahlKachel* k : {m_pr, m_verlust})
+        for (KennzahlKachel* k : {m_pr, m_verlust, m_co2})
             k->setzeWert(QStringLiteral("…"), laeuft);
         leer(m_verluste, laeuft);
         leer(m_fehlerbilder, laeuft);
@@ -386,7 +413,7 @@ void DashboardWidget::aktualisiere()
     }
 
     int ausgewertet = 0;
-    double verlustEuro = 0.0, verlustKwh = 0.0;
+    double verlustEuro = 0.0, verlustKwh = 0.0, energieKwh = 0.0;
     QVector<const Kennzahl*> verluste;
     std::map<Anomalie::Typ, int> bilder;
     for (const Kennzahl& k : fa.kennzahlen()) {
@@ -395,6 +422,7 @@ void DashboardWidget::aktualisiere()
         ++ausgewertet;
         verlustEuro += k.verlustEuro;
         verlustKwh += k.verlustKwh;
+        energieKwh += k.auswertung.energieKwh;
         if (k.verlustEuro > 0.005)
             verluste.append(&k);
         QSet<int> gezaehlt;
@@ -408,6 +436,11 @@ void DashboardWidget::aktualisiere()
     m_pr->setzeWert(Anzeige::pr(fa.medianPrFlotte()),
                     tr("%1 von %2 Anlagen ausgewertet").arg(ausgewertet).arg(d.anlagen().size()));
     m_verlust->setzeWert(Anzeige::euro(verlustEuro), tr("%1 in 14 Tagen").arg(Anzeige::kwh(verlustKwh)));
+    const double co2Kg = energieKwh * kCo2KgProKwh;
+    const QString co2Text = co2Kg >= 1000.0 ? tr("%1 t").arg(Anzeige::zahl(co2Kg / 1000.0, 1))
+                                            : tr("%1 kg").arg(Anzeige::zahl(co2Kg, 0));
+    m_co2->setzeWert(co2Text, tr("in 14 Tagen · ≈ %1 Buchen in einem Jahr")
+                                  .arg(Anzeige::zahl(co2Kg / kCo2KgProBucheUndJahr, 0)));
 
     std::sort(verluste.begin(), verluste.end(),
               [](const Kennzahl* x, const Kennzahl* y) { return x->verlustEuro > y->verlustEuro; });
@@ -445,4 +478,65 @@ void DashboardWidget::aktualisiere()
 
     for (QTreeWidget* t : {m_dringend, m_verluste, m_fehlerbilder})
         passeSpaltenAn(t);
+}
+
+void DashboardWidget::aktualisiereFavoriten()
+{
+    if (!m_favoritenInhalt)
+        return;
+    // Inhalt neu aufbauen (höchstens kMaxFavoriten Knöpfe, Rest als "+N")
+    delete m_favoritenInhalt->layout();
+    qDeleteAll(m_favoritenInhalt->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly));
+    auto* h = new QHBoxLayout(m_favoritenInhalt);
+    h->setContentsMargins(12, 10, 12, 2);
+    h->setSpacing(10);
+
+    const Datenbasis& d = *m_kontext.daten;
+    QStringList ids;
+    for (const QString& id : Favoriten::instanz()->liste())
+        if (d.anlage(id))
+            ids.append(id);
+    if (ids.isEmpty()) {
+        auto* hinweis = new QLabel(tr("Noch keine Favoriten. Wichtige Anlagen in der Anlagenliste mit Strg+D, per "
+                                      "Rechtsklick oder über den Stern im Detailbereich anpinnen."),
+                                   m_favoritenInhalt);
+        hinweis->setObjectName(QStringLiteral("Gedimmt"));
+        hinweis->setWordWrap(true);
+        h->addWidget(hinweis, 1);
+        return;
+    }
+    for (int i = 0; i < qMin<qsizetype>(kMaxFavoriten, ids.size()); ++i) {
+        const Anlage* a = d.anlage(ids.at(i));
+        const int offen = d.offeneStoerungen(a->anlageId);
+        const int kritisch = d.offeneKritischeStoerungen(a->anlageId);
+        auto* k = new QToolButton(m_favoritenInhalt);
+        k->setObjectName(QStringLiteral("FavoritChip"));
+        k->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+        k->setCursor(Qt::PointingHandCursor);
+        // Farbe: kritisch rot, offen orange, sonst Status
+        const QColor farbe = kritisch > 0 ? kRot : offen > 0 ? kOrange : Anzeige::statusFarbe(a->status);
+        QPixmap punkt(14, 14);
+        punkt.fill(Qt::transparent);
+        {
+            QPainter p(&punkt);
+            p.setRenderHint(QPainter::Antialiasing, true);
+            p.setPen(Qt::NoPen);
+            p.setBrush(farbe);
+            p.drawEllipse(QRectF(2, 2, 10, 10));
+        }
+        k->setIcon(QIcon(punkt));
+        const QString zweite = offen > 0 ? tr("%n offene Störung(en)", nullptr, offen) : Anzeige::statusName(a->status);
+        k->setText(QStringLiteral("%1 · %2\n%3").arg(a->anlageId, a->ort, zweite));
+        k->setToolTip(tr("%1 in %2 · %3 kWp · Klick öffnet die Anlage")
+                          .arg(a->anlageId, a->ort, Anzeige::zahl(a->leistungKwp, 1)));
+        k->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        connect(k, &QToolButton::clicked, this, [this, id = a->anlageId] { emit anlageOeffnen(id); });
+        h->addWidget(k);
+    }
+    if (ids.size() > kMaxFavoriten) {
+        auto* mehr = new QLabel(tr("+%1 weitere").arg(ids.size() - kMaxFavoriten), m_favoritenInhalt);
+        mehr->setObjectName(QStringLiteral("Gedimmt"));
+        h->addWidget(mehr);
+    }
+    h->addStretch(1);
 }
