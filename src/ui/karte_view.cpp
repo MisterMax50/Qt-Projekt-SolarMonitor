@@ -12,6 +12,7 @@
 #include <QPainter>
 #include <QPainterPath>
 #include <QPushButton>
+#include <QTimer>
 #include <QToolTip>
 #include <QVBoxLayout>
 #include <QWheelEvent>
@@ -157,6 +158,13 @@ public:
     {
         connect(m_lader, &KachelLader::kachelGeladen, this, [this] { update(); });
         connect(m_lader, &KachelLader::statusGeaendert, this, [this] { update(); });
+        // Nach dem Zoomen/Verschieben kurz warten, dann in voller Qualität zeichnen
+        m_ruhe.setSingleShot(true);
+        m_ruhe.setInterval(180);
+        connect(&m_ruhe, &QTimer::timeout, this, [this] {
+            m_interaktiv = false;
+            update();
+        });
         setMouseTracking(true);
         setMinimumSize(320, 240);
         setCursor(Qt::OpenHandCursor);
@@ -205,7 +213,7 @@ protected:
         const QPointF maus = e->position();
         m_pan = maus - mitte - (maus - mitte - m_pan) * (neu / m_zoom);
         m_zoom = neu;
-        update();
+        bewegt();
     }
     void mousePressEvent(QMouseEvent* e) override
     {
@@ -221,7 +229,7 @@ protected:
                 m_zieht = true;
             m_pan += e->position() - m_letztePos;
             m_letztePos = e->position();
-            update();
+            bewegt();
             return;
         }
         const Punkt* p = punktBei(e->position());
@@ -282,6 +290,15 @@ private:
     QPointF projiziere(double lat, double lon) const { return weltZuBild(mercator(lat, lon)); }
 
     void zeichneKacheln(QPainter& p);
+    /// Während Zoomen/Verschieben schnell zeichnen, danach in voller Qualität.
+    void bewegt()
+    {
+        m_interaktiv = true;
+        m_ruhe.start();
+        update();
+    }
+    /// Anlagenpunkt als vorbereitetes Bild (statt jedes Mal neu mit Kantenglättung zu zeichnen).
+    const QPixmap& punktBild(const QColor& farbe, double r);
     void zeichneGitter(QPainter& p, const QFont& klein);
 
     double radius(double kwp) const
@@ -337,10 +354,14 @@ private:
     /// Kacheln, die bereits auf die exakte Zielgröße in Gerätepixeln
     /// herunterskaliert wurden (Schlüssel: Bild + Größe)
     QHash<QString, QPixmap> m_scharf;
-    QPixmap scharf(const QPixmap& quelle, const QRectF& ausschnitt, const QSize& ziel, qreal dpr);
+    QPixmap scharf(const QPixmap& quelle, const QRectF& ausschnitt, const QSize& ziel, qreal dpr, bool nurGespeichert);
+    QHash<quint64, QPixmap> m_punktBilder;
+    QTimer m_ruhe;
+    bool   m_interaktiv = false;
 };
 
-QPixmap KartenFlaeche::scharf(const QPixmap& quelle, const QRectF& ausschnitt, const QSize& ziel, qreal dpr)
+QPixmap KartenFlaeche::scharf(const QPixmap& quelle, const QRectF& ausschnitt, const QSize& ziel, qreal dpr,
+                              bool nurGespeichert)
 {
     // Hochwertig verkleinern (statt beim Zeichnen nur bilinear zu
     // interpolieren) und das Ergebnis merken: beim Verschieben der Karte
@@ -352,11 +373,13 @@ QPixmap KartenFlaeche::scharf(const QPixmap& quelle, const QRectF& ausschnitt, c
     auto it = m_scharf.constFind(schluessel);
     if (it != m_scharf.constEnd())
         return it.value();
+    if (nurGespeichert)
+        return QPixmap(); // während des Zoomens nicht neu rechnen
     if (m_scharf.size() > 300)
         m_scharf.clear(); // nach vielen Zoomstufen Speicher freigeben
     QPixmap teil = ausschnitt == QRectF(quelle.rect()) ? quelle : quelle.copy(ausschnitt.toRect());
+    Q_UNUSED(dpr)
     QPixmap pm = teil.scaled(ziel, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-    pm.setDevicePixelRatio(dpr);
     m_scharf.insert(schluessel, pm);
     return pm;
 }
@@ -377,45 +400,90 @@ void KartenFlaeche::zeichneKacheln(QPainter& p)
     const int x0 = qMax(0, int(std::floor(w0.x() * n))), x1 = qMin(n - 1, int(std::floor(w1.x() * n)));
     const int y0 = qMax(0, int(std::floor(w0.y() * n))), y1 = qMin(n - 1, int(std::floor(w1.y() * n)));
 
-    // Kachelränder auf ganze Gerätepixel legen: Kacheln stoßen lückenlos
-    // aneinander und werden ohne weiteres Umrechnen 1:1 gezeichnet.
-    auto geraet = [&](double wx, double wy) {
-        const QPointF b = weltZuBild(QPointF(wx, wy));
-        return QPoint(int(std::lround(b.x() * dpr)), int(std::lround(b.y() * dpr)));
-    };
+    // Alle Kacheln einer Stufe bekommen exakt dieselbe Größe in ganzen
+    // Gerätepixeln und liegen lückenlos auf einem Raster. So bleibt die
+    // verkleinerte Kachel beim Verschieben im Zwischenspeicher gültig.
+    const QPointF ursprung = weltZuBild(QPointF(double(x0) / n, double(y0) / n)) * dpr;
+    const QPointF ende = weltZuBild(QPointF(double(x0 + 1) / n, double(y0 + 1) / n)) * dpr;
+    const int seite = qMax(1, int(std::lround(ende.x() - ursprung.x())));
+    const QPoint basis(int(std::lround(ursprung.x())), int(std::lround(ursprung.y())));
+    auto geraet = [&](int tx, int ty) { return basis + QPoint((tx - x0) * seite, (ty - y0) * seite); };
+
+    // Kacheln von der Mitte nach außen anfordern: was man ansieht, kommt zuerst
+    QVector<QPoint> reihenfolge;
+    for (int ty = y0; ty <= y1; ++ty)
+        for (int tx = x0; tx <= x1; ++tx)
+            reihenfolge.append(QPoint(tx, ty));
+    const QPointF mitteWelt = bildZuWelt(QPointF(width() / 2.0, height() / 2.0)) * n;
+    std::sort(reihenfolge.begin(), reihenfolge.end(), [&](const QPoint& a, const QPoint& b) {
+        const QPointF da = QPointF(a) + QPointF(0.5, 0.5) - mitteWelt, db = QPointF(b) + QPointF(0.5, 0.5) - mitteWelt;
+        return da.x() * da.x() + da.y() * da.y() < db.x() * db.x() + db.y() * db.y();
+    });
 
     m_lader->neueAnforderungsrunde();
     p.save();
-    p.setOpacity(0.8); // etwas aufgehellt, damit die Anlagenpunkte gut lesbar bleiben
-    for (int ty = y0; ty <= y1; ++ty) {
-        for (int tx = x0; tx <= x1; ++tx) {
-            const QPoint a = geraet(double(tx) / n, double(ty) / n);
-            const QPoint e = geraet(double(tx + 1) / n, double(ty + 1) / n);
-            const QSize groesse(e.x() - a.x(), e.y() - a.y());
-            if (groesse.width() <= 0 || groesse.height() <= 0)
+    // beim Zoomen einfache (schnelle) Skalierung, in Ruhe die scharfe Version
+    p.setRenderHint(QPainter::SmoothPixmapTransform, !m_interaktiv);
+    auto zeichne = [&](const QPixmap& pm, const QRectF& quelle, const QPoint& geraetPos, const QSize& groesse) {
+        // Ruhe: exakt verkleinerte, gespeicherte Kachel, 1:1 in Gerätepixeln
+        // gezeichnet (reines Kopieren, sehr schnell und scharf).
+        // Beim Zoomen: vorhandene Version oder einfach skaliert (schnell).
+        const QPixmap fertig = scharf(pm, quelle, groesse, dpr, m_interaktiv);
+        if (!fertig.isNull()) {
+            p.save();
+            p.scale(1.0 / dpr, 1.0 / dpr); // zusammen mit der Bildschirmskalierung: 1:1
+            p.drawPixmap(geraetPos, fertig);
+            p.restore();
+        } else {
+            p.drawPixmap(QRectF(QPointF(geraetPos) / dpr, QSizeF(groesse) / dpr), pm, quelle);
+        }
+    };
+    for (const QPoint& t : std::as_const(reihenfolge)) {
+        const int tx = t.x(), ty = t.y();
+        const QPoint a = geraet(tx, ty);
+        const QSize groesse(seite, seite);
+        const QPixmap pm = m_lader->kachel(z, tx, ty);
+        if (!pm.isNull()) {
+            zeichne(pm, QRectF(pm.rect()), a, groesse);
+            continue;
+        }
+        // Ersatz, bis die Kachel geladen ist: vergrößerter Ausschnitt
+        // einer gröberen, bereits gespeicherten Kachel
+        for (int d = 1; d <= 4 && z - d >= 0; ++d) {
+            const QPixmap grob = m_lader->kachelOhneDownload(z - d, tx >> d, ty >> d);
+            if (grob.isNull())
                 continue;
-            const QPointF ziel(a.x() / dpr, a.y() / dpr);
-
-            const QPixmap pm = m_lader->kachel(z, tx, ty);
-            if (!pm.isNull()) {
-                p.drawPixmap(ziel, scharf(pm, QRectF(pm.rect()), groesse, dpr));
-                continue;
-            }
-            // Ersatz, bis die Kachel geladen ist: vergrößerter Ausschnitt
-            // einer gröberen, bereits gespeicherten Kachel
-            for (int d = 1; d <= 4 && z - d >= 0; ++d) {
-                const QPixmap grob = m_lader->kachelOhneDownload(z - d, tx >> d, ty >> d);
-                if (grob.isNull())
-                    continue;
-                const int teile = 1 << d;
-                const double gr = 256.0 / teile;
-                const QRectF quelle((tx % teile) * gr, (ty % teile) * gr, gr, gr);
-                p.drawPixmap(ziel, scharf(grob, quelle, groesse, dpr));
-                break;
-            }
+            const int teile = 1 << d;
+            const double gr = 256.0 / teile;
+            zeichne(grob, QRectF((tx % teile) * gr, (ty % teile) * gr, gr, gr), a, groesse);
+            break;
         }
     }
+    // leicht aufhellen, damit die Anlagenpunkte gut lesbar bleiben
+    // (eine Fläche darüber ist schneller als jede Kachel halbtransparent zu zeichnen)
+    p.fillRect(rect(), QColor(242, 239, 233, 51));
     p.restore();
+}
+
+const QPixmap& KartenFlaeche::punktBild(const QColor& farbe, double r)
+{
+    const qreal dpr = devicePixelRatioF();
+    const int r10 = int(std::lround(r * 10));
+    const quint64 schluessel = (quint64(farbe.rgba()) << 24) | (quint64(r10) << 8) | quint64(std::lround(dpr * 4));
+    auto it = m_punktBilder.find(schluessel);
+    if (it != m_punktBilder.end())
+        return it.value();
+    const int g = int(std::ceil(r * 2 + 3));
+    QPixmap pm(QSize(g, g) * dpr);
+    pm.setDevicePixelRatio(dpr);
+    pm.fill(Qt::transparent);
+    QPainter q(&pm);
+    q.setRenderHint(QPainter::Antialiasing, true);
+    q.setPen(QPen(QColor(255, 255, 255, 220), 0.8));
+    q.setBrush(farbe);
+    q.drawEllipse(QPointF(g / 2.0, g / 2.0), r, r);
+    q.end();
+    return m_punktBilder.insert(schluessel, pm).value();
 }
 
 void KartenFlaeche::zeichneGitter(QPainter& p, const QFont& klein)
@@ -496,10 +564,9 @@ void KartenFlaeche::paintEvent(QPaintEvent*)
         const QPointF pos = projiziere(pt.lat, pt.lon);
         if (!rect().adjusted(-20, -20, 20, 20).contains(pos.toPoint()))
             continue;
-        const double r = radius(pt.kwp);
-        p.setPen(QPen(QColor(255, 255, 255, 220), 0.8));
-        p.setBrush(pt.farbe);
-        p.drawEllipse(pos, r, r);
+        const QPixmap& bild = punktBild(pt.farbe, radius(pt.kwp));
+        const QSizeF b = QSizeF(bild.size()) / bild.devicePixelRatio();
+        p.drawPixmap(QPointF(pos.x() - b.width() / 2, pos.y() - b.height() / 2), bild);
         if (pt.id == m_markiert) {
             markiertPunkt = pos;
             markiertPos = &markiertPunkt;
@@ -649,7 +716,7 @@ KarteView::KarteView(const AppKontext& kontext, QWidget* parent, Modus modus)
     QDir().mkpath(ordner);
     if (!QFileInfo(ordner).isWritable())
         ordner = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + QStringLiteral("/kartenkacheln");
-    m_lader = new KachelLader(ordner, this);
+    m_lader = KachelLader::gemeinsam(ordner);
 
     m_flaeche = new KartenFlaeche(m_lader, this);
     m_flaeche->beiKlick = [this](const QString& id) { emit anlageGewaehlt(id); };

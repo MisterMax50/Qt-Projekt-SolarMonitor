@@ -31,6 +31,10 @@ class KachelLader : public QObject {
 public:
     explicit KachelLader(const QString& kachelOrdner, QObject* parent = nullptr);
 
+    /// Gemeinsamer Lader je Kachelordner: alle Karten (Übersicht, Kartenseite)
+    /// teilen sich Arbeitsspeicher-Cache und Downloads.
+    static KachelLader* gemeinsam(const QString& kachelOrdner);
+
     /// Kachel liefern, falls vorhanden; sonst Download anstoßen und Null-Pixmap.
     QPixmap kachel(int z, int x, int y);
     /// Nur aus Speicher/Festplatte (für Ersatzdarstellung, löst keinen Download aus).
@@ -64,6 +68,7 @@ private:
     QStringList            m_warteschlange;
     QSet<QString>          m_aktiv;
     QSet<QString>          m_fehlgeschlagen;
+    QSet<QString>          m_nichtAufPlatte;   ///< bekannt fehlende Dateien (spart Festplattenzugriffe)
     bool m_onlineErlaubt = true;
     bool m_pausiert = false;
     int  m_fehlerInFolge = 0;

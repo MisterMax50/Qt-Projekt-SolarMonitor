@@ -202,6 +202,20 @@ Ohne Internet und ohne gespeicherte Kacheln erscheint ein Hinweis, die
 Anlagen werden weiter angezeigt; ohne Hintergrund wird ein Gradnetz
 gezeichnet. Kartendaten: © OpenStreetMap-Mitwirkende (ODbL).
 
+Darstellung und Geschwindigkeit:
+- Die Kachelstufe richtet sich nach den echten Bildschirmpixeln (auch bei
+  Windows-Skalierung 125 %/150 %); Kacheln werden höchstens verkleinert,
+  in Ruhe hochwertig auf die exakte Pixelgröße gerechnet und 1:1 gezeichnet.
+- Beim Zoomen und Verschieben wird schnell gezeichnet, ca. 0,2 s nach der
+  letzten Bewegung in voller Qualität.
+- Alle Kacheln einer Stufe haben dieselbe Pixelgröße, dadurch bleiben die
+  aufbereiteten Kacheln beim Verschieben gültig (Zwischenspeicher).
+- Übersicht und Kartenseite teilen sich einen Kachellader (Speicher und
+  Downloads); fehlende Dateien werden gemerkt statt bei jedem Bild erneut
+  auf der Festplatte gesucht; Kacheln werden von der Bildmitte nach außen
+  geladen.
+- Anlagenpunkte werden als vorbereitete kleine Bilder gezeichnet.
+
 ## Tourenplanung mit Autoroute
 
 In der Serviceplanung werden aus allen Einsätzen im gewählten Umkreis um

@@ -1,6 +1,8 @@
 #include "kachel_lader.h"
 
+#include <QCoreApplication>
 #include <QDir>
+#include <QHash>
 #include <QFile>
 #include <QFileInfo>
 #include <QNetworkAccessManager>
@@ -19,7 +21,16 @@ KachelLader::KachelLader(const QString& kachelOrdner, QObject* parent)
     , m_ordner(kachelOrdner)
     , m_netz(new QNetworkAccessManager(this))
 {
-    m_speicher.setMaxCost(200); // Kacheln im Arbeitsspeicher (je ≈ 256 kB dekodiert)
+    m_speicher.setMaxCost(400); // Kacheln im Arbeitsspeicher (je ≈ 256 kB dekodiert)
+}
+
+KachelLader* KachelLader::gemeinsam(const QString& kachelOrdner)
+{
+    static QHash<QString, KachelLader*> lader;
+    KachelLader*& l = lader[kachelOrdner];
+    if (!l)
+        l = new KachelLader(kachelOrdner, QCoreApplication::instance());
+    return l;
 }
 
 QString KachelLader::schluessel(int z, int x, int y)
@@ -37,15 +48,19 @@ QPixmap KachelLader::ausSpeicherOderDatei(int z, int x, int y)
     const QString k = schluessel(z, x, y);
     if (QPixmap* p = m_speicher.object(k))
         return *p;
+    // Fehlende Dateien merken: sonst fragt jedes Neuzeichnen die Festplatte
+    // erneut ab (unter Windows spürbar langsam, die Karte ruckelt)
+    if (m_nichtAufPlatte.contains(k))
+        return QPixmap();
     const QString pfad = dateiPfad(z, x, y);
-    if (QFileInfo::exists(pfad)) {
-        QPixmap pm;
-        if (pm.load(pfad)) {
-            m_speicher.insert(k, new QPixmap(pm));
-            return pm;
-        }
-        QFile::remove(pfad); // beschädigte Datei beim nächsten Mal neu laden
+    QPixmap pm;
+    if (pm.load(pfad, "PNG")) {
+        m_speicher.insert(k, new QPixmap(pm));
+        return pm;
     }
+    if (QFileInfo::exists(pfad))
+        QFile::remove(pfad); // beschädigte Datei beim nächsten Mal neu laden
+    m_nichtAufPlatte.insert(k);
     return QPixmap();
 }
 
@@ -118,6 +133,7 @@ void KachelLader::fertig(QNetworkReply* antwort, const QString& k, int z, int x,
     if (antwort->error() == QNetworkReply::NoError && pm.loadFromData(daten, "PNG")) {
         m_fehlerInFolge = 0;
         ++m_geladen;
+        m_nichtAufPlatte.remove(k);
         m_speicher.insert(k, new QPixmap(pm));
 
         // dauerhaft ablegen (atomar über QSaveFile)
