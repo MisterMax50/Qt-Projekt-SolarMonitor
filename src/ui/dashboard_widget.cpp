@@ -182,6 +182,11 @@ DashboardWidget::DashboardWidget(const AppKontext& kontext, const QList<QAction*
     m_kartenRaster->ladeAnordnung();
     v->addWidget(m_kartenRaster, 1);
 
+    // Ultimate-Anordnungen (Spaß-Abo): ohne Ultimate zurück auf "Standard" –
+    // gleich beim Aufbau (gespeicherte Anordnung) und beim Wechsel der Stufe
+    pruefeAboAnordnung();
+    connect(Abo::instanz(), &Abo::stufeGeaendert, this, &DashboardWidget::pruefeAboAnordnung);
+
     // Bei kleinen Fenstern scrollen statt quetschen
     auto* scroll = new QScrollArea(this);
     scroll->setWidgetResizable(true);
@@ -198,6 +203,14 @@ DashboardWidget::DashboardWidget(const AppKontext& kontext, const QList<QAction*
     connect(m_kontext.daten, &Datenbasis::stoerungenGeaendert, this, &DashboardWidget::spaeterAktualisieren);
     connect(m_kontext.daten, &Datenbasis::meldungenGeaendert, this, &DashboardWidget::spaeterAktualisieren);
     aktualisiere();
+}
+
+void DashboardWidget::pruefeAboAnordnung()
+{
+    const QString aktuell = m_kartenRaster->aktuelleVorlage();
+    if (Abo::erlaubt(Abo::Funktion::Anordnungen) || aktuell.isEmpty() || aktuell == QLatin1String("standard"))
+        return;
+    m_kartenRaster->waehleVorlage(QStringLiteral("standard"));
 }
 
 void DashboardWidget::anordnungZuruecksetzen()

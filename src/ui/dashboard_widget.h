@@ -39,6 +39,8 @@ public:
     /// Seiten, zu denen die Übersicht springen kann.
     enum class Ziel { Anlagen, Stoerungen, Karte, Statistik, Serviceplanung, Datenpruefung };
 
+    /// Ohne Ultimate (Spaß-Abo) eine Ultimate-Anordnung auf "Standard" zurücksetzen.
+    void pruefeAboAnordnung();
     /// Kacheln und Karten wieder auf ihre vorgegebenen Plätze setzen.
     void anordnungZuruecksetzen();
     /// Aktion mit Menü der vordefinierten Anordnungen (für die Aktionszeile der Seite).
