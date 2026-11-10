@@ -18,12 +18,14 @@ KennzahlKachel::KennzahlKachel(Stil::Symbol symbol, const QColor& farbe, const Q
 {
     setObjectName(QStringLiteral("Kachel"));
     setAttribute(Qt::WA_StyledBackground, true);
-    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    // in der Höhe dehnbar: alle Kacheln einer Reihe werden so hoch wie die höchste
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
     m_symbolLabel = new QLabel(this);
     m_symbolLabel->setFixedSize(kKreis, kKreis);
     auto* t = new QLabel(titel, this);
     t->setObjectName(QStringLiteral("KachelTitel"));
+    t->setWordWrap(true); // lange Titel umbrechen statt abschneiden
     m_wert = new QLabel(QStringLiteral("–"), this);
     m_wert->setObjectName(QStringLiteral("KachelWert"));
     m_notiz = new QLabel(this);
@@ -36,7 +38,7 @@ KennzahlKachel::KennzahlKachel(Stil::Symbol symbol, const QColor& farbe, const Q
     texte->addWidget(t);
     texte->addWidget(m_wert);
     texte->addWidget(m_notiz);
-
+    texte->addStretch(1); // Inhalt oben halten, wenn die Kachel höher ist
     auto* h = new QHBoxLayout(this);
     h->setContentsMargins(16, 14, 16, 14);
     h->setSpacing(14);

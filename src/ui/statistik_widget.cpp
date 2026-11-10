@@ -33,10 +33,14 @@ StatistikWidget::StatistikWidget(const AppKontext& kontext, QWidget* parent)
     m_kpiPr         = new KennzahlKachel(Stil::Symbol::Statistik, QColor(13, 148, 136), tr("Median-PR der Flotte"), inhalt);
     m_kpiErtrag     = new KennzahlKachel(Stil::Symbol::Sonne, QColor(22, 163, 74), tr("Ertrag 01.–14.06."), inhalt);
     m_kpiAuffaellig = new KennzahlKachel(Stil::Symbol::Pruefung, QColor(124, 58, 237), tr("Anlagen mit Fehlerbild"), inhalt);
-    auto* kpis = new QHBoxLayout;
+    // Raster mit gleich breiten Spalten: alle Kacheln gleich groß
+    auto* kpis = new QGridLayout;
     kpis->setSpacing(16);
-    for (KennzahlKachel* k : {m_kpiAnlagen, m_kpiLeistung, m_kpiStoerungen, m_kpiPr, m_kpiErtrag, m_kpiAuffaellig})
-        kpis->addWidget(k, 1);
+    int spalte = 0;
+    for (KennzahlKachel* k : {m_kpiAnlagen, m_kpiLeistung, m_kpiStoerungen, m_kpiPr, m_kpiErtrag, m_kpiAuffaellig}) {
+        kpis->addWidget(k, 0, spalte);
+        kpis->setColumnStretch(spalte++, 1);
+    }
     v->addLayout(kpis);
 
     auto gruppe = [&](const QString& titel, QWidget* w) {
