@@ -234,6 +234,20 @@ QMenu::item:disabled { color: %GED%; }
 QMenu::separator { height: 1px; background: %LINIE%; margin: 5px 4px; }
 QMenu::icon { padding-left: 8px; }
 QToolTip { background: %SEITE%; color: #ffffff; border: none; padding: 5px 8px; }
+QFrame#Werbung { background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 %FLAECHE%, stop:1 %AUSW%);
+    border: 1px dashed %LINIESTARK%; border-radius: 8px; }
+QFrame#Werbung:hover { border-color: %AKZ%; }
+QLabel#WerbungHinweis { color: %GED%; font-size: 7.5pt; font-weight: 600; border: 1px solid %LINIESTARK%;
+    border-radius: 3px; padding: 0 4px; }
+QLabel#WerbungTitel { font-size: 11pt; font-weight: 700; }
+QLabel#WerbungText { color: %GED%; }
+QPushButton#WerbungAktion { background: %AKZFL%; color: #ffffff; border: none; border-radius: 16px; padding: 7px 18px;
+    font-weight: 600; }
+QPushButton#WerbungAktion:hover { background: %AKZH%; }
+QToolButton#WerbungSchliessen { color: %GED%; font-size: 13pt; border: none; padding: 0 4px; }
+QToolButton#WerbungSchliessen:hover { color: %TEXT%; background: transparent; }
+QLabel#PremiumChip { color: #3b2a05; font-size: 7.5pt; font-weight: 800; letter-spacing: 1px; border-radius: 10px;
+    padding: 3px 10px; background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #fde68a, stop:0.5 #f59e0b, stop:1 #fbbf24); }
 QLabel#Toast { background: %SEITE%; color: #ffffff; border-radius: 8px; padding: 10px 16px; }
 QLabel#Toast[hinweis="true"] { border-left: 4px solid %AKZ%; padding-left: 14px; }
 QProgressBar { background: %LINIE%; border: none; border-radius: 3px; max-height: 6px; color: transparent; }

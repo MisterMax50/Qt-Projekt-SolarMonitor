@@ -91,6 +91,8 @@ private slots:
     void setzeDesign(bool dunkel);
     void setzeVollbild(bool an);
     void seiteGewechselt(int index);
+    /// Abo-Modus (Spaß-Funktion): Werbung aus- bzw. einblenden und merken.
+    void setzePremium(bool an);
     void angemeldet(const QString& kennung);
 
 private:
@@ -176,6 +178,9 @@ private:
     QLabel*       m_analyseText = nullptr;
     class QToolButton* m_glocke = nullptr;
     class QToolButton* m_benutzerKnopf = nullptr;
+    QWidget*      m_werbungsBereich = nullptr;  ///< Spaß-Werbung (ohne Premium)
+    QLabel*       m_premiumChip = nullptr;
+    QAction*      m_aktPremium = nullptr;
     class Benutzerverwaltung* m_benutzer = nullptr;
     QString       m_angemeldet;   ///< Benutzername des angemeldeten Kontos
     QLabel*       m_toast = nullptr;

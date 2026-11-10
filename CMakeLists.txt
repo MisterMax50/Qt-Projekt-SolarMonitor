@@ -62,6 +62,7 @@ set(PROJEKT_HEADER
     src/ui/datenordner_seite.h
     src/ui/anordnungs_raster.h
     src/ui/benutzer_seite.h
+    src/ui/werbung.h
     src/ui/pdf_bericht.h
     src/ui/pruefprotokoll_widget.h
     src/ui/serviceplanung.h
@@ -106,6 +107,7 @@ set(PROJEKT_QUELLEN
     src/ui/datenordner_seite.cpp
     src/ui/anordnungs_raster.cpp
     src/ui/benutzer_seite.cpp
+    src/ui/werbung.cpp
     src/ui/pdf_bericht.cpp
     src/ui/pruefprotokoll_widget.cpp
     src/ui/serviceplanung.cpp

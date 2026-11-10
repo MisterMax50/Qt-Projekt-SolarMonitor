@@ -59,6 +59,7 @@
 #include "ui/intro_animation.h"
 #include "ui/login_seite.h"
 #include "ui/benutzer_seite.h"
+#include "ui/werbung.h"
 #include "model/benutzer.h"
 #include "util/windows_hello.h"
 #include "ui/datenordner_seite.h"
@@ -327,6 +328,9 @@ void MainWindow::trenneDaten()
     m_anlagenLeer = m_stoerungenLeer = m_anlagenZaehler = m_stoerungsZaehler = nullptr;
     m_glocke = nullptr;
     m_benutzerKnopf = nullptr;
+    m_werbungsBereich = nullptr;
+    m_premiumChip = nullptr;
+    m_aktPremium = nullptr;
     m_navigation = nullptr;
     m_anlageInfo = nullptr;
     m_filterReset = nullptr;
@@ -641,6 +645,18 @@ void MainWindow::baueUi()
     rv->addWidget(baueKopfzeile());
     rv->addWidget(m_tabs, 1);
 
+    // Spaß-Funktion: Werbebanner, solange SolarMonitor Premium aus ist
+    m_werbungsBereich = new QWidget;
+    m_werbungsBereich->setObjectName(QStringLiteral("Inhalt"));
+    m_werbungsBereich->setAttribute(Qt::WA_StyledBackground, true);
+    auto* wv = new QVBoxLayout(m_werbungsBereich);
+    wv->setContentsMargins(24, 0, 24, 16);
+    auto* banner = new WerbeBanner(m_werbungsBereich);
+    connect(banner, &WerbeBanner::premiumGewuenscht, this, [this] { setzePremium(true); });
+    wv->addWidget(banner);
+    rv->addWidget(m_werbungsBereich);
+    m_werbungsBereich->setVisible(!QSettings().value(QStringLiteral("premium"), false).toBool());
+
     auto* zentrum = new QWidget;
     auto* h = new QHBoxLayout(zentrum);
     h->setContentsMargins(0, 0, 0, 0);
@@ -926,6 +942,12 @@ QWidget* MainWindow::baueKopfzeile()
     menue->addAction(Stil::icon(Stil::Symbol::Liste, Stil::text()), tr("Daten&ordner ändern …"), this,
                      [this] { zeigeDatenordner(QString(), true); });
     menue->addSeparator();
+    // Abo-Modus (nur zum Spaß): entfernt die Spaß-Werbung
+    m_aktPremium = menue->addAction(tr("SolarMonitor &Premium (werbefrei)"));
+    m_aktPremium->setCheckable(true);
+    m_aktPremium->setChecked(QSettings().value(QStringLiteral("premium"), false).toBool());
+    m_aktPremium->setToolTip(tr("Abo-Modus: entfernt die (erfundene) Werbung. Kostet 0,00 €."));
+    connect(m_aktPremium, &QAction::toggled, this, &MainWindow::setzePremium);
     QAction* dunkel = menue->addAction(Stil::icon(Stil::Symbol::Mond, Stil::text()), tr("&Dunkles Design"));
     dunkel->setCheckable(true);
     dunkel->setChecked(Stil::istDunkel());
@@ -969,6 +991,12 @@ QWidget* MainWindow::baueKopfzeile()
     h->addWidget(m_suche);
     h->addWidget(m_glocke);
     h->addWidget(trenner);
+    m_premiumChip = new QLabel(tr("PREMIUM"), kopf);
+    m_premiumChip->setObjectName(QStringLiteral("PremiumChip"));
+    m_premiumChip->setToolTip(tr("SolarMonitor Premium ist aktiv – werbefrei"));
+    m_premiumChip->setVisible(QSettings().value(QStringLiteral("premium"), false).toBool());
+    m_premiumChip->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    h->addWidget(m_premiumChip, 0, Qt::AlignVCenter);
     h->addWidget(benutzer);
 
     // Programm schließen (wichtig im Vollbild, wo die Titelleiste fehlt)
@@ -1044,6 +1072,24 @@ void MainWindow::aktualisiereNavigation()
         m_glocke->setToolTip(kritisch > 0 ? tr("%1 kritische Störungen offen – anzeigen").arg(kritisch)
                                           : tr("Keine kritischen Störungen offen"));
     }
+}
+
+void MainWindow::setzePremium(bool an)
+{
+    const bool vorher = QSettings().value(QStringLiteral("premium"), false).toBool();
+    QSettings().setValue(QStringLiteral("premium"), an);
+    if (m_werbungsBereich)
+        m_werbungsBereich->setVisible(!an);
+    if (m_premiumChip)
+        m_premiumChip->setVisible(an);
+    if (m_aktPremium && m_aktPremium->isChecked() != an) {
+        QSignalBlocker sperre(m_aktPremium);
+        m_aktPremium->setChecked(an);
+    }
+    if (an != vorher)
+        meldung(an ? tr("Danke für Ihr Abo! SolarMonitor Premium ist aktiv – werbefrei für sagenhafte 0,00 € im Monat.")
+                   : tr("Premium beendet. Die Werbung ist zurück."),
+                6000);
 }
 
 void MainWindow::meldung(const QString& text, int dauerMs, bool hinweis)

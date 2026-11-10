@@ -2249,78 +2249,78 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="+430"/>
+        <location filename="../src/ui/mainwindow.cpp" line="+434"/>
         <source>SolarMonitor – Monitoring der PV-Flotte</source>
         <translation>SolarMonitor – Monitoring der PV-Flotte</translation>
     </message>
     <message>
         <location line="+152"/>
-        <location line="+214"/>
+        <location line="+226"/>
         <source>Anlagen</source>
         <translation>Anlagen</translation>
     </message>
     <message>
-        <location line="-214"/>
+        <location line="-226"/>
         <source>Alle PV-Anlagen der Flotte · Doppelklick öffnet die Details</source>
         <translation>Alle PV-Anlagen der Flotte · Doppelklick öffnet die Details</translation>
     </message>
     <message>
         <location line="+4"/>
-        <location line="+211"/>
+        <location line="+223"/>
         <source>Störungen</source>
         <translation>Störungen</translation>
     </message>
     <message>
-        <location line="-211"/>
+        <location line="-223"/>
         <source>Störungsmeldungen seit 2024 · Rechtsklick ändert den Status</source>
         <translation>Störungsmeldungen seit 2024 · Rechtsklick ändert den Status</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location line="+206"/>
+        <location line="+218"/>
         <source>Karte</source>
         <translation>Karte</translation>
     </message>
     <message>
-        <location line="-206"/>
+        <location line="-218"/>
         <source>Lage der Anlagen und Wetterstationen · Mausrad zoomt, Klick öffnet eine Anlage</source>
         <translation>Lage der Anlagen und Wetterstationen · Mausrad zoomt, Klick öffnet eine Anlage</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location line="+205"/>
+        <location line="+217"/>
         <source>Statistik</source>
         <translation>Statistik</translation>
     </message>
     <message>
-        <location line="-205"/>
+        <location line="-217"/>
         <source>Kennzahlen und Auswertungen über die gesamte Flotte</source>
         <translation>Kennzahlen und Auswertungen über die gesamte Flotte</translation>
     </message>
     <message>
         <location line="+11"/>
-        <location line="+195"/>
+        <location line="+207"/>
         <source>Serviceplanung</source>
         <translation>Serviceplanung</translation>
     </message>
     <message>
-        <location line="-194"/>
+        <location line="-206"/>
         <source>Welche Anlagen zuerst? Sortiert nach Priorität und geschätztem Ertragsverlust</source>
         <translation>Welche Anlagen zuerst? Sortiert nach Priorität und geschätztem Ertragsverlust</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location line="+190"/>
+        <location line="+202"/>
         <source>Datenprüfung</source>
         <translation>Datenprüfung</translation>
     </message>
     <message>
-        <location line="-189"/>
+        <location line="-201"/>
         <source>Auffälligkeiten beim Einlesen der Dateien und automatische Korrekturen</source>
         <translation>Auffälligkeiten beim Einlesen der Dateien und automatische Korrekturen</translation>
     </message>
     <message>
-        <location line="+148"/>
+        <location line="+160"/>
         <source>PV-Flotte Bodensee</source>
         <translation>PV-Flotte Bodensee</translation>
     </message>
@@ -2330,7 +2330,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Überwachung</translation>
     </message>
     <message>
-        <location line="+135"/>
+        <location line="+141"/>
         <source>&amp;Dunkles Design</source>
         <translation>&amp;Dunkles Design</translation>
     </message>
@@ -2345,7 +2345,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>&amp;Sprache</translation>
     </message>
     <message>
-        <location line="+89"/>
+        <location line="+95"/>
         <source>%1 offene Störungen, davon %2 kritisch</source>
         <translation>%1 offene Störungen, davon %2 kritisch</translation>
     </message>
@@ -2360,7 +2360,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Keine kritischen Störungen offen</translation>
     </message>
     <message>
-        <location line="+54"/>
+        <location line="+72"/>
         <source>Alle Status</source>
         <translation>Alle Status</translation>
     </message>
@@ -2406,18 +2406,18 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Filter zurücksetzen</translation>
     </message>
     <message>
-        <location line="-561"/>
-        <location line="+222"/>
+        <location line="-603"/>
+        <location line="+234"/>
         <source>Übersicht</source>
         <translation>Übersicht</translation>
     </message>
     <message>
-        <location line="+243"/>
+        <location line="+255"/>
         <source>%1 Anlagen mit erkanntem Fehlerbild</source>
         <translation>%1 Anlagen mit erkanntem Fehlerbild</translation>
     </message>
     <message>
-        <location line="+45"/>
+        <location line="+63"/>
         <source>Filter zurücksetzen (%1)</source>
         <translation>Filter zurücksetzen (%1)</translation>
     </message>
@@ -2544,12 +2544,12 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Wiederholen: %1 (Strg+Y)</translation>
     </message>
     <message>
-        <location line="-577"/>
+        <location line="-607"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation>Benutzer &amp;wechseln …</translation>
     </message>
     <message>
-        <location line="+78"/>
+        <location line="+84"/>
         <source>&amp;Beenden</source>
         <translation>&amp;Beenden</translation>
     </message>
@@ -2564,12 +2564,12 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>&amp;Über SolarMonitor</translation>
     </message>
     <message>
-        <location line="+82"/>
+        <location line="+88"/>
         <source>%1 Fehler beim Einlesen</source>
         <translation>%1 Fehler beim Einlesen</translation>
     </message>
     <message>
-        <location line="+53"/>
+        <location line="+71"/>
         <source>Anlagen durchsuchen (Strg+F)</source>
         <translation>Anlagen durchsuchen (Strg+F)</translation>
     </message>
@@ -2615,12 +2615,12 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Anlage:</translation>
     </message>
     <message>
-        <location line="-604"/>
+        <location line="-634"/>
         <source>Exportieren</source>
         <translation>Exportieren</translation>
     </message>
     <message>
-        <location line="+766"/>
+        <location line="+796"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>Nur für die Rolle Administrator.</translation>
     </message>
@@ -2695,7 +2695,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Änderungsverlauf …</translation>
     </message>
     <message>
-        <location line="-1086"/>
+        <location line="-1128"/>
         <source>Daten werden geladen …</source>
         <translation>Daten werden geladen …</translation>
     </message>
@@ -2730,7 +2730,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Konten anlegen, Rollen vergeben, PINs zurücksetzen und Zugänge sperren</translation>
     </message>
     <message>
-        <location line="+169"/>
+        <location line="+181"/>
         <source>Auswertung</source>
         <translation>Auswertung</translation>
     </message>
@@ -2775,7 +2775,17 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Daten&amp;ordner ändern …</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+4"/>
+        <source>SolarMonitor &amp;Premium (werbefrei)</source>
+        <translation>SolarMonitor &amp;Premium (werbefrei)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Abo-Modus: entfernt die (erfundene) Werbung. Kostet 0,00 €.</source>
+        <translation>Abo-Modus: entfernt die (erfundene) Werbung. Kostet 0,00 €.</translation>
+    </message>
+    <message>
+        <location line="+12"/>
         <source>&amp;Intro beim Start</source>
         <translation>&amp;Intro beim Start</translation>
     </message>
@@ -2785,12 +2795,32 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Logo-Animation beim Programmstart zeigen</translation>
     </message>
     <message>
-        <location line="+37"/>
+        <location line="+30"/>
+        <source>PREMIUM</source>
+        <translation>PREMIUM</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>SolarMonitor Premium ist aktiv – werbefrei</source>
+        <translation>SolarMonitor Premium ist aktiv – werbefrei</translation>
+    </message>
+    <message>
+        <location line="+11"/>
         <source>SolarMonitor beenden (Strg+Q)</source>
         <translation>SolarMonitor beenden (Strg+Q)</translation>
     </message>
     <message>
-        <location line="+552"/>
+        <location line="+83"/>
+        <source>Danke für Ihr Abo! SolarMonitor Premium ist aktiv – werbefrei für sagenhafte 0,00 € im Monat.</source>
+        <translation>Danke für Ihr Abo! SolarMonitor Premium ist aktiv – werbefrei für sagenhafte 0,00 € im Monat.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Premium beendet. Die Werbung ist zurück.</source>
+        <translation>Premium beendet. Die Werbung ist zurück.</translation>
+    </message>
+    <message>
+        <location line="+486"/>
         <source>Bitte zuerst eine Anlage in der Liste auswählen.</source>
         <translation>Bitte zuerst eine Anlage in der Liste auswählen.</translation>
     </message>
@@ -2970,12 +3000,12 @@ Jetzt öffnen?</translation>
         <translation>&lt;Ausgangszustand nach dem Laden&gt;</translation>
     </message>
     <message>
-        <location line="-1381"/>
+        <location line="-1423"/>
         <source>Angemeldet als %1.</source>
         <translation>Angemeldet als %1.</translation>
     </message>
     <message>
-        <location line="+1400"/>
+        <location line="+1442"/>
         <source>Über SolarMonitor</source>
         <translation>Über SolarMonitor</translation>
     </message>
@@ -3916,12 +3946,12 @@ Gemessen wird auf dem Landweg um den Bodensee herum, nicht quer über das Wasser
     <name>StatistikWidget</name>
     <message>
         <location filename="../src/ui/statistik_widget.cpp" line="+30"/>
-        <location line="+28"/>
+        <location line="+32"/>
         <source>Anlagen</source>
         <translation>Anlagen</translation>
     </message>
     <message>
-        <location line="-27"/>
+        <location line="-31"/>
         <source>Installierte Leistung</source>
         <translation>Installierte Leistung</translation>
     </message>
@@ -3946,7 +3976,7 @@ Gemessen wird auf dem Landweg um den Bodensee herum, nicht quer über das Wasser
         <translation>Anlagen mit Fehlerbild</translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+20"/>
         <source>Typ</source>
         <translation>Typ</translation>
     </message>
@@ -4392,6 +4422,139 @@ Gemessen wird auf dem Landweg um den Bodensee herum, nicht quer über das Wasser
         <location line="+3"/>
         <source>Zeitstempel sind nicht aufsteigend sortiert.</source>
         <translation>Zeitstempel sind nicht aufsteigend sortiert.</translation>
+    </message>
+</context>
+<context>
+    <name>WerbeBanner</name>
+    <message>
+        <location filename="../src/ui/werbung.cpp" line="+29"/>
+        <source>SonnenPutz 3000</source>
+        <translation>SonnenPutz 3000</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Saubere Module, null Schatten: der Reinigungsroboter, der nebenbei auch Tauben verscheucht.</source>
+        <translation>Saubere Module, null Schatten: der Reinigungsroboter, der nebenbei auch Tauben verscheucht.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Jetzt vorbestellen</source>
+        <translation>Jetzt vorbestellen</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Wolkenschieber Pro</source>
+        <translation>Wolkenschieber Pro</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Nie wieder Ertragsverlust durch Wolken!* (*Funktioniert nicht bei Wetter.)</source>
+        <translation>Nie wieder Ertragsverlust durch Wolken!* (*Funktioniert nicht bei Wetter.)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Gratis testen</source>
+        <translation>Gratis testen</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Kilowattkekse</source>
+        <translation>Kilowattkekse</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Die Energiekekse für lange Wartungstouren. Jetzt mit 30 % mehr Watt pro Biss.</source>
+        <translation>Die Energiekekse für lange Wartungstouren. Jetzt mit 30 % mehr Watt pro Biss.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Zum Keks-Shop</source>
+        <translation>Zum Keks-Shop</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Seeweg-Express</source>
+        <translation>Seeweg-Express</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Mit dem Tretboot quer über den Bodensee zur nächsten Störung – Werkzeugkoffer schwimmt leider nicht.</source>
+        <translation>Mit dem Tretboot quer über den Bodensee zur nächsten Störung – Werkzeugkoffer schwimmt leider nicht.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Ticket sichern</source>
+        <translation>Ticket sichern</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Das PV-Horoskop</source>
+        <translation>Das PV-Horoskop</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Was die Sterne über Ihre Performance Ratio sagen. Heute: Merkur rückläufig, Wechselrichter auch.</source>
+        <translation>Was die Sterne über Ihre Performance Ratio sagen. Heute: Merkur rückläufig, Wechselrichter auch.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Horoskop lesen</source>
+        <translation>Horoskop lesen</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Einspeise-Lotto</source>
+        <translation>Einspeise-Lotto</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Tippen Sie Ihren nächsten Einspeisetarif! Hauptgewinn: 0,47 Cent mehr pro Kilowattstunde.</source>
+        <translation>Tippen Sie Ihren nächsten Einspeisetarif! Hauptgewinn: 0,47 Cent mehr pro Kilowattstunde.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Mitspielen</source>
+        <translation>Mitspielen</translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>Spaß-Werbung – mit SolarMonitor Premium verschwindet sie</source>
+        <translation>Spaß-Werbung – mit SolarMonitor Premium verschwindet sie</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>ANZEIGE</source>
+        <translation>ANZEIGE</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Werbung entfernen</source>
+        <translation>Werbung entfernen</translation>
+    </message>
+    <message>
+        <location line="+44"/>
+        <source>Spaß-Werbung</source>
+        <translation>Spaß-Werbung</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>&lt;b&gt;Erwischt – das ist nur Spaß-Werbung.&lt;/b&gt;</source>
+        <translation>&lt;b&gt;Erwischt – das ist nur Spaß-Werbung.&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Keines dieser Produkte gibt es wirklich. Mit &lt;b&gt;SolarMonitor Premium&lt;/b&gt; verschwindet die Werbung – für sagenhafte 0,00 € im Monat.</source>
+        <translation>Keines dieser Produkte gibt es wirklich. Mit &lt;b&gt;SolarMonitor Premium&lt;/b&gt; verschwindet die Werbung – für sagenhafte 0,00 € im Monat.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Premium aktivieren</source>
+        <translation>Premium aktivieren</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Weiter mit Werbung</source>
+        <translation>Weiter mit Werbung</translation>
     </message>
 </context>
 <context>
