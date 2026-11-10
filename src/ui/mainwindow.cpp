@@ -60,6 +60,7 @@
 #include "ui/login_seite.h"
 #include "ui/benutzer_seite.h"
 #include "model/benutzer.h"
+#include "util/windows_hello.h"
 #include "ui/datenordner_seite.h"
 #include "ui/pdf_bericht.h"
 #include "ui/pruefprotokoll_widget.h"
@@ -884,6 +885,42 @@ QWidget* MainWindow::baueKopfzeile()
         menue->addAction(Stil::icon(Stil::Symbol::Werkzeug, Stil::text()), tr("Benutzer&verwaltung"), this,
                          [this] { m_tabs->setCurrentIndex(ReiterBenutzer); });
     }
+    // Windows Hello für das eigene Konto ein-/ausschalten
+    QAction* hello = menue->addAction(tr("Anmeldung mit Windows &Hello")); // ohne Symbol, damit der Haken sichtbar ist
+    hello->setCheckable(true);
+    auto helloStand = [this, hello] {
+        const Benutzer* b = m_benutzer->finde(m_angemeldet);
+        QSignalBlocker sperre(hello);
+        hello->setChecked(b && !b->helloKonto.isEmpty());
+    };
+    helloStand();
+    connect(menue, &QMenu::aboutToShow, hello, [hello, helloStand] {
+        // Verfügbarkeit erst beim Öffnen des Menüs prüfen (einmalig, dann gemerkt)
+        QString grund;
+        const bool da = WindowsHello::verfuegbar(&grund);
+        hello->setEnabled(da || hello->isChecked());
+        hello->setToolTip(da ? tr("Statt der PIN per Fingerabdruck, Gesicht oder Windows-PIN anmelden") : grund);
+        helloStand();
+    });
+    connect(hello, &QAction::toggled, this, [this, helloStand](bool an) {
+        if (!an) {
+            const QString f = m_benutzer->setzeHello(m_angemeldet, QString());
+            meldung(f.isEmpty() ? tr("Anmeldung mit Windows Hello ausgeschaltet.") : f, 5000, !f.isEmpty());
+            helloStand();
+            return;
+        }
+        // Einschalten nur nach erfolgreicher Bestätigung
+        QString fehler;
+        const auto ergebnis = WindowsHello::pruefe(this, tr("Windows Hello für SolarMonitor einrichten"), &fehler);
+        if (ergebnis == WindowsHello::Ergebnis::Bestaetigt) {
+            const QString f = m_benutzer->setzeHello(m_angemeldet, WindowsHello::windowsKonto());
+            meldung(f.isEmpty() ? tr("Windows Hello eingerichtet. Ab jetzt können Sie sich per Fingerabdruck anmelden.") : f,
+                    6000, !f.isEmpty());
+        } else if (ergebnis != WindowsHello::Ergebnis::Abgebrochen) {
+            meldung(fehler, 5000, true);
+        }
+        helloStand();
+    });
     menue->addAction(m_aktVerlauf);
     menue->addAction(Stil::icon(Stil::Symbol::Liste, Stil::text()), tr("Daten&ordner ändern …"), this,
                      [this] { zeigeDatenordner(QString(), true); });

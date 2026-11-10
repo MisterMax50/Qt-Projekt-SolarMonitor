@@ -25,7 +25,7 @@ public:
     enum class Symbol {
         Liste, Warnung, Karte, Statistik, Werkzeug, Pruefung, Details, Bearbeiten,
         Plus, Export, Bericht, Neuladen, Sonne, Mond, Benutzer, Info, Haken, Fehler,
-        Rueckgaengig, Wiederholen, Pdf, Uebersicht, Vollbild, Glocke, Suche, Blitz, Euro, Abmelden, Schliessen
+        Rueckgaengig, Wiederholen, Pdf, Uebersicht, Vollbild, Glocke, Suche, Blitz, Euro, Abmelden, Schliessen, Fingerabdruck
     };
 
     static void anwenden(bool dunkel);

@@ -61,6 +61,10 @@ BenutzerDialog::BenutzerDialog(Benutzerverwaltung* verwaltung, const QString& ke
                            "Administrator: zusätzlich Stammdaten und Benutzer verwalten"));
     m_aktiv = new QCheckBox(tr("Konto aktiv (Anmeldung erlaubt)"), this);
     m_aktiv->setChecked(true);
+    m_hello = new QCheckBox(tr("Anmeldung mit Windows Hello"), this);
+    m_hello->setEnabled(false); // einrichten kann nur der Benutzer selbst (Benutzermenü)
+    m_hello->setToolTip(tr("Einrichten kann jeder Benutzer selbst im Benutzermenü oben rechts. "
+                           "Hier lässt sich Windows Hello für ein Konto abschalten."));
     m_pin = pinFeld(this);
     m_pin2 = pinFeld(this);
     m_fehler = new QLabel(this);
@@ -74,6 +78,7 @@ BenutzerDialog::BenutzerDialog(Benutzerverwaltung* verwaltung, const QString& ke
     form->addRow(tr("Benutzername:"), m_benutzername);
     form->addRow(tr("Rolle:"), m_rolle);
     form->addRow(QString(), m_aktiv);
+    form->addRow(QString(), m_hello);
     form->addRow(b ? tr("Neue PIN:") : tr("PIN:"), m_pin);
     form->addRow(tr("PIN wiederholen:"), m_pin2);
 
@@ -101,6 +106,10 @@ BenutzerDialog::BenutzerDialog(Benutzerverwaltung* verwaltung, const QString& ke
         m_benutzername->setEnabled(false); // Benutzername bleibt fest
         m_rolle->setCurrentIndex(m_rolle->findData(int(b->rolle)));
         m_aktiv->setChecked(b->aktiv);
+        m_hello->setChecked(!b->helloKonto.isEmpty());
+        m_hello->setEnabled(!b->helloKonto.isEmpty()); // nur abschalten möglich
+        if (!b->helloKonto.isEmpty())
+            m_hello->setText(tr("Anmeldung mit Windows Hello (%1)").arg(b->helloKonto));
         if (b->kennung == angemeldet) {
             // eigenes Konto: Rolle und Sperre nicht änderbar
             m_rolle->setEnabled(false);
@@ -136,6 +145,9 @@ void BenutzerDialog::speichern()
             fehler = m_verwaltung->aendern(m_kennung, m_name->text(), rolle, m_aktiv->isChecked(), m_angemeldet);
         if (fehler.isEmpty() && !pin.isEmpty())
             fehler = m_verwaltung->setzePin(m_kennung, pin);
+        const Benutzer* b = m_verwaltung->finde(m_kennung);
+        if (fehler.isEmpty() && b && !b->helloKonto.isEmpty() && !m_hello->isChecked())
+            fehler = m_verwaltung->setzeHello(m_kennung, QString());
     }
     if (!fehler.isEmpty()) {
         zeige(fehler);
@@ -167,11 +179,11 @@ BenutzerSeite::BenutzerSeite(Benutzerverwaltung* verwaltung, const QString& ange
     m_liste->setRootIsDecorated(false);
     m_liste->setUniformRowHeights(true);
     m_liste->setAlternatingRowColors(false);
-    m_liste->setHeaderLabels({tr("Name"), tr("Benutzername"), tr("Rolle"), tr("Status"), tr("Letzte Anmeldung"),
-                              tr("Angelegt")});
+    m_liste->setHeaderLabels({tr("Name"), tr("Benutzername"), tr("Rolle"), tr("Status"), tr("Windows Hello"),
+                              tr("Letzte Anmeldung"), tr("Angelegt")});
     m_liste->header()->setStretchLastSection(false);
     m_liste->header()->setSectionResizeMode(0, QHeaderView::Stretch);
-    for (int i = 1; i < 6; ++i)
+    for (int i = 1; i < 7; ++i)
         m_liste->header()->setSectionResizeMode(i, QHeaderView::ResizeToContents);
     m_liste->setSortingEnabled(true);
     m_liste->sortByColumn(0, Qt::AscendingOrder);
@@ -214,8 +226,13 @@ void BenutzerSeite::aktualisiere()
         it->setText(3, b.aktiv ? tr("aktiv") : tr("gesperrt"));
         it->setIcon(3, Stil::icon(b.aktiv ? Stil::Symbol::Haken : Stil::Symbol::Fehler,
                                   b.aktiv ? QColor(22, 163, 74) : QColor(220, 38, 38)));
-        it->setText(4, b.letzteAnmeldung.isValid() ? Anzeige::zeitpunkt(b.letzteAnmeldung) : tr("noch nie"));
-        it->setText(5, b.erstellt.isValid() ? Anzeige::datum(b.erstellt.date()) : QString());
+        it->setText(4, b.helloKonto.isEmpty() ? QStringLiteral("–") : tr("eingerichtet"));
+        if (!b.helloKonto.isEmpty()) {
+            it->setIcon(4, Stil::icon(Stil::Symbol::Fingerabdruck, Stil::text()));
+            it->setToolTip(4, tr("Verknüpft mit dem Windows-Konto %1").arg(b.helloKonto));
+        }
+        it->setText(5, b.letzteAnmeldung.isValid() ? Anzeige::zeitpunkt(b.letzteAnmeldung) : tr("noch nie"));
+        it->setText(6, b.erstellt.isValid() ? Anzeige::datum(b.erstellt.date()) : QString());
         it->setData(0, kKennungRolle, b.kennung);
         it->setSizeHint(0, QSize(0, 32)); // Zeilenhöhe wie in den anderen Tabellen
         if (ich) {

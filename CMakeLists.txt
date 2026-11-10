@@ -21,6 +21,8 @@ set(PROJEKT_HEADER
     src/model/datenbasis.h
     src/model/datensatz.h
     src/model/benutzer.h
+    src/util/windows_hello.h
+    src/util/windows_hello_win32.inc
     src/model/pruefmeldung.h
     src/model/rolle.h
     src/model/stoerung.h
@@ -75,6 +77,7 @@ set(PROJEKT_QUELLEN
     src/model/datenbasis.cpp
     src/model/datensatz.cpp
     src/model/benutzer.cpp
+    src/util/windows_hello.cpp
     src/model/rolle.cpp
     src/repo/csv_parser.cpp
     src/repo/routen_dienst.cpp
@@ -128,6 +131,9 @@ target_include_directories(${ZIEL} PRIVATE src)
 # dasselbe Logo per Code gezeichnet (Stil::appIcon).
 if(WIN32)
     target_sources(${ZIEL} PRIVATE resources/SolarMonitor.rc)
+    # Windows Hello: GetUserNameW (advapi32); die WinRT-Funktionen aus
+    # combase.dll werden zur Laufzeit geladen
+    target_link_libraries(${ZIEL} PRIVATE advapi32)
 endif()
 
 target_link_libraries(${ZIEL} PRIVATE

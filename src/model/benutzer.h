@@ -18,6 +18,7 @@ struct Benutzer {
     QByteArray pinHash;        ///< SHA-256(salz + PIN) (hex)
     QDateTime  erstellt;
     QDateTime  letzteAnmeldung;
+    QString    helloKonto;     ///< Windows-Konto für die Anmeldung per Windows Hello (leer = aus)
 };
 
 /**
@@ -46,6 +47,11 @@ public:
 
     /// Prüft Benutzername und PIN; bei Erfolg wird die Anmeldung vermerkt.
     bool anmelden(const QString& kennung, const QString& pin);
+    /// Anmeldung nach bestätigtem Windows Hello: nur, wenn das Konto mit
+    /// genau diesem Windows-Konto verknüpft ist.
+    bool anmeldenMitHello(const QString& kennung, const QString& windowsKonto);
+    /// Windows Hello für ein Konto einrichten (Windows-Konto) oder abschalten (leer).
+    QString setzeHello(const QString& kennung, const QString& windowsKonto);
 
     // Alle Änderungen liefern eine leere Zeichenkette oder den Fehlergrund.
     QString anlegen(const QString& kennung, const QString& name, Rolle rolle, const QString& pin);

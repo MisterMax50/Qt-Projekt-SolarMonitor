@@ -37,6 +37,7 @@ private:
     QLineEdit* m_benutzername = nullptr;
     QComboBox* m_rolle = nullptr;
     QCheckBox* m_aktiv = nullptr;
+    QCheckBox* m_hello = nullptr;
     QLineEdit* m_pin = nullptr;
     QLineEdit* m_pin2 = nullptr;
     QLabel*    m_fehler = nullptr;

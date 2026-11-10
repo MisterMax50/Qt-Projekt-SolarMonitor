@@ -125,6 +125,7 @@ void Benutzerverwaltung::laden()
             b.pinHash = o.value(QStringLiteral("pin_hash")).toString().toLatin1();
             b.erstellt = QDateTime::fromString(o.value(QStringLiteral("erstellt")).toString(), Qt::ISODate);
             b.letzteAnmeldung = QDateTime::fromString(o.value(QStringLiteral("letzte_anmeldung")).toString(), Qt::ISODate);
+            b.helloKonto = o.value(QStringLiteral("windows_hello")).toString();
             if (!finde(b.kennung))
                 m_benutzer.append(b);
         }
@@ -163,6 +164,8 @@ bool Benutzerverwaltung::speichern(QString* fehler)
         o.insert(QStringLiteral("erstellt"), b.erstellt.toString(Qt::ISODate));
         if (b.letzteAnmeldung.isValid())
             o.insert(QStringLiteral("letzte_anmeldung"), b.letzteAnmeldung.toString(Qt::ISODate));
+        if (!b.helloKonto.isEmpty())
+            o.insert(QStringLiteral("windows_hello"), b.helloKonto);
         liste.append(o);
     }
     QJsonObject wurzel;
@@ -186,6 +189,33 @@ bool Benutzerverwaltung::anmelden(const QString& kennung, const QString& pin)
     speichern();
     emit geaendert();
     return true;
+}
+
+bool Benutzerverwaltung::anmeldenMitHello(const QString& kennung, const QString& windowsKonto)
+{
+    Benutzer* b = findeVeraenderbar(kennung);
+    if (!b || !b->aktiv || windowsKonto.isEmpty() || b->helloKonto.compare(windowsKonto, Qt::CaseInsensitive) != 0)
+        return false;
+    b->letzteAnmeldung = QDateTime::currentDateTime();
+    speichern();
+    emit geaendert();
+    return true;
+}
+
+QString Benutzerverwaltung::setzeHello(const QString& kennung, const QString& windowsKonto)
+{
+    Benutzer* b = findeVeraenderbar(kennung);
+    if (!b)
+        return tr("Den Benutzer „%1“ gibt es nicht.").arg(kennung);
+    const QString alt = b->helloKonto;
+    b->helloKonto = windowsKonto;
+    QString fehler;
+    if (!speichern(&fehler)) {
+        b->helloKonto = alt;
+        return fehler;
+    }
+    emit geaendert();
+    return QString();
 }
 
 QString Benutzerverwaltung::anlegen(const QString& kennung, const QString& name, Rolle rolle, const QString& pin)

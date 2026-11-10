@@ -86,6 +86,18 @@ unabhängig vom Datenordner der Flotte; der genaue Pfad steht unten auf der
 Seite Benutzerverwaltung. Wird die Datei gelöscht, entstehen beim nächsten
 Start wieder die Demo-Konten.
 
+**Windows Hello** (`src/util/windows_hello.*`): Jeder Benutzer kann im
+Benutzermenü *Anmeldung mit Windows Hello* einschalten; das muss einmal per
+Fingerabdruck, Gesicht oder Windows-PIN bestätigt werden. Danach erscheint
+auf der Anmeldeseite für dieses Konto der Knopf *Mit Windows Hello
+anmelden*. Das Konto wird mit dem Windows-Konto verknüpft, unter dem Hello
+eingerichtet wurde – nur dort funktioniert die Anmeldung per Hello. In der
+Benutzerverwaltung sieht der Admin, wer Hello nutzt, und kann es für ein
+Konto abschalten. Technisch: Windows-Schnittstelle *UserConsentVerifier*
+über die WinRT-ABI; die Funktionen aus `combase.dll` werden zur Laufzeit
+geladen, daher klappt das auch mit MinGW ohne zusätzliche Bibliotheken.
+Außerhalb von Windows ist die Funktion ausgeblendet.
+
 Nach drei falschen PINs ist die Anmeldung 30 s gesperrt. *Benutzer
 wechseln* im Benutzermenü meldet neu an.
 

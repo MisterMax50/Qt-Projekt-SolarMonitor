@@ -3,6 +3,7 @@
 #include <QSettings>
 
 #include "model/benutzer.h"
+#include "util/windows_hello.h"
 
 #include <QComboBox>
 #include <QFrame>
@@ -52,6 +53,7 @@ LoginSeite::LoginSeite(Benutzerverwaltung* benutzer, QWidget* parent)
                                   "Service: zusätzlich Störungen erfassen und bearbeiten\n"
                                   "Administrator: zusätzlich Stammdaten und Benutzer verwalten"));
     connect(m_benutzerWahl, &QComboBox::activated, this, [this] { m_pin->setFocus(); });
+    connect(m_benutzerWahl, &QComboBox::currentIndexChanged, this, &LoginSeite::aktualisiereHello);
 
     m_pin = new QLineEdit(this);
     m_pin->setEchoMode(QLineEdit::Password);
@@ -67,6 +69,13 @@ LoginSeite::LoginSeite(Benutzerverwaltung* benutzer, QWidget* parent)
     form->setLabelAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     form->addRow(tr("Benutzer:"), m_benutzerWahl);
     form->addRow(tr("PIN:"), m_pin);
+    // Windows Hello: nur sichtbar, wenn für den gewählten Benutzer eingerichtet
+    m_hello = new QPushButton(Stil::icon(Stil::Symbol::Fingerabdruck, Stil::text()), tr("Mit Windows Hello anmelden"), this);
+    m_hello->setIconSize(QSize(20, 20));
+    m_hello->setToolTip(tr("Anmeldung per Fingerabdruck, Gesichtserkennung oder Windows-PIN"));
+    connect(m_hello, &QPushButton::clicked, this, &LoginSeite::anmeldenMitHello);
+    m_hello->hide();
+    form->addRow(QString(), m_hello);
 
     m_anmelden = new QPushButton(tr("Anmelden"), this);
     m_anmelden->setObjectName(QStringLiteral("Primaer"));
@@ -82,7 +91,8 @@ LoginSeite::LoginSeite(Benutzerverwaltung* benutzer, QWidget* parent)
     // Karte in der Mitte: links Markenfläche, rechts das Formular
     auto* karte = new QFrame(this);
     karte->setObjectName(QStringLiteral("Anmeldekarte"));
-    karte->setFixedSize(760, 370);
+    karte->setFixedWidth(760);
+    karte->setMinimumHeight(370);
     auto* schatten = new QGraphicsDropShadowEffect(karte);
     schatten->setBlurRadius(60);
     schatten->setOffset(0, 12);
@@ -143,9 +153,41 @@ void LoginSeite::fuelleBenutzer()
     m_benutzerWahl->setCurrentIndex(i >= 0 ? i : 0);
 }
 
+void LoginSeite::aktualisiereHello()
+{
+    const Benutzer* b = m_benutzer->finde(m_benutzerWahl->currentData().toString());
+    const bool eingerichtet = b && !b->helloKonto.isEmpty()
+        && b->helloKonto.compare(WindowsHello::windowsKonto(), Qt::CaseInsensitive) == 0;
+    m_hello->setVisible(eingerichtet && WindowsHello::verfuegbar());
+}
+
+void LoginSeite::anmeldenMitHello()
+{
+    if (m_restSekunden > 0)
+        return;
+    const QString kennung = m_benutzerWahl->currentData().toString();
+    const Benutzer* b = m_benutzer->finde(kennung);
+    if (!b)
+        return;
+    QString fehler;
+    const auto ergebnis = WindowsHello::pruefe(this, tr("Anmeldung bei SolarMonitor als %1").arg(b->name), &fehler);
+    if (ergebnis == WindowsHello::Ergebnis::Bestaetigt
+        && m_benutzer->anmeldenMitHello(kennung, WindowsHello::windowsKonto())) {
+        m_fehlversuche = 0;
+        m_pin->clear();
+        QSettings().setValue(QStringLiteral("letzterBenutzer"), kennung);
+        emit angemeldet(kennung);
+        return;
+    }
+    if (ergebnis != WindowsHello::Ergebnis::Abgebrochen)
+        m_meldung->setText(fehler.isEmpty() ? tr("Anmeldung mit Windows Hello nicht möglich.") : fehler);
+    m_pin->setFocus();
+}
+
 void LoginSeite::vorbereiten(bool zurueckMoeglich)
 {
     fuelleBenutzer();
+    aktualisiereHello();
     m_abbrechen->setText(zurueckMoeglich ? tr("Zurück") : tr("Beenden"));
     m_pin->clear();
     if (m_restSekunden <= 0)
@@ -174,6 +216,7 @@ void LoginSeite::anmelden()
         m_fehlversuche = 0;
         m_restSekunden = kSperreSekunden;
         m_anmelden->setEnabled(false);
+        m_hello->setEnabled(false);
         m_pin->setEnabled(false);
         sperreTick();
         m_sperrTimer->start();
@@ -187,6 +230,7 @@ void LoginSeite::sperreTick()
     if (m_restSekunden <= 0) {
         m_sperrTimer->stop();
         m_anmelden->setEnabled(true);
+        m_hello->setEnabled(true);
         m_pin->setEnabled(true);
         m_pin->setFocus();
         m_meldung->clear();

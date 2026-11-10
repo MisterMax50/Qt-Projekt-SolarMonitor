@@ -495,6 +495,16 @@ Administrator: additionally manage master data and users</translation>
         <translation>Account active (sign-in allowed)</translation>
     </message>
     <message>
+        <location line="+2"/>
+        <source>Anmeldung mit Windows Hello</source>
+        <translation>Sign in with Windows Hello</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Einrichten kann jeder Benutzer selbst im Benutzermenü oben rechts. Hier lässt sich Windows Hello für ein Konto abschalten.</source>
+        <translation>Each user sets it up in the user menu at the top right. Here Windows Hello can be turned off for an account.</translation>
+    </message>
+    <message>
         <location line="+11"/>
         <source>Name:</source>
         <translation>Name:</translation>
@@ -510,7 +520,7 @@ Administrator: additionally manage master data and users</translation>
         <translation>Role:</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+3"/>
         <source>Neue PIN:</source>
         <translation>New PIN:</translation>
     </message>
@@ -535,7 +545,12 @@ Administrator: additionally manage master data and users</translation>
         <translation>PIN: 4 to 8 digits. It is only stored hashed.</translation>
     </message>
     <message>
-        <location line="+27"/>
+        <location line="+26"/>
+        <source>Anmeldung mit Windows Hello (%1)</source>
+        <translation>Sign in with Windows Hello (%1)</translation>
+    </message>
+    <message>
+        <location line="+5"/>
         <source>Die eigene Rolle kann nicht geändert werden.</source>
         <translation>You cannot change your own role.</translation>
     </message>
@@ -553,7 +568,7 @@ Administrator: additionally manage master data and users</translation>
 <context>
     <name>BenutzerSeite</name>
     <message>
-        <location line="+23"/>
+        <location line="+26"/>
         <source>Neuer Benutzer …</source>
         <translation>New user …</translation>
     </message>
@@ -594,11 +609,16 @@ Administrator: additionally manage master data and users</translation>
     </message>
     <message>
         <location line="+0"/>
+        <source>Windows Hello</source>
+        <translation>Windows Hello</translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>Letzte Anmeldung</source>
         <translation>Last sign-in</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+0"/>
         <source>Angelegt</source>
         <translation>Created</translation>
     </message>
@@ -619,6 +639,16 @@ Administrator: additionally manage master data and users</translation>
     </message>
     <message>
         <location line="+3"/>
+        <source>eingerichtet</source>
+        <translation>set up</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Verknüpft mit dem Windows-Konto %1</source>
+        <translation>Linked to the Windows account %1</translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>noch nie</source>
         <translation>never</translation>
     </message>
@@ -702,12 +732,12 @@ Tip: instead of deleting, the account can also be locked.</translation>
         <translation>Administrator (demo)</translation>
     </message>
     <message>
-        <location line="+77"/>
+        <location line="+80"/>
         <source>Die Benutzerdatei konnte nicht gespeichert werden: %1</source>
         <translation>The user file could not be saved: %1</translation>
     </message>
     <message>
-        <location line="+21"/>
+        <location line="+48"/>
         <source>Der Benutzername muss 2–32 Zeichen lang sein und darf nur Kleinbuchstaben, Ziffern, Punkt, Binde- und Unterstrich enthalten.</source>
         <translation>The user name must be 2–32 characters long and may only contain lower-case letters, digits, dot, hyphen and underscore.</translation>
     </message>
@@ -729,7 +759,8 @@ Tip: instead of deleting, the account can also be locked.</translation>
         <translation>The PIN must consist of 4 to 8 digits.</translation>
     </message>
     <message>
-        <location line="-26"/>
+        <location line="-72"/>
+        <location line="+46"/>
         <location line="+24"/>
         <location line="+21"/>
         <source>Den Benutzer „%1“ gibt es nicht.</source>
@@ -2123,28 +2154,28 @@ PR %1</translation>
 <context>
     <name>LoginSeite</name>
     <message>
-        <location filename="../src/ui/login_seite.cpp" line="+39"/>
+        <location filename="../src/ui/login_seite.cpp" line="+40"/>
         <source>Überwachung und Service für die PV-Flotte rund um den Bodensee</source>
         <translation>Monitoring and service for the PV fleet around Lake Constance</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location line="+29"/>
+        <location line="+37"/>
         <source>Anmelden</source>
         <translation>Sign in</translation>
     </message>
     <message>
-        <location line="-25"/>
+        <location line="-33"/>
         <source>Demo-Zugänge: betrieb / 0000, service / 5678, admin / 1234</source>
         <translation>Demo accounts: betrieb / 0000, service / 5678, admin / 1234</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+14"/>
         <source>PIN</source>
         <translation>PIN</translation>
     </message>
     <message>
-        <location line="-15"/>
+        <location line="-16"/>
         <source>Melden Sie sich mit Ihrem Benutzer und Ihrer PIN an.</source>
         <translation>Sign in with your user and PIN.</translation>
     </message>
@@ -2158,7 +2189,7 @@ Service: additionally record and edit faults
 Administrator: additionally manage master data and users</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+18"/>
         <source>Benutzer:</source>
         <translation>User:</translation>
     </message>
@@ -2168,23 +2199,43 @@ Administrator: additionally manage master data and users</translation>
         <translation>PIN:</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <location line="+76"/>
+        <location line="+2"/>
+        <source>Mit Windows Hello anmelden</source>
+        <translation>Sign in with Windows Hello</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Anmeldung per Fingerabdruck, Gesichtserkennung oder Windows-PIN</source>
+        <translation>Sign in with fingerprint, face recognition or Windows PIN</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+109"/>
         <source>Beenden</source>
         <translation>Quit</translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="-18"/>
+        <source>Anmeldung bei SolarMonitor als %1</source>
+        <translation>Sign in to SolarMonitor as %1</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Anmeldung mit Windows Hello nicht möglich.</source>
+        <translation>Sign-in with Windows Hello is not possible.</translation>
+    </message>
+    <message>
+        <location line="+8"/>
         <source>Zurück</source>
         <translation>Back</translation>
     </message>
     <message>
-        <location line="+32"/>
+        <location line="+33"/>
         <source>PIN falsch (Versuch %1 von %2).</source>
         <translation>Wrong PIN (attempt %1 of %2).</translation>
     </message>
     <message>
-        <location line="+14"/>
+        <location line="+15"/>
         <source>Zu viele Fehlversuche – Anmeldung für %1 s gesperrt.</source>
         <translation>Too many failed attempts – sign-in locked for %1 s.</translation>
     </message>
@@ -2192,7 +2243,7 @@ Administrator: additionally manage master data and users</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="+429"/>
+        <location filename="../src/ui/mainwindow.cpp" line="+430"/>
         <source>SolarMonitor – Monitoring der PV-Flotte</source>
         <translation>SolarMonitor – PV fleet monitoring</translation>
     </message>
@@ -2273,7 +2324,7 @@ Administrator: additionally manage master data and users</translation>
         <translation>Monitoring</translation>
     </message>
     <message>
-        <location line="+98"/>
+        <location line="+134"/>
         <source>&amp;Dunkles Design</source>
         <translation>&amp;Dark theme</translation>
     </message>
@@ -2349,13 +2400,13 @@ Administrator: additionally manage master data and users</translation>
         <translation>Reset filters</translation>
     </message>
     <message>
-        <location line="-524"/>
+        <location line="-560"/>
         <location line="+222"/>
         <source>Übersicht</source>
         <translation>Overview</translation>
     </message>
     <message>
-        <location line="+206"/>
+        <location line="+242"/>
         <source>%1 Anlagen mit erkanntem Fehlerbild</source>
         <translation>%1 plants with a detected fault pattern</translation>
     </message>
@@ -2487,12 +2538,12 @@ Administrator: additionally manage master data and users</translation>
         <translation>Redo: %1 (Ctrl+Y)</translation>
     </message>
     <message>
-        <location line="-540"/>
+        <location line="-576"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation>S&amp;witch user …</translation>
     </message>
     <message>
-        <location line="+41"/>
+        <location line="+77"/>
         <source>&amp;Beenden</source>
         <translation>&amp;Quit</translation>
     </message>
@@ -2558,12 +2609,12 @@ Administrator: additionally manage master data and users</translation>
         <translation>Plant:</translation>
     </message>
     <message>
-        <location line="-567"/>
+        <location line="-603"/>
         <source>Exportieren</source>
         <translation>Export</translation>
     </message>
     <message>
-        <location line="+729"/>
+        <location line="+765"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>Administrator role only.</translation>
     </message>
@@ -2638,7 +2689,7 @@ Administrator: additionally manage master data and users</translation>
         <translation>Change history …</translation>
     </message>
     <message>
-        <location line="-1049"/>
+        <location line="-1085"/>
         <source>Daten werden geladen …</source>
         <translation>Loading data …</translation>
     </message>
@@ -2689,6 +2740,31 @@ Administrator: additionally manage master data and users</translation>
     </message>
     <message>
         <location line="+4"/>
+        <source>Anmeldung mit Windows &amp;Hello</source>
+        <translation>Sign in with Windows &amp;Hello</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Statt der PIN per Fingerabdruck, Gesicht oder Windows-PIN anmelden</source>
+        <translation>Sign in with fingerprint, face or Windows PIN instead of the PIN</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Anmeldung mit Windows Hello ausgeschaltet.</source>
+        <translation>Sign-in with Windows Hello turned off.</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Windows Hello für SolarMonitor einrichten</source>
+        <translation>Set up Windows Hello for SolarMonitor</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Windows Hello eingerichtet. Ab jetzt können Sie sich per Fingerabdruck anmelden.</source>
+        <translation>Windows Hello is set up. From now on you can sign in with your fingerprint.</translation>
+    </message>
+    <message>
+        <location line="+8"/>
         <source>Daten&amp;ordner ändern …</source>
         <translation>Change data &amp;folder …</translation>
     </message>
@@ -2888,12 +2964,12 @@ Open it now?</translation>
         <translation>&lt;Initial state after loading&gt;</translation>
     </message>
     <message>
-        <location line="-1344"/>
+        <location line="-1380"/>
         <source>Angemeldet als %1.</source>
         <translation>Signed in as %1.</translation>
     </message>
     <message>
-        <location line="+1363"/>
+        <location line="+1399"/>
         <source>Über SolarMonitor</source>
         <translation>About SolarMonitor</translation>
     </message>
@@ -4310,6 +4386,55 @@ Measured over land around Lake Constance, not straight across the water.</transl
         <location line="+3"/>
         <source>Zeitstempel sind nicht aufsteigend sortiert.</source>
         <translation>Timestamps are not sorted in ascending order.</translation>
+    </message>
+</context>
+<context>
+    <name>WindowsHello</name>
+    <message>
+        <location filename="../src/util/windows_hello.cpp" line="+31"/>
+        <source>Kein Fingerabdruckleser bzw. keine Windows-Hello-Kamera gefunden.</source>
+        <translation>No fingerprint reader or Windows Hello camera found.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Windows Hello ist für dieses Windows-Konto nicht eingerichtet (Windows-Einstellungen → Konten → Anmeldeoptionen).</source>
+        <translation>Windows Hello is not set up for this Windows account (Windows Settings → Accounts → Sign-in options).</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Windows Hello ist durch eine Richtlinie deaktiviert.</source>
+        <translation>Windows Hello is disabled by policy.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Windows Hello ist gerade belegt. Bitte erneut versuchen.</source>
+        <translation>Windows Hello is busy. Please try again.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Windows Hello konnte nicht abgefragt werden.</source>
+        <translation>Windows Hello could not be queried.</translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>Zu viele Fehlversuche bei Windows Hello.</source>
+        <translation>Too many failed Windows Hello attempts.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Windows Hello ist nicht verfügbar.</source>
+        <translation>Windows Hello is not available.</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Windows Hello konnte die Anmeldung nicht bestätigen.</source>
+        <translation>Windows Hello could not confirm the sign-in.</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <location line="+7"/>
+        <source>Windows Hello gibt es nur unter Windows.</source>
+        <translation>Windows Hello is only available on Windows.</translation>
     </message>
 </context>
 </TS>

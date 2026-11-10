@@ -523,6 +523,17 @@ QIcon Stil::icon(Symbol symbol, const QColor& farbeWunsch)
             p.drawLine(QPointF(10, 12), QPointF(20, 12));
             p.drawPolyline(QPolygonF({QPointF(16, 8), QPointF(20, 12), QPointF(16, 16)}));
             break;
+        case Symbol::Fingerabdruck:
+            // ineinanderliegende Bögen wie die Linien eines Fingerabdrucks
+            p.drawArc(QRectF(4, 3, 16, 18), 20 * 16, 140 * 16);
+            p.drawArc(QRectF(7, 6.5, 10, 12), 0, 180 * 16);
+            p.drawLine(QPointF(7, 12.5), QPointF(7, 16));
+            p.drawLine(QPointF(17, 12.5), QPointF(17, 17));
+            p.drawArc(QRectF(10, 10, 4, 6), 0, 180 * 16);
+            p.drawLine(QPointF(10, 13), QPointF(10, 20.5));
+            p.drawLine(QPointF(14, 13), QPointF(14, 19));
+            p.drawLine(QPointF(4.5, 14), QPointF(4.5, 17));
+            break;
         case Symbol::Schliessen:
             // Tür: Türblatt mit Klinke, darunter der Boden
             p.drawPolyline(QPolygonF({QPointF(6.5, 20.5), QPointF(6.5, 4.5), QPointF(17.5, 4.5), QPointF(17.5, 20.5)}));

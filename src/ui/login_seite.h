@@ -42,6 +42,7 @@ signals:
 
 private slots:
     void anmelden();
+    void anmeldenMitHello();
     void sperreTick();
 
 private:
@@ -52,6 +53,8 @@ private:
     QLineEdit*   m_pin = nullptr;
     QLabel*      m_meldung = nullptr;
     QPushButton* m_anmelden = nullptr;
+    QPushButton* m_hello = nullptr;   ///< "Mit Windows Hello anmelden"
+    void aktualisiereHello();
     QPushButton* m_abbrechen = nullptr;
     QTimer*      m_sperrTimer = nullptr;
     int          m_fehlversuche = 0;
