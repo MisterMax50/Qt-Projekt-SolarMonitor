@@ -203,7 +203,7 @@ für Solarparks):
   Die „Webseite“ ist ein eigenes Fenster im Browser-Look, komplett im
   Programm gezeichnet (keine Internetverbindung, Adressen auf `.example`).
   Im Kontomenü startet *SolarMonitor Premium (werbefrei)* das „Abo“ für
-  0,00 €. Es läuft über den erfundenen Bezahlablauf **SolarMonitor Pay**
+  9,99 € im Monat (Spielgeld). Es läuft über den erfundenen Bezahlablauf **SolarMonitor Pay**
   (`src/ui/zahlung_dialog.*`): Bestellung → Anmelden mit beliebiger
   vierstelliger „Sonnen-PIN“ → Zahlart (Sonnenstunden, Kilowattkekse,
   Lächeln) → Prüfen mit AGB-Haken → Verarbeitung → Quittung. Nichts wird

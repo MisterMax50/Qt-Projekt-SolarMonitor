@@ -2330,7 +2330,12 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Überwachung</translation>
     </message>
     <message>
-        <location line="+147"/>
+        <location line="+139"/>
+        <source>Abo-Modus: entfernt die (erfundene) Werbung. Kostet 9,99 € im Monat (Spielgeld).</source>
+        <translation>Abo-Modus: entfernt die (erfundene) Werbung. Kostet 9,99 € im Monat (Spielgeld).</translation>
+    </message>
+    <message>
+        <location line="+8"/>
         <source>&amp;Dunkles Design</source>
         <translation>&amp;Dunkles Design</translation>
     </message>
@@ -2360,7 +2365,12 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Keine kritischen Störungen offen</translation>
     </message>
     <message>
-        <location line="+96"/>
+        <location line="+41"/>
+        <source>Danke für Ihr Abo! SolarMonitor Premium ist aktiv – werbefrei für 9,99 € im Monat. (Keine Sorge: Spielgeld.)</source>
+        <translation>Danke für Ihr Abo! SolarMonitor Premium ist aktiv – werbefrei für 9,99 € im Monat. (Keine Sorge: Spielgeld.)</translation>
+    </message>
+    <message>
+        <location line="+55"/>
         <source>Alle Status</source>
         <translation>Alle Status</translation>
     </message>
@@ -2780,12 +2790,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>SolarMonitor &amp;Premium (werbefrei)</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>Abo-Modus: entfernt die (erfundene) Werbung. Kostet 0,00 €.</source>
-        <translation>Abo-Modus: entfernt die (erfundene) Werbung. Kostet 0,00 €.</translation>
-    </message>
-    <message>
-        <location line="+18"/>
+        <location line="+21"/>
         <source>&amp;Intro beim Start</source>
         <translation>&amp;Intro beim Start</translation>
     </message>
@@ -2815,12 +2820,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Zahlung abgebrochen – die Werbung bleibt.</translation>
     </message>
     <message>
-        <location line="+18"/>
-        <source>Danke für Ihr Abo! SolarMonitor Premium ist aktiv – werbefrei für sagenhafte 0,00 € im Monat.</source>
-        <translation>Danke für Ihr Abo! SolarMonitor Premium ist aktiv – werbefrei für sagenhafte 0,00 € im Monat.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+19"/>
         <source>Premium beendet. Die Werbung ist zurück.</source>
         <translation>Premium beendet. Die Werbung ist zurück.</translation>
     </message>
@@ -4548,11 +4548,16 @@ Gemessen wird auf dem Landweg um den Bodensee herum, nicht quer über das Wasser
     </message>
     <message>
         <location line="+1"/>
-        <source>Werbefrei mit SolarMonitor Premium – nur 0,00 €</source>
-        <translation>Werbefrei mit SolarMonitor Premium – nur 0,00 €</translation>
+        <source>Werbefrei mit SolarMonitor Premium – nur 9,99 € im Monat</source>
+        <translation>Werbefrei mit SolarMonitor Premium – nur 9,99 € im Monat</translation>
     </message>
     <message>
-        <location line="+43"/>
+        <location line="+152"/>
+        <source>Keines dieser Produkte gibt es wirklich. Mit &lt;b&gt;SolarMonitor Premium&lt;/b&gt; verschwindet die Werbung – für nur 9,99 € im Monat (Spielgeld).</source>
+        <translation>Keines dieser Produkte gibt es wirklich. Mit &lt;b&gt;SolarMonitor Premium&lt;/b&gt; verschwindet die Werbung – für nur 9,99 € im Monat (Spielgeld).</translation>
+    </message>
+    <message>
+        <location line="-109"/>
         <source>Spaß-Werbung – mit SolarMonitor Premium verschwindet sie</source>
         <translation>Spaß-Werbung – mit SolarMonitor Premium verschwindet sie</translation>
     </message>
@@ -4587,12 +4592,7 @@ Gemessen wird auf dem Landweg um den Bodensee herum, nicht quer über das Wasser
         <translation>&lt;b&gt;Erwischt – das ist nur Spaß-Werbung.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Keines dieser Produkte gibt es wirklich. Mit &lt;b&gt;SolarMonitor Premium&lt;/b&gt; verschwindet die Werbung – für sagenhafte 0,00 € im Monat.</source>
-        <translation>Keines dieser Produkte gibt es wirklich. Mit &lt;b&gt;SolarMonitor Premium&lt;/b&gt; verschwindet die Werbung – für sagenhafte 0,00 € im Monat.</translation>
-    </message>
-    <message>
-        <location line="+2"/>
+        <location line="+3"/>
         <source>Premium aktivieren</source>
         <translation>Premium aktivieren</translation>
     </message>
@@ -4806,8 +4806,8 @@ Ihr Warenkorb bleibt leer und Ihr Geld bei Ihnen.</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Bucht 0,00 € ab …</source>
-        <translation>Bucht 0,00 € ab …</translation>
+        <source>Bucht 9,99 € ab …</source>
+        <translation>Bucht 9,99 € ab …</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -4851,14 +4851,18 @@ Ihr Warenkorb bleibt leer und Ihr Geld bei Ihnen.</translation>
     </message>
     <message>
         <location line="+0"/>
-        <location line="+1"/>
-        <location line="+1"/>
+        <location line="+2"/>
         <location line="+90"/>
+        <source>9,99 €</source>
+        <translation>9,99 €</translation>
+    </message>
+    <message>
+        <location line="-91"/>
         <source>0,00 €</source>
         <translation>0,00 €</translation>
     </message>
     <message>
-        <location line="-91"/>
+        <location line="+0"/>
         <source>Einrichtungsgebühr</source>
         <translation>Einrichtungsgebühr</translation>
     </message>
@@ -5004,13 +5008,13 @@ Ihr Warenkorb bleibt leer und Ihr Geld bei Ihnen.</translation>
     </message>
     <message>
         <location line="+4"/>
-        <source>Jetzt abonnieren · 0,00 €</source>
-        <translation>Jetzt abonnieren · 0,00 €</translation>
+        <source>Jetzt abonnieren · 9,99 €</source>
+        <translation>Jetzt abonnieren · 9,99 €</translation>
     </message>
     <message>
         <location line="+10"/>
-        <source>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; ist aktiv.&lt;br&gt;Transaktion: %1&lt;br&gt;Betrag: 0,00 € · Zahlart: %2&lt;br&gt;Datum: %3</source>
-        <translation>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; ist aktiv.&lt;br&gt;Transaktion: %1&lt;br&gt;Betrag: 0,00 € · Zahlart: %2&lt;br&gt;Datum: %3</translation>
+        <source>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; ist aktiv.&lt;br&gt;Transaktion: %1&lt;br&gt;Betrag: 9,99 € · Zahlart: %2&lt;br&gt;Datum: %3</source>
+        <translation>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; ist aktiv.&lt;br&gt;Transaktion: %1&lt;br&gt;Betrag: 9,99 € · Zahlart: %2&lt;br&gt;Datum: %3</translation>
     </message>
     <message>
         <location line="+4"/>

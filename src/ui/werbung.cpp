@@ -117,7 +117,7 @@ public:
                                tw(QT_TRANSLATE_NOOP("WerbeBanner", "Wolkenschieber Pro jetzt mit Rückenwind")),
                                tw(QT_TRANSLATE_NOOP("WerbeBanner", "SonnenPutz 3000 – die Tauben hassen diesen Trick")),
                                tw(QT_TRANSLATE_NOOP("WerbeBanner", "Ärzte empfehlen: mehr Sonne")),
-                               tw(QT_TRANSLATE_NOOP("WerbeBanner", "Werbefrei mit SolarMonitor Premium – nur 0,00 €"))}
+                               tw(QT_TRANSLATE_NOOP("WerbeBanner", "Werbefrei mit SolarMonitor Premium – nur 9,99 € im Monat"))}
                        .join(QStringLiteral("   +++   "));
         auto* t = new QTimer(this);
         t->setInterval(30);
@@ -270,7 +270,7 @@ void WerbeBanner::schliessenGeklickt()
     frage.setIconPixmap(Stil::appIcon().pixmap(48, 48));
     frage.setText(tr("<b>Erwischt – das ist nur Spaß-Werbung.</b>"));
     frage.setInformativeText(tr("Keines dieser Produkte gibt es wirklich. Mit <b>SolarMonitor Premium</b> verschwindet "
-                                "die Werbung – für sagenhafte 0,00 € im Monat."));
+                                "die Werbung – für nur 9,99 € im Monat (Spielgeld)."));
     QPushButton* premium = frage.addButton(tr("Premium aktivieren"), QMessageBox::AcceptRole);
     frage.addButton(tr("Weiter mit Werbung"), QMessageBox::RejectRole);
     frage.setDefaultButton(premium);

@@ -2436,11 +2436,6 @@ Administrateur : en plus, gérer les données de base et les utilisateurs</trans
         <translation>SolarMonitor &amp;Premium (sans publicité)</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="963"/>
-        <source>Abo-Modus: entfernt die (erfundene) Werbung. Kostet 0,00 €.</source>
-        <translation>Mode abonnement : supprime les publicités (fictives). Coût : 0,00 €.</translation>
-    </message>
-    <message>
         <location filename="../src/ui/mainwindow.cpp" line="971"/>
         <source>&amp;Dunkles Design</source>
         <translation>&amp;Thème sombre</translation>
@@ -2526,9 +2521,14 @@ Administrateur : en plus, gérer les données de base et les utilisateurs</trans
         <translation>Paiement annulé – la publicité reste.</translation>
     </message>
     <message>
+        <location filename="../src/ui/mainwindow.cpp" line="963"/>
+        <source>Abo-Modus: entfernt die (erfundene) Werbung. Kostet 9,99 € im Monat (Spielgeld).</source>
+        <translation>Mode abonnement : supprime les publicités (fictives). Coût : 9,99 € par mois (argent fictif).</translation>
+    </message>
+    <message>
         <location filename="../src/ui/mainwindow.cpp" line="1134"/>
-        <source>Danke für Ihr Abo! SolarMonitor Premium ist aktiv – werbefrei für sagenhafte 0,00 € im Monat.</source>
-        <translation>Merci pour votre abonnement ! SolarMonitor Premium est actif – sans publicité pour seulement 0,00 € par mois.</translation>
+        <source>Danke für Ihr Abo! SolarMonitor Premium ist aktiv – werbefrei für 9,99 € im Monat. (Keine Sorge: Spielgeld.)</source>
+        <translation>Merci pour votre abonnement ! SolarMonitor Premium est actif – sans publicité pour 9,99 € par mois. (Pas d&apos;inquiétude : argent fictif.)</translation>
     </message>
     <message>
         <location filename="../src/ui/mainwindow.cpp" line="1135"/>
@@ -4548,8 +4548,13 @@ Les tournées déjà calculées sont enregistrées et disponibles hors ligne.</t
     </message>
     <message>
         <location filename="../src/ui/werbung.cpp" line="120"/>
-        <source>Werbefrei mit SolarMonitor Premium – nur 0,00 €</source>
-        <translation>Sans publicité avec SolarMonitor Premium – seulement 0,00 €</translation>
+        <source>Werbefrei mit SolarMonitor Premium – nur 9,99 € im Monat</source>
+        <translation>Sans publicité avec SolarMonitor Premium – seulement 9,99 € par mois</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/werbung.cpp" line="272"/>
+        <source>Keines dieser Produkte gibt es wirklich. Mit &lt;b&gt;SolarMonitor Premium&lt;/b&gt; verschwindet die Werbung – für nur 9,99 € im Monat (Spielgeld).</source>
+        <translation>Aucun de ces produits n&apos;existe vraiment. Avec &lt;b&gt;SolarMonitor Premium&lt;/b&gt;, la publicité disparaît – pour seulement 9,99 € par mois (argent fictif).</translation>
     </message>
     <message>
         <location filename="../src/ui/werbung.cpp" line="163"/>
@@ -4585,11 +4590,6 @@ Les tournées déjà calculées sont enregistrées et disponibles hors ligne.</t
         <location filename="../src/ui/werbung.cpp" line="271"/>
         <source>&lt;b&gt;Erwischt – das ist nur Spaß-Werbung.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Attrapé – ce n&apos;est qu&apos;une publicité pour rire.&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/werbung.cpp" line="272"/>
-        <source>Keines dieser Produkte gibt es wirklich. Mit &lt;b&gt;SolarMonitor Premium&lt;/b&gt; verschwindet die Werbung – für sagenhafte 0,00 € im Monat.</source>
-        <translation>Aucun de ces produits n&apos;existe vraiment. Avec &lt;b&gt;SolarMonitor Premium&lt;/b&gt;, la publicité disparaît – pour seulement 0,00 € par mois.</translation>
     </message>
     <message>
         <location filename="../src/ui/werbung.cpp" line="274"/>
@@ -4806,8 +4806,8 @@ Votre panier reste vide et votre argent reste chez vous.</translation>
     </message>
     <message>
         <location filename="../src/ui/zahlung_dialog.cpp" line="192"/>
-        <source>Bucht 0,00 € ab …</source>
-        <translation>Débit de 0,00 € …</translation>
+        <source>Bucht 9,99 € ab …</source>
+        <translation>Débit de 9,99 € …</translation>
     </message>
     <message>
         <location filename="../src/ui/zahlung_dialog.cpp" line="193"/>
@@ -4851,9 +4851,13 @@ Votre panier reste vide et votre argent reste chez vous.</translation>
     </message>
     <message>
         <location filename="../src/ui/zahlung_dialog.cpp" line="229"/>
-        <location filename="../src/ui/zahlung_dialog.cpp" line="230"/>
         <location filename="../src/ui/zahlung_dialog.cpp" line="231"/>
         <location filename="../src/ui/zahlung_dialog.cpp" line="321"/>
+        <source>9,99 €</source>
+        <translation>9,99 €</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/zahlung_dialog.cpp" line="230"/>
         <source>0,00 €</source>
         <translation>0,00 €</translation>
     </message>
@@ -5004,13 +5008,13 @@ Votre panier reste vide et votre argent reste chez vous.</translation>
     </message>
     <message>
         <location filename="../src/ui/zahlung_dialog.cpp" line="415"/>
-        <source>Jetzt abonnieren · 0,00 €</source>
-        <translation>S&apos;abonner maintenant · 0,00 €</translation>
+        <source>Jetzt abonnieren · 9,99 €</source>
+        <translation>S&apos;abonner maintenant · 9,99 €</translation>
     </message>
     <message>
         <location filename="../src/ui/zahlung_dialog.cpp" line="425"/>
-        <source>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; ist aktiv.&lt;br&gt;Transaktion: %1&lt;br&gt;Betrag: 0,00 € · Zahlart: %2&lt;br&gt;Datum: %3</source>
-        <translation>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; est actif.&lt;br&gt;Transaction : %1&lt;br&gt;Montant : 0,00 € · Moyen de paiement : %2&lt;br&gt;Date : %3</translation>
+        <source>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; ist aktiv.&lt;br&gt;Transaktion: %1&lt;br&gt;Betrag: 9,99 € · Zahlart: %2&lt;br&gt;Datum: %3</source>
+        <translation>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; est actif.&lt;br&gt;Transaction : %1&lt;br&gt;Montant : 9,99 € · Moyen de paiement : %2&lt;br&gt;Date : %3</translation>
     </message>
     <message>
         <location filename="../src/ui/zahlung_dialog.cpp" line="429"/>

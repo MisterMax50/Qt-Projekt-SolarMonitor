@@ -960,7 +960,7 @@ QWidget* MainWindow::baueKopfzeile()
     m_aktPremium = menue->addAction(tr("SolarMonitor &Premium (werbefrei)"));
     m_aktPremium->setCheckable(true);
     m_aktPremium->setChecked(QSettings().value(QStringLiteral("premium"), false).toBool());
-    m_aktPremium->setToolTip(tr("Abo-Modus: entfernt die (erfundene) Werbung. Kostet 0,00 €."));
+    m_aktPremium->setToolTip(tr("Abo-Modus: entfernt die (erfundene) Werbung. Kostet 9,99 € im Monat (Spielgeld)."));
     connect(m_aktPremium, &QAction::toggled, this, [this](bool an) {
         // Einschalten geht über den (erfundenen) Bezahlablauf, Ausschalten sofort
         if (an)
@@ -1131,7 +1131,7 @@ void MainWindow::setzePremium(bool an)
         m_aktPremium->setChecked(an);
     }
     if (an != vorher)
-        meldung(an ? tr("Danke für Ihr Abo! SolarMonitor Premium ist aktiv – werbefrei für sagenhafte 0,00 € im Monat.")
+        meldung(an ? tr("Danke für Ihr Abo! SolarMonitor Premium ist aktiv – werbefrei für 9,99 € im Monat. (Keine Sorge: Spielgeld.)")
                    : tr("Premium beendet. Die Werbung ist zurück."),
                 6000);
 }

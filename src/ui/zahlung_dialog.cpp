@@ -189,7 +189,7 @@ ZahlungDialog::ZahlungDialog(const QString& kontoName, QWidget* parent)
         static const char* const schritte[] = {
             QT_TR_NOOP("Verbinde mit der Sonne …"),
             QT_TR_NOOP("Prüfe die Wolkenlage über dem Bodensee …"),
-            QT_TR_NOOP("Bucht 0,00 € ab …"),
+            QT_TR_NOOP("Bucht 9,99 € ab …"),
             QT_TR_NOOP("Entsorgt die Werbung fachgerecht …"),
         };
         m_status->setText(tr(schritte[qMin(3, prozent / 25)]));
@@ -226,9 +226,9 @@ QWidget* ZahlungDialog::baueBestellung()
     auto* summe = box(w);
     auto* sv = new QVBoxLayout(summe);
     sv->setContentsMargins(16, 12, 16, 12);
-    sv->addLayout(zeile(tr("Monatlicher Preis"), new QLabel(tr("0,00 €"))));
+    sv->addLayout(zeile(tr("Monatlicher Preis"), new QLabel(tr("9,99 €"))));
     sv->addLayout(zeile(tr("Einrichtungsgebühr"), new QLabel(tr("0,00 €"))));
-    auto* betrag = new QLabel(tr("0,00 €"));
+    auto* betrag = new QLabel(tr("9,99 €"));
     betrag->setObjectName(QStringLiteral("ZahlungBetrag"));
     sv->addLayout(zeile(tr("Heute fällig"), betrag));
     v->addWidget(summe);
@@ -318,7 +318,7 @@ QWidget* ZahlungDialog::bauePruefen()
     m_pruefZahlart = new QLabel;
     bv->addLayout(zeile(tr("Zahlart"), m_pruefZahlart));
     bv->addLayout(zeile(tr("Laufzeit"), new QLabel(tr("monatlich, jederzeit kündbar"))));
-    auto* betrag = new QLabel(tr("0,00 €"));
+    auto* betrag = new QLabel(tr("9,99 €"));
     betrag->setObjectName(QStringLiteral("ZahlungBetrag"));
     bv->addLayout(zeile(tr("Betrag"), betrag));
     v->addWidget(b);
@@ -412,7 +412,7 @@ void ZahlungDialog::geheZu(int schritt)
         break;
     case Pruefen:
         m_pruefZahlart->setText(zahlartText());
-        m_weiter->setText(tr("Jetzt abonnieren · 0,00 €"));
+        m_weiter->setText(tr("Jetzt abonnieren · 9,99 €"));
         m_weiter->setEnabled(m_agb->isChecked());
         break;
     case Verarbeitung:
@@ -422,7 +422,7 @@ void ZahlungDialog::geheZu(int schritt)
         const QString nr = QStringLiteral("SMP-%1-%2")
                                .arg(QDate::currentDate().year())
                                .arg(QRandomGenerator::global()->bounded(100000, 999999));
-        m_quittung->setText(tr("<b>SolarMonitor Premium</b> ist aktiv.<br>Transaktion: %1<br>Betrag: 0,00 € · "
+        m_quittung->setText(tr("<b>SolarMonitor Premium</b> ist aktiv.<br>Transaktion: %1<br>Betrag: 9,99 € · "
                                "Zahlart: %2<br>Datum: %3")
                                 .arg(nr, zahlartText().toHtmlEscaped(),
                                      QLocale().toString(QDateTime::currentDateTime(), QLocale::ShortFormat)));

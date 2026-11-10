@@ -2436,11 +2436,6 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</source>
         <translation>SolarMonitor 高级版(&amp;P)(无广告)</translation>
     </message>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="963"/>
-        <source>Abo-Modus: entfernt die (erfundene) Werbung. Kostet 0,00 €.</source>
-        <translation>订阅模式：移除（虚构的）广告。费用 0.00 €。</translation>
-    </message>
-    <message>
         <location filename="../src/ui/mainwindow.cpp" line="971"/>
         <source>&amp;Dunkles Design</source>
         <translation>深色主题(&amp;D)</translation>
@@ -2526,9 +2521,14 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</source>
         <translation>付款已取消 – 广告继续保留。</translation>
     </message>
     <message>
+        <location filename="../src/ui/mainwindow.cpp" line="963"/>
+        <source>Abo-Modus: entfernt die (erfundene) Werbung. Kostet 9,99 € im Monat (Spielgeld).</source>
+        <translation>订阅模式：移除（虚构的）广告。每月 9.99 €（游戏币）。</translation>
+    </message>
+    <message>
         <location filename="../src/ui/mainwindow.cpp" line="1134"/>
-        <source>Danke für Ihr Abo! SolarMonitor Premium ist aktiv – werbefrei für sagenhafte 0,00 € im Monat.</source>
-        <translation>感谢订阅！SolarMonitor 高级版已激活 – 每月仅需惊人的 0.00 €，无广告。</translation>
+        <source>Danke für Ihr Abo! SolarMonitor Premium ist aktiv – werbefrei für 9,99 € im Monat. (Keine Sorge: Spielgeld.)</source>
+        <translation>感谢订阅！SolarMonitor 高级版已激活 – 每月 9.99 €，无广告。（别担心：是游戏币。）</translation>
     </message>
     <message>
         <location filename="../src/ui/mainwindow.cpp" line="1135"/>
@@ -4547,8 +4547,13 @@ Bereits berechnete Touren werden gespeichert und sind offline verfügbar.</sourc
     </message>
     <message>
         <location filename="../src/ui/werbung.cpp" line="120"/>
-        <source>Werbefrei mit SolarMonitor Premium – nur 0,00 €</source>
-        <translation>开通 SolarMonitor 高级版即可无广告 – 仅需 0.00 €</translation>
+        <source>Werbefrei mit SolarMonitor Premium – nur 9,99 € im Monat</source>
+        <translation>开通 SolarMonitor 高级版即可无广告 – 每月仅需 9.99 €</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/werbung.cpp" line="272"/>
+        <source>Keines dieser Produkte gibt es wirklich. Mit &lt;b&gt;SolarMonitor Premium&lt;/b&gt; verschwindet die Werbung – für nur 9,99 € im Monat (Spielgeld).</source>
+        <translation>这些产品都不存在。开通 &lt;b&gt;SolarMonitor 高级版&lt;/b&gt;，广告即刻消失——每月仅需 9.99 €（游戏币）。</translation>
     </message>
     <message>
         <location filename="../src/ui/werbung.cpp" line="163"/>
@@ -4584,11 +4589,6 @@ Bereits berechnete Touren werden gespeichert und sind offline verfügbar.</sourc
         <location filename="../src/ui/werbung.cpp" line="271"/>
         <source>&lt;b&gt;Erwischt – das ist nur Spaß-Werbung.&lt;/b&gt;</source>
         <translation>&lt;b&gt;上当了——这只是恶搞广告。&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/werbung.cpp" line="272"/>
-        <source>Keines dieser Produkte gibt es wirklich. Mit &lt;b&gt;SolarMonitor Premium&lt;/b&gt; verschwindet die Werbung – für sagenhafte 0,00 € im Monat.</source>
-        <translation>这些产品都不存在。开通 &lt;b&gt;SolarMonitor 高级版&lt;/b&gt;，广告即刻消失——每月仅需惊人的 0.00 €。</translation>
     </message>
     <message>
         <location filename="../src/ui/werbung.cpp" line="274"/>
@@ -4805,8 +4805,8 @@ Ihr Warenkorb bleibt leer und Ihr Geld bei Ihnen.</source>
     </message>
     <message>
         <location filename="../src/ui/zahlung_dialog.cpp" line="192"/>
-        <source>Bucht 0,00 € ab …</source>
-        <translation>正在扣款 0.00 € …</translation>
+        <source>Bucht 9,99 € ab …</source>
+        <translation>正在扣款 9.99 € …</translation>
     </message>
     <message>
         <location filename="../src/ui/zahlung_dialog.cpp" line="193"/>
@@ -4850,9 +4850,13 @@ Ihr Warenkorb bleibt leer und Ihr Geld bei Ihnen.</source>
     </message>
     <message>
         <location filename="../src/ui/zahlung_dialog.cpp" line="229"/>
-        <location filename="../src/ui/zahlung_dialog.cpp" line="230"/>
         <location filename="../src/ui/zahlung_dialog.cpp" line="231"/>
         <location filename="../src/ui/zahlung_dialog.cpp" line="321"/>
+        <source>9,99 €</source>
+        <translation>9.99 €</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/zahlung_dialog.cpp" line="230"/>
         <source>0,00 €</source>
         <translation>0.00 €</translation>
     </message>
@@ -5003,13 +5007,13 @@ Ihr Warenkorb bleibt leer und Ihr Geld bei Ihnen.</source>
     </message>
     <message>
         <location filename="../src/ui/zahlung_dialog.cpp" line="415"/>
-        <source>Jetzt abonnieren · 0,00 €</source>
-        <translation>立即订阅 · 0.00 €</translation>
+        <source>Jetzt abonnieren · 9,99 €</source>
+        <translation>立即订阅 · 9.99 €</translation>
     </message>
     <message>
         <location filename="../src/ui/zahlung_dialog.cpp" line="425"/>
-        <source>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; ist aktiv.&lt;br&gt;Transaktion: %1&lt;br&gt;Betrag: 0,00 € · Zahlart: %2&lt;br&gt;Datum: %3</source>
-        <translation>&lt;b&gt;SolarMonitor 高级版&lt;/b&gt;已激活。&lt;br&gt;交易号：%1&lt;br&gt;金额：0.00 € · 付款方式：%2&lt;br&gt;日期：%3</translation>
+        <source>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; ist aktiv.&lt;br&gt;Transaktion: %1&lt;br&gt;Betrag: 9,99 € · Zahlart: %2&lt;br&gt;Datum: %3</source>
+        <translation>&lt;b&gt;SolarMonitor 高级版&lt;/b&gt;已激活。&lt;br&gt;交易号：%1&lt;br&gt;金额：9.99 € · 付款方式：%2&lt;br&gt;日期：%3</translation>
     </message>
     <message>
         <location filename="../src/ui/zahlung_dialog.cpp" line="429"/>

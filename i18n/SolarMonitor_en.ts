@@ -2330,7 +2330,12 @@ Administrator: additionally manage master data and users</translation>
         <translation>Monitoring</translation>
     </message>
     <message>
-        <location line="+147"/>
+        <location line="+139"/>
+        <source>Abo-Modus: entfernt die (erfundene) Werbung. Kostet 9,99 € im Monat (Spielgeld).</source>
+        <translation>Subscription mode: removes the (made-up) ads. Costs €9.99 a month (play money).</translation>
+    </message>
+    <message>
+        <location line="+8"/>
         <source>&amp;Dunkles Design</source>
         <translation>&amp;Dark theme</translation>
     </message>
@@ -2360,7 +2365,12 @@ Administrator: additionally manage master data and users</translation>
         <translation>No critical faults open</translation>
     </message>
     <message>
-        <location line="+96"/>
+        <location line="+41"/>
+        <source>Danke für Ihr Abo! SolarMonitor Premium ist aktiv – werbefrei für 9,99 € im Monat. (Keine Sorge: Spielgeld.)</source>
+        <translation>Thanks for subscribing! SolarMonitor Premium is active – ad-free for €9.99 a month. (Don&apos;t worry: play money.)</translation>
+    </message>
+    <message>
+        <location line="+55"/>
         <source>Alle Status</source>
         <translation>All statuses</translation>
     </message>
@@ -2780,12 +2790,7 @@ Administrator: additionally manage master data and users</translation>
         <translation>SolarMonitor &amp;Premium (ad-free)</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>Abo-Modus: entfernt die (erfundene) Werbung. Kostet 0,00 €.</source>
-        <translation>Subscription mode: removes the (made-up) ads. Costs €0.00.</translation>
-    </message>
-    <message>
-        <location line="+18"/>
+        <location line="+21"/>
         <source>&amp;Intro beim Start</source>
         <translation>&amp;Intro at startup</translation>
     </message>
@@ -2815,12 +2820,7 @@ Administrator: additionally manage master data and users</translation>
         <translation>Payment cancelled – the ads stay.</translation>
     </message>
     <message>
-        <location line="+18"/>
-        <source>Danke für Ihr Abo! SolarMonitor Premium ist aktiv – werbefrei für sagenhafte 0,00 € im Monat.</source>
-        <translation>Thanks for subscribing! SolarMonitor Premium is active – ad-free for a whopping €0.00 a month.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+19"/>
         <source>Premium beendet. Die Werbung ist zurück.</source>
         <translation>Premium ended. The ads are back.</translation>
     </message>
@@ -4548,11 +4548,16 @@ Measured over land around Lake Constance, not straight across the water.</transl
     </message>
     <message>
         <location line="+1"/>
-        <source>Werbefrei mit SolarMonitor Premium – nur 0,00 €</source>
-        <translation>Ad-free with SolarMonitor Premium – only €0.00</translation>
+        <source>Werbefrei mit SolarMonitor Premium – nur 9,99 € im Monat</source>
+        <translation>Ad-free with SolarMonitor Premium – only €9.99 a month</translation>
     </message>
     <message>
-        <location line="+43"/>
+        <location line="+152"/>
+        <source>Keines dieser Produkte gibt es wirklich. Mit &lt;b&gt;SolarMonitor Premium&lt;/b&gt; verschwindet die Werbung – für nur 9,99 € im Monat (Spielgeld).</source>
+        <translation>None of these products actually exist. With &lt;b&gt;SolarMonitor Premium&lt;/b&gt; the ads disappear – for only €9.99 a month (play money).</translation>
+    </message>
+    <message>
+        <location line="-109"/>
         <source>Spaß-Werbung – mit SolarMonitor Premium verschwindet sie</source>
         <translation>Joke ad – SolarMonitor Premium makes it disappear</translation>
     </message>
@@ -4587,12 +4592,7 @@ Measured over land around Lake Constance, not straight across the water.</transl
         <translation>&lt;b&gt;Gotcha – this is just a joke ad.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Keines dieser Produkte gibt es wirklich. Mit &lt;b&gt;SolarMonitor Premium&lt;/b&gt; verschwindet die Werbung – für sagenhafte 0,00 € im Monat.</source>
-        <translation>None of these products actually exist. With &lt;b&gt;SolarMonitor Premium&lt;/b&gt; the ads disappear – for a whopping €0.00 a month.</translation>
-    </message>
-    <message>
-        <location line="+2"/>
+        <location line="+3"/>
         <source>Premium aktivieren</source>
         <translation>Activate Premium</translation>
     </message>
@@ -4806,8 +4806,8 @@ Your cart stays empty and your money stays with you.</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Bucht 0,00 € ab …</source>
-        <translation>Charging €0.00 …</translation>
+        <source>Bucht 9,99 € ab …</source>
+        <translation>Charging €9.99 …</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -4851,14 +4851,18 @@ Your cart stays empty and your money stays with you.</translation>
     </message>
     <message>
         <location line="+0"/>
-        <location line="+1"/>
-        <location line="+1"/>
+        <location line="+2"/>
         <location line="+90"/>
+        <source>9,99 €</source>
+        <translation>€9.99</translation>
+    </message>
+    <message>
+        <location line="-91"/>
         <source>0,00 €</source>
         <translation>€0.00</translation>
     </message>
     <message>
-        <location line="-91"/>
+        <location line="+0"/>
         <source>Einrichtungsgebühr</source>
         <translation>Setup fee</translation>
     </message>
@@ -5004,13 +5008,13 @@ Your cart stays empty and your money stays with you.</translation>
     </message>
     <message>
         <location line="+4"/>
-        <source>Jetzt abonnieren · 0,00 €</source>
-        <translation>Subscribe now · €0.00</translation>
+        <source>Jetzt abonnieren · 9,99 €</source>
+        <translation>Subscribe now · €9.99</translation>
     </message>
     <message>
         <location line="+10"/>
-        <source>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; ist aktiv.&lt;br&gt;Transaktion: %1&lt;br&gt;Betrag: 0,00 € · Zahlart: %2&lt;br&gt;Datum: %3</source>
-        <translation>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; is active.&lt;br&gt;Transaction: %1&lt;br&gt;Amount: €0.00 · Payment method: %2&lt;br&gt;Date: %3</translation>
+        <source>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; ist aktiv.&lt;br&gt;Transaktion: %1&lt;br&gt;Betrag: 9,99 € · Zahlart: %2&lt;br&gt;Datum: %3</source>
+        <translation>&lt;b&gt;SolarMonitor Premium&lt;/b&gt; is active.&lt;br&gt;Transaction: %1&lt;br&gt;Amount: €9.99 · Payment method: %2&lt;br&gt;Date: %3</translation>
     </message>
     <message>
         <location line="+4"/>
