@@ -218,8 +218,8 @@ für Solarparks):
   vierstelliger „Sonnen-PIN“ → Zahlart (Sonnenstunden, Kilowattkekse,
   Lächeln) → Prüfen mit AGB-Haken → Verarbeitung → Quittung. Nichts wird
   gespeichert oder gesendet, es fließt kein Geld. Herabstufen wirkt sofort;
-  gesperrte Einstellungen springen dann auf hell, Deutsch und Intro an
-  zurück. Über `--lang` bleibt jede Sprache auch ohne Ultimate wählbar.
+  gesperrte Einstellungen springen dann auf hell, Deutsch, Intro an und
+  die Dashboard-Anordnung „Standard“ zurück (ebenso beim Programmstart). Über `--lang` bleibt jede Sprache auch ohne Ultimate wählbar.
 - Farben: Dunkelblau (Seitenleiste) und Sonnen-Orange (Akzent, Hauptknöpfe);
   Grün/Orange/Rot nur für den Zustand der Anlagen. Alles steht in einem
   Stylesheet in `src/util/stil.cpp` (hell und dunkel), Grundlage ist der
