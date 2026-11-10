@@ -58,6 +58,8 @@
 #include "ui/karte_view.h"
 #include "ui/intro_animation.h"
 #include "ui/login_seite.h"
+#include "ui/benutzer_seite.h"
+#include "model/benutzer.h"
 #include "ui/datenordner_seite.h"
 #include "ui/pdf_bericht.h"
 #include "ui/pruefprotokoll_widget.h"
@@ -71,7 +73,8 @@
 #include "util/zeit.h"
 
 namespace {
-enum Reiter { ReiterUebersicht, ReiterAnlagen, ReiterStoerungen, ReiterKarte, ReiterStatistik, ReiterService, ReiterPruefung };
+enum Reiter { ReiterUebersicht, ReiterAnlagen, ReiterStoerungen, ReiterKarte, ReiterStatistik, ReiterService, ReiterPruefung,
+              ReiterBenutzer };
 const QString kQuelleJson = QStringLiteral("Verlauf (JSON)");
 
 QIcon farbIcon(const QColor& farbe)
@@ -228,7 +231,14 @@ QIcon avatar(const QString& name)
     f.setBold(true);
     p.setFont(f);
     p.setPen(kSonne);
-    p.drawText(QRectF(0, 0, 64, 64), Qt::AlignCenter, name.left(1).toUpper());
+    // Anfangsbuchstaben von Vor- und Nachname
+    const QStringList teile = name.split(QLatin1Char(' '), Qt::SkipEmptyParts);
+    QString kuerzel = teile.isEmpty() ? QStringLiteral("?") : teile.first().left(1);
+    if (teile.size() > 1 && teile.last().at(0).isLetter())
+        kuerzel += teile.last().left(1);
+    f.setPixelSize(kuerzel.size() > 1 ? 23 : 26);
+    p.setFont(f);
+    p.drawText(QRectF(0, 0, 64, 64), Qt::AlignCenter, kuerzel.toUpper());
     p.end();
     return QIcon(pm);
 }
@@ -239,6 +249,7 @@ MainWindow::MainWindow(std::unique_ptr<Datensatz> datensatz, QWidget* parent)
 {
     m_undo = new QUndoStack(this);
     m_undo->setUndoLimit(100);
+    m_benutzer = new Benutzerverwaltung(this);
     uebernimmDaten(std::move(datensatz));
 
     resize(1440, 900);
@@ -314,6 +325,7 @@ void MainWindow::trenneDaten()
     m_seitenTitel = m_seitenHinweis = m_analyseText = nullptr;
     m_anlagenLeer = m_stoerungenLeer = m_anlagenZaehler = m_stoerungsZaehler = nullptr;
     m_glocke = nullptr;
+    m_benutzerKnopf = nullptr;
     m_navigation = nullptr;
     m_anlageInfo = nullptr;
     m_filterReset = nullptr;
@@ -377,7 +389,7 @@ void MainWindow::neueLoginSeite()
         m_ebenen->removeWidget(m_login);
         m_login->deleteLater();
     }
-    m_login = new LoginSeite;
+    m_login = new LoginSeite(m_benutzer);
     m_ebenen->insertWidget(stelle, m_login);
     connect(m_login, &LoginSeite::angemeldet, this, &MainWindow::angemeldet);
     connect(m_login, &LoginSeite::abgebrochen, this, [this] {
@@ -449,8 +461,14 @@ void MainWindow::zeigeDatenordner(const QString& fehler, bool zurueckMoeglich)
     m_ordnerSeite->vorbereiten(m_datenOrdner, fehler, zurueckMoeglich);
 }
 
-void MainWindow::angemeldet(Rolle rolle)
+void MainWindow::angemeldet(const QString& kennung)
 {
+    const Benutzer* b = m_benutzer->finde(kennung);
+    if (!b)
+        return;
+    const Rolle rolle = b->rolle;
+    const bool andererBenutzer = kennung != m_angemeldet;
+    m_angemeldet = kennung;
     if (!m_datenFehler.isEmpty()) {
         // Keine Daten: erst den Datenordner festlegen lassen
         m_kontext.rolle = rolle;
@@ -459,7 +477,7 @@ void MainWindow::angemeldet(Rolle rolle)
     }
     const bool wechsel = m_programm != nullptr;
     // Die neue Rolle darf die Änderungen der vorherigen nicht rückgängig machen
-    if (wechsel && rolle != m_kontext.rolle)
+    if (wechsel && (rolle != m_kontext.rolle || andererBenutzer))
         m_undo->clear();
     m_kontext.rolle = rolle;
     baueUi();
@@ -467,7 +485,7 @@ void MainWindow::angemeldet(Rolle rolle)
     if (!wechsel)
         QTimer::singleShot(0, m_kontext.analyse, &FlottenAnalyse::starte); // Auswertung im Hintergrund
     else
-        meldung(tr("Angemeldet als %1.").arg(Rollen::anzeigename(m_kontext.rolle)), 5000);
+        meldung(tr("Angemeldet als %1.").arg(b->name), 5000);
 }
 
 void MainWindow::setzeVollbild(bool an)
@@ -593,6 +611,27 @@ void MainWindow::baueUi()
     m_tabs->addWidget(seite(tr("Datenprüfung"),
                             tr("Auffälligkeiten beim Einlesen der Dateien und automatische Korrekturen"), pruefung));
 
+    // Benutzerverwaltung nur für Administratoren
+    if (m_kontext.darf(Recht::BenutzerVerwalten)) {
+        auto* benutzerSeite = new BenutzerSeite(m_benutzer, m_angemeldet);
+        connect(benutzerSeite, &BenutzerSeite::meldung, this,
+                [this](const QString& text, bool hinweis) { meldung(text, hinweis ? 3500 : 5000, hinweis); });
+        // eigenen Namen in der Kopfzeile aktuell halten
+        connect(m_benutzer, &Benutzerverwaltung::geaendert, benutzerSeite, [this] {
+            if (const Benutzer* b = m_benutzer->finde(m_angemeldet))
+                if (m_benutzerKnopf) {
+                    m_benutzerKnopf->setText(QStringLiteral("%1   ").arg(b->name));
+                    m_benutzerKnopf->setIcon(avatar(b->name));
+                }
+        });
+        benutzerSeite->aktionNeu()->setProperty("primaer", true);
+        m_tabs->addWidget(seite(tr("Benutzerverwaltung"),
+                                tr("Konten anlegen, Rollen vergeben, PINs zurücksetzen und Zugänge sperren"),
+                                benutzerSeite,
+                                {benutzerSeite->aktionBearbeiten(), benutzerSeite->aktionPin(),
+                                 benutzerSeite->aktionLoeschen(), nullptr, benutzerSeite->aktionNeu()}));
+    }
+
     // Seitenleiste links, rechts Kopfzeile und Inhalt
     auto* rechts = new QWidget;
     auto* rv = new QVBoxLayout(rechts);
@@ -662,7 +701,7 @@ QWidget* MainWindow::seite(const QString& titel, const QString& hinweis, QWidget
                 k->setPopupMode(QToolButton::InstantPopup);
                 k->setProperty("menue", true);
             }
-            const bool primaer = a == m_aktStoerung;
+            const bool primaer = a->property("primaer").toBool();
             const bool nurSymbol = a == m_aktRueckgaengig || a == m_aktWiederholen;
             k->setObjectName(primaer ? QStringLiteral("SeitenAktionPrimaer") : QStringLiteral("SeitenAktion"));
             k->setProperty("nurSymbol", nurSymbol);
@@ -760,6 +799,10 @@ QWidget* MainWindow::baueNavigation()
     eintrag(Stil::Symbol::Statistik, tr("Statistik"), ReiterStatistik);
     eintrag(Stil::Symbol::Werkzeug, tr("Serviceplanung"), ReiterService);
     eintrag(Stil::Symbol::Pruefung, tr("Datenprüfung"), ReiterPruefung);
+    if (m_kontext.darf(Recht::BenutzerVerwalten)) {
+        abschnitt(tr("Verwaltung"));
+        eintrag(Stil::Symbol::Benutzer, tr("Benutzerverwaltung"), ReiterBenutzer);
+    }
     connect(m_navigation, &QListWidget::currentItemChanged, this, [this](QListWidgetItem* it) {
         if (it && it->data(kSeiteRolle).toInt() >= 0)
             m_tabs->setCurrentIndex(it->data(kSeiteRolle).toInt());
@@ -826,15 +869,17 @@ QWidget* MainWindow::baueKopfzeile()
 
     // Benutzer mit Menü (Konto, Darstellung, Sprache, Programm)
     const QString rolle = Rollen::anzeigename(m_kontext.rolle);
+    const Benutzer* ich = m_benutzer->finde(m_angemeldet);
+    const QString name = ich ? ich->name : rolle;
     auto* benutzer = new QToolButton(kopf);
     benutzer->setObjectName(QStringLiteral("BenutzerKnopf"));
-    benutzer->setIcon(avatar(rolle));
+    benutzer->setIcon(avatar(name));
     benutzer->setIconSize(QSize(32, 32));
-    benutzer->setText(QStringLiteral("%1   ").arg(rolle));
+    benutzer->setText(QStringLiteral("%1   ").arg(name));
     benutzer->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     benutzer->setPopupMode(QToolButton::InstantPopup);
     benutzer->setCursor(Qt::PointingHandCursor);
-    benutzer->setToolTip(tr("Angemeldet als %1").arg(rolle));
+    benutzer->setToolTip(tr("Angemeldet als %1 (%2)").arg(name, rolle));
     auto* menue = new QMenu(benutzer);
     menue->addAction(Stil::icon(Stil::Symbol::Benutzer, Stil::text()), tr("Benutzer &wechseln …"), this,
                      &MainWindow::benutzerWechseln);
@@ -859,8 +904,8 @@ QWidget* MainWindow::baueKopfzeile()
     connect(intro, &QAction::toggled, this, [](bool an) { QSettings().setValue(QStringLiteral("intro"), an); });
     QMenu* sprache = menue->addMenu(tr("&Sprache"));
     auto* sprachen = new QActionGroup(sprache);
-    for (const auto& [kuerzel, name] : Sprache::verfuegbar()) {
-        QAction* a = sprache->addAction(name);
+    for (const auto& [kuerzel, sprachName] : Sprache::verfuegbar()) {
+        QAction* a = sprache->addAction(sprachName);
         a->setCheckable(true);
         a->setChecked(Sprache::aktuell() == kuerzel);
         sprachen->addAction(a);
@@ -876,6 +921,7 @@ QWidget* MainWindow::baueKopfzeile()
     beenden->setShortcut(QKeySequence::Quit);
     addAction(beenden);
     benutzer->setMenu(menue);
+    m_benutzerKnopf = benutzer;
 
     auto* h = new QHBoxLayout(kopf);
     h->setContentsMargins(24, 0, 18, 0);
@@ -1346,6 +1392,7 @@ void MainWindow::erzeugeAktionen()
     m_aktPdfFlotte = new QAction(Stil::icon(Stil::Symbol::Pdf, f), tr("&Flottenbericht als PDF …"), this);
     connect(m_aktPdfFlotte, &QAction::triggered, this, &MainWindow::exportiereFlottenPdf);
 
+    m_aktStoerung->setProperty("primaer", true); // Hauptbefehl der Seite, orange hervorgehoben
     m_aktAnalyse = new QAction(Stil::icon(Stil::Symbol::Neuladen, f), tr("Analyse neu starten"), this);
     m_aktAnalyse->setToolTip(tr("Verläufe aller Anlagen erneut auswerten"));
     connect(m_aktAnalyse, &QAction::triggered, this, [this] { m_kontext.analyse->starte(); });

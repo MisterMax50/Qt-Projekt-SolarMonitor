@@ -20,6 +20,7 @@ set(PROJEKT_HEADER
     src/model/anlage.h
     src/model/datenbasis.h
     src/model/datensatz.h
+    src/model/benutzer.h
     src/model/pruefmeldung.h
     src/model/rolle.h
     src/model/stoerung.h
@@ -58,6 +59,7 @@ set(PROJEKT_HEADER
     src/ui/intro_animation.h
     src/ui/datenordner_seite.h
     src/ui/anordnungs_raster.h
+    src/ui/benutzer_seite.h
     src/ui/pdf_bericht.h
     src/ui/pruefprotokoll_widget.h
     src/ui/serviceplanung.h
@@ -72,6 +74,7 @@ set(PROJEKT_QUELLEN
     src/main.cpp
     src/model/datenbasis.cpp
     src/model/datensatz.cpp
+    src/model/benutzer.cpp
     src/model/rolle.cpp
     src/repo/csv_parser.cpp
     src/repo/routen_dienst.cpp
@@ -99,6 +102,7 @@ set(PROJEKT_QUELLEN
     src/ui/intro_animation.cpp
     src/ui/datenordner_seite.cpp
     src/ui/anordnungs_raster.cpp
+    src/ui/benutzer_seite.cpp
     src/ui/pdf_bericht.cpp
     src/ui/pruefprotokoll_widget.cpp
     src/ui/serviceplanung.cpp

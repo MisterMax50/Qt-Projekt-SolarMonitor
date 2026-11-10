@@ -8,7 +8,7 @@
  *
  *  - Betrieb : Lesen, Auswertungen, Berichte exportieren
  *  - Service : zusätzlich Störungen erfassen und bearbeiten
- *  - Admin   : zusätzlich Stammdaten bearbeiten und exportieren
+ *  - Admin   : zusätzlich Stammdaten bearbeiten und exportieren, Benutzer verwalten
  *
  * Alle Rechteabfragen der Oberfläche laufen über @ref darf, damit das
  * Konzept an genau einer Stelle definiert ist.
@@ -19,7 +19,8 @@ enum class Recht {
     BerichtExportieren,
     StoerungBearbeiten,   ///< Störung erfassen / Status ändern
     StammdatenBearbeiten,
-    StammdatenExportieren
+    StammdatenExportieren,
+    BenutzerVerwalten     ///< Benutzer anlegen, bearbeiten, sperren, löschen
 };
 
 class Rollen {
@@ -31,6 +32,4 @@ public:
     static QString anzeigename(Rolle rolle);      ///< übersetzter Name
     static bool ausKennung(const QString& kennung, Rolle* rolle);
 
-    /// Prüft die PIN gegen den hinterlegten SHA-256-Hash.
-    static bool pinKorrekt(Rolle rolle, const QString& pin);
 };

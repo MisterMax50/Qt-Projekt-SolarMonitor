@@ -1,5 +1,9 @@
 #include "login_seite.h"
 
+#include <QSettings>
+
+#include "model/benutzer.h"
+
 #include <QComboBox>
 #include <QFrame>
 #include <QGraphicsDropShadowEffect>
@@ -19,8 +23,9 @@ constexpr int kMaxVersuche = 3;
 constexpr int kSperreSekunden = 30;
 } // namespace
 
-LoginSeite::LoginSeite(QWidget* parent)
+LoginSeite::LoginSeite(Benutzerverwaltung* benutzer, QWidget* parent)
     : QWidget(parent)
+    , m_benutzer(benutzer)
 {
     setObjectName(QStringLiteral("Anmeldeseite"));
     setAttribute(Qt::WA_StyledBackground, true);
@@ -36,18 +41,17 @@ LoginSeite::LoginSeite(QWidget* parent)
     untertitel->setWordWrap(true);
     auto* anmeldenTitel = new QLabel(tr("Anmelden"), this);
     anmeldenTitel->setObjectName(QStringLiteral("AnmeldenTitel"));
-    auto* anmeldenText = new QLabel(tr("Melden Sie sich mit Ihrer Rolle und PIN an."), this);
+    auto* anmeldenText = new QLabel(tr("Melden Sie sich mit Ihrem Benutzer und Ihrer PIN an."), this);
     anmeldenText->setObjectName(QStringLiteral("Gedimmt"));
     auto* hinweis = new QLabel(tr("Demo-Zugänge: betrieb / 0000, service / 5678, admin / 1234"), this);
     hinweis->setObjectName(QStringLiteral("Gedimmt"));
     hinweis->setWordWrap(true);
 
-    m_rollen = new QComboBox(this);
-    for (Rolle r : {Rolle::Betrieb, Rolle::Service, Rolle::Admin})
-        m_rollen->addItem(Rollen::anzeigename(r), int(r));
-    m_rollen->setToolTip(tr("Betrieb: lesen und auswerten\n"
-                            "Service: zusätzlich Störungen erfassen und bearbeiten\n"
-                            "Administrator: zusätzlich Stammdaten bearbeiten und exportieren"));
+    m_benutzerWahl = new QComboBox(this);
+    m_benutzerWahl->setToolTip(tr("Betrieb: lesen und auswerten\n"
+                                  "Service: zusätzlich Störungen erfassen und bearbeiten\n"
+                                  "Administrator: zusätzlich Stammdaten und Benutzer verwalten"));
+    connect(m_benutzerWahl, &QComboBox::activated, this, [this] { m_pin->setFocus(); });
 
     m_pin = new QLineEdit(this);
     m_pin->setEchoMode(QLineEdit::Password);
@@ -61,7 +65,7 @@ LoginSeite::LoginSeite(QWidget* parent)
     auto* form = new QFormLayout;
     form->setVerticalSpacing(10);
     form->setLabelAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    form->addRow(tr("Rolle:"), m_rollen);
+    form->addRow(tr("Benutzer:"), m_benutzerWahl);
     form->addRow(tr("PIN:"), m_pin);
 
     m_anmelden = new QPushButton(tr("Anmelden"), this);
@@ -127,8 +131,21 @@ LoginSeite::LoginSeite(QWidget* parent)
     connect(m_sperrTimer, &QTimer::timeout, this, &LoginSeite::sperreTick);
 }
 
+void LoginSeite::fuelleBenutzer()
+{
+    // aktive Konten, zuletzt angemeldeter Benutzer vorausgewählt
+    const QString zuletzt = QSettings().value(QStringLiteral("letzterBenutzer")).toString();
+    m_benutzerWahl->clear();
+    for (const Benutzer& b : m_benutzer->alle())
+        if (b.aktiv)
+            m_benutzerWahl->addItem(QStringLiteral("%1 – %2").arg(b.name, Rollen::anzeigename(b.rolle)), b.kennung);
+    const int i = m_benutzerWahl->findData(zuletzt);
+    m_benutzerWahl->setCurrentIndex(i >= 0 ? i : 0);
+}
+
 void LoginSeite::vorbereiten(bool zurueckMoeglich)
 {
+    fuelleBenutzer();
     m_abbrechen->setText(zurueckMoeglich ? tr("Zurück") : tr("Beenden"));
     m_pin->clear();
     if (m_restSekunden <= 0)
@@ -141,11 +158,12 @@ void LoginSeite::anmelden()
     if (m_restSekunden > 0)
         return;
 
-    const auto rolle = static_cast<Rolle>(m_rollen->currentData().toInt());
-    if (Rollen::pinKorrekt(rolle, m_pin->text())) {
+    const QString kennung = m_benutzerWahl->currentData().toString();
+    if (m_benutzer->anmelden(kennung, m_pin->text())) {
         m_fehlversuche = 0;
         m_pin->clear();
-        emit angemeldet(rolle);
+        QSettings().setValue(QStringLiteral("letzterBenutzer"), kennung);
+        emit angemeldet(kennung);
         return;
     }
 

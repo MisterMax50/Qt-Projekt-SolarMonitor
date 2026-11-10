@@ -459,6 +459,300 @@
     </message>
 </context>
 <context>
+    <name>BenutzerDialog</name>
+    <message>
+        <location filename="../src/ui/benutzer_seite.cpp" line="+48"/>
+        <source>Benutzer bearbeiten – %1</source>
+        <translation>Benutzer bearbeiten – %1</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Neuer Benutzer</source>
+        <translation>Neuer Benutzer</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>z. B. Max Mustermann</source>
+        <translation>z. B. Max Mustermann</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>z. B. mmustermann</source>
+        <translation>z. B. mmustermann</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Betrieb: ansehen und auswerten
+Service: zusätzlich Störungen erfassen und bearbeiten
+Administrator: zusätzlich Stammdaten und Benutzer verwalten</source>
+        <translation>Betrieb: ansehen und auswerten
+Service: zusätzlich Störungen erfassen und bearbeiten
+Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Konto aktiv (Anmeldung erlaubt)</source>
+        <translation>Konto aktiv (Anmeldung erlaubt)</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Name:</source>
+        <translation>Name:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Benutzername:</source>
+        <translation>Benutzername:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Rolle:</source>
+        <translation>Rolle:</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Neue PIN:</source>
+        <translation>Neue PIN:</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>PIN:</source>
+        <translation>PIN:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>PIN wiederholen:</source>
+        <translation>PIN wiederholen:</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>PIN-Felder leer lassen, um die PIN nicht zu ändern. PIN: 4 bis 8 Ziffern.</source>
+        <translation>PIN-Felder leer lassen, um die PIN nicht zu ändern. PIN: 4 bis 8 Ziffern.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>PIN: 4 bis 8 Ziffern. Sie wird nur verschlüsselt (gehasht) gespeichert.</source>
+        <translation>PIN: 4 bis 8 Ziffern. Sie wird nur verschlüsselt (gehasht) gespeichert.</translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>Die eigene Rolle kann nicht geändert werden.</source>
+        <translation>Die eigene Rolle kann nicht geändert werden.</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Die beiden PINs stimmen nicht überein.</source>
+        <translation>Die beiden PINs stimmen nicht überein.</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Die PIN muss aus 4 bis 8 Ziffern bestehen.</source>
+        <translation>Die PIN muss aus 4 bis 8 Ziffern bestehen.</translation>
+    </message>
+</context>
+<context>
+    <name>BenutzerSeite</name>
+    <message>
+        <location line="+23"/>
+        <source>Neuer Benutzer …</source>
+        <translation>Neuer Benutzer …</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Bearbeiten …</source>
+        <translation>Bearbeiten …</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>PIN zurücksetzen …</source>
+        <translation>PIN zurücksetzen …</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Löschen</source>
+        <translation>Löschen</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Name</source>
+        <translation>Name</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Benutzername</source>
+        <translation>Benutzername</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Rolle</source>
+        <translation>Rolle</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Status</source>
+        <translation>Status</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Letzte Anmeldung</source>
+        <translation>Letzte Anmeldung</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Angelegt</source>
+        <translation>Angelegt</translation>
+    </message>
+    <message>
+        <location line="+40"/>
+        <source>%1 (Sie)</source>
+        <translation>%1 (Sie)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>aktiv</source>
+        <translation>aktiv</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>gesperrt</source>
+        <translation>gesperrt</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>noch nie</source>
+        <translation>noch nie</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>%1 Benutzer, davon %2 aktiv · gespeichert in %3</source>
+        <translation>%1 Benutzer, davon %2 aktiv · gespeichert in %3</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Das eigene Konto kann nicht gelöscht werden.</source>
+        <translation>Das eigene Konto kann nicht gelöscht werden.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Benutzer angelegt.</source>
+        <translation>Benutzer angelegt.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+13"/>
+        <location line="+21"/>
+        <source>Bitte zuerst einen Benutzer in der Liste auswählen.</source>
+        <translation>Bitte zuerst einen Benutzer in der Liste auswählen.</translation>
+    </message>
+    <message>
+        <location line="-29"/>
+        <source>Änderungen gespeichert.</source>
+        <translation>Änderungen gespeichert.</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <location line="+9"/>
+        <source>PIN zurücksetzen</source>
+        <translation>PIN zurücksetzen</translation>
+    </message>
+    <message>
+        <location line="-8"/>
+        <source>Neue PIN für %1 (4 bis 8 Ziffern):</source>
+        <translation>Neue PIN für %1 (4 bis 8 Ziffern):</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>PIN für %1 geändert.</source>
+        <translation>PIN für %1 geändert.</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <location line="+10"/>
+        <source>Benutzer löschen</source>
+        <translation>Benutzer löschen</translation>
+    </message>
+    <message>
+        <location line="-9"/>
+        <source>Soll der Benutzer „%1“ (%2) wirklich gelöscht werden?
+Tipp: Statt zu löschen kann das Konto auch gesperrt werden.</source>
+        <translation>Soll der Benutzer „%1“ (%2) wirklich gelöscht werden?
+Tipp: Statt zu löschen kann das Konto auch gesperrt werden.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Benutzer „%1“ gelöscht.</source>
+        <translation>Benutzer „%1“ gelöscht.</translation>
+    </message>
+</context>
+<context>
+    <name>Benutzerverwaltung</name>
+    <message>
+        <location filename="../src/model/benutzer.cpp" line="+95"/>
+        <source>Betrieb (Demo)</source>
+        <translation>Betrieb (Demo)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Service (Demo)</source>
+        <translation>Service (Demo)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Administrator (Demo)</source>
+        <translation>Administrator (Demo)</translation>
+    </message>
+    <message>
+        <location line="+77"/>
+        <source>Die Benutzerdatei konnte nicht gespeichert werden: %1</source>
+        <translation>Die Benutzerdatei konnte nicht gespeichert werden: %1</translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>Der Benutzername muss 2–32 Zeichen lang sein und darf nur Kleinbuchstaben, Ziffern, Punkt, Binde- und Unterstrich enthalten.</source>
+        <translation>Der Benutzername muss 2–32 Zeichen lang sein und darf nur Kleinbuchstaben, Ziffern, Punkt, Binde- und Unterstrich enthalten.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Den Benutzernamen „%1“ gibt es bereits.</source>
+        <translation>Den Benutzernamen „%1“ gibt es bereits.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location line="+27"/>
+        <source>Bitte einen Namen angeben.</source>
+        <translation>Bitte einen Namen angeben.</translation>
+    </message>
+    <message>
+        <location line="-25"/>
+        <location line="+49"/>
+        <source>Die PIN muss aus 4 bis 8 Ziffern bestehen.</source>
+        <translation>Die PIN muss aus 4 bis 8 Ziffern bestehen.</translation>
+    </message>
+    <message>
+        <location line="-26"/>
+        <location line="+24"/>
+        <location line="+21"/>
+        <source>Den Benutzer „%1“ gibt es nicht.</source>
+        <translation>Den Benutzer „%1“ gibt es nicht.</translation>
+    </message>
+    <message>
+        <location line="-41"/>
+        <source>Die eigene Rolle kann nicht geändert und das eigene Konto nicht gesperrt werden.</source>
+        <translation>Die eigene Rolle kann nicht geändert und das eigene Konto nicht gesperrt werden.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location line="+41"/>
+        <source>Es muss mindestens ein aktiver Administrator bleiben.</source>
+        <translation>Es muss mindestens ein aktiver Administrator bleiben.</translation>
+    </message>
+    <message>
+        <location line="-5"/>
+        <source>Das eigene Konto kann nicht gelöscht werden.</source>
+        <translation>Das eigene Konto kann nicht gelöscht werden.</translation>
+    </message>
+</context>
+<context>
     <name>CsvReader</name>
     <message>
         <location filename="../src/repo/csv_parser.cpp" line="+86"/>
@@ -1654,7 +1948,7 @@ Grund: %1</translation>
 <context>
     <name>KachelLader</name>
     <message>
-        <location filename="../src/ui/kachel_lader.cpp" line="+145"/>
+        <location filename="../src/ui/kachel_lader.cpp" line="+161"/>
         <source>Hintergrundkarte: nur gespeicherte Kacheln (offline)</source>
         <translation>Hintergrundkarte: nur gespeicherte Kacheln (offline)</translation>
     </message>
@@ -1672,7 +1966,7 @@ Grund: %1</translation>
 <context>
     <name>KarteView</name>
     <message>
-        <location filename="../src/ui/karte_view.cpp" line="+588"/>
+        <location filename="../src/ui/karte_view.cpp" line="+655"/>
         <source>Wetterstation</source>
         <translation>Wetterstation</translation>
     </message>
@@ -1829,44 +2123,44 @@ PR %1</translation>
 <context>
     <name>LoginSeite</name>
     <message>
-        <location filename="../src/ui/login_seite.cpp" line="+34"/>
+        <location filename="../src/ui/login_seite.cpp" line="+39"/>
         <source>Überwachung und Service für die PV-Flotte rund um den Bodensee</source>
         <translation>Überwachung und Service für die PV-Flotte rund um den Bodensee</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location line="+30"/>
+        <location line="+29"/>
         <source>Anmelden</source>
         <translation>Anmelden</translation>
     </message>
     <message>
-        <location line="-28"/>
-        <source>Melden Sie sich mit Ihrer Rolle und PIN an.</source>
-        <translation>Melden Sie sich mit Ihrer Rolle und PIN an.</translation>
-    </message>
-    <message>
-        <location line="+2"/>
+        <location line="-25"/>
         <source>Demo-Zugänge: betrieb / 0000, service / 5678, admin / 1234</source>
         <translation>Demo-Zugänge: betrieb / 0000, service / 5678, admin / 1234</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>PIN</source>
+        <translation>PIN</translation>
+    </message>
+    <message>
+        <location line="-15"/>
+        <source>Melden Sie sich mit Ihrem Benutzer und Ihrer PIN an.</source>
+        <translation>Melden Sie sich mit Ihrem Benutzer und Ihrer PIN an.</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Betrieb: lesen und auswerten
 Service: zusätzlich Störungen erfassen und bearbeiten
-Administrator: zusätzlich Stammdaten bearbeiten und exportieren</source>
+Administrator: zusätzlich Stammdaten und Benutzer verwalten</source>
         <translation>Betrieb: lesen und auswerten
 Service: zusätzlich Störungen erfassen und bearbeiten
-Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
+Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
     </message>
     <message>
-        <location line="+7"/>
-        <source>PIN</source>
-        <translation>PIN</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Rolle:</source>
-        <translation>Rolle:</translation>
+        <location line="+17"/>
+        <source>Benutzer:</source>
+        <translation>Benutzer:</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1875,7 +2169,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
     </message>
     <message>
         <location line="+4"/>
-        <location line="+63"/>
+        <location line="+76"/>
         <source>Beenden</source>
         <translation>Beenden</translation>
     </message>
@@ -1885,7 +2179,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Zurück</translation>
     </message>
     <message>
-        <location line="+31"/>
+        <location line="+32"/>
         <source>PIN falsch (Versuch %1 von %2).</source>
         <translation>PIN falsch (Versuch %1 von %2).</translation>
     </message>
@@ -1898,78 +2192,78 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="+417"/>
+        <location filename="../src/ui/mainwindow.cpp" line="+429"/>
         <source>SolarMonitor – Monitoring der PV-Flotte</source>
         <translation>SolarMonitor – Monitoring der PV-Flotte</translation>
     </message>
     <message>
-        <location line="+146"/>
-        <location line="+193"/>
+        <location line="+152"/>
+        <location line="+214"/>
         <source>Anlagen</source>
         <translation>Anlagen</translation>
     </message>
     <message>
-        <location line="-193"/>
+        <location line="-214"/>
         <source>Alle PV-Anlagen der Flotte · Doppelklick öffnet die Details</source>
         <translation>Alle PV-Anlagen der Flotte · Doppelklick öffnet die Details</translation>
     </message>
     <message>
         <location line="+4"/>
-        <location line="+190"/>
+        <location line="+211"/>
         <source>Störungen</source>
         <translation>Störungen</translation>
     </message>
     <message>
-        <location line="-190"/>
+        <location line="-211"/>
         <source>Störungsmeldungen seit 2024 · Rechtsklick ändert den Status</source>
         <translation>Störungsmeldungen seit 2024 · Rechtsklick ändert den Status</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location line="+185"/>
+        <location line="+206"/>
         <source>Karte</source>
         <translation>Karte</translation>
     </message>
     <message>
-        <location line="-185"/>
+        <location line="-206"/>
         <source>Lage der Anlagen und Wetterstationen · Mausrad zoomt, Klick öffnet eine Anlage</source>
         <translation>Lage der Anlagen und Wetterstationen · Mausrad zoomt, Klick öffnet eine Anlage</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location line="+184"/>
+        <location line="+205"/>
         <source>Statistik</source>
         <translation>Statistik</translation>
     </message>
     <message>
-        <location line="-184"/>
+        <location line="-205"/>
         <source>Kennzahlen und Auswertungen über die gesamte Flotte</source>
         <translation>Kennzahlen und Auswertungen über die gesamte Flotte</translation>
     </message>
     <message>
         <location line="+11"/>
-        <location line="+174"/>
+        <location line="+195"/>
         <source>Serviceplanung</source>
         <translation>Serviceplanung</translation>
     </message>
     <message>
-        <location line="-173"/>
+        <location line="-194"/>
         <source>Welche Anlagen zuerst? Sortiert nach Priorität und geschätztem Ertragsverlust</source>
         <translation>Welche Anlagen zuerst? Sortiert nach Priorität und geschätztem Ertragsverlust</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location line="+169"/>
+        <location line="+190"/>
         <source>Datenprüfung</source>
         <translation>Datenprüfung</translation>
     </message>
     <message>
-        <location line="-168"/>
+        <location line="-189"/>
         <source>Auffälligkeiten beim Einlesen der Dateien und automatische Korrekturen</source>
         <translation>Auffälligkeiten beim Einlesen der Dateien und automatische Korrekturen</translation>
     </message>
     <message>
-        <location line="+127"/>
+        <location line="+148"/>
         <source>PV-Flotte Bodensee</source>
         <translation>PV-Flotte Bodensee</translation>
     </message>
@@ -1979,12 +2273,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Überwachung</translation>
     </message>
     <message>
-        <location line="+83"/>
-        <source>Angemeldet als %1</source>
-        <translation>Angemeldet als %1</translation>
-    </message>
-    <message>
-        <location line="+8"/>
+        <location line="+97"/>
         <source>&amp;Dunkles Design</source>
         <translation>&amp;Dunkles Design</translation>
     </message>
@@ -1999,7 +2288,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>&amp;Sprache</translation>
     </message>
     <message>
-        <location line="+85"/>
+        <location line="+86"/>
         <source>%1 offene Störungen, davon %2 kritisch</source>
         <translation>%1 offene Störungen, davon %2 kritisch</translation>
     </message>
@@ -2060,13 +2349,13 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Filter zurücksetzen</translation>
     </message>
     <message>
-        <location line="-492"/>
-        <location line="+201"/>
+        <location line="-520"/>
+        <location line="+222"/>
         <source>Übersicht</source>
         <translation>Übersicht</translation>
     </message>
     <message>
-        <location line="+195"/>
+        <location line="+202"/>
         <source>%1 Anlagen mit erkanntem Fehlerbild</source>
         <translation>%1 Anlagen mit erkanntem Fehlerbild</translation>
     </message>
@@ -2146,7 +2435,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>&amp;Flottenbericht als PDF …</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+4"/>
         <source>Analyse neu starten</source>
         <translation>Analyse neu starten</translation>
     </message>
@@ -2198,7 +2487,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Wiederholen: %1 (Strg+Y)</translation>
     </message>
     <message>
-        <location line="-530"/>
+        <location line="-532"/>
         <source>Benutzer &amp;wechseln …</source>
         <translation>Benutzer &amp;wechseln …</translation>
     </message>
@@ -2218,7 +2507,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>&amp;Über SolarMonitor</translation>
     </message>
     <message>
-        <location line="+78"/>
+        <location line="+79"/>
         <source>%1 Fehler beim Einlesen</source>
         <translation>%1 Fehler beim Einlesen</translation>
     </message>
@@ -2269,12 +2558,12 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Anlage:</translation>
     </message>
     <message>
-        <location line="-556"/>
+        <location line="-563"/>
         <source>Exportieren</source>
         <translation>Exportieren</translation>
     </message>
     <message>
-        <location line="+717"/>
+        <location line="+725"/>
         <source>Nur für die Rolle Administrator.</source>
         <translation>Nur für die Rolle Administrator.</translation>
     </message>
@@ -2349,7 +2638,7 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Änderungsverlauf …</translation>
     </message>
     <message>
-        <location line="-1010"/>
+        <location line="-1045"/>
         <source>Daten werden geladen …</source>
         <translation>Daten werden geladen …</translation>
     </message>
@@ -2369,17 +2658,38 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Datenordner – SolarMonitor</translation>
     </message>
     <message>
-        <location line="+110"/>
+        <location line="+116"/>
         <source>Zustand der Flotte auf einen Blick · Kacheln und Karten lassen sich per Ziehen verschieben</source>
         <translation>Zustand der Flotte auf einen Blick · Kacheln und Karten lassen sich per Ziehen verschieben</translation>
     </message>
     <message>
-        <location line="+205"/>
+        <location line="+56"/>
+        <location line="+176"/>
+        <source>Benutzerverwaltung</source>
+        <translation>Benutzerverwaltung</translation>
+    </message>
+    <message>
+        <location line="-175"/>
+        <source>Konten anlegen, Rollen vergeben, PINs zurücksetzen und Zugänge sperren</source>
+        <translation>Konten anlegen, Rollen vergeben, PINs zurücksetzen und Zugänge sperren</translation>
+    </message>
+    <message>
+        <location line="+169"/>
         <source>Auswertung</source>
         <translation>Auswertung</translation>
     </message>
     <message>
-        <location line="+83"/>
+        <location line="+5"/>
+        <source>Verwaltung</source>
+        <translation>Verwaltung</translation>
+    </message>
+    <message>
+        <location line="+79"/>
+        <source>Angemeldet als %1 (%2)</source>
+        <translation>Angemeldet als %1 (%2)</translation>
+    </message>
+    <message>
+        <location line="+5"/>
         <source>Daten&amp;ordner ändern …</source>
         <translation>Daten&amp;ordner ändern …</translation>
     </message>
@@ -2394,12 +2704,12 @@ Administrator: zusätzlich Stammdaten bearbeiten und exportieren</translation>
         <translation>Logo-Animation beim Programmstart zeigen</translation>
     </message>
     <message>
-        <location line="+36"/>
+        <location line="+37"/>
         <source>SolarMonitor beenden (Strg+Q)</source>
         <translation>SolarMonitor beenden (Strg+Q)</translation>
     </message>
     <message>
-        <location line="+548"/>
+        <location line="+549"/>
         <source>Bitte zuerst eine Anlage in der Liste auswählen.</source>
         <translation>Bitte zuerst eine Anlage in der Liste auswählen.</translation>
     </message>
@@ -2579,12 +2889,12 @@ Jetzt öffnen?</translation>
         <translation>&lt;Ausgangszustand nach dem Laden&gt;</translation>
     </message>
     <message>
-        <location line="-1311"/>
+        <location line="-1340"/>
         <source>Angemeldet als %1.</source>
         <translation>Angemeldet als %1.</translation>
     </message>
     <message>
-        <location line="+1330"/>
+        <location line="+1359"/>
         <source>Über SolarMonitor</source>
         <translation>Über SolarMonitor</translation>
     </message>

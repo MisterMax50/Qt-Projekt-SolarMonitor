@@ -59,16 +59,35 @@ der Anmeldung (`src/ui/datenordner_seite.*`).
 Kommandozeile: `--daten <ordner>` (Datenordner), `--lang de|en|fr|zh`
 (Startsprache), `--kein-intro`.
 
-## Anmeldung (Rollen)
+## Anmeldung, Rollen und Benutzerverwaltung
 
-| Rolle      | PIN  | Rechte |
-|------------|------|--------|
-| betrieb    | 0000 | Ansehen, Auswertungen, Ertragsbericht/Einsatzliste exportieren |
-| service    | 5678 | zusätzlich Störungen erfassen und bearbeiten, Störungen exportieren |
-| admin      | 1234 | zusätzlich Stammdaten bearbeiten und exportieren |
+Angemeldet wird mit **Benutzer und PIN**. Jedes Konto hat eine Rolle:
 
-Nach drei falschen PINs ist die Anmeldung 30 s gesperrt. PINs sind nur als
-SHA-256-Hash im Code hinterlegt. *Datei → Benutzer wechseln* meldet neu an.
+| Rolle         | Rechte |
+|---------------|--------|
+| Betrieb       | Ansehen, Auswertungen, Ertragsbericht/Einsatzliste exportieren |
+| Service       | zusätzlich Störungen erfassen und bearbeiten, Störungen exportieren |
+| Administrator | zusätzlich Stammdaten bearbeiten und exportieren, **Benutzer verwalten** |
+
+Beim ersten Start werden drei Demo-Konten angelegt:
+`betrieb` / 0000, `service` / 5678, `admin` / 1234.
+
+**Benutzerverwaltung** (Seitenleiste → *Verwaltung*, nur für
+Administratoren, `src/ui/benutzer_seite.*`, `src/model/benutzer.*`):
+Benutzer anlegen (Name, Benutzername, Rolle, PIN), bearbeiten, sperren,
+PIN zurücksetzen und löschen. Schutzregeln: Es bleibt immer mindestens ein
+aktiver Administrator; das eigene Konto kann nicht gelöscht, gesperrt oder
+herabgestuft werden. PINs bestehen aus 4–8 Ziffern und werden mit
+zufälligem Salz als SHA-256-Hash gespeichert, nie im Klartext.
+
+Die Konten liegen in `benutzer.json` im Programmdatenordner des
+Betriebssystems (Windows: `%APPDATA%\SolarMonitor\SolarMonitor\`), also
+unabhängig vom Datenordner der Flotte; der genaue Pfad steht unten auf der
+Seite Benutzerverwaltung. Wird die Datei gelöscht, entstehen beim nächsten
+Start wieder die Demo-Konten.
+
+Nach drei falschen PINs ist die Anmeldung 30 s gesperrt. *Benutzer
+wechseln* im Benutzermenü meldet neu an.
 
 ## Oberfläche
 

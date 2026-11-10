@@ -91,7 +91,7 @@ private slots:
     void setzeDesign(bool dunkel);
     void setzeVollbild(bool an);
     void seiteGewechselt(int index);
-    void angemeldet(Rolle rolle);
+    void angemeldet(const QString& kennung);
 
 private:
     /// Merkt sich die Filtereinstellungen über einen Neuaufbau der Oberfläche hinweg.
@@ -175,6 +175,9 @@ private:
     QLabel*       m_seitenHinweis = nullptr;
     QLabel*       m_analyseText = nullptr;
     class QToolButton* m_glocke = nullptr;
+    class QToolButton* m_benutzerKnopf = nullptr;
+    class Benutzerverwaltung* m_benutzer = nullptr;
+    QString       m_angemeldet;   ///< Benutzername des angemeldeten Kontos
     QLabel*       m_toast = nullptr;
     class QTimer* m_toastTimer = nullptr;
     QListWidget*  m_navigation = nullptr;
