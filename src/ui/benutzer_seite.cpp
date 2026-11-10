@@ -47,7 +47,7 @@ BenutzerDialog::BenutzerDialog(Benutzerverwaltung* verwaltung, const QString& ke
 {
     const Benutzer* b = kennung.isEmpty() ? nullptr : verwaltung->finde(kennung);
     setWindowTitle(b ? tr("Benutzer bearbeiten – %1").arg(b->name) : tr("Neuer Benutzer"));
-    setMinimumWidth(460);
+    setMinimumWidth(560); // Platz für "Anmeldung mit Windows Hello (DOMÄNE\\Benutzer)"
 
     m_name = new QLineEdit(this);
     m_name->setPlaceholderText(tr("z. B. Max Mustermann"));
