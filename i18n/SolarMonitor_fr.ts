@@ -461,27 +461,27 @@
 <context>
     <name>BenutzerDialog</name>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="48"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="49"/>
         <source>Benutzer bearbeiten – %1</source>
         <translation>Modifier l’utilisateur – %1</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="48"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="49"/>
         <source>Neuer Benutzer</source>
         <translation>Nouvel utilisateur</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="52"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="53"/>
         <source>z. B. Max Mustermann</source>
         <translation>p. ex. Jean Dupont</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="54"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="55"/>
         <source>z. B. mmustermann</source>
         <translation>p. ex. jdupont</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="60"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="61"/>
         <source>Betrieb: ansehen und auswerten
 Service: zusätzlich Störungen erfassen und bearbeiten
 Administrator: zusätzlich Stammdaten und Benutzer verwalten</source>
@@ -490,77 +490,83 @@ Service : en plus, saisir et modifier les pannes
 Administrateur : en plus, gérer les données de base et les utilisateurs</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="62"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="63"/>
         <source>Konto aktiv (Anmeldung erlaubt)</source>
         <translation>Compte actif (connexion autorisée)</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="64"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="65"/>
         <source>Anmeldung mit Windows Hello</source>
         <translation>Connexion avec Windows Hello</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="66"/>
-        <source>Einrichten kann jeder Benutzer selbst im Benutzermenü oben rechts. Hier lässt sich Windows Hello für ein Konto abschalten.</source>
-        <translation>Chaque utilisateur le configure dans le menu utilisateur en haut à droite. Ici, Windows Hello peut être désactivé pour un compte.</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="77"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="105"/>
         <source>Name:</source>
         <translation>Nom :</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="78"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="106"/>
         <source>Benutzername:</source>
         <translation>Nom d’utilisateur :</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="79"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="107"/>
         <source>Rolle:</source>
         <translation>Rôle :</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="82"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="110"/>
         <source>Neue PIN:</source>
         <translation>Nouveau PIN :</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="82"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="110"/>
         <source>PIN:</source>
         <translation>PIN :</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="83"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="111"/>
         <source>PIN wiederholen:</source>
         <translation>Répéter le PIN :</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="85"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="113"/>
         <source>PIN-Felder leer lassen, um die PIN nicht zu ändern. PIN: 4 bis 8 Ziffern.</source>
         <translation>Laissez les champs PIN vides pour conserver le PIN. PIN : 4 à 8 chiffres.</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="86"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="114"/>
         <source>PIN: 4 bis 8 Ziffern. Sie wird nur verschlüsselt (gehasht) gespeichert.</source>
         <translation>PIN : 4 à 8 chiffres. Il est uniquement stocké sous forme hachée.</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="112"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="86"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="139"/>
         <source>Anmeldung mit Windows Hello (%1)</source>
         <translation>Connexion avec Windows Hello (%1)</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="117"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="66"/>
+        <source>Beim Einschalten fragt Windows sofort nach dem Fingerabdruck (bzw. Gesicht oder Windows-PIN) der Person, die dieses Konto nutzen soll.</source>
+        <translation>À l’activation, Windows demande aussitôt l’empreinte digitale (ou le visage ou le code PIN Windows) de la personne qui utilisera ce compte.</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/benutzer_seite.cpp" line="83"/>
+        <source>Windows Hello für %1 einrichten</source>
+        <translation>Configurer Windows Hello pour %1</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/benutzer_seite.cpp" line="144"/>
         <source>Die eigene Rolle kann nicht geändert werden.</source>
         <translation>Vous ne pouvez pas modifier votre propre rôle.</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="133"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="160"/>
         <source>Die beiden PINs stimmen nicht überein.</source>
         <translation>Les deux PIN ne correspondent pas.</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="143"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="172"/>
         <source>Die PIN muss aus 4 bis 8 Ziffern bestehen.</source>
         <translation>Le PIN doit comporter 4 à 8 chiffres.</translation>
     </message>
@@ -568,148 +574,148 @@ Administrateur : en plus, gérer les données de base et les utilisateurs</trans
 <context>
     <name>BenutzerSeite</name>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="169"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="200"/>
         <source>Neuer Benutzer …</source>
         <translation>Nouvel utilisateur …</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="170"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="201"/>
         <source>Bearbeiten …</source>
         <translation>Modifier …</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="171"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="202"/>
         <source>PIN zurücksetzen …</source>
         <translation>Réinitialiser le PIN …</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="172"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="203"/>
         <source>Löschen</source>
         <translation>Supprimer</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="182"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="213"/>
         <source>Name</source>
         <translation>Nom</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="182"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="213"/>
         <source>Benutzername</source>
         <translation>Nom d’utilisateur</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="182"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="213"/>
         <source>Rolle</source>
         <translation>Rôle</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="182"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="213"/>
         <source>Status</source>
         <translation>Statut</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="182"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="213"/>
         <source>Windows Hello</source>
         <translation>Windows Hello</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="183"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="214"/>
         <source>Letzte Anmeldung</source>
         <translation>Dernière connexion</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="183"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="214"/>
         <source>Angelegt</source>
         <translation>Créé le</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="223"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="254"/>
         <source>%1 (Sie)</source>
         <translation>%1 (vous)</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="226"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="257"/>
         <source>aktiv</source>
         <translation>actif</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="226"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="257"/>
         <source>gesperrt</source>
         <translation>bloqué</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="229"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="260"/>
         <source>eingerichtet</source>
         <translation>configuré</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="232"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="263"/>
         <source>Verknüpft mit dem Windows-Konto %1</source>
         <translation>Lié au compte Windows %1</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="234"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="265"/>
         <source>noch nie</source>
         <translation>jamais</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="249"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="280"/>
         <source>%1 Benutzer, davon %2 aktiv · gespeichert in %3</source>
         <translation>%1 utilisateurs, dont %2 actifs · enregistré dans %3</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="262"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="293"/>
         <source>Das eigene Konto kann nicht gelöscht werden.</source>
         <translation>Vous ne pouvez pas supprimer votre propre compte.</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="269"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="300"/>
         <source>Benutzer angelegt.</source>
         <translation>Utilisateur créé.</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="276"/>
-        <location filename="../src/ui/benutzer_seite.cpp" line="289"/>
-        <location filename="../src/ui/benutzer_seite.cpp" line="310"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="307"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="320"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="341"/>
         <source>Bitte zuerst einen Benutzer in der Liste auswählen.</source>
         <translation>Veuillez d’abord sélectionner un utilisateur dans la liste.</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="281"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="312"/>
         <source>Änderungen gespeichert.</source>
         <translation>Modifications enregistrées.</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="293"/>
-        <location filename="../src/ui/benutzer_seite.cpp" line="302"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="324"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="333"/>
         <source>PIN zurücksetzen</source>
         <translation>Réinitialiser le PIN</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="294"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="325"/>
         <source>Neue PIN für %1 (4 bis 8 Ziffern):</source>
         <translation>Nouveau PIN pour %1 (4 à 8 chiffres) :</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="300"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="331"/>
         <source>PIN für %1 geändert.</source>
         <translation>PIN de %1 modifié.</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="314"/>
-        <location filename="../src/ui/benutzer_seite.cpp" line="324"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="345"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="355"/>
         <source>Benutzer löschen</source>
         <translation>Supprimer l’utilisateur</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="315"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="346"/>
         <source>Soll der Benutzer „%1“ (%2) wirklich gelöscht werden?
 Tipp: Statt zu löschen kann das Konto auch gesperrt werden.</source>
         <translation>Voulez-vous vraiment supprimer l’utilisateur « %1 » (%2) ?
 Astuce : au lieu de le supprimer, vous pouvez aussi bloquer le compte.</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="322"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="353"/>
         <source>Benutzer „%1“ gelöscht.</source>
         <translation>Utilisateur « %1 » supprimé.</translation>
     </message>

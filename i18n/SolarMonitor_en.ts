@@ -461,7 +461,7 @@
 <context>
     <name>BenutzerDialog</name>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="+48"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="+49"/>
         <source>Benutzer bearbeiten – %1</source>
         <translation>Edit user – %1</translation>
     </message>
@@ -500,12 +500,7 @@ Administrator: additionally manage master data and users</translation>
         <translation>Sign in with Windows Hello</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Einrichten kann jeder Benutzer selbst im Benutzermenü oben rechts. Hier lässt sich Windows Hello für ein Konto abschalten.</source>
-        <translation>Each user sets it up in the user menu at the top right. Here Windows Hello can be turned off for an account.</translation>
-    </message>
-    <message>
-        <location line="+11"/>
+        <location line="+40"/>
         <source>Name:</source>
         <translation>Name:</translation>
     </message>
@@ -545,12 +540,23 @@ Administrator: additionally manage master data and users</translation>
         <translation>PIN: 4 to 8 digits. It is only stored hashed.</translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="-28"/>
+        <location line="+53"/>
         <source>Anmeldung mit Windows Hello (%1)</source>
         <translation>Sign in with Windows Hello (%1)</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="-73"/>
+        <source>Beim Einschalten fragt Windows sofort nach dem Fingerabdruck (bzw. Gesicht oder Windows-PIN) der Person, die dieses Konto nutzen soll.</source>
+        <translation>When switched on, Windows immediately asks for the fingerprint (or face or Windows PIN) of the person who will use this account.</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Windows Hello für %1 einrichten</source>
+        <translation>Set up Windows Hello for %1</translation>
+    </message>
+    <message>
+        <location line="+61"/>
         <source>Die eigene Rolle kann nicht geändert werden.</source>
         <translation>You cannot change your own role.</translation>
     </message>
@@ -560,7 +566,7 @@ Administrator: additionally manage master data and users</translation>
         <translation>The two PINs do not match.</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+12"/>
         <source>Die PIN muss aus 4 bis 8 Ziffern bestehen.</source>
         <translation>The PIN must consist of 4 to 8 digits.</translation>
     </message>
@@ -568,7 +574,7 @@ Administrator: additionally manage master data and users</translation>
 <context>
     <name>BenutzerSeite</name>
     <message>
-        <location line="+26"/>
+        <location line="+28"/>
         <source>Neuer Benutzer …</source>
         <translation>New user …</translation>
     </message>

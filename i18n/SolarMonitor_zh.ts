@@ -461,27 +461,27 @@
 <context>
     <name>BenutzerDialog</name>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="48"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="49"/>
         <source>Benutzer bearbeiten – %1</source>
         <translation>编辑用户 – %1</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="48"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="49"/>
         <source>Neuer Benutzer</source>
         <translation>新建用户</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="52"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="53"/>
         <source>z. B. Max Mustermann</source>
         <translation>例如 张三</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="54"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="55"/>
         <source>z. B. mmustermann</source>
         <translation>例如 zhangsan</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="60"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="61"/>
         <source>Betrieb: ansehen und auswerten
 Service: zusätzlich Störungen erfassen und bearbeiten
 Administrator: zusätzlich Stammdaten und Benutzer verwalten</source>
@@ -490,77 +490,83 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</source>
 管理员：另可管理基础数据和用户</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="62"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="63"/>
         <source>Konto aktiv (Anmeldung erlaubt)</source>
         <translation>账户已启用（允许登录）</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="64"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="65"/>
         <source>Anmeldung mit Windows Hello</source>
         <translation>使用 Windows Hello 登录</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="66"/>
-        <source>Einrichten kann jeder Benutzer selbst im Benutzermenü oben rechts. Hier lässt sich Windows Hello für ein Konto abschalten.</source>
-        <translation>每位用户可在右上角用户菜单中自行设置。此处可为账户关闭 Windows Hello。</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="77"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="105"/>
         <source>Name:</source>
         <translation>姓名：</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="78"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="106"/>
         <source>Benutzername:</source>
         <translation>用户名：</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="79"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="107"/>
         <source>Rolle:</source>
         <translation>角色：</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="82"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="110"/>
         <source>Neue PIN:</source>
         <translation>新 PIN：</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="82"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="110"/>
         <source>PIN:</source>
         <translation>PIN：</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="83"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="111"/>
         <source>PIN wiederholen:</source>
         <translation>再次输入 PIN：</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="85"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="113"/>
         <source>PIN-Felder leer lassen, um die PIN nicht zu ändern. PIN: 4 bis 8 Ziffern.</source>
         <translation>PIN 字段留空则不修改 PIN。PIN：4 至 8 位数字。</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="86"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="114"/>
         <source>PIN: 4 bis 8 Ziffern. Sie wird nur verschlüsselt (gehasht) gespeichert.</source>
         <translation>PIN：4 至 8 位数字。仅以哈希形式保存。</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="112"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="86"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="139"/>
         <source>Anmeldung mit Windows Hello (%1)</source>
         <translation>使用 Windows Hello 登录（%1）</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="117"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="66"/>
+        <source>Beim Einschalten fragt Windows sofort nach dem Fingerabdruck (bzw. Gesicht oder Windows-PIN) der Person, die dieses Konto nutzen soll.</source>
+        <translation>开启时，Windows 会立即要求将使用此账户的人员验证指纹（或人脸、Windows PIN）。</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/benutzer_seite.cpp" line="83"/>
+        <source>Windows Hello für %1 einrichten</source>
+        <translation>为 %1 设置 Windows Hello</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/benutzer_seite.cpp" line="144"/>
         <source>Die eigene Rolle kann nicht geändert werden.</source>
         <translation>不能修改自己的角色。</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="133"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="160"/>
         <source>Die beiden PINs stimmen nicht überein.</source>
         <translation>两次输入的 PIN 不一致。</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="143"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="172"/>
         <source>Die PIN muss aus 4 bis 8 Ziffern bestehen.</source>
         <translation>PIN 必须为 4 至 8 位数字。</translation>
     </message>
@@ -568,148 +574,148 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</source>
 <context>
     <name>BenutzerSeite</name>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="169"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="200"/>
         <source>Neuer Benutzer …</source>
         <translation>新建用户 …</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="170"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="201"/>
         <source>Bearbeiten …</source>
         <translation>编辑 …</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="171"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="202"/>
         <source>PIN zurücksetzen …</source>
         <translation>重置 PIN …</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="172"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="203"/>
         <source>Löschen</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="182"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="213"/>
         <source>Name</source>
         <translation>姓名</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="182"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="213"/>
         <source>Benutzername</source>
         <translation>用户名</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="182"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="213"/>
         <source>Rolle</source>
         <translation>角色</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="182"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="213"/>
         <source>Status</source>
         <translation>状态</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="182"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="213"/>
         <source>Windows Hello</source>
         <translation>Windows Hello</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="183"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="214"/>
         <source>Letzte Anmeldung</source>
         <translation>上次登录</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="183"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="214"/>
         <source>Angelegt</source>
         <translation>创建时间</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="223"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="254"/>
         <source>%1 (Sie)</source>
         <translation>%1（您）</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="226"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="257"/>
         <source>aktiv</source>
         <translation>已启用</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="226"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="257"/>
         <source>gesperrt</source>
         <translation>已停用</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="229"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="260"/>
         <source>eingerichtet</source>
         <translation>已设置</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="232"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="263"/>
         <source>Verknüpft mit dem Windows-Konto %1</source>
         <translation>已关联 Windows 账户 %1</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="234"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="265"/>
         <source>noch nie</source>
         <translation>从未</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="249"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="280"/>
         <source>%1 Benutzer, davon %2 aktiv · gespeichert in %3</source>
         <translation>%1 个用户，其中 %2 个已启用 · 保存在 %3</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="262"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="293"/>
         <source>Das eigene Konto kann nicht gelöscht werden.</source>
         <translation>不能删除自己的账户。</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="269"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="300"/>
         <source>Benutzer angelegt.</source>
         <translation>用户已创建。</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="276"/>
-        <location filename="../src/ui/benutzer_seite.cpp" line="289"/>
-        <location filename="../src/ui/benutzer_seite.cpp" line="310"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="307"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="320"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="341"/>
         <source>Bitte zuerst einen Benutzer in der Liste auswählen.</source>
         <translation>请先在列表中选择一个用户。</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="281"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="312"/>
         <source>Änderungen gespeichert.</source>
         <translation>修改已保存。</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="293"/>
-        <location filename="../src/ui/benutzer_seite.cpp" line="302"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="324"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="333"/>
         <source>PIN zurücksetzen</source>
         <translation>重置 PIN</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="294"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="325"/>
         <source>Neue PIN für %1 (4 bis 8 Ziffern):</source>
         <translation>%1 的新 PIN（4 至 8 位数字）：</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="300"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="331"/>
         <source>PIN für %1 geändert.</source>
         <translation>已修改 %1 的 PIN。</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="314"/>
-        <location filename="../src/ui/benutzer_seite.cpp" line="324"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="345"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="355"/>
         <source>Benutzer löschen</source>
         <translation>删除用户</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="315"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="346"/>
         <source>Soll der Benutzer „%1“ (%2) wirklich gelöscht werden?
 Tipp: Statt zu löschen kann das Konto auch gesperrt werden.</source>
         <translation>确定要删除用户“%1”（%2）吗？
 提示：也可以停用该账户而不是删除。</translation>
     </message>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="322"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="353"/>
         <source>Benutzer „%1“ gelöscht.</source>
         <translation>用户“%1”已删除。</translation>
     </message>

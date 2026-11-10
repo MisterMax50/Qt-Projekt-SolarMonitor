@@ -461,7 +461,7 @@
 <context>
     <name>BenutzerDialog</name>
     <message>
-        <location filename="../src/ui/benutzer_seite.cpp" line="+48"/>
+        <location filename="../src/ui/benutzer_seite.cpp" line="+49"/>
         <source>Benutzer bearbeiten – %1</source>
         <translation>Benutzer bearbeiten – %1</translation>
     </message>
@@ -500,12 +500,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Anmeldung mit Windows Hello</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Einrichten kann jeder Benutzer selbst im Benutzermenü oben rechts. Hier lässt sich Windows Hello für ein Konto abschalten.</source>
-        <translation>Einrichten kann jeder Benutzer selbst im Benutzermenü oben rechts. Hier lässt sich Windows Hello für ein Konto abschalten.</translation>
-    </message>
-    <message>
-        <location line="+11"/>
+        <location line="+40"/>
         <source>Name:</source>
         <translation>Name:</translation>
     </message>
@@ -545,12 +540,23 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>PIN: 4 bis 8 Ziffern. Sie wird nur verschlüsselt (gehasht) gespeichert.</translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="-28"/>
+        <location line="+53"/>
         <source>Anmeldung mit Windows Hello (%1)</source>
         <translation>Anmeldung mit Windows Hello (%1)</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="-73"/>
+        <source>Beim Einschalten fragt Windows sofort nach dem Fingerabdruck (bzw. Gesicht oder Windows-PIN) der Person, die dieses Konto nutzen soll.</source>
+        <translation>Beim Einschalten fragt Windows sofort nach dem Fingerabdruck (bzw. Gesicht oder Windows-PIN) der Person, die dieses Konto nutzen soll.</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Windows Hello für %1 einrichten</source>
+        <translation>Windows Hello für %1 einrichten</translation>
+    </message>
+    <message>
+        <location line="+61"/>
         <source>Die eigene Rolle kann nicht geändert werden.</source>
         <translation>Die eigene Rolle kann nicht geändert werden.</translation>
     </message>
@@ -560,7 +566,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
         <translation>Die beiden PINs stimmen nicht überein.</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+12"/>
         <source>Die PIN muss aus 4 bis 8 Ziffern bestehen.</source>
         <translation>Die PIN muss aus 4 bis 8 Ziffern bestehen.</translation>
     </message>
@@ -568,7 +574,7 @@ Administrator: zusätzlich Stammdaten und Benutzer verwalten</translation>
 <context>
     <name>BenutzerSeite</name>
     <message>
-        <location line="+26"/>
+        <location line="+28"/>
         <source>Neuer Benutzer …</source>
         <translation>Neuer Benutzer …</translation>
     </message>

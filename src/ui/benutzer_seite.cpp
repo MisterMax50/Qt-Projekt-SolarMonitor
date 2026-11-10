@@ -19,6 +19,7 @@
 #include "model/benutzer.h"
 #include "util/anzeige.h"
 #include "util/stil.h"
+#include "util/windows_hello.h"
 
 namespace {
 constexpr int kKennungRolle = Qt::UserRole + 1;
@@ -62,9 +63,36 @@ BenutzerDialog::BenutzerDialog(Benutzerverwaltung* verwaltung, const QString& ke
     m_aktiv = new QCheckBox(tr("Konto aktiv (Anmeldung erlaubt)"), this);
     m_aktiv->setChecked(true);
     m_hello = new QCheckBox(tr("Anmeldung mit Windows Hello"), this);
-    m_hello->setEnabled(false); // einrichten kann nur der Benutzer selbst (Benutzermenü)
-    m_hello->setToolTip(tr("Einrichten kann jeder Benutzer selbst im Benutzermenü oben rechts. "
-                           "Hier lässt sich Windows Hello für ein Konto abschalten."));
+    m_hello->setToolTip(tr("Beim Einschalten fragt Windows sofort nach dem Fingerabdruck (bzw. Gesicht oder "
+                           "Windows-PIN) der Person, die dieses Konto nutzen soll."));
+    // Einschalten nur nach erfolgreicher Bestätigung durch Windows Hello
+    connect(m_hello, &QCheckBox::clicked, this, [this](bool an) {
+        if (!an) {
+            m_helloNeu.clear();
+            return;
+        }
+        QString grund;
+        if (!WindowsHello::verfuegbar(&grund)) {
+            m_hello->setChecked(false);
+            m_fehler->setText(grund);
+            m_fehler->show();
+            return;
+        }
+        const QString name = m_name->text().trimmed().isEmpty() ? m_benutzername->text() : m_name->text().trimmed();
+        QString fehler;
+        const auto ergebnis = WindowsHello::pruefe(this, tr("Windows Hello für %1 einrichten").arg(name), &fehler);
+        if (ergebnis == WindowsHello::Ergebnis::Bestaetigt) {
+            m_helloNeu = WindowsHello::windowsKonto();
+            m_hello->setText(tr("Anmeldung mit Windows Hello (%1)").arg(m_helloNeu));
+            m_fehler->hide();
+        } else {
+            m_hello->setChecked(false);
+            if (ergebnis != WindowsHello::Ergebnis::Abgebrochen) {
+                m_fehler->setText(fehler);
+                m_fehler->show();
+            }
+        }
+    });
     m_pin = pinFeld(this);
     m_pin2 = pinFeld(this);
     m_fehler = new QLabel(this);
@@ -107,7 +135,6 @@ BenutzerDialog::BenutzerDialog(Benutzerverwaltung* verwaltung, const QString& ke
         m_rolle->setCurrentIndex(m_rolle->findData(int(b->rolle)));
         m_aktiv->setChecked(b->aktiv);
         m_hello->setChecked(!b->helloKonto.isEmpty());
-        m_hello->setEnabled(!b->helloKonto.isEmpty()); // nur abschalten möglich
         if (!b->helloKonto.isEmpty())
             m_hello->setText(tr("Anmeldung mit Windows Hello (%1)").arg(b->helloKonto));
         if (b->kennung == angemeldet) {
@@ -138,6 +165,8 @@ void BenutzerDialog::speichern()
     QString fehler;
     if (m_kennung.isEmpty()) {
         fehler = m_verwaltung->anlegen(m_benutzername->text(), m_name->text(), rolle, pin);
+        if (fehler.isEmpty() && m_hello->isChecked() && !m_helloNeu.isEmpty())
+            fehler = m_verwaltung->setzeHello(m_benutzername->text().trimmed().toLower(), m_helloNeu);
     } else {
         if (!pin.isEmpty() && !Benutzerverwaltung::pinGueltig(pin))
             fehler = tr("Die PIN muss aus 4 bis 8 Ziffern bestehen.");
@@ -148,6 +177,8 @@ void BenutzerDialog::speichern()
         const Benutzer* b = m_verwaltung->finde(m_kennung);
         if (fehler.isEmpty() && b && !b->helloKonto.isEmpty() && !m_hello->isChecked())
             fehler = m_verwaltung->setzeHello(m_kennung, QString());
+        else if (fehler.isEmpty() && m_hello->isChecked() && !m_helloNeu.isEmpty())
+            fehler = m_verwaltung->setzeHello(m_kennung, m_helloNeu);
     }
     if (!fehler.isEmpty()) {
         zeige(fehler);

@@ -18,7 +18,9 @@ class QPushButton;
  *
  * Beim Anlegen sind Benutzername und PIN Pflicht; beim Bearbeiten ist der
  * Benutzername fest und die PIN wird nur geändert, wenn eine neue
- * eingetragen wird. Fehler werden direkt im Formular angezeigt.
+ * eingetragen wird. Windows Hello kann hier für jedes Konto eingerichtet
+ * werden: Beim Setzen des Häkchens bestätigt die Person am Rechner per
+ * Fingerabdruck. Fehler werden direkt im Formular angezeigt.
  */
 class BenutzerDialog : public QDialog {
     Q_OBJECT
@@ -38,6 +40,7 @@ private:
     QComboBox* m_rolle = nullptr;
     QCheckBox* m_aktiv = nullptr;
     QCheckBox* m_hello = nullptr;
+    QString    m_helloNeu;   ///< frisch per Windows Hello bestätigtes Windows-Konto
     QLineEdit* m_pin = nullptr;
     QLineEdit* m_pin2 = nullptr;
     QLabel*    m_fehler = nullptr;
