@@ -3,7 +3,7 @@
 
 cmake_minimum_required(VERSION 3.19)
 
-project(SolarMonitor_Gruppe_XY
+project(SolarMonitor_Gruppe_03
     VERSION 2.0
     DESCRIPTION "Monitoring einer PV-Flotte rund um den Bodensee"
     LANGUAGES CXX)
@@ -133,7 +133,7 @@ set(PROJEKT_QUELLEN
 
 # Kurzer interner Zielname: Unter Windows ist der Pfad einer Datei auf 260 Zeichen
 # begrenzt (MAX_PATH), und CMake/MinGW hängen den Zielnamen mehrfach an den
-# Build-Pfad an. Die erzeugte Exe heißt trotzdem SolarMonitor_Gruppe_XY.exe.
+# Build-Pfad an. Die erzeugte Exe heißt trotzdem SolarMonitor_Gruppe_03.exe.
 set(ZIEL SolarMonitor)
 
 qt_add_executable(${ZIEL}
@@ -176,7 +176,7 @@ endif()
 
 # Kein Konsolenfenster unter Windows, App-Bundle unter macOS
 set_target_properties(${ZIEL} PROPERTIES
-    OUTPUT_NAME SolarMonitor_Gruppe_XY
+    OUTPUT_NAME SolarMonitor_Gruppe_03
     WIN32_EXECUTABLE ON
     MACOSX_BUNDLE ON
 )
