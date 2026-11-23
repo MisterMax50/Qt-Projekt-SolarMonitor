@@ -47,6 +47,13 @@ VerlaufRepository::VerlaufRepository(QObject* parent)
     // Die zuletzt gewählte Datenquelle gilt auch nach dem Neustart
     if (QSettings().value(QStringLiteral("datenquelle")).toString() == QLatin1String("live"))
         m_quelle = Quelle::Live;
+    m_uhr.setFaktor(QSettings().value(QStringLiteral("simulation/faktor"), 60).toInt());
+}
+
+void VerlaufRepository::setSimulationsFaktor(int faktor)
+{
+    m_uhr.setFaktor(faktor);
+    QSettings().setValue(QStringLiteral("simulation/faktor"), m_uhr.faktor());
 }
 
 void VerlaufRepository::setQuelle(Quelle quelle)
@@ -252,7 +259,7 @@ VerlaufLadeErgebnis VerlaufRepository::ladeSofort(const QString& anlageId) const
             e.fehler = fehlgrund(anlageId);
             return e;
         }
-        return erzeugeLive(it.value());
+        return erzeugeLive(it.value(), simulationszeit());
     }
     if (!m_index.contains(anlageId)) {
         VerlaufLadeErgebnis e;
@@ -262,10 +269,10 @@ VerlaufLadeErgebnis VerlaufRepository::ladeSofort(const QString& anlageId) const
     return lese(m_index.value(anlageId), anlageId);
 }
 
-VerlaufLadeErgebnis VerlaufRepository::erzeugeLive(const Anlage& anlage)
+VerlaufLadeErgebnis VerlaufRepository::erzeugeLive(const Anlage& anlage, const QDateTime& ende)
 {
     VerlaufLadeErgebnis e;
-    e.verlauf = std::make_shared<const Verlauf>(LiveGenerator::erzeuge(anlage));
+    e.verlauf = std::make_shared<const Verlauf>(LiveGenerator::erzeuge(anlage, ende));
     return e;
 }
 
@@ -275,6 +282,9 @@ VerlaufLadeErgebnis VerlaufRepository::erzeugeLive(const Anlage& anlage)
 
 std::shared_ptr<const Verlauf> VerlaufRepository::ausCache(const QString& anlageId)
 {
+    // Live-Verläufe ändern sich mit der Simulationszeit und werden deshalb nie zwischengespeichert
+    if (m_quelle == Quelle::Live)
+        return nullptr;
     const auto it = m_cache.constFind(anlageId);
     if (it == m_cache.constEnd())
         return nullptr;
@@ -314,8 +324,6 @@ void VerlaufRepository::ladeAsync(const QString& anlageId)
     if (m_quelle == Quelle::Live) {
         // Erzeugen ist schnell: Ergebnis im nächsten Takt melden, damit Aufrufer zuerst verbinden können
         const VerlaufLadeErgebnis e = ladeSofort(anlageId);
-        if (e.ok())
-            inCache(anlageId, e.verlauf);
         QTimer::singleShot(0, this, [this, anlageId, e] { emit verlaufGeladen(anlageId, e); });
         return;
     }

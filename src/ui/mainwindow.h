@@ -96,6 +96,10 @@ private slots:
     void setzeVollbild(bool an);
     /// Datenquelle umschalten (true = Live-Generator, false = CSV-Dateien) und alles neu auswerten.
     void setzeDatenquelle(bool live);
+    /// Geschwindigkeit der Simulation setzen (Simulationszeit je Wanduhrsekunde).
+    void setzeSimulationsFaktor(int faktor);
+    /// Takt starten bzw. anhalten: im Simulationsmodus neu auswerten, sobald eine neue Viertelstunde beginnt.
+    void aktualisiereSimulation();
     void seiteGewechselt(int index);
     /// Abo-Modus (Spaß-Funktion): Werbung aus- bzw. einblenden und merken.
     void setzePremium(bool an);
@@ -214,6 +218,8 @@ private:
     QString       m_angemeldet;   ///< Benutzername des angemeldeten Kontos
     QLabel*       m_toast = nullptr;
     class QTimer* m_toastTimer = nullptr;
+    class QTimer* m_simTakt = nullptr;   ///< Takt des Simulationsmodus
+    int           m_simViertel = -1;     ///< letzte ausgewertete Viertelstunde der Simulation
     std::function<void()> m_toastAktion; ///< Link in der Einblendung (leer = keiner)
 
     // Rückmeldung zu Rückgängig/Wiederholen: woher kam die letzte Änderung am Stapel?

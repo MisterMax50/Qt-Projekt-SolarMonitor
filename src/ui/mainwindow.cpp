@@ -521,9 +521,45 @@ void MainWindow::setzeDatenquelle(bool live)
         return;
     m_kontext.verlaeufe->setQuelle(neu);
     m_kontext.analyse->starte(); // alle Seiten aktualisieren sich über "fertig"
+    aktualisiereSimulation();
     meldung(live ? tr("Datenquelle: Live-Generator. Alle Auswertungen zeigen simulierte Werte.")
                  : tr("Datenquelle: CSV-Dateien. Auswertungen zeigen die Verlaufsdateien."),
             5000, false);
+}
+
+void MainWindow::setzeSimulationsFaktor(int faktor)
+{
+    if (!m_kontext.verlaeufe || !m_kontext.analyse)
+        return;
+    m_kontext.verlaeufe->setSimulationsFaktor(faktor);
+    if (m_kontext.verlaeufe->quelle() == VerlaufRepository::Quelle::Live && m_kontext.analyse->istFertig())
+        m_kontext.analyse->starte(); // neue Geschwindigkeit sofort auswerten
+    meldung(tr("Simulationsgeschwindigkeit: %1×").arg(m_kontext.verlaeufe->simulationsFaktor()), 3000, false);
+}
+
+void MainWindow::aktualisiereSimulation()
+{
+    const bool live = m_kontext.verlaeufe && m_kontext.verlaeufe->quelle() == VerlaufRepository::Quelle::Live;
+    if (!m_simTakt) {
+        m_simTakt = new QTimer(this);
+        m_simTakt->setInterval(1000);
+        connect(m_simTakt, &QTimer::timeout, this, [this] {
+            if (!m_kontext.verlaeufe || !m_kontext.analyse
+                || m_kontext.verlaeufe->quelle() != VerlaufRepository::Quelle::Live)
+                return;
+            // Neu rechnen, sobald eine neue Viertelstunde der Simulation begonnen hat und die letzte Auswertung fertig ist
+            const int viertel = int(m_kontext.verlaeufe->simulationszeit().toSecsSinceEpoch() / 900);
+            if (m_kontext.analyse->istFertig() && viertel != m_simViertel) {
+                m_simViertel = viertel;
+                m_kontext.analyse->starte();
+            }
+            analyseFortschritt(m_fortschrittWert, m_fortschrittMax); // Simulationszeit in der Statuszeile
+        });
+    }
+    if (live)
+        m_simTakt->start();
+    else
+        m_simTakt->stop();
 }
 
 void MainWindow::setzeVollbild(bool an)
@@ -1008,6 +1044,26 @@ QWidget* MainWindow::baueKopfzeile()
     (live ? quelleLive : quelleCsv)->setChecked(true);
     connect(quellenGruppe, &QActionGroup::triggered, this,
             [this, quelleLive](QAction* a) { setzeDatenquelle(a == quelleLive); });
+    // Geschwindigkeit der Simulation (Simulationszeit je Wanduhrsekunde)
+    QMenu* tempo = quelle->addMenu(tr("Simulationsgeschwindigkeit"));
+    auto* tempoGruppe = new QActionGroup(tempo);
+    const int aktuell = m_kontext.verlaeufe ? m_kontext.verlaeufe->simulationsFaktor() : 60;
+    const QList<std::pair<int, QString>> stufen = {
+        {1, tr("1× Echtzeit")},
+        {60, tr("60× · 1 Minute je Sekunde")},
+        {900, tr("900× · 15 Minuten je Sekunde")},
+        {3600, tr("3600× · 1 Stunde je Sekunde")},
+    };
+    for (const auto& [faktor, text] : stufen) {
+        QAction* a = tempo->addAction(text);
+        a->setCheckable(true);
+        a->setChecked(faktor == aktuell);
+        a->setData(faktor);
+        tempoGruppe->addAction(a);
+    }
+    connect(tempoGruppe, &QActionGroup::triggered, this,
+            [this](QAction* a) { setzeSimulationsFaktor(a->data().toInt()); });
+    aktualisiereSimulation();
     menue->addSeparator();
     // Abo (nur zum Spaß): Kostenlos mit Werbung, Premium werbefrei, Ultimate mit Extras
     m_aboMenue = menue->addMenu(Stil::icon(Stil::Symbol::Euro, Stil::text()), QString());
@@ -2158,6 +2214,12 @@ void MainWindow::nachStoerungsAenderung(const QString&)
 
 void MainWindow::erfasseStoerung(const QString& anlageId, QWidget* parent)
 {
+    if (m_kontext.daten->istSimuliert()) {
+        QMessageBox::information(parent ? parent : this, tr("Nur Ansicht"),
+                                 tr("Im Simulationsmodus sind Störungen schreibgeschützt. Die Datenquelle „CSV-Dateien“ "
+                                    "im Benutzermenü wählen, um Störungen zu erfassen."));
+        return;
+    }
     if (!m_kontext.darf(Recht::StoerungBearbeiten)) {
         QMessageBox::information(parent ? parent : this, tr("Keine Berechtigung"),
                                  tr("Störungen dürfen nur von den Rollen Service und Administrator erfasst werden."));
@@ -2176,7 +2238,8 @@ void MainWindow::oeffneStoerung(const QString& stoerungId, QWidget* parent)
     const Stoerung* s = m_kontext.daten->stoerung(stoerungId);
     if (!s)
         return;
-    const bool darf = m_kontext.darf(Recht::StoerungBearbeiten);
+    // Im Simulationsmodus nur ansehen
+    const bool darf = m_kontext.darf(Recht::StoerungBearbeiten) && !m_kontext.daten->istSimuliert();
     StoerungDialog dlg(*s, m_kontext.daten, darf, parent ? parent : this);
     if (dlg.exec() != QDialog::Accepted || !darf)
         return;
@@ -2192,7 +2255,7 @@ void MainWindow::oeffneStoerung(const QString& stoerungId, QWidget* parent)
 void MainWindow::setzeStoerungsStatus(const QString& stoerungId, const QString& status)
 {
     const Stoerung* alt = m_kontext.daten->stoerung(stoerungId);
-    if (!alt || !m_kontext.darf(Recht::StoerungBearbeiten))
+    if (!alt || !m_kontext.darf(Recht::StoerungBearbeiten) || m_kontext.daten->istSimuliert())
         return;
     Stoerung neu = *alt;
     neu.status = status;
@@ -2420,8 +2483,12 @@ void MainWindow::analyseFortschritt(int erledigt, int gesamt)
     else if (m_kontext.analyse->istFertig())
         m_analyseText->setText(QStringLiteral("<span style='color:#22c55e'>●</span> ")
                                + tr("Analyse aktuell · %1 Anlagen").arg(m_kontext.analyse->kennzahlen().size())
-                               + (live ? QStringLiteral("<br><span style='color:#f59e0b'>") + tr("Live-Generator (simuliert)")
-                                           + QStringLiteral("</span>")
+                               + (live ? QStringLiteral("<br><span style='color:#f59e0b'>")
+                                             + tr("Simulierte Daten · %1 · %2×")
+                                                   .arg(QLocale().toString(m_kontext.verlaeufe->simulationszeit(),
+                                                                           QStringLiteral("dd.MM.yyyy HH:mm")))
+                                                   .arg(m_kontext.verlaeufe->simulationsFaktor())
+                                             + QStringLiteral("</span>")
                                        : QString()));
     else
         m_analyseText->setText(tr("Flottenanalyse wird vorbereitet …"));

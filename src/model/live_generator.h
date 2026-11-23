@@ -3,6 +3,7 @@
 #include <QDateTime>
 
 #include "model/anlage.h"
+#include "model/stoerung.h"
 #include "model/verlauf.h"
 
 /**
@@ -28,4 +29,11 @@ public:
 
     /// Verlauf der Anlage, der mit dem letzten vollen Viertelstundenwert bei @p ende endet.
     static Verlauf erzeuge(const Anlage& anlage, const QDateTime& ende = QDateTime::currentDateTime());
+
+    /**
+     * @brief Störungsmeldungen aus einem erzeugten Verlauf: jede zusammenhängende
+     *        Phase mit wr_status "stoerung" wird eine Störung. Dauer bestimmt die
+     *        Schwere; läuft die Phase bis zum Ende des Verlaufs, ist sie offen.
+     */
+    static QVector<Stoerung> stoerungenAus(const Verlauf& verlauf);
 };

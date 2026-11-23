@@ -12,6 +12,7 @@
 
 #include "model/anlage.h"
 #include "model/pruefmeldung.h"
+#include "model/simulation_uhr.h"
 #include "model/verlauf.h"
 
 /// Ergebnis eines Ladevorgangs (Erfolg: verlauf != nullptr).
@@ -82,8 +83,14 @@ public:
     /// Verlauf der aktuellen Quelle, ohne Cache und ohne Signal (für Berichte).
     VerlaufLadeErgebnis ladeSofort(const QString& anlageId) const;
 
-    /// Erzeugt einen Live-Verlauf zu einer Anlage (thread-sicher, ohne Zustand).
-    static VerlaufLadeErgebnis erzeugeLive(const Anlage& anlage);
+    /// Erzeugt einen Live-Verlauf zu einer Anlage, der bei @p ende endet (thread-sicher, ohne Zustand).
+    static VerlaufLadeErgebnis erzeugeLive(const Anlage& anlage, const QDateTime& ende);
+
+    /// Aktuelle Simulationszeit (Quelle Live) bzw. Wanduhrzeit.
+    QDateTime simulationszeit() const { return m_uhr.jetzt(); }
+    int simulationsFaktor() const { return m_uhr.faktor(); }
+    /// Geschwindigkeit der Simulation; wird gespeichert.
+    void setSimulationsFaktor(int faktor);
 
     void setCacheGroesse(int anzahl);
     int cacheGroesse() const { return m_cacheMax; }
@@ -115,4 +122,5 @@ private:
 
     Quelle                  m_quelle = Quelle::Csv;
     QHash<QString, Anlage>  m_live;         ///< Stammdaten für den Live-Generator
+    SimulationsUhr          m_uhr;
 };
