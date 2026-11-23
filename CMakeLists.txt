@@ -72,7 +72,6 @@ set(PROJEKT_HEADER
     src/ui/stoerung_model.h
     src/ui/tabellen_hilfe.h
     src/ui/verlauf_plot.h
-    src/ui/live_seite.h
 )
 
 set(PROJEKT_QUELLEN
@@ -132,7 +131,6 @@ set(PROJEKT_QUELLEN
     src/ui/stoerung_dialog.cpp
     src/ui/stoerung_model.cpp
     src/ui/verlauf_plot.cpp
-    src/ui/live_seite.cpp
 )
 
 # Kurzer interner Zielname: Unter Windows ist der Pfad einer Datei auf 260 Zeichen

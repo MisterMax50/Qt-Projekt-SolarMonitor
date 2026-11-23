@@ -3,16 +3,21 @@
 #include <algorithm>
 #include <cmath>
 
-#include "model/anlage.h"
+#include <QByteArray>
+#include <QHash>
+#include <QRandomGenerator>
+#include <QTime>
+
 #include "util/sonnenstand.h"
 
 namespace {
-constexpr int    kTaktMs = 1000;          ///< Wanduhr-Takt zwischen zwei Messungen
 constexpr double kSystemWirkungsgrad = 0.85;
-constexpr double kTemperaturBeiwert = 0.0035; ///< Leistungsverlust je Kelvin über 25 °C
-constexpr double kStoerWahrscheinlichkeit = 0.0004; ///< je Anlage und Takt bei Sonne
+constexpr double kTemperaturBeiwert = 0.0035;     ///< Leistungsverlust je Kelvin über 25 °C
+constexpr double kStoerWahrscheinlichkeit = 0.004; ///< je Anlage und Viertelstunde bei Sonne
 constexpr double kNachtGrenzeWm2 = 5.0;
 constexpr double kPi = 3.14159265358979323846;
+constexpr quint32 kWetterSeed = 20260601u;         ///< gemeinsame Wetterlage aller Anlagen
+constexpr int kSchrittSek = LiveGenerator::kIntervallMin * 60;
 
 double clamp(double wert, double lo, double hi)
 {
@@ -20,119 +25,74 @@ double clamp(double wert, double lo, double hi)
 }
 } // namespace
 
-LiveGenerator::LiveGenerator(QObject* parent)
-    : QObject(parent)
+Verlauf LiveGenerator::erzeuge(const Anlage& anlage, const QDateTime& ende)
 {
-    m_takt.setInterval(kTaktMs);
-    connect(&m_takt, &QTimer::timeout, this, &LiveGenerator::schritt);
-}
+    Verlauf v;
+    v.anlageId = anlage.anlageId;
+    v.intervallMin = kIntervallMin;
 
-void LiveGenerator::setAnlagen(const QVector<Anlage>& anlagen)
-{
-    m_quellen.clear();
-    m_quellen.reserve(anlagen.size());
-    for (const Anlage& a : anlagen) {
-        if (!a.hatGueltigeLeistung())
-            continue;
-        Quelle q;
-        q.id = a.anlageId;
-        q.kwp = a.leistungKwp;
-        q.lat = a.lat;
-        q.lon = a.lon;
-        q.abgeschaltet = (a.status == QLatin1String("abgeschaltet"));
-        q.lokal = (m_zufall.generateDouble() - 0.5) * 0.2;
-        m_quellen.append(q);
-    }
-    // Simulationszeit beginnt mit der Wanduhr und läuft ab hier weiter
-    m_zeit = QDateTime::currentDateTime();
-}
+    // Endzeitpunkt auf den Viertelstundenraster abrunden
+    QDateTime letzter = ende;
+    letzter.setTime(QTime(letzter.time().hour(), (letzter.time().minute() / kIntervallMin) * kIntervallMin, 0, 0));
 
-void LiveGenerator::setFaktor(int faktor)
-{
-    m_faktor = std::max(1, faktor);
-}
+    const int n = kTage * 24 * 60 / kIntervallMin;
+    const QDateTime start = letzter.addSecs(-qint64(n - 1) * kSchrittSek);
 
-void LiveGenerator::starte()
-{
-    if (m_takt.isActive())
-        return;
-    m_takt.start();
-    schritt(); // sofort ein erster Stand, nicht erst nach einer Sekunde
-}
+    // Gemeinsame Wetterlage: gleicher Seed, also für alle Anlagen dieselbe Folge
+    QRandomGenerator wetter(kWetterSeed);
+    // Eigene Abweichung der Anlage: Seed aus der Anlagen-ID
+    QRandomGenerator lokal(qHash(anlage.anlageId.toUtf8(), 0x5eedu));
 
-void LiveGenerator::stoppe()
-{
-    m_takt.stop();
-}
+    double wetterWert = 0.6 + wetter.generateDouble() * 0.3;
+    double lokalWert = (lokal.generateDouble() - 0.5) * 0.2;
+    int stoerRest = 0;
+    const bool abgeschaltet = (anlage.status == QLatin1String("abgeschaltet"));
+    const double kwp = anlage.leistungKwp;
 
-void LiveGenerator::schritt()
-{
-    if (!m_zeit.isValid())
-        m_zeit = QDateTime::currentDateTime();
-    m_zeit = m_zeit.addMSecs(qint64(m_faktor) * kTaktMs);
+    v.zeit.reserve(n);
+    v.leistungW.reserve(n);
+    v.einstrahlungWm2.reserve(n);
+    v.modultemperaturC.reserve(n);
+    v.wrStatus.reserve(n);
 
-    // Gemeinsame Wetterlage wandert langsam; jede Anlage hat zusätzlich eine eigene Abweichung
-    m_wetter = clamp(m_wetter + (m_zufall.generateDouble() - 0.5) * 0.06, 0.3, 1.0);
-
-    QVector<LiveMesswert> werte;
-    werte.reserve(m_quellen.size());
-
-    for (Quelle& q : m_quellen) {
-        q.lokal = clamp(q.lokal + (m_zufall.generateDouble() - 0.5) * 0.04, -0.15, 0.15);
-
-        LiveMesswert m;
-        m.anlageId = q.id;
-
-        if (q.abgeschaltet) {
-            m.status = QStringLiteral("aus");
-            werte.append(m);
-            continue;
-        }
+    for (int i = 0; i < n; ++i) {
+        const QDateTime zeit = start.addSecs(qint64(i) * kSchrittSek);
+        wetterWert = clamp(wetterWert + (wetter.generateDouble() - 0.5) * 0.08, 0.3, 1.0);
+        lokalWert = clamp(lokalWert + (lokal.generateDouble() - 0.5) * 0.05, -0.15, 0.15);
 
         // Sonnenstand bestimmt die Einstrahlung in der Modulebene (vereinfachtes Modell)
-        const double hoehe = Sonnenstand::berechne(m_zeit, q.lat, q.lon).hoeheGrad;
-        const double sinH = std::sin(hoehe * kPi / 180.0);
-        double einstrahlung = hoehe > 0.0 ? 950.0 * std::pow(sinH, 1.15) : 0.0;
-        einstrahlung *= clamp(m_wetter + q.lokal, 0.15, 1.0);
-        einstrahlung = std::max(0.0, einstrahlung + (m_zufall.generateDouble() - 0.5) * 12.0);
+        const double hoehe = Sonnenstand::berechne(zeit, anlage.lat, anlage.lon).hoeheGrad;
+        double einstrahlung = hoehe > 0.0 ? 950.0 * std::pow(std::sin(hoehe * kPi / 180.0), 1.15) : 0.0;
+        einstrahlung *= clamp(wetterWert + lokalWert, 0.15, 1.0);
+        einstrahlung = std::max(0.0, einstrahlung + (lokal.generateDouble() - 0.5) * 12.0);
 
-        m.einstrahlungWm2 = einstrahlung;
-        m.modultemperaturC = 15.0 + einstrahlung / 1000.0 * 30.0;
+        const double temperatur = 15.0 + einstrahlung / 1000.0 * 30.0;
+        double leistung = 0.0;
+        QString status;
 
-        if (einstrahlung < kNachtGrenzeWm2) {
-            // Nacht: Wechselrichter im Standby, keine Einspeisung
-            m.status = QStringLiteral("standby");
-            m.leistungW = 0.0;
-            werte.append(m);
-            continue;
+        if (abgeschaltet) {
+            status = QStringLiteral("aus");
+        } else if (einstrahlung < kNachtGrenzeWm2) {
+            status = QStringLiteral("standby");
+        } else if (stoerRest > 0) {
+            --stoerRest;
+            status = QStringLiteral("stoerung");
+        } else if (lokal.generateDouble() < kStoerWahrscheinlichkeit) {
+            stoerRest = 1 + int(lokal.bounded(7)); // Dauer: 1 bis 7 Viertelstunden
+            status = QStringLiteral("stoerung");
+        } else {
+            const double temperaturFaktor = 1.0 - kTemperaturBeiwert * std::max(0.0, temperatur - 25.0);
+            const double rauschen = 1.0 + (lokal.generateDouble() - 0.5) * 0.03;
+            leistung = clamp(kwp * 1000.0 * (einstrahlung / 1000.0) * kSystemWirkungsgrad * temperaturFaktor * rauschen,
+                             0.0, kwp * 1000.0);
+            status = QStringLiteral("ok");
         }
 
-        // Gelegentlich eine Störung, die einige Takte anhält
-        if (q.stoerRest > 0) {
-            --q.stoerRest;
-            m.status = QStringLiteral("stoerung");
-            m.leistungW = 0.0;
-            werte.append(m);
-            continue;
-        }
-        if (m_zufall.generateDouble() < kStoerWahrscheinlichkeit) {
-            q.stoerRest = 5 + int(m_zufall.bounded(30));
-            m.status = QStringLiteral("stoerung");
-            m.leistungW = 0.0;
-            werte.append(m);
-            continue;
-        }
-
-        const double temperaturFaktor = 1.0 - kTemperaturBeiwert * std::max(0.0, m.modultemperaturC - 25.0);
-        const double rauschen = 1.0 + (m_zufall.generateDouble() - 0.5) * 0.03;
-        double leistung = q.kwp * 1000.0 * (einstrahlung / 1000.0) * kSystemWirkungsgrad
-                        * temperaturFaktor * rauschen;
-        leistung = clamp(leistung, 0.0, q.kwp * 1000.0);
-
-        m.leistungW = leistung;
-        m.status = QStringLiteral("ok");
-        werte.append(m);
+        v.zeit.append(zeit);
+        v.leistungW.append(leistung);
+        v.einstrahlungWm2.append(einstrahlung);
+        v.modultemperaturC.append(temperatur);
+        v.wrStatus.append(status);
     }
-
-    emit neueMesswerte(werte, m_zeit);
+    return v;
 }

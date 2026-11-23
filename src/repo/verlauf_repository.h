@@ -10,6 +10,7 @@
 #include <QStringList>
 #include <QVector>
 
+#include "model/anlage.h"
 #include "model/pruefmeldung.h"
 #include "model/verlauf.h"
 
@@ -39,8 +40,17 @@ struct VerlaufLadeErgebnis {
 class VerlaufRepository : public QObject {
     Q_OBJECT
 public:
+    /// Woher die Zeitreihen stammen: Verlaufsdateien (CSV-Ordner) oder der Live-Generator.
+    enum class Quelle { Csv, Live };
+
     explicit VerlaufRepository(QObject* parent = nullptr);
     ~VerlaufRepository() override;
+
+    Quelle quelle() const { return m_quelle; }
+    /// Wechselt die Quelle, merkt sie sich und leert den Cache. Laufende Ladevorgänge der alten Quelle werden verworfen.
+    void setQuelle(Quelle quelle);
+    /// Stammdaten für den Live-Generator (Anlagen mit installierter Leistung).
+    void setLiveAnlagen(const QVector<Anlage>& anlagen);
 
     /// Liest den Index; Auffälligkeiten stehen danach in @ref indexMeldungen.
     void ladeIndex(const QString& datenOrdner);
@@ -54,8 +64,9 @@ public:
     }
     /// Erklärung, warum kein Verlauf verfügbar ist (leer, wenn verfügbar).
     QString fehlgrund(const QString& anlageId) const;
+    /// Pfad der Verlaufsdatei (nur Quelle CSV; sonst leer).
     QString pfadFuer(const QString& anlageId) const;
-    QStringList anlagenMitVerlauf() const { return m_index.keys(); }
+    QStringList anlagenMitVerlauf() const;
     int anzahlIndexEintraege() const { return int(m_index.size()); }
 
     /// Verlauf aus dem Cache (nullptr, wenn nicht geladen). Aktualisiert die LRU-Reihenfolge.
@@ -64,8 +75,15 @@ public:
     /**
      * @brief Asynchron laden. Liegt der Verlauf im Cache, kommt das Signal
      *        sofort; läuft bereits ein Ladevorgang, wird keiner doppelt gestartet.
+     *        Quelle Live: erzeugt den Verlauf sofort (Signal kommt im nächsten Takt).
      */
     void ladeAsync(const QString& anlageId);
+
+    /// Verlauf der aktuellen Quelle, ohne Cache und ohne Signal (für Berichte).
+    VerlaufLadeErgebnis ladeSofort(const QString& anlageId) const;
+
+    /// Erzeugt einen Live-Verlauf zu einer Anlage (thread-sicher, ohne Zustand).
+    static VerlaufLadeErgebnis erzeugeLive(const Anlage& anlage);
 
     void setCacheGroesse(int anzahl);
     int cacheGroesse() const { return m_cacheMax; }
@@ -94,4 +112,7 @@ private:
     int                     m_cacheMax = 20;
 
     QHash<QString, QFutureWatcher<VerlaufLadeErgebnis>*> m_laufend;
+
+    Quelle                  m_quelle = Quelle::Csv;
+    QHash<QString, Anlage>  m_live;         ///< Stammdaten für den Live-Generator
 };

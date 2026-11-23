@@ -94,6 +94,8 @@ private slots:
     void aktualisiereNavigation();
     void setzeDesign(bool dunkel);
     void setzeVollbild(bool an);
+    /// Datenquelle umschalten (true = Live-Generator, false = CSV-Dateien) und alles neu auswerten.
+    void setzeDatenquelle(bool live);
     void seiteGewechselt(int index);
     /// Abo-Modus (Spaß-Funktion): Werbung aus- bzw. einblenden und merken.
     void setzePremium(bool an);

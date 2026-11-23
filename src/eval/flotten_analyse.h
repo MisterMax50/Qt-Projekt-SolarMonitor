@@ -6,6 +6,7 @@
 #include <QVector>
 
 #include "eval/ertrags_auswertung.h"
+#include "model/anlage.h"
 
 class Datenbasis;
 class VerlaufRepository;
@@ -67,7 +68,9 @@ private:
     struct Auftrag {
         QString anlageId;
         QString stationId;
-        QString pfad;
+        QString pfad;          ///< Verlaufsdatei (nur Quelle CSV)
+        bool    live = false;  ///< Verlauf vom Live-Generator erzeugen statt lesen
+        Anlage  anlage;        ///< Stammdaten für den Live-Generator
         double  ppeakKwp = 0.0;
         double  acGrenzeKw = 0.0;
     };

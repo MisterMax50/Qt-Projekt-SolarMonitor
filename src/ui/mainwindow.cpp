@@ -56,7 +56,6 @@
 #include "ui/detail_dialog.h"
 #include "ui/edit_dialog.h"
 #include "ui/karte_view.h"
-#include "ui/live_seite.h"
 #include "ui/intro_animation.h"
 #include "ui/login_seite.h"
 #include "ui/benutzer_seite.h"
@@ -82,7 +81,7 @@
 #include "util/zeit.h"
 
 namespace {
-enum Reiter { ReiterUebersicht, ReiterAnlagen, ReiterStoerungen, ReiterKarte, ReiterLive, ReiterStatistik, ReiterService, ReiterPruefung,
+enum Reiter { ReiterUebersicht, ReiterAnlagen, ReiterStoerungen, ReiterKarte, ReiterStatistik, ReiterService, ReiterPruefung,
               ReiterBenutzer };
 const QString kQuelleJson = QStringLiteral("Verlauf (JSON)");
 
@@ -513,6 +512,20 @@ void MainWindow::angemeldet(const QString& kennung)
         QTimer::singleShot(900, this, [this] { zeigeKeksBanner(); });
 }
 
+void MainWindow::setzeDatenquelle(bool live)
+{
+    if (!m_kontext.verlaeufe || !m_kontext.analyse)
+        return;
+    const auto neu = live ? VerlaufRepository::Quelle::Live : VerlaufRepository::Quelle::Csv;
+    if (m_kontext.verlaeufe->quelle() == neu)
+        return;
+    m_kontext.verlaeufe->setQuelle(neu);
+    m_kontext.analyse->starte(); // alle Seiten aktualisieren sich über "fertig"
+    meldung(live ? tr("Datenquelle: Live-Generator. Alle Auswertungen zeigen simulierte Werte.")
+                 : tr("Datenquelle: CSV-Dateien. Auswertungen zeigen die Verlaufsdateien."),
+            5000, false);
+}
+
 void MainWindow::setzeVollbild(bool an)
 {
     QSettings().setValue(QStringLiteral("vollbild"), an);
@@ -621,12 +634,6 @@ void MainWindow::baueUi()
     connect(m_karte, &KarteView::anlageGewaehlt, this, [this](const QString& id) { oeffneAnlage(id); });
     m_tabs->addWidget(seite(tr("Karte"), tr("Lage der Anlagen und Wetterstationen · Mausrad zoomt, Klick öffnet eine Anlage"),
                             m_karte));
-
-    auto* live = new LiveSeite(m_kontext);
-    connect(live, &LiveSeite::anlageOeffnen, this, [this](const QString& id) { oeffneAnlage(id); });
-    m_tabs->addWidget(seite(tr("Live"),
-                            tr("Simulierte Live-Messwerte aller Anlagen · keine echten Messungen · Doppelklick öffnet die Anlage"),
-                            live));
 
     m_tabs->addWidget(seite(tr("Statistik"), tr("Kennzahlen und Auswertungen über die gesamte Flotte"),
                             new StatistikWidget(m_kontext), {m_aktAnalyse}, {m_aktPdfFlotte, m_aktExportBericht}));
@@ -857,7 +864,6 @@ QWidget* MainWindow::baueNavigation()
     eintrag(Stil::Symbol::Liste, tr("Anlagen"), ReiterAnlagen);
     eintrag(Stil::Symbol::Warnung, tr("Störungen"), ReiterStoerungen);
     eintrag(Stil::Symbol::Karte, tr("Karte"), ReiterKarte);
-    eintrag(Stil::Symbol::Blitz, tr("Live"), ReiterLive);
     abschnitt(tr("Auswertung"));
     eintrag(Stil::Symbol::Statistik, tr("Statistik"), ReiterStatistik);
     eintrag(Stil::Symbol::Werkzeug, tr("Serviceplanung"), ReiterService);
@@ -987,6 +993,21 @@ QWidget* MainWindow::baueKopfzeile()
     menue->addAction(m_aktVerlauf);
     menue->addAction(Stil::icon(Stil::Symbol::Liste, Stil::text()), tr("Daten&ordner ändern …"), this,
                      [this] { zeigeDatenordner(QString(), true); });
+    // Datenquelle: Verlaufsdateien (CSV) oder Live-Generator für alle Auswertungen
+    QMenu* quelle = menue->addMenu(Stil::icon(Stil::Symbol::Blitz, Stil::text()), tr("Datenquelle"));
+    quelle->setToolTipsVisible(true);
+    auto* quellenGruppe = new QActionGroup(quelle);
+    QAction* quelleCsv = quelle->addAction(tr("CSV-Dateien (Verlaufsdateien)"));
+    QAction* quelleLive = quelle->addAction(tr("Live-Generator (simuliert)"));
+    quelleLive->setToolTip(tr("Alle Auswertungen mit simulierten Messwerten aus dem Sonnenstand und einer Wetterlage füttern"));
+    for (QAction* a : {quelleCsv, quelleLive}) {
+        a->setCheckable(true);
+        quellenGruppe->addAction(a);
+    }
+    const bool live = m_kontext.verlaeufe && m_kontext.verlaeufe->quelle() == VerlaufRepository::Quelle::Live;
+    (live ? quelleLive : quelleCsv)->setChecked(true);
+    connect(quellenGruppe, &QActionGroup::triggered, this,
+            [this, quelleLive](QAction* a) { setzeDatenquelle(a == quelleLive); });
     menue->addSeparator();
     // Abo (nur zum Spaß): Kostenlos mit Werbung, Premium werbefrei, Ultimate mit Extras
     m_aboMenue = menue->addMenu(Stil::icon(Stil::Symbol::Euro, Stil::text()), QString());
@@ -2393,11 +2414,15 @@ void MainWindow::analyseFortschritt(int erledigt, int gesamt)
     m_fortschritt->setRange(0, qMax(1, gesamt));
     m_fortschritt->setValue(erledigt);
     m_fortschritt->setVisible(laeuft);
+    const bool live = m_kontext.verlaeufe && m_kontext.verlaeufe->quelle() == VerlaufRepository::Quelle::Live;
     if (laeuft)
         m_analyseText->setText(tr("Flottenanalyse läuft: %1 von %2 Anlagen").arg(erledigt).arg(gesamt));
     else if (m_kontext.analyse->istFertig())
         m_analyseText->setText(QStringLiteral("<span style='color:#22c55e'>●</span> ")
-                               + tr("Analyse aktuell · %1 Anlagen").arg(m_kontext.analyse->kennzahlen().size()));
+                               + tr("Analyse aktuell · %1 Anlagen").arg(m_kontext.analyse->kennzahlen().size())
+                               + (live ? QStringLiteral("<br><span style='color:#f59e0b'>") + tr("Live-Generator (simuliert)")
+                                           + QStringLiteral("</span>")
+                                       : QString()));
     else
         m_analyseText->setText(tr("Flottenanalyse wird vorbereitet …"));
     m_analyseText->setToolTip(tr("Verläufe aller Anlagen werden im Hintergrund ausgewertet (%1 von %2).")

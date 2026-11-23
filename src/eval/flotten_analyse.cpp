@@ -34,7 +34,9 @@ FlottenAnalyse::Auftrag FlottenAnalyse::auftragFuer(const QString& anlageId) con
     Auftrag a;
     a.anlageId = anlageId;
     a.pfad = m_verlaeufe->pfadFuer(anlageId);
+    a.live = m_verlaeufe->quelle() == VerlaufRepository::Quelle::Live;
     if (const Anlage* an = m_datenbasis->anlage(anlageId)) {
+        a.anlage = *an;
         a.stationId = an->wetterstationId;
         a.ppeakKwp = an->leistungKwp;
         if (const Wechselrichter* wr = m_datenbasis->wechselrichter(an->wechselrichterId))
@@ -63,7 +65,8 @@ Kennzahl FlottenAnalyse::analysiere(const Auftrag& auftrag)
     k.anlageId = auftrag.anlageId;
     k.stationId = auftrag.stationId;
 
-    const VerlaufLadeErgebnis e = VerlaufRepository::lese(auftrag.pfad, auftrag.anlageId);
+    const VerlaufLadeErgebnis e = auftrag.live ? VerlaufRepository::erzeugeLive(auftrag.anlage)
+                                               : VerlaufRepository::lese(auftrag.pfad, auftrag.anlageId);
     if (!e.ok()) {
         k.fehler = e.fehler;
         return k;

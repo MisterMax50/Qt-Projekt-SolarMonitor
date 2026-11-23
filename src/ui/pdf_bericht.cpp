@@ -373,14 +373,9 @@ bool PdfBericht::anlage(const AppKontext& kontext, const QString& anlageId, cons
     std::shared_ptr<const Verlauf> verlauf = kontext.verlaeufe->ausCache(anlageId);
     QString verlaufFehler;
     if (!verlauf) {
-        const QString datei = kontext.verlaeufe->pfadFuer(anlageId);
-        if (datei.isEmpty()) {
-            verlaufFehler = kontext.verlaeufe->fehlgrund(anlageId);
-        } else {
-            const VerlaufLadeErgebnis e = VerlaufRepository::lese(datei, anlageId);
-            verlauf = e.verlauf;
-            verlaufFehler = e.fehler;
-        }
+        const VerlaufLadeErgebnis e = kontext.verlaeufe->ladeSofort(anlageId);
+        verlauf = e.verlauf;
+        verlaufFehler = e.fehler;
     }
 
     h += ueberschrift(tr("Ertrag und Performance Ratio"));
@@ -551,7 +546,7 @@ bool PdfBericht::flotte(const AppKontext& kontext, const QString& pfad, QString*
     // Zeitraum aus einem beliebigen Verlauf
     QString zeitraumText;
     for (const QString& id : kontext.verlaeufe->anlagenMitVerlauf()) {
-        const VerlaufLadeErgebnis e = VerlaufRepository::lese(kontext.verlaeufe->pfadFuer(id), id);
+        const VerlaufLadeErgebnis e = kontext.verlaeufe->ladeSofort(id);
         if (e.ok() && e.verlauf->anzahl() > 0) {
             zeitraumText = QStringLiteral("%1 – %2").arg(Anzeige::datum(e.verlauf->zeit.first().date()),
                                                         Anzeige::datum(e.verlauf->zeit.last().date()));

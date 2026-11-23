@@ -34,6 +34,7 @@ std::unique_ptr<Datensatz> Datensatz::lade(const QString& ordner)
     } else {
         // Verlaufsindex (die JSON-Dateien selbst werden erst bei Bedarf geladen)
         d->m_verlaeufe->ladeIndex(d->m_daten->datenOrdner());
+        d->m_verlaeufe->setLiveAnlagen(d->m_daten->anlagen());
         QVector<Pruefmeldung> meldungen = d->m_verlaeufe->indexMeldungen();
         for (const Anlage& a : d->m_daten->anlagen())
             if (!d->m_verlaeufe->istEingetragen(a.anlageId))
