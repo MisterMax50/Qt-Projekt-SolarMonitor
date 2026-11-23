@@ -56,6 +56,7 @@
 #include "ui/detail_dialog.h"
 #include "ui/edit_dialog.h"
 #include "ui/karte_view.h"
+#include "ui/live_seite.h"
 #include "ui/intro_animation.h"
 #include "ui/login_seite.h"
 #include "ui/benutzer_seite.h"
@@ -81,7 +82,7 @@
 #include "util/zeit.h"
 
 namespace {
-enum Reiter { ReiterUebersicht, ReiterAnlagen, ReiterStoerungen, ReiterKarte, ReiterStatistik, ReiterService, ReiterPruefung,
+enum Reiter { ReiterUebersicht, ReiterAnlagen, ReiterStoerungen, ReiterKarte, ReiterLive, ReiterStatistik, ReiterService, ReiterPruefung,
               ReiterBenutzer };
 const QString kQuelleJson = QStringLiteral("Verlauf (JSON)");
 
@@ -621,6 +622,12 @@ void MainWindow::baueUi()
     m_tabs->addWidget(seite(tr("Karte"), tr("Lage der Anlagen und Wetterstationen · Mausrad zoomt, Klick öffnet eine Anlage"),
                             m_karte));
 
+    auto* live = new LiveSeite(m_kontext);
+    connect(live, &LiveSeite::anlageOeffnen, this, [this](const QString& id) { oeffneAnlage(id); });
+    m_tabs->addWidget(seite(tr("Live"),
+                            tr("Simulierte Live-Messwerte aller Anlagen · keine echten Messungen · Doppelklick öffnet die Anlage"),
+                            live));
+
     m_tabs->addWidget(seite(tr("Statistik"), tr("Kennzahlen und Auswertungen über die gesamte Flotte"),
                             new StatistikWidget(m_kontext), {m_aktAnalyse}, {m_aktPdfFlotte, m_aktExportBericht}));
 
@@ -850,6 +857,7 @@ QWidget* MainWindow::baueNavigation()
     eintrag(Stil::Symbol::Liste, tr("Anlagen"), ReiterAnlagen);
     eintrag(Stil::Symbol::Warnung, tr("Störungen"), ReiterStoerungen);
     eintrag(Stil::Symbol::Karte, tr("Karte"), ReiterKarte);
+    eintrag(Stil::Symbol::Blitz, tr("Live"), ReiterLive);
     abschnitt(tr("Auswertung"));
     eintrag(Stil::Symbol::Statistik, tr("Statistik"), ReiterStatistik);
     eintrag(Stil::Symbol::Werkzeug, tr("Serviceplanung"), ReiterService);

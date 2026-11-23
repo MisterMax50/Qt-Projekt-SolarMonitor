@@ -29,6 +29,7 @@ set(PROJEKT_HEADER
     src/model/verlauf.h
     src/model/wechselrichter.h
     src/model/wetterstation.h
+    src/model/live_generator.h
     src/repo/csv_parser.h
     src/repo/routen_dienst.h
     src/repo/verlauf_repository.h
@@ -71,12 +72,14 @@ set(PROJEKT_HEADER
     src/ui/stoerung_model.h
     src/ui/tabellen_hilfe.h
     src/ui/verlauf_plot.h
+    src/ui/live_seite.h
 )
 
 set(PROJEKT_QUELLEN
     src/main.cpp
     src/model/datenbasis.cpp
     src/model/datensatz.cpp
+    src/model/live_generator.cpp
     src/model/benutzer.cpp
     src/util/windows_hello.cpp
     src/model/rolle.cpp
@@ -129,6 +132,7 @@ set(PROJEKT_QUELLEN
     src/ui/stoerung_dialog.cpp
     src/ui/stoerung_model.cpp
     src/ui/verlauf_plot.cpp
+    src/ui/live_seite.cpp
 )
 
 # Kurzer interner Zielname: Unter Windows ist der Pfad einer Datei auf 260 Zeichen
