@@ -557,41 +557,8 @@ bool Datenbasis::aktualisiereAnlage(const Anlage& neu, QString* fehler)
     return true;
 }
 
-void Datenbasis::setzeSimulierteStoerungen(const QVector<Stoerung>& simulierte)
-{
-    if (!m_simuliert) {
-        m_csvStoerungen = m_stoerungen;
-        m_simuliert = true;
-    }
-    m_stoerungen = simulierte;
-    m_stoerungIndex.clear();
-    for (int i = 0; i < m_stoerungen.size(); ++i)
-        m_stoerungIndex.insert(m_stoerungen.at(i).stoerungId, i);
-    baueStoerungsIndex();
-    emit stoerungenGeaendert(QString());
-}
-
-void Datenbasis::stelleCsvStoerungenWiederHer()
-{
-    if (!m_simuliert)
-        return;
-    m_stoerungen = m_csvStoerungen;
-    m_csvStoerungen.clear();
-    m_simuliert = false;
-    m_stoerungIndex.clear();
-    for (int i = 0; i < m_stoerungen.size(); ++i)
-        m_stoerungIndex.insert(m_stoerungen.at(i).stoerungId, i);
-    baueStoerungsIndex();
-    emit stoerungenGeaendert(QString());
-}
-
 bool Datenbasis::aktualisiereStoerung(const Stoerung& neu, QString* fehler)
 {
-    if (m_simuliert) {
-        if (fehler)
-            *fehler = tr("Im Simulationsmodus sind Störungen schreibgeschützt.");
-        return false;
-    }
     const auto it = m_stoerungIndex.constFind(neu.stoerungId);
     if (it == m_stoerungIndex.constEnd()) {
         if (fehler)
@@ -606,8 +573,6 @@ bool Datenbasis::aktualisiereStoerung(const Stoerung& neu, QString* fehler)
 
 QString Datenbasis::erfasseStoerung(Stoerung neu)
 {
-    if (m_simuliert)
-        return QString(); // schreibgeschützt: keine ID vergeben
     int maxNr = 0;
     for (const Stoerung& s : std::as_const(m_stoerungen)) {
         bool ok = false;
@@ -625,7 +590,7 @@ QString Datenbasis::erfasseStoerung(Stoerung neu)
 
 bool Datenbasis::fuegeStoerungEin(const Stoerung& stoerung)
 {
-    if (m_simuliert || stoerung.stoerungId.isEmpty() || m_stoerungIndex.contains(stoerung.stoerungId))
+    if (stoerung.stoerungId.isEmpty() || m_stoerungIndex.contains(stoerung.stoerungId))
         return false;
     m_stoerungIndex.insert(stoerung.stoerungId, m_stoerungen.size());
     m_stoerungen.append(stoerung);
@@ -636,8 +601,6 @@ bool Datenbasis::fuegeStoerungEin(const Stoerung& stoerung)
 
 bool Datenbasis::entferneStoerung(const QString& stoerungId)
 {
-    if (m_simuliert)
-        return false;
     const auto it = m_stoerungIndex.constFind(stoerungId);
     if (it == m_stoerungIndex.constEnd())
         return false;
@@ -696,11 +659,6 @@ bool Datenbasis::exportiereAnlagen(const QString& pfad, QString* fehler) const
 
 bool Datenbasis::exportiereStoerungen(const QString& pfad, QString* fehler) const
 {
-    if (m_simuliert) {
-        if (fehler)
-            *fehler = tr("Im Simulationsmodus werden keine Störungen gespeichert.");
-        return false;
-    }
     QSaveFile datei(pfad);
     if (!datei.open(QIODevice::WriteOnly | QIODevice::Text)) {
         if (fehler)

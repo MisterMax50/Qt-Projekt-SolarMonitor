@@ -6,8 +6,6 @@
 #include <QVector>
 
 #include "eval/ertrags_auswertung.h"
-#include "model/anlage.h"
-#include "model/stoerung.h"
 
 class Datenbasis;
 class VerlaufRepository;
@@ -23,7 +21,6 @@ struct Kennzahl {
     double     sollKwh = 0.0;   ///< H · Ppeak · Referenz-PR
     double     verlustKwh = 0.0;
     double     verlustEuro = 0.0;
-    QVector<Stoerung> simStoerungen; ///< nur Simulationsmodus: aus dem erzeugten Verlauf, im GUI-Thread übernommen
 };
 
 /**
@@ -70,10 +67,7 @@ private:
     struct Auftrag {
         QString anlageId;
         QString stationId;
-        QString pfad;          ///< Verlaufsdatei (nur Quelle CSV)
-        bool    live = false;  ///< Verlauf vom Live-Generator erzeugen statt lesen
-        Anlage  anlage;        ///< Stammdaten für den Live-Generator
-        QDateTime ende;        ///< Simulationszeit, bei der der Live-Verlauf endet
+        QString pfad;
         double  ppeakKwp = 0.0;
         double  acGrenzeKw = 0.0;
     };

@@ -78,13 +78,6 @@ public:
      * @return false + *fehler, wenn die Anlage unbekannt ist
      */
     bool aktualisiereAnlage(const Anlage& neu, QString* fehler = nullptr);
-    /// Im Simulationsmodus (Datenquelle Live) schreibgeschützt; Änderungen werden abgelehnt.
-    bool istSimuliert() const { return m_simuliert; }
-    /// Ersetzt die Störungen durch simulierte. Die CSV-Liste bleibt gesichert.
-    void setzeSimulierteStoerungen(const QVector<Stoerung>& simulierte);
-    /// Stellt die CSV-Störungen wieder her (Ende des Simulationsmodus).
-    void stelleCsvStoerungenWiederHer();
-
     bool aktualisiereStoerung(const Stoerung& neu, QString* fehler = nullptr);
     /// Legt eine neue Störung an; vergibt die ID und liefert sie zurück.
     QString erfasseStoerung(Stoerung neu);
@@ -124,8 +117,6 @@ private:
     QHash<QString, Wechselrichter> m_wechselrichter;
     QHash<QString, Wetterstation>  m_wetterstationen;
     QVector<Stoerung>              m_stoerungen;
-    QVector<Stoerung>              m_csvStoerungen;     ///< gesicherte CSV-Liste während der Simulation
-    bool                           m_simuliert = false;
     QHash<QString, int>            m_stoerungIndex;     ///< ID -> Position
     QHash<QString, int>            m_offen;             ///< anlageId -> offene Störungen
     QHash<QString, int>            m_offenKritisch;

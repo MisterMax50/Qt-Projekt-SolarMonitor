@@ -9,11 +9,8 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QSet>
-#include <QSettings>
-#include <QTimer>
 #include <QtConcurrent/QtConcurrentRun>
 
-#include "model/live_generator.h"
 #include "repo/csv_parser.h"
 #include "util/zeit.h"
 
@@ -44,51 +41,6 @@ QVector<double> zahlenArray(const QJsonArray& arr, int* nichtZahlen)
 VerlaufRepository::VerlaufRepository(QObject* parent)
     : QObject(parent)
 {
-    // Die zuletzt gewählte Datenquelle gilt auch nach dem Neustart
-    if (QSettings().value(QStringLiteral("datenquelle")).toString() == QLatin1String("live"))
-        m_quelle = Quelle::Live;
-    m_uhr.setFaktor(QSettings().value(QStringLiteral("simulation/faktor"), 60).toInt());
-}
-
-void VerlaufRepository::setSimulationsFaktor(int faktor)
-{
-    m_uhr.setFaktor(faktor);
-    QSettings().setValue(QStringLiteral("simulation/faktor"), m_uhr.faktor());
-}
-
-void VerlaufRepository::setQuelle(Quelle quelle)
-{
-    if (quelle == m_quelle)
-        return;
-    m_quelle = quelle;
-    QSettings().setValue(QStringLiteral("datenquelle"), quelle == Quelle::Live ? QStringLiteral("live") : QStringLiteral("csv"));
-
-    // Alte Ergebnisse dürfen nicht in die neue Quelle hineinragen
-    m_cache.clear();
-    m_lru.clear();
-    for (auto* w : std::as_const(m_laufend)) {
-        w->disconnect(this); // Ergebnis wird verworfen
-        if (w->isFinished())
-            w->deleteLater();
-        else
-            connect(w, &QFutureWatcherBase::finished, w, &QObject::deleteLater);
-    }
-    m_laufend.clear();
-}
-
-void VerlaufRepository::setLiveAnlagen(const QVector<Anlage>& anlagen)
-{
-    m_live.clear();
-    for (const Anlage& a : anlagen)
-        if (a.hatGueltigeLeistung())
-            m_live.insert(a.anlageId, a);
-    m_cache.clear();
-    m_lru.clear();
-}
-
-QStringList VerlaufRepository::anlagenMitVerlauf() const
-{
-    return m_quelle == Quelle::Live ? m_live.keys() : m_index.keys();
 }
 
 VerlaufRepository::~VerlaufRepository()
@@ -227,16 +179,11 @@ void VerlaufRepository::ladeBatchIndex(const QString& batchOrdner, bool nurErgae
 
 bool VerlaufRepository::hatVerlauf(const QString& anlageId) const
 {
-    return m_quelle == Quelle::Live ? m_live.contains(anlageId) : m_index.contains(anlageId);
+    return m_index.contains(anlageId);
 }
 
 QString VerlaufRepository::fehlgrund(const QString& anlageId) const
 {
-    if (m_quelle == Quelle::Live) {
-        if (m_live.contains(anlageId))
-            return QString();
-        return tr("Der Live-Generator braucht eine installierte Leistung und Koordinaten aus anlagen.csv.");
-    }
     if (m_index.contains(anlageId))
         return QString();
     if (m_fehlend.contains(anlageId))
@@ -247,33 +194,7 @@ QString VerlaufRepository::fehlgrund(const QString& anlageId) const
 
 QString VerlaufRepository::pfadFuer(const QString& anlageId) const
 {
-    return m_quelle == Quelle::Live ? QString() : m_index.value(anlageId);
-}
-
-VerlaufLadeErgebnis VerlaufRepository::ladeSofort(const QString& anlageId) const
-{
-    if (m_quelle == Quelle::Live) {
-        const auto it = m_live.constFind(anlageId);
-        if (it == m_live.constEnd()) {
-            VerlaufLadeErgebnis e;
-            e.fehler = fehlgrund(anlageId);
-            return e;
-        }
-        return erzeugeLive(it.value(), simulationszeit());
-    }
-    if (!m_index.contains(anlageId)) {
-        VerlaufLadeErgebnis e;
-        e.fehler = fehlgrund(anlageId);
-        return e;
-    }
-    return lese(m_index.value(anlageId), anlageId);
-}
-
-VerlaufLadeErgebnis VerlaufRepository::erzeugeLive(const Anlage& anlage, const QDateTime& ende)
-{
-    VerlaufLadeErgebnis e;
-    e.verlauf = std::make_shared<const Verlauf>(LiveGenerator::erzeuge(anlage, ende));
-    return e;
+    return m_index.value(anlageId);
 }
 
 // -------------------------------------------------------------------
@@ -282,9 +203,6 @@ VerlaufLadeErgebnis VerlaufRepository::erzeugeLive(const Anlage& anlage, const Q
 
 std::shared_ptr<const Verlauf> VerlaufRepository::ausCache(const QString& anlageId)
 {
-    // Live-Verläufe ändern sich mit der Simulationszeit und werden deshalb nie zwischengespeichert
-    if (m_quelle == Quelle::Live)
-        return nullptr;
     const auto it = m_cache.constFind(anlageId);
     if (it == m_cache.constEnd())
         return nullptr;
@@ -319,12 +237,6 @@ void VerlaufRepository::ladeAsync(const QString& anlageId)
         VerlaufLadeErgebnis e;
         e.verlauf = std::move(v);
         emit verlaufGeladen(anlageId, e);
-        return;
-    }
-    if (m_quelle == Quelle::Live) {
-        // Erzeugen ist schnell: Ergebnis im nächsten Takt melden, damit Aufrufer zuerst verbinden können
-        const VerlaufLadeErgebnis e = ladeSofort(anlageId);
-        QTimer::singleShot(0, this, [this, anlageId, e] { emit verlaufGeladen(anlageId, e); });
         return;
     }
     if (!m_index.contains(anlageId)) {

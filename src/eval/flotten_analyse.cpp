@@ -4,7 +4,6 @@
 
 #include "eval/schwellwerte.h"
 #include "model/datenbasis.h"
-#include "model/live_generator.h"
 #include "repo/verlauf_repository.h"
 
 FlottenAnalyse::FlottenAnalyse(Datenbasis* datenbasis, VerlaufRepository* verlaeufe, QObject* parent)
@@ -35,10 +34,7 @@ FlottenAnalyse::Auftrag FlottenAnalyse::auftragFuer(const QString& anlageId) con
     Auftrag a;
     a.anlageId = anlageId;
     a.pfad = m_verlaeufe->pfadFuer(anlageId);
-    a.live = m_verlaeufe->quelle() == VerlaufRepository::Quelle::Live;
-    a.ende = m_verlaeufe->simulationszeit();
     if (const Anlage* an = m_datenbasis->anlage(anlageId)) {
-        a.anlage = *an;
         a.stationId = an->wetterstationId;
         a.ppeakKwp = an->leistungKwp;
         if (const Wechselrichter* wr = m_datenbasis->wechselrichter(an->wechselrichterId))
@@ -67,14 +63,11 @@ Kennzahl FlottenAnalyse::analysiere(const Auftrag& auftrag)
     k.anlageId = auftrag.anlageId;
     k.stationId = auftrag.stationId;
 
-    const VerlaufLadeErgebnis e = auftrag.live ? VerlaufRepository::erzeugeLive(auftrag.anlage, auftrag.ende)
-                                               : VerlaufRepository::lese(auftrag.pfad, auftrag.anlageId);
+    const VerlaufLadeErgebnis e = VerlaufRepository::lese(auftrag.pfad, auftrag.anlageId);
     if (!e.ok()) {
         k.fehler = e.fehler;
         return k;
     }
-    if (auftrag.live)
-        k.simStoerungen = LiveGenerator::stoerungenAus(*e.verlauf);
     k.auswertung = ErtragsAuswertung::berechne(*e.verlauf, auftrag.ppeakKwp, auftrag.acGrenzeKw);
     k.auswertung.tage.clear(); // Tageswerte braucht nur der Detaildialog
     k.ok = k.auswertung.gueltig;
@@ -89,21 +82,8 @@ void FlottenAnalyse::auswerten()
         return;
 
     m_kennzahlen.clear();
-    QList<Kennzahl> ergebnisse = m_watcher.future().results();
-
-    // Störungen: im Simulationsmodus aus den erzeugten Verläufen, sonst die CSV-Liste
-    if (m_verlaeufe->quelle() == VerlaufRepository::Quelle::Live) {
-        QVector<Stoerung> simuliert;
-        for (Kennzahl& k : ergebnisse) {
-            simuliert += k.simStoerungen;
-            k.simStoerungen.clear();
-        }
-        m_datenbasis->setzeSimulierteStoerungen(simuliert);
-    } else {
-        m_datenbasis->stelleCsvStoerungenWiederHer();
-    }
-
-    for (const Kennzahl& k : std::as_const(ergebnisse))
+    const QList<Kennzahl> ergebnisse = m_watcher.future().results();
+    for (const Kennzahl& k : ergebnisse)
         m_kennzahlen.insert(k.anlageId, k);
 
     // PR-Mediane je Station; Anlagen ohne Einspeisung verfälschen den
